@@ -1,3 +1,5 @@
+import ModulesHomePage from "src/main/mainComponents/modules";
+
 export default function App() {
-  return <div>123</div>;
+  return <ModulesHomePage />;
 }
