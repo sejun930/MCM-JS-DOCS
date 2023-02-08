@@ -1,6 +1,9 @@
 import { ReactNode } from "react";
+import { useRouter } from "next/router";
 
 export default function CommonsHooksComponents() {
+  const router = useRouter();
+
   // 컴포넌트 렌더 함수
   const componentRender = (Component: ReactNode) => {
     return Component;
@@ -17,8 +20,14 @@ export default function CommonsHooksComponents() {
     return _className;
   };
 
+  // router 객체 리턴하기
+  const getRouter = () => {
+    return router;
+  };
+
   return {
     componentRender,
     getAllComponentsClassName,
+    getRouter,
   };
 }
