@@ -1,5 +1,5 @@
-import _MyModal from "src/main/mainComponents/modules/modal";
+import _MySlick from "src/main/mainComponents/modules/slick";
 
 export default function ModuleSlickHomePage() {
-  return <_MyModal />;
+  return <_MySlick />;
 }
