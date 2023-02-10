@@ -19,5 +19,9 @@ module.exports = {
     semi: "off",
     "comma-dangle": "off",
     quotes: "off",
+    indent: "off",
+  },
+  globals: {
+    JSX: true,
   },
 };
