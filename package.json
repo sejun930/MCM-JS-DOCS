@@ -1,9 +1,10 @@
 {
-  "name": "my_modules",
+  "name": "cmm-js-doc",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "build:ssg": "next build && next export",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
