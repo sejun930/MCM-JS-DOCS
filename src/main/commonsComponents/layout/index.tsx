@@ -17,7 +17,7 @@ export default function LayoutPage(props: IProps) {
         <_HalfDrag
           LeftComponent={<LayoutNavPage />}
           RightComponent={<>{props.children}</>}
-          //   leftComponentWidth={"20%"}
+          leftComponentWidth={"20%"}
         />
       </LayoutContentsWrapper>
     </LayoutWrapper>
