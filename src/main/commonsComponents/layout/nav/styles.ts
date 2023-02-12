@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
 
 export const LayoutNavWrapper = styled.nav`
   width: 100%;
@@ -34,5 +35,9 @@ export const LayoutNavListWrapper = styled.article`
       background-color: #473c33;
       color: white;
     }
+  }
+
+  @media ${breakPoints.mobile} {
+    padding: 0rem;
   }
 `;

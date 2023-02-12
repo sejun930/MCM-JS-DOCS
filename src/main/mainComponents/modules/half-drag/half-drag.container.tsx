@@ -145,6 +145,10 @@ export default function _HalfDrag({
     }
   };
 
+  // 모바일용 드래그 시작 이벤트
+  // 모바일용 드래그 진행 이벤트
+  // 모바일용 드래그 종료 이벤트
+
   return (
     <HalfDragUIPage
       LeftComponent={LeftComponent}
