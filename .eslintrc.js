@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["plugin:react/recommended", "standard"],
+  extends: ["plugin:react/recommended", "standard", "prettier"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -11,17 +11,13 @@ module.exports = {
     },
     ecmaVersion: "latest",
     sourceType: "module",
+    project: "***/tsconfig.json",
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
-    "react/react-in-jsx-scope": "off",
-    "space-before-function-paren": "off",
-    semi: "off",
-    "comma-dangle": "off",
     quotes: "off",
-    indent: "off",
-  },
-  globals: {
-    JSX: true,
+    semi: "off",
+    "space-before-function-paren": "off",
+    "react/react-in-jsx-scope": "off",
   },
 };

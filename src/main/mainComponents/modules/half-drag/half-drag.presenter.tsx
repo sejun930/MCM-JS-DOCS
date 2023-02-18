@@ -46,6 +46,7 @@ export default function HalfDragUIPage({
           isStartingHalfScroll={startHalfScroll}
           onMouseDown={startDrag}
           ref={controllerRef}
+          onDragStart={() => alert("모바일용 드래그 시작")}
         >
           <ScorllBar className="_scroll_bar_">
             <img
