@@ -4,7 +4,7 @@ import { LayoutNavListWrapper, LayoutNavWrapper } from "./styles";
 import { navList } from "./data";
 
 import CommonsHooksComponents from "../../hooks";
-import _Link from "../../units/link";
+import _Link from "../../units/link/Link";
 import _PText from "../../units/text/p";
 
 export default function LayoutNavPage() {

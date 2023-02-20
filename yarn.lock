@@ -825,10 +825,10 @@ client-only@0.0.1:
   resolved "https://registry.npmjs.org/client-only/-/client-only-0.0.1.tgz"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
-cmm-js-dev@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/cmm-js-dev/-/cmm-js-dev-0.0.6.tgz#dfa3fb1b229e33bc86811d6fa12587705d25f48d"
-  integrity sha512-8+9lCdgEvn18uqxMM1EivPcqXM0af91dRnsrFPqCDtVQKorbukqVNaRUfINcTPzSwSoXJ/VranUDRLwFC+VGDA==
+cmm-js-dev@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/cmm-js-dev/-/cmm-js-dev-0.0.8.tgz#cbc9f143f56b218014354f18ced1d454c3cb2316"
+  integrity sha512-EPreFUbFytiQyPE2z5prOcwVXo5pyfiuJmNP9+tpbg9KavXtin3q1ekMoEsAVENICNzqqsVKlyxW5r1DO1flXg==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
