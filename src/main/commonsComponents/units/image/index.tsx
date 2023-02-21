@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, MutableRefObject } from "react";
 
 import CommonsHooksComponents from "../../hooks";
 
@@ -7,9 +7,10 @@ interface IProps {
   src: string; // 출력될 이미지 경로
   styles?: CSSProperties; // 설정할 스타일
   className?: string;
+  _ref?: MutableRefObject<HTMLImageElement>;
 }
 
-export default function _Image({ src, styles, className }: IProps) {
+export default function _Image({ src, styles, className, _ref }: IProps) {
   const { getAllComponentsClassName } = CommonsHooksComponents();
 
   return (
@@ -17,6 +18,7 @@ export default function _Image({ src, styles, className }: IProps) {
       className={getAllComponentsClassName("_image_", className)}
       src={src}
       style={styles}
+      ref={_ref}
     />
   );
 }
