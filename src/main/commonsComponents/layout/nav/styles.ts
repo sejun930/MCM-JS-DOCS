@@ -3,6 +3,7 @@ import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
 
 export const LayoutNavWrapper = styled.nav`
   width: 100%;
+  height: 100%;
   border-right: solid 3px #aa5656;
   /* min-width: 200px; */
   display: flex;

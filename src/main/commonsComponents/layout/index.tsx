@@ -1,5 +1,9 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { LayoutWrapper, LayoutContentsWrapper } from "./styles";
+
+import CommonsHooksComponents from "../hooks";
+import { useRecoilState } from "recoil";
+import { moduleState } from "src/commons/store";
 
 import LayoutHeadPage from "./header";
 import LayoutNavPage from "./nav";
@@ -10,6 +14,16 @@ interface IProps {
 }
 
 export default function LayoutPage(props: IProps) {
+  const { getRouter, getModuleNamewithJadenCase } = CommonsHooksComponents();
+  const [, setModule] = useRecoilState(moduleState);
+
+  useEffect(() => {
+    // 현재 선택한 모듈 저장하기
+    const moduleName = getModuleNamewithJadenCase();
+    console.log(moduleName);
+    setModule(moduleName);
+  }, [getRouter()]);
+
   return (
     <LayoutWrapper>
       <LayoutHeadPage />
