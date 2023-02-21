@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import React, { CSSProperties } from "react";
-import _Title from "../../title";
 
+import _Title from "../../../title";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks";
+import { subTitleEmoji } from "./data";
 
 interface IProps {
   children: React.ReactNode;
@@ -13,7 +14,7 @@ interface IProps {
 }
 
 // 소제목 템플릿
-export default function _SmallTitleTemplate({
+export default function _SubTitleTemplate({
   children,
   title,
   titleLevel,
@@ -28,7 +29,7 @@ export default function _SmallTitleTemplate({
       style={styles}
     >
       <_Title
-        title={title || ""}
+        title={`${subTitleEmoji[title]} ${title}` || ""}
         titleLevel={titleLevel || "h2"}
         className="_subTitle_"
       />

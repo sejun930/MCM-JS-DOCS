@@ -46,9 +46,10 @@ export default function _Title({
 
         // 새로운 태그 추가
         divTarget.append(headering);
+        // divTarget.innerHTML = title;
       }
     }
-  }, [titleLevel]);
+  }, [titleLevel, title]);
 
   return (
     <div ref={renderRef}>

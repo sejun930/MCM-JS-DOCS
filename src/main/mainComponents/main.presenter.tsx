@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Template from "../commonsComponents/units/template/main";
 import _Title from "../commonsComponents/units/title";
 import _PText from "../commonsComponents/units/text/p";
-import _SmallTitleTemplate from "../commonsComponents/units/template/smallTitle";
+import _SubTitleTemplate from "../commonsComponents/units/template/title/subTitle";
 import _A from "../commonsComponents/units/link/anchor";
 import _Copy from "../commonsComponents/units/copy";
 
@@ -20,7 +20,7 @@ export default function MainHomePage() {
       </ProjectInfoWrapper>
 
       <ProjectDetailInfoWrapper>
-        <_SmallTitleTemplate title="💾 Install" className="npmInstall">
+        <_SubTitleTemplate title="Install" className="npmInstall">
           <div>
             <b>MCM-js npm : </b>
             <_A href="https://www.npmjs.com/package/mcm-js">
@@ -37,7 +37,7 @@ export default function MainHomePage() {
               <_Copy text="yarn add mcm-js" />
             </InstallItems>
           </InstallWrapper>
-        </_SmallTitleTemplate>
+        </_SubTitleTemplate>
       </ProjectDetailInfoWrapper>
     </Template>
   );
@@ -60,7 +60,7 @@ export const ProjectInfo = styled.div`
 
 export const ProjectDetailInfoWrapper = styled.section`
   .npmInstall {
-    padding-top: 80px;
+    padding-top: 120px;
   }
 `;
 
