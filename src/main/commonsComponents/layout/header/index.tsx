@@ -26,10 +26,11 @@ const HeaderWrapper = styled.header`
   }
 
   @media ${breakPoints.mobile} {
-    height: 120px;
+    height: auto;
+    padding: 5vw 0px;
 
     ._title_ {
-      font-size: 3rem;
+      font-size: 9vw;
     }
   }
 `;

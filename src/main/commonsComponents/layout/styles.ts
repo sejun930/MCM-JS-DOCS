@@ -3,6 +3,12 @@ import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
 
 export const LayoutWrapper = styled.div`
   height: 100%;
+
+  @media ${breakPoints.mobile} {
+    ._halfDrag_controller_ {
+      display: none;
+    }
+  }
 `;
 
 export const LayoutContentsWrapper = styled.div`
@@ -15,11 +21,11 @@ export const LayoutContentsWrapper = styled.div`
 
   @media ${breakPoints.mobile} {
     ._halfDrag_leftPage_ {
-      width: calc(20%) !important;
+      width: 20% !important;
     }
 
     ._halfDrag_rightPage_ {
-      width: calc(80%) !important;
+      width: 80% !important;
     }
   }
 `;
