@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
 
 import Template from "../commonsComponents/units/template/main";
 import _Title from "../commonsComponents/units/title";
@@ -21,12 +22,12 @@ export default function MainHomePage() {
 
       <ProjectDetailInfoWrapper>
         <_SubTitleTemplate title="Install" className="npmInstall">
-          <div>
+          <NpmAdress>
             <b>MCM-js npm : </b>
             <_A href="https://www.npmjs.com/package/mcm-js">
               https://www.npmjs.com/package/mcm-js
             </_A>
-          </div>
+          </NpmAdress>
           <InstallWrapper>
             <InstallItems>
               <_Title titleLevel="h3" title="npm" />
@@ -52,15 +53,50 @@ export const ProjectInfoWrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 12px 0px;
+
+  @media ${breakPoints.mobile} {
+    gap: 4vw 0px;
+
+    ._title_ {
+      font-size: 5.2vw;
+    }
+  }
 `;
 
 export const ProjectInfo = styled.div`
   line-height: 26px;
+
+  @media ${breakPoints.mobile} {
+    ._p_ {
+      font-size: 3.5vw;
+    }
+
+    line-height: 5.5vw;
+  }
 `;
 
 export const ProjectDetailInfoWrapper = styled.section`
   .npmInstall {
     padding-top: 120px;
+  }
+
+  @media ${breakPoints.mobile} {
+    h2 {
+      font-size: 6vw;
+    }
+
+    .npmInstall {
+      padding-top: 18vw;
+    }
+  }
+`;
+
+export const NpmAdress = styled.div`
+  display: flex;
+
+  @media ${breakPoints.mobile} {
+    flex-direction: column;
+    font-size: 3.6vw;
   }
 `;
 
@@ -69,10 +105,21 @@ export const InstallWrapper = styled.div`
   flex-direction: column;
   padding-top: 30px;
   gap: 20px 0px;
+
+  @media ${breakPoints.mobile} {
+    padding-top: 8vw;
+    gap: 8vw 0px;
+  }
 `;
 
 export const InstallItems = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px 0px;
+
+  @media ${breakPoints.mobile} {
+    ._title_ {
+      font-size: 5vw;
+    }
+  }
 `;

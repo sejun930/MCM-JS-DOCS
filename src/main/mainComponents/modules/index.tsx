@@ -1,7 +1,7 @@
-import CMM from "cmm-js-dev";
+// import CMM from "cmm-js-dev";
 
 export default function ModulesHomePage() {
-  console.log(CMM());
+  // console.log(CMM());
   return (
     <>
       {/* <_Modal show={true} onCloseModal={() => {}}>

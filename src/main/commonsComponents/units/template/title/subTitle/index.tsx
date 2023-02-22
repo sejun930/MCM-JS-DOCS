@@ -33,7 +33,7 @@ export default function _SubTitleTemplate({
         titleLevel={titleLevel || "h2"}
         className="_subTitle_"
       />
-      <Line />
+      <Line className="_subTitleLine_" />
       {children}
     </Wrapper>
   );

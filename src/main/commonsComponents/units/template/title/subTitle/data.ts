@@ -2,4 +2,5 @@
 export const subTitleEmoji: { [key: string]: string } = {
   Install: "💾",
   "사용 방법": "🔍",
+  "사용 예시": "📝",
 };

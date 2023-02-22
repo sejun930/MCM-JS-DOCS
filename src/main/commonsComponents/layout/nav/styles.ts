@@ -39,6 +39,13 @@ export const LayoutNavListWrapper = styled.article`
   }
 
   @media ${breakPoints.mobile} {
-    padding: 0rem;
+    padding: 0rem 2vw;
+    gap: 3vw 0px;
+    padding-top: 4vw;
+
+    ._p_ {
+      font-size: 0.6rem;
+      padding: 2vw;
+    }
   }
 `;
