@@ -25,6 +25,7 @@ button {
   border: unset;
   padding: 0;
   cursor: pointer;
+  background-color: unset;
 }
 
 h1,
