@@ -6,6 +6,7 @@ export default function CommonsHooksComponents() {
 
   // 컴포넌트 렌더 함수
   const componentRender = (Component: ReactNode): ReactNode => {
+    console.log(Component);
     return Component;
   };
 

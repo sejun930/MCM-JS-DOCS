@@ -13,6 +13,9 @@ module.exports = {
     sourceType: "module",
     project: "***/tsconfig.json",
   },
+  globals: {
+    JSX: true,
+  },
   plugins: ["react", "@typescript-eslint"],
   rules: {
     quotes: "off",

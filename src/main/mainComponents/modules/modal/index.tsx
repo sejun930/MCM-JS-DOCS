@@ -1,4 +1,5 @@
 import { ModulesInfoWrapper } from "./modal.styles";
+import { exampleList } from "./example/data";
 
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
@@ -11,7 +12,7 @@ export default function MyModal() {
       <_MainTitleTemplate />
       <ModulesInfoWrapper>
         <_HowUseForm />
-        <_ExampleForm />
+        <_ExampleForm exampleList={exampleList} />
       </ModulesInfoWrapper>
     </Template>
   );

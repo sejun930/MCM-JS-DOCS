@@ -4,8 +4,11 @@ import { IPropsTypes } from "../modal.example.types";
 import _Button from "src/main/commonsComponents/units/button";
 
 // 모달 기본 예시
-export default function ModalBasicExample(props: { props: IPropsTypes }) {
+export default function ModalBasicExample(props: {
+  props: IPropsTypes;
+}): JSX.Element {
   const { openModal, isShow, closeModal } = props.props;
+  console.log(123123123);
 
   return (
     <>
