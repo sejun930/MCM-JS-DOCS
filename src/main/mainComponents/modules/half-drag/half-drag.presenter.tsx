@@ -36,7 +36,7 @@ export default function HalfDragUIPage({
           className="_halfDrag_leftPage_"
           ref={leftRef}
         >
-          {componentRender(LeftComponent)}
+          {(LeftComponent && componentRender(LeftComponent)) || <></>}
         </HalfDragComponentsWrapper>
       )}
 
@@ -63,7 +63,7 @@ export default function HalfDragUIPage({
           className="_halfDrag_rightPage_"
           ref={rightRef}
         >
-          {componentRender(RightComponent)}
+          {(RightComponent && componentRender(RightComponent)) || <></>}
         </HalfDragComponentsWrapper>
       )}
     </HalfDragWrapper>

@@ -26,7 +26,7 @@ export default function _Link({
       href={href}
       className={getAllComponentsClassName("_link_", className)}
     >
-      {componentRender(Component)}
+      {(Component && componentRender(Component)) || <></>}
     </LinkComponent>
   );
 }

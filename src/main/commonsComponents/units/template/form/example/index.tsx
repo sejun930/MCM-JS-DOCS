@@ -1,32 +1,52 @@
-import _SubTitleTemplate from "../../title/subTitle";
+import React from "react";
+import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
 
-// import ModalBasicExample from "src/main/mainComponents/modules/modal/example/modal.basic.example";
-import _Title from "../../../title";
-import ModalExampleHomePage from "src/main/mainComponents/modules/modal/example";
+import { moduleState } from "src/commons/store";
+import { ExampleIProps, ExampleContentsTypes } from "./template.example.types";
+import { renderTemplateList } from "./template.example.data";
 
-export default function _ExampleForm() {
+import _Title from "../../../title";
+import _SubTitleTemplate from "../../title/subTitle";
+
+export default function _ExampleForm({
+  exampleList, // 렌더되는 예시용 컴포넌트들
+  _props,
+}: {
+  exampleList: Array<ExampleIProps>;
+  _props: any;
+}) {
+  const [module] = useRecoilState(moduleState);
+
   return (
     <_SubTitleTemplate title="사용 예시">
       <ExampleWrapper>
-        <ExampleItems>
-          <_Title title="기본 (Basic)" titleLevel="h3" />
-          <ExampleResult>
-            <ModalExampleHomePage type="basic" />
-          </ExampleResult>
-        </ExampleItems>
-        <ExampleItems>
-          <_Title title="애니메이션 적용" titleLevel="h3" />
-          <ExampleResult>
-            <ModalExampleHomePage type="animation" />
-          </ExampleResult>
-        </ExampleItems>
-        {/* <ExampleItems>
-          <_Title title="모달 닫기 버튼 관련" titleLevel="h3" />
-          <ExampleResult>
-            <ModalExampleHomePage type="animation" />
-          </ExampleResult>
-        </ExampleItems> */}
+        {exampleList &&
+          exampleList?.length &&
+          exampleList.map((el, key: number) => (
+            <ExampleItems
+              key={`${module}_${key + 1}`}
+              isFull={el.isFull ?? false}
+            >
+              <_Title title={el.title} titleLevel="h3" />
+              <ExampleResult>
+                {el.contents &&
+                  el.contents.length &&
+                  el.contents.map(
+                    (component: ExampleContentsTypes, key2: number) => {
+                      component._props = { ..._props, ...component.addProps };
+
+                      return (
+                        <React.Fragment key={`${module}_${key}_${key2}`}>
+                          {(renderTemplateList[module] &&
+                            renderTemplateList[module](component)) || <></>}
+                        </React.Fragment>
+                      );
+                    }
+                  )}
+              </ExampleResult>
+            </ExampleItems>
+          ))}
       </ExampleWrapper>
     </_SubTitleTemplate>
   );
@@ -34,6 +54,7 @@ export default function _ExampleForm() {
 
 interface StyleTypes {
   offBoard?: boolean;
+  isFull?: boolean;
 }
 
 export const ExampleWrapper = styled.div`
@@ -41,7 +62,7 @@ export const ExampleWrapper = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 40px;
-  gap: 80px 50px;
+  gap: 60px 0px;
 `;
 
 export const ExampleItems = styled.div`
@@ -61,13 +82,17 @@ export const ExampleItems = styled.div`
     font-weight: 700;
     font-size: 14px;
   }
+
+  ${(props: StyleTypes) =>
+    props.isFull && {
+      width: "100%",
+    }}
 `;
 
 export const ExampleResult = styled.div`
   display: flex;
   width: 100%;
   border: solid 1px #dddddd;
-  /* height: 180px; */
   margin-top: 15px;
   border-radius: 5px;
   padding: 1rem;
