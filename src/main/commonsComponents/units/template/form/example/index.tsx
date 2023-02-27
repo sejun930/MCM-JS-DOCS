@@ -3,50 +3,47 @@ import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
 
 import { moduleState } from "src/commons/store";
-import { ExampleIProps } from "./template.example.types";
+import { ExampleIProps, ExampleContentsTypes } from "./template.example.types";
 import { renderTemplateList } from "./template.example.data";
 
-import CommonsHooksComponents from "src/main/commonsComponents/hooks";
 import _Title from "../../../title";
 import _SubTitleTemplate from "../../title/subTitle";
 
-import ModalExampleRenderPage from "src/main/mainComponents/modules/modal/example";
-
 export default function _ExampleForm({
   exampleList, // 렌더되는 예시용 컴포넌트들
+  _props,
 }: {
   exampleList: Array<ExampleIProps>;
+  _props: any;
 }) {
-  const { componentRender } = CommonsHooksComponents();
   const [module] = useRecoilState(moduleState);
-
-  console.log(renderTemplateList[module]);
 
   return (
     <_SubTitleTemplate title="사용 예시">
       <ExampleWrapper>
         {exampleList &&
           exampleList?.length &&
-          exampleList.map((el, key) => (
+          exampleList.map((el, key: number) => (
             <ExampleItems
               key={`${module}_${key + 1}`}
               isFull={el.isFull ?? false}
             >
               <_Title title={el.title} titleLevel="h3" />
               <ExampleResult>
-                {el.exampleContents &&
-                  el.exampleContents.length &&
-                  el.exampleContents.map((component, key2) => {
-                    console.log(component);
-                    // console.log(component.component);
-                    return (
-                      <React.Fragment key={`${module}_${key}_${key2}`}>
-                        {renderTemplateList[module] &&
-                          renderTemplateList[module](component)}
-                      </React.Fragment>
-                    );
-                    // return <>{componentRender(component.component)}</>;
-                  })}
+                {el.contents &&
+                  el.contents.length &&
+                  el.contents.map(
+                    (component: ExampleContentsTypes, key2: number) => {
+                      component._props = { ..._props, ...component.addProps };
+
+                      return (
+                        <React.Fragment key={`${module}_${key}_${key2}`}>
+                          {(renderTemplateList[module] &&
+                            renderTemplateList[module](component)) || <></>}
+                        </React.Fragment>
+                      );
+                    }
+                  )}
               </ExampleResult>
             </ExampleItems>
           ))}
