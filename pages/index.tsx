@@ -1,4 +1,4 @@
-import MainHomePage from "src/main/mainComponents/main.presenter";
+import MainHomePage from "src/main/mainComponents";
 
 export default function App() {
   return <MainHomePage />;
