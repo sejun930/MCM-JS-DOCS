@@ -16,7 +16,7 @@ module.exports = {
   globals: {
     JSX: true,
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "jest/globals"],
   rules: {
     quotes: "off",
     semi: "off",

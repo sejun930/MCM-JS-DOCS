@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { NextRouter, useRouter } from "next/router";
+import { ExampleIProps } from "../units/template/form/example/template.example.types";
 
 export default function CommonsHooksComponents() {
   const router = useRouter();
@@ -36,10 +37,16 @@ export default function CommonsHooksComponents() {
     return "";
   };
 
+  // 예시용 렌더시 몇개의 예시 컴포넌트를 가지고 있는지를 리턴
+  const getAllExampleComponentLength = (list: Array<ExampleIProps>): number => {
+    return list.reduce((acc, cur) => acc + cur.contents.length, 0);
+  };
+
   return {
     componentRender,
     getAllComponentsClassName,
     getRouter,
     getModuleNamewithJadenCase,
+    getAllExampleComponentLength,
   };
 }

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Units Page Sanpshot 1`] = `
+<div>
+  <button
+    class="_button_ jest_btn css-0"
+  >
+    버튼 테스트
+  </button>
+</div>
+`;
