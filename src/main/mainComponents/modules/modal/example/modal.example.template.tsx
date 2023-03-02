@@ -17,8 +17,6 @@ export default function ModalExampleRenderPage(props: ExampleContentsTypes) {
   const { onBGAnimation, onModalOpenAnimation } =
     props.addProps as ModalExampleInitTypes;
 
-  console.log(props);
-
   return (
     <>
       {/* 모달 실행 버튼 */}

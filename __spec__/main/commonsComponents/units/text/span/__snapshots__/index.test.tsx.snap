@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text Span Tag Units Page Sanpshot 1`] = `
+<div>
+  <span
+    class="_spanText_ _jest_span_text_"
+    style="color: red;"
+  >
+    span 태그 테스트
+  </span>
+</div>
+`;

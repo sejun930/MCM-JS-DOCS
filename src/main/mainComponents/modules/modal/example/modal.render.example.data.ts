@@ -20,18 +20,6 @@ export const exampleList: Array<ExampleIProps> = [
         },
         children: `기본 모달 페이지입니다.`,
       },
-      // {
-      //   addProps: { onBGAnimation: true, onModalOpenAnimation: false },
-      //   info: {
-      //     buttonName: "Open Basic Modal 2",
-      //   },
-      // },
-      // {
-      //   addProps: { onBGAnimation: true, onModalOpenAnimation: false },
-      //   info: {
-      //     buttonName: "Open Basic Modal 3",
-      //   },
-      // },
     ],
   },
   {
@@ -46,15 +34,4 @@ export const exampleList: Array<ExampleIProps> = [
       // },
     ],
   },
-  // {
-  //   title: "애니메이션 적용",
-  //   // buttonName: "Open Animation Modal",
-  //   // type: "animation",
-  // },
-  // {
-  //   title: "닫기 버튼 관련",
-  //   // buttonName: "Open Animation Modal",
-  //   // type: "animation",
-  //   isFull: true,
-  // },
 ];

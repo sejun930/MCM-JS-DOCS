@@ -1,7 +1,10 @@
 import { useState } from "react";
 
 import styled from "@emotion/styled";
-import { exampleList, exampleInitProps } from "./example/data";
+import {
+  exampleList,
+  exampleInitProps,
+} from "./example/modal.render.example.data";
 
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";

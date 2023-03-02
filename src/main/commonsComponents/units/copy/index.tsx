@@ -1,4 +1,5 @@
-import styled from "@emotion/styled";
+import { CopyButton, CopyText, CopyWrapper } from "./copy.styles";
+import { Pre } from "./code-highlight/codeHighlight.styles";
 import { MutableRefObject, useRef, useState } from "react";
 
 import CommonsHooksComponents from "../../hooks";
@@ -33,6 +34,16 @@ export default function _Copy({
   // 복사 확인 여부 (true일 경우 복사 완료)
   const [isCopied, setIsCopied] = useState(false);
 
+  // 태그 제거하기
+  const removeTag = (str: string) => {
+    return str
+      .split("</span>")
+      .map((el) => {
+        return el.substring(el.lastIndexOf(">") + 1);
+      })
+      .join("");
+  };
+
   // 글자 복사하기
   const copy = () => {
     if (isCopied) return;
@@ -43,7 +54,7 @@ export default function _Copy({
       } else {
         // 복사할 임시 input 생성
         const tempInput = document.createElement("input");
-        tempInput.value = text;
+        tempInput.value = removeTag(text);
         tempInput.classList.add("hide");
 
         if (_textWrapperRef.current) {
@@ -73,16 +84,19 @@ export default function _Copy({
 
   return (
     <CopyWrapper
-      onClick={(!onlyClickButton && copy) || undefined}
+      onMouseDown={(!onlyClickButton && copy) || undefined}
       className={getAllComponentsClassName("_copy_", className)}
       ref={_ref}
       isCopied={isCopied}
       offCopyAnimation={offCopyAnimation}
+      isCode={type === "Code"}
     >
       <CopyText ref={_textWrapperRef}>
         {/* 타입에 따른 별도 렌더하기 */}
         {type === "Code" ? (
-          <code ref={_textRef}>{text}</code>
+          <Pre>
+            <code ref={_textRef} dangerouslySetInnerHTML={{ __html: text }} />
+          </Pre>
         ) : (
           <input
             className="copyInput"
@@ -102,87 +116,3 @@ export default function _Copy({
     </CopyWrapper>
   );
 }
-
-interface StyleTypes {
-  isCopied?: boolean;
-  offCopyAnimation?: boolean;
-}
-
-export const CopyWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f3f3f3;
-  width: 100%;
-  /* padding: 1rem; */
-  border-radius: 5px;
-  height: 60px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-
-  .hide {
-    position: absolute;
-    opacity: 0;
-  }
-
-  .copyInput {
-    width: 100%;
-    height: 100%;
-    border: unset;
-    background-color: unset;
-    cursor: pointer;
-    outline: none;
-    font-size: 16px;
-  }
-
-  ._copyIcon_ {
-    width: 20px;
-    transition: all 0.3s ease-out;
-  }
-
-  :before,
-  :after {
-    content: "";
-    position: absolute;
-    width: 0px;
-    height: 0px;
-    transition: all 0.3s;
-
-    ${(props: StyleTypes) =>
-      props.isCopied &&
-      !props.offCopyAnimation && {
-        width: "100%",
-        height: "100%",
-      }}
-  }
-
-  :before {
-    bottom: 0;
-    left: 0;
-    border-left: 2px solid #95bdff;
-    border-bottom: 2px solid #95bdff;
-    border-radius: 0 0 0 4px;
-  }
-
-  :after {
-    top: 0;
-    right: 0;
-    border-right: 2px solid #95bdff;
-    border-top: 2px solid #95bdff;
-    border-radius: 0 4px 0 0px;
-  }
-`;
-
-export const CopyButton = styled.button`
-  width: 50px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const CopyText = styled.div`
-  display: flex;
-  padding-left: 1rem;
-`;
