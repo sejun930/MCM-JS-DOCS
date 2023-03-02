@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "@emotion/styled";
 
 import CommonsHooksComponents from "../../hooks";
 
@@ -17,13 +16,12 @@ export default function _Button({
   const { getAllComponentsClassName } = CommonsHooksComponents();
 
   return (
-    <Button
+    <button
       className={getAllComponentsClassName("_button_", className)}
       onClick={onClickEvent}
+      role="button_click_event"
     >
       {children}
-    </Button>
+    </button>
   );
 }
-
-const Button = styled.button``;

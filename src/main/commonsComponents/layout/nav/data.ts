@@ -5,12 +5,12 @@ interface NavListTypes {
 
 export const navList: Array<NavListTypes> = [
   { name: "Modal" },
-  { name: "Slick" },
-  { name: "Half Page", href: "halfPage" },
-  { name: "b" },
-  { name: "c" },
-  { name: "z" },
-  { name: "c" },
-  { name: "d" },
-  { name: "e" },
+  // { name: "Slick" },
+  // { name: "Half Page", href: "halfPage" },
+  // { name: "b" },
+  // { name: "c" },
+  // { name: "z" },
+  // { name: "c" },
+  // { name: "d" },
+  // { name: "e" },
 ];

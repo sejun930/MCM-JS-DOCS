@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Title Units Page Sanpshot 1`] = `
+<div>
+  <div>
+    <h2
+      class="_title_ _jest_title_"
+      style=""
+    />
+  </div>
+</div>
+`;
