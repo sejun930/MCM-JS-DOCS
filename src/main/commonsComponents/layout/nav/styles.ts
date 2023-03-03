@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
 
 export const LayoutNavWrapper = styled.nav`
-  width: 100%;
+  width: 20%;
   height: 100%;
   border-right: solid 3px #aa5656;
   /* min-width: 200px; */
@@ -16,6 +16,7 @@ export const LayoutNavListWrapper = styled.article`
   flex-direction: column;
   gap: 10px 0px;
   width: 100%;
+  height: 100%;
   padding: 1rem;
 
   ._p_ {

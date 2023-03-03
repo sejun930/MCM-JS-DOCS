@@ -28,11 +28,13 @@ export default function LayoutPage(props: IProps) {
     <LayoutWrapper>
       <LayoutHeadPage />
       <LayoutContentsWrapper>
-        <_HalfDrag
+        <LayoutNavPage />
+        <>{props.children}</>
+        {/* <_HalfDrag
           LeftComponent={<LayoutNavPage />}
           RightComponent={<>{props.children}</>}
           leftComponentWidth={"20%"}
-        />
+        /> */}
       </LayoutContentsWrapper>
     </LayoutWrapper>
   );

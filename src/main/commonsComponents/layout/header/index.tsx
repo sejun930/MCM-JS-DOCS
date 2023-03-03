@@ -8,15 +8,12 @@ import _Image from "../../units/image";
 export default function LayoutHeadPage() {
   return (
     <HeaderWrapper>
-      <_Link
-        href="/"
-        Component={
-          <_Image
-            src="/images/commons/logo/MCM_white_logo.png"
-            className="_headerLogo_"
-          />
-        }
-      />
+      <_Link href="/">
+        <_Image
+          src="/images/commons/logo/MCM_white_logo.png"
+          className="_headerLogo_"
+        />
+      </_Link>
     </HeaderWrapper>
   );
 }

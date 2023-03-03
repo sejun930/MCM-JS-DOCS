@@ -1,0 +1,85 @@
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom";
+
+import Template from "src/main/commonsComponents/units/template/main";
+import _Title from "src/main/commonsComponents/units/title";
+import { useRouter } from "next/router";
+
+// 가짜 router 만들기
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
+const push = jest.fn();
+(useRouter as jest.Mock).mockImplementation(() => ({
+  push,
+}));
+
+export default describe("Main Template Page", () => {
+  // 스냅샷
+  test("Main Template Page - Snapshot", () => {
+    const { container } = render(<Template>메인 템플릿 페이지</Template>);
+    expect(container).toMatchSnapshot();
+  });
+
+  // main 태그가 존재하는 여부 검증
+  test("Main Template Page - Check main tag in Template Components", () => {
+    const { container } = render(<Template>메인 템플릿 페이지</Template>);
+
+    // main 태그 존재 여부 검증
+    const mainEle = container.querySelector("main");
+    expect(mainEle).toBeInTheDocument();
+  });
+
+  // <div>메인 템플릿 페이지</div>가 children으로 존재하는지에 대한 여부 검증
+  test("Main Template Page - Check div tag in Template Components", () => {
+    const { container, getByText } = render(
+      <Template>
+        <div>메인 템플릿 페이지</div>
+      </Template>
+    );
+
+    // main 태그 존재 여부 검증
+    const mainEle = container.querySelector("main");
+    expect(mainEle).toBeInTheDocument();
+
+    // div 태그 존재 여부 검증
+    const divEle = container.querySelector("div");
+    expect(divEle).toBeInTheDocument();
+
+    // main 태그 안에 div 태그가 존재하는지를 검증
+    const divEleInMainEle = mainEle?.querySelector("div");
+    expect(divEleInMainEle).toBeInTheDocument();
+
+    // 메인 템플릿 페이지 텍스트 확인
+    expect(getByText("메인 템플릿 페이지")).toBeTruthy();
+  });
+
+  // Title 컴포넌트가 children으로 사용중인지 여부 검증
+  test("Main Template Page - Check Title Component in Template Components", () => {
+    const { container } = render(
+      <Template>
+        <_Title
+          title="메인 템플릿 페이지"
+          titleLevel="h2"
+          className="_main_template_title_"
+        />
+      </Template>
+    );
+
+    // main 태그 존재 여부 검증
+    const mainEle = container.querySelector("main");
+    expect(mainEle).toBeInTheDocument();
+
+    // h2 태그 확인하기
+    const h2Ele = container.querySelector("h2");
+    expect(h2Ele).toBeInTheDocument();
+
+    // main 태그 안에 h2 태그 존재 여부 검증
+    const h2EleInMainEle = mainEle?.querySelector("h2");
+    expect(h2EleInMainEle).toBeInTheDocument();
+
+    if (h2EleInMainEle) {
+      expect(h2EleInMainEle).toHaveClass("_title_ _main_template_title_"); // 클래스 값 검증
+    }
+  });
+});

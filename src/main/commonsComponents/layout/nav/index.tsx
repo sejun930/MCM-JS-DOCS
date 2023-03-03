@@ -32,9 +32,10 @@ export default function LayoutNavPage() {
                     ? `/modules/${el.href}`
                     : `/modules/${el.name.toLowerCase()}`
                 }
-                Component={<_PText text={el.name} />}
                 className={(isSelect && `_selectTap_`) || ""}
-              />
+              >
+                <_PText text={el.name} />
+              </_Link>
             );
           })}
       </LayoutNavListWrapper>
