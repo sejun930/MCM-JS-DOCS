@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Text Span Tag Units Page Sanpshot 1`] = `
+exports[`Text Span tag Units Page Jest Text Span Tag Units Page - Sanpshot 1`] = `
 <div>
   <span
     class="_spanText_ _jest_span_text_"

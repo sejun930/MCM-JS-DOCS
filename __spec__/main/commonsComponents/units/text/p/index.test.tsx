@@ -36,26 +36,15 @@ export default describe("Text P tag Units Page Jest", () => {
         styles={{ color: "red" }}
       />
     );
-    const PEle = container.querySelector("p");
-    expect(PEle).toBeInTheDocument(); // P 태그가 있는지 검증
+    const pEle = container.querySelector("p");
+    expect(pEle).toBeInTheDocument(); // P 태그가 있는지 검증
 
-    if (PEle) {
+    if (pEle) {
       const checkText = screen.getByText("p 태그 테스트");
       expect(checkText).toBeInTheDocument(); // 텍스트가 존재하는지 검증
 
-      expect(PEle).toHaveStyle("color: red"); // 스타일 일치하는지 검증
+      expect(pEle).toHaveClass("_jest_p_text_"); // 클래스가 있는지 검증
+      expect(pEle).toHaveStyle("color: red"); // 스타일 일치하는지 검증
     }
   });
 });
-
-// export default it("Text P Tag Units Page Sanpshot", () => {
-//   const component = render(
-//     <_PText
-//       text="p 태그 테스트"
-//       className="_jest_p_text_"
-//       styles={{ color: "red" }}
-//     />
-//   );
-//   // @ts-ignore
-//   expect(component.container).toMatchSnapshot();
-// });

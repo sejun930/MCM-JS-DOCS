@@ -12,7 +12,7 @@ export default function MainHomePage() {
   return (
     <Template>
       <ProjectInfoWrapper>
-        <_Title title="MCM (My Custom Modules)" titleLevel="h1" />
+        <_Title title="MCM (My Custom Modules)" />
         <ProjectInfo>
           <_PText text="'라이브러리를 쉽게 커스텀할 수 있게 하는 모듈을 만들어보면 어떨까?' 하는 생각에서 시작된 프로젝트입니다." />
           <_PText text="실력이 부족한 개발자가 직접 만든 기능들이다 보니 이슈 발생 확률이 상당할 수도 있습니다. 😅" />

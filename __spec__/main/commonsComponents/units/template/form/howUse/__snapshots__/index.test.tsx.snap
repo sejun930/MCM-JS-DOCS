@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HowUse Template Page HowUse Template Page - Snapshot 1`] = `
+<div>
+  <div
+    class="_subTitleTemplate_ css-k59gj9"
+  >
+    <div>
+      <h2
+        class="_title_ _subTitle_"
+      />
+    </div>
+    <div
+      class="_subTitleLine_ css-18klhw4"
+    />
+    <div
+      class="css-1m3zms3"
+    >
+      <p
+        class="_p_ css-pzlb5d"
+      >
+        기본값으로 사용할 수 있는 예시 코드입니다.
+      </p>
+      <div
+        class="_copy_ css-que9y8"
+      >
+        <div
+          class="css-eppsv9"
+        >
+          <pre
+            class="css-1gdhu95"
+          >
+            <code>
+              <span
+                class="purple"
+              >
+                import
+              </span>
+              <span
+                class="yellow"
+              >
+                 { 
+              </span>
+              <span
+                class="skyblue"
+              >
+                _
+              </span>
+              <span
+                class="yellow"
+              >
+                 } 
+              </span>
+              <span
+                class="purple"
+              >
+                from
+              </span>
+              <span
+                class="lightOrange"
+              >
+                 "MCM-js"
+              </span>
+              <span
+                class="sub"
+              >
+                ;
+              </span>
+            </code>
+          </pre>
+        </div>
+        <button
+          class="css-12vdm2a"
+        >
+          <img
+            class="_image_ _copyIcon_ css-msby2z"
+            src="/images/commons/icons/copy.png"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

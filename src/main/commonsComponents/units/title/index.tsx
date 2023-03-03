@@ -1,4 +1,10 @@
-import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
+import {
+  CSSProperties,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import CommonsHooksComponents from "../../hooks";
 
 interface IProps {
@@ -17,7 +23,8 @@ export default function _Title({
   titleLevel,
 }: IProps) {
   const renderRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const { getAllComponentsClassName } = CommonsHooksComponents();
+  const { getAllComponentsClassName, getOriginTemplate } =
+    CommonsHooksComponents();
 
   const _className = getAllComponentsClassName("_title_", className);
 
@@ -34,8 +41,17 @@ export default function _Title({
       headering.className = _className;
 
       // 스타일 지정
-      // @ts-ignore
-      if (styles) (headering as HTMLHeadingElement).style = styles;
+      if (headering.style && styles) {
+        const stylesStr = Object.entries(styles)
+          .reduce((acc, cur) => {
+            return (
+              acc +
+              `${getOriginTemplate(cur[0])}:${getOriginTemplate(cur[1])}; `
+            );
+          }, "")
+          .trim();
+        headering.setAttribute("style", stylesStr);
+      }
 
       // 타이틀 메세지 추가
       headering.innerText = title;
@@ -45,11 +61,10 @@ export default function _Title({
         if (divTarget.children[0]) divTarget.children[0].remove();
 
         // 새로운 태그 추가
-        divTarget.append(headering);
-        // divTarget.innerHTML = title;
+        divTarget.appendChild(headering);
       }
     }
-  }, [titleLevel, title]);
+  }, [title]);
 
   return (
     <div ref={renderRef}>

@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import styled from "@emotion/styled";
 import {
-  exampleList,
-  exampleInitProps,
+  modalExampleList,
+  modalExampleInitProps,
 } from "./example/modal.render.example.data";
 
 import Template from "src/main/commonsComponents/units/template/main";
@@ -17,7 +17,7 @@ export default function MyModal() {
   const { getAllExampleComponentLength } = CommonsHooksComponents();
 
   const [isShow, setIsShow] = useState(
-    new Array(getAllExampleComponentLength(exampleList)).fill(false)
+    new Array(getAllExampleComponentLength(modalExampleList)).fill(false)
   );
 
   // 버튼 클릭 시 모달 오픈
@@ -45,8 +45,8 @@ export default function MyModal() {
       <ModulesInfoWrapper>
         <_HowUseForm />
         <_ExampleForm
-          exampleList={exampleList}
-          initProps={exampleInitProps}
+          exampleList={modalExampleList}
+          initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
       </ModulesInfoWrapper>

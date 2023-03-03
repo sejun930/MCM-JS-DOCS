@@ -11,6 +11,7 @@ export const Wrapper = styled.main`
   padding: 1.5rem 3rem;
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   @media ${breakPoints.mobile} {
     padding: 5vw;
