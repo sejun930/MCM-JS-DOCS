@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build:ssg": "next build && next export",
-    "build": "next build",
+    "build": "jest --watch && next build",
     "start": "next start",
     "lint": "next lint",
     "jest": "jest",

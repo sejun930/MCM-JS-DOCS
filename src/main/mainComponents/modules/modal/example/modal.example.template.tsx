@@ -1,4 +1,4 @@
-import { _Modal } from "MCM-js";
+import { _Modal } from "mcm-js";
 
 import {
   ExampleContentsTypes,

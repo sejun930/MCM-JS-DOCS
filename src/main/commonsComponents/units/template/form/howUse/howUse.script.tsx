@@ -7,7 +7,7 @@ export default function HowUseScriptComponnet() {
     str += `<span class='skyblue'>_${module}</span>`;
     str += `<span class='yellow'> } </span>`;
     str += `<span class='purple'>from</span>`;
-    str += `<span class='lightOrange'> "MCM-js"</span>`;
+    str += `<span class='lightOrange'> "mcm-js"</span>`;
     str += `<span class='sub'>;</span>`;
 
     return str;

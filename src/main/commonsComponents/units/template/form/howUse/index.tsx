@@ -17,11 +17,7 @@ export default function _HowUseForm() {
     <_SubTitleTemplate title="사용 방법">
       <CodeWrapper>
         <_PText text="기본값으로 사용할 수 있는 예시 코드입니다." />
-        <_Copy
-          text={getHowUseResultCode(module)}
-          // text={`<span>import</span> { _${module} } from "MCM-js"`}
-          type="Code"
-        />
+        <_Copy text={getHowUseResultCode(module)} type="Code" />
       </CodeWrapper>
     </_SubTitleTemplate>
   );
