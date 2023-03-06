@@ -1,17 +1,5 @@
-import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-
+import { render } from "@testing-library/react";
 import _Link from "src/main/commonsComponents/units/link/Link";
-import { useRouter } from "next/router";
-
-// 가짜 router 만들기
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
-const push = jest.fn();
-(useRouter as jest.Mock).mockImplementation(() => ({
-  push,
-}));
 
 export default describe("Link Tag Page", () => {
   // 스냅샷

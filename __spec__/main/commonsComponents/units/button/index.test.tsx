@@ -1,17 +1,5 @@
-import "@testing-library/jest-dom";
-import { fireEvent, render, screen } from "@testing-library/react";
-
+import { fireEvent, render } from "@testing-library/react";
 import _Button from "src/main/commonsComponents/units/button";
-import { useRouter } from "next/router";
-
-// 가짜 router 만들기
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
-const push = jest.fn();
-(useRouter as jest.Mock).mockImplementation(() => ({
-  push,
-}));
 
 export default describe("Button Units Page Jest", () => {
   // 스냅샷

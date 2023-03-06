@@ -1,26 +1,10 @@
-import React from "react";
-import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-
 import _Image from "src/main/commonsComponents/units/image";
-import { useRouter } from "next/router";
-import { MutableRefObject, useRef } from "react";
+import React, { MutableRefObject } from "react";
 
-// 가짜 router 만들기
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
-const push = jest.fn();
-(useRouter as jest.Mock).mockImplementation(() => ({
-  push,
-}));
-
-// 가짜 ref 만들기
-jest.spyOn(React, "useRef").mockReturnValue({
-  current: {
-    childMethod: jest.fn(),
-  },
-});
+import { jestMockUseRef } from "src/commons/mocks/mock";
+// useRef mocking function 생성
+jestMockUseRef();
 
 export default describe("Image Units Page Jest", () => {
   const { useRef } = require("react");

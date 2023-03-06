@@ -1,28 +1,16 @@
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { RecoilRoot } from "recoil";
-
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example";
-import { useRouter } from "next/router";
 
 import {
   modalExampleList,
   modalExampleInitProps,
 } from "src/main/mainComponents/modules/modal/example/modal.render.example.data";
 
-// 가짜 router 만들기
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
-const push = jest.fn();
-(useRouter as jest.Mock).mockImplementation(() => ({
-  push,
-}));
-
 const commonsProps = {
   isShow: [false, false],
-  openModal: (_: number) => () => void {},
-  closeModal: (_: number) => () => void {},
+  openModal: (_: number) => () => {},
+  closeModal: (_: number) => () => {},
 };
 
 export default describe("Example Template Page", () => {

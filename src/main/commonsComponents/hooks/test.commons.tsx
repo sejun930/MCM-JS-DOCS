@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+("");
 import { useRouter } from "next/router";
 
 export default function TestCommonsHooksComponents() {
