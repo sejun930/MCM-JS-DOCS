@@ -1,18 +1,7 @@
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import Template from "src/main/commonsComponents/units/template/main";
 import _Title from "src/main/commonsComponents/units/title";
-import { useRouter } from "next/router";
-
-// 가짜 router 만들기
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
-const push = jest.fn();
-(useRouter as jest.Mock).mockImplementation(() => ({
-  push,
-}));
 
 export default describe("Main Template Page", () => {
   // 스냅샷
