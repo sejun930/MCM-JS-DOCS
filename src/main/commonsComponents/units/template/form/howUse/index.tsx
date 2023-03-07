@@ -14,9 +14,12 @@ export default function _HowUseForm() {
   const [module] = useRecoilState(moduleState);
 
   return (
-    <_SubTitleTemplate title="사용 방법">
-      <CodeWrapper>
-        <_PText text="기본값으로 사용할 수 있는 예시 코드입니다." />
+    <_SubTitleTemplate title="사용 방법" className="_howUse_Title_">
+      <CodeWrapper role="code-wrapper">
+        <_PText
+          text="기본값으로 사용할 수 있는 예시 코드입니다."
+          className="_howUse_example_notice_"
+        />
         <_Copy text={getHowUseResultCode(module)} type="Code" />
       </CodeWrapper>
     </_SubTitleTemplate>

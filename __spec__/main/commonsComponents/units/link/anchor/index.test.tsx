@@ -26,7 +26,7 @@ export default describe("Anchor Tag Page", () => {
         다음으로 이동
       </_A>
     );
-    const aEle = container.querySelector("a");
+    const aEle = container.querySelector("._jest_a_");
 
     if (aEle) {
       expect(aEle).toHaveAttribute("href", "https://www.daum.net");
@@ -38,25 +38,27 @@ export default describe("Anchor Tag Page", () => {
   // a 태그에 target 속성으로 _self를 사용중인지 체크
   test("Anchor Page - Check have href in a tag", () => {
     const { container } = render(
-      <_A href="https://www.daum.net" notTarget>
+      <_A href="https://www.daum.net" notTarget className="_jest_a_">
         다음으로 이동
       </_A>
     );
-    const aEle = container.querySelector("a");
+    const aEle = container.querySelector("._jest_a_");
+
+    expect(aEle).toBeInTheDocument();
     expect(aEle).toHaveAttribute("target", "_self");
   });
 
   // children 데이터로 <button>이동하기</button>가 있는지를 검증
   test("Anchor Page - Check have href in a tag", () => {
     const { container, getByText } = render(
-      <_A href="https://www.daum.net">
-        <button>이동하기</button>
+      <_A href="https://www.daum.net" className="_jest_a_">
+        <button className="jest_a_btn">이동하기</button>
       </_A>
     );
-    const aEle = container.querySelector("a");
+    const aEle = container.querySelector("._jest_a_");
     expect(aEle).toHaveAttribute("href", "https://www.daum.net");
 
-    const btnEle = container.querySelector("button");
+    const btnEle = container.querySelector(".jest_a_btn");
     expect(btnEle).toBeInTheDocument(); // 버튼 태그가 먼저 존재하는지 체크
 
     if (btnEle) {

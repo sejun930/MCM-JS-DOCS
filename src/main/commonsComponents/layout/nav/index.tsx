@@ -9,15 +9,15 @@ import _PText from "../../units/text/p";
 
 export default function LayoutNavPage() {
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const { getRouter } = CommonsHooksComponents();
+  const { getRouter, getAllComponentsClassName } = CommonsHooksComponents();
   const router = getRouter();
 
   // 현재 선택중인 탭
   const selectTap = router.pathname.split("/").at(-1);
 
   return (
-    <LayoutNavWrapper ref={wrapperRef}>
-      <LayoutNavListWrapper>
+    <LayoutNavWrapper ref={wrapperRef} className="_layout_nav_wrapper_">
+      <LayoutNavListWrapper className="_layout_nav_list_">
         {navList
           .slice()
           .sort((a, b) => (a.name > b.name ? 1 : -1)) // 알파벳 순서로 정렬
@@ -32,9 +32,12 @@ export default function LayoutNavPage() {
                     ? `/modules/${el.href}`
                     : `/modules/${el.name.toLowerCase()}`
                 }
-                className={(isSelect && `_selectTap_`) || ""}
+                className={getAllComponentsClassName(
+                  "_tap_",
+                  (isSelect && `_selectTap_`) || ""
+                )}
               >
-                <_PText text={el.name} />
+                <_PText text={el.name} className="_tap_name_" />
               </_Link>
             );
           })}

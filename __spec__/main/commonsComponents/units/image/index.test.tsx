@@ -33,7 +33,7 @@ export default describe("Image Units Page Jest", () => {
         styles={{ width: "100px" }}
       />
     );
-    const imgEle = container.querySelector("img");
+    const imgEle = container.querySelector(".jest_image") as HTMLImageElement;
 
     expect(imgEle).toBeInTheDocument(); // img 태그 존재여부 검증
     if (imgEle) {

@@ -10,9 +10,12 @@ export default function _MainTitleTemplate() {
   const [module] = useRecoilState(moduleState);
 
   return (
-    <Wrapper>
-      <_Title title={`📖 ${module}`} titleLevel="h1" className="_mainTitle_" />
-      <_PText text={mouduleRemarksList[module]} />
+    <Wrapper className="_main_title_wrapper_">
+      <_Title title={`📖 ${module}`} titleLevel="h1" className="_main_title_" />
+      <_PText
+        text={mouduleRemarksList[module]}
+        className="_main_title_remarks_"
+      />
     </Wrapper>
   );
 }
@@ -24,7 +27,7 @@ export const Wrapper = styled.section`
   gap: 10px 0px;
   padding-bottom: 120px;
 
-  ._mainTitle_ {
+  ._main_title_ {
     display: flex;
     align-items: center;
   }

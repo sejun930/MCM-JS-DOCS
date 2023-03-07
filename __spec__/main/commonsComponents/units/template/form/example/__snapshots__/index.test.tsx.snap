@@ -3,7 +3,7 @@
 exports[`Example Template Page Example Template Page - Snapshot 1`] = `
 <div>
   <div
-    class="_subTitleTemplate_ css-k59gj9"
+    class="_subTitleTemplate_ _example_template_title_ css-k59gj9"
   >
     <div>
       <h2

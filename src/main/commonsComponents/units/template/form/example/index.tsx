@@ -18,7 +18,7 @@ export default function _ExampleForm({
   let _idx = 0;
 
   return (
-    <_SubTitleTemplate title="사용 예시">
+    <_SubTitleTemplate title="사용 예시" className="_example_template_title_">
       <ExampleWrapper>
         {exampleList &&
           exampleList?.length &&

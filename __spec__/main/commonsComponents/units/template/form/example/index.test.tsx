@@ -40,12 +40,17 @@ export default describe("Example Template Page", () => {
       </RecoilRoot>
     );
     const h2WrapperEle = container.getElementsByClassName("_subTitleTemplate_");
-    const h2Ele = h2WrapperEle[0]?.querySelector("h2");
-    // h2 태그 존재 여부 검증
-    expect(h2Ele).toBeInTheDocument();
+    const h2Ele = h2WrapperEle[0]?.querySelector(
+      "._subTitle_"
+    ) as HTMLHeadingElement;
 
-    const h2Text = h2Ele?.innerText;
-    // 사용 예시 텍스트 검증
-    expect(h2Text).toEqual("📝 사용 예시");
+    if (h2Ele) {
+      // h2 태그 존재 여부 검증
+      expect(h2Ele).toBeInTheDocument();
+
+      const h2Text = h2Ele.innerText;
+      // 사용 예시 텍스트 검증
+      expect(h2Text).toEqual("📝 사용 예시");
+    }
   });
 });

@@ -38,11 +38,13 @@ export default describe("Button Units Page Jest", () => {
         버튼 테스트
       </_Button>
     );
-    const btnEle = container.querySelector("button");
+    const btnEle = container.querySelector(".jest_btn");
 
     // button 태그가 존재하는지 검증
     expect(btnEle).toBeInTheDocument();
     // 클래스 존재 여부 검증
     expect(btnEle).toHaveClass("jest_btn");
+    // 버튼 텍스트 여부 검증
+    expect(btnEle?.textContent).toEqual("버튼 테스트");
   });
 });

@@ -38,15 +38,15 @@ export default describe("Text Span tag Units Page Jest", () => {
         styles={{ color: "blue", fontSize: "20px" }}
       />
     );
-    const h3Ele = container.querySelector("h3");
+    const h3Ele = container.querySelector(
+      "._jest_title_3_"
+    ) as HTMLHeadingElement;
     expect(h3Ele).toBeInTheDocument(); // h3 태그가 존재하는지 검증
 
     if (h3Ele) {
-      // expect(getByText("타이틀 테스트")).toBeTruthy();
-      // const h3Text = screen.getByText("타이틀 테스트");
-      // expect(h3Text).toBeInTheDocument(); // title이 존재하는지 검증
       expect(h3Ele).toHaveStyle("color : blue; font-size : 20px"); // 스타일이 존재하는지 검증
       expect(h3Ele).toHaveClass("_jest_title_3_"); // 클래스가 존재하는지 검증
+      expect(h3Ele.innerText).toEqual("타이틀 테스트"); // 텍스트가 일치하는지 검증
     }
   });
 });
