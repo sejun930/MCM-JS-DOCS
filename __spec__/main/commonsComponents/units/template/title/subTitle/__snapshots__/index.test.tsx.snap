@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`subTitle Template Page subTitle Template Page - Snapshot 1`] = `
+<div>
+  <div
+    class="_subTitleTemplate_ css-k59gj9"
+  >
+    <div>
+      <h2
+        class="_title_ _subTitle_"
+      />
+    </div>
+    <div
+      class="_subTitleLine_ css-18klhw4"
+    />
+    <div>
+      내용
+    </div>
+  </div>
+</div>
+`;

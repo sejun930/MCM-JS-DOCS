@@ -29,7 +29,6 @@ export default function CommonsHooksComponents() {
   // 주소 query 끝 제이든 케이스 리턴하기
   const getModuleNamewithJadenCase = (): string => {
     let moduleName = router.pathname.split("/").at(-1);
-    console.log(moduleName);
 
     if (moduleName) {
       moduleName = moduleName[0].toUpperCase() + moduleName.substring(1);

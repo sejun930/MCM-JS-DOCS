@@ -1,16 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Text P Tag Units Page Sanpshot 1`] = `
-<div>
-  <p
-    class="_p_ _jest_p_text_ css-pzlb5d"
-    style="color: red;"
-  >
-    p 태그 테스트
-  </p>
-</div>
-`;
-
 exports[`Text P tag Units Page Jest Text P Tag Units Page - Sanpshot 1`] = `
 <div>
   <p

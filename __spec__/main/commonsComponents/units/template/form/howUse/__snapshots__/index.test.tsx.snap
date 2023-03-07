@@ -3,7 +3,7 @@
 exports[`HowUse Template Page HowUse Template Page - Snapshot 1`] = `
 <div>
   <div
-    class="_subTitleTemplate_ css-k59gj9"
+    class="_subTitleTemplate_ _howUse_Title_ css-k59gj9"
   >
     <div>
       <h2
@@ -15,9 +15,10 @@ exports[`HowUse Template Page HowUse Template Page - Snapshot 1`] = `
     />
     <div
       class="css-1m3zms3"
+      role="code-wrapper"
     >
       <p
-        class="_p_ css-pzlb5d"
+        class="_p_ _howUse_example_notice_ css-pzlb5d"
       >
         기본값으로 사용할 수 있는 예시 코드입니다.
       </p>

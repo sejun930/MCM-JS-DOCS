@@ -25,7 +25,7 @@ export default describe("Text Span tag Units Page Jest", () => {
       />
     );
 
-    const spanEle = container.querySelector("span");
+    const spanEle = container.querySelector("._jest_span_text_");
     expect(spanEle).toBeInTheDocument(); // span 태그가 있는지 검증
 
     if (spanEle) {

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Example Page Modal Example Page - Snapshot 1`] = `
+<div>
+  <button
+    class="_button_"
+    role="button_click_event"
+  >
+    클릭하세요.
+  </button>
+  <div
+    class="cmm-modal-wrapper css-tz1nwt"
+  >
+    <div
+      class="cmm-modal-item css-1dgb740"
+    >
+      <div
+        class="cmm-modal-contents-wrapper css-d4a1oh"
+      >
+        <div
+          class="cmm-modal-content css-3o9g8b"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

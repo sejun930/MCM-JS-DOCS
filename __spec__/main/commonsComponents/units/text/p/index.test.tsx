@@ -24,7 +24,7 @@ export default describe("Text P tag Units Page Jest", () => {
         styles={{ color: "red" }}
       />
     );
-    const pEle = container.querySelector("p");
+    const pEle = container.querySelector("._jest_p_text_");
     expect(pEle).toBeInTheDocument(); // P 태그가 있는지 검증
 
     if (pEle) {

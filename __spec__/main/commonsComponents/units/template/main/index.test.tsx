@@ -15,7 +15,7 @@ export default describe("Main Template Page", () => {
     const { container } = render(<Template>메인 템플릿 페이지</Template>);
 
     // main 태그 존재 여부 검증
-    const mainEle = container.querySelector("main");
+    const mainEle = container.querySelector("._main_template_wrapper_");
     expect(mainEle).toBeInTheDocument();
   });
 
@@ -23,20 +23,20 @@ export default describe("Main Template Page", () => {
   test("Main Template Page - Check div tag in Template Components", () => {
     const { container, getByText } = render(
       <Template>
-        <div>메인 템플릿 페이지</div>
+        <div className="_main_template_contents_">메인 템플릿 페이지</div>
       </Template>
     );
 
     // main 태그 존재 여부 검증
-    const mainEle = container.querySelector("main");
+    const mainEle = container.querySelector("._main_template_wrapper_");
     expect(mainEle).toBeInTheDocument();
 
     // div 태그 존재 여부 검증
-    const divEle = container.querySelector("div");
+    const divEle = container.querySelector("._main_template_contents_");
     expect(divEle).toBeInTheDocument();
 
     // main 태그 안에 div 태그가 존재하는지를 검증
-    const divEleInMainEle = mainEle?.querySelector("div");
+    const divEleInMainEle = mainEle?.querySelector("._main_template_contents_");
     expect(divEleInMainEle).toBeInTheDocument();
 
     // 메인 템플릿 페이지 텍스트 확인
@@ -56,19 +56,24 @@ export default describe("Main Template Page", () => {
     );
 
     // main 태그 존재 여부 검증
-    const mainEle = container.querySelector("main");
+    const mainEle = container.querySelector("._main_template_wrapper_");
     expect(mainEle).toBeInTheDocument();
 
     // h2 태그 확인하기
-    const h2Ele = container.querySelector("h2");
+    const h2Ele = container.querySelector(
+      "._main_template_title_"
+    ) as HTMLHeadingElement;
     expect(h2Ele).toBeInTheDocument();
 
     // main 태그 안에 h2 태그 존재 여부 검증
-    const h2EleInMainEle = mainEle?.querySelector("h2");
+    const h2EleInMainEle = mainEle?.querySelector(
+      "._main_template_title_"
+    ) as HTMLHeadingElement;
     expect(h2EleInMainEle).toBeInTheDocument();
 
     if (h2EleInMainEle) {
       expect(h2EleInMainEle).toHaveClass("_title_ _main_template_title_"); // 클래스 값 검증
+      expect(h2EleInMainEle.innerText).toEqual("메인 템플릿 페이지");
     }
   });
 });

@@ -7,7 +7,7 @@ import { moduleState } from "src/commons/store";
 
 import LayoutHeadPage from "./header";
 import LayoutNavPage from "./nav";
-import _HalfDrag from "src/main/mainComponents/modules/half-drag/half-drag.container";
+// import _HalfDrag from "src/main/mainComponents/modules/half-drag/half-drag.container";
 
 interface IProps {
   children: ReactNode;
@@ -20,12 +20,11 @@ export default function LayoutPage(props: IProps) {
   useEffect(() => {
     // 현재 선택한 모듈 저장하기
     const moduleName = getModuleNamewithJadenCase();
-    console.log(moduleName);
     setModule(moduleName);
   }, [getRouter()]);
 
   return (
-    <LayoutWrapper>
+    <LayoutWrapper className="_layout_home_wrapper_">
       <LayoutHeadPage />
       <LayoutContentsWrapper>
         <LayoutNavPage />

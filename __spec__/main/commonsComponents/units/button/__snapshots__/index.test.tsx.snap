@@ -10,14 +10,3 @@ exports[`Button Units Page Jest Button Units Page - Snapshot 1`] = `
   </button>
 </div>
 `;
-
-exports[`Button Units Page Jest Button Units Page Snapshot 1`] = `
-<div>
-  <button
-    class="_button_ jest_btn"
-    role="button_click_event"
-  >
-    버튼 테스트
-  </button>
-</div>
-`;

@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
+<div>
+  <main
+    class="_main_template_wrapper_ css-1p2vox9"
+  >
+    <section
+      class="_main_title_wrapper_ css-j3xf1"
+    >
+      <div>
+        <h1
+          class="_title_ _main_title_"
+        />
+      </div>
+      <p
+        class="_p_ _main_title_remarks_ css-pzlb5d"
+      />
+    </section>
+    <div
+      class="css-1po5u6t"
+    >
+      <div
+        class="_subTitleTemplate_ _howUse_Title_ css-k59gj9"
+      >
+        <div>
+          <h2
+            class="_title_ _subTitle_"
+          />
+        </div>
+        <div
+          class="_subTitleLine_ css-18klhw4"
+        />
+        <div
+          class="css-1m3zms3"
+          role="code-wrapper"
+        >
+          <p
+            class="_p_ _howUse_example_notice_ css-pzlb5d"
+          >
+            기본값으로 사용할 수 있는 예시 코드입니다.
+          </p>
+          <div
+            class="_copy_ css-que9y8"
+          >
+            <div
+              class="css-eppsv9"
+            >
+              <pre
+                class="css-1gdhu95"
+              >
+                <code>
+                  <span
+                    class="purple"
+                  >
+                    import
+                  </span>
+                  <span
+                    class="yellow"
+                  >
+                     { 
+                  </span>
+                  <span
+                    class="skyblue"
+                  >
+                    _
+                  </span>
+                  <span
+                    class="yellow"
+                  >
+                     } 
+                  </span>
+                  <span
+                    class="purple"
+                  >
+                    from
+                  </span>
+                  <span
+                    class="lightOrange"
+                  >
+                     "mcm-js"
+                  </span>
+                  <span
+                    class="sub"
+                  >
+                    ;
+                  </span>
+                </code>
+              </pre>
+            </div>
+            <button
+              class="css-12vdm2a"
+            >
+              <img
+                class="_image_ _copyIcon_ css-msby2z"
+                src="/images/commons/icons/copy.png"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="_subTitleTemplate_ _example_template_title_ css-k59gj9"
+      >
+        <div>
+          <h2
+            class="_title_ _subTitle_"
+          />
+        </div>
+        <div
+          class="_subTitleLine_ css-18klhw4"
+        />
+        <div
+          class="css-1sw7z4p"
+        >
+          <div
+            class="css-bqybxg"
+          >
+            <div>
+              <h3
+                class="_title_"
+              />
+            </div>
+            <div
+              class="css-1bzs2hq"
+            />
+          </div>
+          <div
+            class="css-bqybxg"
+          >
+            <div>
+              <h3
+                class="_title_"
+              />
+            </div>
+            <div
+              class="css-1bzs2hq"
+            >
+              0
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+`;

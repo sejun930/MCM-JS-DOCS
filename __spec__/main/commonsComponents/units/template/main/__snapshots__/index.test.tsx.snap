@@ -3,7 +3,7 @@
 exports[`Main Template Page Main Template Page - Snapshot 1`] = `
 <div>
   <main
-    class="css-1p2vox9"
+    class="_main_template_wrapper_ css-1p2vox9"
   >
     메인 템플릿 페이지
   </main>

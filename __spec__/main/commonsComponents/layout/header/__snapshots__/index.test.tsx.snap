@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout Header Page Layout Header Page - Snapshot 1`] = `
+<div>
+  <header
+    class="_layout_header_wrapper_ css-14b3e4t"
+  >
+    <a
+      class="_link_ _layout_header_link_ css-1h5x3dy"
+      href="/"
+    >
+      <img
+        class="_image_ _layout_header_logo_ css-msby2z"
+        src="/images/commons/logo/MCM_white_logo.png"
+      />
+    </a>
+  </header>
+</div>
+`;
+
+exports[`Layout Header Page Layout Header Page - Snapshot 2`] = `
+<div>
+  <header
+    class="_layout_header_wrapper_ css-14b3e4t"
+  >
+    <a
+      class="_link_ _layout_header_link_ css-1h5x3dy"
+      href="/"
+    >
+      <img
+        class="_image_ _layout_header_logo_ css-msby2z"
+        src="/images/commons/logo/MCM_white_logo.png"
+      />
+    </a>
+  </header>
+</div>
+`;

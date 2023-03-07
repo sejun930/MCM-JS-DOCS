@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout Nav Page Layout Nav Page - Snapshot 1`] = `
+<div>
+  <nav
+    class="_layout_nav_wrapper_ css-1essgvo"
+  >
+    <article
+      class="_layout_nav_list_ css-xaukxq"
+    >
+      <a
+        class="_link_ _tap_ css-1h5x3dy"
+        href="/modules/modal"
+      >
+        <p
+          class="_p_ _tap_name_ css-pzlb5d"
+        >
+          Modal
+        </p>
+      </a>
+    </article>
+  </nav>
+</div>
+`;

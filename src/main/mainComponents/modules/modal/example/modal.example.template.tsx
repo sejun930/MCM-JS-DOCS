@@ -10,7 +10,7 @@ import {
 } from "../modal.types";
 import _Button from "src/main/commonsComponents/units/button";
 
-export default function ModalExampleRenderPage(props: ExampleContentsTypes) {
+export default function MyModalExample(props: ExampleContentsTypes) {
   const { idx, buttonName } = props.info as ExampleContentsInfoTypes;
   const { isShow, openModal, closeModal } =
     props.commonsProps as ModalExampleCommonsTypes;
