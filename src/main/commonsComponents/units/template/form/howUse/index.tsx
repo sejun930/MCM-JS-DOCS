@@ -7,10 +7,11 @@ import _Copy from "../../../copy";
 
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
+import { CodeInfoTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
 
 // 사용 방법에 대한 폼
-export default function _HowUseForm() {
-  const { getHowUseResultCode } = HowUseScriptComponnet();
+export default function _HowUseForm({ codeInfo }: { codeInfo: CodeInfoTypes }) {
+  const { getHowUseExampleCode } = HowUseScriptComponnet();
   const [module] = useRecoilState(moduleState);
 
   return (
@@ -20,7 +21,7 @@ export default function _HowUseForm() {
           text="기본값으로 사용할 수 있는 예시 코드입니다."
           className="_howUse_example_notice_"
         />
-        <_Copy text={getHowUseResultCode(module)} type="Code" />
+        <_Copy text={getHowUseExampleCode(module, codeInfo)} type="Code" />
       </CodeWrapper>
     </_SubTitleTemplate>
   );

@@ -53,3 +53,10 @@ h2 {
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Manlo";
+  src: url("../public/font/manlo/Menlo-Regular.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
