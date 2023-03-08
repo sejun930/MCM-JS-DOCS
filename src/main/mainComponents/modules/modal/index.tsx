@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 import {
   modalExampleList,
   modalExampleInitProps,
-} from "./example/modal.render.example.data";
+} from "./example/modal.example.render.data";
+import { modalCodeList } from "./example/modal.example.code.data";
 
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
@@ -43,7 +44,7 @@ export default function MyModal() {
     <Template>
       <_MainTitleTemplate />
       <ModulesInfoWrapper>
-        <_HowUseForm />
+        <_HowUseForm codeInfo={modalCodeList.basic} />
         <_ExampleForm
           exampleList={modalExampleList}
           initProps={modalExampleInitProps}

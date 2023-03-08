@@ -5,7 +5,7 @@ import _ExampleForm from "src/main/commonsComponents/units/template/form/example
 import {
   modalExampleList,
   modalExampleInitProps,
-} from "src/main/mainComponents/modules/modal/example/modal.render.example.data";
+} from "src/main/mainComponents/modules/modal/example/modal.example.render.data";
 
 const commonsProps = {
   isShow: [false, false],
