@@ -41,7 +41,7 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
             기본값으로 사용할 수 있는 예시 코드입니다.
           </p>
           <div
-            class="_copy_ css-que9y8"
+            class="_copy_ css-zko0mt"
           >
             <div
               class="css-eppsv9"
@@ -568,8 +568,6 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
                   >
                     }
                   </span>
-                  
-  
                 </code>
               </pre>
             </div>
