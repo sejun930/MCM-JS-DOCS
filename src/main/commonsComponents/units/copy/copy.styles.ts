@@ -18,7 +18,7 @@ export const CopyWrapper = styled.div`
   padding: 1rem 0px;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
 
   ${(props) =>
     props.isCode && {

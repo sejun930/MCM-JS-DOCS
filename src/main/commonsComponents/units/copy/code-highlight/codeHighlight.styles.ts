@@ -29,7 +29,8 @@ export const Pre = styled.pre`
     // 진한 파란색 : function, const, 태그이름
     /* color: #4d77ff; */
     /* color: #537fe7; */
-    color: #3c79f5;
+    /* color: #3c79f5; */
+    color: #537fe7;
   }
 
   .blue {
@@ -60,5 +61,11 @@ export const Pre = styled.pre`
   .lightGreen {
     // 연초록 : 주석
     color: #4e944f;
+  }
+
+  .green {
+    // 초록색 : 스타일 컴포넌트 및 컴포넌트 명
+    /* color: #03c988; */
+    color: #6cc4a1;
   }
 `;

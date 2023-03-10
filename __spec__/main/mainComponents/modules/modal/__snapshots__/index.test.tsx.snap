@@ -47,7 +47,7 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
               class="css-eppsv9"
             >
               <pre
-                class="css-1gdhu95"
+                class="css-1quoi9q"
               >
                 <code>
                   <span
@@ -81,10 +81,495 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
                      "mcm-js"
                   </span>
                   <span
-                    class="sub"
+                    class="lightGray"
                   >
                     ;
                   </span>
+                  
+
+                  <span
+                    class="purple"
+                  >
+                    import
+                  </span>
+                  <span
+                    class="yellow"
+                  >
+                     { 
+                  </span>
+                  <span
+                    class="skyblue"
+                  >
+                    useState
+                  </span>
+                  <span
+                    class="yellow"
+                  >
+                     } 
+                  </span>
+                  <span
+                    class="purple"
+                  >
+                    from
+                  </span>
+                   
+                  <span
+                    class="lightOrange"
+                  >
+                    "react"
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ;
+                  </span>
+                  
+    
+
+                  <span
+                    class="purple"
+                  >
+                    export default
+                  </span>
+                  <span
+                    class="darkBlue"
+                  >
+                     function
+                  </span>
+                  <span
+                    class="lightYellow"
+                  >
+                     ExamplePage
+                  </span>
+                  <span
+                    class="yellow"
+                  >
+                    () {
+                  </span>
+                  
+  
+                  <span
+                    class="lightGreen"
+                  >
+                    // 모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.
+                  </span>
+                  
+  
+                  <span
+                    class="darkBlue"
+                  >
+                    const
+                  </span>
+                   
+                  <span
+                    class="purple"
+                  >
+                    [
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    isOpen
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ,
+                  </span>
+                   
+                  <span
+                    class="lightYellow"
+                  >
+                    setIsOpen
+                  </span>
+                  <span
+                    class="purple"
+                  >
+                    ]
+                  </span>
+                   
+                  <span
+                    class="lightGray"
+                  >
+                    =
+                  </span>
+                   
+                  <span
+                    class="lightYellow"
+                  >
+                    useState
+                  </span>
+                  <span
+                    class="purple"
+                  >
+                    (
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    false
+                  </span>
+                  <span
+                    class="purple"
+                  >
+                    )
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ;
+                  </span>
+                  
+  
+  
+                  <span
+                    class="lightGreen"
+                  >
+                    // 모달을 실행하는 함수입니다.
+                  </span>
+                  
+  
+                  <span
+                    class="darkBlue"
+                  >
+                    const
+                  </span>
+                   
+                  <span
+                    class="lightYellow"
+                  >
+                    openModal
+                  </span>
+                   
+                  <span
+                    class="lightGray"
+                  >
+                    =
+                  </span>
+                   
+                  <span
+                    class="purple"
+                  >
+                    ()
+                  </span>
+                   
+                  <span
+                    class="blue"
+                  >
+                    =&gt;
+                  </span>
+                   
+                  <span
+                    class="purple"
+                  >
+                    {
+                  </span>
+                  
+    
+                  <span
+                    class="lightYellow"
+                  >
+                    setIsOpen
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    (true)
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ;
+                  </span>
+                  
+  
+                  <span
+                    class="purple"
+                  >
+                    }
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ;
+                  </span>
+                  
+
+  
+                  <span
+                    class="lightGreen"
+                  >
+                    // 모달을 종료하는 함수입니다.
+                  </span>
+                  
+  
+                  <span
+                    class="darkBlue"
+                  >
+                    const
+                  </span>
+                   
+                  <span
+                    class="lightYellow"
+                  >
+                    closeModal
+                  </span>
+                   
+                  <span
+                    class="lightGray"
+                  >
+                    =
+                  </span>
+                   
+                  <span
+                    class="purple"
+                  >
+                    ()
+                  </span>
+                   
+                  <span
+                    class="blue"
+                  >
+                    =&gt;
+                  </span>
+                   
+                  <span
+                    class="purple"
+                  >
+                    {
+                  </span>
+                  
+    
+                  <span
+                    class="lightYellow"
+                  >
+                    setIsOpen
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    (false)
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ;
+                  </span>
+                  
+  
+                  <span
+                    class="purple"
+                  >
+                    }
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ;
+                  </span>
+                  
+
+  
+                  <span
+                    class="purple"
+                  >
+                    return (
+                  </span>
+                  
+    
+                  <span
+                    class="gray"
+                  >
+                    &lt;
+                  </span>
+                  <span
+                    class="darkBlue"
+                  >
+                    div
+                  </span>
+                  <span
+                    class="gray"
+                  >
+                    &gt;
+                  </span>
+                  
+      
+                  <span
+                    class="gray"
+                  >
+                    &lt;
+                  </span>
+                  <span
+                    class="darkBlue"
+                  >
+                    button
+                  </span>
+                   
+                  <span
+                    class="skyblue"
+                  >
+                    onClick
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    =
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    {
+                  </span>
+                  <span
+                    class="lightYellow"
+                  >
+                    openModal
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    }
+                  </span>
+                  <span
+                    class="gray"
+                  >
+                    &gt;
+                  </span>
+                   
+                  <span
+                    class="lightGray"
+                  >
+                    모달 실행하기
+                  </span>
+                   
+                  <span
+                    class="gray"
+                  >
+                    &lt;
+                  </span>
+                  <span
+                    class="gray"
+                  >
+                    /
+                  </span>
+                  <span
+                    class="darkBlue"
+                  >
+                    button
+                  </span>
+                  <span
+                    class="gray"
+                  >
+                    &gt;
+                  </span>
+                  
+      
+                  <span
+                    class="gray"
+                  >
+                    &lt;
+                  </span>
+                  <span
+                    class="green"
+                  >
+                    _Modal
+                  </span>
+                   
+                  <span
+                    class="skyblue"
+                  >
+                    show
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    =
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    {isOpen}
+                  </span>
+                   
+                  <span
+                    class="skyblue"
+                  >
+                    onCloseModal
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    =
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    {
+                  </span>
+                  <span
+                    class="lightYellow"
+                  >
+                    closeModal
+                  </span>
+                  <span
+                    class="blue"
+                  >
+                    }
+                  </span>
+                   
+                  <span
+                    class="gray"
+                  >
+                    /
+                  </span>
+                  <span
+                    class="gray"
+                  >
+                    &gt;
+                  </span>
+                  
+    
+                  <span
+                    class="gray"
+                  >
+                    &lt;
+                  </span>
+                  <span
+                    class="gray"
+                  >
+                    /
+                  </span>
+                  <span
+                    class="darkBlue"
+                  >
+                    div
+                  </span>
+                  <span
+                    class="gray"
+                  >
+                    &gt;
+                  </span>
+                  
+  
+                  <span
+                    class="purple"
+                  >
+                    )
+                  </span>
+                  <span
+                    class="lightGray"
+                  >
+                    ;
+                  </span>
+                  
+
+                  <span
+                    class="yellow"
+                  >
+                    }
+                  </span>
+                  
+  
                 </code>
               </pre>
             </div>
@@ -124,20 +609,6 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
             <div
               class="css-1bzs2hq"
             />
-          </div>
-          <div
-            class="css-bqybxg"
-          >
-            <div>
-              <h3
-                class="_title_"
-              />
-            </div>
-            <div
-              class="css-1bzs2hq"
-            >
-              0
-            </div>
           </div>
         </div>
       </div>
