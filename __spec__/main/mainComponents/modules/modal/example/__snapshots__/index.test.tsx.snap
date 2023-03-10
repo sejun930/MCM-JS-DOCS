@@ -9,16 +9,23 @@ exports[`Modal Example Page Modal Example Page - Snapshot 1`] = `
     클릭하세요.
   </button>
   <div
-    class="cmm-modal-wrapper css-tz1nwt"
+    class="cmm-modal-wrapper css-uwybve"
   >
     <div
-      class="cmm-modal-item css-1dgb740"
+      class="cmm-modal-items css-m029r6"
     >
-      <div
-        class="cmm-modal-contents-wrapper css-d4a1oh"
+      <button
+        class="cmm-modal-close-button-wrapper css-1jzwdgn"
       >
         <div
-          class="cmm-modal-content css-3o9g8b"
+          class="cmm-modal-close-button css-1ignqe8"
+        />
+      </button>
+      <div
+        class="cmm-modal-layout css-1vkx5dn"
+      >
+        <div
+          class="cmm-modal-content css-1wdbmsj"
         />
       </div>
     </div>

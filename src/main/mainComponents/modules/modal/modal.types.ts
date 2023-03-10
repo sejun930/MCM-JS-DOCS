@@ -7,6 +7,6 @@ export interface ModalExampleCommonsTypes {
 
 // 추가적으로 붙는 예시용 모달 타입
 export interface ModalExampleInitTypes {
-  onBGAnimation?: boolean;
-  onModalOpenAnimation?: boolean;
+  showBGAnimation?: boolean;
+  showModalOpenAnimation?: boolean;
 }

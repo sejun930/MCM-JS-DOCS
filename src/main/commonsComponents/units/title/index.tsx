@@ -1,10 +1,4 @@
-import {
-  CSSProperties,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
 import CommonsHooksComponents from "../../hooks";
 
 interface IProps {

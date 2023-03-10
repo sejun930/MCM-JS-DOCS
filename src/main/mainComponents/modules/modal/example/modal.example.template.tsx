@@ -1,4 +1,4 @@
-import { _Modal } from "mcm-js";
+import { _Modal } from "mcm-js-dev";
 
 import {
   ExampleContentsTypes,
@@ -14,7 +14,7 @@ export default function MyModalExample(props: ExampleContentsTypes) {
   const { idx, buttonName } = props.info as ExampleContentsInfoTypes;
   const { isShow, openModal, closeModal } =
     props.commonsProps as ModalExampleCommonsTypes;
-  const { onBGAnimation, onModalOpenAnimation } =
+  const { showBGAnimation, showModalOpenAnimation } =
     props.addProps as ModalExampleInitTypes;
 
   return (
@@ -27,8 +27,8 @@ export default function MyModalExample(props: ExampleContentsTypes) {
         <_Modal
           show={isShow[idx ?? 0]}
           onCloseModal={closeModal(idx ?? 0)}
-          onBGAnimation={onBGAnimation}
-          onModalOpenAnimation={onModalOpenAnimation}
+          showBGAnimation={showBGAnimation}
+          showModalOpenAnimation={showModalOpenAnimation}
         >
           {props.children}
         </_Modal>

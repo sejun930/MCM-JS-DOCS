@@ -1,7 +1,7 @@
-import { Router, useRouter } from "next/router";
+import { Router } from "next/router";
 
 export default function MCMDynamicPageTestPage(props: { test: string }) {
-  const router = useRouter();
+  // const router = useRouter();
 
   return <>{props.test} 페이지 입니다.</>;
 }

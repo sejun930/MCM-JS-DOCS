@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
 
+import { modalCodeList } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 
 export default describe("HowUse Template Page", () => {
@@ -8,7 +9,7 @@ export default describe("HowUse Template Page", () => {
   test("HowUse Template Page - Snapshot", () => {
     const { container } = render(
       <RecoilRoot>
-        <_HowUseForm />
+        <_HowUseForm codeInfo={modalCodeList.basic} />
       </RecoilRoot>
     );
     expect(container).toMatchSnapshot();
@@ -18,7 +19,7 @@ export default describe("HowUse Template Page", () => {
   test("HowUse Template Page - Check have h2, p tag", () => {
     const { container, getByRole } = render(
       <RecoilRoot>
-        <_HowUseForm />
+        <_HowUseForm codeInfo={modalCodeList.basic} />
       </RecoilRoot>
     );
 

@@ -28,20 +28,6 @@ exports[`Example Template Page Example Template Page - Snapshot 1`] = `
           class="css-1bzs2hq"
         />
       </div>
-      <div
-        class="css-bqybxg"
-      >
-        <div>
-          <h3
-            class="_title_"
-          />
-        </div>
-        <div
-          class="css-1bzs2hq"
-        >
-          0
-        </div>
-      </div>
     </div>
   </div>
 </div>
