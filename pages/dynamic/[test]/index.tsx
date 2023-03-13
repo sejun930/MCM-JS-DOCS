@@ -3,7 +3,9 @@ import { Router } from "next/router";
 export default function MCMDynamicPageTestPage(props: { test: string }) {
   // const router = useRouter();
 
-  return <>{props.test} 페이지 입니다.</>;
+  return (
+    <>{props.test} 페이지 입니다. (modify : 23년 03월 13일 오전 10시 21분)</>
+  );
 }
 
 export const getServerSideProps = (context: Router) => {
