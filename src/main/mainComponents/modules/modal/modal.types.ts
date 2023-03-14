@@ -9,4 +9,6 @@ export interface ModalExampleCommonsTypes {
 export interface ModalExampleInitTypes {
   showBGAnimation?: boolean;
   showModalOpenAnimation?: boolean;
+  styles?: { width?: string; height?: string };
+  mobileDefaultStyles?: { width?: string; height?: string };
 }

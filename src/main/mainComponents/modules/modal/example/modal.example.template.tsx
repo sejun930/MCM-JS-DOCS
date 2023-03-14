@@ -1,4 +1,5 @@
 import { _Modal } from "mcm-js-dev";
+import React from "react";
 
 import {
   ExampleContentsTypes,
@@ -14,13 +15,20 @@ export default function MyModalExample(props: ExampleContentsTypes) {
   const { idx, buttonName } = props.info as ExampleContentsInfoTypes;
   const { isShow, openModal, closeModal } =
     props.commonsProps as ModalExampleCommonsTypes;
-  const { showBGAnimation, showModalOpenAnimation } =
-    props.addProps as ModalExampleInitTypes;
+  const {
+    showBGAnimation,
+    showModalOpenAnimation,
+    styles,
+    mobileDefaultStyles,
+  } = props.addProps as ModalExampleInitTypes;
 
   return (
     <>
       {/* 모달 실행 버튼 */}
-      <_Button onClickEvent={openModal(idx ?? 0)}>
+      <_Button
+        onClickEvent={openModal(idx ?? 0)}
+        className="_open_module_button_"
+      >
         {buttonName ?? "Open Modal"}
       </_Button>
       {isShow && (
@@ -29,6 +37,8 @@ export default function MyModalExample(props: ExampleContentsTypes) {
           onCloseModal={closeModal(idx ?? 0)}
           showBGAnimation={showBGAnimation}
           showModalOpenAnimation={showModalOpenAnimation}
+          styles={styles}
+          mobileDefaultStyles={mobileDefaultStyles}
         >
           {props.children}
         </_Modal>
