@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Pre = styled.pre`
-  line-height: 2;
+  line-height: 1.8;
   code {
     font-weight: 500;
     font-family: "Manlo";
     /* font-family: "Lucida Console"; */
-    font-size: 16px;
+    font-size: 14px;
     color: black;
   }
 

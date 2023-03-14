@@ -18,12 +18,13 @@ export interface ExampleContentsTypes {
   addProps?: ModalExampleInitTypes; // 예시 컴포넌트 실행시 추가적으로 넘길 props 값
   commonsProps?: ModalExampleCommonsTypes; // 컴포넌트 실행하기 위해 필요한 Props 값
   children: ReactNode;
+  code: string; // 렌더되는 코드 정보
+  remakrs: string; // 예시 설명
 }
 
 // 각각의 페이지에서 전달될 props 타입
 export interface ExampleIProps {
   title: string; // 예시 타이틀
-  remakrs: string; // 예시 설명
   contents: Array<ExampleContentsTypes>;
   isFull?: boolean; // 화면을 분할해서 사용하지 않고 block 요소로 전체 사용
 }

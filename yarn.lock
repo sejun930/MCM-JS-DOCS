@@ -9079,10 +9079,10 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.npmjs.org/markdown-escapes/-/markdown-escapes-1.0.4.tgz"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
-mcm-js-dev@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.5.tgz#bbf3eefaeb1ef5afe414a3d6b2cc85bca3818acd"
-  integrity sha512-RaIy7lZznUBnGXEeRtl5fDNf/Xbc3ttjZV0oMZR389gUrgw7imfZJ8YDhDLfJTDpG6xCcyNgOgoZIDLyIvkl2w==
+mcm-js-dev@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.7.tgz#b8e49140f0d7a621d6440ede534c146a779194f1"
+  integrity sha512-e3uZe4qiw9rtK5cQx5D7IQm1H1uEwf5SUmNWYbKrDMmgBx5wun6tV2I6jYgYT0drPeBhZEzD+40wNZRg3WyZ4g==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"

@@ -6,8 +6,10 @@ import { moduleState } from "src/commons/store";
 import { IProps } from "./template.example.types";
 import { renderTemplateList } from "./template.example.data";
 
+import _ExampleOptionalFormPage from "./optional";
 import _Title from "../../../title";
 import _SubTitleTemplate from "../../title/subTitle";
+import _PText from "../../../text/p";
 
 export default function _ExampleForm({
   exampleList, // 렌더되는 예시용 컴포넌트들
@@ -43,10 +45,17 @@ export default function _ExampleForm({
                     component.commonsProps = { ...commonsProps };
 
                     return (
-                      <React.Fragment key={`${module}_${idx}_${idx2}`}>
-                        {(renderTemplateList[module] &&
-                          renderTemplateList[module](component)) || <></>}
-                      </React.Fragment>
+                      <ExampleContents key={`${module}_${idx}_${idx2}`}>
+                        <ExampleContentsItems>
+                          {(renderTemplateList[module] &&
+                            renderTemplateList[module](component)) || <></>}
+                          <_PText
+                            text={component.remakrs}
+                            className="_exmaple_remarks_"
+                          />
+                        </ExampleContentsItems>
+                        <_ExampleOptionalFormPage />
+                      </ExampleContents>
                     );
                   })}
               </ExampleResult>
@@ -79,7 +88,7 @@ export const ExampleItems = styled.div`
     font-size: 20px;
   }
 
-  ._button_ {
+  ._open_module_button_ {
     padding: 0.7rem 1.5rem;
     border-radius: 10px;
     background-color: #7b2869;
@@ -101,12 +110,36 @@ export const ExampleResult = styled.div`
   border: solid 1px #dddddd;
   margin-top: 15px;
   border-radius: 5px;
-  padding: 1rem;
-  gap: 20px;
+  /* padding: 1rem; */
+  /* gap: 20px; */
 
   ${(props: StyleTypes) =>
     props.offBoard && {
       border: "unset",
       height: "auto",
     }}
+`;
+
+export const ExampleContents = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* border-bottom: solid 1px #dddddd; */
+
+  ._exmaple_remarks_ {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #666666;
+  }
+`;
+
+export const ExampleContentsItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem 1rem;
+  border-bottom: solid 1px #dddddd;
+
+  ._module_open_button_ {
+    width: fit-content;
+  }
 `;
