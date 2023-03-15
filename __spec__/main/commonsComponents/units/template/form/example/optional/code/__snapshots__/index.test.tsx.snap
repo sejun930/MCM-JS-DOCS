@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Example Code Icon Example Code Icon - Snapshot 1`] = `
+<div>
+  <button
+    class="_button_ _example_code_icon_btn_"
+    role="button_click_event"
+  >
+    <div
+      class="css-16pyd80"
+    >
+      <span
+        class="css-1iywk7f"
+      >
+        &lt;
+      </span>
+      <span
+        class="css-9alhxk"
+      >
+        /
+      </span>
+      <span
+        class="css-1t3qs2b"
+      >
+        &gt;
+      </span>
+    </div>
+  </button>
+</div>
+`;

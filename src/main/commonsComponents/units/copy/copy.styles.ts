@@ -18,7 +18,7 @@ export const CopyWrapper = styled.div`
   padding: 1rem 0px;
   cursor: pointer;
   position: relative;
-  overflow-x: auto;
+  /* overflow-x: auto; */
 
   ${(props) =>
     props.isCode && {
@@ -89,9 +89,12 @@ export const CopyButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: 0;
 `;
 
 export const CopyText = styled.div`
   display: flex;
   padding-left: 1rem;
+  overflow-x: auto;
 `;

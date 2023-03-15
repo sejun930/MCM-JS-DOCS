@@ -4,28 +4,19 @@ import { MutableRefObject, useRef, useState } from "react";
 
 import CommonsHooksComponents from "../../hooks";
 import _Image from "../image";
-
-interface IProps {
-  text: string; // 복사할 텍스트 내용
-  className?: string; // 클래스네임 지정
-  onlyClickButton?: boolean; // 복사 버튼을 클릭할 때만 복사 여부 지정 (default : false)
-  copiedMessage?: string; // 복사 완료시 출력되는 완료 메세지 (default : "복사되었습니다.")
-  type?: "Text" | "Code"; // 복사할 텍스트의 타입 지정 (default : Text)
-  // ex) Code를 선택할 경우 자바스크립트 코드를 사용
-  isMinimum?: boolean; // 복사 아이콘만 출력 (default : false)
-  offCopyAnimation?: boolean; // 복사 애니메이션 끄기 (default : false)
-}
+import { CodeTypes } from "./copy.types";
 
 // 글자 복사 기능 컴포넌트
 export default function _Copy({
   text,
+  showText,
   className,
   onlyClickButton,
   copiedMessage,
   type,
   isMinimum,
   offCopyAnimation,
-}: IProps) {
+}: CodeTypes) {
   const _ref = useRef() as MutableRefObject<HTMLDivElement>;
   const _textWrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _textRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -131,7 +122,7 @@ export default function _Copy({
           <Pre>
             <code
               ref={_textRef}
-              dangerouslySetInnerHTML={{ __html: getTap(text) }}
+              dangerouslySetInnerHTML={{ __html: getTap(showText || text) }}
             />
           </Pre>
         ) : (
@@ -139,7 +130,7 @@ export default function _Copy({
             className="copyInput"
             readOnly
             type="text"
-            value={text}
+            value={showText || text}
             ref={_textRef}
           />
         )}

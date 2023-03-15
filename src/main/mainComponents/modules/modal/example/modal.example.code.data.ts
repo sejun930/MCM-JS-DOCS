@@ -11,7 +11,7 @@ interface CodeListTypese {
 
 // Modal 각각의 예시 코드를 저장하는 객체
 export const modalCodeList: CodeListTypese = {
-  basic: {
+  form: {
     import: {
       react: ["useState"],
     },
