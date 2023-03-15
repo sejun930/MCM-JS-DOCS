@@ -54,7 +54,7 @@ export default function _ExampleForm({
                             className="_exmaple_remarks_"
                           />
                         </ExampleContentsItems>
-                        <_ExampleOptionalFormPage />
+                        <_ExampleOptionalFormPage codeInfo={component.code} />
                       </ExampleContents>
                     );
                   })}

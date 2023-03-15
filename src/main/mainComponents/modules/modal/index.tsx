@@ -44,7 +44,7 @@ export default function MyModal() {
     <Template>
       <_MainTitleTemplate />
       <ModulesInfoWrapper>
-        <_HowUseForm codeInfo={modalCodeList.basic} />
+        <_HowUseForm codeInfo={modalCodeList.form} />
         <_ExampleForm
           exampleList={modalExampleList}
           initProps={modalExampleInitProps}
