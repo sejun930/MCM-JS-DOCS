@@ -1,6 +1,6 @@
 import React from "react";
 
-import CommonsHooksComponents from "../../hooks";
+import CommonsHooksComponents from "../../hooks/commonsHooks";
 
 interface StyleTypes {
   children: React.ReactNode;

@@ -7,7 +7,7 @@ import {
 } from "./half-drag.styles";
 // import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
 
-import CommonsHooksComponents from "src/main/commonsComponents/hooks";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import { IProps } from "./half-drag.container";
 
 interface UIProps {

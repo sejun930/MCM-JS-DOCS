@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { CSSProperties, MutableRefObject } from "react";
 
-import CommonsHooksComponents from "../../hooks";
+import CommonsHooksComponents from "../../hooks/commonsHooks";
 
 interface IProps {
   src: string; // 출력될 이미지 경로

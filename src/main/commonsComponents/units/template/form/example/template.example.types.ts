@@ -3,7 +3,6 @@ import {
   ModalExampleCommonsTypes,
   ModalExampleInitTypes,
 } from "src/main/mainComponents/modules/modal/modal.types";
-import { CodeInfoTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
 
 // 예시 컴포넌트의 부가적인 옵션 타입
 export interface ExampleContentsInfoTypes {
@@ -19,7 +18,7 @@ export interface ExampleContentsTypes {
   addProps?: ModalExampleInitTypes; // 예시 컴포넌트 실행시 추가적으로 넘길 props 값
   commonsProps?: ModalExampleCommonsTypes; // 컴포넌트 실행하기 위해 필요한 Props 값
   children: ReactNode;
-  code: CodeInfoTypes; // 렌더되는 코드 정보
+  code: string; // 렌더되는 코드 정보
   remakrs: string; // 예시 설명
 }
 

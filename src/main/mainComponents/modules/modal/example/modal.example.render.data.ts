@@ -19,7 +19,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open Basic Modal",
         },
         children: `기본 모달 페이지입니다.`,
-        code: modalCodeList.form,
+        code: modalCodeList.basic,
       },
     ],
   },
@@ -34,7 +34,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open Animation Modal",
         },
         children: `애니메이션이 적용된 모달입니다.`,
-        code: modalCodeList.form,
+        code: modalCodeList.animation,
       },
     ],
   },
@@ -49,7 +49,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open width 300px, height 300px Modal",
         },
         children: `크기가 300px로 설정된 모달입니다.`,
-        code: modalCodeList.form,
+        code: modalCodeList.size300,
       },
       {
         remakrs: "width 30%, height : 40% 크기의 모달을 만들 수 있습니다.",
@@ -58,28 +58,28 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open width 30%, height 40% Modal",
         },
         children: `%로 크기 설정된 모달입니다.`,
-        code: modalCodeList.form,
+        code: modalCodeList.sizePercent,
       },
     ],
   },
-  {
-    title: "모바일 반응형 조절",
-    // isFull: true,
-    contents: [
-      {
-        remakrs: "모바일에서의 크기를 별도로 조절할 수도 있습니다.",
-        addProps: {
-          styles: { width: "767px" },
-          mobileDefaultStyles: { width: "50%", height: "50%" },
-        },
-        info: {
-          buttonName: "Open Mobile Responsive Modal",
-        },
-        children: `모바일에서만 width 50%, height 50% 크기를 가집니다.`,
-        code: modalCodeList.form,
-      },
-    ],
-  },
+  // {
+  //   title: "모바일 반응형 조절",
+  //   // isFull: true,
+  //   contents: [
+  //     {
+  //       remakrs: "모바일에서의 크기를 별도로 조절할 수도 있습니다.",
+  //       addProps: {
+  //         styles: { width: "767px" },
+  //         mobileDefaultStyles: { width: "50%", height: "50%" },
+  //       },
+  //       info: {
+  //         buttonName: "Open Mobile Responsive Modal",
+  //       },
+  //       children: `모바일에서만 width 50%, height 50% 크기를 가집니다.`,
+  //       code: modalCodeList.form,
+  //     },
+  //   ],
+  // },
   // {
   //   title: "애니메이션 ON",
   //   remakrs: "애니메이션이 적용된 Modal 입니다.",

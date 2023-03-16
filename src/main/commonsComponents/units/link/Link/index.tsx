@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "@emotion/styled";
-import CommonsHooksComponents from "../../../hooks";
+import CommonsHooksComponents from "../../../hooks/commonsHooks";
 import { ReactNode } from "react";
 
 interface IProps {

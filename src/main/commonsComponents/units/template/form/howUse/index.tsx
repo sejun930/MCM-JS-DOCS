@@ -1,18 +1,13 @@
 import styled from "@emotion/styled";
-import HowUseScriptComponnet from "./howUse.script";
+import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 
 import _SubTitleTemplate from "../../title/subTitle";
 import _PText from "../../../text/p";
 import _Copy from "../../../copy";
 
-import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
-import { CodeInfoTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
-
 // 사용 방법에 대한 폼
-export default function _HowUseForm({ codeInfo }: { codeInfo: CodeInfoTypes }) {
-  const { getHowUseExampleCode } = HowUseScriptComponnet();
-  const [module] = useRecoilState(moduleState);
+export default function _HowUseForm({ code }: { code: string }) {
+  const { getExampleCode } = getExampleCodeComponnet();
 
   return (
     <_SubTitleTemplate title="사용 방법" className="_howUse_Title_">
@@ -21,7 +16,7 @@ export default function _HowUseForm({ codeInfo }: { codeInfo: CodeInfoTypes }) {
           text="기본값으로 사용할 수 있는 예시 코드입니다."
           className="_howUse_example_notice_"
         />
-        <_Copy text={getHowUseExampleCode(module, codeInfo)} type="Code" />
+        <_Copy text={getExampleCode(code)} type="Code" />
       </CodeWrapper>
     </_SubTitleTemplate>
   );

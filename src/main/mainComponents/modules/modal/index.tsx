@@ -11,7 +11,7 @@ import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example";
-import CommonsHooksComponents from "src/main/commonsComponents/hooks";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 export default function MyModal() {
   // 모달을 오픈할 show state (true일 때 모달 오픈)
@@ -44,7 +44,7 @@ export default function MyModal() {
     <Template>
       <_MainTitleTemplate />
       <ModulesInfoWrapper>
-        <_HowUseForm codeInfo={modalCodeList.form} />
+        <_HowUseForm code={modalCodeList.basic} />
         <_ExampleForm
           exampleList={modalExampleList}
           initProps={modalExampleInitProps}

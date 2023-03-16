@@ -2,8 +2,9 @@ import { CopyButton, CopyText, CopyWrapper } from "./copy.styles";
 import { Pre } from "./code-highlight/codeHighlight.styles";
 import { MutableRefObject, useRef, useState } from "react";
 
-import CommonsHooksComponents from "../../hooks";
-import _Image from "../image";
+import CommonsHooksComponents from "../../hooks/commonsHooks";
+// import _Image from "../image";
+import _PText from "../text/p";
 import { CodeTypes } from "./copy.types";
 
 // 글자 복사 기능 컴포넌트
@@ -16,11 +17,19 @@ export default function _Copy({
   type,
   isMinimum,
   offCopyAnimation,
+  position,
 }: CodeTypes) {
   const _ref = useRef() as MutableRefObject<HTMLDivElement>;
   const _textWrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _textRef = useRef() as MutableRefObject<HTMLInputElement>;
   const { getAllComponentsClassName } = CommonsHooksComponents();
+
+  let textPosition = "center";
+  if (position) {
+    textPosition = position.toLowerCase();
+    if (position === "Top") textPosition = "flex-start";
+    if (position === "Bottom") textPosition = "flex-end";
+  }
 
   // 복사 확인 여부 (true일 경우 복사 완료)
   const [isCopied, setIsCopied] = useState(false);
@@ -69,7 +78,6 @@ export default function _Copy({
         // pre 요소 안에 code 요소를 생성하고 코드를 삽입
         const codeEl = document.createElement("code");
 
-        console.log(text);
         // 태그 제거, 공백 제거한 최종 결과 복사
         codeEl.innerText = getTap(removeTag(text));
         preEl.appendChild(codeEl);
@@ -79,9 +87,10 @@ export default function _Copy({
 
         // createRange 함수를 이용하여 텍스트 범위 선택
         const range = document.createRange();
-        range.selectNodeContents(preEl);
+        range.selectNode(preEl);
         // Range 객체를 선택한 텍스트 범위로 설정
-        const sel = window.getSelection();
+        const sel = document.getSelection();
+        console.log(sel);
 
         if (sel && sel.rangeCount > 0) {
           sel.removeAllRanges();
@@ -116,7 +125,7 @@ export default function _Copy({
       offCopyAnimation={offCopyAnimation}
       isCode={type === "Code"}
     >
-      <CopyText ref={_textWrapperRef}>
+      <CopyText ref={_textWrapperRef} className="_copy_text_">
         {/* 타입에 따른 별도 렌더하기 */}
         {type === "Code" ? (
           <Pre>
@@ -135,11 +144,16 @@ export default function _Copy({
           />
         )}
       </CopyText>
-      <CopyButton onClick={(onlyClickButton && copy) || undefined}>
-        <_Image
+      <CopyButton
+        // onClick={(onlyClickButton && copy) || undefined}
+        isCode={type === "Code"}
+        textPosition={textPosition}
+      >
+        {/* <_Image
           src={`/images/commons/icons/${isCopied ? "copied" : "copy"}.png`}
           className="_copyIcon_"
-        />
+        /> */}
+        <_PText text={isCopied ? "Copied!" : "Copy"} />
       </CopyButton>
     </CopyWrapper>
   );
