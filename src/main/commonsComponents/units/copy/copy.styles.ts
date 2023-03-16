@@ -4,6 +4,7 @@ interface StyleTypes {
   isCopied?: boolean;
   offCopyAnimation?: boolean;
   isCode?: boolean;
+  textPosition?: string;
 }
 
 export const CopyWrapper = styled.div`
@@ -15,7 +16,8 @@ export const CopyWrapper = styled.div`
   /* padding: 1rem; */
   border-radius: 5px;
   min-height: 60px;
-  padding: 1rem 0px;
+  padding-top: 1rem;
+  /* padding: 1rem 0px; */
   cursor: pointer;
   position: relative;
   /* overflow-x: auto; */
@@ -84,17 +86,28 @@ export const CopyWrapper = styled.div`
 `;
 
 export const CopyButton = styled.button`
-  width: 50px;
+  width: 70px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   right: 0;
+  padding: 1rem 0px;
+
+  ${(props) =>
+    props.textPosition && {
+      alignItems: props.textPosition,
+    }}
+
+  ._p_ {
+    color: ${(props: StyleTypes) => (props.isCode ? "white" : "#333333")};
+  }
 `;
 
 export const CopyText = styled.div`
   display: flex;
-  padding-left: 1rem;
+  padding: 0px 1rem;
+  padding-bottom: 1rem;
   overflow-x: auto;
 `;

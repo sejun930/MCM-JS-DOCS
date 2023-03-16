@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import React, { CSSProperties } from "react";
 
 import _Title from "../../../title";
-import CommonsHooksComponents from "src/main/commonsComponents/hooks";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import { subTitleEmoji } from "./data";
 
 interface IProps {

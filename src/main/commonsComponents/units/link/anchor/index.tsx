@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-import CommonsHooksComponents from "src/main/commonsComponents/hooks";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 // a태그를 사용해 타 웹 사이트 이동
 export default function _A({

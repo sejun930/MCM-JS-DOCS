@@ -3,7 +3,7 @@ import { LayoutNavListWrapper, LayoutNavWrapper } from "./styles";
 
 import { navList } from "./data";
 
-import CommonsHooksComponents from "../../hooks";
+import CommonsHooksComponents from "../../hooks/commonsHooks";
 import _Link from "../../units/link/Link";
 import _PText from "../../units/text/p";
 

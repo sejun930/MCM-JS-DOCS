@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { LayoutWrapper, LayoutContentsWrapper } from "./styles";
 
-import CommonsHooksComponents from "../hooks";
+import CommonsHooksComponents from "../hooks/commonsHooks";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 

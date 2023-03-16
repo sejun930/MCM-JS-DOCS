@@ -45,7 +45,9 @@ export const Pre = styled.pre`
 
   .lightOrange {
     // 연한 주황색 : 라이브러리 및 경로
-    color: #dc8449;
+    /* color: #dc8449; */
+    /* color: #ff9551; */
+    color: #e9a178;
   }
 
   .gray {

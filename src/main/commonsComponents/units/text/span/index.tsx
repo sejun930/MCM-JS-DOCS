@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import CommonsHooksComponents from "src/main/commonsComponents/hooks";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 interface IProps {
   text: string;

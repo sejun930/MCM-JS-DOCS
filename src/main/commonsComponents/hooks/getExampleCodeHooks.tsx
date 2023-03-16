@@ -1,12 +1,19 @@
-// 공백 2칸을 주고 싶다면 /&tap2&/ 를 추가
-import { CodeInfoTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
+import { useRecoilState } from "recoil";
+import { moduleState } from "src/commons/store";
 
-export default function HowUseScriptComponnet() {
+import {
+  exampleCommonsList,
+  exampleCommonsReturnList,
+} from "src/commons/data/example/example.commons.data";
+
+// 공백 2칸을 주고 싶다면 /&tap2&/ 를 추가
+
+export default function getExampleCodeComponnet() {
+  const [module] = useRecoilState(moduleState);
+  const commonsInfo = exampleCommonsList[module];
+
   // 해당 모듈의 이름으로 호출하는 코드 출력
-  const getHowUseExampleCode = (
-    module: string,
-    codeInfo: CodeInfoTypes
-  ): string => {
+  const getExampleCode = (code: string): string => {
     let str = "";
     str += `<span class='purple'>import</span>`;
     str += `<span class='yellow'> { </span>`;
@@ -17,15 +24,22 @@ export default function HowUseScriptComponnet() {
     str += `<span class='lightGray'>;</span>`;
 
     // 추가 import 렌더하기
-    if (codeInfo?.import) {
-      str += getImportCode(codeInfo.import);
+    if (commonsInfo?.import) {
+      str += getImportCode(commonsInfo.import);
     }
 
     str += "/&tap2&/<span class='purple'>export default</span>";
     str += "<span class='darkBlue'> function</span>";
-    str += "<span class='lightYellow'> ExamplePage</span>";
+    str += `<span class='lightYellow'> ${module}ExamplePage</span>`;
     str += "<span class='yellow'>() {</span>";
-    str += `/&tap&/${codeInfo.code}`;
+
+    // 공통으로 사용되는 코드 렌더
+    if (commonsInfo?.code) {
+      str += `${commonsInfo.code}`;
+    }
+
+    str += `/&tap&/${getReturn(getCommonsReturn(code))}`;
+    str += "/&tap&/<span class='yellow'>}</span>";
 
     return str;
   };
@@ -48,7 +62,26 @@ export default function HowUseScriptComponnet() {
     return str;
   };
 
+  // return 붙여서 렌더하기
+  const getReturn = (code: string) => {
+    const str = `  <span class='purple'>return (</span>
+    ${code}
+  <span class='purple'>)</span><span class='lightGray'>;</span>`;
+
+    return str;
+  };
+
+  // return 안에서 모듈 각각의 공통 태그들 추가하기
+  const getCommonsReturn = (code: string) => {
+    const returnInfo = exampleCommonsReturnList[module];
+
+    if (returnInfo) return returnInfo(code);
+    return code;
+  };
+
   return {
-    getHowUseExampleCode,
+    getExampleCode,
+    getReturn,
+    getCommonsReturn,
   };
 }

@@ -1,5 +1,5 @@
 import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
-import CommonsHooksComponents from "../../hooks";
+import CommonsHooksComponents from "../../hooks/commonsHooks";
 
 interface IProps {
   title: string; // 화면에 출력되는 제목명
