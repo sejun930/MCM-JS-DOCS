@@ -34,21 +34,26 @@ export const modalReturnCommonsData = (code: string): string => {
 // Modal 각각의 예시 코드를 저장하는 객체
 export const modalCodeList: ExampleCodeListTypese = {
   basic:
-    "<span class='gray'><</span><span class='green'>_Modal</span> <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span> <span class='gray'>/</span><span class='gray'>></span>",
-  animation: `<span class='gray'><</span><span class='green'>_Modal</span>
+    "<span class='gray'><</span><span class='green'>Modal</span> <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span> <span class='gray'>/</span><span class='gray'>></span>",
+  animation: `<span class='gray'><</span><span class='green'>Modal</span>
         <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
         <span class='skyblue'>showBGAnimation</span>
         <span class='skyblue'>showModalOpenAnimation</span>
       <span class='gray'>/</span><span class='gray'>></span>`,
-  size300: `<span class='gray'><</span><span class='green'>_Modal</span>
+  size300: `<span class='gray'><</span><span class='green'>Modal</span>
         <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
         <span class='skyblue'>styles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"300px"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"300px"</span> <span class='yellow'>}</span><span class='blue'>}</span>
       <span class='gray'>/</span><span class='gray'>></span>`,
-  sizePercent: `<span class='gray'><</span><span class='green'>_Modal</span>
+  sizePercent: `<span class='gray'><</span><span class='green'>Modal</span>
         <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
         <span class='skyblue'>styles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"30%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"40%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+      <span class='gray'>/</span><span class='gray'>></span>`,
+  responsive: `<span class='gray'><</span><span class='green'>Modal</span>
+        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
+        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
+        <span class='skyblue'>mobileDefaultStyles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
       <span class='gray'>/</span><span class='gray'>></span>`,
 };

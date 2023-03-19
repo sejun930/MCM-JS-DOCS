@@ -3,19 +3,17 @@ import { mouduleRemarksList } from "./data";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
-import _Title from "../../../title";
-import _PText from "../../../text/p";
+import { _PText, _Title } from "mcm-js-commons";
 
 export default function _MainTitleTemplate() {
   const [module] = useRecoilState(moduleState);
 
   return (
     <Wrapper className="_main_title_wrapper_">
-      <_Title title={`📖 ${module}`} titleLevel="h1" className="_main_title_" />
-      <_PText
-        text={mouduleRemarksList[module]}
-        className="_main_title_remarks_"
-      />
+      <_Title className="_main_title_">📖 {module}</_Title>
+      <_PText className="_main_title_remarks_">
+        {mouduleRemarksList[module]}
+      </_PText>
     </Wrapper>
   );
 }

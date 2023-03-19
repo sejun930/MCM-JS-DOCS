@@ -19,11 +19,8 @@ export default function _ExampleOptionalFormPage({ code }: { code: string }) {
 
   return (
     <Wrapper>
-      <OptionalWrapper>
-        <_ExampleOptionalCodeIconPage
-          toggleShowCode={toggleShowCode}
-          showCode={showCode}
-        />
+      <OptionalWrapper onClick={toggleShowCode}>
+        <_ExampleOptionalCodeIconPage showCode={showCode} />
       </OptionalWrapper>
       <CodeInfoWrapper showCode={showCode}>
         <_Copy
@@ -42,11 +39,13 @@ export const Wrapper = styled.section`
   border-bottom: solid 1px #dddddd;
 `;
 
-export const OptionalWrapper = styled.div`
+export const OptionalWrapper = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 24px;
+  cursor: pointer;
+  width: 100%;
 `;
 
 export const CodeInfoWrapper = styled.div`
@@ -65,6 +64,6 @@ export const CodeInfoWrapper = styled.div`
 
   ${(props: { showCode?: boolean }) =>
     props.showCode && {
-      maxHeight: "100vh",
+      maxHeight: "50vh",
     }}
 `;
