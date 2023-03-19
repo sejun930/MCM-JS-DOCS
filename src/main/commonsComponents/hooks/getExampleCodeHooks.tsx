@@ -17,7 +17,7 @@ export default function getExampleCodeComponnet() {
     let str = "";
     str += `<span class='purple'>import</span>`;
     str += `<span class='yellow'> { </span>`;
-    str += `<span class='skyblue'>_${module}</span>`;
+    str += `<span class='skyblue'>${module}</span>`;
     str += `<span class='yellow'> } </span>`;
     str += `<span class='purple'>from</span>`;
     str += `<span class='lightOrange'> "mcm-js"</span>`;

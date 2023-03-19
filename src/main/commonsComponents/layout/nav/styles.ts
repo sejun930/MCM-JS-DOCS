@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const LayoutNavWrapper = styled.nav`
   width: 20%;
@@ -19,7 +19,7 @@ export const LayoutNavListWrapper = styled.article`
   height: 100%;
   padding: 1rem;
 
-  ._p_ {
+  .mcm-p-unit {
     transition: all 0.25s ease-in;
     padding: 10px;
     border-radius: 10px;
@@ -32,7 +32,7 @@ export const LayoutNavListWrapper = styled.article`
 
   ._selectTap_ {
     cursor: default !important;
-    ._p_ {
+    .mcm-p-unit {
       /* background-color: #20262e; */
       background-color: #473c33;
       color: white;
@@ -44,7 +44,7 @@ export const LayoutNavListWrapper = styled.article`
     gap: 3vw 0px;
     padding-top: 4vw;
 
-    ._p_ {
+    .mcm-p-unit {
       font-size: 0.6rem;
       padding: 2vw;
     }

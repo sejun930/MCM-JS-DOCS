@@ -1,22 +1,17 @@
 import styled from "@emotion/styled";
-import _Button from "src/main/commonsComponents/units/button";
 
 // 코드 보기 및 감추기 아이콘 페이지
 export default function _ExampleOptionalCodeIconPage({
-  toggleShowCode,
   showCode,
 }: {
-  toggleShowCode: () => void;
   showCode: boolean;
 }) {
   return (
-    <_Button className="_example_code_icon_btn_" onClickEvent={toggleShowCode}>
-      <Wrapper>
-        <LeftTem showCode={showCode}>{`<`}</LeftTem>
-        <Fin showCode={showCode}>{`/`}</Fin>
-        <RightTem showCode={showCode}>{`>`}</RightTem>
-      </Wrapper>
-    </_Button>
+    <Wrapper className="_example_code_icon_btn_">
+      <LeftTem showCode={showCode}>{`<`}</LeftTem>
+      <Fin showCode={showCode}>{`/`}</Fin>
+      <RightTem showCode={showCode}>{`>`}</RightTem>
+    </Wrapper>
   );
 }
 
@@ -41,7 +36,7 @@ export const LeftTem = styled.span`
 
   ${(props: StyleTypes) =>
     props.showCode && {
-      marginLeft: "-5px",
+      marginLeft: "-8px",
     }}
 `;
 
@@ -50,7 +45,7 @@ export const RightTem = styled.span`
 
   ${(props: StyleTypes) =>
     props.showCode && {
-      marginLeft: "2.5px",
+      marginLeft: "4px",
     }}
 `;
 

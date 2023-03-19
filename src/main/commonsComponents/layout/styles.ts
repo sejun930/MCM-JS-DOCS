@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const LayoutWrapper = styled.div`
   height: 100%;

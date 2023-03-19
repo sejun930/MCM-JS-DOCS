@@ -2,10 +2,9 @@ import { MutableRefObject, useRef } from "react";
 import { LayoutNavListWrapper, LayoutNavWrapper } from "./styles";
 
 import { navList } from "./data";
+import { _PText, _Link } from "mcm-js-commons";
 
 import CommonsHooksComponents from "../../hooks/commonsHooks";
-import _Link from "../../units/link/Link";
-import _PText from "../../units/text/p";
 
 export default function LayoutNavPage() {
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -37,7 +36,7 @@ export default function LayoutNavPage() {
                   (isSelect && `_selectTap_`) || ""
                 )}
               >
-                <_PText text={el.name} className="_tap_name_" />
+                <_PText className="_tap_name_">{el.name}</_PText>
               </_Link>
             );
           })}

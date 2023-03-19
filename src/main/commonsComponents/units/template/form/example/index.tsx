@@ -5,6 +5,7 @@ import {
   ExampleResult,
   ExampleWrapper,
 } from "./template.example.styles";
+import { _PText, _Title } from "mcm-js-commons";
 
 import React from "react";
 import { useRecoilState } from "recoil";
@@ -14,9 +15,7 @@ import { IProps } from "./template.example.types";
 import { renderTemplateList } from "./template.example.data";
 
 import _ExampleOptionalFormPage from "./optional";
-import _Title from "../../../title";
 import _SubTitleTemplate from "../../title/subTitle";
-import _PText from "../../../text/p";
 
 export default function _ExampleForm({
   exampleList, // 렌더되는 예시용 컴포넌트들
@@ -36,7 +35,7 @@ export default function _ExampleForm({
               key={`${module}_${idx + 1}`}
               isFull={el.isFull ?? false}
             >
-              <_Title title={el.title} titleLevel="h3" />
+              <_Title titleLevel="h3">{el.title}</_Title>
               <ExampleResult>
                 {el.contents &&
                   el.contents.length &&
@@ -51,15 +50,23 @@ export default function _ExampleForm({
                     // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
                     component.commonsProps = { ...commonsProps };
 
+                    // 하위 컴포넌트들의 width 값 지정하기
+                    let width: string = "100%";
+                    if (el.isFull) {
+                      width = `${100 / el.contents.length}%`;
+                    }
+
                     return (
-                      <ExampleContents key={`${module}_${idx}_${idx2}`}>
+                      <ExampleContents
+                        key={`${module}_${idx}_${idx2}`}
+                        style={{ width }}
+                      >
                         <ExampleContentsItems>
                           {(renderTemplateList[module] &&
                             renderTemplateList[module](component)) || <></>}
-                          <_PText
-                            text={component.remakrs}
-                            className="_exmaple_remarks_"
-                          />
+                          <_PText className="_exmaple_remarks_">
+                            {component.remakrs}
+                          </_PText>
                         </ExampleContentsItems>
                         <_ExampleOptionalFormPage code={component.code} />
                       </ExampleContents>

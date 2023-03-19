@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
 
-import _Link from "../../units/link/Link";
-import _Image from "../../units/image";
+import { _Image, _Link } from "mcm-js-commons";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export default function LayoutHeadPage() {
   return (

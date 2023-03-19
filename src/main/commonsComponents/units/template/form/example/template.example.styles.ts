@@ -29,6 +29,7 @@ export const ExampleItems = styled.div`
     color: white;
     font-weight: 700;
     font-size: 14px;
+    width: fit-content;
   }
 
   ${(props: StyleTypes) =>
@@ -44,8 +45,6 @@ export const ExampleResult = styled.div`
   border: solid 1px #dddddd;
   margin-top: 15px;
   border-radius: 5px;
-  /* padding: 1rem; */
-  /* gap: 20px; */
 
   ${(props: StyleTypes) =>
     props.offBoard && {
@@ -58,7 +57,6 @@ export const ExampleContents = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* border-bottom: solid 1px #dddddd; */
 
   ._exmaple_remarks_ {
     font-size: 14px;

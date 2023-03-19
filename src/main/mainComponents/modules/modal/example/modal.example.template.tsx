@@ -1,15 +1,14 @@
-import { _Modal } from "mcm-js-dev";
 import React from "react";
+
+import { Modal } from "mcm-js-dev";
+import { _Button } from "mcm-js-commons";
+import { ModalPropsType } from "mcm-js/dist/commons/types";
 
 import {
   ExampleContentsTypes,
   ExampleContentsInfoTypes,
 } from "src/main/commonsComponents/units/template/form/example/template.example.types";
-import {
-  ModalExampleCommonsTypes,
-  ModalExampleInitTypes,
-} from "../modal.types";
-import _Button from "src/main/commonsComponents/units/button";
+import { ModalExampleCommonsTypes } from "../modal.types";
 
 export default function MyModalExample(props: ExampleContentsTypes) {
   const { idx, buttonName } = props.info as ExampleContentsInfoTypes;
@@ -20,7 +19,8 @@ export default function MyModalExample(props: ExampleContentsTypes) {
     showModalOpenAnimation,
     styles,
     mobileDefaultStyles,
-  } = props.addProps as ModalExampleInitTypes;
+    hideCloseButton,
+  } = props.addProps as ModalPropsType;
 
   return (
     <>
@@ -32,16 +32,17 @@ export default function MyModalExample(props: ExampleContentsTypes) {
         {buttonName ?? "Open Modal"}
       </_Button>
       {isShow && (
-        <_Modal
+        <Modal
           show={isShow[idx ?? 0]}
           onCloseModal={closeModal(idx ?? 0)}
           showBGAnimation={showBGAnimation}
           showModalOpenAnimation={showModalOpenAnimation}
           styles={styles}
           mobileDefaultStyles={mobileDefaultStyles}
+          hideCloseButton={hideCloseButton}
         >
           {props.children}
-        </_Modal>
+        </Modal>
       )}
     </>
   );

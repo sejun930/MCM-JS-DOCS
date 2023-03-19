@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import React, { CSSProperties } from "react";
 
-import _Title from "../../../title";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import { subTitleEmoji } from "./data";
+import { _Title } from "mcm-js-commons";
 
 interface IProps {
   children: React.ReactNode;
@@ -28,11 +28,9 @@ export default function _SubTitleTemplate({
       className={getAllComponentsClassName("_subTitleTemplate_", className)}
       style={styles}
     >
-      <_Title
-        title={`${subTitleEmoji[title]} ${title}` || ""}
-        titleLevel={titleLevel || "h2"}
-        className="_subTitle_"
-      />
+      <_Title titleLevel={titleLevel || "h2"} className="_subTitle_">
+        {`${subTitleEmoji[title]} ${title}` || ""}
+      </_Title>
       <Line className="_subTitleLine_" />
       {children}
     </Wrapper>

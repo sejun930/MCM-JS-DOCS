@@ -13,33 +13,21 @@ export const CopyWrapper = styled.div`
   align-items: center;
   background-color: #f3f3f3;
   width: 100%;
-  /* padding: 1rem; */
   border-radius: 5px;
   min-height: 60px;
-  padding-top: 1rem;
-  /* padding: 1rem 0px; */
   cursor: pointer;
   position: relative;
-  /* overflow-x: auto; */
+  overflow: hidden;
 
   ${(props) =>
     props.isCode && {
       backgroundColor: "#333333",
+      paddingTop: "1rem",
     }}
 
   .hide {
     position: absolute;
     opacity: 0;
-  }
-
-  .copyInput {
-    width: 100%;
-    height: 100%;
-    border: unset;
-    background-color: unset;
-    cursor: pointer;
-    outline: none;
-    font-size: 16px;
   }
 
   ._copyIcon_ {
@@ -93,15 +81,19 @@ export const CopyButton = styled.button`
   justify-content: center;
   position: absolute;
   right: 0;
-  padding: 1rem 0px;
 
-  ${(props) =>
+  ${(props: StyleTypes) =>
     props.textPosition && {
       alignItems: props.textPosition,
     }}
 
-  ._p_ {
-    color: ${(props: StyleTypes) => (props.isCode ? "white" : "#333333")};
+  ${(props) =>
+    props.isCode && {
+      padding: "1rem 0px",
+    }}
+
+  .mcm-p-unit {
+    color: ${(props) => (props.isCode ? "white" : "#333333")};
   }
 `;
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { breakPoints } from "src/commons/styles/responsiveBreakPoints";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 // DOC 페이지 메인 템플릿
 export default function Template({ children }: { children: React.ReactNode }) {

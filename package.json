@@ -1,5 +1,5 @@
 {
-  "name": "cmm-js-doc",
+  "name": "mcm-js-doc",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,8 +16,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "mcm-js": "^0.0.4",
-    "mcm-js-dev": "^0.0.7",
+    "mcm-js": "^0.0.5",
+    "mcm-js-commons": "^0.0.10",
+    "mcm-js-dev": "^0.0.11",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",

@@ -1,4 +1,4 @@
-import { _Modal } from "mcm-js";
+import { Modal } from "mcm-js-dev";
 import { useState } from "react";
 
 export default function ModalExamplePage() {
@@ -18,7 +18,7 @@ export default function ModalExamplePage() {
   return (
     <div>
       <button onClick={openModal}> 모달 실행하기 </button>
-      <_Modal show={isOpen} onCloseModal={closeModal} />
+      <Modal show={isOpen} onCloseModal={closeModal} />
     </div>
   );
 }
