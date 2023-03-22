@@ -7,7 +7,7 @@ export const Pre = styled.pre`
     font-family: "Manlo";
     /* font-family: "Lucida Console"; */
     font-size: 14px;
-    color: black;
+    color: #9d9d9d;
   }
 
   .purple {
@@ -62,7 +62,7 @@ export const Pre = styled.pre`
 
   .lightGreen {
     // 연초록 : 주석
-    color: #4e944f;
+    color: #5f8d4e;
   }
 
   .green {

@@ -20,7 +20,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         info: {
           buttonName: "Open Basic Modal",
         },
-        children: `기본 모달 페이지입니다.`,
+        content: `기본 모달 페이지입니다.`,
         code: modalCodeList.basic,
       },
     ],
@@ -30,7 +30,6 @@ export const modalExampleList: Array<ExampleIProps> = [
     contents: [
       {
         remakrs: "애니메이션이 적용되어 좀더 활동적인 모달을 제공합니다.",
-
         addProps: {
           ...modalExampleInitProps,
           showBGAnimation: true,
@@ -39,7 +38,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         info: {
           buttonName: "Open Animation Modal",
         },
-        children: `애니메이션이 적용된 모달입니다.`,
+        content: `애니메이션이 적용된 모달입니다.`,
         code: modalCodeList.animation,
       },
     ],
@@ -57,7 +56,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         info: {
           buttonName: "Open width 300px, height 300px Modal",
         },
-        children: `크기가 300px로 설정된 모달입니다.`,
+        content: `크기가 300px로 설정된 모달입니다.`,
         code: modalCodeList.size300,
       },
       {
@@ -69,7 +68,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         info: {
           buttonName: "Open width 30%, height 40% Modal",
         },
-        children: `%로 크기 설정된 모달입니다.`,
+        content: `%로 크기 설정된 모달입니다.`,
         code: modalCodeList.sizePercent,
       },
     ],
@@ -88,7 +87,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         info: {
           buttonName: "Open Mobile Responsive Modal",
         },
-        children: `모바일에서만 width 50%, height 50% 크기를 가집니다.`,
+        content: `모바일에서만 width 50%, height 50% 크기를 가집니다.`,
         code: modalCodeList.responsive,
       },
     ],
@@ -103,16 +102,49 @@ export const modalExampleList: Array<ExampleIProps> = [
         info: {
           buttonName: "Open Hide Close Button Modal",
         },
-        children: `닫기 버튼이 사라진 모달입니다.`,
-        code: modalCodeList.responsive,
+        content: `닫기 버튼이 사라진 모달입니다.`,
+        code: modalCodeList.hideCloseButton,
       },
       {
-        remakrs: "닫기 버튼을 사용하지 않을 수도 있습니다.",
-        info: {
-          buttonName: "Open Hide Close Button Modal",
+        remakrs: "닫기에 대한 설명을 덧붙일 수 있습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          closeMent: "오늘 하루 보지 않기",
         },
-        children: `닫기 버튼이 사라진 모달입니다.`,
-        code: modalCodeList.responsive,
+        info: {
+          buttonName: "Open Add CloseMent Button Modal",
+        },
+        content: `닫기에 대한 설명이 추가됩니다.`,
+        code: modalCodeList.addCloseMent,
+      },
+      {
+        remakrs: "닫기 버튼 사이즈를 조절합니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          closeButtonSize: "15px",
+        },
+        info: {
+          buttonName: "Open Resize Button Modal",
+        },
+        content: `닫기 버튼의 사이즈가 조절됩니다.`,
+        code: modalCodeList.resizeBtn,
+      },
+    ],
+  },
+  {
+    title: "자동 종료 (auto-close) 방지",
+    contents: [
+      {
+        remakrs: "외부 영역을 선택해도 모달이 종료되지 않습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          offAutoClose: true,
+        },
+        info: {
+          buttonName: "Open Off Auto-close Modal",
+        },
+        content: `닫기 버튼을 클릭해 모달을 종료하세요.`,
+        code: modalCodeList.offAutoClose,
       },
     ],
   },

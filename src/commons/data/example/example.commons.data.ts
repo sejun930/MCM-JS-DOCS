@@ -1,3 +1,4 @@
+import React from "react";
 import {
   modalCommonsData,
   modalReturnCommonsData,
@@ -16,7 +17,8 @@ export const exampleCommonsList: { [key: string]: ExampleCommonsTypes } = {
 };
 
 export const exampleCommonsReturnList: {
-  [key: string]: (code: string) => string;
+  [key: string]: (code: string, children?: React.ReactNode | string) => string;
 } = {
-  Modal: (code: string) => modalReturnCommonsData(code),
+  Modal: (code: string, children?: React.ReactNode | string) =>
+    modalReturnCommonsData(code, children),
 };

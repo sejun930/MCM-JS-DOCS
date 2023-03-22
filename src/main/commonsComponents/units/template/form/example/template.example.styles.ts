@@ -42,7 +42,8 @@ export const ExampleResult = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  border: solid 1px #dddddd;
+  /* border: solid 1px #dddddd; */
+  /* border-bottom: 0px; */
   margin-top: 15px;
   border-radius: 5px;
 
@@ -69,7 +70,8 @@ export const ExampleContentsItems = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.3rem 1rem;
-  border-bottom: solid 1px #dddddd;
+  border: solid 1px #dddddd;
+  /* border-bottom: solid 1px #dddddd; */
 
   ._module_open_button_ {
     width: fit-content;

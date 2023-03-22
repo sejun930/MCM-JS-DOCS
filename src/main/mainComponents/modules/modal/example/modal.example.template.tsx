@@ -20,6 +20,9 @@ export default function MyModalExample(props: ExampleContentsTypes) {
     styles,
     mobileDefaultStyles,
     hideCloseButton,
+    closeMent,
+    closeButtonSize,
+    offAutoClose,
   } = props.addProps as ModalPropsType;
 
   return (
@@ -40,8 +43,11 @@ export default function MyModalExample(props: ExampleContentsTypes) {
           styles={styles}
           mobileDefaultStyles={mobileDefaultStyles}
           hideCloseButton={hideCloseButton}
+          closeMent={closeMent}
+          closeButtonSize={closeButtonSize}
+          offAutoClose={offAutoClose}
         >
-          {props.children}
+          {props.content}
         </Modal>
       )}
     </>

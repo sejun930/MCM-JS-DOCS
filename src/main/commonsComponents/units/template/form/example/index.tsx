@@ -11,7 +11,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 
 import { moduleState } from "src/commons/store";
-import { IProps } from "./template.example.types";
+import { ExampleContentsTypes, IProps } from "./template.example.types";
 import { renderTemplateList } from "./template.example.data";
 
 import _ExampleOptionalFormPage from "./optional";
@@ -39,39 +39,44 @@ export default function _ExampleForm({
               <ExampleResult>
                 {el.contents &&
                   el.contents.length &&
-                  el.contents.map((component, idx2: number) => {
-                    // 렌더할 때 넘겨줄 props 옵션 값 설정
-                    const addProps = { ...initProps, ...component.addProps };
-                    component.addProps = { ...addProps };
+                  el.contents.map(
+                    (component: ExampleContentsTypes, idx2: number) => {
+                      // 렌더할 때 넘겨줄 props 옵션 값 설정
+                      const addProps = { ...initProps, ...component.addProps };
+                      component.addProps = { ...addProps };
 
-                    // 렌더될 대상의 인덱스 값 지정
-                    component.info.idx = _idx++;
+                      // 렌더될 대상의 인덱스 값 지정
+                      component.info.idx = _idx++;
 
-                    // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
-                    component.commonsProps = { ...commonsProps };
+                      // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
+                      component.commonsProps = { ...commonsProps };
 
-                    // 하위 컴포넌트들의 width 값 지정하기
-                    let width: string = "100%";
-                    if (el.isFull) {
-                      width = `${100 / el.contents.length}%`;
+                      // 하위 컴포넌트들의 width 값 지정하기
+                      let width: string = "100%";
+                      if (el.isFull) {
+                        width = `${100 / el.contents.length}%`;
+                      }
+
+                      return (
+                        <ExampleContents
+                          key={`${module}_${idx}_${idx2}`}
+                          style={{ width }}
+                        >
+                          <ExampleContentsItems>
+                            {(renderTemplateList[module] &&
+                              renderTemplateList[module](component)) || <></>}
+                            <_PText className="_exmaple_remarks_">
+                              {component.remakrs}
+                            </_PText>
+                          </ExampleContentsItems>
+                          <_ExampleOptionalFormPage
+                            code={component.code}
+                            content={component.content}
+                          />
+                        </ExampleContents>
+                      );
                     }
-
-                    return (
-                      <ExampleContents
-                        key={`${module}_${idx}_${idx2}`}
-                        style={{ width }}
-                      >
-                        <ExampleContentsItems>
-                          {(renderTemplateList[module] &&
-                            renderTemplateList[module](component)) || <></>}
-                          <_PText className="_exmaple_remarks_">
-                            {component.remakrs}
-                          </_PText>
-                        </ExampleContentsItems>
-                        <_ExampleOptionalFormPage code={component.code} />
-                      </ExampleContents>
-                    );
-                  })}
+                  )}
               </ExampleResult>
             </ExampleItems>
           ))}
