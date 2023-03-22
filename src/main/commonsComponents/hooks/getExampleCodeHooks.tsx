@@ -5,6 +5,7 @@ import {
   exampleCommonsList,
   exampleCommonsReturnList,
 } from "src/commons/data/example/example.commons.data";
+import React from "react";
 
 // 공백 2칸을 주고 싶다면 /&tap2&/ 를 추가
 
@@ -13,7 +14,10 @@ export default function getExampleCodeComponnet() {
   const commonsInfo = exampleCommonsList[module];
 
   // 해당 모듈의 이름으로 호출하는 코드 출력
-  const getExampleCode = (code: string): string => {
+  const getExampleCode = (
+    code: string,
+    children: React.ReactNode | string
+  ): string => {
     let str = "";
     str += `<span class='purple'>import</span>`;
     str += `<span class='yellow'> { </span>`;
@@ -37,8 +41,7 @@ export default function getExampleCodeComponnet() {
     if (commonsInfo?.code) {
       str += `${commonsInfo.code}`;
     }
-
-    str += `/&tap&/${getReturn(getCommonsReturn(code))}`;
+    str += `/&tap&/${getReturn(getCommonsReturn(code, children))}`;
     str += "/&tap&/<span class='yellow'>}</span>";
 
     return str;
@@ -72,10 +75,17 @@ export default function getExampleCodeComponnet() {
   };
 
   // return 안에서 모듈 각각의 공통 태그들 추가하기
-  const getCommonsReturn = (code: string) => {
+  const getCommonsReturn = (
+    code: string,
+    children: React.ReactNode | string
+  ) => {
     const returnInfo = exampleCommonsReturnList[module];
+    let _children = children;
+    if (typeof children === "string") {
+      _children = `<span class='lightGray'>${children}</span>`;
+    }
 
-    if (returnInfo) return returnInfo(code);
+    if (returnInfo) return returnInfo(code, _children);
     return code;
   };
 

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import React from "react";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 import { _PText } from "mcm-js-commons";
 
@@ -6,7 +7,13 @@ import _SubTitleTemplate from "../../title/subTitle";
 import _Copy from "../../../copy";
 
 // 사용 방법에 대한 폼
-export default function _HowUseForm({ code }: { code: string }) {
+export default function _HowUseForm({
+  code,
+  exmapleContents,
+}: {
+  code: string;
+  exmapleContents: React.ReactNode | string;
+}) {
   const { getExampleCode } = getExampleCodeComponnet();
 
   return (
@@ -15,7 +22,7 @@ export default function _HowUseForm({ code }: { code: string }) {
         <_PText className="_howUse_example_notice_">
           기본값으로 사용할 수 있는 예시 코드입니다.
         </_PText>
-        <_Copy text={getExampleCode(code)} type="Code" />
+        <_Copy text={getExampleCode(code, exmapleContents)} type="Code" />
       </CodeWrapper>
     </_SubTitleTemplate>
   );

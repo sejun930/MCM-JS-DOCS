@@ -1,12 +1,18 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import _ExampleOptionalCodeIconPage from "./code";
 import _Copy from "src/main/commonsComponents/units/copy";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 
 // 예시용에 추가적으로 붙는 옵션 폼 페이지 (ex : 코드보기 등등)
-export default function _ExampleOptionalFormPage({ code }: { code: string }) {
+export default function _ExampleOptionalFormPage({
+  code,
+  content,
+}: {
+  code: string;
+  content: string;
+}) {
   // 코드 보기 및 가리기
   const [showCode, setShowCode] = useState(false);
   const { getExampleCode, getReturn, getCommonsReturn } =
@@ -24,19 +30,20 @@ export default function _ExampleOptionalFormPage({ code }: { code: string }) {
       </OptionalWrapper>
       <CodeInfoWrapper showCode={showCode}>
         <_Copy
-          text={getExampleCode(code)}
+          text={getExampleCode(code, content)}
           type="Code"
-          showText={getReturn(getCommonsReturn(code))}
+          showText={getReturn(getCommonsReturn(code, content))}
           position="Top"
         />
       </CodeInfoWrapper>
-      {/* {showCode ? "오픈" : "클로즈"} */}
     </Wrapper>
   );
 }
 
 export const Wrapper = styled.section`
-  border-bottom: solid 1px #dddddd;
+  border: solid 1px #dddddd;
+  border-top: unset;
+  /* border-bottom: solid 1px #dddddd; */
 `;
 
 export const OptionalWrapper = styled.button`
@@ -64,6 +71,6 @@ export const CodeInfoWrapper = styled.div`
 
   ${(props: { showCode?: boolean }) =>
     props.showCode && {
-      maxHeight: "50vh",
+      maxHeight: "60vh",
     }}
 `;

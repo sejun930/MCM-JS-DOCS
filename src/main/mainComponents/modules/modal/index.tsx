@@ -44,7 +44,10 @@ export default function MyModal() {
     <Template>
       <_MainTitleTemplate />
       <ModulesInfoWrapper>
-        <_HowUseForm code={modalCodeList.basic} />
+        <_HowUseForm
+          code={modalCodeList.basic}
+          exmapleContents="기본 모달 페이지입니다."
+        />
         <_ExampleForm
           exampleList={modalExampleList}
           initProps={modalExampleInitProps}

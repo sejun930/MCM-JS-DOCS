@@ -3,7 +3,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const LayoutNavWrapper = styled.nav`
   width: 20%;
-  height: 100%;
+  height: auto;
   border-right: solid 3px #aa5656;
   /* min-width: 200px; */
   display: flex;

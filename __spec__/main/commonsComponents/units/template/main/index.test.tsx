@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
+import { _Title } from "mcm-js-commons";
 
 import Template from "src/main/commonsComponents/units/template/main";
-import _Title from "src/main/commonsComponents/units/title";
 
 export default describe("Main Template Page", () => {
   // 스냅샷
