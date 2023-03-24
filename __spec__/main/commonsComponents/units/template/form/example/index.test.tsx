@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
-import _ExampleForm from "src/main/commonsComponents/units/template/form/example";
+import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
 
 import {
   modalExampleList,
@@ -15,7 +15,7 @@ const commonsProps = {
 
 export default describe("Example Template Page", () => {
   // 스냅샷
-  test("Example Template Page - Snapshot", () => {
+  test("Snapshot", () => {
     const { container } = render(
       <RecoilRoot>
         <_ExampleForm
@@ -29,7 +29,7 @@ export default describe("Example Template Page", () => {
   });
 
   // h2 태그와 사용 예시 텍스트 검증
-  test("Example Template Page - Check have h2 tag", () => {
+  test("Check have h2 tag", () => {
     const { container } = render(
       <RecoilRoot>
         <_ExampleForm
@@ -39,18 +39,17 @@ export default describe("Example Template Page", () => {
         />
       </RecoilRoot>
     );
-    const h2WrapperEle = container.getElementsByClassName("_subTitleTemplate_");
+    const h2WrapperEle = container.getElementsByClassName("subTitle-Template");
     const h2Ele = h2WrapperEle[0]?.querySelector(
-      "._subTitle_"
+      ".subTitle"
     ) as HTMLHeadingElement;
 
     if (h2Ele) {
       // h2 태그 존재 여부 검증
       expect(h2Ele).toBeInTheDocument();
 
-      const h2Text = h2Ele.innerText;
       // 사용 예시 텍스트 검증
-      expect(h2Text).toEqual("📝 사용 예시");
+      expect(h2Ele.textContent).toEqual("📝 사용 예시");
     }
   });
 });

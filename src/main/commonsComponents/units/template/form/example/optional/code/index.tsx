@@ -7,10 +7,19 @@ export default function _ExampleOptionalCodeIconPage({
   showCode: boolean;
 }) {
   return (
-    <Wrapper className="_example_code_icon_btn_">
-      <LeftTem showCode={showCode}>{`<`}</LeftTem>
-      <Fin showCode={showCode}>{`/`}</Fin>
-      <RightTem showCode={showCode}>{`>`}</RightTem>
+    <Wrapper className="example-code-icon-button">
+      <LeftTem
+        showCode={showCode}
+        role={`example-left-tem${(showCode && "-open") || ""}`}
+      >{`<`}</LeftTem>
+      <Fin
+        showCode={showCode}
+        role={`example-fin${(showCode && "-open") || ""}`}
+      >{`/`}</Fin>
+      <RightTem
+        showCode={showCode}
+        role={`example-right-tem${(showCode && "-open") || ""}`}
+      >{`>`}</RightTem>
     </Wrapper>
   );
 }

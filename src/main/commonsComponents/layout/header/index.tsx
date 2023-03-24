@@ -5,11 +5,11 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export default function LayoutHeadPage() {
   return (
-    <HeaderWrapper className="_layout_header_wrapper_">
-      <_Link href="/" className="_layout_header_link_">
+    <HeaderWrapper className="layout-header-wrapper">
+      <_Link href="/" className="layout-header-link">
         <_Image
           src="/images/commons/logo/MCM_white_logo.png"
-          className="_layout_header_logo_"
+          className="layout-header-logo"
         />
       </_Link>
     </HeaderWrapper>
@@ -23,10 +23,10 @@ const HeaderWrapper = styled.header`
   align-items: center;
   height: 200px;
 
-  ._layout_header_link_ {
+  .layout-header-link {
     height: 220px;
 
-    ._layout_header_logo_ {
+    .layout-header-logo {
       /* width: 280px; */
       height: 220px;
       object-fit: cover;

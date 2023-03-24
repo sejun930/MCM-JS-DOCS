@@ -24,16 +24,11 @@ export default function LayoutPage(props: IProps) {
   }, [getRouter()]);
 
   return (
-    <LayoutWrapper className="_layout_home_wrapper_">
+    <LayoutWrapper className="layout-home-wrapper">
       <LayoutHeadPage />
       <LayoutContentsWrapper>
         <LayoutNavPage />
-        <>{props.children}</>
-        {/* <_HalfDrag
-          LeftComponent={<LayoutNavPage />}
-          RightComponent={<>{props.children}</>}
-          leftComponentWidth={"20%"}
-        /> */}
+        {props.children}
       </LayoutContentsWrapper>
     </LayoutWrapper>
   );

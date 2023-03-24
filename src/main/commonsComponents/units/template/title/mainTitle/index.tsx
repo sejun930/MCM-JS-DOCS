@@ -9,23 +9,23 @@ export default function _MainTitleTemplate() {
   const [module] = useRecoilState(moduleState);
 
   return (
-    <Wrapper className="_main_title_wrapper_">
-      <_Title className="_main_title_">📖 {module}</_Title>
-      <_PText className="_main_title_remarks_">
+    <Wrapper className="main-title-wrapper">
+      <_Title className="main-title">📖 {module}</_Title>
+      <_PText className="main-title-remarks">
         {mouduleRemarksList[module]}
       </_PText>
     </Wrapper>
   );
 }
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
   gap: 10px 0px;
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
 
-  ._main_title_ {
+  .main-title {
     display: flex;
     align-items: center;
   }

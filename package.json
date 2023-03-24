@@ -34,6 +34,8 @@
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/enzyme": "^3.10.12",
     "@types/jest": "^29.4.0",
     "@types/node": "18.11.18",

@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Example Optional Snapshot 1`] = `
+<div>
+  <section
+    class="css-cnt23e"
+  >
+    <button
+      class="css-qf2s45"
+    >
+      <div
+        class="example-code-icon-button css-16pyd80"
+      >
+        <span
+          class="css-1iywk7f"
+          role="example-left-tem"
+        >
+          &lt;
+        </span>
+        <span
+          class="css-9alhxk"
+          role="example-fin"
+        >
+          /
+        </span>
+        <span
+          class="css-1t3qs2b"
+          role="example-right-tem"
+        >
+          &gt;
+        </span>
+      </div>
+    </button>
+    <div
+      class="css-nef91a"
+    >
+      <div
+        class="_copy_ css-wbm39"
+      >
+        <div
+          class="_copy_text_ css-gjwso2"
+        >
+          <pre
+            class="css-1ppfysk"
+          >
+            <code>
+                
+              <span
+                class="purple"
+              >
+                return (
+              </span>
+              
+    
+              <span />
+              
+  
+              <span
+                class="purple"
+              >
+                )
+              </span>
+              <span
+                class="lightGray"
+              >
+                ;
+              </span>
+            </code>
+          </pre>
+        </div>
+        <button
+          class="css-dqlxgg"
+        >
+          <p
+            class="mcm-p-unit css-pzlb5d"
+          >
+            Copy
+          </p>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+`;

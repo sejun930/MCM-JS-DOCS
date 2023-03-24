@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const Pre = styled.pre`
   line-height: 1.8;
+
   code {
     font-weight: 500;
     font-family: "Manlo";

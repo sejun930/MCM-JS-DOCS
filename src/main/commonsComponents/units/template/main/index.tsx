@@ -4,7 +4,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 // DOC 페이지 메인 템플릿
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <Wrapper className="_main_template_wrapper_">{children}</Wrapper>;
+  return <Wrapper className="main-template-wrapper">{children}</Wrapper>;
 }
 
 export const Wrapper = styled.main`

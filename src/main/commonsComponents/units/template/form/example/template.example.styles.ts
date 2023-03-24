@@ -7,13 +7,37 @@ interface StyleTypes {
 
 export const ExampleWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  /* margin-top: 100px; */
+`;
+
+export const ExampleTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  .exmaple-subTitle {
+    display: flex;
+  }
+
+  .subTitle-title-wrapper {
+    align-items: flex-end;
+    .toggle-all-code-btn {
+      font-size: 16px;
+    }
+  }
+`;
+
+export const ExampleContentsWrapper = styled.div`
+  display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 40px;
   gap: 60px 0px;
 `;
 
-export const ExampleItems = styled.div`
+export const ExampleContentsItems = styled.div`
   display: flex;
   flex-direction: column;
   width: 48%;
@@ -38,7 +62,7 @@ export const ExampleItems = styled.div`
     }}
 `;
 
-export const ExampleResult = styled.div`
+export const ExampleResultList = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -54,19 +78,19 @@ export const ExampleResult = styled.div`
     }}
 `;
 
-export const ExampleContents = styled.div`
+export const ExampleListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  ._exmaple_remarks_ {
+  .example-remarks {
     font-size: 14px;
     margin-top: 10px;
     color: #666666;
   }
 `;
 
-export const ExampleContentsItems = styled.div`
+export const ExampleListItems = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.3rem 1rem;

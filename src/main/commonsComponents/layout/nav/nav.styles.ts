@@ -2,13 +2,18 @@ import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const LayoutNavWrapper = styled.nav`
-  width: 20%;
+  min-width: 18%;
+  max-width: 18%;
   height: auto;
   border-right: solid 3px #aa5656;
-  /* min-width: 200px; */
   display: flex;
   position: relative;
-  overflow: hidden;
+
+  @media ${breakPoints.mobile} {
+    min-width: auto;
+    max-width: auto;
+    display: none;
+  }
 `;
 
 export const LayoutNavListWrapper = styled.article`
@@ -30,10 +35,13 @@ export const LayoutNavListWrapper = styled.article`
     }
   }
 
-  ._selectTap_ {
-    cursor: default !important;
+  .select-tap {
+    position: sticky;
+    top: 50px;
+    width: 18vw;
+
     .mcm-p-unit {
-      /* background-color: #20262e; */
+      /* transition: unset; */
       background-color: #473c33;
       color: white;
     }

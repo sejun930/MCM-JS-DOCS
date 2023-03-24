@@ -5,7 +5,7 @@ import LayoutPage from "src/main/commonsComponents/layout";
 
 export default describe("Layout Home Page", () => {
   // 스냅샷
-  test("Layout Home Page - Snapshot", () => {
+  test("Snapshot", () => {
     const { container } = render(
       <RecoilRoot>
         <LayoutPage>

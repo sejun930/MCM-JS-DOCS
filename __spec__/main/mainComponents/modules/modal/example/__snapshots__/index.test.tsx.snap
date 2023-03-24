@@ -3,29 +3,30 @@
 exports[`Modal Example Page Modal Example Page - Snapshot 1`] = `
 <div>
   <button
-    class="_button_"
+    class="cmm-button-unit _open_module_button_ css-19ngahp"
     role="button_click_event"
   >
     클릭하세요.
   </button>
   <div
-    class="cmm-modal-wrapper css-uwybve"
+    class="mcm-modal-wrapper css-uwybve"
   >
     <div
-      class="cmm-modal-items css-m029r6"
+      class="mcm-modal-items css-1ys2wia"
     >
       <button
-        class="cmm-modal-close-button-wrapper css-1jzwdgn"
+        class="mcm-modal-close-button-wrapper css-1gtshid"
+        style="top: -35px;"
       >
         <div
-          class="cmm-modal-close-button css-1ignqe8"
+          class="mcm-modal-close-button css-1jcgi8s"
         />
       </button>
       <div
-        class="cmm-modal-layout css-1vkx5dn"
+        class="mcm-modal-layout css-1qmdus"
       >
         <div
-          class="cmm-modal-content css-1wdbmsj"
+          class="mcm-modal-content css-r2q4vg"
         />
       </div>
     </div>
