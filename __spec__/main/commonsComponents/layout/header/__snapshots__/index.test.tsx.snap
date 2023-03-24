@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout Header Page Layout Header Page - Snapshot 1`] = `
+exports[`Layout Header Page Check link and img tag 1`] = `
 <div>
   <header
-    class="_layout_header_wrapper_ css-14b3e4t"
+    class="layout-header-wrapper css-9a7bum"
   >
     <a
-      class="_link_ _layout_header_link_ css-1h5x3dy"
+      class="mcm-link-unit layout-header-link css-1h5x3dy"
       href="/"
     >
       <img
-        class="_image_ _layout_header_logo_ css-msby2z"
+        class="mcm-image-unit layout-header-logo css-msby2z"
         src="/images/commons/logo/MCM_white_logo.png"
       />
     </a>
@@ -18,17 +18,17 @@ exports[`Layout Header Page Layout Header Page - Snapshot 1`] = `
 </div>
 `;
 
-exports[`Layout Header Page Layout Header Page - Snapshot 2`] = `
+exports[`Layout Header Page Snapshot 1`] = `
 <div>
   <header
-    class="_layout_header_wrapper_ css-14b3e4t"
+    class="layout-header-wrapper css-9a7bum"
   >
     <a
-      class="_link_ _layout_header_link_ css-1h5x3dy"
+      class="mcm-link-unit layout-header-link css-1h5x3dy"
       href="/"
     >
       <img
-        class="_image_ _layout_header_logo_ css-msby2z"
+        class="mcm-image-unit layout-header-logo css-msby2z"
         src="/images/commons/logo/MCM_white_logo.png"
       />
     </a>

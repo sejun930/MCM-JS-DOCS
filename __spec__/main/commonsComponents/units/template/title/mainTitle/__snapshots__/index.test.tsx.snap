@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mainTitle Template Page mainTitle Template Page - Snapshot 1`] = `
+exports[`mainTitle Template Page Snapshot 1`] = `
 <div>
-  <section
-    class="_main_title_wrapper_ css-j3xf1"
+  <div
+    class="main-title-wrapper css-qe9630"
   >
-    <div>
-      <h1
-        class="_title_ _main_title_"
-      />
-    </div>
+    <h1
+      class="mcm-title-unit main-title"
+    >
+      📖 
+    </h1>
     <p
-      class="_p_ _main_title_remarks_ css-pzlb5d"
+      class="mcm-p-unit main-title-remarks css-pzlb5d"
     />
-  </section>
+  </div>
 </div>
 `;

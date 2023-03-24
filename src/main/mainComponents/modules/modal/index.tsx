@@ -10,7 +10,8 @@ import { modalCodeList } from "./example/modal.example.code.data";
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
-import _ExampleForm from "src/main/commonsComponents/units/template/form/example";
+import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
+import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 export default function MyModal() {
@@ -42,8 +43,8 @@ export default function MyModal() {
 
   return (
     <Template>
-      <_MainTitleTemplate />
       <ModulesInfoWrapper>
+        <_MainTitleTemplate />
         <_HowUseForm
           code={modalCodeList.basic}
           exmapleContents="기본 모달 페이지입니다."
@@ -53,13 +54,14 @@ export default function MyModal() {
           initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
+        {/* <_TreeForm /> */}
       </ModulesInfoWrapper>
     </Template>
   );
 }
 
-export const ModulesInfoWrapper = styled.div`
+export const ModulesInfoWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 100px 0px;
+  gap: 160px 0px;
 `;

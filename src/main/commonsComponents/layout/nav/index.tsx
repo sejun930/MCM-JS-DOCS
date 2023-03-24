@@ -1,10 +1,11 @@
 import { MutableRefObject, useRef } from "react";
-import { LayoutNavListWrapper, LayoutNavWrapper } from "./styles";
+import { LayoutNavListWrapper, LayoutNavWrapper } from "./nav.styles";
 
-import { navList } from "./data";
+import { navList } from "./nav.data";
 import { _PText, _Link } from "mcm-js-commons";
 
 import CommonsHooksComponents from "../../hooks/commonsHooks";
+import NavSearchPage from "./search";
 
 export default function LayoutNavPage() {
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -15,8 +16,9 @@ export default function LayoutNavPage() {
   const selectTap = router.pathname.split("/").at(-1);
 
   return (
-    <LayoutNavWrapper ref={wrapperRef} className="_layout_nav_wrapper_">
-      <LayoutNavListWrapper className="_layout_nav_list_">
+    <LayoutNavWrapper ref={wrapperRef} className="nav-wrapper">
+      <LayoutNavListWrapper className="nav-list-wrapper">
+        <NavSearchPage />
         {navList
           .slice()
           .sort((a, b) => (a.name > b.name ? 1 : -1)) // 알파벳 순서로 정렬
@@ -25,18 +27,18 @@ export default function LayoutNavPage() {
 
             return (
               <_Link
-                key={`_layout_modules_list_${key}_`}
+                key={`layout-modules-list-${key}`}
                 href={
                   el.href
                     ? `/modules/${el.href}`
                     : `/modules/${el.name.toLowerCase()}`
                 }
                 className={getAllComponentsClassName(
-                  "_tap_",
-                  (isSelect && `_selectTap_`) || ""
+                  "tap",
+                  (isSelect && `select-tap`) || ""
                 )}
               >
-                <_PText className="_tap_name_">{el.name}</_PText>
+                <_PText className="tap-name">{el.name}</_PText>
               </_Link>
             );
           })}

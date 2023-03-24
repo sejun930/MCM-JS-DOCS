@@ -31,3 +31,11 @@ export interface IProps {
   initProps: ModalPropsType;
   commonsProps: ModalExampleCommonsTypes;
 }
+
+export interface UIProps {
+  module: string;
+  openList: Array<boolean>;
+  changeOpenList: (idx: number, list?: Array<boolean>) => void;
+  isOneOpen: boolean;
+  allLen: number;
+}

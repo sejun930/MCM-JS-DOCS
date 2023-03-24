@@ -5,7 +5,7 @@ import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/
 
 export default describe("mainTitle Template Page", () => {
   // 스냅샷
-  test("mainTitle Template Page - Snapshot", () => {
+  test("Snapshot", () => {
     const { container } = render(
       <RecoilRoot>
         <_MainTitleTemplate />
@@ -15,7 +15,7 @@ export default describe("mainTitle Template Page", () => {
   });
 
   // h1 태그 존재 여부 확인
-  test("mainTitle Template Page - Check have h1 and p tag", () => {
+  test("Check have h1 and p tag", () => {
     const { container } = render(
       <RecoilRoot>
         <_MainTitleTemplate />
@@ -23,16 +23,16 @@ export default describe("mainTitle Template Page", () => {
     );
 
     // h1, p 태그를 감싸는 wrapper 태그 존재여부 검증
-    const wrapperEle = container.querySelector("._main_title_wrapper_");
+    const wrapperEle = container.querySelector(".main-title-wrapper");
     expect(wrapperEle).toBeInTheDocument();
 
     if (wrapperEle) {
       // h1 태그 있는지 검증
-      const h1Ele = wrapperEle.querySelector("._main_title_");
+      const h1Ele = wrapperEle.querySelector(".main-title");
       expect(h1Ele).toBeInTheDocument();
 
       // p 태그 있는지 검증
-      const pEle = wrapperEle.querySelector("._main_title_remarks_");
+      const pEle = wrapperEle.querySelector(".main-title-remarks");
       expect(pEle).toBeInTheDocument();
     }
   });

@@ -3,25 +3,25 @@
 exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
 <div>
   <main
-    class="_main_template_wrapper_ css-1p2vox9"
+    class="main-template-wrapper css-1p2vox9"
   >
     <section
-      class="_main_title_wrapper_ css-j3xf1"
+      class="main-title-wrapper css-j3xf1"
     >
       <div>
         <h1
-          class="_title_ _main_title_"
+          class="_title_ main-title"
         />
       </div>
       <p
-        class="_p_ _main_title_remarks_ css-pzlb5d"
+        class="_p_ main-title-remarks css-pzlb5d"
       />
     </section>
     <div
       class="css-1po5u6t"
     >
       <div
-        class="_subTitleTemplate_ _howUse_Title_ css-k59gj9"
+        class="subTitle-Template howUse-subTitle css-k59gj9"
       >
         <div>
           <h2
@@ -29,7 +29,7 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
           />
         </div>
         <div
-          class="_subTitleLine_ css-18klhw4"
+          class="subTitle-line css-18klhw4"
         />
         <div
           class="css-1m3zms3"
@@ -583,7 +583,7 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="_subTitleTemplate_ _example_template_title_ css-k59gj9"
+        class="subTitle-Template _example_template_title_ css-k59gj9"
       >
         <div>
           <h2
@@ -591,7 +591,7 @@ exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
           />
         </div>
         <div
-          class="_subTitleLine_ css-18klhw4"
+          class="subTitle-line css-18klhw4"
         />
         <div
           class="css-1sw7z4p"

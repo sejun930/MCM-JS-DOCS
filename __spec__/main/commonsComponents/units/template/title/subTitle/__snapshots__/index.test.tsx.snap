@@ -1,21 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`subTitle Template Page subTitle Template Page - Snapshot 1`] = `
+exports[`subTitle Template Page Snapshot 1`] = `
 <div>
   <div
-    class="_subTitleTemplate_ css-k59gj9"
+    class="subTitle-Template css-cw3rkw"
   >
-    <div>
+    <div
+      class="subTitle-title-wrapper css-1knbux5"
+    >
       <h2
-        class="_title_ _subTitle_"
-      />
+        class="mcm-title-unit subTitle"
+      >
+        undefined 서브타이틀 테스트
+      </h2>
     </div>
     <div
-      class="_subTitleLine_ css-18klhw4"
+      class="subTitle-line css-18klhw4"
     />
-    <div>
+    <span>
       내용
-    </div>
+    </span>
   </div>
 </div>
 `;

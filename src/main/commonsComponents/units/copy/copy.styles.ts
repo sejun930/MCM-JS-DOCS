@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   isCopied?: boolean;
@@ -94,6 +95,10 @@ export const CopyButton = styled.button`
 
   .mcm-p-unit {
     color: ${(props) => (props.isCode ? "white" : "#333333")};
+  }
+
+  @media ${breakPoints.mobile} {
+    display: none;
   }
 `;
 

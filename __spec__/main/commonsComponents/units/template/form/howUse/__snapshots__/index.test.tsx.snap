@@ -1,567 +1,178 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HowUse Template Page HowUse Template Page - Snapshot 1`] = `
+exports[`HowUse Template Page Snapshot 1`] = `
 <div>
   <div
-    class="_subTitleTemplate_ _howUse_Title_ css-k59gj9"
+    class="css-1iyoj2o"
   >
-    <div>
-      <h2
-        class="_title_ _subTitle_"
+    <div
+      class="subTitle-Template howUse-subTitle css-cw3rkw"
+    >
+      <div
+        class="subTitle-title-wrapper css-1knbux5"
+      >
+        <h2
+          class="mcm-title-unit subTitle"
+        >
+          🔍 사용 방법
+        </h2>
+      </div>
+      <div
+        class="subTitle-line css-18klhw4"
       />
+      <p
+        class="mcm-p-unit subTitle-remarks css-pzlb5d"
+      >
+        기본적으로 사용할 수 있는 예시입니다.
+      </p>
     </div>
     <div
-      class="_subTitleLine_ css-18klhw4"
-    />
-    <div
-      class="css-1m3zms3"
-      role="code-wrapper"
+      class="_copy_ css-wbm39"
     >
-      <p
-        class="_p_ _howUse_example_notice_ css-pzlb5d"
-      >
-        기본값으로 사용할 수 있는 예시 코드입니다.
-      </p>
       <div
-        class="_copy_ css-zko0mt"
+        class="_copy_text_ css-gjwso2"
       >
-        <div
-          class="css-eppsv9"
+        <pre
+          class="css-1ppfysk"
         >
-          <pre
-            class="css-1quoi9q"
-          >
-            <code>
-              <span
-                class="purple"
-              >
-                import
-              </span>
-              <span
-                class="yellow"
-              >
-                 { 
-              </span>
-              <span
-                class="skyblue"
-              >
-                _
-              </span>
-              <span
-                class="yellow"
-              >
-                 } 
-              </span>
-              <span
-                class="purple"
-              >
-                from
-              </span>
-              <span
-                class="lightOrange"
-              >
-                 "mcm-js"
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
-
-              <span
-                class="purple"
-              >
-                import
-              </span>
-              <span
-                class="yellow"
-              >
-                 { 
-              </span>
-              <span
-                class="skyblue"
-              >
-                useState
-              </span>
-              <span
-                class="yellow"
-              >
-                 } 
-              </span>
-              <span
-                class="purple"
-              >
-                from
-              </span>
-               
-              <span
-                class="lightOrange"
-              >
-                "react"
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
+          <code>
+            <span
+              class="purple"
+            >
+              import
+            </span>
+            <span
+              class="yellow"
+            >
+               { 
+            </span>
+            <span
+              class="skyblue"
+            />
+            <span
+              class="yellow"
+            >
+               } 
+            </span>
+            <span
+              class="purple"
+            >
+              from
+            </span>
+            <span
+              class="lightOrange"
+            >
+               "mcm-js"
+            </span>
+            <span
+              class="lightGray"
+            >
+              ;
+            </span>
+            
     
 
-              <span
-                class="purple"
-              >
-                export default
-              </span>
-              <span
-                class="darkBlue"
-              >
-                 function
-              </span>
-              <span
-                class="lightYellow"
-              >
-                 ExamplePage
-              </span>
-              <span
-                class="yellow"
-              >
-                () {
-              </span>
-              
+            <span
+              class="purple"
+            >
+              export default
+            </span>
+            <span
+              class="darkBlue"
+            >
+               function
+            </span>
+            <span
+              class="lightYellow"
+            >
+               ExamplePage
+            </span>
+            <span
+              class="yellow"
+            >
+              () {
+            </span>
+            
   
-              <span
-                class="lightGreen"
-              >
-                // 모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.
-              </span>
-              
-  
-              <span
-                class="darkBlue"
-              >
-                const
-              </span>
-               
-              <span
-                class="purple"
-              >
-                [
-              </span>
-              <span
-                class="blue"
-              >
-                isOpen
-              </span>
-              <span
-                class="lightGray"
-              >
-                ,
-              </span>
-               
-              <span
-                class="lightYellow"
-              >
-                setIsOpen
-              </span>
-              <span
-                class="purple"
-              >
-                ]
-              </span>
-               
-              <span
-                class="lightGray"
-              >
-                =
-              </span>
-               
-              <span
-                class="lightYellow"
-              >
-                useState
-              </span>
-              <span
-                class="purple"
-              >
-                (
-              </span>
-              <span
-                class="blue"
-              >
-                false
-              </span>
-              <span
-                class="purple"
-              >
-                )
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
-  
-  
-              <span
-                class="lightGreen"
-              >
-                // 모달을 실행하는 함수입니다.
-              </span>
-              
-  
-              <span
-                class="darkBlue"
-              >
-                const
-              </span>
-               
-              <span
-                class="lightYellow"
-              >
-                openModal
-              </span>
-               
-              <span
-                class="lightGray"
-              >
-                =
-              </span>
-               
-              <span
-                class="purple"
-              >
-                ()
-              </span>
-               
-              <span
-                class="blue"
-              >
-                =&gt;
-              </span>
-               
-              <span
-                class="purple"
-              >
-                {
-              </span>
-              
+            <span
+              class="purple"
+            >
+              return (
+            </span>
+            
     
-              <span
-                class="lightYellow"
-              >
-                setIsOpen
-              </span>
-              <span
-                class="blue"
-              >
-                (true)
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
+            <span
+              class="skyblue"
+            >
+              show
+            </span>
+            <span
+              class="lightGray"
+            >
+              =
+            </span>
+            <span
+              class="blue"
+            >
+              {isOpen}
+            </span>
+             
+            <span
+              class="skyblue"
+            >
+              onCloseModal
+            </span>
+            <span
+              class="lightGray"
+            >
+              =
+            </span>
+            <span
+              class="blue"
+            >
+              {
+            </span>
+            <span
+              class="lightYellow"
+            >
+              closeModal
+            </span>
+            <span
+              class="blue"
+            >
+              }
+            </span>
+            
   
-              <span
-                class="purple"
-              >
-                }
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
+            <span
+              class="purple"
+            >
+              )
+            </span>
+            <span
+              class="lightGray"
+            >
+              ;
+            </span>
+            
 
-  
-              <span
-                class="lightGreen"
-              >
-                // 모달을 종료하는 함수입니다.
-              </span>
-              
-  
-              <span
-                class="darkBlue"
-              >
-                const
-              </span>
-               
-              <span
-                class="lightYellow"
-              >
-                closeModal
-              </span>
-               
-              <span
-                class="lightGray"
-              >
-                =
-              </span>
-               
-              <span
-                class="purple"
-              >
-                ()
-              </span>
-               
-              <span
-                class="blue"
-              >
-                =&gt;
-              </span>
-               
-              <span
-                class="purple"
-              >
-                {
-              </span>
-              
-    
-              <span
-                class="lightYellow"
-              >
-                setIsOpen
-              </span>
-              <span
-                class="blue"
-              >
-                (false)
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
-  
-              <span
-                class="purple"
-              >
-                }
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
-
-  
-              <span
-                class="purple"
-              >
-                return (
-              </span>
-              
-    
-              <span
-                class="gray"
-              >
-                &lt;
-              </span>
-              <span
-                class="darkBlue"
-              >
-                div
-              </span>
-              <span
-                class="gray"
-              >
-                &gt;
-              </span>
-              
-      
-              <span
-                class="gray"
-              >
-                &lt;
-              </span>
-              <span
-                class="darkBlue"
-              >
-                button
-              </span>
-               
-              <span
-                class="skyblue"
-              >
-                onClick
-              </span>
-              <span
-                class="lightGray"
-              >
-                =
-              </span>
-              <span
-                class="blue"
-              >
-                {
-              </span>
-              <span
-                class="lightYellow"
-              >
-                openModal
-              </span>
-              <span
-                class="blue"
-              >
-                }
-              </span>
-              <span
-                class="gray"
-              >
-                &gt;
-              </span>
-               
-              <span
-                class="lightGray"
-              >
-                모달 실행하기
-              </span>
-               
-              <span
-                class="gray"
-              >
-                &lt;
-              </span>
-              <span
-                class="gray"
-              >
-                /
-              </span>
-              <span
-                class="darkBlue"
-              >
-                button
-              </span>
-              <span
-                class="gray"
-              >
-                &gt;
-              </span>
-              
-      
-              <span
-                class="gray"
-              >
-                &lt;
-              </span>
-              <span
-                class="green"
-              >
-                _Modal
-              </span>
-               
-              <span
-                class="skyblue"
-              >
-                show
-              </span>
-              <span
-                class="lightGray"
-              >
-                =
-              </span>
-              <span
-                class="blue"
-              >
-                {isOpen}
-              </span>
-               
-              <span
-                class="skyblue"
-              >
-                onCloseModal
-              </span>
-              <span
-                class="lightGray"
-              >
-                =
-              </span>
-              <span
-                class="blue"
-              >
-                {
-              </span>
-              <span
-                class="lightYellow"
-              >
-                closeModal
-              </span>
-              <span
-                class="blue"
-              >
-                }
-              </span>
-               
-              <span
-                class="gray"
-              >
-                /
-              </span>
-              <span
-                class="gray"
-              >
-                &gt;
-              </span>
-              
-    
-              <span
-                class="gray"
-              >
-                &lt;
-              </span>
-              <span
-                class="gray"
-              >
-                /
-              </span>
-              <span
-                class="darkBlue"
-              >
-                div
-              </span>
-              <span
-                class="gray"
-              >
-                &gt;
-              </span>
-              
-  
-              <span
-                class="purple"
-              >
-                )
-              </span>
-              <span
-                class="lightGray"
-              >
-                ;
-              </span>
-              
-
-              <span
-                class="yellow"
-              >
-                }
-              </span>
-            </code>
-          </pre>
-        </div>
-        <button
-          class="css-12vdm2a"
-        >
-          <img
-            class="_image_ _copyIcon_ css-msby2z"
-            src="/images/commons/icons/copy.png"
-          />
-        </button>
+            <span
+              class="yellow"
+            >
+              }
+            </span>
+          </code>
+        </pre>
       </div>
+      <button
+        class="css-ikbf1i"
+      >
+        <p
+          class="mcm-p-unit css-pzlb5d"
+        >
+          Copy
+        </p>
+      </button>
     </div>
   </div>
 </div>
