@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const LayoutNavWrapper = styled.nav`
-  min-width: 18%;
-  max-width: 18%;
+  min-width: 16%;
+  max-width: 16%;
   height: auto;
   border-right: solid 3px #aa5656;
   display: flex;
@@ -22,7 +22,7 @@ export const LayoutNavListWrapper = styled.article`
   gap: 10px 0px;
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  /* padding: 1rem; */
 
   .mcm-p-unit {
     transition: all 0.25s ease-in;
@@ -36,9 +36,9 @@ export const LayoutNavListWrapper = styled.article`
   }
 
   .select-tap {
-    position: sticky;
+    /* position: sticky;
     top: 50px;
-    width: 18vw;
+    width: 18vw; */
 
     .mcm-p-unit {
       /* transition: unset; */
@@ -57,4 +57,14 @@ export const LayoutNavListWrapper = styled.article`
       padding: 2vw;
     }
   }
+`;
+
+export const LayoutNavListItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-bottom: solid 2px #ababab;
+  position: sticky;
+  top: 0px;
+  background-color: white;
 `;

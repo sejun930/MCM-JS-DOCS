@@ -1,14 +1,28 @@
 import styled from "@emotion/styled";
+import { ChangeEvent, FormEvent } from "react";
 
-export default function NavSearchPage() {
+export default function NavSearchPage({
+  changeSearch,
+}: {
+  changeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+}) {
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
     <Wrapper className="nav-search-wrapper">
-      <Form className="nav-search-form">
+      <Form className="nav-search-form" onSubmit={submit}>
         <NavSearchFieldset>
           <legend>모듈 검색</legend>
           <SerachWrapper>
             <SearchItems>
-              <Input type="text" />
+              <Input
+                type="text"
+                placeholder="모듈 검색"
+                maxLength={20}
+                onChange={changeSearch}
+              />
             </SearchItems>
           </SerachWrapper>
         </NavSearchFieldset>
