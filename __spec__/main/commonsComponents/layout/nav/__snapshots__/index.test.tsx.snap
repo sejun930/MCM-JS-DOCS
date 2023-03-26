@@ -1,47 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout Nav Page Layout Nav Page - Snapshot 1`] = `
+exports[`Layout Nav Page Snapshot 1`] = `
 <div>
   <nav
-    class="nav-wrapper css-g3duar"
+    class="nav-wrapper css-r34cv1"
   >
     <article
-      class="nav-list-wrapper css-10y3vds"
+      class="nav-list-wrapper css-jh0u6n"
     >
       <div
-        class="nav-search-wrapper css-lobae1"
+        class="css-peiozq"
       >
-        <form
-          class="nav-search-form css-0"
+        <div
+          class="nav-search-wrapper css-1qxmmiy"
         >
-          <fieldset
-            class="css-1opjr3t"
+          <form
+            class="nav-search-form css-b3mgo2"
           >
-            <legend>
-              모듈 검색
-            </legend>
-            <div
-              class="css-1rbly99"
+            <fieldset
+              class="css-1opjr3t"
             >
+              <legend>
+                모듈 검색
+              </legend>
               <div
-                class="css-1sg36r4"
+                class="css-1rbly99"
               >
-                123123
+                <div
+                  class="css-1l2zqce"
+                >
+                  <input
+                    class="css-1ibeljf"
+                    maxlength="20"
+                    placeholder="모듈 검색"
+                    type="text"
+                  />
+                </div>
               </div>
-            </div>
-          </fieldset>
-        </form>
+            </fieldset>
+          </form>
+        </div>
       </div>
-      <a
-        class="mcm-link-unit tap css-1h5x3dy"
-        href="/modules/modal"
+      <ul
+        class="nav-list-wrapper css-ge2mxv"
       >
-        <p
-          class="mcm-p-unit tap-name css-pzlb5d"
-        >
-          Modal
-        </p>
-      </a>
+        <li>
+          <a
+            class="mcm-link-unit css-1h5x3dy"
+            href="/modules/Modal"
+          >
+            <span
+              class="mcm-span-unit"
+            >
+              Modal
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="mcm-link-unit css-1h5x3dy"
+            href="/modules/Slick"
+          >
+            <span
+              class="mcm-span-unit"
+            >
+              Slick
+            </span>
+          </a>
+        </li>
+      </ul>
     </article>
   </nav>
 </div>

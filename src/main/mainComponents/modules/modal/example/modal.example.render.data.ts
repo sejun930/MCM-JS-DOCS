@@ -121,7 +121,9 @@ export const modalExampleList: Array<ExampleIProps> = [
         remakrs: "닫기 버튼 사이즈를 조절합니다.",
         addProps: {
           ...modalExampleInitProps,
-          closeButtonSize: "15px",
+          closeButtonInfo: {
+            buttonSize: "25px",
+          },
         },
         info: {
           buttonName: "Open Resize Button Modal",

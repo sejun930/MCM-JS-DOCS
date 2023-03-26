@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout Nav Search Page Snapshot 1`] = `
+<div>
+  <div
+    class="nav-search-wrapper css-1qxmmiy"
+  >
+    <form
+      class="nav-search-form css-b3mgo2"
+    >
+      <fieldset
+        class="css-1opjr3t"
+      >
+        <legend>
+          모듈 검색
+        </legend>
+        <div
+          class="css-1rbly99"
+        >
+          <div
+            class="css-1l2zqce"
+          >
+            <input
+              class="nav-search-input css-1ibeljf"
+              maxlength="20"
+              placeholder="모듈 검색"
+              type="text"
+            />
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+`;

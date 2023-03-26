@@ -35,16 +35,9 @@ export const LayoutNavListWrapper = styled.article`
     }
   }
 
-  .select-tap {
-    /* position: sticky;
-    top: 50px;
-    width: 18vw; */
-
-    .mcm-p-unit {
-      /* transition: unset; */
-      background-color: #473c33;
-      color: white;
-    }
+  .search-keyword {
+    color: #aa5656;
+    font-weight: 800;
   }
 
   @media ${breakPoints.mobile} {

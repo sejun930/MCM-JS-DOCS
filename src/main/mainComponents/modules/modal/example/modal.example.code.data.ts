@@ -68,6 +68,10 @@ export const modalCodeList: ExampleCodeListTypese = {
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
         <span class='skyblue'>closeMent</span><span class='lightGray'>=</span><span class='lightOrange'>"오늘 하루 보지 않기"</span>
       `,
-  resizeBtn: `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span> <span class='skyblue'>closeButtonSize</span><span class='lightGray'>=</span><span class='lightOrange'>"15px"</span>`,
+  resizeBtn: `
+        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
+        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
+        <span class='skyblue'>closeButtonInfo</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>buttonSize:</span> <span class='lightOrange'>"25px"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+      `,
   offAutoClose: `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span> <span class='skyblue'>offAutoClose</span><span class='lightGray'>=</span><span class='blue'>{true}</span>`,
 };

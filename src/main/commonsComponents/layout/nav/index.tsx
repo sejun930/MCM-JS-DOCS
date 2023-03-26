@@ -1,4 +1,10 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 import {
@@ -15,6 +21,7 @@ import NavListPage from "./list";
 // 디바운싱 저장 변수
 let _debounce: ReturnType<typeof setTimeout> | number;
 export default function LayoutNavPage() {
+  const _inputRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [module] = useRecoilState(moduleState);
 
   // 모듈 검색어
@@ -30,13 +37,17 @@ export default function LayoutNavPage() {
       tempAllList = tempAllList.filter((el) =>
         el.name.toLowerCase().includes(search.toLowerCase())
       );
-
-    // .sort((a, b) => (a.name > b.name ? 1 : -1));
     setAllList(tempAllList);
   }, [module, search]);
 
+  useEffect(() => {
+    setSearch("");
+    _inputRef.current.value = "";
+  }, [module]);
+
   const changeSearch = ({ target }: ChangeEvent<HTMLInputElement>) => {
     window.clearTimeout(_debounce);
+
     _debounce = window.setTimeout(() => {
       const { value } = target;
       setSearch(value.trim());
@@ -50,7 +61,11 @@ export default function LayoutNavPage() {
     <LayoutNavWrapper className="nav-wrapper">
       <LayoutNavListWrapper className="nav-list-wrapper">
         <LayoutNavListItems>
-          <NavSearchPage changeSearch={changeSearch} />
+          <NavSearchPage
+            changeSearch={changeSearch}
+            _inputRef={_inputRef}
+            search={search}
+          />
           {module && module !== "404" && (
             // 선택된 탭의 정보 렌더하기
             <NavListPage list={[selectTapInfo]} isSelect={true} />

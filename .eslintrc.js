@@ -23,5 +23,6 @@ module.exports = {
     semi: "off",
     "space-before-function-paren": "off",
     "react/react-in-jsx-scope": "off",
+    "react/no-danger-with-children": "off",
   },
 };

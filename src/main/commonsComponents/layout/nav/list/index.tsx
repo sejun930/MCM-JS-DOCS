@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { NavListTypes } from "../nav.data";
-import { _Link, _SpanText } from "mcm-js-commons";
+import { _Link, _SpanText, _PText } from "mcm-js-commons";
 
 export default function NavListPage({
   list,
@@ -13,21 +13,40 @@ export default function NavListPage({
   search?: string;
 }) {
   return (
-    (list.length && (
-      <ListWrapper isSelect={isSelect}>
-        {list.map((el, key) => {
+    <ListWrapper
+      isSelect={isSelect}
+      className={`nav-list-wrapper${
+        isSelect ? " nav-list-select-wrapper" : ""
+      }`}
+    >
+      {(list.length &&
+        list.map((el, key) => {
           const _href = `/modules/${el.href ?? el.name}`;
+          let name = el.name;
+
+          if (search) {
+            const startIdx = name.toLowerCase().indexOf(search.toLowerCase());
+
+            if (startIdx !== -1) {
+              const endIdx = startIdx + search.length;
+              const _temp = name.substring(startIdx, endIdx);
+
+              name = name.replaceAll(
+                _temp,
+                `<span class='search-keyword'>${_temp}</span>`
+              );
+            }
+          }
 
           return (
             <li key={`tap-name-${el.name}-${key}`}>
               <_Link href={_href}>
-                <_SpanText>{el.name}</_SpanText>
+                <_SpanText dangerouslySetInnerHTML={name}> </_SpanText>
               </_Link>
             </li>
           );
-        })}
-      </ListWrapper>
-    )) || <></>
+        })) || <_PText className="empty-search-result">검색 결과 없음</_PText>}
+    </ListWrapper>
   );
 }
 
@@ -65,9 +84,9 @@ export const ListWrapper = styled.ul`
     }
   }
 
-  //
-
-  /* li {
-
-  } */
+  .empty-search-result {
+    padding: 0px;
+    font-size: 14px;
+    color: #777777;
+  }
 `;
