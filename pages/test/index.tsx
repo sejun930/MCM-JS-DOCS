@@ -1,4 +1,4 @@
-import ModuleSlickHomePage from "pages/modules/slick";
+import ModuleSlickHomePage from "pages/modules/Slick";
 
 export default function TestPage() {
   return <ModuleSlickHomePage />;
