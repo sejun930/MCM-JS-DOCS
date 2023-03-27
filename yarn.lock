@@ -9154,6 +9154,17 @@ mcm-js-commons@^0.0.15:
     react "18.2.0"
     react-dom "18.2.0"
 
+mcm-js-commons@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/mcm-js-commons/-/mcm-js-commons-0.0.18.tgz#48ec91a99b1a5779a9bac0ec9e83c7fdf8c840fa"
+  integrity sha512-iGShF5ZeLWbPZwIPjfOkDhwGNAoSTdGQ6E8fwaCVCAWvDvXE2ezGB+3vCDwlfVp8H9Ukx1stQf4BlgFrLLAkGw==
+  dependencies:
+    "@emotion/react" "^11.10.6"
+    "@emotion/styled" "^11.10.6"
+    next "13.1.6"
+    react "18.2.0"
+    react-dom "18.2.0"
+
 mcm-js-dev@^0.0.16:
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.16.tgz#773e6dcda2c84b6ad500f90f192db5540213ae96"

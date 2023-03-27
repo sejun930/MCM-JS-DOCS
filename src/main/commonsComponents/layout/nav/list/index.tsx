@@ -21,7 +21,8 @@ export default function NavListPage({
     >
       {(list.length &&
         list.map((el, key) => {
-          const _href = `/modules/${el.href ?? el.name}`;
+          const _href = `/modules/${el.href || el.name}`;
+          console.log(_href);
           let name = el.name;
 
           if (search) {
@@ -45,7 +46,11 @@ export default function NavListPage({
               </_Link>
             </li>
           );
-        })) || <_PText className="empty-search-result">검색 결과 없음</_PText>}
+        })) || (
+        <li>
+          <_PText className="empty-search-result">검색 결과 없음</_PText>
+        </li>
+      )}
     </ListWrapper>
   );
 }

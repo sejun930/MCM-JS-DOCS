@@ -1,13 +1,23 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
+interface StyleTypes {
+  render?: boolean;
+}
+
 export const LayoutNavWrapper = styled.nav`
   min-width: 16%;
   max-width: 16%;
   height: auto;
   border-right: solid 3px #aa5656;
   display: flex;
+  opacity: 0;
   position: relative;
+
+  ${(props: StyleTypes) =>
+    props.render && {
+      opacity: 1,
+    }}
 
   @media ${breakPoints.mobile} {
     min-width: auto;

@@ -1,41 +1,42 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, FormEvent, MutableRefObject } from "react";
+import { ChangeEvent, MutableRefObject } from "react";
+
+import { _CloseButton } from "mcm-js-commons";
 
 export default function NavSearchPage({
   changeSearch,
   _inputRef,
   search,
+  resetSearch,
 }: {
   changeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
   _inputRef: MutableRefObject<HTMLInputElement>;
   search: string;
+  resetSearch: () => void;
 }) {
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-  console.log(search);
-
   return (
     <Wrapper className="nav-search-wrapper">
-      <Form className="nav-search-form" onSubmit={submit}>
-        <NavSearchFieldset>
-          <legend>모듈 검색</legend>
-          <SerachWrapper>
-            <SearchItems>
-              <Input
-                className="nav-search-input"
-                type="text"
-                placeholder="모듈 검색"
-                maxLength={20}
-                onChange={changeSearch}
-                ref={_inputRef}
-                hasSearch={search}
-              />
-              <ResetBtnWrapper>1</ResetBtnWrapper>
-            </SearchItems>
-          </SerachWrapper>
-        </NavSearchFieldset>
-      </Form>
+      {/* <Form className="nav-search-form" onSubmit={submit}> */}xw
+      <NavSearchFieldset>
+        <legend>모듈 검색</legend>
+        <SerachWrapper>
+          <SearchItems>
+            <Input
+              className="nav-search-input"
+              type="text"
+              placeholder="모듈 검색"
+              maxLength={20}
+              onChange={changeSearch}
+              ref={_inputRef}
+              hasSearch={search}
+            />
+            <ResetBtnWrapper>
+              <_CloseButton onClickEvent={resetSearch} />
+            </ResetBtnWrapper>
+          </SearchItems>
+        </SerachWrapper>
+      </NavSearchFieldset>
+      {/* </Form> */}
     </Wrapper>
   );
 }
@@ -51,9 +52,6 @@ export const Wrapper = styled.div`
   height: auto;
   top: 10px;
   z-index: 100;
-`;
-
-export const Form = styled.form`
   height: 30px;
 `;
 
@@ -94,7 +92,7 @@ export const Input = styled.input`
 
   ${(props: StyleTypes) =>
     props.hasSearch && {
-      minWidth: "90%",
+      minWidth: "80%",
     }}
 `;
 
@@ -102,31 +100,6 @@ export const ResetBtnWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 100%;
+  min-width: 20px;
 `;
-
-// export const CloseBtn = styled.button`
-//   /* position: absolute; */
-//   /* right: 7px; */
-//   width: 10px;
-//   height: 10px;
-//   cursor: pointer;
-
-//   :after,
-//   :before {
-//     position: absolute;
-//     content: "";
-//     width: 10px;
-//     height: 1px;
-//     background-color: black;
-//   }
-
-//   :before {
-//     transform: rotate(45deg);
-//   }
-
-//   :after {
-//     transform: rotate(-45deg);
-//   }
-// `;
