@@ -1,6 +1,26 @@
-import { Wrapper } from "./tree.styles";
+import { Wrapper, TreeWrapper, TreeInfoWrapper } from "./tree.styles";
+
+import { TreeModuleListTypes } from "src/commons/data/tree/tree.commons.data";
+import _SubTitleTemplate from "../../title/subTitle";
+import ModuleTreeListPage from "./list";
 
 // 폴더 구조 예시용 폼
-export default function _TreeForm() {
-  return <Wrapper>111</Wrapper>;
+export default function _TreeForm({
+  treeList,
+}: {
+  treeList: Array<TreeModuleListTypes>;
+}) {
+  return (
+    <Wrapper>
+      <_SubTitleTemplate
+        title="모듈 구조"
+        className="tree-subTitle"
+        remakrs="모듈의 구조와 각각의 태그들이 어떤 역할을 하고 있는지 마우스를 올려 확인해보세요."
+      />
+      <TreeWrapper>
+        <ModuleTreeListPage treeList={treeList} />
+        <TreeInfoWrapper> </TreeInfoWrapper>
+      </TreeWrapper>
+    </Wrapper>
+  );
 }

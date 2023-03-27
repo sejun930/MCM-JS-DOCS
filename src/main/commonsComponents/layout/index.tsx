@@ -1,13 +1,12 @@
 import { ReactNode, useEffect } from "react";
 import { LayoutWrapper, LayoutContentsWrapper } from "./styles";
 
-import CommonsHooksComponents from "../hooks/commonsHooks";
+import CommonsHooksComponents from "mcm-js-commons/dist/hooks";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
 import LayoutHeadPage from "./header";
 import LayoutNavPage from "./nav";
-// import _HalfDrag from "src/main/mainComponents/modules/half-drag/half-drag.container";
 
 interface IProps {
   children: ReactNode;
@@ -19,8 +18,7 @@ export default function LayoutPage(props: IProps) {
 
   useEffect(() => {
     // 현재 선택한 모듈 저장하기
-    const moduleName = getModuleNamewithJadenCase();
-    setModule(moduleName);
+    setModule(getModuleNamewithJadenCase());
   }, [getRouter()]);
 
   return (

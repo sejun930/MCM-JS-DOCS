@@ -16,6 +16,7 @@ export const exampleCommonsList: { [key: string]: ExampleCommonsTypes } = {
   Modal: modalCommonsData,
 };
 
+// 예시용 코드에 붙여지는 return 코드들
 export const exampleCommonsReturnList: {
   [key: string]: (code: string, children?: React.ReactNode | string) => string;
 } = {
