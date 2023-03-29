@@ -76,7 +76,7 @@ exports[`Main Home Page Main Home Page - Snapshot 1`] = `
               />
             </div>
             <div
-              class="_copy_ css-1xkft5v"
+              class="copy-wrapper css-1xkft5v"
             >
               <div
                 class="css-eppsv9"
@@ -107,7 +107,7 @@ exports[`Main Home Page Main Home Page - Snapshot 1`] = `
               />
             </div>
             <div
-              class="_copy_ css-1xkft5v"
+              class="copy-wrapper css-1xkft5v"
             >
               <div
                 class="css-eppsv9"

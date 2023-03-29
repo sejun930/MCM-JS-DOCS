@@ -35,10 +35,10 @@ exports[`Example Optional Snapshot 1`] = `
       class="css-nef91a"
     >
       <div
-        class="_copy_ css-wbm39"
+        class="copy-wrapper css-wbm39"
       >
         <div
-          class="_copy_text_ css-gjwso2"
+          class="copy-wrappertext_ css-gjwso2"
         >
           <pre
             class="css-1ppfysk"

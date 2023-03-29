@@ -21,10 +21,10 @@ export const CodeInfoWrapper = styled.div`
   transition: all 0.65s ease-out;
   max-height: 0px;
 
-  ._copy_ {
+  .copy-wrapper {
     border-radius: 0px;
 
-    ._copy_text_ {
+    .copy-text {
       padding-left: 0px;
     }
   }

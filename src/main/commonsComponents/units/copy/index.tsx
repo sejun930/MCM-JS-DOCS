@@ -17,6 +17,7 @@ export default function _Copy({
   isMinimum,
   offCopyAnimation,
   position,
+  copyDisable,
 }: CodeTypes) {
   const _ref = useRef() as MutableRefObject<HTMLDivElement>;
   const _textWrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -58,7 +59,7 @@ export default function _Copy({
 
   // 글자 복사하기
   const copy = () => {
-    if (isCopied) return;
+    if (isCopied || copyDisable) return;
 
     setIsCopied(true);
     _ref?.current?.addEventListener("mouseleave", leaveIconMouse);
@@ -67,14 +68,7 @@ export default function _Copy({
       if (type === "Code") {
         text = getTap(removeTag(text));
       }
-
       navigator.clipboard.writeText(text);
-      // .then(() => {
-      //   console.log("복사 완료");
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
     }
   };
 
@@ -89,30 +83,35 @@ export default function _Copy({
   // 코드를 렌더하고 있는지?
   const isCode = type === "Code";
 
+  console.log(text);
   return (
     <CopyWrapper
       onMouseDown={(!onlyClickButton && copy) || undefined}
-      className={getAllComponentsClassName("_copy_", className)}
+      className={getAllComponentsClassName("copy-wrapper", className)}
       ref={_ref}
       isCopied={isCopied}
       offCopyAnimation={offCopyAnimation}
       isCode={isCode}
     >
-      <CopyText ref={_textWrapperRef} className="_copy_text_">
+      <CopyText ref={_textWrapperRef} className="copy-text">
         {/* 코드용과 텍스트용 분할 렌더 */}
         {type === "Code" ? (
-          <Pre>
+          <Pre className="copy-code-list">
             <code
+              className="copy-code"
               dangerouslySetInnerHTML={{ __html: getTap(showText || text) }}
             />
           </Pre>
         ) : (
-          <_PText className="_copy_text_">{showText || text}</_PText>
+          <_PText className="copy-contents">{showText || text}</_PText>
         )}
       </CopyText>
-      <CopyButton isCode={isCode} textPosition={textPosition}>
-        <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
-      </CopyButton>
+
+      {!copyDisable && (
+        <CopyButton isCode={isCode} textPosition={textPosition}>
+          <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
+        </CopyButton>
+      )}
     </CopyWrapper>
   );
 }
