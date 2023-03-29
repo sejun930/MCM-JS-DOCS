@@ -9,4 +9,5 @@ export interface CodeTypes {
   isMinimum?: boolean; // 복사 아이콘만 출력 (default : false)
   offCopyAnimation?: boolean; // 복사 애니메이션 끄기 (default : false)
   position?: "Top" | "Center" | "Bottom"; // 복사 글자가 위치 조정 (default : "Center")
+  copyDisable?: boolean; // copy 기능 해제 여부 (deafult : false)
 }

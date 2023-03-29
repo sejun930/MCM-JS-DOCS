@@ -4,6 +4,9 @@ export interface TreeModuleListTypes {
   tag: string;
   class: string;
   depth: number;
+  //   info : {
+
+  //   }
 }
 
 export const treeModuleList: { [key: string]: Array<TreeModuleListTypes> } = {

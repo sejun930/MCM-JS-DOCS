@@ -17,4 +17,5 @@ export const TreeWrapper = styled.div`
 
 export const TreeInfoWrapper = styled.div`
   padding: 1rem;
+  min-width: 40%;
 `;

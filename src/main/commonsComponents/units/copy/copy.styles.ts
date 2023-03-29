@@ -24,6 +24,7 @@ export const CopyWrapper = styled.div`
     props.isCode && {
       backgroundColor: "#333333",
       paddingTop: "1rem",
+      height: "100%",
     }}
 
   .hide {

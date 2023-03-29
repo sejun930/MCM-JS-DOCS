@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { NavListTypes } from "../nav.data";
-import { _Link, _SpanText, _PText } from "mcm-js-commons";
+import { _Link, _PText, _SpanTextWithHtml } from "mcm-js-commons";
 
 export default function NavListPage({
   list,
@@ -42,7 +42,7 @@ export default function NavListPage({
           return (
             <li key={`tap-name-${el.name}-${key}`}>
               <_Link href={_href}>
-                <_SpanText dangerouslySetInnerHTML={name}> </_SpanText>
+                <_SpanTextWithHtml dangerouslySetInnerHTML={name} />
               </_Link>
             </li>
           );

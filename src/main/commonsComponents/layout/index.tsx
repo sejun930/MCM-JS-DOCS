@@ -1,7 +1,8 @@
 import { ReactNode, useEffect } from "react";
 import { LayoutWrapper, LayoutContentsWrapper } from "./styles";
 
-import CommonsHooksComponents from "mcm-js-commons/dist/hooks";
+import CommonsHooksComponents from "../hooks/commonsHooks";
+// import CommonsHooksComponents from "mcm-js-commons/dist/hooks";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
