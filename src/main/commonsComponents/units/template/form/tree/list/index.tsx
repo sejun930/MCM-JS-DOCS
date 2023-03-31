@@ -1,18 +1,29 @@
-import styled from "@emotion/styled";
+import { TreeListWrapper } from "./list.styles";
 
 import _Copy from "src/main/commonsComponents/units/copy";
-import { TreeModuleListTypes } from "src/commons/data/tree/tree.commons.data";
+import { TreeIProps } from "..";
+
+declare const window: typeof globalThis & {
+  selectTree: (i: number) => void;
+};
 
 export default function ModuleTreeListPage({
   treeList,
   selectTree,
-}: {
-  treeList: Array<TreeModuleListTypes>;
-  selectTree: (num: number) => void;
-}) {
-  const getList = () => {
-    return treeList.reduce((acc, cur, i) => {
-      let str = `<code style="--left : ${cur.depth}" onclick=${selectTree(1)}>`;
+  select,
+}: TreeIProps) {
+  const getList = (): string => {
+    return treeList.reduce((acc, cur, i): string => {
+      if (typeof window !== "undefined")
+        window.selectTree = function (i: number) {
+          selectTree(i);
+        };
+
+      let str: string = `<code style="--left : ${
+        cur.depth
+      }" onmouseover="selectTree(${i})"}
+        class="${(select === i && "select-tree") || ""}"
+      >`;
       str += `${
         (cur.depth && "<span>∟</span> ") || ""
       }<<span class='darkBlue'>${
@@ -27,8 +38,6 @@ export default function ModuleTreeListPage({
     }, "");
   };
 
-  console.log(getList());
-
   return (
     <TreeListWrapper>
       <_Copy type="Code" text={getList()} className="tree-list" copyDisable />
@@ -36,44 +45,3 @@ export default function ModuleTreeListPage({
     </TreeListWrapper>
   );
 }
-
-export const TreeListWrapper = styled.div`
-  width: 60%;
-  height: 100%;
-  background-color: #eeeeee;
-  border-radius: 8px 0px 0px 8px;
-  overflow: auto;
-
-  .tree-list {
-    border-radius: 5px 0px 0px 5px;
-    cursor: default;
-
-    .copy-text {
-      height: 100%;
-      width: 100%;
-
-      .copy-code-list {
-        width: fit-content;
-
-        .copy-code {
-          display: block;
-          cursor: pointer;
-
-          code {
-            display: block;
-            --left: 0;
-            padding-left: calc(var(--left) * 20px);
-
-            :hover {
-              background-color: white;
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const TreeListItems = styled.ul`
-  padding: 1rem;
-`;
