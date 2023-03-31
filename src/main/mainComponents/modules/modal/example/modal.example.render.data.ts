@@ -98,7 +98,10 @@ export const modalExampleList: Array<ExampleIProps> = [
     contents: [
       {
         remakrs: "닫기 버튼을 사용하지 않을 수도 있습니다.",
-        addProps: { ...modalExampleInitProps, hideCloseButton: true },
+        addProps: {
+          ...modalExampleInitProps,
+          hideCloseButton: true,
+        },
         info: {
           buttonName: "Open Hide Close Button Modal",
         },
@@ -122,7 +125,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         addProps: {
           ...modalExampleInitProps,
           closeButtonInfo: {
-            buttonSize: "25px",
+            buttonSize: "35px",
           },
         },
         info: {

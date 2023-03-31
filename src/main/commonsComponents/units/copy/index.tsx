@@ -83,7 +83,6 @@ export default function _Copy({
   // 코드를 렌더하고 있는지?
   const isCode = type === "Code";
 
-  console.log(text);
   return (
     <CopyWrapper
       onMouseDown={(!onlyClickButton && copy) || undefined}

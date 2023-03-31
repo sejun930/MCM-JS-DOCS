@@ -10,12 +10,7 @@ export const TreeWrapper = styled.div`
   margin-top: 30px;
   border: solid 1px #777777;
   width: 100%;
-  min-height: 200px;
+  height: 300px;
   border-radius: 10px;
   position: relative;
-`;
-
-export const TreeInfoWrapper = styled.div`
-  padding: 1rem;
-  min-width: 40%;
 `;

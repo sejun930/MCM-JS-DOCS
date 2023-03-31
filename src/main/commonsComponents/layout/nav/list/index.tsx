@@ -22,7 +22,6 @@ export default function NavListPage({
       {(list.length &&
         list.map((el, key) => {
           const _href = `/modules/${el.href || el.name}`;
-          console.log(_href);
           let name = el.name;
 
           if (search) {
