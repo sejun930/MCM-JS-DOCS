@@ -19,32 +19,22 @@ export default function ModuleTreeDetailPage({
   // 현재 선택된 정보 가져오기
   const detailInfo = treeList[select];
 
-  // const parentsTag = getParents();
-
   let parentsInfo: Partial<TreeModuleListTypes> = {};
   let parentIdx = -1;
 
   if (treeList.length && detailInfo?.depth) {
-    const filterArr = treeList.filter(
-      (el) => detailInfo?.depth - 1 === el.depth
-    );
-    console.log(filterArr);
-    // treeList.forEach((el, i) => {
-    //   if (detailInfo?.depth - 1 === el.depth) {
-    //     if (!parentsInfo?.class && parentIdx === -1) {
-    //       parentsInfo = el;
-    //       parentIdx = i;
-    //     }
-    //   }
-  }
+    const filterArr = treeList.slice(0, select + 1).filter((el, i) => {
+      if (detailInfo?.depth - 1 === el.depth) {
+        parentIdx = i;
+        return true;
+      }
+      return false;
+    });
 
-  // 상위 태그 구하기
-  // const getParents = () => {
-  //   const parents = treeList.filter(
-  //     (el, i) => el.depth === detailInfo?.depth - 1 && select > i
-  //   );
-  //   return parents.at(-1);
-  // };
+    if (filterArr.at(-1)?.class) {
+      parentsInfo = filterArr?.at(-1) || {};
+    }
+  }
 
   return (
     <Wrapper>

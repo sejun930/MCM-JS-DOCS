@@ -6,8 +6,8 @@ interface StyleTypes {
 }
 
 export const LayoutNavWrapper = styled.nav`
-  min-width: 16%;
-  max-width: 16%;
+  min-width: 15%;
+  /* max-width: 20%; */
   height: auto;
   border-right: solid 3px #aa5656;
   display: flex;
