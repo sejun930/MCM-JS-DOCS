@@ -11,7 +11,8 @@ export const Wrapper = styled.main`
   padding: 3rem 4rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  /* width: 100%; */
+  min-width: 85%;
 
   // 코드에 관한 색상 스타일 지정
   code {

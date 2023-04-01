@@ -29,6 +29,8 @@ export const DetailWrapper = styled.div`
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+    background-color: gainsboro;
+    border-radius: 0px 0px 10px 0px;
 
     code {
       margin-left: 6px;

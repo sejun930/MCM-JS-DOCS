@@ -13,7 +13,7 @@ export default function _TreeForm({
   treeList: Array<TreeModuleListTypes>;
 }) {
   // 선택한 데이터
-  const [select, setSelect] = useState<number>(2);
+  const [select, setSelect] = useState<number>(0);
 
   // 마우스 올렸을 경우 해당 데이터 선택하기
   const selectTree = (num: number) => {
