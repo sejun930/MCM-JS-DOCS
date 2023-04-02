@@ -16,7 +16,7 @@ export default describe("subTitle Template Page", () => {
   // h2 태그 여부 확인 및 텍스트 검증
   test("Check have h2 tag and title", () => {
     const { container } = render(
-      <_SubTitleTemplate title="사용 방법">
+      <_SubTitleTemplate title="How To Use">
         <span className="contents">내용</span>
       </_SubTitleTemplate>
     );
@@ -30,14 +30,14 @@ export default describe("subTitle Template Page", () => {
     expect(h2Ele).toBeInTheDocument();
 
     if (h2Ele) {
-      expect(h2Ele.textContent).toEqual("🔍 사용 방법"); // 타이틀 검증
+      expect(h2Ele.textContent).toEqual("🔍 How To Use"); // 타이틀 검증
     }
   });
 
   // wrapper 안에 img 태그 존재 여부 검증
   test("Check have img tag in wrapper", () => {
     const { container } = render(
-      <_SubTitleTemplate title="사용 방법">
+      <_SubTitleTemplate title="How To Use">
         <img
           alt=""
           src="/images/commons/logo/MCM_main_logo.png"

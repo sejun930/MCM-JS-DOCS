@@ -3,614 +3,1934 @@
 exports[`Modal Module Page Modal Module Page - Snapshot 1`] = `
 <div>
   <main
-    class="main-template-wrapper css-1p2vox9"
+    class="main-template-wrapper css-18hqzxs"
   >
     <section
-      class="main-title-wrapper css-j3xf1"
-    >
-      <div>
-        <h1
-          class="_title_ main-title"
-        />
-      </div>
-      <p
-        class="_p_ main-title-remarks css-pzlb5d"
-      />
-    </section>
-    <div
-      class="css-1po5u6t"
+      class="css-1bsxzru"
     >
       <div
-        class="subTitle-Template howUse-subTitle css-k59gj9"
+        class="main-title-wrapper css-qe9630"
       >
-        <div>
-          <h2
-            class="_title_ _subTitle_"
+        <h1
+          class="mcm-title-unit main-title"
+        >
+          📖 
+        </h1>
+        <p
+          class="mcm-p-unit main-title-remarks css-z401r8"
+        />
+      </div>
+      <div
+        class="css-1iyoj2o"
+      >
+        <div
+          class="subTitle-Template howUse-subTitle css-cw3rkw"
+        >
+          <div
+            class="subTitle-title-wrapper css-1knbux5"
+          >
+            <h2
+              class="mcm-title-unit subTitle"
+            >
+              🔍 How To Use
+            </h2>
+          </div>
+          <div
+            class="subTitle-line css-18klhw4"
           />
+          <p
+            class="mcm-p-unit subTitle-remarks css-z401r8"
+          >
+            기본적으로 사용할 수 있는 예시입니다.
+          </p>
         </div>
         <div
-          class="subTitle-line css-18klhw4"
-        />
-        <div
-          class="css-1m3zms3"
-          role="code-wrapper"
+          class="copy-wrapper css-di3nu0"
         >
-          <p
-            class="_p_ _howUse_example_notice_ css-pzlb5d"
-          >
-            기본값으로 사용할 수 있는 예시 코드입니다.
-          </p>
           <div
-            class="copy-wrapper css-zko0mt"
+            class="copy-text css-gjwso2"
+          >
+            <pre
+              class="copy-code-list css-1gnhfxs"
+            >
+              <code
+                class="copy-code"
+              >
+                <span
+                  class="purple"
+                >
+                  import
+                </span>
+                <span
+                  class="yellow"
+                >
+                   { 
+                </span>
+                <span
+                  class="skyblue"
+                />
+                <span
+                  class="yellow"
+                >
+                   } 
+                </span>
+                <span
+                  class="purple"
+                >
+                  from
+                </span>
+                <span
+                  class="lightOrange"
+                >
+                   "mcm-js"
+                </span>
+                <span
+                  class="lightGray"
+                >
+                  ;
+                </span>
+                
+    
+
+                <span
+                  class="purple"
+                >
+                  export default
+                </span>
+                <span
+                  class="darkBlue"
+                >
+                   function
+                </span>
+                <span
+                  class="lightYellow"
+                >
+                   ExamplePage
+                </span>
+                <span
+                  class="yellow"
+                >
+                  () {
+                </span>
+                
+  
+                <span
+                  class="purple"
+                >
+                  return (
+                </span>
+                
+    
+                <span
+                  class="skyblue"
+                >
+                  show
+                </span>
+                <span
+                  class="lightGray"
+                >
+                  =
+                </span>
+                <span
+                  class="blue"
+                >
+                  {isOpen}
+                </span>
+                 
+                <span
+                  class="skyblue"
+                >
+                  onCloseModal
+                </span>
+                <span
+                  class="lightGray"
+                >
+                  =
+                </span>
+                <span
+                  class="blue"
+                >
+                  {
+                </span>
+                <span
+                  class="lightYellow"
+                >
+                  closeModal
+                </span>
+                <span
+                  class="blue"
+                >
+                  }
+                </span>
+                
+  
+                <span
+                  class="purple"
+                >
+                  )
+                </span>
+                <span
+                  class="lightGray"
+                >
+                  ;
+                </span>
+                
+
+                <span
+                  class="yellow"
+                >
+                  }
+                </span>
+              </code>
+            </pre>
+          </div>
+          <button
+            class="css-ikbf1i"
+          >
+            <p
+              class="mcm-p-unit css-z401r8"
+            >
+              Copy
+            </p>
+          </button>
+        </div>
+      </div>
+      <div
+        class="css-29vync"
+      >
+        <div
+          class="css-503l71"
+        >
+          <div
+            class="subTitle-Template exmaple-subTitle css-cw3rkw"
           >
             <div
-              class="css-eppsv9"
+              class="subTitle-title-wrapper css-1knbux5"
             >
-              <pre
-                class="css-1quoi9q"
+              <h2
+                class="mcm-title-unit subTitle"
               >
-                <code>
-                  <span
-                    class="purple"
-                  >
-                    import
-                  </span>
-                  <span
-                    class="yellow"
-                  >
-                     { 
-                  </span>
-                  <span
-                    class="skyblue"
-                  >
-                    _
-                  </span>
-                  <span
-                    class="yellow"
-                  >
-                     } 
-                  </span>
-                  <span
-                    class="purple"
-                  >
-                    from
-                  </span>
-                  <span
-                    class="lightOrange"
-                  >
-                     "mcm-js"
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-
-                  <span
-                    class="purple"
-                  >
-                    import
-                  </span>
-                  <span
-                    class="yellow"
-                  >
-                     { 
-                  </span>
-                  <span
-                    class="skyblue"
-                  >
-                    useState
-                  </span>
-                  <span
-                    class="yellow"
-                  >
-                     } 
-                  </span>
-                  <span
-                    class="purple"
-                  >
-                    from
-                  </span>
-                   
-                  <span
-                    class="lightOrange"
-                  >
-                    "react"
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-    
-
-                  <span
-                    class="purple"
-                  >
-                    export default
-                  </span>
-                  <span
-                    class="darkBlue"
-                  >
-                     function
-                  </span>
-                  <span
-                    class="lightYellow"
-                  >
-                     ExamplePage
-                  </span>
-                  <span
-                    class="yellow"
-                  >
-                    () {
-                  </span>
-                  
-  
-                  <span
-                    class="lightGreen"
-                  >
-                    // 모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.
-                  </span>
-                  
-  
-                  <span
-                    class="darkBlue"
-                  >
-                    const
-                  </span>
-                   
-                  <span
-                    class="purple"
-                  >
-                    [
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    isOpen
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ,
-                  </span>
-                   
-                  <span
-                    class="lightYellow"
-                  >
-                    setIsOpen
-                  </span>
-                  <span
-                    class="purple"
-                  >
-                    ]
-                  </span>
-                   
-                  <span
-                    class="lightGray"
-                  >
-                    =
-                  </span>
-                   
-                  <span
-                    class="lightYellow"
-                  >
-                    useState
-                  </span>
-                  <span
-                    class="purple"
-                  >
-                    (
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    false
-                  </span>
-                  <span
-                    class="purple"
-                  >
-                    )
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-  
-  
-                  <span
-                    class="lightGreen"
-                  >
-                    // 모달을 실행하는 함수입니다.
-                  </span>
-                  
-  
-                  <span
-                    class="darkBlue"
-                  >
-                    const
-                  </span>
-                   
-                  <span
-                    class="lightYellow"
-                  >
-                    openModal
-                  </span>
-                   
-                  <span
-                    class="lightGray"
-                  >
-                    =
-                  </span>
-                   
-                  <span
-                    class="purple"
-                  >
-                    ()
-                  </span>
-                   
-                  <span
-                    class="blue"
-                  >
-                    =&gt;
-                  </span>
-                   
-                  <span
-                    class="purple"
-                  >
-                    {
-                  </span>
-                  
-    
-                  <span
-                    class="lightYellow"
-                  >
-                    setIsOpen
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    (true)
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-  
-                  <span
-                    class="purple"
-                  >
-                    }
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-
-  
-                  <span
-                    class="lightGreen"
-                  >
-                    // 모달을 종료하는 함수입니다.
-                  </span>
-                  
-  
-                  <span
-                    class="darkBlue"
-                  >
-                    const
-                  </span>
-                   
-                  <span
-                    class="lightYellow"
-                  >
-                    closeModal
-                  </span>
-                   
-                  <span
-                    class="lightGray"
-                  >
-                    =
-                  </span>
-                   
-                  <span
-                    class="purple"
-                  >
-                    ()
-                  </span>
-                   
-                  <span
-                    class="blue"
-                  >
-                    =&gt;
-                  </span>
-                   
-                  <span
-                    class="purple"
-                  >
-                    {
-                  </span>
-                  
-    
-                  <span
-                    class="lightYellow"
-                  >
-                    setIsOpen
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    (false)
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-  
-                  <span
-                    class="purple"
-                  >
-                    }
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-
-  
-                  <span
-                    class="purple"
-                  >
-                    return (
-                  </span>
-                  
-    
-                  <span
-                    class="gray"
-                  >
-                    &lt;
-                  </span>
-                  <span
-                    class="darkBlue"
-                  >
-                    div
-                  </span>
-                  <span
-                    class="gray"
-                  >
-                    &gt;
-                  </span>
-                  
-      
-                  <span
-                    class="gray"
-                  >
-                    &lt;
-                  </span>
-                  <span
-                    class="darkBlue"
-                  >
-                    button
-                  </span>
-                   
-                  <span
-                    class="skyblue"
-                  >
-                    onClick
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    =
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    {
-                  </span>
-                  <span
-                    class="lightYellow"
-                  >
-                    openModal
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    }
-                  </span>
-                  <span
-                    class="gray"
-                  >
-                    &gt;
-                  </span>
-                   
-                  <span
-                    class="lightGray"
-                  >
-                    모달 실행하기
-                  </span>
-                   
-                  <span
-                    class="gray"
-                  >
-                    &lt;
-                  </span>
-                  <span
-                    class="gray"
-                  >
-                    /
-                  </span>
-                  <span
-                    class="darkBlue"
-                  >
-                    button
-                  </span>
-                  <span
-                    class="gray"
-                  >
-                    &gt;
-                  </span>
-                  
-      
-                  <span
-                    class="gray"
-                  >
-                    &lt;
-                  </span>
-                  <span
-                    class="green"
-                  >
-                    _Modal
-                  </span>
-                   
-                  <span
-                    class="skyblue"
-                  >
-                    show
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    =
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    {isOpen}
-                  </span>
-                   
-                  <span
-                    class="skyblue"
-                  >
-                    onCloseModal
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    =
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    {
-                  </span>
-                  <span
-                    class="lightYellow"
-                  >
-                    closeModal
-                  </span>
-                  <span
-                    class="blue"
-                  >
-                    }
-                  </span>
-                   
-                  <span
-                    class="gray"
-                  >
-                    /
-                  </span>
-                  <span
-                    class="gray"
-                  >
-                    &gt;
-                  </span>
-                  
-    
-                  <span
-                    class="gray"
-                  >
-                    &lt;
-                  </span>
-                  <span
-                    class="gray"
-                  >
-                    /
-                  </span>
-                  <span
-                    class="darkBlue"
-                  >
-                    div
-                  </span>
-                  <span
-                    class="gray"
-                  >
-                    &gt;
-                  </span>
-                  
-  
-                  <span
-                    class="purple"
-                  >
-                    )
-                  </span>
-                  <span
-                    class="lightGray"
-                  >
-                    ;
-                  </span>
-                  
-
-                  <span
-                    class="yellow"
-                  >
-                    }
-                  </span>
-                </code>
-              </pre>
+                📝 Example
+              </h2>
+              <button
+                class="cmm-button-unit toggle-all-code-btn css-19ngahp"
+                role="button_click_event"
+              >
+                모든 코드 
+                열기
+              </button>
             </div>
-            <button
-              class="css-12vdm2a"
+            <div
+              class="subTitle-line css-18klhw4"
+            />
+            <p
+              class="mcm-p-unit subTitle-remarks css-z401r8"
             >
-              <img
-                class="_image_ _copyIcon_ css-msby2z"
-                src="/images/commons/icons/copy.png"
-              />
-            </button>
+              각각의 사용 예시들을 통해 어떻게 사용할 수 있는지 알아봅시다.
+            </p>
           </div>
         </div>
-      </div>
-      <div
-        class="subTitle-Template _example_template_title_ css-k59gj9"
-      >
-        <div>
-          <h2
-            class="_title_ _subTitle_"
-          />
-        </div>
-        <div
-          class="subTitle-line css-18klhw4"
-        />
         <div
           class="css-1sw7z4p"
         >
           <div
-            class="css-bqybxg"
+            class="css-1eb0wob"
           >
-            <div>
-              <h3
-                class="_title_"
-              />
-            </div>
+            <h3
+              class="mcm-title-unit"
+            >
+              기본 (Basic)
+            </h3>
             <div
-              class="css-1bzs2hq"
-            />
+              class="css-1kw0xyg"
+            >
+              <div
+                class="css-va4riu"
+                style="width: 100%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    제일 기본적으로 실행되는 모달입니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-1eb0wob"
+          >
+            <h3
+              class="mcm-title-unit"
+            >
+              애니메이션 (Animation) 적용
+            </h3>
+            <div
+              class="css-1kw0xyg"
+            >
+              <div
+                class="css-va4riu"
+                style="width: 100%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    애니메이션이 적용되어 좀더 활동적인 모달을 제공합니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+        
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              showBGAnimation
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {true}
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              showModalOpenAnimation
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {true}
+                            </span>
+                            
+      
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-1eb0wob"
+          >
+            <h3
+              class="mcm-title-unit"
+            >
+              크기 조절
+            </h3>
+            <div
+              class="css-1kw0xyg"
+            >
+              <div
+                class="css-va4riu"
+                style="width: 100%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    width 300px, height : 300px 크기의 모달을 만들 수 있습니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+        
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              styles
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="yellow"
+                            >
+                              {
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              width:
+                            </span>
+                             
+                            <span
+                              class="lightOrange"
+                            >
+                              "300px"
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ,
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              height:
+                            </span>
+                             
+                            <span
+                              class="lightOrange"
+                            >
+                              "300px"
+                            </span>
+                             
+                            <span
+                              class="yellow"
+                            >
+                              }
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+      
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <div
+                class="css-va4riu"
+                style="width: 100%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    width 30%, height : 40% 크기의 모달을 만들 수 있습니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+        
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              styles
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="yellow"
+                            >
+                              {
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              width:
+                            </span>
+                             
+                            <span
+                              class="lightOrange"
+                            >
+                              "30%"
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ,
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              height:
+                            </span>
+                             
+                            <span
+                              class="lightOrange"
+                            >
+                              "40%"
+                            </span>
+                             
+                            <span
+                              class="yellow"
+                            >
+                              }
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+      
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-1eb0wob"
+          >
+            <h3
+              class="mcm-title-unit"
+            >
+              모바일 반응형 조절
+            </h3>
+            <div
+              class="css-1kw0xyg"
+            >
+              <div
+                class="css-va4riu"
+                style="width: 100%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    모바일에서의 크기를 별도로 조절할 수도 있습니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+        
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              mobileDefaultStyles
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="yellow"
+                            >
+                              {
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              width:
+                            </span>
+                             
+                            <span
+                              class="lightOrange"
+                            >
+                              "50%"
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ,
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              height:
+                            </span>
+                             
+                            <span
+                              class="lightOrange"
+                            >
+                              "50%"
+                            </span>
+                             
+                            <span
+                              class="yellow"
+                            >
+                              }
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+      
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-13p5azg"
+          >
+            <h3
+              class="mcm-title-unit"
+            >
+              모달 닫기 관련
+            </h3>
+            <div
+              class="css-1kw0xyg"
+            >
+              <div
+                class="css-va4riu"
+                style="width: 33.333333333333336%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    닫기 버튼을 사용하지 않을 수도 있습니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              hideCloseButton
+                            </span>
+                            
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <div
+                class="css-va4riu"
+                style="width: 33.333333333333336%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    닫기에 대한 설명을 덧붙일 수 있습니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+        
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              closeMent
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="lightOrange"
+                            >
+                              "오늘 하루 보지 않기"
+                            </span>
+                            
+      
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <div
+                class="css-va4riu"
+                style="width: 33.333333333333336%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    닫기 버튼 사이즈를 조절합니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+        
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+        
+                            <span
+                              class="skyblue"
+                            >
+                              closeButtonInfo
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="yellow"
+                            >
+                              {
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              buttonSize:
+                            </span>
+                             
+                            <span
+                              class="lightOrange"
+                            >
+                              "25px"
+                            </span>
+                             
+                            <span
+                              class="yellow"
+                            >
+                              }
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                            
+      
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-1eb0wob"
+          >
+            <h3
+              class="mcm-title-unit"
+            >
+              자동 종료 (auto-close) 방지
+            </h3>
+            <div
+              class="css-1kw0xyg"
+            >
+              <div
+                class="css-va4riu"
+                style="width: 100%;"
+              >
+                <div
+                  class="css-uy3vqj"
+                >
+                  <p
+                    class="mcm-p-unit example-remarks css-z401r8"
+                  >
+                    외부 영역을 선택해도 모달이 종료되지 않습니다.
+                  </p>
+                </div>
+                <section
+                  class="css-cnt23e"
+                >
+                  <button
+                    class="css-qf2s45"
+                  >
+                    <div
+                      class="example-code-icon-button css-16pyd80"
+                    >
+                      <span
+                        class="css-1iywk7f"
+                        role="example-left-tem"
+                      >
+                        &lt;
+                      </span>
+                      <span
+                        class="css-9alhxk"
+                        role="example-fin"
+                      >
+                        /
+                      </span>
+                      <span
+                        class="css-1t3qs2b"
+                        role="example-right-tem"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                  </button>
+                  <div
+                    class="css-1iyan75"
+                  >
+                    <div
+                      class="copy-wrapper css-di3nu0"
+                    >
+                      <div
+                        class="copy-text css-gjwso2"
+                      >
+                        <pre
+                          class="copy-code-list css-1gnhfxs"
+                        >
+                          <code
+                            class="copy-code"
+                          >
+                              
+                            <span
+                              class="purple"
+                            >
+                              return (
+                            </span>
+                            
+    
+                            <span
+                              class="skyblue"
+                            >
+                              show
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {isOpen}
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              onCloseModal
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {
+                            </span>
+                            <span
+                              class="lightYellow"
+                            >
+                              closeModal
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              }
+                            </span>
+                             
+                            <span
+                              class="skyblue"
+                            >
+                              offAutoClose
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              =
+                            </span>
+                            <span
+                              class="blue"
+                            >
+                              {true}
+                            </span>
+                            
+  
+                            <span
+                              class="purple"
+                            >
+                              )
+                            </span>
+                            <span
+                              class="lightGray"
+                            >
+                              ;
+                            </span>
+                          </code>
+                        </pre>
+                      </div>
+                      <button
+                        class="css-dqlxgg"
+                      >
+                        <p
+                          class="mcm-p-unit css-z401r8"
+                        >
+                          Copy
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div
+        class="css-1iyoj2o"
+      >
+        <div
+          class="subTitle-Template tree-subTitle css-cw3rkw"
+        >
+          <div
+            class="subTitle-title-wrapper css-1knbux5"
+          >
+            <h2
+              class="mcm-title-unit subTitle"
+            >
+              📂 Module Tree
+            </h2>
+          </div>
+          <div
+            class="subTitle-line css-18klhw4"
+          />
+          <p
+            class="mcm-p-unit subTitle-remarks css-z401r8"
+          >
+            모듈의 구조 안의 각각의 태그들이 어떤 역할을 하고 있는지 태그를 클릭해보세요.
+          </p>
+        </div>
+        <div
+          class="css-1757l5l"
+        >
+          <div
+            class="tree-list-wrapper css-1hxre6i"
+          >
+            <div
+              class="copy-wrapper tree-list css-di3nu0"
+            >
+              <div
+                class="copy-text css-gjwso2"
+              >
+                <pre
+                  class="copy-code-list css-1gnhfxs"
+                >
+                  <code
+                    class="copy-code"
+                  />
+                </pre>
+              </div>
+            </div>
+          </div>
+          <div
+            class="tree-detail-wrapper css-zmto2j"
+          >
+            <div
+              class="tree-detail-empty-select css-12hwwz"
+            >
+              <p
+                class="mcm-p-unit css-z401r8"
+              >
+                태그를 클릭해보세요.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-dmqHEX iHpFyK"
+      >
+        <div
+          class="subTitle-Template props-subTitle css-cw3rkw"
+        >
+          <div
+            class="subTitle-title-wrapper css-1knbux5"
+          >
+            <h2
+              class="mcm-title-unit subTitle"
+            >
+              📤 Props List
+            </h2>
+          </div>
+          <div
+            class="subTitle-line css-18klhw4"
+          />
+          <p
+            class="mcm-p-unit subTitle-remarks css-z401r8"
+          >
+            Props들을 이용해 원하는 모듈을 조립해보세요.
+          </p>
+        </div>
+        <div
+          class="props-empty-list-wrapper"
+        />
+      </div>
+    </section>
   </main>
 </div>
 `;

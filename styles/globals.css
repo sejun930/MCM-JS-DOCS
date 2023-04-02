@@ -67,3 +67,8 @@ ol {
   margin: 0px;
   list-style: none;
 }
+
+table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}

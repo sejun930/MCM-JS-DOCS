@@ -35,7 +35,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
     <ExampleWrapper>
       <ExampleTitleWrapper>
         <_SubTitleTemplate
-          title="사용 예시"
+          title="Example"
           className="exmaple-subTitle"
           remakrs="각각의 사용 예시들을 통해 어떻게 사용할 수 있는지 알아봅시다."
           sideComponent={

@@ -11,7 +11,7 @@ exports[`subTitle Template Page Snapshot 1`] = `
       <h2
         class="mcm-title-unit subTitle"
       >
-        undefined 서브타이틀 테스트
+         서브타이틀 테스트
       </h2>
     </div>
     <div
