@@ -3,7 +3,7 @@
 exports[`Layout Nav Page Snapshot 1`] = `
 <div>
   <nav
-    class="nav-wrapper css-r34cv1"
+    class="nav-wrapper css-qfzuzk"
   >
     <article
       class="nav-list-wrapper css-jh0u6n"
@@ -12,37 +12,41 @@ exports[`Layout Nav Page Snapshot 1`] = `
         class="css-peiozq"
       >
         <div
-          class="nav-search-wrapper css-1qxmmiy"
+          class="nav-search-wrapper css-1pry9ao"
         >
-          <form
-            class="nav-search-form css-b3mgo2"
+          xw
+          <fieldset
+            class="css-1opjr3t"
           >
-            <fieldset
-              class="css-1opjr3t"
+            <legend>
+              모듈 검색
+            </legend>
+            <div
+              class="css-1rbly99"
             >
-              <legend>
-                모듈 검색
-              </legend>
               <div
-                class="css-1rbly99"
+                class="css-2gjeij"
               >
+                <input
+                  class="nav-search-input css-1lp61su"
+                  maxlength="20"
+                  placeholder="모듈 검색"
+                  type="text"
+                />
                 <div
-                  class="css-1l2zqce"
+                  class="css-iju4mq"
                 >
-                  <input
-                    class="css-1ibeljf"
-                    maxlength="20"
-                    placeholder="모듈 검색"
-                    type="text"
+                  <button
+                    class="mcm-close-button-unit css-1yn8fww"
                   />
                 </div>
               </div>
-            </fieldset>
-          </form>
+            </div>
+          </fieldset>
         </div>
       </div>
       <ul
-        class="nav-list-wrapper css-ge2mxv"
+        class="nav-list-wrapper css-2yaic1"
       >
         <li>
           <a
@@ -50,7 +54,7 @@ exports[`Layout Nav Page Snapshot 1`] = `
             href="/modules/Modal"
           >
             <span
-              class="mcm-span-unit"
+              class="mcm-span-unit css-1oteowz"
             >
               Modal
             </span>
@@ -62,7 +66,7 @@ exports[`Layout Nav Page Snapshot 1`] = `
             href="/modules/Slick"
           >
             <span
-              class="mcm-span-unit"
+              class="mcm-span-unit css-1oteowz"
             >
               Slick
             </span>

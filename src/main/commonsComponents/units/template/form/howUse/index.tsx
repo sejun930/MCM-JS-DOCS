@@ -18,7 +18,7 @@ export default function _HowUseForm({
   return (
     <Wrapper>
       <_SubTitleTemplate
-        title="사용 방법"
+        title="How To Use"
         className="howUse-subTitle"
         remakrs="기본적으로 사용할 수 있는 예시입니다."
       />

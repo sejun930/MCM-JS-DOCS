@@ -35,7 +35,7 @@ export default function _SubTitleTemplate({
     >
       <TitleWrapper className="subTitle-title-wrapper">
         <_Title titleLevel={titleLevel || "h2"} className="subTitle">
-          {`${subTitleEmoji[title]} ${title}` || ""}
+          {`${subTitleEmoji[title] || ""} ${title}` || ""}
         </_Title>
         {sideComponent && componentRender(sideComponent)}
       </TitleWrapper>

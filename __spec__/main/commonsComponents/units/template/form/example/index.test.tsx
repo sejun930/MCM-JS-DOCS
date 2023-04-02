@@ -49,7 +49,7 @@ export default describe("Example Template Page", () => {
       expect(h2Ele).toBeInTheDocument();
 
       // 사용 예시 텍스트 검증
-      expect(h2Ele.textContent).toEqual("📝 사용 예시");
+      expect(h2Ele.textContent).toEqual("📝 Example");
     }
   });
 });

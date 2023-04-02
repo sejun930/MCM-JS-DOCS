@@ -11,7 +11,7 @@ export const modalTreeList: Array<TreeModuleListTypes> = [
     tag: "div",
     class: "mcm-modal-items",
     depth: 1,
-    role: "모달 창을 나타내는 태그입니다. <br /> width, height 값으로 <b>모달의 내부 크기를 조절</b>할 수 있습니다.",
+    role: "모달 창을 나타내는 태그입니다. <br /> width, height 값으로 <b>모달의 내부 크기를 조절</b>할 수 있습니다. <br /><br /><b>styles, mobileDefaultStyles</b>가 직접 적용되는 태그입니다.",
   },
   {
     tag: "div",
@@ -35,7 +35,7 @@ export const modalTreeList: Array<TreeModuleListTypes> = [
     tag: "button",
     class: "mcm-modal-close-button",
     depth: 3,
-    role: "모달을 닫는 버튼을 나타내는 태그입니다. <br />클릭하면 <b>onCloseModal</b> 이벤트가 작동되고 <br /><b>hideCloseButton</b>가 전달되면 화면에 노출되지 않습니다. <br /><br /><b>:before, :after</b>에 직접 접근해 버튼 스타일을 변경할 수 있습니다.",
+    role: "모달을 닫는 버튼을 나타내는 태그입니다. <br />클릭하면 <b>onCloseModal</b> 이벤트가 작동되고 <br /><b>hideCloseButton</b>가 전달되면 화면에 노출되지 않습니다. <br /><br /><b>closeButtonInfo</b>로 버튼의 스타일을 지정할 수 있으며, <br /><b>:before, :after</b>에 직접 접근해 버튼 스타일을 변경할 수 있습니다.",
   },
   {
     tag: "div",

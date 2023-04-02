@@ -3,33 +3,31 @@
 exports[`Main Home Page Main Home Page - Snapshot 1`] = `
 <div>
   <main
-    class="main-template-wrapper css-1p2vox9"
+    class="main-template-wrapper css-18hqzxs"
   >
     <section
-      class="css-1k0p6w2"
+      class="css-12w58b6"
     >
-      <div>
-        <h1
-          class="_title_"
-        >
-          MCM (My Custom Modules)
-        </h1>
-      </div>
+      <h1
+        class="mcm-title-unit"
+      >
+        MCM (My Custom Modules)
+      </h1>
       <div
-        class="css-7y6usd"
+        class="css-1umslvj"
       >
         <p
-          class="_p_ css-pzlb5d"
+          class="mcm-p-unit css-z401r8"
         >
           '라이브러리를 쉽게 커스텀할 수 있게 하는 모듈을 만들어보면 어떨까?' 하는 생각에서 시작된 프로젝트입니다.
         </p>
         <p
-          class="_p_ css-pzlb5d"
+          class="mcm-p-unit css-z401r8"
         >
           실력이 부족한 개발자가 직접 만든 기능들이다 보니 이슈 발생 확률이 상당할 수도 있습니다. 😅
         </p>
         <p
-          class="_p_ css-pzlb5d"
+          class="mcm-p-unit css-z401r8"
         >
           이용중에 발생되는 버그나 사용중에 느꼈었던 개선점들을 가감없이 말씀해주시면 감사하겠습니다! 🙇
         </p>
@@ -39,12 +37,16 @@ exports[`Main Home Page Main Home Page - Snapshot 1`] = `
       class="css-1fuuxf2"
     >
       <div
-        class="subTitle-Template npmInstall css-k59gj9"
+        class="subTitle-Template npmInstall css-cw3rkw"
       >
-        <div>
+        <div
+          class="subTitle-title-wrapper css-1knbux5"
+        >
           <h2
-            class="_title_ _subTitle_"
-          />
+            class="mcm-title-unit subTitle"
+          >
+            💾 Install
+          </h2>
         </div>
         <div
           class="subTitle-line css-18klhw4"
@@ -56,7 +58,7 @@ exports[`Main Home Page Main Home Page - Snapshot 1`] = `
             MCM-js npm : 
           </b>
           <a
-            class="_a_ css-1y7ig4m"
+            class="mcm-anchor-unit css-1y7ig4m"
             href="https://www.npmjs.com/package/mcm-js"
             rel="noreferrer"
             target="_blank"
@@ -68,64 +70,64 @@ exports[`Main Home Page Main Home Page - Snapshot 1`] = `
           class="css-1kbhwo5"
         >
           <div
-            class="css-2ydrod"
+            class="css-1ivwabx"
           >
-            <div>
-              <h3
-                class="_title_"
-              />
-            </div>
+            <h3
+              class="mcm-title-unit"
+            >
+              npm
+            </h3>
             <div
-              class="copy-wrapper css-1xkft5v"
+              class="copy-wrapper css-1nugrr6"
             >
               <div
-                class="css-eppsv9"
+                class="copy-text css-gjwso2"
               >
-                <input
-                  class="copyInput"
-                  readonly=""
-                  type="text"
-                  value="npm install mcm-js"
-                />
+                <p
+                  class="mcm-p-unit copy-contents css-z401r8"
+                >
+                  npm install mcm-js
+                </p>
               </div>
               <button
-                class="css-12vdm2a"
+                class="css-fxbknv"
               >
-                <img
-                  class="_image_ _copyIcon_ css-msby2z"
-                  src="/images/commons/icons/copy.png"
-                />
+                <p
+                  class="mcm-p-unit css-z401r8"
+                >
+                  Copy
+                </p>
               </button>
             </div>
           </div>
           <div
-            class="css-2ydrod"
+            class="css-1ivwabx"
           >
-            <div>
-              <h3
-                class="_title_"
-              />
-            </div>
+            <h3
+              class="mcm-title-unit"
+            >
+              yarn
+            </h3>
             <div
-              class="copy-wrapper css-1xkft5v"
+              class="copy-wrapper css-1nugrr6"
             >
               <div
-                class="css-eppsv9"
+                class="copy-text css-gjwso2"
               >
-                <input
-                  class="copyInput"
-                  readonly=""
-                  type="text"
-                  value="yarn add mcm-js"
-                />
+                <p
+                  class="mcm-p-unit copy-contents css-z401r8"
+                >
+                  yarn add mcm-js
+                </p>
               </div>
               <button
-                class="css-12vdm2a"
+                class="css-fxbknv"
               >
-                <img
-                  class="_image_ _copyIcon_ css-msby2z"
-                  src="/images/commons/icons/copy.png"
-                />
+                <p
+                  class="mcm-p-unit css-z401r8"
+                >
+                  Copy
+                </p>
               </button>
             </div>
           </div>

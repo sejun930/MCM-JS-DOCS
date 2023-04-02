@@ -1,10 +1,12 @@
 import {
+  Wrapper,
   DetailInfoWrapper,
   DetailTitle,
   DetailTitleInfo,
+  DetailRole,
   DetailWrapper,
+  ParentsWrapper,
   EmptySelect,
-  Wrapper,
 } from "./tree.datail.styles";
 import { TreeModuleListTypes } from "src/commons/data/tree/tree.commons.data";
 
@@ -20,7 +22,7 @@ export default function ModuleTreeDetailPage({
   const detailInfo = treeList[select];
 
   let parentsInfo: Partial<TreeModuleListTypes> = {};
-  let parentIdx = -1;
+  let parentIdx = 0;
 
   if (treeList.length && detailInfo?.depth) {
     const filterArr = treeList.slice(0, select + 1).filter((el, i) => {
@@ -37,16 +39,16 @@ export default function ModuleTreeDetailPage({
   }
 
   return (
-    <Wrapper>
+    <Wrapper className="tree-detail-wrapper">
       {!detailInfo ? (
-        <EmptySelect>
-          <_PText>태그에 마우스를 올려보세요.</_PText>
+        <EmptySelect className="tree-detail-empty-select">
+          <_PText>태그를 클릭해보세요.</_PText>
         </EmptySelect>
       ) : (
-        <DetailWrapper>
+        <DetailWrapper className="tree-detail-contents-wrapper">
           <DetailInfoWrapper>
-            <DetailTitleInfo>
-              <DetailTitle>
+            <DetailTitleInfo className="tree-detail-title-wrapper">
+              <DetailTitle className="tree-detail-tag-type">
                 <_SpanText>Tag Type</_SpanText>
                 <code
                   dangerouslySetInnerHTML={{
@@ -54,7 +56,7 @@ export default function ModuleTreeDetailPage({
                   }}
                 />
               </DetailTitle>
-              <DetailTitle>
+              <DetailTitle className="tree-detail-tag-className">
                 <_SpanText>ClassName</_SpanText>
                 <code
                   dangerouslySetInnerHTML={{
@@ -63,24 +65,31 @@ export default function ModuleTreeDetailPage({
                 />
               </DetailTitle>
             </DetailTitleInfo>
-            <_PTextWithHtml
-              className="detail-info-role"
-              dangerouslySetInnerHTML={detailInfo?.role || "-"}
-            />
+            <DetailRole>
+              <_PTextWithHtml
+                className="tree-detail-info-role"
+                dangerouslySetInnerHTML={detailInfo?.role || "-"}
+              />
+            </DetailRole>
           </DetailInfoWrapper>
-          <_PText className="my-parents">
-            상위 태그 :
-            {(parentsInfo.class && (
-              <_Button onClickEvent={() => selectTree(parentIdx)}>
-                <code
-                  dangerouslySetInnerHTML={{
-                    __html: `<<b class="darkBlue">${parentsInfo.tag}</b> <span class='skyblue'>class=</span><span class='lightOrange' style="font-weight : 700">"${parentsInfo.class}"</span> />`,
-                  }}
-                />
-              </_Button>
-            )) ||
-              " - "}
-          </_PText>
+          <ParentsWrapper>
+            <_Button
+              onClickEvent={() => selectTree(parentIdx)}
+              className="tree-detail-button"
+            >
+              <_PText className="my-parents">
+                상위 태그 :
+                {(parentsInfo.class && (
+                  <code
+                    dangerouslySetInnerHTML={{
+                      __html: `<<b class="darkBlue">${parentsInfo.tag}</b> <span class='skyblue'>class=</span><span class='lightOrange' style="font-weight : 700">"${parentsInfo.class}"</span> />`,
+                    }}
+                  />
+                )) ||
+                  " - "}
+              </_PText>
+            </_Button>
+          </ParentsWrapper>
         </DetailWrapper>
       )}
     </Wrapper>

@@ -28,7 +28,7 @@ export default describe("HowUse Template Page", () => {
 
     // h2 태그 존재여부 판단
     expect(h2Ele).toBeInTheDocument();
-    expect(h2Ele.textContent).toEqual("🔍 사용 방법");
+    expect(h2Ele.textContent).toEqual("🔍 How To Use");
 
     // const codeWrapper = getByRole("code-wrapper");
   });

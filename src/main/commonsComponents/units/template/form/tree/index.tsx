@@ -1,43 +1,53 @@
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { moduleState } from "src/commons/store";
+
 import { Wrapper, TreeWrapper } from "./tree.styles";
 
-import { TreeModuleListTypes } from "src/commons/data/tree/tree.commons.data";
+import {
+  TreeModuleListTypes,
+  treeModuleList,
+} from "src/commons/data/tree/tree.commons.data";
+
 import _SubTitleTemplate from "../../title/subTitle";
 import ModuleTreeListPage from "./list";
 import ModuleTreeDetailPage from "./detail";
 
 // 폴더 구조 예시용 폼
-export default function _TreeForm({
-  treeList,
-}: {
-  treeList: Array<TreeModuleListTypes>;
-}) {
+export default function _TreeForm() {
   // 선택한 데이터
-  const [select, setSelect] = useState<number>(0);
+  const [select, setSelect] = useState<number>(5);
+  const [module] = useRecoilState(moduleState);
+
+  const list = treeModuleList[module] || [];
 
   // 마우스 올렸을 경우 해당 데이터 선택하기
   const selectTree = (num: number) => {
-    setSelect(num);
+    setSelect(num === select ? -1 : num);
   };
 
   return (
-    <Wrapper onMouseLeave={() => selectTree(-1)}>
+    <Wrapper>
       <_SubTitleTemplate
-        title="모듈 구조"
+        title="Module Tree"
         className="tree-subTitle"
-        remakrs="모듈의 구조 안의 각각의 태그들이 어떤 역할을 하고 있는지 마우스를 올려 확인해보세요."
+        remakrs="모듈의 구조 안의 각각의 태그들이 어떤 역할을 하고 있는지 태그를 클릭해보세요."
       />
-      <TreeWrapper onMouseLeave={() => selectTree(-1)}>
-        <ModuleTreeListPage
-          treeList={treeList}
-          selectTree={selectTree}
-          select={select}
-        />
-        <ModuleTreeDetailPage
-          treeList={treeList}
-          selectTree={selectTree}
-          select={select}
-        />
+      <TreeWrapper>
+        {list && (
+          <>
+            <ModuleTreeListPage
+              treeList={list}
+              selectTree={selectTree}
+              select={select}
+            />
+            <ModuleTreeDetailPage
+              treeList={list}
+              selectTree={selectTree}
+              select={select}
+            />
+          </>
+        )}
       </TreeWrapper>
     </Wrapper>
   );

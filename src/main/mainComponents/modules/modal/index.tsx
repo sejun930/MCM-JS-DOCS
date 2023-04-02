@@ -6,13 +6,13 @@ import {
   modalExampleInitProps,
 } from "./example/modal.example.render.data";
 import { modalCodeList } from "./example/modal.example.code.data";
-import { modalTreeList } from "./tree/modal.tree";
 
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
 import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
+import _PropsForm from "src/main/commonsComponents/units/template/form/props";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 export default function MyModal() {
@@ -55,7 +55,8 @@ export default function MyModal() {
           initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
-        <_TreeForm treeList={modalTreeList} />
+        <_TreeForm />
+        <_PropsForm />
       </ModulesInfoWrapper>
     </Template>
   );

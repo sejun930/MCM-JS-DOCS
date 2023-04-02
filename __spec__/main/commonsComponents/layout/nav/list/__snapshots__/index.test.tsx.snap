@@ -3,7 +3,7 @@
 exports[`Layout Nav List Page Snapshot : isSelect=false 1`] = `
 <div>
   <ul
-    class="nav-list-wrapper css-ge2mxv"
+    class="nav-list-wrapper css-2yaic1"
   >
     <li>
       <a
@@ -11,7 +11,7 @@ exports[`Layout Nav List Page Snapshot : isSelect=false 1`] = `
         href="/modules/Modal"
       >
         <span
-          class="mcm-span-unit"
+          class="mcm-span-unit css-1oteowz"
         >
           Modal
         </span>
@@ -23,7 +23,7 @@ exports[`Layout Nav List Page Snapshot : isSelect=false 1`] = `
         href="/modules/Slick"
       >
         <span
-          class="mcm-span-unit"
+          class="mcm-span-unit css-1oteowz"
         >
           Slick
         </span>
@@ -36,7 +36,7 @@ exports[`Layout Nav List Page Snapshot : isSelect=false 1`] = `
 exports[`Layout Nav List Page Snapshot : isSelect=true 1`] = `
 <div>
   <ul
-    class="nav-list-wrapper nav-list-select-wrapper css-16cbju7"
+    class="nav-list-wrapper nav-list-select-wrapper css-19gtpsr"
   >
     <li>
       <a
@@ -44,7 +44,7 @@ exports[`Layout Nav List Page Snapshot : isSelect=true 1`] = `
         href="/modules/Modal"
       >
         <span
-          class="mcm-span-unit"
+          class="mcm-span-unit css-1oteowz"
         >
           Modal
         </span>
@@ -56,7 +56,7 @@ exports[`Layout Nav List Page Snapshot : isSelect=true 1`] = `
         href="/modules/Slick"
       >
         <span
-          class="mcm-span-unit"
+          class="mcm-span-unit css-1oteowz"
         >
           Slick
         </span>

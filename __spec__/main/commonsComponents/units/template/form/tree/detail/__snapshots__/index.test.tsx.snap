@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tree Detail Page Check has Empty Wrapper 1`] = `
+<div>
+  <div
+    class="tree-detail-wrapper css-zmto2j"
+  >
+    <div
+      class="tree-detail-empty-select css-12hwwz"
+    >
+      <p
+        class="mcm-p-unit css-z401r8"
+      >
+        태그를 클릭해보세요.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tree Detail Page Snapshot 1`] = `
+<div>
+  <div
+    class="tree-detail-wrapper css-zmto2j"
+  >
+    <div
+      class="tree-detail-contents-wrapper css-1chsacr"
+    >
+      <article
+        class="css-v03706"
+      >
+        <div
+          class="tree-detail-title-wrapper css-8xx97q"
+        >
+          <div
+            class="tree-detail-tag-type css-6eonw1"
+          >
+            <span
+              class="mcm-span-unit css-1oteowz"
+            >
+              Tag Type
+            </span>
+            <code>
+              &lt;
+              <b
+                class="darkBlue"
+              >
+                div
+              </b>
+              &gt;
+            </code>
+          </div>
+          <div
+            class="tree-detail-tag-className css-6eonw1"
+          >
+            <span
+              class="mcm-span-unit css-1oteowz"
+            >
+              ClassName
+            </span>
+            <code>
+              <b
+                class="lightOrange"
+              >
+                mcm-modal-wrapper
+              </b>
+            </code>
+          </div>
+        </div>
+        <div
+          class="css-19fvkwx"
+        >
+          <p
+            class="mcm-p-unit tree-detail-info-role css-z401r8"
+          >
+            모달 전체를 감싸는 최상위 태그입니다. 
+            <br />
+             위치 고정 및 배경을 담당하며 
+            <b>
+              모달의 배경색을 직접 제어
+            </b>
+            할 수 있습니다.
+          </p>
+        </div>
+      </article>
+      <div
+        class="css-1o2w8yl"
+      >
+        <button
+          class="cmm-button-unit tree-detail-button css-19ngahp"
+          role="button_click_event"
+        >
+          <p
+            class="mcm-p-unit my-parents css-z401r8"
+          >
+            상위 태그 :
+             - 
+          </p>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

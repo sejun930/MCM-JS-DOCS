@@ -32,18 +32,20 @@ exports[`Example Optional Snapshot 1`] = `
       </div>
     </button>
     <div
-      class="css-nef91a"
+      class="css-1iyan75"
     >
       <div
-        class="copy-wrapper css-wbm39"
+        class="copy-wrapper css-di3nu0"
       >
         <div
-          class="copy-wrappertext_ css-gjwso2"
+          class="copy-text css-gjwso2"
         >
           <pre
-            class="css-1ppfysk"
+            class="copy-code-list css-1gnhfxs"
           >
-            <code>
+            <code
+              class="copy-code"
+            >
                 
               <span
                 class="purple"
@@ -72,7 +74,7 @@ exports[`Example Optional Snapshot 1`] = `
           class="css-dqlxgg"
         >
           <p
-            class="mcm-p-unit css-pzlb5d"
+            class="mcm-p-unit css-z401r8"
           >
             Copy
           </p>

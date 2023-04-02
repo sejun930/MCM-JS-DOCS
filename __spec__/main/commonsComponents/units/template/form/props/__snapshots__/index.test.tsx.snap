@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Props Template Page Snapshot 1`] = `
+<div>
+  <div
+    class="sc-dmqHEX iHpFyK"
+  >
+    <div
+      class="subTitle-Template props-subTitle css-cw3rkw"
+    >
+      <div
+        class="subTitle-title-wrapper css-1knbux5"
+      >
+        <h2
+          class="mcm-title-unit subTitle"
+        >
+          📤 Props List
+        </h2>
+      </div>
+      <div
+        class="subTitle-line css-18klhw4"
+      />
+      <p
+        class="mcm-p-unit subTitle-remarks css-z401r8"
+      >
+        Props들을 이용해 원하는 모듈을 조립해보세요.
+      </p>
+    </div>
+    <div
+      class="props-empty-list-wrapper"
+    />
+  </div>
+</div>
+`;

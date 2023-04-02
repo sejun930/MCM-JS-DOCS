@@ -3,33 +3,37 @@
 exports[`Layout Nav Search Page Snapshot 1`] = `
 <div>
   <div
-    class="nav-search-wrapper css-1qxmmiy"
+    class="nav-search-wrapper css-1pry9ao"
   >
-    <form
-      class="nav-search-form css-b3mgo2"
+    xw
+    <fieldset
+      class="css-1opjr3t"
     >
-      <fieldset
-        class="css-1opjr3t"
+      <legend>
+        모듈 검색
+      </legend>
+      <div
+        class="css-1rbly99"
       >
-        <legend>
-          모듈 검색
-        </legend>
         <div
-          class="css-1rbly99"
+          class="css-2gjeij"
         >
+          <input
+            class="nav-search-input css-1wxelb4"
+            maxlength="20"
+            placeholder="모듈 검색"
+            type="text"
+          />
           <div
-            class="css-1l2zqce"
+            class="css-iju4mq"
           >
-            <input
-              class="nav-search-input css-1ibeljf"
-              maxlength="20"
-              placeholder="모듈 검색"
-              type="text"
+            <button
+              class="mcm-close-button-unit css-1yn8fww"
             />
           </div>
         </div>
-      </fieldset>
-    </form>
+      </div>
+    </fieldset>
   </div>
 </div>
 `;

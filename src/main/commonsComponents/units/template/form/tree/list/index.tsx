@@ -21,7 +21,7 @@ export default function ModuleTreeListPage({
 
       let str: string = `<code style="--left : ${
         cur.depth
-      }" onmouseover="selectTree(${i})"}
+      }" onclick="selectTree(${i})"}
         class="${(select === i && "select-tree") || ""}"
       >`;
       str += `${
@@ -39,7 +39,7 @@ export default function ModuleTreeListPage({
   };
 
   return (
-    <TreeListWrapper>
+    <TreeListWrapper className="tree-list-wrapper">
       <_Copy type="Code" text={getList()} className="tree-list" copyDisable />
       {/* <TreeListItems dangerouslySetInnerHTML={{ __html: getList() }} /> */}
     </TreeListWrapper>

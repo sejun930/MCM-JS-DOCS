@@ -17,7 +17,7 @@ exports[`Example Template Page Snapshot 1`] = `
           <h2
             class="mcm-title-unit subTitle"
           >
-            📝 사용 예시
+            📝 Example
           </h2>
           <button
             class="cmm-button-unit toggle-all-code-btn css-19ngahp"
@@ -31,7 +31,7 @@ exports[`Example Template Page Snapshot 1`] = `
           class="subTitle-line css-18klhw4"
         />
         <p
-          class="mcm-p-unit subTitle-remarks css-pzlb5d"
+          class="mcm-p-unit subTitle-remarks css-z401r8"
         >
           각각의 사용 예시들을 통해 어떻게 사용할 수 있는지 알아봅시다.
         </p>
@@ -59,7 +59,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 제일 기본적으로 실행되는 모달입니다.
               </p>
@@ -94,18 +94,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -174,7 +176,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -204,7 +206,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 애니메이션이 적용되어 좀더 활동적인 모달을 제공합니다.
               </p>
@@ -239,18 +241,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -356,7 +360,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -386,7 +390,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 width 300px, height : 300px 크기의 모달을 만들 수 있습니다.
               </p>
@@ -421,18 +425,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -566,7 +572,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -583,7 +589,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 width 30%, height : 40% 크기의 모달을 만들 수 있습니다.
               </p>
@@ -618,18 +624,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -763,7 +771,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -793,7 +801,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 모바일에서의 크기를 별도로 조절할 수도 있습니다.
               </p>
@@ -828,18 +836,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -973,7 +983,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -1003,7 +1013,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 닫기 버튼을 사용하지 않을 수도 있습니다.
               </p>
@@ -1038,18 +1048,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -1124,7 +1136,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -1141,7 +1153,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 닫기에 대한 설명을 덧붙일 수 있습니다.
               </p>
@@ -1176,18 +1188,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -1276,7 +1290,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -1293,7 +1307,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 닫기 버튼 사이즈를 조절합니다.
               </p>
@@ -1328,18 +1342,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -1348,6 +1364,7 @@ exports[`Example Template Page Snapshot 1`] = `
                         </span>
                         
     
+        
                         <span
                           class="skyblue"
                         >
@@ -1363,7 +1380,8 @@ exports[`Example Template Page Snapshot 1`] = `
                         >
                           {isOpen}
                         </span>
-                         
+                        
+        
                         <span
                           class="skyblue"
                         >
@@ -1389,11 +1407,12 @@ exports[`Example Template Page Snapshot 1`] = `
                         >
                           }
                         </span>
-                         
+                        
+        
                         <span
                           class="skyblue"
                         >
-                          closeButtonSize
+                          closeButtonInfo
                         </span>
                         <span
                           class="lightGray"
@@ -1401,11 +1420,40 @@ exports[`Example Template Page Snapshot 1`] = `
                           =
                         </span>
                         <span
+                          class="blue"
+                        >
+                          {
+                        </span>
+                        <span
+                          class="yellow"
+                        >
+                          {
+                        </span>
+                         
+                        <span
+                          class="skyblue"
+                        >
+                          buttonSize:
+                        </span>
+                         
+                        <span
                           class="lightOrange"
                         >
-                          "15px"
+                          "25px"
+                        </span>
+                         
+                        <span
+                          class="yellow"
+                        >
+                          }
+                        </span>
+                        <span
+                          class="blue"
+                        >
+                          }
                         </span>
                         
+      
   
                         <span
                           class="purple"
@@ -1424,7 +1472,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
@@ -1454,7 +1502,7 @@ exports[`Example Template Page Snapshot 1`] = `
               class="css-uy3vqj"
             >
               <p
-                class="mcm-p-unit example-remarks css-pzlb5d"
+                class="mcm-p-unit example-remarks css-z401r8"
               >
                 외부 영역을 선택해도 모달이 종료되지 않습니다.
               </p>
@@ -1489,18 +1537,20 @@ exports[`Example Template Page Snapshot 1`] = `
                 </div>
               </button>
               <div
-                class="css-nef91a"
+                class="css-1iyan75"
               >
                 <div
-                  class="copy-wrapper css-wbm39"
+                  class="copy-wrapper css-di3nu0"
                 >
                   <div
-                    class="copy-wrappertext_ css-gjwso2"
+                    class="copy-text css-gjwso2"
                   >
                     <pre
-                      class="css-1ppfysk"
+                      class="copy-code-list css-1gnhfxs"
                     >
-                      <code>
+                      <code
+                        class="copy-code"
+                      >
                           
                         <span
                           class="purple"
@@ -1585,7 +1635,7 @@ exports[`Example Template Page Snapshot 1`] = `
                     class="css-dqlxgg"
                   >
                     <p
-                      class="mcm-p-unit css-pzlb5d"
+                      class="mcm-p-unit css-z401r8"
                     >
                       Copy
                     </p>
