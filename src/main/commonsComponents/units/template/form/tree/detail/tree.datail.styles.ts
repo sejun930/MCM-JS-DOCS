@@ -75,6 +75,8 @@ export const DetailTitle = styled.div`
   code {
     padding-left: 30px;
     padding-right: 12px;
+    display : flex;
+    align-items : center;
   }
 `;
 

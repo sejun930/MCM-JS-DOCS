@@ -3,6 +3,7 @@ import _SubTitleTemplate from "../../title/subTitle";
 import _ExampleOptionalFormPage from "./optional";
 
 import { renderTemplateList } from "./template.example.data";
+import { Wrapper } from "../form.commons.styles";
 import {
   ExampleContentsItems,
   ExampleContentsWrapper,
@@ -10,7 +11,6 @@ import {
   ExampleListWrapper,
   ExampleResultList,
   ExampleTitleWrapper,
-  ExampleWrapper,
 } from "./template.example.styles";
 import {
   ExampleContentsTypes,
@@ -32,7 +32,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
   let _idx = 0;
 
   return (
-    <ExampleWrapper>
+    <Wrapper>
       <ExampleTitleWrapper>
         <_SubTitleTemplate
           title="Example"
@@ -114,6 +114,6 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
             </ExampleContentsItems>
           ))}
       </ExampleContentsWrapper>
-    </ExampleWrapper>
+    </Wrapper>
   );
 }

@@ -16,8 +16,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "mcm-js": "^0.0.14",
-    "mcm-js-commons": "^0.0.23",
+    "firebase": "^9.10.0",
+    "mcm-js": "^0.0.16",
+    "mcm-js-commons": "^0.0.30",
     "mcm-js-dev": "^0.0.18",
     "next": "13.1.6",
     "react": "18.2.0",

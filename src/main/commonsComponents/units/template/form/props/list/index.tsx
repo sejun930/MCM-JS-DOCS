@@ -92,11 +92,11 @@ export const Tr = styled.tr`
     width: 50%;
   }
   td:nth-of-type(3) {
-    width: 15%;
+    width: 20%;
     text-align: center;
   }
   td:nth-of-type(4) {
-    width: 15%;
+    width: 10%;
     text-align: center;
   }
 `;

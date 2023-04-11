@@ -1,7 +1,7 @@
-import styled from "styled-components";
-
 import _SubTitleTemplate from "../../title/subTitle";
 import ModulePropsListFormPage from "./list";
+
+import { Wrapper } from "../form.commons.styles";
 
 // Props Data Form 페이지
 export default function _PropsForm() {
@@ -16,8 +16,3 @@ export default function _PropsForm() {
     </Wrapper>
   );
 }
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;

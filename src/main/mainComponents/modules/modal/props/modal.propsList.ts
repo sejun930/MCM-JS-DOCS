@@ -12,7 +12,7 @@ export const modalPropsList: Array<PropsModuleListType> = [
     name: "onCloseModal",
     default: "-",
     type: "Function",
-    notice: "모달을 종료될 때 실행되는 이벤트입니다.",
+    notice: "모달을 종료할 때 실행하는 이벤트입니다.",
     isRequired: true,
   },
   {

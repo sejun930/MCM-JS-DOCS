@@ -5,12 +5,6 @@ interface StyleTypes {
   isFull?: boolean;
 }
 
-export const ExampleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* margin-top: 100px; */
-`;
-
 export const ExampleTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;

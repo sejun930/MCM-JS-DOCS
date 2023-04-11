@@ -1,9 +1,10 @@
-import styled from "@emotion/styled";
 import React from "react";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 
 import _SubTitleTemplate from "../../title/subTitle";
 import _Copy from "../../../copy";
+
+import { Wrapper } from "../form.commons.styles";
 
 // 사용 방법에 대한 폼
 export default function _HowUseForm({
@@ -26,8 +27,3 @@ export default function _HowUseForm({
     </Wrapper>
   );
 }
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
