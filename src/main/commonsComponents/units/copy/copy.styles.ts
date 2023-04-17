@@ -37,8 +37,8 @@ export const CopyWrapper = styled.div`
     transition: all 0.3s ease-out;
   }
 
-  :before,
-  :after {
+  ::before,
+  ::after {
     content: "";
     position: absolute;
     width: 0px;
@@ -58,7 +58,7 @@ export const CopyWrapper = styled.div`
       }}
   }
 
-  :before {
+  ::before {
     bottom: 0;
     left: 0;
     border-left: 2px solid #95bdff;
@@ -66,7 +66,7 @@ export const CopyWrapper = styled.div`
     border-radius: 0 0 0 4px;
   }
 
-  :after {
+  ::after {
     top: 0;
     right: 0;
     border-right: 2px solid #95bdff;

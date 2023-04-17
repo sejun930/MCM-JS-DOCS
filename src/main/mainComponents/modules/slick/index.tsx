@@ -18,8 +18,13 @@ export default function ModalExamplePage() {
   return (
     <div>
       <button onClick={openModal}> 모달 실행하기 </button>
-      <Modal show={isOpen} onCloseModal={closeModal} offAutoClose={true}>
-        <span> 닫기 버튼을 클릭해 모달을 종료하세요. </span>
+      <Modal
+        show={isOpen}
+        onCloseModal={closeModal}
+        offAutoClose={true}
+        closeMent="닫기"
+      >
+        <span> 닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다. </span>
       </Modal>
     </div>
   );

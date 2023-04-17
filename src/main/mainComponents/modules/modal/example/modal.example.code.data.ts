@@ -50,17 +50,17 @@ export const modalCodeList: ExampleCodeListTypese = {
   size300: `
         <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>styles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"300px"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"300px"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+        <span class='skyblue'>modalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"300px"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"300px"</span> <span class='yellow'>}</span><span class='blue'>}</span>
       `,
   sizePercent: `
         <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>styles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"30%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"40%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+        <span class='skyblue'>modalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"30%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"40%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
       `,
   responsive: `
         <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>mobileDefaultStyles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+        <span class='skyblue'>mobileModalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
       `,
   hideCloseButton: `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span> <span class='skyblue'>hideCloseButton</span>`,
   addCloseMent: `
@@ -73,5 +73,10 @@ export const modalCodeList: ExampleCodeListTypese = {
         <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
         <span class='skyblue'>closeButtonInfo</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>buttonSize:</span> <span class='lightOrange'>"25px"</span> <span class='yellow'>}</span><span class='blue'>}</span>
       `,
-  offAutoClose: `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span> <span class='skyblue'>offAutoClose</span><span class='lightGray'>=</span><span class='blue'>{true}</span>`,
+  offAutoClose: `
+        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
+        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
+        <span class='skyblue'>offAutoClose</span><span class='lightGray'>=</span><span class='blue'>{true}</span>
+        <span class='skyblue'>closeMent</span><span class='lightGray'>=</span><span class='lightOrange'>"닫기"</span>
+      `,
 };

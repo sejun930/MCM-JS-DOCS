@@ -35,18 +35,18 @@ export const modalTreeList: Array<TreeModuleListTypes> = [
     tag: "button",
     class: "mcm-modal-close-button",
     depth: 3,
-    role: "모달을 닫는 버튼을 나타내는 태그입니다. <br />클릭하면 <b>onCloseModal</b> 이벤트가 작동되고 <br /><b>hideCloseButton</b>가 전달되면 화면에 노출되지 않습니다. <br /><br /><b>closeButtonInfo</b>로 버튼의 스타일을 지정할 수 있으며, <br /><b>:before, :after</b>에 직접 접근해 버튼 스타일을 변경할 수 있습니다.",
+    role: "모달을 닫는 버튼을 나타내는 태그입니다. <br />클릭하면 <b>onCloseModal</b> 이벤트가 작동되고 <br /><b>hideCloseButton</b>가 전달되면 화면에 노출되지 않습니다. <br /><br /><b>closeButtonInfo</b>로 버튼의 스타일을 지정할 수 있으며, <br /><b>::before, ::after</b>에 직접 접근해 버튼 스타일을 변경할 수 있습니다.",
   },
+  // {
+  //   tag: "div",
+  //   class: "mcm-modal-layout",
+  //   depth: 2,
+  //   role: "모달의 전체 내용의 레이아웃을 담당하는 태그입니다.",
+  // },
   {
     tag: "div",
-    class: "mcm-modal-layout",
+    class: "mcm-modal-contents",
     depth: 2,
-    role: "모달의 전체 내용의 레이아웃을 담당하는 태그입니다.",
-  },
-  {
-    tag: "div",
-    class: "mcm-modal-content",
-    depth: 3,
     role: "실제로 출력될 전체 데이터를 감싸는 태그입니다. <br /><b>children</b>으로 전달되는 데이터들이 여기에 출력됩니다. <br /><br />모달 내부의 스타일을 제어할 수 있지만 <b>모달의 위치를 수정</b>하는 등의 스타일은 추천하지 않습니다.",
   },
 ];

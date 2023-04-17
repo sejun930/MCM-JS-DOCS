@@ -13,6 +13,7 @@ export const Wrapper = styled.main`
   flex-direction: column;
   /* width: 100%; */
   min-width: 85%;
+  /* z-index: 99; */
 
   // 코드에 관한 색상 스타일 지정
   code {

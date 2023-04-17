@@ -13,6 +13,7 @@ export const LayoutNavWrapper = styled.nav`
   display: flex;
   opacity: 0;
   position: relative;
+  /* z-index: 100; */
 
   ${(props: StyleTypes) =>
     props.render && {

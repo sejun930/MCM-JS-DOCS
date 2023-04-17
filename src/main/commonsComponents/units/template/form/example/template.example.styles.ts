@@ -40,6 +40,13 @@ export const ExampleContentsItems = styled.div`
     font-size: 20px;
   }
 
+  .error-form {
+    display: flex;
+    align-items: center;
+    /* color: #7b2869; */
+    font-weight: 700;
+  }
+
   ._open_module_button_ {
     padding: 0.7rem 1.5rem;
     border-radius: 10px;
@@ -79,8 +86,10 @@ export const ExampleListWrapper = styled.div`
 
   .example-remarks {
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 16px;
     color: #666666;
+    line-height: 20px;
+    letter-spacing: -0.01rem;
   }
 `;
 
@@ -89,9 +98,12 @@ export const ExampleListItems = styled.div`
   flex-direction: column;
   padding: 1.3rem 1rem;
   border: solid 1px #dddddd;
-  /* border-bottom: solid 1px #dddddd; */
 
   ._module_open_button_ {
     width: fit-content;
+  }
+
+  .mcm-error-unit {
+    margin-top: 0px;
   }
 `;

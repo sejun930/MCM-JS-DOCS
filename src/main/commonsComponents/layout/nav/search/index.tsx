@@ -4,38 +4,42 @@ import { ChangeEvent, MutableRefObject } from "react";
 import { _CloseButton } from "mcm-js-commons";
 
 export default function NavSearchPage({
-  changeSearch,
+  onChangeSearch,
   _inputRef,
   search,
   resetSearch,
+  isTextArea,
 }: {
-  changeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
   _inputRef: MutableRefObject<HTMLInputElement>;
   search: string;
   resetSearch: () => void;
+  isTextArea?: boolean;
 }) {
   return (
     <Wrapper className="nav-search-wrapper">
-      <NavSearchFieldset>
-        <legend>모듈 검색</legend>
-        <SerachWrapper>
-          <SearchItems>
-            <Input
-              className="nav-search-input"
-              type="text"
-              placeholder="모듈 검색"
-              maxLength={20}
-              onChange={changeSearch}
-              ref={_inputRef}
-              hasSearch={search}
-            />
-            <ResetBtnWrapper>
-              <_CloseButton onClickEvent={resetSearch} />
-            </ResetBtnWrapper>
-          </SearchItems>
-        </SerachWrapper>
-      </NavSearchFieldset>
-      {/* </Form> */}
+      <form onSubmit={(e) => e.preventDefault()}>
+        <NavSearchFieldset>
+          <legend>모듈 검색</legend>
+          <SerachWrapper>
+            <SearchItems>
+              <Input
+                className="nav-search-input"
+                type="text"
+                placeholder="모듈 검색"
+                maxLength={20}
+                onChange={onChangeSearch}
+                ref={_inputRef}
+                hasSearch={search}
+              />
+              <ResetBtnWrapper>
+                <_CloseButton onClickEvent={resetSearch} />
+              </ResetBtnWrapper>
+            </SearchItems>
+          </SerachWrapper>
+        </NavSearchFieldset>
+        {/* </Form> */}
+      </form>
     </Wrapper>
   );
 }

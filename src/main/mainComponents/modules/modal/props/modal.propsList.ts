@@ -16,16 +16,17 @@ export const modalPropsList: Array<PropsModuleListType> = [
     isRequired: true,
   },
   {
-    name: "styles",
+    name: "modalSize",
     default: "{}",
     type: "Object",
-    notice: "모달창의 스타일을 직접 구성할 수 있습니다.",
+    notice: "모달창의 크기(width, height)를 직접 지정할 수 있습니다.",
   },
   {
-    name: "mobileDefaultStyles",
+    name: "mobileModalSize",
     default: "{}",
     type: "Object",
-    notice: "모바일 환경에서 적용될 모달창의 스타일을 직접 구성할 수 있습니다.",
+    notice:
+      "모바일 환경에서의 모달창의 크기(width, height)를 직접 지정할 수 있습니다.",
   },
   {
     name: "showBGAnimation",

@@ -51,7 +51,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         remakrs: "width 300px, height : 300px 크기의 모달을 만들 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
-          styles: { width: "300px", height: "300px" },
+          modalSize: { width: "300px", height: "300px" },
         },
         info: {
           buttonName: "Open width 300px, height 300px Modal",
@@ -63,7 +63,7 @@ export const modalExampleList: Array<ExampleIProps> = [
         remakrs: "width 30%, height : 40% 크기의 모달을 만들 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
-          styles: { width: "30%", height: "40%" },
+          modalSize: { width: "30%", height: "40%" },
         },
         info: {
           buttonName: "Open width 30%, height 40% Modal",
@@ -81,8 +81,8 @@ export const modalExampleList: Array<ExampleIProps> = [
         remakrs: "모바일에서의 크기를 별도로 조절할 수도 있습니다.",
         addProps: {
           ...modalExampleInitProps,
-          styles: { width: "767px" },
-          mobileDefaultStyles: { width: "50%", height: "50%" },
+          modalSize: { width: "767px" },
+          mobileModalSize: { width: "50%", height: "50%" },
         },
         info: {
           buttonName: "Open Mobile Responsive Modal",
@@ -144,12 +144,37 @@ export const modalExampleList: Array<ExampleIProps> = [
         addProps: {
           ...modalExampleInitProps,
           offAutoClose: true,
+          closeMent: "닫기",
         },
         info: {
           buttonName: "Open Off Auto-close Modal",
         },
-        content: `닫기 버튼을 클릭해 모달을 종료하세요.`,
+        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
         code: modalCodeList.offAutoClose,
+      },
+    ],
+  },
+  {
+    title: "",
+    isErrorForm: true,
+    contents: [
+      {
+        remakrs:
+          "Modal 모듈을 사용하기 위해서는 'show', 'onCloseModal' props가 필수로 전달되어야 합니다. 전달되지 않는다면 모듈을 실행할 수 없으므로 해당 에러메세지가 보여진다면 props 값을 다시 확인해주세요. ",
+        addProps: {
+          ...modalExampleInitProps,
+          offAutoClose: true,
+          closeMent: "닫기",
+          // @ts-ignore
+          show: undefined,
+          // @ts-ignore
+          onCloseModal: undefined,
+        },
+        info: {
+          buttonName: "Open Off Auto-close Modal",
+        },
+        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+        code: "",
       },
     ],
   },

@@ -7,6 +7,9 @@ import {
 } from "react";
 import { useRecoilState } from "recoil";
 
+import { _Input } from "mcm-js-commons";
+import { Modal } from "mcm-js";
+
 import { moduleState } from "src/commons/store";
 import {
   LayoutNavListWrapper,
@@ -15,19 +18,16 @@ import {
 } from "./nav.styles";
 import { navList, NavListTypes } from "./nav.data";
 
-import NavSearchPage from "./search";
 import NavListPage from "./list";
 
-// 디바운싱 저장 변수
-let _debounce: ReturnType<typeof setTimeout> | number;
 export default function LayoutNavPage() {
-  const _inputRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [module] = useRecoilState(moduleState);
-
   // 모듈 검색어
   const [search, setSearch] = useState<string>("");
   // 렌더 여부
-  const [render, setRender] = useState(false);
+  const [render, setRender] = useState<boolean>(false);
+  // 모달 오픈
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!module) resetSearch();
@@ -35,19 +35,13 @@ export default function LayoutNavPage() {
     setRender(true);
   }, [module]);
 
-  const changeSearch = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    window.clearTimeout(_debounce);
-
-    _debounce = window.setTimeout(() => {
-      const { value } = target;
-      setSearch(value.trim());
-    }, 300);
+  const onChangeSearch = (text: string) => {
+    setSearch(text);
   };
 
   // 검색어 초기화
   const resetSearch = () => {
     setSearch("");
-    if (_inputRef.current) _inputRef.current.value = "";
   };
 
   // 선택한 탭의 정보
@@ -67,12 +61,20 @@ export default function LayoutNavPage() {
   return (
     <LayoutNavWrapper className="nav-wrapper" render={render}>
       <LayoutNavListWrapper className="nav-list-wrapper">
+        <Modal show={isOpen} onCloseModal={() => setIsOpen(false)}>
+          123
+        </Modal>
+
         <LayoutNavListItems>
-          <NavSearchPage
-            changeSearch={changeSearch}
-            _inputRef={_inputRef}
-            search={search}
-            resetSearch={resetSearch}
+          <_Input
+            onChangeEvent={onChangeSearch}
+            onResetEvent={() => {
+              setIsOpen(true);
+              return false;
+            }}
+            className="nav-search-input"
+            placeHolder="모듈 입력"
+            maxLength={10}
           />
           {module && module !== "404" && (
             // 선택된 탭의 정보 렌더하기

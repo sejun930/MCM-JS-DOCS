@@ -29,7 +29,5 @@ export default function _CommentsForm() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(commentsList);
-
   return <_CommentsUIForm />;
 }

@@ -8,10 +8,9 @@ import { IProps, UIProps } from "./template.example.types";
 
 export default function _ExampleForm(props: IProps) {
   // 전체 예시용 코드의 개수
-  const allLen = props.exampleList.reduce(
-    (acc, cur) => acc + cur.contents.length,
-    0
-  );
+  const allLen = props.exampleList
+    .filter((el) => !el.isErrorForm)
+    .reduce((acc, cur) => acc + cur.contents.length, 0);
 
   // 코스 on/off 정보
   const [openList, setOpenList] = useState(

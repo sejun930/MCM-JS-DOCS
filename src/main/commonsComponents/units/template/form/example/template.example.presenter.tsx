@@ -61,7 +61,12 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
               key={`${module}_${idx + 1}`}
               isFull={el.isFull ?? false}
             >
-              <_Title titleLevel="h3">{el.title}</_Title>
+              <_Title
+                titleLevel="h3"
+                className={(el.isErrorForm && "error-form") || undefined}
+              >
+                {el.isErrorForm ? "❗ 모듈 호출시 에러 발생 예시" : el.title}
+              </_Title>
               <ExampleResultList>
                 {el.contents &&
                   el.contents.length &&
@@ -73,10 +78,11 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                         ...component.addProps,
                       };
                       component.addProps = { ...addProps };
+                      component.isError = el?.isErrorForm || false;
 
-                      _idx++;
                       // 렌더될 대상의 인덱스 값 지정
                       component.info.idx = _idx;
+                      _idx++;
 
                       // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
                       component.commonsProps = { ...commonsProps };
@@ -99,13 +105,15 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                               {component.remakrs}
                             </_PText>
                           </ExampleListItems>
-                          <_ExampleOptionalFormPage
-                            code={component.code}
-                            content={component.content}
-                            isOpen={openList[_idx - 1]}
-                            changeOpenList={changeOpenList}
-                            codeIdx={_idx - 1}
-                          />
+                          {component.code && (
+                            <_ExampleOptionalFormPage
+                              code={component.code}
+                              content={component.content}
+                              isOpen={openList[_idx - 1]}
+                              changeOpenList={changeOpenList}
+                              codeIdx={_idx - 1}
+                            />
+                          )}
                         </ExampleListWrapper>
                       );
                     }
