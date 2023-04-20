@@ -1,14 +1,7 @@
-import {
-  ChangeEvent,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 import { _Input } from "mcm-js-commons";
-import { Modal } from "mcm-js";
 
 import { moduleState } from "src/commons/store";
 import {
@@ -26,8 +19,6 @@ export default function LayoutNavPage() {
   const [search, setSearch] = useState<string>("");
   // 렌더 여부
   const [render, setRender] = useState<boolean>(false);
-  // 모달 오픈
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!module) resetSearch();
@@ -61,16 +52,11 @@ export default function LayoutNavPage() {
   return (
     <LayoutNavWrapper className="nav-wrapper" render={render}>
       <LayoutNavListWrapper className="nav-list-wrapper">
-        <Modal show={isOpen} onCloseModal={() => setIsOpen(false)}>
-          123
-        </Modal>
-
         <LayoutNavListItems>
           <_Input
             onChangeEvent={onChangeSearch}
             onResetEvent={() => {
-              setIsOpen(true);
-              return false;
+              return true;
             }}
             className="nav-search-input"
             placeHolder="모듈 입력"

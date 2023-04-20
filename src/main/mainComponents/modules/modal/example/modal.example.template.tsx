@@ -26,7 +26,6 @@ export default function MyModalExample(props: ExampleContentsTypes) {
   } = props.addProps as ModalPropsType;
 
   const isError = props?.isError || false;
-  console.log(isError);
   return (
     <>
       {/* 모달 실행 버튼 */}
