@@ -108,4 +108,5 @@ export const CopyText = styled.div`
   padding: 0px 1rem;
   padding-bottom: 1rem;
   overflow-x: auto;
+  width: 100%;
 `;

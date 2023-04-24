@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { versState } from "src/commons/store";
 
 import styled from "@emotion/styled";
 import {
@@ -8,8 +10,8 @@ import {
 import { modalCodeList } from "./example/modal.example.code.data";
 
 import Template from "src/main/commonsComponents/units/template/main";
-// import _Index from "src/main/commonsComponents/units/index";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
+import _VersionForm from "src/main/commonsComponents/units/template/form/version";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
 import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
@@ -20,6 +22,7 @@ import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHook
 export default function MyModal() {
   // 모달을 오픈할 show state (true일 때 모달 오픈)
   const { getAllExampleComponentLength } = CommonsHooksComponents();
+  const [vers] = useRecoilState(versState);
 
   const [isShow, setIsShow] = useState(
     new Array(getAllExampleComponentLength(modalExampleList)).fill(false)
@@ -44,22 +47,25 @@ export default function MyModal() {
   // 예시용 컴포넌트로 전달되는 props
   const commonsProps = { isShow, openModal, closeModal };
 
+  console.log(modalCodeList[vers].basic, vers);
+
   return (
     <Template>
       <ModulesInfoWrapper>
         <_MainTitleTemplate />
+        {/* <_VersionForm /> */}
         <_HowUseForm
-          code={modalCodeList.basic}
+          codeInfo={modalCodeList}
           exmapleContents="기본 모달 페이지입니다."
         />
-        <_ExampleForm
+        {/* <_ExampleForm
           exampleList={modalExampleList}
           initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
         <_TreeForm />
         <_PropsForm />
-        <_CommentsForm />
+        <_CommentsForm /> */}
       </ModulesInfoWrapper>
     </Template>
   );

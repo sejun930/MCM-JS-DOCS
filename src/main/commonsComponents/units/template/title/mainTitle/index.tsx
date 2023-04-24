@@ -3,7 +3,7 @@ import { mouduleRemarksList } from "./data";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
-import { _PText, _Title } from "mcm-js-commons";
+import { _PTextWithHtml, _Title } from "mcm-js-commons";
 
 export default function _MainTitleTemplate() {
   const [module] = useRecoilState(moduleState);
@@ -11,9 +11,10 @@ export default function _MainTitleTemplate() {
   return (
     <Wrapper className="main-title-wrapper">
       <_Title className="main-title">📖 {module}</_Title>
-      <_PText className="main-title-remarks">
-        {mouduleRemarksList[module]}
-      </_PText>
+      <_PTextWithHtml
+        className="main-title-remarks"
+        dangerouslySetInnerHTML={mouduleRemarksList[module]}
+      />
     </Wrapper>
   );
 }
@@ -23,10 +24,14 @@ export const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
   gap: 10px 0px;
-  /* padding-bottom: 120px; */
 
   .main-title {
     display: flex;
     align-items: center;
+  }
+
+  .main-title-remarks {
+    line-height: 28px;
+    letter-spacing: -0.02rem;
   }
 `;

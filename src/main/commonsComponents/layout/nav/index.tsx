@@ -21,18 +21,13 @@ export default function LayoutNavPage() {
   const [render, setRender] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!module) resetSearch();
+    if (!module) setSearch("");
 
     setRender(true);
   }, [module]);
 
   const onChangeSearch = (text: string) => {
     setSearch(text);
-  };
-
-  // 검색어 초기화
-  const resetSearch = () => {
-    setSearch("");
   };
 
   // 선택한 탭의 정보
@@ -55,12 +50,11 @@ export default function LayoutNavPage() {
         <LayoutNavListItems>
           <_Input
             onChangeEvent={onChangeSearch}
-            onResetEvent={() => {
-              return true;
-            }}
             className="nav-search-input"
             placeHolder="모듈 입력"
             maxLength={10}
+            delay={300}
+            value={search}
           />
           {module && module !== "404" && (
             // 선택된 탭의 정보 렌더하기

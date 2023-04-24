@@ -28,10 +28,14 @@ export default function CommonsHooksComponents() {
 
   // 주소 query 끝 제이든 케이스 리턴하기
   const getModuleNamewithJadenCase = (): string => {
-    let moduleName = router.pathname.split("/").at(-1);
+    let moduleName = router.asPath
+      .split("/")
+      .filter((el) => el)
+      .at(-1);
 
     if (moduleName) {
       moduleName = moduleName[0].toUpperCase() + moduleName.substring(1);
+
       return moduleName;
     }
     return "";

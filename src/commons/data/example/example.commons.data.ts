@@ -12,9 +12,10 @@ export interface ExampleCommonsTypes {
 }
 
 // 예시용 코드에 import될 추가 코드들
-export const exampleCommonsList: { [key: string]: ExampleCommonsTypes } = {
-  Modal: modalCommonsData,
-};
+export const exampleCommonsList: { [key: string]: Array<ExampleCommonsTypes> } =
+  {
+    Modal: modalCommonsData,
+  };
 
 // 예시용 코드에 붙여지는 return 코드들
 export const exampleCommonsReturnList: {

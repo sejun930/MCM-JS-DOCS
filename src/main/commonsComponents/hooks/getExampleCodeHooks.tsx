@@ -1,7 +1,8 @@
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { moduleState, versState } from "src/commons/store";
 
 import {
+  ExampleCommonsTypes,
   exampleCommonsList,
   exampleCommonsReturnList,
 } from "src/commons/data/example/example.commons.data";
@@ -11,12 +12,17 @@ import React from "react";
 
 export default function getExampleCodeComponnet() {
   const [module] = useRecoilState(moduleState);
-  const commonsInfo = exampleCommonsList[module];
+  const [vers] = useRecoilState(versState);
+
+  const getCommonsInfo: ExampleCommonsTypes[] =
+    exampleCommonsList[module || "Modal"];
+  const commonsInfo: ExampleCommonsTypes = getCommonsInfo[vers || 0];
 
   // 해당 모듈의 이름으로 호출하는 코드 출력
   const getExampleCode = (
     code: string,
-    children: React.ReactNode | string
+    children: React.ReactNode | string,
+    idx?: number
   ): string => {
     let str = "";
     str += `<span class='purple'>import</span>`;
