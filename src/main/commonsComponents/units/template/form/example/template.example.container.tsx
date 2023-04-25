@@ -4,9 +4,12 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 
 import { moduleState } from "src/commons/store";
+// import { versState } from "src/commons/store";
 import { IProps, UIProps } from "./template.example.types";
 
 export default function _ExampleForm(props: IProps) {
+  const [module] = useRecoilState(moduleState);
+
   // 전체 예시용 코드의 개수
   const allLen = props.exampleList
     .filter((el) => !el.isErrorForm)
@@ -16,7 +19,6 @@ export default function _ExampleForm(props: IProps) {
   const [openList, setOpenList] = useState(
     Array.from(new Array(allLen), () => false)
   );
-  const [module] = useRecoilState(moduleState);
 
   const changeOpenList = (idx: number, list?: Array<boolean>) => {
     const _list = [...openList];

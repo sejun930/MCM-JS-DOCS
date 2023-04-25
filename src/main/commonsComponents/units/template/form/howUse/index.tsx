@@ -47,7 +47,7 @@ export default function _HowUseForm({
             </Tap>
           ))}
         </TapWrapper>
-        {codeInfo[vers].basic && (
+        {codeInfo[vers].basic !== undefined && (
           <_Copy
             text={getExampleCode(codeInfo[vers].basic, exmapleContents, vers)}
             type="Code"

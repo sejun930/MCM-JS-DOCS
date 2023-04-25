@@ -10,32 +10,27 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   {
     code: `
   <span class='lightGreen'>// 모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.</span>
-  <span class='darkBlue'>const</span> <span class='purple'>[</span><span class='blue'>isOpen</span><span class='lightGray'>,</span> <span class='lightYellow'>setIsOpen</span><span class='purple'>]</span> <span class='lightGray'>=</span> <span class='lightYellow'>useState</span><span class='purple'>(</span><span class='blue'>false</span><span class='purple'>)</span><span class='lightGray'>;</span>
+  <span class='darkBlue'>const</span> <span class='deepPurple'>[</span><span class='blue'>isOpen</span><span class='lightGray'>,</span> <span class='lightYellow'>setIsOpen</span><span class='deepPurple'>]</span> <span class='lightGray'>=</span> <span class='lightYellow'>useState</span><span class='deepPurple'>(</span><span class='blue'>false</span><span class='deepPurple'>)</span><span class='lightGray'>;</span>
   
   <span class='lightGreen'>// 모달을 실행하는 함수입니다.</span>
-  <span class='darkBlue'>const</span> <span class='lightYellow'>openModal</span> <span class='lightGray'>=</span> <span class='purple'>()</span> <span class='blue'>=></span> <span class='purple'>{</span>
+  <span class='darkBlue'>const</span> <span class='lightYellow'>openModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
     <span class='lightYellow'>setIsOpen</span><span class='blue'>(true)</span><span class='lightGray'>;</span>
-  <span class='purple'>}</span><span class='lightGray'>;</span>
+  <span class='deepPurple'>}</span><span class='lightGray'>;</span>
   
   <span class='lightGreen'>// 모달을 종료하는 함수입니다.</span>
-  <span class='darkBlue'>const</span> <span class='lightYellow'>closeModal</span> <span class='lightGray'>=</span> <span class='purple'>()</span> <span class='blue'>=></span> <span class='purple'>{</span>
+  <span class='darkBlue'>const</span> <span class='lightYellow'>closeModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
     <span class='lightYellow'>setIsOpen</span><span class='blue'>(false)</span><span class='lightGray'>;</span>
-  <span class='purple'>}</span><span class='lightGray'>;</span>
+  <span class='deepPurple'>}</span><span class='lightGray'>;</span>
   `,
     import: { react: ["useState"] },
   },
   {
     code: `
-  <span class='lightGreen'>// 모달을 실행시키는 함수입니다. </span>
-  <span class='darkBlue'>const</span> <span class="lightYellow">openModal</span> <span class='lightGray'>=</span> <span class='purple'>()</span> <span class='blue'>=></span> <span class='purple'>{</span>
-    <span class='blue'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='blue'>(</span><span class='yellow'>{</span> <span class='lightYellow'>onCloseModal</span> <span class='skyblue'>:</span> <span class='lightYellow'>closeModal</span> <span class='yellow'>}</span><span class='blue'>)</span>
-  <span class='purple'>}</span><span class='lightGray'>;</span>
-
-  <span class='lightGreen'>// 모달을 종료시킬 수 있는 함수입니다. 해당 함수가 없어도 모달을 종료시킬 수 있습니다. </span>
-  <span class='darkBlue'>const</span> <span class="lightYellow">closeModal</span> <span class='lightGray'>=</span> <span class='purple'>()</span> <span class='blue'>=></span> <span class='purple'>{</span>
-    <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달이 종료됩니다."</span><span class='blue'>)</span>
-    <span class='blue'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>()</span>
-  <span class='purple'>}</span><span class='lightGray'>;</span>
+  <span class='lightGreen'>// 모달이 종료될 때 실행되는 함수입니다. 해당 함수가 없어도 모달을 종료시킬 수 있습니다. </span>
+  <span class='darkBlue'>const</span> <span class="lightYellow">closeModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
+    <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달이 종료됩니다."</span><span class='blue'>)</span></span><span class='lightGray'>;</span>
+    <span class='blue'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>()</span></span><span class='lightGray'>;</span>
+  <span class='deepPurple'>}</span><span class='lightGray'>;</span>
     `,
   },
 ];
@@ -44,13 +39,18 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
 export const modalReturnCommonsData = (
   code: string,
   text?: React.ReactNode | string
-): string => {
-  return `<span><</span><span class='darkBlue'>div</span><span>></span>
+): Array<string> => {
+  return [
+    `<span><</span><span class='darkBlue'>div</span><span>></span>
       <span><</span><span class='darkBlue'>button</span> <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>openModal</span><span class='blue'>}</span><span>></span> <span class='lightGray'>모달 실행하기</span> <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>
       <span><</span><span class='green'>Modal</span> ${code}<span>></span>
         <span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>
       <span><</span><span>/</span><span class='green'>Modal</span><span>></span>
-    <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>`;
+    <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>`,
+    `<span><</span><span class='darkBlue'>button</span> <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span><span class='deepPurple'>{</span> ${code} <span class='deepPurple'>}</span><span class='yellow'>)</span><span class='blue'>}</span><span>></span>
+      <span class='lightGray'>모달 실행하기</span> 
+    <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
+  ];
 };
 
 // Modal 각각의 예시 코드를 저장하는 객체
@@ -100,6 +100,6 @@ export const modalCodeList: Array<ExampleCodeListTypese> = [
   },
   {
     title: "Use in Function",
-    basic: "12312",
+    basic: `<span class="lightYellow">onCloseModal</span> <span class='lightGray'>:</span> <span class="lightYellow">closeModal</span>`,
   },
 ];

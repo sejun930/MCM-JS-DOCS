@@ -1,6 +1,9 @@
 import { CodeInfoWrapper, OptionalWrapper, Wrapper } from "./optional.styles";
 import React, { useEffect, useState } from "react";
 
+import { useRecoilState } from "recoil";
+import { versState } from "src/commons/store";
+
 import _ExampleOptionalCodeIconPage from "./code";
 import _Copy from "src/main/commonsComponents/units/copy";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
@@ -21,6 +24,7 @@ export default function _ExampleOptionalFormPage({
 }) {
   // 코드 보기 및 가리기
   const [showCode, setShowCode] = useState(false);
+  const [vers] = useRecoilState(versState);
   const { getExampleCode, getReturn, getCommonsReturn } =
     getExampleCodeComponnet();
 
@@ -42,9 +46,9 @@ export default function _ExampleOptionalFormPage({
       </OptionalWrapper>
       <CodeInfoWrapper showCode={showCode}>
         <_Copy
-          text={getExampleCode(code, content)}
+          text={getExampleCode(code, content, vers || 0)}
           type="Code"
-          showText={getReturn(getCommonsReturn(code, content))}
+          showText={getReturn(getCommonsReturn(code, content, vers || 0))}
           position="Top"
         />
       </CodeInfoWrapper>

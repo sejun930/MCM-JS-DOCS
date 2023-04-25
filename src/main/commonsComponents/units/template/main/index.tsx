@@ -23,7 +23,12 @@ export const Wrapper = styled.main`
 
     .purple {
       // 보라색 : import, export, from
-      color: #be6db7;
+      color: #cb86b9;
+    }
+
+    .deepPurple {
+      // 진보라색 : state, function
+      color: #de6db7;
     }
 
     .lightYellow {
@@ -38,10 +43,8 @@ export const Wrapper = styled.main`
 
     .darkBlue {
       // 진한 파란색 : function, const, 태그이름
-      /* color: #4d77ff; */
       /* color: #537fe7; */
-      /* color: #3c79f5; */
-      color: #537fe7;
+      color: #5e8fe9;
     }
 
     .blue {
@@ -49,9 +52,18 @@ export const Wrapper = styled.main`
       color: #009eff;
     }
 
+    .blue2 {
+      color: #70a9ff;
+    }
+
+    .blue3 {
+      color: #70c0ff;
+    }
+
     .skyblue {
-      // 스카이블루
-      color: #89c4e1;
+      // 스카이블루 : 라이브러리 및 속성
+      /* color: #89c4e1; */
+      color: #99e1f0;
     }
 
     .lightOrange {

@@ -25,7 +25,7 @@ export default function MyModal() {
   const [vers] = useRecoilState(versState);
 
   const [isShow, setIsShow] = useState(
-    new Array(getAllExampleComponentLength(modalExampleList)).fill(false)
+    new Array(getAllExampleComponentLength(modalExampleList())).fill(false)
   );
 
   // 버튼 클릭 시 모달 오픈
@@ -47,8 +47,6 @@ export default function MyModal() {
   // 예시용 컴포넌트로 전달되는 props
   const commonsProps = { isShow, openModal, closeModal };
 
-  console.log(modalCodeList[vers].basic, vers);
-
   return (
     <Template>
       <ModulesInfoWrapper>
@@ -58,11 +56,12 @@ export default function MyModal() {
           codeInfo={modalCodeList}
           exmapleContents="기본 모달 페이지입니다."
         />
-        {/* <_ExampleForm
-          exampleList={modalExampleList}
+        <_ExampleForm
+          exampleList={modalExampleList(vers)}
           initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
+        {/* 
         <_TreeForm />
         <_PropsForm />
         <_CommentsForm /> */}
