@@ -1,3 +1,7 @@
+import { useRecoilState } from "recoil";
+import { moduleState } from "src/commons/store";
+import { versState } from "src/commons/store";
+
 import { _Button, _Title, _PText } from "mcm-js-commons";
 import _SubTitleTemplate from "../../title/subTitle";
 import _ExampleOptionalFormPage from "./optional";
@@ -22,13 +26,15 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
   const {
     exampleList,
     initProps,
-    module,
     commonsProps,
     openList,
     changeOpenList,
     isOneOpen,
     allLen,
   } = props;
+  const [module] = useRecoilState(moduleState);
+  const [vers] = useRecoilState(versState);
+
   let _idx = 0;
 
   return (
@@ -107,7 +113,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                           </ExampleListItems>
                           {component.code && (
                             <_ExampleOptionalFormPage
-                              code={component.code}
+                              code={component.code[vers]}
                               content={component.content}
                               isOpen={openList[_idx - 1]}
                               changeOpenList={changeOpenList}

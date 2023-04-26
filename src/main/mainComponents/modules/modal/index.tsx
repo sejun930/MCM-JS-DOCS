@@ -25,7 +25,7 @@ export default function MyModal() {
   const [vers] = useRecoilState(versState);
 
   const [isShow, setIsShow] = useState(
-    new Array(getAllExampleComponentLength(modalExampleList())).fill(false)
+    new Array(getAllExampleComponentLength(modalExampleList(vers))).fill(false)
   );
 
   // 버튼 클릭 시 모달 오픈
@@ -53,7 +53,7 @@ export default function MyModal() {
         <_MainTitleTemplate />
         {/* <_VersionForm /> */}
         <_HowUseForm
-          codeInfo={modalCodeList}
+          codeInfo={modalCodeList(vers)}
           exmapleContents="기본 모달 페이지입니다."
         />
         <_ExampleForm

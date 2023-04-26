@@ -15,7 +15,7 @@ export interface ExampleContentsTypes {
   addProps?: ModalPropsType; // 예시 컴포넌트 실행시 추가적으로 넘길 props 값
   commonsProps?: ModalExampleCommonsTypes; // 컴포넌트 실행하기 위해 필요한 Props 값
   content: string; // 모듈 실행시 함께 렌더될 데이터
-  code: string; // 렌더되는 코드 정보
+  code: null | Array<string>; // 렌더되는 코드 정보
   remakrs: string; // 예시 설명
   isError?: boolean; // 에러 예시용 여부
 }
@@ -35,7 +35,6 @@ export interface IProps {
 }
 
 export interface UIProps {
-  module: string;
   openList: Array<boolean>;
   changeOpenList: (idx: number, list?: Array<boolean>) => void;
   isOneOpen: boolean;

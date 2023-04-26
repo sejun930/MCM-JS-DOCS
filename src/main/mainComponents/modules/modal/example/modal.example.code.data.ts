@@ -1,32 +1,36 @@
 import React from "react";
 import { ExampleCommonsTypes } from "src/commons/data/example/example.commons.data";
+import { modalCommonsExampleCode } from "./modal.example.commons.code";
+import { getCommonsHighlight } from "src/commons/highlight";
 
-export interface ExampleCodeListTypese {
-  [key: string]: string;
+export interface ExampleCodeListTypes {
+  [key: string]: string[];
 }
 
 // 해당 모듈을 실행하기 위한 공통적인 준비물
 export const modalCommonsData: Array<ExampleCommonsTypes> = [
+  // prettier-ignore
   {
     code: `
-  <span class='lightGreen'>// 모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.</span>
+  ${getCommonsHighlight.comment("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다")}
   <span class='darkBlue'>const</span> <span class='deepPurple'>[</span><span class='blue'>isOpen</span><span class='lightGray'>,</span> <span class='lightYellow'>setIsOpen</span><span class='deepPurple'>]</span> <span class='lightGray'>=</span> <span class='lightYellow'>useState</span><span class='deepPurple'>(</span><span class='blue'>false</span><span class='deepPurple'>)</span><span class='lightGray'>;</span>
   
-  <span class='lightGreen'>// 모달을 실행하는 함수입니다.</span>
+  ${getCommonsHighlight.comment("모달을 실행하는 함수입니다.")}
   <span class='darkBlue'>const</span> <span class='lightYellow'>openModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
     <span class='lightYellow'>setIsOpen</span><span class='blue'>(true)</span><span class='lightGray'>;</span>
   <span class='deepPurple'>}</span><span class='lightGray'>;</span>
   
-  <span class='lightGreen'>// 모달을 종료하는 함수입니다.</span>
+  ${getCommonsHighlight.comment("모달을 종료하는 함수입니다.")}
   <span class='darkBlue'>const</span> <span class='lightYellow'>closeModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
     <span class='lightYellow'>setIsOpen</span><span class='blue'>(false)</span><span class='lightGray'>;</span>
   <span class='deepPurple'>}</span><span class='lightGray'>;</span>
   `,
     import: { react: ["useState"] },
   },
+  // prettier-ignore
   {
     code: `
-  <span class='lightGreen'>// 모달이 종료될 때 실행되는 함수입니다. 해당 함수가 없어도 모달을 종료시킬 수 있습니다. </span>
+  ${getCommonsHighlight.comment("모달이 종료될 때 실행되는 함수입니다. 해당 함수가 없어도 모달을 종료시킬 수 있습니다.")}
   <span class='darkBlue'>const</span> <span class="lightYellow">closeModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
     <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달이 종료됩니다."</span><span class='blue'>)</span></span><span class='lightGray'>;</span>
     <span class='blue'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>()</span></span><span class='lightGray'>;</span>
@@ -47,59 +51,119 @@ export const modalReturnCommonsData = (
         <span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>
       <span><</span><span>/</span><span class='green'>Modal</span><span>></span>
     <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>`,
-    `<span><</span><span class='darkBlue'>button</span> <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span><span class='deepPurple'>{</span> ${code} <span class='deepPurple'>}</span><span class='yellow'>)</span><span class='blue'>}</span><span>></span>
+    `<span><</span><span class='darkBlue'>button</span>
+      <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> 
+        <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span><span class='deepPurple'>{</span> 
+          ${code} 
+        <span class='deepPurple'>}</span><span class='yellow'>)</span>
+      <span class='blue'>}</span>
+    <span>></span>
       <span class='lightGray'>모달 실행하기</span> 
     <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
   ];
 };
 
 // Modal 각각의 예시 코드를 저장하는 객체
-export const modalCodeList: Array<ExampleCodeListTypese> = [
-  {
-    title: "With State",
-    basic:
-      "<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>",
-    animation: `
-        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
-        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>showBGAnimation</span><span class='lightGray'>=</span><span class='blue'>{true}</span>
-        <span class='skyblue'>showModalOpenAnimation</span><span class='lightGray'>=</span><span class='blue'>{true}</span>
+export const modalCodeList = (idx: number): ExampleCodeListTypes => {
+  return {
+    title: ["With State", "Use in Function"],
+    basic: [
+      `${modalCommonsExampleCode.show[idx]} ${modalCommonsExampleCode.onCloseModal[idx]}`,
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+      ])}`,
+    ],
+    animation: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.showBGAnimation[idx]}
+        ${modalCommonsExampleCode.showModalOpenAnimation[idx]}
       `,
-    size300: `
-        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
-        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>modalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"300px"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"300px"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` + modalCommonsExampleCode.showBGAnimation[idx],
+        `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
+      ])}`,
+    ],
+    size300: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.modalSize("300px", "300px")[idx]}
       `,
-    sizePercent: `
-        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
-        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>modalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"30%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"40%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` + modalCommonsExampleCode.modalSize("300px", "300px")[idx],
+      ])}`,
+    ],
+    sizePercent: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.modalSize("30%", "40%")[idx]}
+    `,
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` + modalCommonsExampleCode.modalSize("30%", "40%")[idx],
+      ])}`,
+    ],
+    responsive: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.mobileModalSize[idx]}
       `,
-    responsive: `
-        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
-        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>mobileModalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` + modalCommonsExampleCode.mobileModalSize[idx],
+      ])}`,
+    ],
+    hideCloseButton: [
+      `${modalCommonsExampleCode.show[idx]} ${modalCommonsExampleCode.onCloseModal[idx]} ${modalCommonsExampleCode.hideCloseButton[idx]}`,
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` + modalCommonsExampleCode.hideCloseButton[idx],
+      ])}`,
+    ],
+    addCloseMent: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.closeMent("오늘 하루 보지 않기")[idx]}
       `,
-    hideCloseButton: `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span> <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span> <span class='skyblue'>hideCloseButton</span>`,
-    addCloseMent: `
-        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
-        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>closeMent</span><span class='lightGray'>=</span><span class='lightOrange'>"오늘 하루 보지 않기"</span>
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` +
+          modalCommonsExampleCode.closeMent("오늘 하루 보지 않기")[idx],
+      ])}`,
+    ],
+    resizeBtn: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.closeButtonInfo[idx]}
       `,
-    resizeBtn: `
-        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
-        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>closeButtonInfo</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>buttonSize:</span> <span class='lightOrange'>"25px"</span> <span class='yellow'>}</span><span class='blue'>}</span>
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` + modalCommonsExampleCode.closeButtonInfo[idx],
+      ])}`,
+    ],
+    offAutoClose: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.offAutoClose[idx]}
+        ${modalCommonsExampleCode.closeMent("닫기")[idx]}
       `,
-    offAutoClose: `
-        <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{isOpen}</span>
-        <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>
-        <span class='skyblue'>offAutoClose</span><span class='lightGray'>=</span><span class='blue'>{true}</span>
-        <span class='skyblue'>closeMent</span><span class='lightGray'>=</span><span class='lightOrange'>"닫기"</span>
-      `,
-  },
-  {
-    title: "Use in Function",
-    basic: `<span class="lightYellow">onCloseModal</span> <span class='lightGray'>:</span> <span class="lightYellow">closeModal</span>`,
-  },
-];
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onCloseModal[idx],
+        `         ` + modalCommonsExampleCode.offAutoClose[idx],
+      ])}`,
+    ],
+  };
+};
+// {
+//   title: "Use in Function",
+//   basic: ,
+// },

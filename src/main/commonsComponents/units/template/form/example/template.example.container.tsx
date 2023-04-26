@@ -8,8 +8,6 @@ import { moduleState } from "src/commons/store";
 import { IProps, UIProps } from "./template.example.types";
 
 export default function _ExampleForm(props: IProps) {
-  const [module] = useRecoilState(moduleState);
-
   // 전체 예시용 코드의 개수
   const allLen = props.exampleList
     .filter((el) => !el.isErrorForm)
@@ -32,7 +30,6 @@ export default function _ExampleForm(props: IProps) {
 
   const _props: IProps & UIProps = {
     ...props,
-    module,
     openList,
     changeOpenList,
     isOneOpen,

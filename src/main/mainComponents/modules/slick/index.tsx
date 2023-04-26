@@ -8,7 +8,14 @@ export default function ModalExamplePage() {
   };
 
   return (
-    <button onClick={() => Modal.open({ onCloseModal: closeModal })}>
+    <button
+      onClick={() =>
+        Modal.open({
+          onCloseModal: closeModal,
+          offAutoClose: true,
+        })
+      }
+    >
       모달 실행하기
     </button>
   );
