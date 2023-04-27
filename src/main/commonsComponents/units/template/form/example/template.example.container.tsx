@@ -1,9 +1,7 @@
 import _ExampleUIPage from "./template.example.presenter";
 
 import { useState } from "react";
-import { useRecoilState } from "recoil";
 
-import { moduleState } from "src/commons/store";
 // import { versState } from "src/commons/store";
 import { IProps, UIProps } from "./template.example.types";
 
