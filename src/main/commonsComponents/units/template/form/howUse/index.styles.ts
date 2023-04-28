@@ -79,7 +79,6 @@ export const TapWrapper = styled.div`
 
         if (props.isFixed) {
           styles.opacity = 1;
-        } else {
         }
 
         return styles;

@@ -4,6 +4,7 @@ export const subTitleEmoji: { [key: string]: string } = {
   Version: "🗂",
   "How To Use": "🔍",
   Example: "📝",
+  Functional: "🏷",
   "Module Tree": "📂",
   "Props List": "📤",
   Comments: "🌟",

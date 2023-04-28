@@ -91,8 +91,6 @@ export default function _HowUseForm({
     setTempVers(i);
   };
 
-  console.log(tempVers);
-
   return (
     <Wrapper>
       <_SubTitleTemplate

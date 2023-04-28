@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import {
   modalExampleList,
   modalExampleInitProps,
+  modalFunctionalData,
 } from "./example/modal.example.render.data";
 import { modalCodeList } from "./example/modal.example.code.data";
 
@@ -14,6 +15,7 @@ import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/
 import _VersionForm from "src/main/commonsComponents/units/template/form/version";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
+import _FunctionalForm from "src/main/commonsComponents/units/template/form/functional";
 import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
 import _PropsForm from "src/main/commonsComponents/units/template/form/props";
 import _CommentsForm from "src/main/commonsComponents/units/template/form/comments/comments.container";
@@ -61,10 +63,10 @@ export default function MyModal() {
           initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
-        {/* 
+        {modalFunctionalData[vers] && <_FunctionalForm />}
         <_TreeForm />
         <_PropsForm />
-        <_CommentsForm /> */}
+        <_CommentsForm />
       </ModulesInfoWrapper>
     </Template>
   );

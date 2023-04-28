@@ -179,3 +179,5 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     ],
   },
 ];
+
+export const modalFunctionalData: any = [null, 2];
