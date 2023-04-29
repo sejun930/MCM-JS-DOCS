@@ -17,7 +17,7 @@ export interface ExampleContentsTypes {
   content: string; // 모듈 실행시 함께 렌더될 데이터
   code: null | Array<string>; // 렌더되는 코드 정보
   remakrs: string; // 예시 설명
-  isError?: boolean; // 에러 예시용 여부
+  isError?: boolean; // 에러 여부
 }
 
 // 각각의 페이지에서 전달될 props 타입
@@ -25,7 +25,8 @@ export interface ExampleIProps {
   title: string; // 예시 타이틀
   contents: Array<ExampleContentsTypes>;
   isFull?: boolean; // 화면을 분할해서 사용하지 않고 block 요소로 전체 사용
-  isErrorForm?: boolean; // 에러 화면 노출 여부
+  isError?: boolean; // 에러케이스 여부
+  isHide?: boolean; // 노출 여부 (true일 경우 숨기기)
 }
 
 export interface IProps {

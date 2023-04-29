@@ -30,11 +30,6 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   // prettier-ignore
   {
     code: `
-  ${getCommonsHighlight.comment("모달이 종료될 때 실행되는 함수입니다. 해당 함수가 없어도 모달을 종료시킬 수 있습니다.")}
-  <span class='darkBlue'>const</span> <span class="lightYellow">closeModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
-    <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달이 종료됩니다."</span><span class='blue'>)</span></span><span class='lightGray'>;</span>
-    <span class='blue'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>()</span></span><span class='lightGray'>;</span>
-  <span class='deepPurple'>}</span><span class='lightGray'>;</span>
     `,
   },
 ];
@@ -51,13 +46,33 @@ export const modalReturnCommonsData = (
         <span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>
       <span><</span><span>/</span><span class='green'>Modal</span><span>></span>
     <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>`,
-    `<span><</span><span class='darkBlue'>button</span>
-      <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> 
-        <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span><span class='deepPurple'>{</span> 
+    `<span><</span><span class='darkBlue'>button</span> ${
+      (code &&
+        `
+      `) ||
+      ""
+    }<span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> ${
+      (code &&
+        `
+        `) ||
+      ""
+    }<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span>${
+      (code &&
+        `<span class='deepPurple'>{</span> 
           ${code} 
-        <span class='deepPurple'>}</span><span class='yellow'>)</span>
-      <span class='blue'>}</span>
-    <span>></span>
+        <span class='deepPurple'>}</span>`) ||
+      ``
+    }<span class='yellow'>)</span>${
+      (code &&
+        `
+      `) ||
+      ""
+    }<span class='blue'>}</span>${
+      (code &&
+        `
+    `) ||
+      ""
+    }<span>></span>
       <span class='lightGray'>모달 실행하기</span> 
     <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
   ];
@@ -69,9 +84,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
     title: ["With State", "Use in Function"],
     basic: [
       `${modalCommonsExampleCode.show[idx]} ${modalCommonsExampleCode.onCloseModal[idx]}`,
-      `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-      ])}`,
+      ``,
     ],
     animation: [
       `
@@ -81,8 +94,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.showModalOpenAnimation[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` + modalCommonsExampleCode.showBGAnimation[idx],
+        modalCommonsExampleCode.showBGAnimation[idx],
         `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
       ])}`,
     ],
@@ -93,8 +105,8 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.modalSize("300px", "300px")[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` + modalCommonsExampleCode.modalSize("300px", "300px")[idx],
+        // modalCommonsExampleCode.onCloseModal[idx],
+        modalCommonsExampleCode.modalSize("300px", "300px")[idx],
       ])}`,
     ],
     sizePercent: [
@@ -104,8 +116,8 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.modalSize("30%", "40%")[idx]}
     `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` + modalCommonsExampleCode.modalSize("30%", "40%")[idx],
+        // modalCommonsExampleCode.onCloseModal[idx],
+        modalCommonsExampleCode.modalSize("30%", "40%")[idx],
       ])}`,
     ],
     responsive: [
@@ -115,15 +127,15 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.mobileModalSize[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` + modalCommonsExampleCode.mobileModalSize[idx],
+        // modalCommonsExampleCode.onCloseModal[idx],
+        modalCommonsExampleCode.mobileModalSize[idx],
       ])}`,
     ],
     hideCloseButton: [
       `${modalCommonsExampleCode.show[idx]} ${modalCommonsExampleCode.onCloseModal[idx]} ${modalCommonsExampleCode.hideCloseButton[idx]}`,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` + modalCommonsExampleCode.hideCloseButton[idx],
+        // modalCommonsExampleCode.onCloseModal[idx],
+        modalCommonsExampleCode.hideCloseButton[idx],
       ])}`,
     ],
     addCloseMent: [
@@ -133,9 +145,8 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.closeMent("오늘 하루 보지 않기")[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` +
-          modalCommonsExampleCode.closeMent("오늘 하루 보지 않기")[idx],
+        // modalCommonsExampleCode.onCloseModal[idx],
+        modalCommonsExampleCode.closeMent("오늘 하루 보지 않기")[idx],
       ])}`,
     ],
     resizeBtn: [
@@ -145,8 +156,8 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.closeButtonInfo[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` + modalCommonsExampleCode.closeButtonInfo[idx],
+        // modalCommonsExampleCode.onCloseModal[idx],
+        modalCommonsExampleCode.closeButtonInfo[idx],
       ])}`,
     ],
     offAutoClose: [
@@ -157,8 +168,8 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.closeMent("닫기")[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.onCloseModal[idx],
-        `         ` + modalCommonsExampleCode.offAutoClose[idx],
+        // modalCommonsExampleCode.onCloseModal[idx],
+        modalCommonsExampleCode.offAutoClose[idx],
       ])}`,
     ],
   };

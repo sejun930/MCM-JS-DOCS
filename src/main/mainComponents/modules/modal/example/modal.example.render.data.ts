@@ -156,7 +156,8 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
   },
   {
     title: "",
-    isErrorForm: true,
+    isError: true,
+    isHide: [false, true][idx],
     contents: [
       {
         remakrs:
@@ -175,6 +176,26 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         },
         content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
         code: null,
+      },
+    ],
+  },
+  {
+    title: "모달 선택 종료",
+    isHide: [true, false][idx],
+    contents: [
+      {
+        remakrs:
+          "여러개의 모달 중 id 또는 class가 지정된 모달을 선택해서 종료할 수 있습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          offAutoClose: true,
+          closeMent: "닫기",
+        },
+        info: {
+          buttonName: "Close Selected Modal",
+        },
+        content: `my-modal id가 지정된 모달을 선택해서 닫을 수 있습니다.`,
+        code: modalCodeList(idx).offAutoClose,
       },
     ],
   },

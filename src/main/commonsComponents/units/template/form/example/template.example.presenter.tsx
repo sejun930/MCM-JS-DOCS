@@ -62,71 +62,77 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
       <ExampleContentsWrapper>
         {exampleList &&
           exampleList?.length &&
-          exampleList.map((el, idx: number) => (
-            <ExampleContentsItems
-              key={`${module}_${idx + 1}`}
-              isFull={el.isFull ?? false}
-            >
-              <_Title
-                titleLevel="h3"
-                className={(el.isErrorForm && "error-form") || undefined}
-              >
-                {el.isErrorForm ? "❗ 모듈 호출시 에러 발생 예시" : el.title}
-              </_Title>
-              <ExampleResultList>
-                {el.contents &&
-                  el.contents.length &&
-                  el.contents.map(
-                    (component: ExampleContentsTypes, idx2: number) => {
-                      // 렌더할 때 넘겨줄 props 옵션 값 설정
-                      const addProps = {
-                        ...initProps,
-                        ...component.addProps,
-                      };
-                      component.addProps = { ...addProps };
-                      component.isError = el?.isErrorForm || false;
+          exampleList.map(
+            (el, idx: number) =>
+              (!el.isHide && (
+                <ExampleContentsItems
+                  key={`${module}_${idx + 1}`}
+                  isFull={el.isFull ?? false}
+                >
+                  <_Title
+                    titleLevel="h3"
+                    className={(el.isError && "error-form") || undefined}
+                  >
+                    {el.isError ? "❗ 모듈 호출시 에러 발생 예시" : el.title}
+                  </_Title>
+                  <ExampleResultList>
+                    {el.contents &&
+                      el.contents.length &&
+                      el.contents.map(
+                        (component: ExampleContentsTypes, idx2: number) => {
+                          // 렌더할 때 넘겨줄 props 옵션 값 설정
+                          const addProps = {
+                            ...initProps,
+                            ...component.addProps,
+                          };
+                          component.addProps = { ...addProps };
+                          // 에러케이스 처리
+                          component.isError = el?.isError || false;
 
-                      // 렌더될 대상의 인덱스 값 지정
-                      component.info.idx = _idx;
-                      _idx++;
+                          // 렌더될 대상의 인덱스 값 지정
+                          component.info.idx = _idx;
+                          _idx++;
 
-                      // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
-                      component.commonsProps = { ...commonsProps };
+                          // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
+                          component.commonsProps = { ...commonsProps };
 
-                      // 하위 컴포넌트들의 width 값 지정하기
-                      let width: string = "100%";
-                      if (el.isFull) {
-                        width = `${100 / el.contents.length}%`;
-                      }
+                          // 하위 컴포넌트들의 width 값 지정하기
+                          let width: string = "100%";
+                          if (el.isFull) {
+                            width = `${100 / el.contents.length}%`;
+                          }
 
-                      return (
-                        <ExampleListWrapper
-                          key={`${module}_${idx}_${idx2}`}
-                          style={{ width }}
-                        >
-                          <ExampleListItems>
-                            {(renderTemplateList[module] &&
-                              renderTemplateList[module](component)) || <></>}
-                            <_PText className="example-remarks">
-                              {component.remakrs}
-                            </_PText>
-                          </ExampleListItems>
-                          {component.code && (
-                            <_ExampleOptionalFormPage
-                              code={component.code[vers]}
-                              content={component.content}
-                              isOpen={openList[_idx - 1]}
-                              changeOpenList={changeOpenList}
-                              codeIdx={_idx - 1}
-                            />
-                          )}
-                        </ExampleListWrapper>
-                      );
-                    }
-                  )}
-              </ExampleResultList>
-            </ExampleContentsItems>
-          ))}
+                          return (
+                            <ExampleListWrapper
+                              key={`${module}_${idx}_${idx2}`}
+                              style={{ width }}
+                            >
+                              <ExampleListItems>
+                                {(renderTemplateList[module] &&
+                                  renderTemplateList[module](component)) || (
+                                  <></>
+                                )}
+                                <_PText className="example-remarks">
+                                  {component.remakrs}
+                                </_PText>
+                              </ExampleListItems>
+                              {component.code && (
+                                <_ExampleOptionalFormPage
+                                  code={component.code[vers]}
+                                  content={component.content}
+                                  isOpen={openList[_idx - 1]}
+                                  changeOpenList={changeOpenList}
+                                  codeIdx={_idx - 1}
+                                />
+                              )}
+                            </ExampleListWrapper>
+                          );
+                        }
+                      )}
+                  </ExampleResultList>
+                </ExampleContentsItems>
+              )) || <></>
+          )}
       </ExampleContentsWrapper>
     </Wrapper>
   );
