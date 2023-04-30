@@ -6,7 +6,7 @@ export const modalTreeList: Array<TreeModuleListTypes> = [
     tag: "div",
     class: classList?.modal?.wrapper || "mcm-modal-wrapper",
     depth: 0,
-    role: "모달 전체를 감싸는 최상위 태그입니다. <br /> 위치 고정 및 배경을 담당하며 <b>모달의 배경색을 직접 제어</b>할 수 있습니다.",
+    role: "모달 전체를 감싸는 최상위 태그입니다. <br /> 위치 고정 및 배경을 담당하며 <b>모달의 배경색을 직접 제어</b>할 수 있습니다. <br /><br /><b>id</b> 또는 <b>className</b>을 전달받으면 선택자가 지정되는 태그입니다.",
   },
   {
     tag: "div",

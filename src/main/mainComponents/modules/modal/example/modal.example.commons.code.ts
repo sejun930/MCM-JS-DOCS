@@ -1,6 +1,10 @@
 import { getCommonsHighlight } from "src/commons/highlight";
 
 export const modalCommonsExampleCode = {
+  children: (text: string) => [
+    ``,
+    `<span class='skyblue'>children:</span> <span><</span><span class='darkBlue'>span</span><span>></span> <span class='lightGray'>${text}</span> <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>`,
+  ],
   show: [
     `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='blue3'>isOpen</span><span class='blue'>}</span>`,
   ],

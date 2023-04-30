@@ -18,6 +18,7 @@ export interface ExampleContentsTypes {
   code: null | Array<string>; // 렌더되는 코드 정보
   remakrs: string; // 예시 설명
   isError?: boolean; // 에러 여부
+  vers?: number;
 }
 
 // 각각의 페이지에서 전달될 props 타입
@@ -37,7 +38,7 @@ export interface IProps {
 
 export interface UIProps {
   openList: Array<boolean>;
-  changeOpenList: (idx: number, list?: Array<boolean>) => void;
+  changeOpenList: (idx: number, list?: Array<boolean>, all?: boolean) => void;
   isOneOpen: boolean;
   allLen: number;
 }

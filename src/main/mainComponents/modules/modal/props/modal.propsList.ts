@@ -2,6 +2,14 @@ import { PropsModuleListType } from "src/commons/data/props/props.commons.data";
 
 export const modalPropsList: Array<PropsModuleListType> = [
   {
+    name: "children",
+    default: "-",
+    type: "String | Node",
+    notice:
+      "모달에 출력되는 내용을 나타냅니다. Modal.open을 사용하는 경우에는 children value 값을 설정해주세요.",
+    isRequired: true,
+  },
+  {
     name: "show",
     default: false,
     type: "Boolean",
@@ -14,6 +22,19 @@ export const modalPropsList: Array<PropsModuleListType> = [
     type: "Function",
     notice: "모달을 종료할 때 실행하는 이벤트입니다.",
     isRequired: true,
+  },
+  {
+    name: "id",
+    default: "-",
+    type: "String",
+    notice: "모달의 id 값을 지정합니다. id는 wrapper 태그에 적용됩니다.",
+  },
+  {
+    name: "className",
+    default: "-",
+    type: "String",
+    notice:
+      "모달의 className 값을 지정합니다. className은 wrapper 태그에 적용됩니다.",
   },
   {
     name: "modalSize",

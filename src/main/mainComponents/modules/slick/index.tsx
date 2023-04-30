@@ -5,7 +5,7 @@ export default function ModalExamplePage() {
     <button
       onClick={() =>
         Modal.open({
-          offAutoClose: true,
+          children: <span> 기본 모달 페이지입니다. </span>,
         })
       }
     >

@@ -50,7 +50,8 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
               onClickEvent={() =>
                 changeOpenList(
                   -1,
-                  Array.from(new Array(allLen), () => !isOneOpen)
+                  Array.from(new Array(allLen), () => !isOneOpen),
+                  true
                 )
               }
             >
@@ -88,6 +89,8 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                           component.addProps = { ...addProps };
                           // 에러케이스 처리
                           component.isError = el?.isError || false;
+                          // vers 저장
+                          component.vers = vers;
 
                           // 렌더될 대상의 인덱스 값 지정
                           component.info.idx = _idx;

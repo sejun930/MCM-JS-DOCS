@@ -24,7 +24,6 @@ export default function TapListPage({
     if (el) {
       Array.from(document.getElementsByClassName("select-tap")).forEach(
         (el) => {
-          console.log(el);
           el.classList.remove("select-tap");
         }
       );
@@ -33,6 +32,7 @@ export default function TapListPage({
 
     if (isFixedMode && changeTempVers) changeTempVers(i);
     setTimeout(() => {
+      console.log(i);
       setVers(i);
     }, 200);
   };

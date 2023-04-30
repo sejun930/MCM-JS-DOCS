@@ -46,33 +46,18 @@ export const modalReturnCommonsData = (
         <span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>
       <span><</span><span>/</span><span class='green'>Modal</span><span>></span>
     <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>`,
-    `<span><</span><span class='darkBlue'>button</span> ${
-      (code &&
-        `
-      `) ||
-      ""
-    }<span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> ${
-      (code &&
-        `
-        `) ||
-      ""
-    }<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span>${
-      (code &&
-        `<span class='deepPurple'>{</span> 
-          ${code} 
-        <span class='deepPurple'>}</span>`) ||
-      ``
-    }<span class='yellow'>)</span>${
-      (code &&
-        `
-      `) ||
-      ""
-    }<span class='blue'>}</span>${
-      (code &&
-        `
-    `) ||
-      ""
-    }<span>></span>
+    `<span><</span><span class='darkBlue'>button</span> 
+      <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> 
+        <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span><span class='deepPurple'>{</span> 
+          <span class='skyblue'>children:</span> <span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span><span class='lightGray'>,</span>${
+      code
+        ? `
+          ${code}`
+        : ""
+    } 
+        <span class='deepPurple'>}</span><span class='yellow'>)</span>
+      <span class='blue'>}</span>
+    <span>></span>
       <span class='lightGray'>모달 실행하기</span> 
     <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
   ];

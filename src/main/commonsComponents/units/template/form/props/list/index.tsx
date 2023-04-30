@@ -78,6 +78,7 @@ export const Tr = styled.tr`
     border: solid 1px #bbbbbb;
     padding: 15px 10px;
     letter-spacing: -0.5px;
+    line-height: 20px;
 
     ${(props: StyleTypes) =>
       props.isRequired && {

@@ -2,7 +2,6 @@ import React from "react";
 
 import { Modal } from "mcm-js";
 import { _Button } from "mcm-js-commons";
-import { ModalPropsType } from "mcm-js/dist/commons/types";
 
 import {
   ExampleContentsTypes,
@@ -14,47 +13,43 @@ export default function MyModalExample(props: ExampleContentsTypes) {
   const { idx, buttonName } = props.info as ExampleContentsInfoTypes;
   const { isShow, openModal, closeModal } =
     props.commonsProps as ModalExampleCommonsTypes;
-  const {
-    showBGAnimation,
-    showModalOpenAnimation,
-    modalSize,
-    mobileModalSize,
-    hideCloseButton,
-    closeMent,
-    offAutoClose,
-    closeButtonInfo,
-  } = props.addProps as ModalPropsType;
 
   const isError = props?.isError || false;
+
+  const _props = { ...props.addProps };
+  _props.show = isShow[idx ?? 0];
+  _props.onCloseModal = closeModal(idx ?? 0);
+
+  if (isError) {
+    _props.show = undefined;
+    _props.onCloseModal = undefined;
+  }
+
+  if (props.vers === 1) {
+    _props.show = true;
+    _props.children = <span>{props.content}</span>;
+  }
+
   return (
     <>
       {/* 모달 실행 버튼 */}
       {!isError && (
         <_Button
-          onClickEvent={openModal(idx ?? 0)}
+          onClickEvent={() =>
+            props.vers === 0 ? openModal(idx ?? 0)() : Modal.open({ ..._props })
+          }
           className="_open_module_button_"
         >
           {buttonName ?? "Open Modal"}
         </_Button>
       )}
-      {isShow && (
-        <Modal
+      {isShow &&
+        ((props.vers === 0 && (
           // @ts-ignore
-          show={isError ? undefined : isShow[idx ?? 0]}
-          // @ts-ignore
-          onCloseModal={isError ? undefined : closeModal(idx ?? 0)}
-          showBGAnimation={showBGAnimation}
-          showModalOpenAnimation={showModalOpenAnimation}
-          modalSize={modalSize}
-          mobileModalSize={mobileModalSize}
-          hideCloseButton={hideCloseButton}
-          closeMent={closeMent}
-          closeButtonInfo={closeButtonInfo}
-          offAutoClose={offAutoClose}
-        >
-          {props.content}
-        </Modal>
-      )}
+          <Modal {..._props}>
+            <span>{props.content}</span>
+          </Modal>
+        )) || <></>)}
     </>
   );
 }

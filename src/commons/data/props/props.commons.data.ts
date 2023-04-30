@@ -9,6 +9,8 @@ export interface PropsModuleListType {
     | "Number"
     | "Function"
     | "Object"
+    | "Node"
+    | "String | Node"
     | "[Boolean]"
     | "[String]"
     | "[Number]"

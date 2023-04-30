@@ -63,7 +63,7 @@ export default function MyModal() {
           initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
-        {modalFunctionalData[vers] && <_FunctionalForm />}
+        {/* {modalFunctionalData[vers] && <_FunctionalForm />} */}
         <_TreeForm />
         <_PropsForm />
         <_CommentsForm />
