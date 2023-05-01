@@ -27,14 +27,14 @@ export const modalPropsList: Array<PropsModuleListType> = [
     name: "id",
     default: "-",
     type: "String",
-    notice: "모달의 id 값을 지정합니다. id는 wrapper 태그에 적용됩니다.",
+    notice: "모달의 id 선택자 값을 지정합니다. id는 wrapper 태그에 적용됩니다.",
   },
   {
     name: "className",
     default: "-",
     type: "String",
     notice:
-      "모달의 className 값을 지정합니다. className은 wrapper 태그에 적용됩니다.",
+      "모달의 class 선택자 값을 지정합니다. className은 wrapper 태그에 적용됩니다.",
   },
   {
     name: "modalSize",

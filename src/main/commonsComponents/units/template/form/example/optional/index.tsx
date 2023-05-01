@@ -1,5 +1,5 @@
 import { CodeInfoWrapper, OptionalWrapper, Wrapper } from "./optional.styles";
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 
 import { useRecoilState } from "recoil";
 import { versState } from "src/commons/store";
@@ -8,6 +8,7 @@ import _ExampleOptionalCodeIconPage from "./code";
 import _Copy from "src/main/commonsComponents/units/copy";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 
+let allHeight = 0; // 코드의 전체 높이값
 // 예시용에 추가적으로 붙는 옵션 폼 페이지 (ex : 코드보기 등등)
 export default function _ExampleOptionalFormPage({
   code,
@@ -15,23 +16,38 @@ export default function _ExampleOptionalFormPage({
   isOpen,
   changeOpenList,
   codeIdx,
+  changeContent,
+  allHeightList,
 }: {
   code: string;
   content: string;
   isOpen: boolean;
   changeOpenList: (idx: number, list?: Array<boolean>) => void;
   codeIdx: number;
+  changeContent: string;
+  allHeightList: { [key: number]: number };
 }) {
   // 코드 보기 및 가리기
   const [showCode, setShowCode] = useState(false);
+  const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
+
   const [vers] = useRecoilState(versState);
   const { getExampleCode, getReturn, getCommonsReturn } =
     getExampleCodeComponnet();
 
+  useEffect(() => {
+    if (_wrapperRef?.current) {
+      const children = _wrapperRef.current.children[0];
+      if (children) {
+        // 각각의 코드 총 높이값 저장하기
+        allHeightList[codeIdx] = children.clientHeight;
+      }
+    }
+  }, [vers]);
+
   // 코드 보기 toggle
   const toggleShowCode = () => {
     setShowCode(!showCode);
-
     changeOpenList(codeIdx);
   };
 
@@ -44,11 +60,27 @@ export default function _ExampleOptionalFormPage({
       <OptionalWrapper onClick={toggleShowCode}>
         <_ExampleOptionalCodeIconPage showCode={showCode} />
       </OptionalWrapper>
-      <CodeInfoWrapper showCode={showCode}>
+      <CodeInfoWrapper
+        showCode={showCode}
+        ref={_wrapperRef}
+        allHeight={allHeightList[codeIdx]}
+      >
         <_Copy
-          text={getExampleCode(code, content, vers || 0)}
+          text={getExampleCode({
+            code,
+            children: content,
+            idx: vers || 0,
+            changeContent,
+          })}
           type="Code"
-          showText={getReturn(getCommonsReturn(code, content, vers || 0))}
+          showText={getReturn(
+            getCommonsReturn({
+              code,
+              children: content,
+              idx: vers || 0,
+              changeContent,
+            })
+          )}
           position="Top"
         />
       </CodeInfoWrapper>

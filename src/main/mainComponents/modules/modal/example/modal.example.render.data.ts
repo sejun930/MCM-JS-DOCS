@@ -2,6 +2,8 @@ import { ExampleIProps } from "src/main/commonsComponents/units/template/form/ex
 import { ModalPropsType } from "mcm-js/dist/commons/types";
 import { modalCodeList } from "./modal.example.code.data";
 
+import { CloseMultipleModal } from "./modal.example.template";
+
 // Modal default Props값
 export const modalExampleInitProps: ModalPropsType = {
   showBGAnimation: false, // 배경 애니메이션 여부
@@ -185,17 +187,31 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "여러개의 모달 중 id 또는 class가 지정된 모달을 선택해서 종료할 수 있습니다.",
+          "여러개의 모달 중 id 또는 class 선택자가 지정된 모달을 선택해서 종료할 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
-          offAutoClose: true,
-          closeMent: "닫기",
+          id: "parents-modal",
+          // @ts-ignore
+          children: CloseMultipleModal(),
         },
         info: {
           buttonName: "Close Selected Modal",
         },
-        content: `my-modal id가 지정된 모달을 선택해서 닫을 수 있습니다.`,
-        code: modalCodeList(idx).offAutoClose,
+        // 새로운 content 사용
+        changeContent: `<span class='blue'>(</span>
+            <span><</span><span class='darkBlue'>div</span><span>></span>
+              <span><</span><span class='darkBlue'>span</span><span>></span> <span class='lightGray'>하위 모달을 종료하면 상위 모달도 함께 종료됩니다.</span> <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>
+              <span><</span><span class="green">Modal</span>
+                <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='darkBlue'>true</span><span class='yellow'>}</span>
+                <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='darkBlue'>=></span> <span class='blue'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='purple'>(</span><span class='blue'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span> <span class='blue'>}</span><span class='purple'>)</span><span class='yellow'>}</span>
+                <span class='skyblue'>modalSize</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"100px"</span><span class='lightGray'>,</span> <span class='skyblue'>height:</span> <span class='lightOrange'>"100px"</span> <span class='deepPurple'>}</span><span class='yellow'>}</span>
+              <span>></span>
+                <span class='lightGray'>하위 모달</span>
+              <span><</span><span>/</span><span class="green">Modal</span><span>></span>
+            <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>
+          <span class='blue'>)</span><span class='lightGray'>,</span>`,
+        content: `하위 모달을 종료하면 상위 모달도 함께 종료됩니다.`,
+        code: modalCodeList(idx).selectClose,
       },
     ],
   },

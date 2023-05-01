@@ -26,7 +26,7 @@ export const modalCommonsExampleCode = {
   ],
   mobileModalSize: [
     `<span class='skyblue'>mobileModalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>`,
-    `<span class='skyblue'>mobileModalSize:</span> <span class='blue'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>`,
+    `<span class='skyblue'>mobileModalSize:</span> <span class='blue'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='blue'>}</span>`,
   ],
   hideCloseButton: [
     `<span class='skyblue'>hideCloseButton</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='darkBlue'>true</span><span class='blue'>}</span>`,

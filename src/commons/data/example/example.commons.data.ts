@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import {
   modalCommonsData,
   modalReturnCommonsData,
@@ -18,12 +18,16 @@ export const exampleCommonsList: { [key: string]: Array<ExampleCommonsTypes> } =
   };
 
 // 예시용 코드에 붙여지는 return 코드들
-export const exampleCommonsReturnList: {
+export const exampleCommonsReturnList = (
+  changeContent: string
+): {
   [key: string]: (
     code: string,
     children?: React.ReactNode | string
   ) => Array<string>;
-} = {
-  Modal: (code: string, children?: React.ReactNode | string) =>
-    modalReturnCommonsData(code, children),
+} => {
+  return {
+    Modal: (code: string, children?: React.ReactNode | string) =>
+      modalReturnCommonsData(code, children, changeContent),
+  };
 };

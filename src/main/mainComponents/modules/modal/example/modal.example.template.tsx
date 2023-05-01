@@ -27,7 +27,13 @@ export default function MyModalExample(props: ExampleContentsTypes) {
 
   if (props.vers === 1) {
     _props.show = true;
-    _props.children = <span>{props.content}</span>;
+    _props.children = props.content ? (
+      props.content
+    ) : (
+      <span>{props.content}</span>
+    );
+
+    if (props.addProps?.children) _props.children = props.addProps.children;
   }
 
   return (
@@ -53,3 +59,18 @@ export default function MyModalExample(props: ExampleContentsTypes) {
     </>
   );
 }
+
+export const CloseMultipleModal = () => {
+  return (
+    <div>
+      <span> 하위 모달을 종료하면 상위 모달도 함께 종료됩니다. </span>
+      <Modal
+        show={true}
+        onCloseModal={() => Modal.close({ id: "parents-modal" })}
+        modalSize={{ width: "100px", height: "100px" }}
+      >
+        하위 모달
+      </Modal>
+    </div>
+  );
+};

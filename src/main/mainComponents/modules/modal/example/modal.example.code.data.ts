@@ -37,7 +37,8 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
 // 리턴될 때에 공통적으로 들어가는 코드 데이터
 export const modalReturnCommonsData = (
   code: string,
-  text?: React.ReactNode | string
+  text?: React.ReactNode | string,
+  changeContent?: string // content form 사용 여부, true일 경우 사용하지 않음
 ): Array<string> => {
   return [
     `<span><</span><span class='darkBlue'>div</span><span>></span>
@@ -49,7 +50,11 @@ export const modalReturnCommonsData = (
     `<span><</span><span class='darkBlue'>button</span> 
       <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> 
         <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span><span class='deepPurple'>{</span> 
-          <span class='skyblue'>children:</span> <span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span><span class='lightGray'>,</span>${
+          <span class='skyblue'>children:</span> ${
+            (!changeContent &&
+              `<span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span><span class='lightGray'>,</span>`) ||
+            changeContent
+          }${
       code
         ? `
           ${code}`
@@ -156,6 +161,10 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         // modalCommonsExampleCode.onCloseModal[idx],
         modalCommonsExampleCode.offAutoClose[idx],
       ])}`,
+    ],
+    selectClose: [
+      ``,
+      `<span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span>`,
     ],
   };
 };

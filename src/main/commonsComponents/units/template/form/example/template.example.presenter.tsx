@@ -22,6 +22,8 @@ import {
   UIProps,
 } from "./template.example.types";
 
+// 모든 코드들의 높이값을 저장하는 객체
+let allHeightList = {};
 export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
   const {
     exampleList,
@@ -32,6 +34,8 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
     isOneOpen,
     allLen,
   } = props;
+  // const [ allHeightList, setAllHeightList ] = useState({})
+
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
 
@@ -126,6 +130,8 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                                   isOpen={openList[_idx - 1]}
                                   changeOpenList={changeOpenList}
                                   codeIdx={_idx - 1}
+                                  changeContent={component.changeContent || ""}
+                                  allHeightList={allHeightList}
                                 />
                               )}
                             </ExampleListWrapper>

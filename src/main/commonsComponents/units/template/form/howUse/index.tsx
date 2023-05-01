@@ -56,7 +56,7 @@ export default function _HowUseForm({
         const scrollTop = window.scrollY;
         const endLine = // 종료 위치
           scrollTop +
-          (_wrapperRef.current.offsetTop - scrollTop) +
+          (_wrapperRef.current?.offsetTop - scrollTop) +
           _wrapperRef.current.clientHeight;
         setTempVers(vers);
 
@@ -124,7 +124,11 @@ export default function _HowUseForm({
 
         {codeInfo.basic[vers] !== undefined && (
           <_Copy
-            text={getExampleCode(codeInfo.basic[vers], exmapleContents, vers)}
+            text={getExampleCode({
+              code: codeInfo.basic[vers],
+              children: exmapleContents,
+              idx: vers,
+            })}
             type="Code"
           />
         )}

@@ -20,11 +20,17 @@ export default function getExampleCodeComponnet() {
     getCommonsInfo && getCommonsInfo[vers || 0];
 
   // 해당 모듈의 이름으로 호출하는 코드 출력
-  const getExampleCode = (
-    code: string,
-    children: React.ReactNode | string,
-    idx?: number
-  ): string => {
+  const getExampleCode = ({
+    code,
+    children,
+    idx,
+    changeContent,
+  }: {
+    code: string;
+    children: React.ReactNode | string;
+    idx?: number;
+    changeContent?: string;
+  }): string => {
     let str = "";
     str += `<span class='purple'>import</span>`;
     str += `<span class='yellow'> { </span>`;
@@ -49,7 +55,14 @@ export default function getExampleCodeComponnet() {
       str += `${commonsInfo.code}`;
     }
 
-    const getReturnStr = getReturn(getCommonsReturn(code, children, idx || 0));
+    const getReturnStr = getReturn(
+      getCommonsReturn({
+        code: code,
+        children: children,
+        idx: idx || 0,
+        changeContent,
+      })
+    );
     if (getReturnStr) str += `/&tap&/${getReturnStr}`;
     str += "/&tap&/<span class='yellow'>}</span>";
 
@@ -84,12 +97,18 @@ export default function getExampleCodeComponnet() {
   };
 
   // return 안에서 모듈 각각의 공통 태그들 추가하기
-  const getCommonsReturn = (
-    code: string,
-    children: React.ReactNode | string,
-    idx?: number
-  ) => {
-    const returnInfo = exampleCommonsReturnList[module];
+  const getCommonsReturn = ({
+    code,
+    children,
+    idx,
+    changeContent,
+  }: {
+    code: string;
+    children: React.ReactNode | string;
+    idx: number;
+    changeContent?: string;
+  }): string => {
+    const returnInfo = exampleCommonsReturnList(changeContent || "")[module];
     let _children = children;
     if (typeof children === "string") {
       _children = `<span class='lightGray'>${children}</span>`;
