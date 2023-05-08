@@ -25,7 +25,8 @@
     // "./src/**/*.ts",
     // "./src/**/*.tsx"
     "**/*.tsx",
-    "**/*.ts"
+    "**/*.ts",
+    "src/main/mainComponents/modules/modal/functional/index.tsx"
   ],
   "exclude": [
     "node_modules"

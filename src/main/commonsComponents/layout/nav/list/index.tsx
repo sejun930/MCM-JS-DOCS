@@ -83,7 +83,7 @@ export const ListWrapper = styled.ul`
           borderRadius: "10px",
           backgroundColor: "#aa5656",
           color: "white",
-          width: "16vw",
+          width: "calc(100% + 50px)",
         }}
     }
   }

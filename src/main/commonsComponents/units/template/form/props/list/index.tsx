@@ -1,26 +1,28 @@
 import styled from "styled-components";
 
-import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { PropsModuleListType } from "src/commons/data/props/props.commons.data";
 
-import { propsModuleList } from "src/commons/data/props/props.commons.data";
-
-export default function ModulePropsListFormPage() {
-  const [module] = useRecoilState(moduleState);
-  const list = propsModuleList[module] || [];
-
+export default function ModulePropsListFormPage({
+  list,
+  hideTitle,
+}: {
+  list: Array<PropsModuleListType>;
+  hideTitle?: boolean; // 타이틀 가리기 여부
+}) {
   return (
-    (list.length && (
+    (list && list.length && (
       <PropsTable border={1} className="props-list-wrapper">
         <caption>Props List</caption>
-        <thead>
-          <Tr>
-            <td>이름</td>
-            <td>설명</td>
-            <td>기본값 (Type)</td>
-            <td>필수 여부</td>
-          </Tr>
-        </thead>
+        {!hideTitle && (
+          <thead>
+            <Tr>
+              <td>이름</td>
+              <td>설명</td>
+              <td>기본값 (Type)</td>
+              <td>필수 여부</td>
+            </Tr>
+          </thead>
+        )}
         <tbody>
           {list.map((el, idx) => (
             <Tr

@@ -7,17 +7,21 @@ export default function ModalExamplePage() {
         Modal.open({
           children: (
             <div>
-              <span> 하위 모달을 종료하면 상위 모달도 함께 종료됩니다. </span>
+              <span> 상위 모달 </span>
               <Modal
                 show={true}
                 onCloseModal={() => Modal.close({ id: "parents-modal" })}
-                modalSize={{ width: "100px", height: "100px" }}
+                modalSize={{ width: "400px", height: "400px" }}
+                showBGAnimation={true}
+                showModalOpenAnimation={true}
               >
-                하위 모달
+                하위 모달을 종료하면 상위 모달도 함께 종료됩니다.
               </Modal>
             </div>
           ),
           id: "parents-modal",
+          showBGAnimation: true,
+          showModalOpenAnimation: true,
         })
       }
     >

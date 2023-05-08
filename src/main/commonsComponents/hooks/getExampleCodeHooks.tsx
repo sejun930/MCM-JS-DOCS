@@ -25,11 +25,13 @@ export default function getExampleCodeComponnet() {
     children,
     idx,
     changeContent,
+    funcName,
   }: {
     code: string;
     children: React.ReactNode | string;
     idx?: number;
     changeContent?: string;
+    funcName?: string;
   }): string => {
     let str = "";
     str += `<span class='purple'>import</span>`;
@@ -61,6 +63,7 @@ export default function getExampleCodeComponnet() {
         children: children,
         idx: idx || 0,
         changeContent,
+        funcName,
       })
     );
     if (getReturnStr) str += `/&tap&/${getReturnStr}`;
@@ -102,13 +105,18 @@ export default function getExampleCodeComponnet() {
     children,
     idx,
     changeContent,
+    funcName,
   }: {
     code: string;
     children: React.ReactNode | string;
     idx: number;
     changeContent?: string;
+    funcName?: string;
   }): string => {
-    const returnInfo = exampleCommonsReturnList(changeContent || "")[module];
+    const returnInfo = exampleCommonsReturnList({
+      changeContent: changeContent || "",
+      funcName,
+    })[module];
     let _children = children;
     if (typeof children === "string") {
       _children = `<span class='lightGray'>${children}</span>`;

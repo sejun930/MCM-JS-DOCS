@@ -19,6 +19,7 @@ export const CopyWrapper = styled.div`
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  padding-right: 10px;
 
   ${(props) =>
     props.isCode && {
@@ -82,6 +83,7 @@ export const CopyButton = styled.button`
   align-items: center;
   justify-content: center;
   position: absolute;
+  top: 0;
   right: 0;
 
   ${(props: StyleTypes) =>

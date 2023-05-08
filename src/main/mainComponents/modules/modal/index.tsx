@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
-import { versState } from "src/commons/store";
+import { versState, moduleState } from "src/commons/store";
 
 import styled from "@emotion/styled";
 import {
@@ -25,10 +25,14 @@ export default function MyModal() {
   // 모달을 오픈할 show state (true일 때 모달 오픈)
   const { getAllExampleComponentLength } = CommonsHooksComponents();
   const [vers] = useRecoilState(versState);
+  const [module] = useRecoilState(moduleState);
 
   const [isShow, setIsShow] = useState(
     new Array(getAllExampleComponentLength(modalExampleList(vers))).fill(false)
   );
+
+  // props 페이지의 ref 설정
+  const propsRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   // 버튼 클릭 시 모달 오픈
   const openModal = (idx: number) => (): void => {
@@ -63,9 +67,9 @@ export default function MyModal() {
           initProps={modalExampleInitProps}
           commonsProps={commonsProps}
         />
-        {/* {modalFunctionalData[vers] && <_FunctionalForm />} */}
+        {modalFunctionalData[vers] && <_FunctionalForm propsRef={propsRef} />}
         <_TreeForm />
-        <_PropsForm />
+        <_PropsForm propsRef={propsRef} />
         <_CommentsForm />
       </ModulesInfoWrapper>
     </Template>

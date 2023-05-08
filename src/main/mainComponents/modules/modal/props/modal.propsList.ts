@@ -6,7 +6,7 @@ export const modalPropsList: Array<PropsModuleListType> = [
     default: "-",
     type: "String | Node",
     notice:
-      "모달에 출력되는 내용을 나타냅니다. Modal.open을 사용하는 경우에는 children value 값을 설정해주세요.",
+      "모달에 출력되는 내용을 나타냅니다. Modal.open을 사용하는 경우에는 children Props를 전달해줘야 합니다.",
     isRequired: true,
   },
   {

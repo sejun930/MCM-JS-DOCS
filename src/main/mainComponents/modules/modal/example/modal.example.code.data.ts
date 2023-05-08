@@ -35,11 +35,17 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
 ];
 
 // 리턴될 때에 공통적으로 들어가는 코드 데이터
-export const modalReturnCommonsData = (
-  code: string,
-  text?: React.ReactNode | string,
-  changeContent?: string // content form 사용 여부, true일 경우 사용하지 않음
-): Array<string> => {
+export const modalReturnCommonsData = ({
+  code,
+  text,
+  changeContent, // content form 사용 여부, true일 경우 사용하지 않음
+  funcName, // 사용될 함수명
+}: {
+  code: string;
+  text?: React.ReactNode | string;
+  changeContent?: string;
+  funcName?: string;
+}): Array<string> => {
   return [
     `<span><</span><span class='darkBlue'>div</span><span>></span>
       <span><</span><span class='darkBlue'>button</span> <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>openModal</span><span class='blue'>}</span><span>></span> <span class='lightGray'>모달 실행하기</span> <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>
@@ -49,7 +55,9 @@ export const modalReturnCommonsData = (
     <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>`,
     `<span><</span><span class='darkBlue'>button</span> 
       <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> 
-        <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span><span class='yellow'>(</span><span class='deepPurple'>{</span> 
+        <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>${
+          funcName || "open"
+        }</span><span class='yellow'>(</span><span class='deepPurple'>{</span> 
           <span class='skyblue'>children:</span> ${
             (!changeContent &&
               `<span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span><span class='lightGray'>,</span>`) ||
@@ -164,7 +172,11 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
     ],
     selectClose: [
       ``,
-      `<span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span>`,
+      `${getCommonsHighlight.getComma([
+        `<span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span>`,
+        `         ` + modalCommonsExampleCode.showBGAnimation[idx],
+        `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
+      ])}`,
     ],
   };
 };

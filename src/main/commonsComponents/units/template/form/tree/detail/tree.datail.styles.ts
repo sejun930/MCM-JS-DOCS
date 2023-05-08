@@ -75,8 +75,8 @@ export const DetailTitle = styled.div`
   code {
     padding-left: 30px;
     padding-right: 12px;
-    display : flex;
-    align-items : center;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -88,7 +88,8 @@ export const ParentsWrapper = styled.div`
   .tree-detail-button {
     height: 100%;
     width: 100%;
-    background-color: gainsboro;
+    /* background-color: gainsboro; */
+    border-top: double 2px black;
     border-radius: 0px 0px 10px 0px;
 
     .my-parents {

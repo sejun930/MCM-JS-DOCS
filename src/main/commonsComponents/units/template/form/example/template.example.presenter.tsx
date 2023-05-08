@@ -6,6 +6,8 @@ import { _Button, _Title, _PText } from "mcm-js-commons";
 import _SubTitleTemplate from "../../title/subTitle";
 import _ExampleOptionalFormPage from "./optional";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { renderTemplateList } from "./template.example.data";
 import { Wrapper } from "../form.commons.styles";
 import {
@@ -69,7 +71,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
           exampleList?.length &&
           exampleList.map(
             (el, idx: number) =>
-              (!el.isHide && (
+              !el.isHide && (
                 <ExampleContentsItems
                   key={`${module}_${idx + 1}`}
                   isFull={el.isFull ?? false}
@@ -115,10 +117,8 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                               style={{ width }}
                             >
                               <ExampleListItems>
-                                {(renderTemplateList[module] &&
-                                  renderTemplateList[module](component)) || (
-                                  <></>
-                                )}
+                                {renderTemplateList[module] &&
+                                  renderTemplateList[module](component)}
                                 <_PText className="example-remarks">
                                   {component.remakrs}
                                 </_PText>
@@ -140,7 +140,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                       )}
                   </ExampleResultList>
                 </ExampleContentsItems>
-              )) || <></>
+              )
           )}
       </ExampleContentsWrapper>
     </Wrapper>
