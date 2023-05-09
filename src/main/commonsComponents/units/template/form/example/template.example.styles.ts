@@ -47,16 +47,6 @@ export const ExampleContentsItems = styled.div`
     font-weight: 700;
   }
 
-  ._open_module_button_ {
-    padding: 0.7rem 1.5rem;
-    border-radius: 10px;
-    background-color: #7b2869;
-    color: white;
-    font-weight: 700;
-    font-size: 14px;
-    width: fit-content;
-  }
-
   ${(props: StyleTypes) =>
     props.isFull && {
       width: "100%",

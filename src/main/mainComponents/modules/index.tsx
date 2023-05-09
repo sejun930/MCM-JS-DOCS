@@ -4,7 +4,6 @@ import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 
 export default function ModulePage({ module }: { module: string }) {
-  console.log(module);
   return (
     <Template>
       <ModulesInfoWrapper>

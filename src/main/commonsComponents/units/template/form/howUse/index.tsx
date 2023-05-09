@@ -57,7 +57,7 @@ export default function _HowUseForm({
         const endLine = // 종료 위치
           scrollTop +
           (_wrapperRef.current?.offsetTop - scrollTop) +
-          _wrapperRef.current.clientHeight;
+          _wrapperRef.current?.clientHeight;
         setTempVers(vers);
 
         if (!eventStart && scrollTop + bonusHeight >= endLine) {

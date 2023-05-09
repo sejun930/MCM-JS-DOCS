@@ -5,6 +5,7 @@ import { _PText } from "mcm-js-commons";
 
 import CommonsHooksComponents from "../../hooks/commonsHooks";
 import { CodeTypes } from "./copy.types";
+import { removeTag } from "../../functional";
 
 // 글자 복사 기능 컴포넌트
 export default function _Copy({
@@ -32,16 +33,6 @@ export default function _Copy({
 
   // 복사 확인 여부 (true일 경우 복사 완료)
   const [isCopied, setIsCopied] = useState(false);
-
-  // 태그 제거하기
-  const removeTag = (str: string) => {
-    return str
-      .split("</span>")
-      .map((el) =>
-        el.replace(el.substring(el.indexOf("<span"), el.indexOf(">") + 1), "")
-      )
-      .join("");
-  };
 
   // 탭 (공백) 적용하기
   const getTap = (str: string) => {

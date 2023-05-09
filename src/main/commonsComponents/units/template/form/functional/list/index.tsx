@@ -1,15 +1,24 @@
-import { MutableRefObject } from "react";
-import { useRecoilState } from "recoil";
-import { versState } from "src/commons/store";
+import {
+  FunctionalInfoWrapper,
+  FunctionalWrapper,
+  PropsInfoItems,
+  PropsInfoList,
+  PropsInfoWrapper,
+  TitleWrapper,
+  ExampleCodeBtnWrapper,
+  InfoListWrapper,
+  Info,
+} from "./index.styles";
 
+import { MutableRefObject } from "react";
 import { v4 } from "uuid";
-import styled from "@emotion/styled";
 
 import { FunctionalListType } from "src/commons/data/functional/functional.commons.data";
 import { _Title, _SpanText, _PText } from "mcm-js-commons";
 import ModulePropsListFormPage from "../../props/list";
 import _Copy from "src/main/commonsComponents/units/copy";
 
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 
 export default function FunctionalDetailInfoListPage({
@@ -21,7 +30,7 @@ export default function FunctionalDetailInfoListPage({
   list: Array<FunctionalListType>;
   propsRef?: MutableRefObject<HTMLDivElement>;
 }) {
-  const [vers] = useRecoilState(versState);
+  const { componentRender } = CommonsHooksComponents();
   const { getReturn, getCommonsReturn, getExampleCode } =
     getExampleCodeComponnet();
 
@@ -35,9 +44,13 @@ export default function FunctionalDetailInfoListPage({
     }
   };
 
+  const renderComponent = (str: any) => {
+    return str;
+  };
+
   return (
     <FunctionalWrapper>
-      {list.map((el, idx) => {
+      {list.map((el) => {
         const key = v4();
         return (
           <FunctionalInfoWrapper key={key}>
@@ -70,23 +83,42 @@ export default function FunctionalDetailInfoListPage({
               </PropsInfoItems>
               <PropsInfoItems>
                 <_PText className="props-title">- 📝 Example</_PText>
+                {el?.setExampleCode && (
+                  <ExampleCodeBtnWrapper>
+                    {componentRender(el.setExampleCode)}
+                  </ExampleCodeBtnWrapper>
+                )}
+
                 <_Copy
                   text={getExampleCode({
-                    code: "aa",
-                    idx: (vers || 0) + (idx + 1),
-                    children: "22",
+                    code: el.exampleCode,
+                    idx: -1,
+                    children: "",
                   })}
                   showText={getReturn(
                     getCommonsReturn({
-                      code: "aa",
-                      idx: (vers || 0) + (idx + 1),
-                      children: "22",
-                    })
+                      code: "",
+                      idx: -1,
+                      children: "",
+                    }) || el.exampleCode
                   )}
                   type="Code"
                   className="functional-props-code-wrapper"
                 />
               </PropsInfoItems>
+              {el.info && el.info.length && (
+                <PropsInfoItems>
+                  <_PText className="props-title">- 💡 사용시 참고사항 </_PText>
+                  <InfoListWrapper>
+                    {el.info.map((infoStr, key2) => (
+                      <Info
+                        key={`${key}_infoList_${key2}`}
+                        dangerouslySetInnerHTML={{ __html: infoStr }}
+                      />
+                    ))}
+                  </InfoListWrapper>
+                </PropsInfoItems>
+              )}
             </PropsInfoWrapper>
           </FunctionalInfoWrapper>
         );
@@ -94,75 +126,3 @@ export default function FunctionalDetailInfoListPage({
     </FunctionalWrapper>
   );
 }
-
-export const FunctionalWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  margin-top: 30px;
-`;
-
-export const FunctionalInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* border-bottom: solid 4px #aa5656; */
-`;
-
-export const TitleWrapper = styled.div`
-  /* align-items: center; */
-  /* justify-content: space-between; */
-  background-color: #eeeeee;
-  padding: 20px 24px;
-
-  .functional-name {
-    font-size: 18px;
-  }
-
-  .function-remarks {
-    font-size: 14px;
-    margin-top: 10px;
-    white-space: pre;
-    overflow: auto;
-  }
-`;
-
-export const PropsInfoWrapper = styled.div`
-  /* max-height: 0px; */
-  overflow: hidden;
-`;
-
-export const PropsInfoItems = styled.div`
-  padding: 24px 24px;
-  padding-right: 0px;
-  border-left: solid 4px rgba(170, 86, 86, 0.4);
-  /* border-bottom: double 2px #aa5656; */
-
-  .props-title {
-    font-weight: 500;
-  }
-
-  .functional-props-code-wrapper {
-    margin-top: 16px;
-  }
-`;
-
-export const PropsInfoList = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-
-  .same-props {
-    color: gray;
-    font-size: 14px;
-
-    .move-props-list {
-      color: blue;
-      font-weight: 500;
-    }
-  }
-
-  .props-list-wrapper {
-    margin-top: 10px;
-  }
-`;

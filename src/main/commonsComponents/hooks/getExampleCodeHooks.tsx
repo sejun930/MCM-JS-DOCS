@@ -64,7 +64,7 @@ export default function getExampleCodeComponnet() {
         idx: idx || 0,
         changeContent,
         funcName,
-      })
+      }) || code
     );
     if (getReturnStr) str += `/&tap&/${getReturnStr}`;
     str += "/&tap&/<span class='yellow'>}</span>";

@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { PropsModuleListType } from "../props/props.commons.data";
 
 export interface FunctionalListType {
@@ -7,10 +8,13 @@ export interface FunctionalListType {
     isSameContents?: boolean; // 본문의 props와 동일한지?
     list: Array<PropsModuleListType>; // props 리스트 정보
   };
+  exampleCode: string; // 예시용 코드
+  info?: Array<string>; // 추가 정보
+  setExampleCode?: ReactNode; // 예시 실행 코드
 }
 
-import { ModalFunctionalList } from "src/main/mainComponents/modules/modal/functional";
+import ModalFunctionalList from "src/main/mainComponents/modules/modal/functional";
 
 export const functionalList: { [key: string]: Array<FunctionalListType> } = {
-  Modal: ModalFunctionalList,
+  Modal: ModalFunctionalList(),
 };

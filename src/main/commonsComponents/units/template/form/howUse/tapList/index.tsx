@@ -32,7 +32,6 @@ export default function TapListPage({
 
     if (isFixedMode && changeTempVers) changeTempVers(i);
     setTimeout(() => {
-      console.log(i);
       setVers(i);
     }, 200);
   };

@@ -72,3 +72,19 @@ table {
   border-spacing: 0px;
   border-collapse: collapse;
 }
+
+.open_module_button {
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  border: double 3px #7b2869;
+  font-weight: 700;
+  font-size: 14px;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.open_module_button:hover {
+  background-color: #7b2869;
+  color: white;
+  border: double 3px white;
+}

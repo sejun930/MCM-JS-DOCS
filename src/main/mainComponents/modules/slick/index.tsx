@@ -6,22 +6,18 @@ export default function ModalExamplePage() {
       onClick={() =>
         Modal.open({
           children: (
-            <div>
-              <span> 상위 모달 </span>
-              <Modal
-                show={true}
-                onCloseModal={() => Modal.close({ id: "parents-modal" })}
-                modalSize={{ width: "400px", height: "400px" }}
-                showBGAnimation={true}
-                showModalOpenAnimation={true}
-              >
-                하위 모달을 종료하면 상위 모달도 함께 종료됩니다.
-              </Modal>
-            </div>
+            <button
+              onClick={() => {
+                alert("모달을 종료합니다.");
+                Modal.close({ id: "modal2" });
+              }}
+            >
+              모달 종료하기
+            </button>
           ),
-          id: "parents-modal",
           showBGAnimation: true,
           showModalOpenAnimation: true,
+          id: "modal",
         })
       }
     >
