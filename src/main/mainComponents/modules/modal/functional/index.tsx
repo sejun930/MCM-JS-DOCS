@@ -10,8 +10,11 @@ export default function ModalFunctionalList(): FunctionalListType[] {
       name: "open",
       remakrs: "모달을 실행하는 함수입니다.",
       props: { isSameContents: true, list: [] },
-      exampleCode: `<span><</span><span class='darkBlue'>button</span>
-      <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span>
+      exampleCode: `${getCommonsHighlight.tag.button({
+        children: getCommonsHighlight.text(" 모달 실행하기"),
+        clickEvent: {
+          hasStartSpace: true,
+          code: `
         <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open(</span><span class='deepPurple'>{</span>
           ${getCommonsHighlight.getComma([
             modalCommonsExampleCode.children("함수로 실행된 모달입니다.")[1],
@@ -19,10 +22,10 @@ export default function ModalFunctionalList(): FunctionalListType[] {
             `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
           ])}
         <span class='deepPurple'>}</span><span class='lightYellow'>)</span>
-      <span class='blue'>}</span>
-    <span>></span>
-      <span class='lightGray'>모달 실행하기</span>
-    <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
+      `,
+          useArrow: true,
+        },
+      })}`,
       setExampleCode: (
         <button
           className="open_module_button"
@@ -58,29 +61,32 @@ export default function ModalFunctionalList(): FunctionalListType[] {
           },
         ],
       },
-      exampleCode: `<span><</span><span class='darkBlue'>button</span>
-        <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span>
-          <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open(</span><span class='deepPurple'>{</span>
-            ${getCommonsHighlight.getComma([
-              `<span class='skyblue'>children:</span> <span class='blue'>(</span>
-              <span><</span><span class='darkBlue'>button</span>
-                <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='blue2'>=></span> <span class='deepPurple'>{</span>
-                  <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달을 종료합니다."</span><span class='blue'>)</span><span class='lightGray'>;</span>
-                  <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>(</span><span class='yellow'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span> <span class='yellow'>}</span><span class='blue'>)</span><span class='lightGray'>;</span>
-                <span class='deepPurple'>}</span><span class='yellow'>}</span>
-              <span>></span>
-                <span class='lightGray'>모달 종료하기</span>
-              <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>
-            <span class='blue'>)</span>`,
-              `         ` + modalCommonsExampleCode.showBGAnimation[1],
-              `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
-              `         <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span>`,
-            ])}
-          <span class='deepPurple'>}</span><span class='lightYellow'>)</span>
-        <span class='blue'>}</span>
-      <span>></span>
-          <span class='lightGray'>모달 실행하기</span>
-      <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
+      exampleCode: `${getCommonsHighlight.tag.button({
+        children: getCommonsHighlight.text(" 모달 실행하기"),
+        clickEvent: {
+          hasStartSpace: true,
+          code: `
+        <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open(</span><span class='deepPurple'>{</span>
+          ${getCommonsHighlight.getComma([
+            `<span class='skyblue'>children:</span> <span class='blue'>(</span>
+            <span><</span><span class='darkBlue'>button</span>
+              <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='blue2'>=></span> <span class='deepPurple'>{</span>
+                <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달을 종료합니다."</span><span class='blue'>)</span><span class='lightGray'>;</span>
+                <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>(</span><span class='yellow'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span> <span class='yellow'>}</span><span class='blue'>)</span><span class='lightGray'>;</span>
+              <span class='deepPurple'>}</span><span class='yellow'>}</span>
+            <span>></span>
+              <span class='lightGray'>모달 종료하기</span>
+            <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>
+          <span class='blue'>)</span>`,
+            `         ` + modalCommonsExampleCode.showBGAnimation[1],
+            `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
+            `         <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span>`,
+          ])}
+        <span class='deepPurple'>}</span><span class='lightYellow'>)</span>
+      `,
+          useArrow: true,
+        },
+      })}`,
       info: [
         "함수를 사용하지 않아도 열려있는 최하단 모달은 종료할 수 있습니다.",
         "id 선택자와 class 선택자가 중복으로 전달되면, <b>id 선택자가 우선</b>으로 지정됩니다.",

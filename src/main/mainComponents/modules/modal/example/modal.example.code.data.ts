@@ -3,6 +3,8 @@ import { ExampleCommonsTypes } from "src/commons/data/example/example.commons.da
 import { modalCommonsExampleCode } from "./modal.example.commons.code";
 import { getCommonsHighlight } from "src/commons/highlight";
 
+import { removeTag } from "src/main/commonsComponents/functional";
+
 export interface ExampleCodeListTypes {
   [key: string]: string[];
 }
@@ -46,46 +48,57 @@ export const modalReturnCommonsData = ({
   changeContent?: string;
   funcName?: string;
 }): Array<string> => {
+  text = removeTag(typeof text === "string" ? text : "");
+
   return [
-    `<span><</span><span class='darkBlue'>div</span><span>></span>
-      <span><</span><span class='darkBlue'>button</span> <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>openModal</span><span class='blue'>}</span><span>></span> <span class='lightGray'>모달 실행하기</span> <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>
-      <span><</span><span class='green'>Modal</span> ${code}<span>></span>
-        <span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>
-      <span><</span><span>/</span><span class='green'>Modal</span><span>></span>
-    <span><</span><span>/</span><span class='darkBlue'>div</span><span>></span>`,
-    `<span><</span><span class='darkBlue'>button</span> 
-      <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span> 
+    getCommonsHighlight.tag.div(`
+      ${getCommonsHighlight.tag.button({
+        children: getCommonsHighlight.text("모달 실행하기"),
+        clickEvent: {
+          // useArrow: true,
+          eventName: "openModal",
+          // code: "bbb",
+        },
+      })}
+      ${getCommonsHighlight.tag.component({
+        componentName: "Modal",
+        props: ` ${code}`,
+        children: getCommonsHighlight.tag.span(
+          typeof text === "string" ? text : ""
+        ),
+        childrenSpace: `
+        `,
+        endSpace: `
+      `,
+      })}
+    `),
+    `${getCommonsHighlight.tag.button({
+      children: getCommonsHighlight.text("모달 실행하기"),
+      endSpace: `
+      `,
+      clickEvent: {
+        useArrow: true,
+        code: `
         <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>${
           funcName || "open"
         }</span><span class='yellow'>(</span><span class='deepPurple'>{</span> 
           <span class='skyblue'>children:</span> ${
             (!changeContent &&
-              `<span><</span><span class='darkBlue'>span</span><span>></span> ${text} <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span><span class='lightGray'>,</span>`) ||
+              `${getCommonsHighlight.tag.span(
+                typeof text === "string" ? text : ""
+              )}<span class='lightGray'>,</span>`) ||
             changeContent
           }${
-      code
-        ? `
+          code
+            ? `
           ${code}`
-        : ""
-    } 
+            : ""
+        } 
         <span class='deepPurple'>}</span><span class='yellow'>)</span>
-      <span class='blue'>}</span>
-    <span>></span>
-      <span class='lightGray'>모달 실행하기</span> 
-    <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
-    // `<span><</span><span class='darkBlue'>button</span>
-    //   <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>()</span> <span class='blue2'>=></span>
-    //     <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open(</span><span class='deepPurple'>{</span>
-    //       ${getCommonsHighlight.getComma([
-    //         modalCommonsExampleCode.children("함수로 실행된 모달입니다.")[1],
-    //         `         ` + modalCommonsExampleCode.showBGAnimation[1],
-    //         `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
-    //       ])}
-    //     <span class='deepPurple'>}</span><span class='lightYellow'>)</span>
-    //   <span class='blue'>}</span>
-    // <span>></span>
-    //   <span class='lightGray'>모달 실행하기</span>
-    // <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
+      `,
+        hasStartSpace: true,
+      },
+    })}`,
   ];
 };
 
@@ -125,7 +138,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
         ${modalCommonsExampleCode.modalSize("30%", "40%")[idx]}
-    `,
+      `,
       `${getCommonsHighlight.getComma([
         // modalCommonsExampleCode.onCloseModal[idx],
         modalCommonsExampleCode.modalSize("30%", "40%")[idx],
@@ -179,7 +192,6 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.closeMent("닫기")[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        // modalCommonsExampleCode.onCloseModal[idx],
         modalCommonsExampleCode.offAutoClose[idx],
       ])}`,
     ],

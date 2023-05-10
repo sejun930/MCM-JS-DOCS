@@ -69,7 +69,7 @@ export const CloseMultipleModal = () => {
         onCloseModal={() => Modal.close({ id: "parents-modal" })}
         modalSize={{ width: "400px", height: "400px" }}
       >
-        하위 모달을 종료하면 상위 모달도 함께 종료됩니다.
+        <span> 하위 모달을 종료하면 상위 모달도 함께 종료됩니다. </span>
       </Modal>
     </div>
   );
