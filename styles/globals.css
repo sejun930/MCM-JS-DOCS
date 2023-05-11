@@ -88,3 +88,7 @@ table {
   color: white;
   border: double 3px white;
 }
+
+.error-modal .mcm-modal-items {
+  border: double 6px #aa5656;
+}

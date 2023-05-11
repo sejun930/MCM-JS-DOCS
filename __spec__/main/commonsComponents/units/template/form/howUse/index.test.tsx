@@ -9,7 +9,7 @@ export default describe("HowUse Template Page", () => {
   test("Snapshot", () => {
     const { container } = render(
       <RecoilRoot>
-        <_HowUseForm code={modalCodeList.basic} exmapleContents={<div></div>} />
+        <_HowUseForm cod={modalCodeList.basic} exmapleContents={<div></div>} />
       </RecoilRoot>
     );
     expect(container).toMatchSnapshot();

@@ -37,7 +37,7 @@ export const TreeListWrapper = styled.div`
             width: 100%;
             height: 30px;
             --left: 0;
-            padding-left: calc(var(--left) * 20px);
+            padding-left: calc((var(--left) * 20px) + 10px);
           }
         }
       }

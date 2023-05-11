@@ -5,9 +5,19 @@ export default function ModalExamplePage() {
     <button
       onClick={() =>
         Modal.open({
-          children: <span> 함수로 실행된 모달입니다. </span>,
+          children: (
+            <button
+              onClick={() => {
+                alert("모달을 종료합니다.");
+                Modal.close({ id: "modal" });
+              }}
+            >
+              모달 종료하기
+            </button>
+          ),
           showBGAnimation: true,
           showModalOpenAnimation: true,
+          id: "modal",
         })
       }
     >
