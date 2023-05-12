@@ -88,4 +88,10 @@ export const modalPropsList: Array<PropsModuleListType> = [
     notice:
       "true를 전달하면 모달창 외부를 클릭해도 닫기 이벤트가 실행되지 않습니다.",
   },
+  {
+    name: "onAfterCloseEvent",
+    default: "-",
+    type: "Function",
+    notice: "모달이 종료되는 시점 후에 실행될 이벤트입니다.",
+  },
 ];

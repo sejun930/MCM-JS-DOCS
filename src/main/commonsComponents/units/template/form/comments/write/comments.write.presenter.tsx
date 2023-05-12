@@ -1,8 +1,10 @@
 import { ChangeEvent, MutableRefObject } from "react";
+import { CSSProperties } from "styled-components";
 import styled from "@emotion/styled";
 
 import { _Input, _SpanText } from "mcm-js-commons";
 import { CategoryTypes } from "./comments.write.types";
+import StarsForm from "./stars";
 
 export default function CommentsWriteUIPage({
   category,
@@ -17,7 +19,9 @@ export default function CommentsWriteUIPage({
   category: CategoryTypes;
   selectCategory: (e: ChangeEvent<HTMLSelectElement>) => void;
   categoryList: Array<{ name: string; value: string }>;
-  changeInfo: (value: string) => (name: "contents" | "password") => void;
+  changeInfo: (
+    value: string | number
+  ) => (name: "contents" | "password" | "rating") => void;
   write: () => void;
   categoryRef: MutableRefObject<HTMLSelectElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
@@ -47,9 +51,18 @@ export default function CommentsWriteUIPage({
             ))}
           </SelectCategory>
 
-          {category === "review" && (
-            <OptionItems className="rating-wrapper">평점</OptionItems>
-          )}
+          <OptionItems
+            className="rating-wrapper"
+            isRating={true}
+            show={category === "review"}
+          >
+            <StarsForm
+              changeEvent={(rating: number) => {
+                changeInfo(rating)("rating");
+              }}
+              category={category}
+            />
+          </OptionItems>
           <OptionItems>
             <_Input
               onChangeEvent={(value) => changeInfo(value)("password")}
@@ -85,6 +98,8 @@ export default function CommentsWriteUIPage({
 
 interface StyleTypes {
   category?: CategoryTypes;
+  isRating?: boolean;
+  show?: boolean;
 }
 
 export const Form = styled.form`
@@ -107,7 +122,8 @@ export const WriteWrapper = styled.article`
       .contents-input {
         min-height: 180px;
         max-height: 300px;
-        padding: 10px;
+        padding: 15px;
+        padding-top: 20px;
         font-size: 16px;
       }
     }
@@ -117,7 +133,6 @@ export const WriteWrapper = styled.article`
 export const SelectCategory = styled.select`
   font-weight: 700;
   width: 100%;
-  /* min-height: 60%; */
   height: 100%;
   cursor: pointer;
   border: unset;
@@ -142,20 +157,6 @@ export const OptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-right: solid 2px black;
-
-  @keyframes TOGGLE_RATING_WRAPPER {
-    from {
-      min-height: 0px;
-    }
-    to {
-      min-height: 40px;
-    }
-  }
-
-  .rating-wrapper {
-    animation: TOGGLE_RATING_WRAPPER 0.2s;
-  }
-  /* border: solid 1px black; */
 `;
 
 export const OptionItems = styled.div`
@@ -163,8 +164,24 @@ export const OptionItems = styled.div`
   align-items: center;
   border-top: dotted 1px black;
   min-height: 40px;
+  overflow: hidden;
 
-  /* padding: 8px; */
+  ${(props: StyleTypes) => {
+    const styles: { [key: string]: string } & CSSProperties = {};
+
+    if (props.isRating) {
+      styles.transition = "all 0.3s";
+      styles.minHeight = "0px";
+      styles.maxHeight = "0px";
+    }
+
+    if (props.show) {
+      styles.minHeight = "40px";
+      styles.maxHeight = "40px";
+    }
+
+    return styles;
+  }}
 
   .mcm-input-unit-wrapper {
     height: 100%;

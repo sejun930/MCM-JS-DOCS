@@ -5,14 +5,22 @@ import { _Title, _Button } from "mcm-js-commons";
 
 export default function ErrorModalForm({
   errorMessage,
+  errorEvent,
 }: {
   errorMessage: string;
+  errorEvent?: () => void;
 }) {
+  console.log(errorEvent);
   return (
     <Wrapper>
-      <_Title>{errorMessage}</_Title>
+      <_Title>🙇 {errorMessage}</_Title>
       <ButtonWrapper>
-        <_Button onClickEvent={() => Modal.close({ className: "error-modal" })}>
+        <_Button
+          onClickEvent={() => {
+            Modal.close({ className: "error-modal" });
+            if (errorEvent) errorEvent();
+          }}
+        >
           확인
         </_Button>
       </ButtonWrapper>
