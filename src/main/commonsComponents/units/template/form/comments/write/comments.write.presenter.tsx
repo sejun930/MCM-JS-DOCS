@@ -1,43 +1,39 @@
-import { ChangeEvent, MutableRefObject } from "react";
+import { ChangeEvent, FormEvent, MutableRefObject } from "react";
 import { CSSProperties } from "styled-components";
 import styled from "@emotion/styled";
 
 import { _Input, _SpanText } from "mcm-js-commons";
-import { CategoryTypes } from "./comments.write.types";
+import { CategoryTypes, InfoTypes } from "./comments.write.types";
 import StarsForm from "./stars";
 
 export default function CommentsWriteUIPage({
-  category,
-  selectCategory,
   categoryList,
   changeInfo,
+  info,
   write,
   categoryRef,
   contentsRef,
   passwordRef,
 }: {
-  category: CategoryTypes;
-  selectCategory: (e: ChangeEvent<HTMLSelectElement>) => void;
   categoryList: Array<{ name: string; value: string }>;
-  changeInfo: (
-    value: string | number
-  ) => (name: "contents" | "password" | "rating") => void;
-  write: () => void;
+  changeInfo: (value: string | number) => (name: string) => void;
+  info: InfoTypes;
+  write: (e?: FormEvent<Element>) => void;
   categoryRef: MutableRefObject<HTMLSelectElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
   passwordRef: MutableRefObject<HTMLInputElement>;
 }) {
   return (
-    <Form>
+    <Form onSubmit={write}>
       <fieldset>
         <legend>댓글 작성</legend>
       </fieldset>
       <WriteWrapper>
         <OptionWrapper>
           <SelectCategory
-            onChange={selectCategory}
-            category={category}
-            defaultValue={""}
+            onChange={(e) => changeInfo(String(e.target.value))("category")}
+            category={info.category}
+            value={info.category}
             ref={categoryRef}
           >
             {categoryList.map((category) => (
@@ -54,13 +50,14 @@ export default function CommentsWriteUIPage({
           <OptionItems
             className="rating-wrapper"
             isRating={true}
-            show={category === "review"}
+            show={info.category === "review"}
           >
             <StarsForm
+              rating={info.rating}
               changeEvent={(rating: number) => {
                 changeInfo(rating)("rating");
               }}
-              category={category}
+              category={info.category}
             />
           </OptionItems>
           <OptionItems>
@@ -70,6 +67,8 @@ export default function CommentsWriteUIPage({
               inputType="password"
               placeHolder="비밀번호 입력"
               inputRef={passwordRef}
+              value={info.password}
+              delay={200}
             />
           </OptionItems>
         </OptionWrapper>
@@ -81,6 +80,8 @@ export default function CommentsWriteUIPage({
           onSubmitEvent={write}
           inputRef={contentsRef}
           maxLength={300}
+          delay={200}
+          value={info.contents}
         />
       </WriteWrapper>
       {/* <OptionWrapper>
@@ -97,7 +98,7 @@ export default function CommentsWriteUIPage({
 }
 
 interface StyleTypes {
-  category?: CategoryTypes;
+  category?: string;
   isRating?: boolean;
   show?: boolean;
 }
@@ -111,7 +112,7 @@ export const Form = styled.form`
 
 export const WriteWrapper = styled.article`
   display: flex;
-  border: double 6px black;
+  border: double 3px black;
 
   .mcm-input-unit-wrapper {
     width: 100%;

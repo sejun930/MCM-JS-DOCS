@@ -25,8 +25,10 @@ export default function StarsForm({
   }, []);
 
   useEffect(() => {
-    if (selectRating) {
-      selectStar(selectRating);
+    if (!category) {
+      selectStar(0);
+    } else if (selectRating) {
+      selectRating;
     }
   }, [category]);
 
@@ -71,7 +73,7 @@ export default function StarsForm({
             (selectRating !== key + 1 && selectStar(key + 1)) || undefined
           }
           onMouseEnter={() => hoverStar(key + 1)}
-          className={`star`}
+          className={`star ${(selectRating >= key + 1 && "select-star") || ""}`}
           type="button"
         >
           ⭐

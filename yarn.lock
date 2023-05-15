@@ -5938,6 +5938,11 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
+
 css-color-keywords@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/css-color-keywords/-/css-color-keywords-1.0.0.tgz#fea2616dc676b2962686b3af8dbdbe180b244e05"
@@ -9816,10 +9821,10 @@ mcm-js-commons@^0.0.43:
     react-dom "18.2.0"
     uuid "^9.0.0"
 
-mcm-js-commons@^0.0.47:
-  version "0.0.47"
-  resolved "https://registry.yarnpkg.com/mcm-js-commons/-/mcm-js-commons-0.0.47.tgz#3e0eafc0484c777b80382f098ac422ae615e2878"
-  integrity sha512-+itC7DbOpNkWVPr1lZTXkh1wYFsPy7l/ri1qQxPWoxlW26Q37kPc1EmdxsDcZW7j+NTkusRNLb1ybnrTL5vg8g==
+mcm-js-commons@^0.0.49:
+  version "0.0.49"
+  resolved "https://registry.yarnpkg.com/mcm-js-commons/-/mcm-js-commons-0.0.49.tgz#55fc05d2e13244951540e8aa380314ae94810e5d"
+  integrity sha512-TydCVWGRzJWAeeWwGoBHTUy40uRDAE8oJNbbwPDy6bC1l3xD5JluNAS1GxCFeQ/bcSFN+PegSvzfai6BNeAfzg==
   dependencies:
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"

@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+
+// import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,10 +14,19 @@ const firebaseConfig = {
   projectId: "mcm-js",
   storageBucket: "mcm-js.appspot.com",
   messagingSenderId: "526957034744",
-  appId: "1:526957034744:web:f2dde9e0325535afe18f0d",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_ID,
   measurementId: "G-B6KWZ1B1D8",
 };
 
 // Initialize Firebase
-export const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const db = firebase.firestore(firebaseApp);
 // export const analytics = getAnalytics(firebaseApp);
+
+// 서버 타임 가져오기
+export const getServerTime = () => {
+  return firebase.firestore.FieldValue.serverTimestamp();
+};
+
+// 타입 리턴하기
+export type FieldValue = firebase.firestore.FieldValue;

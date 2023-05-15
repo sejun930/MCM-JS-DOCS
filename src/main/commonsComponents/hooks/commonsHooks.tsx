@@ -58,6 +58,34 @@ export default function CommonsHooksComponents() {
     }, "");
   };
 
+  // 비밀번호 해쉬화
+  const getHashPassword = async (
+    data:
+      | Array<string | number> // 배열
+      | { [key: string]: string | number } // 객체
+      | string // 문자열
+      | number, // 숫자
+    salt?: string
+  ) => {
+    const { createHash } = await import("crypto");
+    let str: string = String(data);
+
+    // 객체일 경우 value 값만 뽑아 배열에 저장
+    if (typeof data === "object" && !Array.isArray(data)) {
+      data = Object.values(data);
+    }
+    // 배열 데이터는 하나의 문자열로 뭉치기
+    if (typeof data === "object") {
+      str = data.join(" + ");
+    }
+    // salt 적용하기
+    let _salt = process.env.NEXT_PUBLIC_SALT || "mcm-sejun3278-Salt-data-0515";
+    if (salt) _salt = salt;
+
+    str += _salt;
+    return createHash("sha256").update(str).digest("hex");
+  };
+
   return {
     componentRender,
     getAllComponentsClassName,
@@ -65,5 +93,6 @@ export default function CommonsHooksComponents() {
     getModuleNamewithJadenCase,
     getAllExampleComponentLength,
     getOriginTemplate,
+    getHashPassword,
   };
 }

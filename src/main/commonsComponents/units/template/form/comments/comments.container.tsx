@@ -1,33 +1,42 @@
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { moduleState } from "src/commons/store";
 import _CommentsUIForm from "./comments.presenter";
 
-import {
-  collection,
-  addDoc,
-  getDocs,
-  getFirestore,
-} from "firebase/firestore/lite";
-import { firebaseApp } from "src/commons/libraries/firebase";
+import { db } from "src/commons/libraries/firebase";
 
 interface CommentsTypes {
-  writer: string;
+  contents: string;
   rating: number;
 }
 
 export default function _CommentsForm() {
+  const [module] = useRecoilState(moduleState);
   const [commentsList, setCommentsList] = useState<
     Array<{ [key: number]: CommentsTypes }>
   >([]);
 
   useEffect(() => {
-    // 댓글 리스트 가져오기
-    getDocs(collection(getFirestore(firebaseApp), "comments"))
-      .then((data) => {
-        const datas = data.docs.map((el) => el.data());
-        setCommentsList(datas);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    if (module) {
+      // 댓글 리스트 가져오기
+      db.collection("comments")
+        .doc(module)
+        .collection("comment")
+        .get()
+        .then((result) => {
+          if (result.size) {
+            const datas: Array<CommentsTypes> = [];
+            result.forEach((data) => {
+              datas.push(data.data() as CommentsTypes);
+            });
+            console.log(datas);
+          }
+        })
+        .catch((err) => {
+          console.log(`댓글을 정상적으로 불러오지 못했습니다. : ${err}`);
+        });
+    }
+  }, [module]);
 
-  return <_CommentsUIForm />;
+  return <_CommentsUIForm module={module} />;
 }
