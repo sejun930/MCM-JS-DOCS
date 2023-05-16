@@ -9,7 +9,11 @@ import CommentsWriteUIPage from "./comments.write.presenter";
 import { Modal } from "mcm-js";
 
 import ErrorModalForm from "../error";
-import { db, getServerTime, FieldValue } from "src/commons/libraries/firebase";
+import {
+  getServerTime,
+  FieldValue,
+  getDoc,
+} from "src/commons/libraries/firebase";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import {
@@ -22,7 +26,15 @@ import {
 // 중복 실행 방지
 let writing = false;
 let clicked = false;
-export default function CommentsWritePage({ module }: { module: string }) {
+export default function CommentsWritePage({
+  module,
+  changeCategory,
+  fetchCommentsList,
+}: {
+  module: string;
+  changeCategory: (category: string) => void;
+  fetchCommentsList: (category: string) => void;
+}) {
   const { getHashPassword } = CommonsHooksComponents();
   // 카테고리 선택
   const [categoryList, setCategoryList] = useState<Array<CategoryListType>>([
@@ -31,7 +43,9 @@ export default function CommentsWritePage({ module }: { module: string }) {
 
   // 정보 저장하기
   const [info, setInfo] = useState<
-    { [key: string]: string | number | Date | null | FieldValue } & InfoTypes
+    {
+      [key: string]: string | number | Date | null | FieldValue | boolean;
+    } & InfoTypes
   >({
     ...initInfo,
   });
@@ -174,13 +188,31 @@ export default function CommentsWritePage({ module }: { module: string }) {
         writing = true;
 
         try {
-          const addComments = await db
-            .collection("comments")
-            .doc(module)
-            .collection("comment")
-            .add(info);
+          const addComments = getDoc("comments", module, "comment");
+          await addComments.add(info);
 
-          console.log(addComments);
+          // 새 정보 가져온 후 저장하기
+          changeCategory(info.category);
+          fetchCommentsList(info.category);
+
+          // 카테고리 개수 올리기
+          getDoc("comments", module, "count")
+            .where("category", "==", info.category)
+            .get()
+            .then((result) => {
+              result.forEach((data) => {
+                const docId = data.id;
+                const originCount = data.data().count;
+
+                getDoc("comments", module, "count")
+                  .doc(docId)
+                  .update({
+                    category: info.category,
+                    count: originCount + 1,
+                  });
+              });
+            });
+
           openErrorModal({
             message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
             className: "success-modal",

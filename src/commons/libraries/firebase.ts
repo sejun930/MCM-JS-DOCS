@@ -28,5 +28,46 @@ export const getServerTime = () => {
   return firebase.firestore.FieldValue.serverTimestamp();
 };
 
+// doc 가져오기
+export const getDoc = (
+  parentCollection: string,
+  parentDoc?: string,
+  childrenCollection?: string
+) => {
+  let _doc: firebase.firestore.CollectionReference =
+    db.collection(parentCollection);
+
+  // 콜렉션 안에 있는 문서 출력
+  // @ts-ignore
+  if (parentDoc) _doc = _doc.doc(parentDoc);
+  // 하위 문서 안에 있는 콜렉션 출력
+  // @ts-ignore
+  if (childrenCollection) _doc = _doc.collection(childrenCollection);
+
+  return _doc;
+};
+
+// 결과 배열에 담기
+export const getResult = (
+  data: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
+) => {
+  const result: Array<any> = [];
+
+  data.forEach(
+    (
+      el: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+    ) => {
+      result.push(el.data());
+    }
+  );
+  console.log(result);
+
+  return result;
+};
+
 // 타입 리턴하기
 export type FieldValue = firebase.firestore.FieldValue;
+export type DocumentData = firebase.firestore.DocumentData;
+export type QuerySnapshot = firebase.firestore.QuerySnapshot;
+export type QuerySnapshot_DocumentData =
+  firebase.firestore.QuerySnapshot<DocumentData>;
