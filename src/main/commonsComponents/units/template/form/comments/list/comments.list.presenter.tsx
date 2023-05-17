@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { InfoTypes, categoryInitList } from "../write/comments.write.types";
 
-import { _PText, _Button } from "mcm-js-commons";
+import { _PText, _Button, _SpanText } from "mcm-js-commons";
+import { categoryName } from "../write/comments.write.types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CommentsListUIPage({
   commentsList,
@@ -37,6 +39,7 @@ export default function CommentsListUIPage({
           );
         })}
       </CategoryWrapper>
+
       {!commentsList.length ? (
         <EmptyWrapper>
           <_PText className="empty-list">
@@ -46,9 +49,22 @@ export default function CommentsListUIPage({
         </EmptyWrapper>
       ) : (
         <CommentListItems>
-          {/* <_PText className="leng">
-            현재 {commentsList.length}개의 댓글이 등록되어 있습니다.
-          </_PText> */}
+          {commentsList.map((el) => {
+            return (
+              <CommentsList key={uuidv4()}>
+                <CommentsInfoWrapper>
+                  {!category && (
+                    <_SpanText className="category-label">
+                      {categoryName[el.category]}
+                    </_SpanText>
+                  )}
+                  <_SpanText className="category-contents">
+                    {el.contents}
+                  </_SpanText>
+                </CommentsInfoWrapper>
+              </CommentsList>
+            );
+          })}
         </CommentListItems>
       )}
     </CommentsListWrapper>
@@ -63,8 +79,7 @@ export const CommentsListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-
-  /* margin-top: 30px; */
+  gap: 50px 0px;
 `;
 
 export const CategoryWrapper = styled.ul`
@@ -110,12 +125,50 @@ export const EmptyWrapper = styled.div`
   }
 `;
 
-export const CommentListItems = styled.div`
+export const CommentListItems = styled.ul`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 
   .leng {
     font-size: 14px;
+  }
+`;
+
+export const CommentsList = styled.li`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-top: dotted 1px black;
+  gap: 20px 0px;
+`;
+
+export const CommentsInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0px 20px;
+
+  @keyframes SHOW_CATEGORY {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+  animation: SHOW_CATEGORY 0.4s ease;
+
+  .category-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    background-color: #c88ea7;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 6px 0px;
+    border-radius: 10px;
+    min-width: 70px;
   }
 `;

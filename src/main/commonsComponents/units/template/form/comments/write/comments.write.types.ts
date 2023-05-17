@@ -37,3 +37,10 @@ export const categoryInitList: Array<CategoryListType> = [
   { name: "문의", value: "question" },
   { name: "리뷰", value: "review" },
 ];
+
+export const categoryName: { [key: string]: string } = categoryInitList
+  .filter((el) => el.value)
+  .reduce((acc: { [key: string]: string }, cur) => {
+    acc[cur.value] = cur.name;
+    return acc;
+  }, {});

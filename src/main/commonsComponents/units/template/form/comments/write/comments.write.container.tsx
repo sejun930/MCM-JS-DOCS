@@ -28,12 +28,14 @@ let writing = false;
 let clicked = false;
 export default function CommentsWritePage({
   module,
-  changeCategory,
+  category,
   fetchCommentsList,
+  saveCategoryCount,
 }: {
   module: string;
-  changeCategory: (category: string) => void;
+  category: string;
   fetchCommentsList: (category: string) => void;
+  saveCategoryCount: () => void;
 }) {
   const { getHashPassword } = CommonsHooksComponents();
   // 카테고리 선택
@@ -192,8 +194,8 @@ export default function CommentsWritePage({
           await addComments.add(info);
 
           // 새 정보 가져온 후 저장하기
-          changeCategory(info.category);
-          fetchCommentsList(info.category);
+          fetchCommentsList(category);
+          // saveCategoryCount();
 
           // 카테고리 개수 올리기
           getDoc("comments", module, "count")
