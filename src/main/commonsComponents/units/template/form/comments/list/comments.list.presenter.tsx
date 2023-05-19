@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import { InfoTypes, categoryInitList } from "../write/comments.write.types";
+import { getDateForm } from "src/main/commonsComponents/functional";
 
 import { _PText, _Button, _SpanText } from "mcm-js-commons";
 import { categoryName } from "../write/comments.write.types";
 import { v4 as uuidv4 } from "uuid";
+import StarsForm from "../write/stars";
 
 export default function CommentsListUIPage({
   commentsList,
@@ -50,6 +52,15 @@ export default function CommentsListUIPage({
       ) : (
         <CommentListItems>
           {commentsList.map((el) => {
+            let date; // 작성 일자 저장
+            if (el.createdAt)
+              date = getDateForm(
+                new Date(
+                  el.createdAt.seconds * 1000 +
+                    el.createdAt.nanoseconds / 1000000
+                )
+              );
+
             return (
               <CommentsList key={uuidv4()}>
                 <CommentsInfoWrapper>
@@ -58,10 +69,19 @@ export default function CommentsListUIPage({
                       {categoryName[el.category]}
                     </_SpanText>
                   )}
+                  {el.category === "review" && (
+                    <StarsForm isView category="review" rating={el.rating} />
+                  )}
                   <_SpanText className="category-contents">
                     {el.contents}
+                    <b className="createdAt">{date}</b>
                   </_SpanText>
                 </CommentsInfoWrapper>
+                <OptionalWrapper className="optional">
+                  <OptaionalItems>수정</OptaionalItems>
+                  <OptaionalItems>삭제</OptaionalItems>
+                  <OptaionalItems>답변</OptaionalItems>
+                </OptionalWrapper>
               </CommentsList>
             );
           })}
@@ -139,7 +159,19 @@ export const CommentsList = styled.li`
   flex-direction: column;
   padding: 20px;
   border-top: dotted 1px black;
-  gap: 20px 0px;
+  /* gap: 20px 0px; */
+  transition: all 0.3s ease-out;
+  min-height: 70px;
+
+  :hover {
+    background-color: #dddddd;
+
+    /* .optional {
+      position: relative;
+      max-height: 40px;
+      padding-top: 20px;
+    } */
+  }
 `;
 
 export const CommentsInfoWrapper = styled.div`
@@ -170,5 +202,25 @@ export const CommentsInfoWrapper = styled.div`
     padding: 6px 0px;
     border-radius: 10px;
     min-width: 70px;
+    cursor: default;
+  }
+
+  .createdAt {
+    font-size: 12px;
+    padding-left: 10px;
+    color: #888888;
+    font-family: "Manlo";
+    word-spacing: 1px;
   }
 `;
+
+export const OptionalWrapper = styled.ul`
+  display: flex;
+  gap: 0px 10px;
+  transition: all 0.4s ease;
+  max-height: 0px;
+  overflow: hidden;
+  /* position: absolute; */
+`;
+
+export const OptaionalItems = styled.li``;

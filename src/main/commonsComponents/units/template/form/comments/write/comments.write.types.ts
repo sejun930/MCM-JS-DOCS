@@ -1,18 +1,35 @@
 import { FieldValue } from "src/commons/libraries/firebase";
 
-export interface InfoTypes {
+interface WriteCommonsTypes {
   category: string;
   password: string;
   contents: string;
   rating: number;
-  createdAt: FieldValue | null;
-  modifyAt: FieldValue | null;
-  deletedAt: FieldValue | null;
   isCompleteBug: boolean; // 버그가 수정되었는지에 대한 여부 (true : 수정 완료)
 }
 
+// 작성용 type
+export type WriteInfoTypes = WriteCommonsTypes & {
+  createdAt: FieldValue | null;
+  modifyAt: FieldValue | null;
+  deletedAt: FieldValue | null;
+};
+
+// 날짜 관련 type
+interface DateTypes {
+  seconds: number;
+  nanoseconds: number;
+}
+
+// 렌더용 type
+export type InfoTypes = WriteCommonsTypes & {
+  createdAt: DateTypes | null;
+  modifyAt: DateTypes | null;
+  deletedAt: DateTypes | null;
+};
+
 // 정보 저장하기
-export const initInfo: InfoTypes = {
+export const initInfo: WriteInfoTypes = {
   category: "",
   password: "",
   contents: "",

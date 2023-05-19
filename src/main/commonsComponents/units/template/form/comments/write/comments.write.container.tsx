@@ -18,7 +18,7 @@ import {
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import {
   initInfo,
-  InfoTypes,
+  WriteInfoTypes,
   categoryInitList,
   CategoryListType,
 } from "./comments.write.types";
@@ -47,7 +47,7 @@ export default function CommentsWritePage({
   const [info, setInfo] = useState<
     {
       [key: string]: string | number | Date | null | FieldValue | boolean;
-    } & InfoTypes
+    } & WriteInfoTypes
   >({
     ...initInfo,
   });

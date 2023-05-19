@@ -9,15 +9,17 @@ export default function StarsForm({
   rating,
   category,
   changeEvent,
+  isView,
 }: {
   rating?: number; // 평점 정보, 있다면 defaultValue로 노출
   category: string;
-  changeEvent: (rating: number) => void;
+  changeEvent?: (rating: number) => void;
+  isView?: boolean;
 }) {
   const [starList, setStarList] = useState<Array<Element>>([]);
 
   useEffect(() => {
-    selectRating = rating || 0;
+    selectRating = 0;
 
     if (!starList.length) {
       setStarList(Array.from(document.getElementsByClassName("star")));
@@ -61,26 +63,43 @@ export default function StarsForm({
 
       if (key + 1 === selectRating) node.classList.add("last-star");
     });
-    changeEvent(selectRating);
+    if (!isView && changeEvent) changeEvent(selectRating);
   };
+  console.log(selectRating, isView);
 
   return (
-    <Wrapper onMouseLeave={() => hoverStar(0, true)}>
-      {Array.from(new Array(5), () => 1).map((_, key) => (
-        <Star
-          key={uuidv4()}
-          onClick={() =>
-            (selectRating !== key + 1 && selectStar(key + 1)) || undefined
-          }
-          onMouseEnter={() => hoverStar(key + 1)}
-          className={`star ${(selectRating >= key + 1 && "select-star") || ""}`}
-          type="button"
-        >
-          ⭐
-        </Star>
-      ))}
+    <Wrapper onMouseLeave={() => hoverStar(0, true)} isView={isView}>
+      {!isView ? (
+        Array.from(new Array(5), () => 1).map((_, key) => (
+          <Star
+            key={uuidv4()}
+            onClick={() =>
+              (selectRating !== key + 1 && selectStar(key + 1)) || undefined
+            }
+            onMouseEnter={() => hoverStar(key + 1)}
+            className={`star ${
+              (selectRating >= key + 1 && "select-star") || ""
+            }`}
+            type="button"
+          >
+            ⭐
+          </Star>
+        ))
+      ) : (
+        <>
+          <Star isView={isView} rating={rating}>
+            ⭐
+          </Star>
+          ({rating})
+        </>
+      )}
     </Wrapper>
   );
+}
+
+interface StylesTypes {
+  isView?: boolean;
+  rating?: number;
 }
 
 export const Wrapper = styled.div`
@@ -92,12 +111,18 @@ export const Wrapper = styled.div`
   position: relative;
   gap: 0px 10px;
 
+  ${(props: StylesTypes) =>
+    props.isView && {
+      width: "auto",
+      gap: "0px 6px",
+    }}
+
   .hover-star {
     text-shadow: 0 0 0 rgba(170, 86, 86, 0.3); /* 새 이모지 색상 부여 */
   }
 
   .select-star {
-    text-shadow: 0 0 0 rgba(170, 86, 86); /* 새 이모지 색상 부여 */
+    text-shadow: 0 0 0 rgba(170, 86, 86) !important; /* 새 이모지 색상 부여 */
   }
 
   .last-star {
@@ -108,6 +133,27 @@ export const Wrapper = styled.div`
 export const Star = styled.button`
   font-size: 20px; /* 이모지 크기 */
   color: transparent; /* 기존 이모지 컬러 제거 */
-  text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+  text-shadow: 0 0 0 #999999; /* 새 이모지 색상 부여 */
   transition: all 0.3s;
+
+  ${(props: StylesTypes) =>
+    props.isView && {
+      fontSize: "22px",
+      position: "relative",
+      display: "flex",
+      "--rating": `${0.2 * (props.rating || 1)}`,
+      opacity: 0.8,
+      cursor: "default",
+    }}
+
+  :after {
+    content: "⭐";
+    position: absolute;
+    color: transparent;
+    text-shadow: 0 0 0 #aa5656;
+    font-size: 22px;
+    left: -0.2px;
+    transform: scale(var(--rating));
+    display: ${(props) => (props.isView ? "flex" : "none")};
+  }
 `;

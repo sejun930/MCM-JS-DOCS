@@ -29,7 +29,9 @@ export const WriteWrapper = styled.article`
         max-height: 300px;
         padding: 15px;
         padding-top: 20px;
-        font-size: 16px;
+        font-size: 15px;
+        font-family: system-ui;
+        line-height: 24px;
       }
     }
   }

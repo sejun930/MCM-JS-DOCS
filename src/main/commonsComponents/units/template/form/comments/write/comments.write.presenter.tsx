@@ -8,8 +8,22 @@ import {
 import { FormEvent, MutableRefObject } from "react";
 
 import { _Input, _SpanText } from "mcm-js-commons";
-import { InfoTypes } from "./comments.write.types";
+import { WriteInfoTypes, CategoryTypes } from "./comments.write.types";
 import StarsForm from "./stars";
+
+const placeList: { [key: string]: string } = {
+  bug: `모듈 사용시 발생하는 버그 이슈등을 자세하게 알려주세요.
+빠른 시간내에 확인 후 처리해드리겠습니다.
+`,
+  question: `모듈에 대한 사용법 및 궁금한 점을 문의해주세요.
+빠른 시간내에 확인 후 답변해드리겠습니다.  
+`,
+  review: `모듈을 사용한 후기를 솔직하게 입력해주세요.
+솔직한 평가가 저에겐 큰 도움이 됩니다.  
+`,
+};
+const defaultPlace =
+  "욕설 및 비방을 목적으로 하는 댓글은 예고없이 삭제 및 차단될 수 있습니다.";
 
 export default function CommentsWriteUIPage({
   categoryList,
@@ -22,7 +36,7 @@ export default function CommentsWriteUIPage({
 }: {
   categoryList: Array<{ name: string; value: string }>;
   changeInfo: (value: string | number) => (name: string) => void;
-  info: InfoTypes;
+  info: WriteInfoTypes;
   write: (e?: FormEvent<Element>) => void;
   categoryRef: MutableRefObject<HTMLSelectElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
@@ -84,9 +98,13 @@ export default function CommentsWriteUIPage({
           isTextArea
           onSubmitEvent={write}
           inputRef={contentsRef}
-          maxLength={300}
+          maxLength={500}
           delay={200}
           value={info.contents}
+          placeHolder={`${
+            placeList[info.category] || "카테고리를 먼저 선택해주세요."
+          }
+${info.category && defaultPlace}`}
         />
       </WriteWrapper>
       {/* <OptionWrapper>
