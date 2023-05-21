@@ -100,3 +100,13 @@ table {
 .success-modal .mcm-modal-items {
   border: double 6px #2cd3e1;
 }
+
+/* 드래그 방지 */
+.disable-drag {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+}

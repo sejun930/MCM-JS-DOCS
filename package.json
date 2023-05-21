@@ -19,7 +19,7 @@
     "crypto": "^1.0.1",
     "firebase": "^9.10.0",
     "mcm-js": "^0.0.32",
-    "mcm-js-commons": "^0.0.49",
+    "mcm-js-commons": "^0.0.52",
     "mcm-js-dev": "^0.0.18",
     "next": "13.1.6",
     "react": "18.2.0",

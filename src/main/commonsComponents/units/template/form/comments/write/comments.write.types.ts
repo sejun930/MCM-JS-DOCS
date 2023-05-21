@@ -5,7 +5,8 @@ interface WriteCommonsTypes {
   password: string;
   contents: string;
   rating: number;
-  isCompleteBug: boolean; // 버그가 수정되었는지에 대한 여부 (true : 수정 완료)
+  bugStatus: number; // 버그 처리 여부 (0 : 대기중, 1 : 처리중, 2 : 처리 완료)
+  complateAnswer: boolean; // 문의 답변 완료 (false : 대기중, true : 답변 완료)
 }
 
 // 작성용 type
@@ -37,7 +38,8 @@ export const initInfo: WriteInfoTypes = {
   createdAt: null,
   modifyAt: null,
   deletedAt: null,
-  isCompleteBug: false,
+  bugStatus: 0,
+  complateAnswer: false,
 };
 
 export type CategoryTypes = "" | "bug" | "review" | "question";
@@ -54,10 +56,3 @@ export const categoryInitList: Array<CategoryListType> = [
   { name: "문의", value: "question" },
   { name: "리뷰", value: "review" },
 ];
-
-export const categoryName: { [key: string]: string } = categoryInitList
-  .filter((el) => el.value)
-  .reduce((acc: { [key: string]: string }, cur) => {
-    acc[cur.value] = cur.name;
-    return acc;
-  }, {});

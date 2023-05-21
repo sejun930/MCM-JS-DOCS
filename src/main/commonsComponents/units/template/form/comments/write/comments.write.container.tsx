@@ -30,12 +30,12 @@ export default function CommentsWritePage({
   module,
   category,
   fetchCommentsList,
-  saveCategoryCount,
+  changeCategory,
 }: {
   module: string;
   category: string;
   fetchCommentsList: (category: string) => void;
-  saveCategoryCount: () => void;
+  changeCategory: (category: string) => void;
 }) {
   const { getHashPassword } = CommonsHooksComponents();
   // 카테고리 선택
@@ -176,6 +176,9 @@ export default function CommentsWritePage({
     if (errorMessage) {
       openErrorModal({ message: errorMessage });
     } else {
+      // 줄바꿈 처리하기
+      info.contents = info.contents.replaceAll("\n", "<br />");
+
       // 비밀번호 해쉬화
       info.password = await getHashPassword(info.password);
 
@@ -195,6 +198,8 @@ export default function CommentsWritePage({
 
           // 새 정보 가져온 후 저장하기
           fetchCommentsList(category);
+          // 카테고리 변경하기
+          changeCategory(info.category);
           // saveCategoryCount();
 
           // 카테고리 개수 올리기

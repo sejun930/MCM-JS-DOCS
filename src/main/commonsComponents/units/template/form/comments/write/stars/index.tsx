@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { v4 as uuidv4 } from "uuid";
-import { _Button } from "mcm-js-commons";
+import { _Button, _SpanText } from "mcm-js-commons";
 import { useEffect, useState } from "react";
 
 let selectRating = 0;
@@ -65,7 +65,6 @@ export default function StarsForm({
     });
     if (!isView && changeEvent) changeEvent(selectRating);
   };
-  console.log(selectRating, isView);
 
   return (
     <Wrapper onMouseLeave={() => hoverStar(0, true)} isView={isView}>
@@ -90,7 +89,7 @@ export default function StarsForm({
           <Star isView={isView} rating={rating}>
             ⭐
           </Star>
-          ({rating})
+          <_SpanText className="rating-number">({rating})</_SpanText>
         </>
       )}
     </Wrapper>
@@ -127,6 +126,10 @@ export const Wrapper = styled.div`
 
   .last-star {
     cursor: default;
+  }
+
+  .rating-number {
+    font-size: 12px;
   }
 `;
 

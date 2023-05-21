@@ -147,7 +147,7 @@ export default function _CommentsUIForm() {
           module={module}
           category={selectCategory}
           fetchCommentsList={fetchCommentsList}
-          saveCategoryCount={saveCategoryCount}
+          changeCategory={changeCategory}
         />
         <CommentsListPage
           commentsList={commentsList}

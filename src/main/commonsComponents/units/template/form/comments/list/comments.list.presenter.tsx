@@ -2,21 +2,23 @@ import styled from "@emotion/styled";
 import { InfoTypes, categoryInitList } from "../write/comments.write.types";
 import { getDateForm } from "src/main/commonsComponents/functional";
 
-import { _PText, _Button, _SpanText } from "mcm-js-commons";
-import { categoryName } from "../write/comments.write.types";
+import { _PText, _Button, _SpanTextWithHtml } from "mcm-js-commons";
 import { v4 as uuidv4 } from "uuid";
-import StarsForm from "../write/stars";
+
+import ListContentsInfoPage from "./contents/list.contents.container";
 
 export default function CommentsListUIPage({
   commentsList,
   category,
   changeCategory,
   countList,
+  getLabel,
 }: {
   commentsList: Array<InfoTypes>;
   category: string;
   changeCategory: (category: string) => void;
   countList: { [key: string]: number };
+  getLabel: (info: InfoTypes) => Array<JSX.Element>;
 }) {
   return (
     <CommentsListWrapper>
@@ -62,27 +64,26 @@ export default function CommentsListUIPage({
               );
 
             return (
-              <CommentsList key={uuidv4()}>
-                <CommentsInfoWrapper>
-                  {!category && (
-                    <_SpanText className="category-label">
-                      {categoryName[el.category]}
-                    </_SpanText>
-                  )}
-                  {el.category === "review" && (
-                    <StarsForm isView category="review" rating={el.rating} />
-                  )}
-                  <_SpanText className="category-contents">
-                    {el.contents}
-                    <b className="createdAt">{date}</b>
-                  </_SpanText>
-                </CommentsInfoWrapper>
-                <OptionalWrapper className="optional">
-                  <OptaionalItems>수정</OptaionalItems>
-                  <OptaionalItems>삭제</OptaionalItems>
-                  <OptaionalItems>답변</OptaionalItems>
-                </OptionalWrapper>
-              </CommentsList>
+              <ListContentsInfoPage
+                key={uuidv4()}
+                info={el}
+                date={date || ""}
+                getLabel={getLabel}
+              />
+              //   <CommentsList key={uuidv4()}>
+              //   <CommentsInfoWrapper>
+              //     <LabelWrapper>{getLabel(el)}</LabelWrapper>
+
+              //     <ContentsWrapper>
+              //       <_SpanTextWithHtml
+              //         dangerouslySetInnerHTML={el.contents}
+              //         className="category-contents"
+              //       />
+              //       <b className="createdAt">{date}</b>
+              //     </ContentsWrapper>
+              //   </CommentsInfoWrapper>
+              //   <OptionalButton className="disable-drag">...</OptionalButton>
+              //   </CommentsList>
             );
           })}
         </CommentListItems>
@@ -153,74 +154,3 @@ export const CommentListItems = styled.ul`
     font-size: 14px;
   }
 `;
-
-export const CommentsList = styled.li`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  border-top: dotted 1px black;
-  /* gap: 20px 0px; */
-  transition: all 0.3s ease-out;
-  min-height: 70px;
-
-  :hover {
-    background-color: #dddddd;
-
-    /* .optional {
-      position: relative;
-      max-height: 40px;
-      padding-top: 20px;
-    } */
-  }
-`;
-
-export const CommentsInfoWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0px 20px;
-
-  @keyframes SHOW_CATEGORY {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-  animation: SHOW_CATEGORY 0.4s ease;
-
-  .category-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    background-color: #c88ea7;
-    color: #ffffff;
-    font-weight: 700;
-    padding: 6px 0px;
-    border-radius: 10px;
-    min-width: 70px;
-    cursor: default;
-  }
-
-  .createdAt {
-    font-size: 12px;
-    padding-left: 10px;
-    color: #888888;
-    font-family: "Manlo";
-    word-spacing: 1px;
-  }
-`;
-
-export const OptionalWrapper = styled.ul`
-  display: flex;
-  gap: 0px 10px;
-  transition: all 0.4s ease;
-  max-height: 0px;
-  overflow: hidden;
-  /* position: absolute; */
-`;
-
-export const OptaionalItems = styled.li``;
