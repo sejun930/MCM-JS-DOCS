@@ -50,6 +50,12 @@ export const modalPropsList: Array<PropsModuleListType> = [
       "모바일 환경에서의 모달창의 크기(width, height)를 직접 지정할 수 있습니다.",
   },
   {
+    name: "modalStyles",
+    default: "{}",
+    type: "Object",
+    notice: "모달의 스타일을 직접 구성할 수 있습니다.",
+  },
+  {
     name: "showBGAnimation",
     default: "false",
     type: "Boolean",

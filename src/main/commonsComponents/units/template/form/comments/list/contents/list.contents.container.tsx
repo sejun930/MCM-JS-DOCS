@@ -17,6 +17,8 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const [isMore, setIsMore] = useState(false);
   // 더 보기 실행
   const [moreShow, setMoreShow] = useState(false);
+  // 선택 리스트 실행 여부
+  const [showSelect, setShowSelect] = useState(false);
 
   useEffect(() => {
     let allLen = 0;
@@ -42,6 +44,10 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
     setMoreShow((prev) => !prev);
   };
 
+  const toggleShowSelect = (bool?: boolean) => {
+    setShowSelect(bool !== undefined ? bool : (prev) => !prev);
+  };
+
   return (
     <ListContentsInfoUIPage
       {...props}
@@ -50,6 +56,8 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       toggleMoreShow={toggleMoreShow}
       moreShow={moreShow}
       contents={contents}
+      showSelect={showSelect}
+      toggleShowSelect={toggleShowSelect}
     />
   );
 }

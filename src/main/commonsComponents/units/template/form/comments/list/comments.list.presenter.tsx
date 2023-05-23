@@ -70,20 +70,6 @@ export default function CommentsListUIPage({
                 date={date || ""}
                 getLabel={getLabel}
               />
-              //   <CommentsList key={uuidv4()}>
-              //   <CommentsInfoWrapper>
-              //     <LabelWrapper>{getLabel(el)}</LabelWrapper>
-
-              //     <ContentsWrapper>
-              //       <_SpanTextWithHtml
-              //         dangerouslySetInnerHTML={el.contents}
-              //         className="category-contents"
-              //       />
-              //       <b className="createdAt">{date}</b>
-              //     </ContentsWrapper>
-              //   </CommentsInfoWrapper>
-              //   <OptionalButton className="disable-drag">...</OptionalButton>
-              //   </CommentsList>
             );
           })}
         </CommentListItems>

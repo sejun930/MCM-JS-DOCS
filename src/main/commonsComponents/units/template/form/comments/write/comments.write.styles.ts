@@ -96,7 +96,6 @@ export const OptionItems = styled.div`
       border: unset;
 
       .password-input {
-        /* border-top: solid 1px black; */
         font-size: 14px;
         height: 100%;
       }

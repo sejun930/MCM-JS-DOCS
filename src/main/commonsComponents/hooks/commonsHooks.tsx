@@ -86,6 +86,12 @@ export default function CommonsHooksComponents() {
     return createHash("sha256").update(str).digest("hex");
   };
 
+  // uuid 출력하기
+  const getUuid = () => {
+    const { v4 } = require("uuid");
+    return v4();
+  };
+
   return {
     componentRender,
     getAllComponentsClassName,
@@ -94,5 +100,6 @@ export default function CommonsHooksComponents() {
     getAllExampleComponentLength,
     getOriginTemplate,
     getHashPassword,
+    getUuid,
   };
 }

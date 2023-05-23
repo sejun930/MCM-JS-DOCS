@@ -8,7 +8,7 @@ import {
 import { FormEvent, MutableRefObject } from "react";
 
 import { _Input, _SpanText } from "mcm-js-commons";
-import { WriteInfoTypes, CategoryTypes } from "./comments.write.types";
+import { WriteInfoTypes } from "./comments.write.types";
 import StarsForm from "./stars";
 
 const placeList: { [key: string]: string } = {
@@ -82,19 +82,20 @@ export default function CommentsWriteUIPage({
           <OptionItems>
             <_Input
               onChangeEvent={(value) => changeInfo(value)("password")}
-              className="password-input"
+              inputClassName="password-input"
               inputType="password"
               placeHolder="비밀번호 입력"
               inputRef={passwordRef}
               value={info.password}
               delay={200}
+              maxLength={20}
             />
           </OptionItems>
         </OptionWrapper>
 
         <_Input
           onChangeEvent={(value) => changeInfo(value)("contents")}
-          className="contents-input"
+          inputClassName="contents-input"
           isTextArea
           onSubmitEvent={write}
           inputRef={contentsRef}
