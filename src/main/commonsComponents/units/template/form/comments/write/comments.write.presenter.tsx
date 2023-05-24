@@ -108,15 +108,6 @@ export default function CommentsWriteUIPage({
 ${info.category && defaultPlace}`}
         />
       </WriteWrapper>
-      {/* <OptionWrapper>
-        <OptionItems>
-          <_SpanText>비밀번호 </_SpanText>
-          <_Input
-            inputType="password"
-            maxLength={10}
-          />
-        </OptionItems>
-      </OptionWrapper> */}
     </Form>
   );
 }

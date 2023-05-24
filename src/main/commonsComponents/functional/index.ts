@@ -61,4 +61,9 @@ const getDateForm = (date: Date): string => {
   return result;
 };
 
-export { removeTag, getDateForm };
+// 줄바꿈 (\n => <br />) 처리하기
+const changeMultipleLine = (str: string) => {
+  return str.replaceAll("\n", "<br />");
+};
+
+export { removeTag, getDateForm, changeMultipleLine };

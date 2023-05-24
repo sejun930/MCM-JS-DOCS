@@ -5,15 +5,15 @@ import {
   useRef,
   useState,
 } from "react";
-import CommentsWriteUIPage from "./comments.write.presenter";
-import { Modal } from "mcm-js";
+import { useRecoilState } from "recoil";
+import { fetchCommentsListState } from "src/commons/store/comments";
 
+import CommentsWriteUIPage from "./comments.write.presenter";
 import ErrorModalForm from "../error";
-import {
-  getServerTime,
-  FieldValue,
-  getDoc,
-} from "src/commons/libraries/firebase";
+
+import { Modal } from "mcm-js";
+import { getServerTime, getDoc } from "src/commons/libraries/firebase";
+import { changeMultipleLine } from "src/main/commonsComponents/functional";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import {
@@ -26,17 +26,9 @@ import {
 // 중복 실행 방지
 let writing = false;
 let clicked = false;
-export default function CommentsWritePage({
-  module,
-  category,
-  fetchCommentsList,
-  changeCategory,
-}: {
-  module: string;
-  category: string;
-  fetchCommentsList: (category: string) => void;
-  changeCategory: (category: string) => void;
-}) {
+export default function CommentsWritePage({ module }: { module: string }) {
+  const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
+
   const { getHashPassword } = CommonsHooksComponents();
   // 카테고리 선택
   const [categoryList, setCategoryList] = useState<Array<CategoryListType>>([
@@ -44,11 +36,7 @@ export default function CommentsWritePage({
   ]);
 
   // 정보 저장하기
-  const [info, setInfo] = useState<
-    {
-      [key: string]: string | number | Date | null | FieldValue | boolean;
-    } & WriteInfoTypes
-  >({
+  const [info, setInfo] = useState<WriteInfoTypes>({
     ...initInfo,
   });
 
@@ -177,7 +165,7 @@ export default function CommentsWritePage({
       openErrorModal({ message: errorMessage });
     } else {
       // 줄바꿈 처리하기
-      info.contents = info.contents.replaceAll("\n", "<br />");
+      info.contents = changeMultipleLine(info.contents);
 
       // 비밀번호 해쉬화
       info.password = await getHashPassword(info.password);
@@ -196,11 +184,8 @@ export default function CommentsWritePage({
           const addComments = getDoc("comments", module, "comment");
           await addComments.add(info);
 
-          // 새 정보 가져온 후 저장하기
-          fetchCommentsList(category);
-          // 카테고리 변경하기
-          changeCategory(info.category);
-          // saveCategoryCount();
+          // 댓글 리스트 및 카테고리 업데이트
+          fetchCommentsList(info.category);
 
           // 카테고리 개수 올리기
           getDoc("comments", module, "count")

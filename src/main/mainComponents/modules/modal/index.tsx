@@ -20,7 +20,7 @@ import _ExampleForm from "src/main/commonsComponents/units/template/form/example
 import _FunctionalForm from "src/main/commonsComponents/units/template/form/functional";
 import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
 import _PropsForm from "src/main/commonsComponents/units/template/form/props";
-import _CommentsForm from "src/main/commonsComponents/units/template/form/comments";
+import _CommentsForm from "src/main/commonsComponents/units/template/form/comments/comments.container";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 export default function MyModal() {

@@ -10,21 +10,26 @@ import CommonsHooksComponents from "../../../../../../../hooks/commonsHooks";
 import { _CloseButton, _Button } from "mcm-js-commons";
 import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
 
+import { useRecoilState } from "recoil";
+import { moduleState } from "src/commons/store";
+import { fetchCommentsListState } from "src/commons/store/comments";
+
 import { Modal } from "mcm-js";
-import ContentsOptionalPage from "./contents.select.optional";
+import ContentsOptionalPage from "./functional/contents.select.functional.container";
+import { InfoTypes } from "../../../write/comments.write.types";
 
 let ableClose = true;
 export default function SelectListOptional({
   list,
   styles,
-  contents,
+  info,
   className,
   closeEvent,
   show,
 }: {
   show: boolean;
   list: Array<{ name: string; value: "delete" | "modify" }>;
-  contents: string;
+  info: InfoTypes;
   closeEvent: () => void;
   styles?: CSSProperties;
   className?: string;
@@ -32,6 +37,9 @@ export default function SelectListOptional({
   const { getAllComponentsClassName, getUuid } = CommonsHooksComponents();
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _listRef = useRef() as MutableRefObject<HTMLUListElement>;
+
+  const [module] = useRecoilState(moduleState);
+  const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
 
   useEffect(() => {
     const body = document.body;
@@ -78,13 +86,20 @@ export default function SelectListOptional({
     ableClose = false;
 
     Modal.open({
-      children: <ContentsOptionalPage type={type} contents={contents} />,
+      children: (
+        <ContentsOptionalPage
+          type={type}
+          info={info}
+          module={module}
+          fetchCommentsList={fetchCommentsList}
+        />
+      ),
       onAfterCloseEvent: () => (ableClose = true),
-      modalStyles: {
-        border: "double 5px #aa5656",
-      },
+
       modalSize: { width: "400px", height: "400px" },
       closeMent: "닫기",
+      showBGAnimation: true,
+      showModalOpenAnimation: true,
     });
   };
 

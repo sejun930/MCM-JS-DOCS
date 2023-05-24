@@ -10,11 +10,12 @@ import {
 } from "./list.styles";
 import React from "react";
 
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+
 import { _SpanTextWithHtml, _Button } from "mcm-js-commons";
 import { ListContentsIProps } from "./list.contents.container";
-import SelectListOptional from "src/main/commonsComponents/units/template/form/comments/list/contents/select/contents.select";
 
-import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+import SelectListOptional from "src/main/commonsComponents/units/template/form/comments/list/contents/select/contents.select";
 
 interface ListContentsUIProps {
   isMore: boolean;
@@ -74,7 +75,7 @@ export default function ListContentsInfoUIPage({
                   { name: "수정", value: "modify" },
                   { name: "삭제", value: "delete" },
                 ]}
-                contents={contents}
+                info={info}
               />
             </SelectWrapper>
           </OptionalWrapper>

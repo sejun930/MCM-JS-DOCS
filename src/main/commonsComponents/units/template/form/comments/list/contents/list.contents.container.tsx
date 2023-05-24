@@ -1,7 +1,7 @@
 import ListContentsInfoUIPage from "./list.contents.presenter";
 
 import { InfoTypes } from "../../write/comments.write.types";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface ListContentsIProps {
   info: InfoTypes;

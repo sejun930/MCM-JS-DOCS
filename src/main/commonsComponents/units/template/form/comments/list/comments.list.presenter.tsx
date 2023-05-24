@@ -24,17 +24,12 @@ export default function CommentsListUIPage({
     <CommentsListWrapper>
       <CategoryWrapper>
         {categoryInitList.map((listInfo, key) => {
-          // 현재 선택중인 카테고리
-          const isSelected = category === listInfo.value;
-
           return (
-            <Category
-              key={`comments-category-list-${listInfo.value}-${key}`}
-              isSelected={isSelected}
-            >
+            <Category key={`comments-category-list-${listInfo.value}-${key}`}>
               <_Button
-                className="category-select-button"
+                className={(key === 0 && "category-select-button") || undefined}
                 onClickEvent={() => changeCategory(listInfo.value)}
+                id={`category-${listInfo.value || "all"}`}
               >
                 {listInfo.secondName || listInfo.name} ({" "}
                 {countList[listInfo.value || "all"]} )
@@ -70,16 +65,26 @@ export default function CommentsListUIPage({
                 date={date || ""}
                 getLabel={getLabel}
               />
+              //   <CommentsList key={uuidv4()}>
+              //   <CommentsInfoWrapper>
+              //     <LabelWrapper>{getLabel(el)}</LabelWrapper>
+
+              //     <ContentsWrapper>
+              //       <_SpanTextWithHtml
+              //         dangerouslySetInnerHTML={el.contents}
+              //         className="category-contents"
+              //       />
+              //       <b className="createdAt">{date}</b>
+              //     </ContentsWrapper>
+              //   </CommentsInfoWrapper>
+              //   <OptionalButton className="disable-drag">...</OptionalButton>
+              //   </CommentsList>
             );
           })}
         </CommentListItems>
       )}
     </CommentsListWrapper>
   );
-}
-
-interface StyleTypes {
-  isSelected?: boolean;
 }
 
 export const CommentsListWrapper = styled.div`
@@ -99,17 +104,16 @@ export const CategoryWrapper = styled.ul`
 `;
 
 export const Category = styled.li`
-  .category-select-button {
+  .cmm-button-unit {
     transition: all 0.3s;
     font-size: 14px;
     color: #666666;
+  }
 
-    ${(props: StyleTypes) =>
-      props.isSelected && {
-        fontWeight: 700,
-        color: "#aa5656",
-        cursor: "default",
-      }}
+  .category-select-button {
+    color: #aa5656;
+    cursor: default;
+    font-weight: 700;
   }
 `;
 

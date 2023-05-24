@@ -1,23 +1,24 @@
 import { InfoTypes } from "../write/comments.write.types";
 import CommentsListUIPage from "./comments.list.presenter";
 
+import { useRecoilState } from "recoil";
+import {
+  commentsListState,
+  countListState,
+  fetchCommentsListState,
+} from "src/commons/store/comments";
+
 import { categoryInitList } from "../write/comments.write.types";
 import CommentsLabel from "./label";
 import StarsForm from "../write/stars";
 
 import { _Button, _SpanText } from "mcm-js-commons";
 
-export default function CommentsListPage({
-  commentsList,
-  category,
-  changeCategory,
-  countList,
-}: {
-  commentsList: Array<InfoTypes>;
-  category: string;
-  changeCategory: (category: string) => void;
-  countList: { [key: string]: number };
-}) {
+export default function CommentsListPage({ category }: { category: string }) {
+  const [commentsList] = useRecoilState(commentsListState);
+  const [countList] = useRecoilState(countListState);
+  const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
+
   const categoryName: { [key: string]: string } = categoryInitList
     .filter((el) => el.value)
     .reduce((acc: { [key: string]: string }, cur) => {
@@ -33,7 +34,7 @@ export default function CommentsListPage({
     if (!category) {
       result.push(
         <_Button
-          onClickEvent={() => changeCategory(info.category)}
+          onClickEvent={() => fetchCommentsList(info.category)}
           buttonType="button"
         >
           <CommentsLabel
@@ -80,7 +81,7 @@ export default function CommentsListPage({
     <CommentsListUIPage
       commentsList={commentsList}
       category={category}
-      changeCategory={changeCategory}
+      changeCategory={fetchCommentsList}
       countList={countList}
       getLabel={getLabel}
     />

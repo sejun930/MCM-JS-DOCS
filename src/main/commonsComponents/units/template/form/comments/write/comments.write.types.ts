@@ -10,11 +10,13 @@ interface WriteCommonsTypes {
 }
 
 // 작성용 type
-export type WriteInfoTypes = WriteCommonsTypes & {
-  createdAt: FieldValue | null;
-  modifyAt: FieldValue | null;
-  deletedAt: FieldValue | null;
-};
+export type WriteInfoTypes = {
+  [key: string]: string | number | Date | null | FieldValue | boolean;
+} & WriteCommonsTypes & {
+    createdAt: FieldValue | null;
+    modifyAt: FieldValue | null;
+    deletedAt: FieldValue | null;
+  };
 
 // 날짜 관련 type
 interface DateTypes {
@@ -24,6 +26,7 @@ interface DateTypes {
 
 // 렌더용 type
 export type InfoTypes = WriteCommonsTypes & {
+  id: string;
   createdAt: DateTypes | null;
   modifyAt: DateTypes | null;
   deletedAt: DateTypes | null;

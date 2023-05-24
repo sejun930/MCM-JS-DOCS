@@ -52,14 +52,6 @@ export const getDoc = (
     .collection(parentCollection)
     .doc(parentDoc)
     .collection(childrenCollection);
-
-  // if (doc) {
-  //   // 콜렉션 안에 있는 문서 출력
-  //   // if (parentDoc) doc = doc.doc(parentDoc);
-  //   // 하위 문서 안에 있는 콜렉션 출력
-  //   // @ts-ignore
-  //   // if (childrenCollection) doc = doc.collection(childrenCollection);
-  // }
 };
 
 // 결과 배열에 담기
@@ -72,7 +64,10 @@ export const getResult = (
     (
       el: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
     ) => {
-      result.push(el.data());
+      const data = { ...el.data() };
+      data.id = el.id; // id 값 저장
+
+      result.push(data);
     }
   );
 
