@@ -6,8 +6,6 @@ import { _Button, _Title, _PText } from "mcm-js-commons";
 import _SubTitleTemplate from "../../title/subTitle";
 import _ExampleOptionalFormPage from "./optional";
 
-import { v4 as uuidv4 } from "uuid";
-
 import { renderTemplateList } from "./template.example.data";
 import { Wrapper } from "../form.commons.styles";
 import {

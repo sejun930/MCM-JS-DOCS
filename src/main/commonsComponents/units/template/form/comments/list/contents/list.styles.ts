@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+interface StyleTypes {
+  render?: boolean;
+}
+
 export const CommentsList = styled.li`
   display: flex;
   align-items: center;
@@ -10,7 +14,10 @@ export const CommentsList = styled.li`
   min-height: 70px;
 
   :hover {
-    background-color: #dddddd;
+    ${(props: StyleTypes) =>
+      props.render && {
+        backgroundColor: "#dddddd",
+      }}
   }
 `;
 
@@ -30,9 +37,10 @@ export const CommentsInfoWrapper = styled.div`
       transform: translateY(0px);
     }
   }
+
   animation: SHOW_CATEGORY 0.4s ease;
 
-  .createdAt {
+  .date {
     font-size: 12px;
     color: #888888;
     font-family: "Manlo";
@@ -44,6 +52,7 @@ export const LabelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 82px;
 
   button label {
     cursor: pointer;
@@ -91,4 +100,9 @@ export const SelectWrapper = styled.div`
     margin-top: 30px;
     margin-right: 30px;
   }
+`;
+
+export const DateWrapper = styled.div`
+  display: flex;
+  gap: 0px 10px;
 `;

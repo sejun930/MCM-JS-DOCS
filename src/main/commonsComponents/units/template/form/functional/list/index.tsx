@@ -11,7 +11,7 @@ import {
 } from "./index.styles";
 
 import { MutableRefObject } from "react";
-import { v4 } from "uuid";
+import { getUuid } from "src/main/commonsComponents/functional";
 
 import { FunctionalListType } from "src/commons/data/functional/functional.commons.data";
 import { _Title, _SpanText, _PText } from "mcm-js-commons";
@@ -51,7 +51,7 @@ export default function FunctionalDetailInfoListPage({
   return (
     <FunctionalWrapper>
       {list.map((el) => {
-        const key = v4();
+        const key = getUuid();
         return (
           <FunctionalInfoWrapper key={key}>
             <TitleWrapper>

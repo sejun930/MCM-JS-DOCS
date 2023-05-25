@@ -6,6 +6,7 @@ import {
 } from "./contents.select.styles";
 
 import CommonsHooksComponents from "../../../../../../../hooks/commonsHooks";
+import { getUuid } from "src/main/commonsComponents/functional";
 
 import { _CloseButton, _Button } from "mcm-js-commons";
 import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
@@ -34,7 +35,7 @@ export default function SelectListOptional({
   styles?: CSSProperties;
   className?: string;
 }) {
-  const { getAllComponentsClassName, getUuid } = CommonsHooksComponents();
+  const { getAllComponentsClassName } = CommonsHooksComponents();
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
@@ -95,7 +96,7 @@ export default function SelectListOptional({
         />
       ),
       onAfterCloseEvent: () => (ableClose = true),
-
+      id: "comments-functional-modal",
       modalSize: { width: "400px", height: "400px" },
       closeMent: "닫기",
       showBGAnimation: true,

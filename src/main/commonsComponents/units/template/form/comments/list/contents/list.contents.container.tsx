@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 
 export interface ListContentsIProps {
   info: InfoTypes;
-  date: string;
+  //   createdAt: string;
   getLabel: (info: InfoTypes) => Array<JSX.Element>;
+  render: boolean;
 }
 
 const MAX_LINE = 200; // 더 보기가 실행 될 최소 글자수

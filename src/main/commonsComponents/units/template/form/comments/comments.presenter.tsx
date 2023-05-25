@@ -7,9 +7,11 @@ import CommentsWritePage from "./write/comments.write.container";
 export default function CommentsUIPage({
   module,
   selectCategory,
+  render,
 }: {
   module: string;
   selectCategory: string;
+  render: boolean;
 }) {
   return (
     <Wrapper>
@@ -19,7 +21,7 @@ export default function CommentsUIPage({
         remakrs="해당 모듈에 대한 사용후기 및 개선점 등을 남겨주세요!"
       />
       <CommentsWritePage module={module} />
-      <CommentsListPage category={selectCategory} />
+      <CommentsListPage category={selectCategory} render={render} />
     </Wrapper>
   );
 }

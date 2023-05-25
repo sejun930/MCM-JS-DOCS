@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { v4 as uuidv4 } from "uuid";
+import { getUuid } from "src/main/commonsComponents/functional";
 import { _Button, _SpanText } from "mcm-js-commons";
 import { useEffect, useState } from "react";
 
@@ -71,7 +71,7 @@ export default function StarsForm({
       {!isView ? (
         Array.from(new Array(5), () => 1).map((_, key) => (
           <Star
-            key={uuidv4()}
+            key={getUuid()}
             onClick={() =>
               (selectRating !== key + 1 && selectStar(key + 1)) || undefined
             }

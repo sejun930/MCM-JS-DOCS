@@ -4,7 +4,7 @@ import { MouseEvent } from "react";
 import { useRecoilState } from "recoil";
 import { versState } from "src/commons/store";
 
-import { v4 } from "uuid";
+import { getUuid } from "src/main/commonsComponents/functional";
 
 export default function TapListPage({
   tapList,
@@ -41,7 +41,7 @@ export default function TapListPage({
       {tapList.length &&
         tapList.map((el, i) => (
           <Tap
-            key={`${module}_vers_tap_${v4()}`}
+            key={`${module}_vers_tap_${getUuid()}`}
             className={`module-vers-tap ${(vers === i && "select-tap") || ""}`}
             onClick={(e) => changeVers(e)(i)}
           >

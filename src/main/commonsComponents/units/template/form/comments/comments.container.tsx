@@ -57,11 +57,6 @@ export default function CommentsPage() {
     }, 30);
   };
 
-  // 페이지 최종 렌더하기
-  const renderPage = () => {
-    if (loadScript) setRender(true);
-  };
-
   // 카테고리 변경하기
   const changeCategory = (category: string) => {
     if (selectCategory === category) return;
@@ -80,6 +75,10 @@ export default function CommentsPage() {
     if (target) target.classList.add("category-select-button");
   };
 
+  const toggleRender = (bool: boolean) => {
+    setRender(bool);
+  };
+
   return (
     <>
       {/* 스크립트 (댓글 리스트) 1차 호출 후 */}
@@ -87,14 +86,16 @@ export default function CommentsPage() {
         <CommentsScriptPage
           loadScript={loadScript}
           module={module}
-          renderPage={renderPage}
           changeCategory={changeCategory}
+          toggleRender={toggleRender}
         />
       )}
       {/* 댓글 페이지 최종 렌더 */}
-      {render && (
-        <CommentsUIPage module={module} selectCategory={selectCategory} />
-      )}
+      <CommentsUIPage
+        module={module}
+        selectCategory={selectCategory}
+        render={render}
+      />
     </>
   );
 }

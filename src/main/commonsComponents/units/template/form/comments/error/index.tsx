@@ -14,7 +14,6 @@ export default function ErrorModalForm({
   isSuccess?: boolean;
   offClose?: boolean;
 }) {
-  console.log(errorEvent);
   return (
     <Wrapper>
       <_PTextWithHtml

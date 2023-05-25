@@ -15,13 +15,14 @@ import { Modal } from "mcm-js";
 import { getServerTime, getDoc } from "src/commons/libraries/firebase";
 import { changeMultipleLine } from "src/main/commonsComponents/functional";
 
-import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import {
   initInfo,
   WriteInfoTypes,
   categoryInitList,
   CategoryListType,
 } from "./comments.write.types";
+import { getHashPassword } from "src/main/commonsComponents/functional";
+// import apis from "src/commons/libraries/commons.apis";
 
 // 중복 실행 방지
 let writing = false;
@@ -29,7 +30,6 @@ let clicked = false;
 export default function CommentsWritePage({ module }: { module: string }) {
   const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
 
-  const { getHashPassword } = CommonsHooksComponents();
   // 카테고리 선택
   const [categoryList, setCategoryList] = useState<Array<CategoryListType>>([
     ...categoryInitList,
@@ -182,6 +182,9 @@ export default function CommentsWritePage({ module }: { module: string }) {
 
         try {
           const addComments = getDoc("comments", module, "comment");
+          // console.log(apis(addComments).create([info]));
+
+          // // return;
           await addComments.add(info);
 
           // 댓글 리스트 및 카테고리 업데이트

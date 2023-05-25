@@ -7,15 +7,15 @@ import {
   OptionalButton,
   OptionalWrapper,
   SelectWrapper,
+  DateWrapper,
 } from "./list.styles";
 import React from "react";
-
-import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 import { _SpanTextWithHtml, _Button } from "mcm-js-commons";
 import { ListContentsIProps } from "./list.contents.container";
 
 import SelectListOptional from "src/main/commonsComponents/units/template/form/comments/list/contents/select/contents.select";
+import { getDateForm, getUuid } from "src/main/commonsComponents/functional";
 
 interface ListContentsUIProps {
   isMore: boolean;
@@ -28,8 +28,8 @@ interface ListContentsUIProps {
 }
 
 export default function ListContentsInfoUIPage({
+  render,
   info,
-  date,
   getLabel,
   subContents,
   isMore,
@@ -39,48 +39,57 @@ export default function ListContentsInfoUIPage({
   showSelect,
   toggleShowSelect,
 }: ListContentsIProps & ListContentsUIProps) {
-  const { getUuid } = CommonsHooksComponents();
   return (
-    <CommentsList>
-      <CommentsInfoWrapper>
-        <LabelWrapper>
-          {getLabel(info).map((el) => {
-            return <React.Fragment key={getUuid()}>{el}</React.Fragment>;
-          })}
-        </LabelWrapper>
+    <CommentsList render={render}>
+      {render && (
+        <CommentsInfoWrapper>
+          <LabelWrapper>
+            {getLabel(info).map((el) => {
+              return <React.Fragment key={getUuid()}>{el}</React.Fragment>;
+            })}
+          </LabelWrapper>
+          <ContentsWrapper>
+            <_SpanTextWithHtml
+              dangerouslySetInnerHTML={moreShow ? contents : subContents}
+            />
+            {isMore && (
+              <MoreShowWrapper>
+                <_Button onClickEvent={toggleMoreShow} className="more-show">
+                  {moreShow ? "간략히" : "더 보기"}
+                </_Button>
+              </MoreShowWrapper>
+            )}
 
-        <ContentsWrapper>
-          <_SpanTextWithHtml
-            dangerouslySetInnerHTML={moreShow ? contents : subContents}
-          />
-          {isMore && (
-            <MoreShowWrapper>
-              <_Button onClickEvent={toggleMoreShow} className="more-show">
-                {moreShow ? "간략히" : "더 보기"}
-              </_Button>
-            </MoreShowWrapper>
-          )}
+            <OptionalWrapper>
+              <DateWrapper>
+                {info.createdAt && ( // 작성일
+                  <b className="date">{getDateForm(info.createdAt)}</b>
+                )}
+                {info.modifyAt && (
+                  <b className="date">
+                    (수정 일자 : {getDateForm(info.modifyAt, true)})
+                  </b>
+                )}
+              </DateWrapper>
 
-          <OptionalWrapper>
-            <b className="createdAt">{date}</b>
-
-            <SelectWrapper>
-              <OptionalButton onClick={() => toggleShowSelect(true)}>
-                ...
-              </OptionalButton>
-              <SelectListOptional
-                show={showSelect}
-                closeEvent={() => toggleShowSelect(false)}
-                list={[
-                  { name: "수정", value: "modify" },
-                  { name: "삭제", value: "delete" },
-                ]}
-                info={info}
-              />
-            </SelectWrapper>
-          </OptionalWrapper>
-        </ContentsWrapper>
-      </CommentsInfoWrapper>
+              <SelectWrapper>
+                <OptionalButton onClick={() => toggleShowSelect(true)}>
+                  ...
+                </OptionalButton>
+                <SelectListOptional
+                  show={showSelect}
+                  closeEvent={() => toggleShowSelect(false)}
+                  list={[
+                    { name: "수정", value: "modify" },
+                    { name: "삭제", value: "delete" },
+                  ]}
+                  info={info}
+                />
+              </SelectWrapper>
+            </OptionalWrapper>
+          </ContentsWrapper>
+        </CommentsInfoWrapper>
+      )}
     </CommentsList>
   );
 }

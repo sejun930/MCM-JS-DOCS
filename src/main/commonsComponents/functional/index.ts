@@ -9,18 +9,28 @@ const removeTag = (str: string) => {
 };
 
 // 시간에 대한 차이 구하기
-const getDateForm = (date: Date): string => {
+const getDateForm = (
+  date: {
+    seconds: number;
+    nanoseconds: number;
+  },
+  getDate?: boolean // 날짜 정보만 얻고 싶을 경우
+): string => {
+  const _date: Date = new Date(
+    date.seconds * 1000 + date.nanoseconds / 1000000
+  );
+
   let result = "";
 
   const now = new Date(); // 현재 시간
   const dateInfo = {
     // date에 대한 각각의 정보 저장
-    year: date.getFullYear(), // 연도
-    month: date.getMonth() + 1, // 월
-    day: date.getDate(), // 일
-    hour: date.getHours(), // 시간
-    minute: date.getMinutes(), // 분
-    second: date.getSeconds(),
+    year: _date.getFullYear(), // 연도
+    month: _date.getMonth() + 1, // 월
+    day: _date.getDate(), // 일
+    hour: _date.getHours(), // 시간
+    minute: _date.getMinutes(), // 분
+    second: _date.getSeconds(),
   };
 
   // 현재 시간과 해당 시간의 차이 구하기
@@ -43,20 +53,17 @@ const getDateForm = (date: Date): string => {
         // 1분 후라면
         result = String(info.minute) + "분 전";
       }
-    } else {
-      // 1시간 후일 경우
-      if (info.hour > 24) {
-        // 하루가 지날 경우
-        result = `${String(dateInfo.year)}년 ${String(dateInfo.month).padStart(
-          2,
-          "0"
-        )}월 ${String(dateInfo.day).padStart(2, "0")}일`;
-      } else {
-        // 하루가 지나기 전이라면 시간 표시
-        result = String(info.hour) + "시간 전";
-      }
+    } else if (info.hour < 24) {
+      // 1시간 후일 경우, // 하루가 지나기 전이라면 시간 표시
+      result = String(info.hour) + "시간 전";
     }
   }
+
+  if (!result || getDate)
+    result = `${String(dateInfo.year)}년 ${String(dateInfo.month).padStart(
+      2,
+      "0"
+    )}월 ${String(dateInfo.day).padStart(2, "0")}일`;
 
   return result;
 };
@@ -66,4 +73,38 @@ const changeMultipleLine = (str: string) => {
   return str.replaceAll("\n", "<br />");
 };
 
-export { removeTag, getDateForm, changeMultipleLine };
+// 비밀번호 해쉬화
+const getHashPassword = async (
+  data:
+    | Array<string | number> // 배열
+    | { [key: string]: string | number } // 객체
+    | string // 문자열
+    | number, // 숫자
+  salt?: string
+) => {
+  const { createHash } = await import("crypto");
+  let str: string = String(data);
+
+  // 객체일 경우 value 값만 뽑아 배열에 저장
+  if (typeof data === "object" && !Array.isArray(data)) {
+    data = Object.values(data);
+  }
+  // 배열 데이터는 하나의 문자열로 뭉치기
+  if (typeof data === "object") {
+    str = data.join(" + ");
+  }
+  // salt 적용하기
+  let _salt = process.env.NEXT_PUBLIC_SALT || "mcm-sejun3278-Salt-data-0515";
+  if (salt) _salt = salt;
+
+  str += _salt;
+  return createHash("sha256").update(str).digest("hex");
+};
+
+// uuid 출력하기
+const getUuid = () => {
+  const { v4 } = require("uuid");
+  return v4();
+};
+
+export { removeTag, getDateForm, changeMultipleLine, getHashPassword, getUuid };

@@ -14,7 +14,13 @@ import StarsForm from "../write/stars";
 
 import { _Button, _SpanText } from "mcm-js-commons";
 
-export default function CommentsListPage({ category }: { category: string }) {
+export default function CommentsListPage({
+  category,
+  render,
+}: {
+  category: string;
+  render: boolean;
+}) {
   const [commentsList] = useRecoilState(commentsListState);
   const [countList] = useRecoilState(countListState);
   const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
@@ -30,6 +36,7 @@ export default function CommentsListPage({ category }: { category: string }) {
   const getLabel = (info: InfoTypes): Array<JSX.Element> => {
     let result = [];
 
+    // console.log(category, info.category);
     // 전체 카테고리일 경우, 각각의 카테고리 명 출력
     if (!category) {
       result.push(
@@ -84,6 +91,7 @@ export default function CommentsListPage({ category }: { category: string }) {
       changeCategory={fetchCommentsList}
       countList={countList}
       getLabel={getLabel}
+      render={render}
     />
   );
 }

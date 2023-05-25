@@ -5,16 +5,19 @@ import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
+import apis from "src/commons/libraries/commons.apis";
 import {
   InfoTypes,
   WriteInfoTypes,
 } from "../../../../write/comments.write.types";
 
 import { changeMultipleLine } from "src/main/commonsComponents/functional";
+import { getHashPassword } from "src/main/commonsComponents/functional";
 
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
 
+let waiting = false; // 중복 클릭 방지
 export default function ContentsSelectFunctionalPage({
   info,
   type,
@@ -55,59 +58,130 @@ export default function ContentsSelectFunctionalPage({
     }
   };
 
+  // 모달 오픈하기
+  const openModal = ({
+    text,
+    isSuccess,
+    focus,
+    afterCloseEvent,
+  }: {
+    text: string;
+    isSuccess?: boolean;
+    focus?: "contents" | "password";
+    afterCloseEvent?: () => {};
+  }) => {
+    Modal.open({
+      children: (
+        <_SpanText styles={{ textAlign: "center" }}>
+          <b>{text}</b>
+        </_SpanText>
+      ),
+      showBGAnimation: true,
+      showModalOpenAnimation: true,
+      modalSize: { width: "280px", height: "60px" },
+      modalStyles: !isSuccess
+        ? {
+            border: "double 5px #aa5656",
+          }
+        : {
+            border: "double 5px #19a7ce",
+          },
+      onAfterCloseEvent: afterCloseEvent
+        ? afterCloseEvent
+        : () => {
+            if (!_contents || focus === "contents") {
+              if (contentsRef.current) contentsRef.current.focus();
+            } else if (!password || focus === "password") {
+              if (passwordRef.current) passwordRef.current.focus();
+            }
+          },
+    });
+  };
+
   // 최종 삭제 및 수정하기
-  const confirm = () => {
+  const confirm = async () => {
+    if (waiting) {
+      openModal({ text: "처리중입니다. 잠시만 기다려주세요." });
+      return;
+    }
+    const typeName = type === "modify" ? "수정" : "삭제";
+
     // 버튼이 비활성화일 경우
     if (!checkAble()) {
-      Modal.open({
-        children: (
-          <_SpanText>
-            <b>
-              {!_contents ? "댓글을 입력해주세요." : "비밀번호를 입력해주세요."}
-            </b>
-          </_SpanText>
-        ),
-        showBGAnimation: true,
-        showModalOpenAnimation: true,
-        modalSize: { width: "250px", height: "60px" },
-        modalStyles: {
-          border: "double 5px #aa5656",
-        },
-        onAfterCloseEvent: () => {
-          if (!_contents) {
-            if (contentsRef.current) contentsRef.current.focus();
-          } else if (!password) {
-            if (passwordRef.current) passwordRef.current.focus();
-          }
-        },
+      openModal({
+        text: !_contents ? "댓글을 입력해주세요." : "비밀번호를 입력해주세요.",
       });
     } else {
       const _info = { ...info } as WriteInfoTypes;
 
       // 비밀번호 체크하기
+      const hashPw = await getHashPassword(password);
 
+      if (hashPw !== info.password || !info.password) {
+        openModal({
+          text: "비밀번호가 일치하지 않습니다.",
+          focus: "password",
+        });
+        return;
+      }
+
+      waiting = true;
       let doc = getDoc("comments", module, "comment").doc(info.id);
 
-      // 수정 모드일 경우
       if (type === "modify") {
+        // 수정 모드일 경우
+
         // 줄바꿈 처리하기
         _info.contents = changeMultipleLine(_contents);
 
         // 수정 시간 저장
         _info.modifyAt = getServerTime();
+      } else {
+        // 삭제 모드일 경우
+        _info.deletedAt = getServerTime();
 
-        console.log(_info);
+        // 카테고리 개수 삭감하기
+        let countDoc = getDoc("comments", module, "count").where(
+          "category",
+          "==",
+          info.category
+        );
 
-        doc
-          .update(_info)
-          .then(() => {
-            // 수정 내용 업데이트
-            fetchCommentsList(_info.category);
-          })
-          .catch((err) =>
-            console.log(`댓글을 수정하는데 실패했습니다. ${err}`)
-          );
+        try {
+          const countResult = await apis(countDoc).read();
+          countResult.forEach((data) => {
+            console.log(data);
+
+            const docId = data.id;
+            let originCount = data.data();
+            // 1개 삭감하기
+            originCount.count--;
+
+            getDoc("comments", module, "count").doc(docId).update(originCount);
+          });
+        } catch (err) {
+          console.log(`카테고리 개수를 가져올 수 없습니다. ${err}`);
+        }
       }
+
+      doc
+        .update(_info)
+        .then(() => {
+          // 수정 내용 업데이트
+          fetchCommentsList(_info.category);
+          waiting = false;
+
+          openModal({
+            text: `${typeName} 완료되었습니다.`,
+            isSuccess: true,
+            afterCloseEvent: () =>
+              Modal.close({ id: "comments-functional-modal" }),
+          });
+          return;
+        })
+        .catch((err) =>
+          console.log(`댓글을 ${typeName}하는데 실패했습니다. ${err}`)
+        );
     }
   };
   return (
