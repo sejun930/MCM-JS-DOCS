@@ -22,19 +22,9 @@ const getDateForm = (
 
   let result = "";
 
-  const now = new Date(); // 현재 시간
-  const dateInfo = {
-    // date에 대한 각각의 정보 저장
-    year: _date.getFullYear(), // 연도
-    month: _date.getMonth() + 1, // 월
-    day: _date.getDate(), // 일
-    hour: _date.getHours(), // 시간
-    minute: _date.getMinutes(), // 분
-    second: _date.getSeconds(),
-  };
-
+  // const now = new Date(); // 현재 시간
   // 현재 시간과 해당 시간의 차이 구하기
-  const distance = Number(now) - Number(date);
+  const distance = Number(new Date()) - Number(_date);
   if (distance > 0) {
     // 현재로부터 얼마나 차이가 나는지 저장
     const info = {
@@ -59,11 +49,22 @@ const getDateForm = (
     }
   }
 
-  if (!result || getDate)
+  if (!result || getDate) {
+    const dateInfo = {
+      // date에 대한 각각의 정보 저장
+      year: _date.getFullYear(), // 연도
+      month: _date.getMonth() + 1, // 월
+      day: _date.getDate(), // 일
+      // hour: _date.getHours(), // 시간
+      // minute: _date.getMinutes(), // 분
+      // second: _date.getSeconds(),
+    };
+
     result = `${String(dateInfo.year)}년 ${String(dateInfo.month).padStart(
       2,
       "0"
     )}월 ${String(dateInfo.day).padStart(2, "0")}일`;
+  }
 
   return result;
 };

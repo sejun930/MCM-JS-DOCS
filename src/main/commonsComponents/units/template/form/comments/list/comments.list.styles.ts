@@ -11,13 +11,24 @@ export const CommentsListWrapper = styled.div`
   gap: 50px 0px;
 `;
 
-export const CategoryWrapper = styled.ul`
+export const CategoryWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const CateogryItems = styled.ul`
   display: flex;
   align-items: center;
   gap: 0px 26px;
   height: 24px;
   border-left: solid 3px gray;
   padding-left: 16px;
+`;
+
+export const FilterWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const Category = styled.li`
@@ -60,7 +71,7 @@ export const CommentListItems = styled.ul`
   ${(props: StyleTypes) =>
     !props.render && {
       filter: "blur(5px)",
-      transition: "all 0.3s ease",
+      transition: "all 0.4s ease",
     }}
 
   .leng {

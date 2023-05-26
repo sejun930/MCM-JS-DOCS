@@ -5,13 +5,17 @@ import {
   useRef,
   useState,
 } from "react";
+import { Message } from "./comments.write.styles";
+
 import { useRecoilState } from "recoil";
 import { fetchCommentsListState } from "src/commons/store/comments";
 
 import CommentsWriteUIPage from "./comments.write.presenter";
-import ErrorModalForm from "../error";
+import ModalResultForm from "../../modal/modal.result";
 
 import { Modal } from "mcm-js";
+import { _SpanTextWithHtml } from "mcm-js-commons";
+
 import { getServerTime, getDoc } from "src/commons/libraries/firebase";
 import { changeMultipleLine } from "src/main/commonsComponents/functional";
 
@@ -99,21 +103,23 @@ export default function CommentsWritePage({ module }: { module: string }) {
     const openErrorModal = ({
       message, // 에러메세지
       isSuccess, // 성공 여부
-      offClose, // 닫기 막기
       className, // 클래스 선택자
     }: {
       message: string;
       isSuccess?: boolean;
-      offClose?: boolean;
       className?: string;
     }) => {
       Modal.open({
         className: `error-modal ${className || ""}`,
-        children: ErrorModalForm({
-          errorMessage: message,
-          isSuccess: isSuccess || false,
-          offClose,
-          errorEvent: () => (clicked = false),
+        children: ModalResultForm({
+          children: (
+            <Message>
+              <_SpanTextWithHtml
+                dangerouslySetInnerHTML={message}
+                className="message"
+              />
+            </Message>
+          ),
         }),
         showBGAnimation: true,
         showModalOpenAnimation: true,
@@ -124,9 +130,6 @@ export default function CommentsWritePage({ module }: { module: string }) {
           height: "30%",
         },
         onAfterCloseEvent: afterEvent,
-        hideCloseButton: offClose || false,
-        offAutoClose: offClose || false,
-        onCloseModal: () => (clicked = false),
       });
     };
 
@@ -188,7 +191,7 @@ export default function CommentsWritePage({ module }: { module: string }) {
           await addComments.add(info);
 
           // 댓글 리스트 및 카테고리 업데이트
-          fetchCommentsList(info.category);
+          fetchCommentsList({ category: info.category });
 
           // 카테고리 개수 올리기
           getDoc("comments", module, "count")

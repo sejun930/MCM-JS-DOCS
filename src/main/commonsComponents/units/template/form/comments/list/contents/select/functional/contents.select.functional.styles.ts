@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+interface StyleTypes {
+  isSuccess?: boolean;
+}
+
 export const OptionalWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,5 +42,20 @@ export const ConfirmButtonWrapper = styled.div`
   .able {
     color: black;
     cursor: pointer;
+  }
+`;
+
+export const Message = styled.div`
+  display: flex;
+
+  .message {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(170, 86, 86);
+
+    ${(props: StyleTypes) =>
+      props.isSuccess && {
+        color: "rgb(25, 167, 206) !important",
+      }}
   }
 `;

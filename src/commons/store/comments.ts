@@ -1,6 +1,16 @@
 import { atom } from "recoil";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
+export interface FetchCommentsListTypes {
+  category?: string;
+  search?: string;
+}
+
+export const initFetchProps: FetchCommentsListTypes = {
+  category: "",
+  search: "",
+};
+
 // 댓글 페이지 렌더 여부
 export const renderState = atom({
   key: "render",
@@ -16,7 +26,7 @@ export const commentsListState = atom({
 // 댓글 리스트 업데이트 함수
 export const fetchCommentsListState = atom({
   key: "fetchCommentsList",
-  default: (category?: string) => {},
+  default: (props: FetchCommentsListTypes) => {},
 });
 
 // 카테고리 별 개수 리스트

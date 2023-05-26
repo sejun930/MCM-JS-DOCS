@@ -1,6 +1,7 @@
 import ContentsSelectFunctionalUIPage from "./contents.select.functional.presenter";
+import { Message } from "./contents.select.functional.styles";
 
-import { MutableRefObject, useRef } from "react";
+import { FormEvent, MutableRefObject, useRef } from "react";
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
@@ -10,6 +11,7 @@ import {
   InfoTypes,
   WriteInfoTypes,
 } from "../../../../write/comments.write.types";
+import ModalResultForm from "../../../../../modal/modal.result";
 
 import { changeMultipleLine } from "src/main/commonsComponents/functional";
 import { getHashPassword } from "src/main/commonsComponents/functional";
@@ -18,6 +20,7 @@ let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
 
 let waiting = false; // 중복 클릭 방지
+let disableOpenModal = false; // 모달 중복 실행 방지
 export default function ContentsSelectFunctionalPage({
   info,
   type,
@@ -27,7 +30,7 @@ export default function ContentsSelectFunctionalPage({
   info: InfoTypes;
   type: "modify" | "delete";
   module: string;
-  fetchCommentsList: (category: string) => void;
+  fetchCommentsList: ({ category }: { category?: string }) => void;
 }) {
   _contents = info.contents;
   const confirmRef = useRef() as MutableRefObject<HTMLButtonElement>;
@@ -70,11 +73,33 @@ export default function ContentsSelectFunctionalPage({
     focus?: "contents" | "password";
     afterCloseEvent?: () => {};
   }) => {
+    if (disableOpenModal) return;
+    disableOpenModal = true;
+
+    const _afterCloseEvent = () => {
+      disableOpenModal = false;
+
+      if (afterCloseEvent) afterCloseEvent();
+      else {
+        if (!_contents || focus === "contents") {
+          if (contentsRef.current) contentsRef.current.focus();
+        } else if (!password || focus === "password") {
+          if (passwordRef.current) passwordRef.current.focus();
+        }
+      }
+    };
+
     Modal.open({
       children: (
-        <_SpanText styles={{ textAlign: "center" }}>
-          <b>{text}</b>
-        </_SpanText>
+        <ModalResultForm
+          children={
+            <Message isSuccess={isSuccess}>
+              <_SpanText className="message">
+                <b>{isSuccess ? "✔" : "❗"}</b> {text}
+              </_SpanText>
+            </Message>
+          }
+        ></ModalResultForm>
       ),
       showBGAnimation: true,
       showModalOpenAnimation: true,
@@ -86,20 +111,13 @@ export default function ContentsSelectFunctionalPage({
         : {
             border: "double 5px #19a7ce",
           },
-      onAfterCloseEvent: afterCloseEvent
-        ? afterCloseEvent
-        : () => {
-            if (!_contents || focus === "contents") {
-              if (contentsRef.current) contentsRef.current.focus();
-            } else if (!password || focus === "password") {
-              if (passwordRef.current) passwordRef.current.focus();
-            }
-          },
+      onAfterCloseEvent: _afterCloseEvent,
     });
   };
 
   // 최종 삭제 및 수정하기
-  const confirm = async () => {
+  const confirm = async (e?: FormEvent) => {
+    if (e) e.preventDefault();
     if (waiting) {
       openModal({ text: "처리중입니다. 잠시만 기다려주세요." });
       return;
@@ -150,8 +168,6 @@ export default function ContentsSelectFunctionalPage({
         try {
           const countResult = await apis(countDoc).read();
           countResult.forEach((data) => {
-            console.log(data);
-
             const docId = data.id;
             let originCount = data.data();
             // 1개 삭감하기
@@ -168,7 +184,7 @@ export default function ContentsSelectFunctionalPage({
         .update(_info)
         .then(() => {
           // 수정 내용 업데이트
-          fetchCommentsList(_info.category);
+          fetchCommentsList({ category: _info.category });
           waiting = false;
 
           openModal({

@@ -1,18 +1,28 @@
 import {
   Category,
   CategoryWrapper,
+  CateogryItems,
+  FilterWrapper,
   CommentListItems,
   CommentsListWrapper,
   EmptyWrapper,
+  //   Form,
 } from "./comments.list.styles";
 
 import { InfoTypes, categoryInitList } from "../write/comments.write.types";
 import { getDateForm } from "src/main/commonsComponents/functional";
 
-import { _PText, _Button, _SpanTextWithHtml, _Title } from "mcm-js-commons";
+import {
+  _PText,
+  _Button,
+  _SpanTextWithHtml,
+  _Title,
+  _Input,
+} from "mcm-js-commons";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
+import CommentsSearchPage from "./search";
 
 export default function CommentsListUIPage({
   commentsList,
@@ -24,7 +34,7 @@ export default function CommentsListUIPage({
 }: {
   commentsList: Array<InfoTypes>;
   category: string;
-  changeCategory: (category: string) => void;
+  changeCategory: ({ category }: { category: string }) => void;
   countList: { [key: string]: number };
   getLabel: (info: InfoTypes) => Array<JSX.Element>;
   render: boolean;
@@ -32,24 +42,32 @@ export default function CommentsListUIPage({
   return (
     <CommentsListWrapper>
       <CategoryWrapper>
-        {categoryInitList.map((listInfo, key) => {
-          return (
-            <Category key={`comments-category-list-${listInfo.value}-${key}`}>
-              <_Button
-                className={(key === 0 && "category-select-button") || undefined}
-                onClickEvent={() =>
-                  (category !== listInfo.value &&
-                    changeCategory(listInfo.value)) ||
-                  undefined
-                }
-                id={`category-${listInfo.value || "all"}`}
-              >
-                {listInfo.secondName || listInfo.name} ({" "}
-                {countList[listInfo.value || "all"]} )
-              </_Button>
-            </Category>
-          );
-        })}
+        <CateogryItems>
+          {categoryInitList.map((listInfo, key) => {
+            return (
+              <Category key={`comments-category-list-${listInfo.value}-${key}`}>
+                <_Button
+                  className={
+                    (key === 0 && "category-select-button") || undefined
+                  }
+                  onClickEvent={() =>
+                    (category !== listInfo.value &&
+                      changeCategory({ category: listInfo.value })) ||
+                    undefined
+                  }
+                  id={`category-${listInfo.value || "all"}`}
+                >
+                  {listInfo.secondName || listInfo.name} ({" "}
+                  {countList[listInfo.value || "all"]} )
+                </_Button>
+              </Category>
+            );
+          })}
+        </CateogryItems>
+
+        <FilterWrapper>
+          <CommentsSearchPage />
+        </FilterWrapper>
       </CategoryWrapper>
 
       {!commentsList.length ? (

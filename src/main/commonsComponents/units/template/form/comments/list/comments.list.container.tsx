@@ -14,6 +14,7 @@ import StarsForm from "../write/stars";
 
 import { _Button, _SpanText } from "mcm-js-commons";
 
+let search = "";
 export default function CommentsListPage({
   category,
   render,
@@ -41,7 +42,7 @@ export default function CommentsListPage({
     if (!category) {
       result.push(
         <_Button
-          onClickEvent={() => fetchCommentsList(info.category)}
+          onClickEvent={() => fetchCommentsList({ category: info.category })}
           buttonType="button"
         >
           <CommentsLabel

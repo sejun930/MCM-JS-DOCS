@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import {
-  renderState,
   commentsListState,
   fetchCommentsListState,
   countListState,
+  FetchCommentsListTypes,
+  initFetchProps,
 } from "src/commons/store/comments";
 
 import {
@@ -15,6 +16,9 @@ import {
 import apis from "src/commons/libraries/commons.apis";
 
 let debouncing: ReturnType<typeof setTimeout> | number;
+
+// 기존의 fetch 정보 저장하기
+let saveFetchInfo = { ...initFetchProps };
 export default function CommentsScriptPage({
   loadScript,
   module,
@@ -35,7 +39,7 @@ export default function CommentsScriptPage({
 
   // 데이터 가져오기
   useEffect(() => {
-    _fetchCommentsList();
+    _fetchCommentsList({});
   }, [module]);
 
   // 화면 렌더 완료 및 함수 저장하기
@@ -50,20 +54,35 @@ export default function CommentsScriptPage({
   }, [loadScript]);
 
   // 댓글 리스트 조회 및 카테고리 업데이트
-  const _fetchCommentsList = async (category?: string) => {
+  const _fetchCommentsList = async (props: FetchCommentsListTypes) => {
+    saveFetchInfo = { ...saveFetchInfo, ...props };
+    console.log(saveFetchInfo, props);
+
     clearTimeout(debouncing);
     toggleRender(false);
+
     if (module && loadScript) {
       // 카테고리 변경하기
-      changeCategory(category || "");
+      changeCategory(saveFetchInfo.category || "");
 
       let doc = getDoc("comments", module, "comment") as Query_DocumentData;
+      // 최신순으로 조회
+      doc = doc.orderBy("createdAt", "desc");
+
+      // 삭제되지 않은 댓글만 조회
       doc = doc.where("deletedAt", "==", null);
 
-      if (category) {
-        doc = doc.where("category", "==", category);
+      // 카테고리가 존재할 경우
+      if (saveFetchInfo.category) {
+        doc = doc.where("category", "==", saveFetchInfo.category);
       }
-      doc = doc.orderBy("createdAt", "desc");
+
+      // 검색어가 존재할 경우
+      //   if (saveFetchInfo.search) {
+      //     doc = doc
+      //       .where("contents", ">=", saveFetchInfo.search)
+      //       .where("contents", "<=", saveFetchInfo.search + "\uf8ff");
+      //   }
 
       try {
         const result = await apis(doc).read();
@@ -73,7 +92,7 @@ export default function CommentsScriptPage({
 
         debouncing = window.setTimeout(() => {
           toggleRender(true);
-        }, 300);
+        }, 0);
       } catch (err) {
         console.log(`댓글을 정상적으로 불러오지 못했습니다. : ${err}`);
       }
