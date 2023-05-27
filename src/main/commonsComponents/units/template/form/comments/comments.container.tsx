@@ -4,6 +4,7 @@ import CommentsScriptPage from "./comments.script";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
+import { categoryInitList } from "./write/comments.write.types";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
@@ -64,11 +65,15 @@ export default function CommentsPage() {
 
   // 카테고리 변경하기
   const changeCategory = (category: string) => {
+    // 해당되지 않는 카테고리가 입력될 경우
+    const filter = categoryInitList.filter((el) => el.value === category);
+    if (!filter.length) category = "all";
+
     // 쿼리스트링 저장하기
     router.push(
       {
         pathname: router.pathname,
-        query: { c: category || "all" },
+        query: { c: category },
       },
       undefined,
       { scroll: false }
