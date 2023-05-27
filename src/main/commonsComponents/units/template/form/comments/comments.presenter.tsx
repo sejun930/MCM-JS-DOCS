@@ -21,7 +21,7 @@ export default function CommentsUIPage({
         remakrs="해당 모듈에 대한 사용후기 및 개선점 등을 남겨주세요!"
       />
       <CommentsWritePage module={module} />
-      <CommentsListPage category={selectCategory} render={render} />
+      <CommentsListPage category={selectCategory} render={true} />
     </Wrapper>
   );
 }

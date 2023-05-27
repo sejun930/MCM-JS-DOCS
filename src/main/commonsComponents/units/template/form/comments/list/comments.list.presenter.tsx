@@ -1,7 +1,7 @@
 import {
   Category,
   CategoryWrapper,
-  CateogryItems,
+  CategoryItems,
   FilterWrapper,
   CommentListItems,
   CommentsListWrapper,
@@ -20,6 +20,7 @@ import {
   _Input,
 } from "mcm-js-commons";
 import { getUuid } from "src/main/commonsComponents/functional";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsSearchPage from "./search";
@@ -39,23 +40,28 @@ export default function CommentsListUIPage({
   getLabel: (info: InfoTypes) => Array<JSX.Element>;
   render: boolean;
 }) {
+  const { getRouter } = CommonsHooksComponents();
+  const router = getRouter();
+
   return (
     <CommentsListWrapper>
       <CategoryWrapper>
-        <CateogryItems>
+        <CategoryItems>
           {categoryInitList.map((listInfo, key) => {
+            let selectCategory = router.query.c;
+            if (selectCategory === "all") selectCategory = "";
+
             return (
-              <Category key={`comments-category-list-${listInfo.value}-${key}`}>
+              <Category
+                key={`comments-category-list-${listInfo.value}-${key}`}
+                selected={selectCategory === listInfo.value}
+              >
                 <_Button
-                  className={
-                    (key === 0 && "category-select-button") || undefined
-                  }
                   onClickEvent={() =>
-                    (category !== listInfo.value &&
+                    (selectCategory !== listInfo.value &&
                       changeCategory({ category: listInfo.value })) ||
                     undefined
                   }
-                  id={`category-${listInfo.value || "all"}`}
                 >
                   {listInfo.secondName || listInfo.name} ({" "}
                   {countList[listInfo.value || "all"]} )
@@ -63,14 +69,14 @@ export default function CommentsListUIPage({
               </Category>
             );
           })}
-        </CateogryItems>
+        </CategoryItems>
 
-        <FilterWrapper>
+        {/* <FilterWrapper>
           <CommentsSearchPage />
-        </FilterWrapper>
+        </FilterWrapper> */}
       </CategoryWrapper>
 
-      {!commentsList.length ? (
+      {/* {!commentsList.length ? (
         <EmptyWrapper>
           <_PText className="empty-list">
             등록된 댓글이 없습니다. <br />
@@ -93,7 +99,7 @@ export default function CommentsListUIPage({
             );
           })}
         </CommentListItems>
-      )}
+      )} */}
     </CommentsListWrapper>
   );
 }

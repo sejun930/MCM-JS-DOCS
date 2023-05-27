@@ -28,7 +28,7 @@ export default function CommonsHooksComponents() {
 
   // 주소 query 끝 제이든 케이스 리턴하기
   const getModuleNamewithJadenCase = (): string => {
-    let moduleName = router.asPath
+    let moduleName = router.pathname
       .split("/")
       .filter((el) => el)
       .at(-1);

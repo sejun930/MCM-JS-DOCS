@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 interface StyleTypes {
   render?: boolean;
+  selected?: boolean;
 }
 
 export const CommentsListWrapper = styled.div`
@@ -17,7 +18,7 @@ export const CategoryWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const CateogryItems = styled.ul`
+export const CategoryItems = styled.ul`
   display: flex;
   align-items: center;
   gap: 0px 26px;
@@ -36,12 +37,13 @@ export const Category = styled.li`
     transition: all 0.3s;
     font-size: 14px;
     color: #666666;
-  }
 
-  .category-select-button {
-    color: #aa5656;
-    cursor: default;
-    font-weight: 700;
+    ${(props: StyleTypes) =>
+      props.selected && {
+        color: "#aa5656",
+        cursor: "default",
+        fontWeight: 700,
+      }}
   }
 `;
 

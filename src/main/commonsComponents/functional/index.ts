@@ -22,7 +22,6 @@ const getDateForm = (
 
   let result = "";
 
-  // const now = new Date(); // 현재 시간
   // 현재 시간과 해당 시간의 차이 구하기
   const distance = Number(new Date()) - Number(_date);
   if (distance > 0) {
@@ -55,9 +54,6 @@ const getDateForm = (
       year: _date.getFullYear(), // 연도
       month: _date.getMonth() + 1, // 월
       day: _date.getDate(), // 일
-      // hour: _date.getHours(), // 시간
-      // minute: _date.getMinutes(), // 분
-      // second: _date.getSeconds(),
     };
 
     result = `${String(dateInfo.year)}년 ${String(dateInfo.month).padStart(

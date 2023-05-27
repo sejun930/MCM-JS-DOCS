@@ -5,11 +5,16 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+
 // 현재 선택중인 카테고리 저장
 let selectCategory = "";
 // 디바운싱 적용
 let debouncing: ReturnType<typeof setTimeout>;
 export default function CommentsPage() {
+  const { getRouter } = CommonsHooksComponents();
+  const router = getRouter();
+
   // 스크립트 호출하기
   const [loadScript, setLoadScript] = useState(false);
   // 페이지 최종 렌더하기
@@ -59,20 +64,28 @@ export default function CommentsPage() {
 
   // 카테고리 변경하기
   const changeCategory = (category: string) => {
-    if (selectCategory === category) return;
-    selectCategory = category;
-
-    // 기존의 카테고리 클래스 제거
-    const selectList = Array.from(
-      document.getElementsByClassName("category-select-button")
+    // 쿼리스트링 저장하기
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { c: category || "all" },
+      },
+      undefined,
+      { scroll: false }
     );
-    if (selectList.length) {
-      selectList.forEach((el) => el.classList.remove("category-select-button"));
-    }
 
-    // 선택한 카테고리 id 추가
-    const target = document.getElementById(`category-${category || "all"}`);
-    if (target) target.classList.add("category-select-button");
+    // if (selectCategory === category) return;
+    // selectCategory = category;
+    // // 기존의 카테고리 클래스 제거
+    // const selectList = Array.from(
+    //   document.getElementsByClassName("category-select-button")
+    // );
+    // if (selectList.length) {
+    //   selectList.forEach((el) => el.classList.remove("category-select-button"));
+    // }
+    // // 선택한 카테고리 id 추가
+    // const target = document.getElementById(`category-${category || "all"}`);
+    // if (target) target.classList.add("category-select-button");
   };
 
   const toggleRender = (bool: boolean) => {
