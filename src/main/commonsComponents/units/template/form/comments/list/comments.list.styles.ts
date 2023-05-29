@@ -70,7 +70,7 @@ export const CommentListItems = styled.ul`
   display: flex;
   flex-direction: column;
 
-  ${(props: StyleTypes) =>
+  /* ${(props: StyleTypes) =>
     !props.render && {
       filter: "blur(5px)",
       transition: "all 0.4s ease",
@@ -78,7 +78,7 @@ export const CommentListItems = styled.ul`
 
   .leng {
     font-size: 14px;
-  }
+  } */
 `;
 
 export const LoadingWrapper = styled.div`

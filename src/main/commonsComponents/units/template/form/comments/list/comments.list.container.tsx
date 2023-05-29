@@ -1,12 +1,7 @@
-import { InfoTypes } from "../write/comments.write.types";
+import { InfoTypes } from "../comments.types";
 import CommentsListUIPage from "./comments.list.presenter";
 
-import { useRecoilState } from "recoil";
-import {
-  commentsListState,
-  countListState,
-  fetchCommentsListState,
-} from "src/commons/store/comments";
+import { FetchCommentsListTypes } from "src/commons/store/comments";
 
 import { categoryInitList } from "../write/comments.write.types";
 import CommentsLabel from "./label";
@@ -17,15 +12,19 @@ import { _Button, _SpanText } from "mcm-js-commons";
 let search = "";
 export default function CommentsListPage({
   category,
-  render,
+  changeCategory,
+  countList,
+  commentsList,
+  filterCommentsList,
+  modifyComments,
 }: {
   category: string;
-  render: boolean;
+  changeCategory: (category: string) => void;
+  countList: { [key: string]: number };
+  commentsList: Array<InfoTypes>;
+  filterCommentsList: (props: FetchCommentsListTypes) => void;
+  modifyComments: (comment: InfoTypes) => void;
 }) {
-  const [commentsList] = useRecoilState(commentsListState);
-  const [countList] = useRecoilState(countListState);
-  const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
-
   const categoryName: { [key: string]: string } = categoryInitList
     .filter((el) => el.value)
     .reduce((acc: { [key: string]: string }, cur) => {
@@ -42,7 +41,7 @@ export default function CommentsListPage({
     if (!category) {
       result.push(
         <_Button
-          onClickEvent={() => fetchCommentsList({ category: info.category })}
+          onClickEvent={() => filterCommentsList({ category: info.category })}
           buttonType="button"
         >
           <CommentsLabel
@@ -89,10 +88,11 @@ export default function CommentsListPage({
     <CommentsListUIPage
       commentsList={commentsList}
       category={category}
-      changeCategory={fetchCommentsList}
+      changeCategory={changeCategory}
       countList={countList}
       getLabel={getLabel}
-      render={render}
+      filterCommentsList={filterCommentsList}
+      modifyComments={modifyComments}
     />
   );
 }

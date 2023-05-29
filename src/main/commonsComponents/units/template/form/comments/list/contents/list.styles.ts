@@ -14,10 +14,7 @@ export const CommentsList = styled.li`
   min-height: 70px;
 
   :hover {
-    ${(props: StyleTypes) =>
-      props.render && {
-        backgroundColor: "#dddddd",
-      }}
+    background-color: #dddddd;
   }
 `;
 

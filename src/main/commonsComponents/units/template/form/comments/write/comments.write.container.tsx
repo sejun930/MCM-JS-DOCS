@@ -7,16 +7,14 @@ import {
 } from "react";
 import { Message } from "./comments.write.styles";
 
-import { useRecoilState } from "recoil";
-import { fetchCommentsListState } from "src/commons/store/comments";
-
 import CommentsWriteUIPage from "./comments.write.presenter";
 import ModalResultForm from "../../modal/modal.result";
 
 import { Modal } from "mcm-js";
 import { _SpanTextWithHtml } from "mcm-js-commons";
 
-import { getServerTime, getDoc } from "src/commons/libraries/firebase";
+import { getHashPassword } from "src/main/commonsComponents/functional";
+import { getServerTime } from "src/commons/libraries/firebase";
 import { changeMultipleLine } from "src/main/commonsComponents/functional";
 
 import {
@@ -25,15 +23,18 @@ import {
   categoryInitList,
   CategoryListType,
 } from "./comments.write.types";
-import { getHashPassword } from "src/main/commonsComponents/functional";
-// import apis from "src/commons/libraries/commons.apis";
+import { InfoTypes } from "../comments.types";
 
 // 중복 실행 방지
 let writing = false;
 let clicked = false;
-export default function CommentsWritePage({ module }: { module: string }) {
-  const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
-
+export default function CommentsWritePage({
+  module,
+  addComments,
+}: {
+  module: string;
+  addComments: (data: InfoTypes) => Promise<boolean>;
+}) {
   // 카테고리 선택
   const [categoryList, setCategoryList] = useState<Array<CategoryListType>>([
     ...categoryInitList,
@@ -183,47 +184,19 @@ export default function CommentsWritePage({ module }: { module: string }) {
       if (module) {
         writing = true;
 
-        try {
-          const addComments = getDoc("comments", module, "comment");
-          // console.log(apis(addComments).create([info]));
-
-          // // return;
-          await addComments.add(info);
-
-          // 댓글 리스트 및 카테고리 업데이트
-          fetchCommentsList({ category: info.category });
-
-          // 카테고리 개수 올리기
-          getDoc("comments", module, "count")
-            .where("category", "==", info.category)
-            .get()
-            .then((result) => {
-              result.forEach((data) => {
-                const docId = data.id;
-                const originCount = data.data().count;
-
-                getDoc("comments", module, "count")
-                  .doc(docId)
-                  .update({
-                    category: info.category,
-                    count: originCount + 1,
-                  });
-              });
-            });
-
+        const addResult = await addComments(info as InfoTypes);
+        if (addResult) {
+          // 등록에 성공할 경우
           openErrorModal({
             message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
             className: "success-modal",
           });
-
-          // 초기화
-          writing = false;
-          setInfo({ ...initInfo });
-        } catch (err) {
-          console.log(err);
-          return openErrorModal({ message: `댓글 등록에 실패했습니다.` });
         }
+        writing = false;
       }
+
+      // 초기화
+      setInfo({ ...initInfo });
     }
   };
 

@@ -1,36 +1,14 @@
 import { FieldValue } from "src/commons/libraries/firebase";
-
-interface WriteCommonsTypes {
-  category: string;
-  password: string;
-  contents: string;
-  rating: number;
-  bugStatus: number; // 버그 처리 여부 (0 : 대기중, 1 : 처리중, 2 : 처리 완료)
-  complateAnswer: boolean; // 문의 답변 완료 (false : 대기중, true : 답변 완료)
-}
+import { CommentsInfoTypes } from "../comments.types";
 
 // 작성용 type
 export type WriteInfoTypes = {
   [key: string]: string | number | Date | null | FieldValue | boolean;
-} & WriteCommonsTypes & {
+} & CommentsInfoTypes & {
     createdAt: FieldValue | null;
     modifyAt: FieldValue | null;
     deletedAt: FieldValue | null;
   };
-
-// 날짜 관련 type
-interface DateTypes {
-  seconds: number;
-  nanoseconds: number;
-}
-
-// 렌더용 type
-export type InfoTypes = WriteCommonsTypes & {
-  id: string;
-  createdAt: DateTypes | null;
-  modifyAt: DateTypes | null;
-  deletedAt: DateTypes | null;
-};
 
 // 정보 저장하기
 export const initInfo: WriteInfoTypes = {

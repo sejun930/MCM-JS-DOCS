@@ -7,10 +7,9 @@ import { _SpanText } from "mcm-js-commons";
 
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
 import apis from "src/commons/libraries/commons.apis";
-import {
-  InfoTypes,
-  WriteInfoTypes,
-} from "../../../../write/comments.write.types";
+import { WriteInfoTypes } from "../../../../write/comments.write.types";
+import { InfoTypes } from "../../../../comments.types";
+
 import ModalResultForm from "../../../../../modal/modal.result";
 
 import { changeMultipleLine } from "src/main/commonsComponents/functional";
@@ -26,11 +25,13 @@ export default function ContentsSelectFunctionalPage({
   type,
   module,
   fetchCommentsList,
+  modifyComments,
 }: {
   info: InfoTypes;
   type: "modify" | "delete";
   module: string;
   fetchCommentsList: ({ category }: { category?: string }) => void;
+  modifyComments: (comment: InfoTypes) => Promise<boolean>;
 }) {
   _contents = info.contents;
   const confirmRef = useRef() as MutableRefObject<HTMLButtonElement>;
@@ -103,7 +104,7 @@ export default function ContentsSelectFunctionalPage({
       ),
       showBGAnimation: true,
       showModalOpenAnimation: true,
-      modalSize: { width: "280px", height: "60px" },
+      modalSize: { width: "300px", height: "60px" },
       modalStyles: !isSuccess
         ? {
             border: "double 5px #aa5656",
@@ -146,6 +147,7 @@ export default function ContentsSelectFunctionalPage({
       waiting = true;
       let doc = getDoc("comments", module, "comment").doc(info.id);
 
+      let isComplete = false; // 성공 여부
       if (type === "modify") {
         // 수정 모드일 경우
 
@@ -154,50 +156,63 @@ export default function ContentsSelectFunctionalPage({
 
         // 수정 시간 저장
         _info.modifyAt = getServerTime();
+
+        // 수정 완료 여부 저장
+        isComplete = await modifyComments(_info as InfoTypes);
       } else {
         // 삭제 모드일 경우
         _info.deletedAt = getServerTime();
 
-        // 카테고리 개수 삭감하기
-        let countDoc = getDoc("comments", module, "count").where(
-          "category",
-          "==",
-          info.category
-        );
+        // // 카테고리 개수 삭감하기
+        // let countDoc = getDoc("comments", module, "count").where(
+        //   "category",
+        //   "==",
+        //   info.category
+        // );
 
-        try {
-          const countResult = await apis(countDoc).read();
-          countResult.forEach((data) => {
-            const docId = data.id;
-            let originCount = data.data();
-            // 1개 삭감하기
-            originCount.count--;
+        // try {
+        //   const countResult = await apis(countDoc).read();
+        //   countResult.forEach((data) => {
+        //     const docId = data.id;
+        //     let originCount = data.data();
+        //     // 1개 삭감하기
+        //     originCount.count--;
 
-            getDoc("comments", module, "count").doc(docId).update(originCount);
-          });
-        } catch (err) {
-          console.log(`카테고리 개수를 가져올 수 없습니다. ${err}`);
-        }
+        //     getDoc("comments", module, "count").doc(docId).update(originCount);
+        //   });
+        // } catch (err) {
+        //   console.log(`카테고리 개수를 가져올 수 없습니다. ${err}`);
+        // }
       }
 
-      doc
-        .update(_info)
-        .then(() => {
-          // 수정 내용 업데이트
-          fetchCommentsList({ category: _info.category });
-          waiting = false;
+      if (isComplete) {
+        openModal({
+          text: `${typeName} 완료되었습니다.`,
+          isSuccess: true,
+          afterCloseEvent: () =>
+            Modal.close({ id: "comments-functional-modal" }),
+        });
+      }
+      waiting = false;
 
-          openModal({
-            text: `${typeName} 완료되었습니다.`,
-            isSuccess: true,
-            afterCloseEvent: () =>
-              Modal.close({ id: "comments-functional-modal" }),
-          });
-          return;
-        })
-        .catch((err) =>
-          console.log(`댓글을 ${typeName}하는데 실패했습니다. ${err}`)
-        );
+      //   doc
+      //     .update(_info)
+      //     .then(() => {
+      //       // 수정 내용 업데이트
+      //       fetchCommentsList({ category: _info.category });
+      //       waiting = false;
+
+      // openModal({
+      //   text: `${typeName} 완료되었습니다.`,
+      //   isSuccess: true,
+      //   afterCloseEvent: () =>
+      //     Modal.close({ id: "comments-functional-modal" }),
+      // });
+      //       return;
+      //     })
+      //     .catch((err) =>
+      //       console.log(`댓글을 ${typeName}하는데 실패했습니다. ${err}`)
+      //     );
     }
   };
   return (
