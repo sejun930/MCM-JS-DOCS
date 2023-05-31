@@ -2,13 +2,11 @@ import ListContentsInfoUIPage from "./list.contents.presenter";
 import { useEffect, useState } from "react";
 
 import { InfoTypes } from "../../comments.types";
-import { FetchCommentsListTypes } from "src/commons/store/comments";
 
 export interface ListContentsIProps {
   info: InfoTypes;
   getLabel: (info: InfoTypes) => Array<JSX.Element>;
-  filterCommentsList: (props: FetchCommentsListTypes) => void;
-  modifyComments: (comment: InfoTypes) => void;
+  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
 }
 
 const MAX_LINE = 200; // 더 보기가 실행 될 최소 글자수

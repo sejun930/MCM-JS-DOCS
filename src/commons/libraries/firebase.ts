@@ -22,6 +22,12 @@ const firebaseConfig = {
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore(firebaseApp);
 
+// 캐시 설정
+db.settings({
+  cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
+  merge: true,
+});
+
 // 타입 리턴하기
 export type FieldValue = firebase.firestore.FieldValue;
 export type DocumentData = firebase.firestore.DocumentData;

@@ -34,7 +34,7 @@ export default function CommentsWriteUIPage({
   contentsRef,
   passwordRef,
 }: {
-  categoryList: Array<{ name: string; value: string }>;
+  categoryList: Array<{ [key: string]: string }>;
   changeInfo: (value: string | number) => (name: string) => void;
   info: WriteInfoTypes;
   write: (e?: FormEvent<Element>) => void;
@@ -55,15 +55,18 @@ export default function CommentsWriteUIPage({
             value={info.category}
             ref={categoryRef}
           >
-            {categoryList.map((category) => (
-              <option
-                key={`comment-category-${category.value}`}
-                value={category.value}
-                disabled={!category.value}
-              >
-                - {category.name}
-              </option>
-            ))}
+            {categoryList.map((category) => {
+              const [value, name] = Object.entries(category)[0];
+              return (
+                <option
+                  key={`comment-category-${name}-${value}`}
+                  value={value}
+                  disabled={value === "all"}
+                >
+                  - {name}
+                </option>
+              );
+            })}
           </SelectCategory>
 
           <OptionItems

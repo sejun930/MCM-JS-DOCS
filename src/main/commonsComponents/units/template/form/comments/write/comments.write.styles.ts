@@ -107,7 +107,7 @@ export const Message = styled.div`
   .message {
     font-size: 24px;
     font-weight: 900;
-    height: 50%;
+    /* height: 50%; */
     width: 100%;
     display: flex;
     justify-content: center;

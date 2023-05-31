@@ -28,3 +28,23 @@ export interface CountListTypes {
   category: string;
   count: number;
 }
+
+export interface CommentsAllInfoTypes {
+  commentsList: Array<InfoTypes>;
+  selectCategory: string;
+  countList: { [key: string]: number };
+  filter: {
+    search: "";
+    page: 1;
+  };
+}
+
+export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
+
+// 댓글 정보들 초기값
+export const initCommentsInfo: CommentsAllInfoTypes = {
+  commentsList: [], // 댓글 리스트
+  selectCategory: "all", // 선택된 카테고리
+  countList: {}, // 카테고리 개수 리스트
+  filter: { search: "", page: 1 }, // 필터 정보
+};

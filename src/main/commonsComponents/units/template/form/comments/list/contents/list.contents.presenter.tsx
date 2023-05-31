@@ -26,7 +26,7 @@ interface ListContentsUIProps {
   contents: string;
   showSelect: boolean;
   toggleShowSelect: (bool?: boolean) => void;
-  modifyComments: (comment: InfoTypes) => void;
+  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
 }
 
 export default function ListContentsInfoUIPage({

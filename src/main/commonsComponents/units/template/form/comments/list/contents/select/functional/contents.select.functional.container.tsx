@@ -24,14 +24,12 @@ export default function ContentsSelectFunctionalPage({
   info,
   type,
   module,
-  fetchCommentsList,
   modifyComments,
 }: {
   info: InfoTypes;
   type: "modify" | "delete";
   module: string;
-  fetchCommentsList: ({ category }: { category?: string }) => void;
-  modifyComments: (comment: InfoTypes) => Promise<boolean>;
+  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
 }) {
   _contents = info.contents;
   const confirmRef = useRef() as MutableRefObject<HTMLButtonElement>;
@@ -156,34 +154,12 @@ export default function ContentsSelectFunctionalPage({
 
         // 수정 시간 저장
         _info.modifyAt = getServerTime();
-
-        // 수정 완료 여부 저장
-        isComplete = await modifyComments(_info as InfoTypes);
       } else {
         // 삭제 모드일 경우
         _info.deletedAt = getServerTime();
-
-        // // 카테고리 개수 삭감하기
-        // let countDoc = getDoc("comments", module, "count").where(
-        //   "category",
-        //   "==",
-        //   info.category
-        // );
-
-        // try {
-        //   const countResult = await apis(countDoc).read();
-        //   countResult.forEach((data) => {
-        //     const docId = data.id;
-        //     let originCount = data.data();
-        //     // 1개 삭감하기
-        //     originCount.count--;
-
-        //     getDoc("comments", module, "count").doc(docId).update(originCount);
-        //   });
-        // } catch (err) {
-        //   console.log(`카테고리 개수를 가져올 수 없습니다. ${err}`);
-        // }
       }
+      // 수정 완료 여부 저장
+      isComplete = await modifyComments(_info as InfoTypes, type === "delete");
 
       if (isComplete) {
         openModal({

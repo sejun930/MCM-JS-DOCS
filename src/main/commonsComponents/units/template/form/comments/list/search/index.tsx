@@ -2,12 +2,12 @@ import styled from "@emotion/styled";
 import { _Input } from "mcm-js-commons";
 
 import { FormEvent, MutableRefObject, useRef } from "react";
-import { useRecoilState } from "recoil";
-import { fetchCommentsListState } from "src/commons/store/comments";
+// import { useRecoilState } from "recoil";
+// import { fetchCommentsListState } from "src/commons/store/comments";
 
 let search = ""; // 검색어 저장
 export default function CommentsSearchPage() {
-  const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
+  //   const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
   const _inputRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   // 검색어 변경하기
@@ -20,7 +20,7 @@ export default function CommentsSearchPage() {
     e.preventDefault();
 
     console.log(search);
-    fetchCommentsList({ search });
+    // fetchCommentsList({ search });
   };
 
   return (

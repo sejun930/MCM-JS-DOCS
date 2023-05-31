@@ -13,7 +13,6 @@ import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
 
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
-import { fetchCommentsListState } from "src/commons/store/comments";
 
 import { Modal } from "mcm-js";
 import ContentsOptionalPage from "./functional/contents.select.functional.container";
@@ -35,14 +34,13 @@ export default function SelectListOptional({
   closeEvent: () => void;
   styles?: CSSProperties;
   className?: string;
-  modifyComments: (comment: InfoTypes) => void;
+  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
 }) {
   const { getAllComponentsClassName } = CommonsHooksComponents();
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
   const [module] = useRecoilState(moduleState);
-  const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
 
   useEffect(() => {
     const body = document.body;
@@ -94,7 +92,6 @@ export default function SelectListOptional({
           type={type}
           info={info}
           module={module}
-          fetchCommentsList={fetchCommentsList}
           modifyComments={modifyComments}
         />
       ),

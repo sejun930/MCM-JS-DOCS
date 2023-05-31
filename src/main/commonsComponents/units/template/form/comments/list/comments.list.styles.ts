@@ -25,6 +25,12 @@ export const CategoryItems = styled.ul`
   height: 24px;
   border-left: solid 3px gray;
   padding-left: 16px;
+  opacity: 0;
+
+  ${(props: StyleTypes) =>
+    props.render && {
+      opacity: 1,
+    }};
 `;
 
 export const FilterWrapper = styled.div`

@@ -16,29 +16,23 @@ import { _SpanTextWithHtml } from "mcm-js-commons";
 import { getHashPassword } from "src/main/commonsComponents/functional";
 import { getServerTime } from "src/commons/libraries/firebase";
 import { changeMultipleLine } from "src/main/commonsComponents/functional";
+import { categoryListArray } from "./comments.write.types";
 
-import {
-  initInfo,
-  WriteInfoTypes,
-  categoryInitList,
-  CategoryListType,
-} from "./comments.write.types";
+import { initInfo, WriteInfoTypes } from "./comments.write.types";
 import { InfoTypes } from "../comments.types";
 
 // 중복 실행 방지
 let writing = false;
 let clicked = false;
 export default function CommentsWritePage({
-  module,
   addComments,
 }: {
-  module: string;
   addComments: (data: InfoTypes) => Promise<boolean>;
 }) {
   // 카테고리 선택
-  const [categoryList, setCategoryList] = useState<Array<CategoryListType>>([
-    ...categoryInitList,
-  ]);
+  const [categoryList, setCategoryList] = useState<
+    Array<{ [key: string]: string }>
+  >([]);
 
   // 정보 저장하기
   const [info, setInfo] = useState<WriteInfoTypes>({
@@ -51,17 +45,14 @@ export default function CommentsWritePage({
   const contentsRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   // password ref
   const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
-  // const [info, setInfo] = useState({ password: "", contents: "", rating: 0 });
 
   useEffect(() => {
-    if (info.category) {
-      if (categoryList[0].value === "") {
-        // 디폴트 상태의 카테고리 없애기
-        setCategoryList(categoryList.slice(1));
-      }
+    if (info.category !== "all") {
+      // 디폴트 상태의 카테고리 없애기
+      setCategoryList([...categoryListArray].slice(1));
     } else {
       // 카테고리 선택 포함하기
-      setCategoryList([...categoryInitList]);
+      setCategoryList([...categoryListArray]);
     }
   }, [info.category]);
 
@@ -140,7 +131,7 @@ export default function CommentsWritePage({
         message: "댓글을 등록하고 있습니다. <br /> 잠시만 기다려주세요.",
       });
     } else {
-      if (!info.category) {
+      if (info.category === "all") {
         // 카테고리를 선택하지 않은 경우
         errorMessage = "카테고리를 선택해주세요.";
       } else {
@@ -181,19 +172,19 @@ export default function CommentsWritePage({
       if (info.category !== "review") info.rating = 0;
 
       // 댓글 작성 가능
-      if (module) {
-        writing = true;
+      // if (module) {
+      writing = true;
 
-        const addResult = await addComments(info as InfoTypes);
-        if (addResult) {
-          // 등록에 성공할 경우
-          openErrorModal({
-            message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
-            className: "success-modal",
-          });
-        }
-        writing = false;
+      const addResult = await addComments(info as InfoTypes);
+      if (addResult) {
+        // 등록에 성공할 경우
+        openErrorModal({
+          message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
+          className: "success-modal",
+        });
       }
+      writing = false;
+      // }
 
       // 초기화
       setInfo({ ...initInfo });

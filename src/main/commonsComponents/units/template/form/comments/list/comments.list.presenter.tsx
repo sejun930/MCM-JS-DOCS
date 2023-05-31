@@ -10,7 +10,6 @@ import {
 
 import { InfoTypes } from "../comments.types";
 import { categoryInitList } from "../write/comments.write.types";
-import { getDateForm } from "src/main/commonsComponents/functional";
 
 import {
   _PText,
@@ -23,47 +22,44 @@ import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsSearchPage from "./search";
-import { FetchCommentsListTypes } from "src/commons/store/comments";
+
+import { CommentsAllInfoTypes } from "../comments.types";
 
 export default function CommentsListUIPage({
-  commentsList,
-  category,
-  changeCategory,
-  countList,
+  commentsInfo,
+  saveCommentsInfo,
   getLabel,
-  filterCommentsList,
   modifyComments,
+  changeCategory,
 }: {
-  commentsList: Array<InfoTypes>;
-  category: string;
-  changeCategory: (category: string) => void;
-  countList: { [key: string]: number };
+  commentsInfo: CommentsAllInfoTypes;
+  saveCommentsInfo: (info: Partial<CommentsAllInfoTypes>) => void;
   getLabel: (info: InfoTypes) => Array<JSX.Element>;
-  filterCommentsList: (props: FetchCommentsListTypes) => void;
-  modifyComments: (comment: InfoTypes) => void;
+  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
+  changeCategory: (category: string) => void;
 }) {
   return (
     <CommentsListWrapper>
       <CategoryWrapper>
-        <CategoryItems>
-          {categoryInitList.map((listInfo, key) => {
+        <CategoryItems render={commentsInfo.countList.all !== undefined}>
+          {Object.entries(commentsInfo.countList).map((el, key) => {
+            const [name] = el;
+
             // 현재 선택되어 있는 카테고리인지?
-            const isSelected = category === listInfo.value;
+            const isSelected = commentsInfo.selectCategory === name;
 
             return (
               <Category
-                key={`comments-category-list-${listInfo.value}-${key}`}
+                key={`comments-category-list-${name}-${key}`}
                 selected={isSelected}
               >
                 <_Button
                   onClickEvent={() =>
-                    (!isSelected &&
-                      filterCommentsList({ category: listInfo.value })) ||
-                    undefined
+                    (!isSelected && changeCategory(name)) || undefined
                   }
                 >
-                  {listInfo.secondName || listInfo.name} ({" "}
-                  {countList[listInfo.value || "all"]} )
+                  {categoryInitList[name]} ({" "}
+                  {commentsInfo.countList[name || "all"]} )
                 </_Button>
               </Category>
             );
@@ -75,7 +71,7 @@ export default function CommentsListUIPage({
         </FilterWrapper> */}
       </CategoryWrapper>
 
-      {!commentsList.length ? (
+      {!commentsInfo.commentsList.length ? (
         <EmptyWrapper>
           <_PText className="empty-list">
             등록된 댓글이 없습니다. <br />
@@ -84,20 +80,14 @@ export default function CommentsListUIPage({
         </EmptyWrapper>
       ) : (
         <CommentListItems>
-          {commentsList.map((el) => {
-            // let createdAt; // 작성 일자 저장
-            // if (el.createdAt) createdAt = getDateForm(el.createdAt);
-
-            return (
-              <ListContentsInfoPage
-                key={getUuid()}
-                info={el}
-                getLabel={getLabel}
-                filterCommentsList={filterCommentsList}
-                modifyComments={modifyComments}
-              />
-            );
-          })}
+          {commentsInfo.commentsList.map((el) => (
+            <ListContentsInfoPage
+              key={getUuid()}
+              info={el}
+              getLabel={getLabel}
+              modifyComments={modifyComments}
+            />
+          ))}
         </CommentListItems>
       )}
     </CommentsListWrapper>
