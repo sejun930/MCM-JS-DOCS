@@ -30,7 +30,7 @@ export default function ModulePropsListFormPage({
               isRequired={el.isRequired || false}
             >
               <td>{el.name}</td>
-              <td>{el.notice}</td>
+              <td dangerouslySetInnerHTML={{ __html: el.notice }} />
               <td>{`${el.default} (${el.type})`}</td>
               <td>{(el.isRequired && "O") || "X"}</td>
             </Tr>
@@ -80,7 +80,7 @@ export const Tr = styled.tr`
     border: solid 1px #bbbbbb;
     padding: 15px 10px;
     letter-spacing: -0.5px;
-    line-height: 20px;
+    line-height: 24px;
 
     ${(props: StyleTypes) =>
       props.isRequired && {
@@ -92,10 +92,10 @@ export const Tr = styled.tr`
     width: 20%;
   }
   td:nth-of-type(2) {
-    width: 50%;
+    width: 55%;
   }
   td:nth-of-type(3) {
-    width: 20%;
+    width: 15%;
     text-align: center;
   }
   td:nth-of-type(4) {

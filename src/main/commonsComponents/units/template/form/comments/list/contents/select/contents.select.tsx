@@ -4,15 +4,14 @@ import {
   SelectListWrapper,
   SelectWrapper,
 } from "./contents.select.styles";
+import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
+import { useRecoilState } from "recoil";
+import { moduleState } from "src/commons/store";
 
 import CommonsHooksComponents from "../../../../../../../hooks/commonsHooks";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import { _CloseButton, _Button } from "mcm-js-commons";
-import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
-
-import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
 
 import { Modal } from "mcm-js";
 import ContentsOptionalPage from "./functional/contents.select.functional.container";
@@ -61,6 +60,7 @@ export default function SelectListOptional({
 
     return () => {
       body.removeEventListener("mousedown", handleClickEvent);
+      ableClose = true;
     };
   }, [show]);
 
@@ -74,7 +74,7 @@ export default function SelectListOptional({
   // 닫기
   const closeSelect = () => {
     ableClose = false;
-    _wrapperRef.current.style.height = "0px";
+    if (_wrapperRef?.current?.style) _wrapperRef.current.style.height = "0px";
 
     window.setTimeout(() => {
       closeEvent();
@@ -95,7 +95,6 @@ export default function SelectListOptional({
           modifyComments={modifyComments}
         />
       ),
-      onAfterCloseEvent: () => (ableClose = true),
       id: "comments-functional-modal",
       modalSize: { width: "400px", height: "400px" },
       closeMent: "닫기",
@@ -118,7 +117,9 @@ export default function SelectListOptional({
         <SelectItems>
           {list && list.length && (
             <SelectListWrapper ref={_listRef}>
-              {list.map((el) => {
+              {list.map((el, idx) => {
+                idx = idx + 1;
+
                 return (
                   <Select key={getUuid()}>
                     <_Button onClickEvent={deleteComments(el.value)}>

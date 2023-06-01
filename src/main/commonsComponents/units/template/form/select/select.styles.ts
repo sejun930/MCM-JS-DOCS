@@ -15,21 +15,19 @@ export const SelectWrapper = styled.div`
   height: 0px;
   transition: all 0.3s;
 
-  .select-close-button {
+  .mcm-unit-select-close-button {
     position: absolute;
     right: 0;
     overflow: hidden;
-    transform: translate3d(5px, -10px, 0px);
+    transform: translate3d(5px, -5px, 0px);
     background-color: white;
     border: solid 2px black;
     border-radius: 100%;
     z-index: 100;
-    width: 20px;
-    height: 20px;
 
     ::after,
     ::before {
-      width: 60%;
+      width: 70%;
     }
   }
 
@@ -60,12 +58,9 @@ export const Select = styled.li`
     padding: 6px;
     border-radius: 5px;
 
-    :hover {
-      background-color: #eee3cb;
-    }
-    /* ${(props: StyleTypes) =>
+    ${(props: StyleTypes) =>
       props.isHover && {
-        backgroundColor: "#eee3cb",
-      }} */
+        backgroundColor: " #eee3cb",
+      }}
   }
 `;

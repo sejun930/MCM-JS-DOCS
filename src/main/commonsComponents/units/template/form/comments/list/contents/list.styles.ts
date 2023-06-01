@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 interface StyleTypes {
   render?: boolean;
+  hover?: boolean;
 }
 
 export const CommentsList = styled.li`
@@ -13,8 +14,23 @@ export const CommentsList = styled.li`
   transition: all 0.3s ease-out;
   min-height: 70px;
 
+  ${(props: StyleTypes) =>
+    props.hover && {
+      backgroundColor: "#9BABB8",
+      color: "white",
+    }}
+
+  .createdAt {
+    .date {
+      ${(props) =>
+        props.hover && {
+          color: "white",
+        }}
+    }
+  }
+
   :hover {
-    background-color: #dddddd;
+    background-color: ${(props) => !props.hover && "#dddddd"};
   }
 `;
 
@@ -102,4 +118,8 @@ export const SelectWrapper = styled.div`
 export const DateWrapper = styled.div`
   display: flex;
   gap: 0px 10px;
+
+  .date {
+    transition: all 0.3s ease-out;
+  }
 `;

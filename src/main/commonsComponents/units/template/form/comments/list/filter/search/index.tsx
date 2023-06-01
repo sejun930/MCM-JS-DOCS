@@ -2,25 +2,47 @@ import styled from "@emotion/styled";
 import { _Input } from "mcm-js-commons";
 
 import { FormEvent, MutableRefObject, useRef } from "react";
-// import { useRecoilState } from "recoil";
-// import { fetchCommentsListState } from "src/commons/store/comments";
+import { CommentsAllInfoTypes } from "../../../comments.types";
 
 let search = ""; // 검색어 저장
-export default function CommentsSearchPage() {
-  //   const [fetchCommentsList] = useRecoilState(fetchCommentsListState);
+let change = false; // 변경여부 확인 (변경될 때만 검색)
+export default function CommentsSearchPage({
+  commentsInfo,
+  changeInfo,
+}: {
+  commentsInfo: CommentsAllInfoTypes;
+  changeInfo: (info: CommentsAllInfoTypes) => void;
+}) {
   const _inputRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   // 검색어 변경하기
   const changeSearch = (text: string) => {
     search = text.trim();
+    change = true;
   };
 
   // 검색 적용하기
   const submitSearch = (e: FormEvent) => {
     e.preventDefault();
-
-    console.log(search);
+    clickSearch();
     // fetchCommentsList({ search });
+  };
+
+  // 검색
+  const clickSearch = () => {
+    if (!change) return;
+
+    const info = {
+      ...commentsInfo,
+      ["filter"]: {
+        ...commentsInfo.filter,
+        search,
+        page: 1,
+      },
+    };
+
+    changeInfo(info);
+    change = false;
   };
 
   return (
@@ -31,7 +53,7 @@ export default function CommentsSearchPage() {
         className="search-comments"
         inputClassName="search-comments-input"
         maxLength={10}
-        onSubmitEvent={() => {}}
+        onSubmitEvent={clickSearch}
         inputRef={_inputRef}
       />
     </Form>

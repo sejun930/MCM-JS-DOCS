@@ -160,7 +160,7 @@ export default function CommentsWritePage({
       openErrorModal({ message: errorMessage });
     } else {
       // 줄바꿈 처리하기
-      info.contents = changeMultipleLine(info.contents);
+      info.contents = changeMultipleLine(info.contents.trim());
 
       // 비밀번호 해쉬화
       info.password = await getHashPassword(info.password);

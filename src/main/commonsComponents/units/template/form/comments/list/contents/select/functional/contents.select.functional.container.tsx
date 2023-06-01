@@ -2,11 +2,11 @@ import ContentsSelectFunctionalUIPage from "./contents.select.functional.present
 import { Message } from "./contents.select.functional.styles";
 
 import { FormEvent, MutableRefObject, useRef } from "react";
+
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
-import { getDoc, getServerTime } from "src/commons/libraries/firebase";
-import apis from "src/commons/libraries/commons.apis";
+import { getServerTime } from "src/commons/libraries/firebase";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { InfoTypes } from "../../../../comments.types";
 
@@ -143,8 +143,6 @@ export default function ContentsSelectFunctionalPage({
       }
 
       waiting = true;
-      let doc = getDoc("comments", module, "comment").doc(info.id);
-
       let isComplete = false; // 성공 여부
       if (type === "modify") {
         // 수정 모드일 경우
@@ -170,25 +168,6 @@ export default function ContentsSelectFunctionalPage({
         });
       }
       waiting = false;
-
-      //   doc
-      //     .update(_info)
-      //     .then(() => {
-      //       // 수정 내용 업데이트
-      //       fetchCommentsList({ category: _info.category });
-      //       waiting = false;
-
-      // openModal({
-      //   text: `${typeName} 완료되었습니다.`,
-      //   isSuccess: true,
-      //   afterCloseEvent: () =>
-      //     Modal.close({ id: "comments-functional-modal" }),
-      // });
-      //       return;
-      //     })
-      //     .catch((err) =>
-      //       console.log(`댓글을 ${typeName}하는데 실패했습니다. ${err}`)
-      //     );
     }
   };
   return (

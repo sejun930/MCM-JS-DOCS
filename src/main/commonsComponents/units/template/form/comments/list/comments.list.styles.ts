@@ -33,11 +33,6 @@ export const CategoryItems = styled.ul`
     }};
 `;
 
-export const FilterWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export const Category = styled.li`
   .cmm-button-unit {
     transition: all 0.3s;

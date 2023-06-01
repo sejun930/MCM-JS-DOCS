@@ -6,21 +6,23 @@ export const modalPropsList: Array<PropsModuleListType> = [
     default: "-",
     type: "String | Node",
     notice:
-      "모달에 출력되는 내용을 나타냅니다. Modal.open을 사용하는 경우에는 children Props를 전달해줘야 합니다.",
+      "모달에 출력되는 내용을 나타냅니다. <br />Modal.open을 사용하는 경우에는 children Props를 전달해줘야 합니다.",
     isRequired: true,
   },
   {
     name: "show",
     default: false,
     type: "Boolean",
-    notice: "모달의 오픈 여부를 결정합니다. true가 전달되면 모달이 실행됩니다.",
+    notice: `모달의 오픈 여부를 결정합니다. true가 전달되면 모달이 실행됩니다. <br />
+      Modal.open을 사용하는 경우에는 자동으로 적용됩니다.`,
     isRequired: true,
   },
   {
     name: "onCloseModal",
     default: "-",
     type: "Function",
-    notice: "모달을 종료할 때 실행하는 이벤트입니다.",
+    notice:
+      "모달을 종료할 때 실행하는 이벤트입니다. <br /> Modal.open을 사용하는 경우에는 자동으로 적용됩니다.",
     isRequired: true,
   },
   {

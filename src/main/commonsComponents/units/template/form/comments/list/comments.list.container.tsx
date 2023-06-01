@@ -5,23 +5,18 @@ import { categoryInitList } from "../write/comments.write.types";
 import CommentsLabel from "./label";
 import StarsForm from "../write/stars";
 
-import {
-  CommentsAllInfoTypes,
-  CommentsPartialPropsType,
-} from "../comments.types";
+import { CommentsAllInfoTypes } from "../comments.types";
 import { _Button, _SpanText } from "mcm-js-commons";
 
 let search = "";
 export default function CommentsListPage({
   commentsInfo,
-  saveCommentsInfo,
   modifyComments,
-  changeCategory,
+  changeInfo,
 }: {
   commentsInfo: CommentsAllInfoTypes;
-  saveCommentsInfo: (info: CommentsPartialPropsType) => void;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
-  changeCategory: (category: string) => void;
+  changeInfo: (info: CommentsAllInfoTypes) => void;
 }) {
   // 각각의 카테고리에 맞는 라벨 및 평점 출력
   const getLabel = (info: InfoTypes): Array<JSX.Element> => {
@@ -29,11 +24,10 @@ export default function CommentsListPage({
 
     // 전체 카테고리일 경우, 각각의 카테고리 명 출력
     if (commentsInfo.selectCategory === "all") {
+      const _info = { ...commentsInfo, ["selectCategory"]: info.category };
+
       result.push(
-        <_Button
-          onClickEvent={() => changeCategory(info.category)}
-          buttonType="button"
-        >
+        <_Button onClickEvent={() => changeInfo(_info)} buttonType="button">
           <CommentsLabel
             children={<_SpanText>{categoryInitList[info.category]}</_SpanText>}
           />
@@ -77,10 +71,9 @@ export default function CommentsListPage({
   return (
     <CommentsListUIPage
       commentsInfo={commentsInfo}
-      saveCommentsInfo={saveCommentsInfo}
       getLabel={getLabel}
       modifyComments={modifyComments}
-      changeCategory={changeCategory}
+      changeInfo={changeInfo}
     />
   );
 }

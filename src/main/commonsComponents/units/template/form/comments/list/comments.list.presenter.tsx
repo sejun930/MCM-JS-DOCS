@@ -2,7 +2,6 @@ import {
   Category,
   CategoryWrapper,
   CategoryItems,
-  FilterWrapper,
   CommentListItems,
   CommentsListWrapper,
   EmptyWrapper,
@@ -21,22 +20,20 @@ import {
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
-import CommentsSearchPage from "./search";
+import CommentsFilterPage from "./filter";
 
 import { CommentsAllInfoTypes } from "../comments.types";
 
 export default function CommentsListUIPage({
   commentsInfo,
-  saveCommentsInfo,
   getLabel,
   modifyComments,
-  changeCategory,
+  changeInfo,
 }: {
   commentsInfo: CommentsAllInfoTypes;
-  saveCommentsInfo: (info: Partial<CommentsAllInfoTypes>) => void;
   getLabel: (info: InfoTypes) => Array<JSX.Element>;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
-  changeCategory: (category: string) => void;
+  changeInfo: (info: CommentsAllInfoTypes) => void;
 }) {
   return (
     <CommentsListWrapper>
@@ -48,6 +45,8 @@ export default function CommentsListUIPage({
             // 현재 선택되어 있는 카테고리인지?
             const isSelected = commentsInfo.selectCategory === name;
 
+            const info = { ...commentsInfo, ["selectCategory"]: name };
+
             return (
               <Category
                 key={`comments-category-list-${name}-${key}`}
@@ -55,7 +54,7 @@ export default function CommentsListUIPage({
               >
                 <_Button
                   onClickEvent={() =>
-                    (!isSelected && changeCategory(name)) || undefined
+                    (!isSelected && changeInfo(info)) || undefined
                   }
                 >
                   {categoryInitList[name]} ({" "}
@@ -66,9 +65,9 @@ export default function CommentsListUIPage({
           })}
         </CategoryItems>
 
-        {/* <FilterWrapper>
-          <CommentsSearchPage />
-        </FilterWrapper> */}
+        {/* {commentsInfo.countList.all !== undefined && (
+          <CommentsFilterPage commentsInfo={commentsInfo} />
+        )} */}
       </CategoryWrapper>
 
       {!commentsInfo.commentsList.length ? (

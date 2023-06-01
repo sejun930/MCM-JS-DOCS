@@ -29,13 +29,17 @@ export interface CountListTypes {
   count: number;
 }
 
+// 필터 타입 (newest : 최신순, oldest : 과거순)
+type SortType = "newest" | "oldest";
+
 export interface CommentsAllInfoTypes {
   commentsList: Array<InfoTypes>;
   selectCategory: string;
   countList: { [key: string]: number };
   filter: {
-    search: "";
-    page: 1;
+    search: string;
+    page: number;
+    sort: SortType;
   };
 }
 
@@ -46,5 +50,5 @@ export const initCommentsInfo: CommentsAllInfoTypes = {
   commentsList: [], // 댓글 리스트
   selectCategory: "all", // 선택된 카테고리
   countList: {}, // 카테고리 개수 리스트
-  filter: { search: "", page: 1 }, // 필터 정보
+  filter: { search: "", page: 1, sort: "newest" }, // 필터 정보
 };

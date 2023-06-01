@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
-import { InfoTypes } from "./comments.types";
+import { CommentsInfoTypes, InfoTypes } from "./comments.types";
 import apis from "src/commons/libraries/commons.apis";
 import {
   getDoc,
@@ -12,14 +12,8 @@ import {
   Query_DocumentData,
 } from "src/commons/libraries/firebase";
 
-import {
-  initCommentsInfo,
-  CommentsAllInfoTypes,
-  CommentsPartialPropsType,
-} from "./comments.types";
+import { initCommentsInfo, CommentsAllInfoTypes } from "./comments.types";
 
-// 원본 댓글 리스트 저장
-let originCommentsList: Array<InfoTypes> = [];
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
 export default function CommentsPage() {
@@ -35,35 +29,42 @@ export default function CommentsPage() {
   }, [module]);
 
   // 댓글 리스트 조회
-  const fetchCommentsList = async (info: CommentsAllInfoTypes) => {
+  const fetchCommentsList = async (info?: CommentsAllInfoTypes) => {
     if (wating) return;
     wating = true;
 
     if (module) {
       let doc = getDoc("comments", module, "comment") as Query_DocumentData;
-      // 최신순으로 조회
-      doc = doc.orderBy("createdAt", "desc");
+      const _info = info || commentsInfo;
+
+      // 최신순, 과거순으로 조회
+      doc = doc.orderBy(
+        "createdAt",
+        _info?.filter.sort === "newest" ? "desc" : "asc"
+      );
       // 삭제되지 않은 댓글만 조회
       doc = doc.where("deletedAt", "==", null);
 
       // 선택되어 있는 카테고리가 있다면 해당 카테고리 조회
-      if (info.selectCategory !== "all" && info.selectCategory) {
-        doc = doc.where("category", "==", info.selectCategory);
+      if (_info.selectCategory !== "all" && _info.selectCategory) {
+        doc = doc.where("category", "==", _info.selectCategory);
       }
+
+      // 검색어가 있다면 해당 검색어 조회
+      //   if (_info.filter.search) {
+      //     doc = doc.where("contents", "==", _info.filter.search);
+      //   }
 
       try {
         const result = await apis(doc).read();
-        let _commentInfo = { ...info };
+        let _commentInfo = { ..._info };
 
         const commentsList = getResult(result);
 
         // 댓글 리스트 저장하기
         _commentInfo.commentsList = commentsList;
-        // 원본 댓글 리스트 저장하기
-        // originCommentsList = [...commentsList];
-
         // 카테고리 개수 저장하기
-        _commentInfo.countList = await saveCategoryCount();
+        _commentInfo.countList = await saveCategoryCount(_commentInfo);
 
         setCommentsInfo(_commentInfo);
         wating = false;
@@ -73,24 +74,8 @@ export default function CommentsPage() {
     }
   };
 
-  // 댓글 전체 정보 저장하기 + 필터 적용하기
-  const saveCommentsInfo = (info: CommentsPartialPropsType) => {
-    // const saveInfoData = { ...commentsInfo, ...info };
-    // saveInfoData.commentsList = [...originCommentsList];
-    // // 카테고리 변경하기
-    // if (
-    //   saveInfoData.selectCategory !== "all" &&
-    //   commentsInfo.selectCategory !== info.selectCategory
-    // ) {
-    //   saveInfoData.commentsList = originCommentsList.filter(
-    //     (el) => el.category === info.selectCategory
-    //   );
-    // }
-    // setCommentsInfo(saveInfoData);
-  };
-
   // 카테고리 개수 저장하기
-  const saveCategoryCount = async () => {
+  const saveCategoryCount = async (info: CommentsAllInfoTypes) => {
     let _list: { [key: string]: number } = {
       all: 0,
       bug: 0,
@@ -98,7 +83,7 @@ export default function CommentsPage() {
       review: 0,
     };
     if (module) {
-      const doc = getDoc("comments", module, "count") as Query_DocumentData;
+      let doc = getDoc("comments", module, "count") as Query_DocumentData;
 
       try {
         const result = await apis(doc).read();
@@ -142,8 +127,7 @@ export default function CommentsPage() {
         // 해당 카테고리 1 증가 결과
         const updateCountResult = await updateCountList(
           "up",
-          newComment.category,
-          _info
+          newComment.category
         );
 
         if (updateCountResult && updateCountResult.category) {
@@ -167,63 +151,39 @@ export default function CommentsPage() {
     return false;
   };
 
-  // 댓글 수정하기
+  // 댓글 정보 수정하기
   const modifyComments = async (
     comment: InfoTypes,
     isDelete?: boolean
   ): Promise<boolean> => {
-    // comment : 수정 및 삭제될 댓글
-    // isDelete : 삭제 여부
-    const _commentsList = [...originCommentsList];
-    const idx = _commentsList.findIndex((el) => el.id === comment.id);
+    try {
+      const modifyDoc = getCommentDoc().doc(comment.id);
+      await modifyDoc.update(comment);
+      const editData = (await modifyDoc.get()).data() as InfoTypes;
 
-    const _list = { ...commentsInfo };
+      if (editData) {
+        // 수정이 완료된 경우
 
-    // 수정할 댓글이 있는 경우
-    if (idx !== -1) {
-      try {
-        const modifyDoc = getCommentDoc().doc(comment.id);
-        await modifyDoc.update(comment);
-
-        const editData = (await modifyDoc.get()).data() as InfoTypes;
-
-        if (editData) {
-          // 수정이 완료된 경우
-          if (isDelete) {
-            // 삭제일 경우
-            _commentsList.splice(idx, 1); // 해당 댓글 제거
-          } else {
-            // 수정일 경우
-            _commentsList[idx] = editData as InfoTypes;
-          }
-
-          _list.commentsList = _commentsList;
-          originCommentsList = _commentsList;
-
+        if (isDelete) {
           // 삭제라면 해당 카테고리 1개 감소
-          if (isDelete) updateCountList("down", editData.category, _list);
-          else setCommentsInfo(_list);
-
-          return true;
+          if (isDelete) updateCountList("down", editData.category);
         }
-      } catch (err) {
-        console.log(`댓글 수정에 실패했습니다. ${err}`);
-        return false;
+        fetchCommentsList();
+
+        return true;
       }
+    } catch (err) {
+      console.log(`댓글 수정에 실패했습니다. ${err}`);
+      return false;
     }
+    // }
     return false;
   };
 
   // 카테고리 갯수 업데이트
-  const updateCountList = async (
-    type: "up" | "down",
-    category: string,
-    list: CommentsAllInfoTypes
-  ) => {
+  const updateCountList = async (type: "up" | "down", category: string) => {
     // type : "up" = 1 증가, "down" = 1 감소
     // category : 변경시킬 카테고리 이름
-    let _list = { ...list };
-    let _countList = { ...list.countList };
 
     try {
       const updateDoc = await getDoc("comments", module, "count")
@@ -251,20 +211,19 @@ export default function CommentsPage() {
     }
   };
 
-  // 카테고리 변경
-  const changeCategory = (category: string) => {
-    const info = { ...commentsInfo, ["selectCategory"]: category };
-    fetchCommentsList(info);
+  // 데이터 정보 변경하기
+  const changeInfo = (info: CommentsAllInfoTypes) => {
+    const _info = { ...commentsInfo, ...info };
+    fetchCommentsList(_info);
   };
+  console.log(commentsInfo);
 
   return (
     <CommentsUIPage
       commentsInfo={commentsInfo}
-      saveCommentsInfo={saveCommentsInfo}
-      fetchCommentsList={fetchCommentsList}
       addComments={addComments}
       modifyComments={modifyComments}
-      changeCategory={changeCategory}
+      changeInfo={changeInfo}
     />
   );
 }

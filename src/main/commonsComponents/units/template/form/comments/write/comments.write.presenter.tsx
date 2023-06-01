@@ -106,7 +106,9 @@ export default function CommentsWriteUIPage({
           delay={200}
           value={info.contents}
           placeHolder={`${
-            placeList[info.category] || "카테고리를 먼저 선택해주세요."
+            placeList[info.category] ||
+            `카테고리를 먼저 선택해주세요.
+            `
           }
 ${info.category && defaultPlace}`}
         />

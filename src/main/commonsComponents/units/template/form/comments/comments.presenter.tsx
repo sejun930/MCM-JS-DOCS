@@ -4,26 +4,18 @@ import { Wrapper } from "../form.commons.styles";
 import CommentsListPage from "./list/comments.list.container";
 import CommentsWritePage from "./write/comments.write.container";
 
-import {
-  CommentsAllInfoTypes,
-  CommentsPartialPropsType,
-  InfoTypes,
-} from "./comments.types";
+import { CommentsAllInfoTypes, InfoTypes } from "./comments.types";
 
 export default function CommentsUIPage({
   commentsInfo,
-  saveCommentsInfo,
-  fetchCommentsList,
   addComments,
   modifyComments,
-  changeCategory,
+  changeInfo,
 }: {
   commentsInfo: CommentsAllInfoTypes;
-  saveCommentsInfo: (info: CommentsPartialPropsType) => void;
-  fetchCommentsList: (info: CommentsAllInfoTypes) => void;
   addComments: (data: InfoTypes) => Promise<boolean>;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
-  changeCategory: (category: string) => void;
+  changeInfo: (info: CommentsAllInfoTypes) => void;
 }) {
   return (
     <Wrapper>
@@ -37,9 +29,8 @@ export default function CommentsUIPage({
        */}
       <CommentsListPage
         commentsInfo={commentsInfo}
-        saveCommentsInfo={saveCommentsInfo}
         modifyComments={modifyComments}
-        changeCategory={changeCategory}
+        changeInfo={changeInfo}
       />
     </Wrapper>
   );
