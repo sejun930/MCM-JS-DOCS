@@ -28,32 +28,43 @@ export default function CommentsPage() {
     fetchCommentsList(commentsInfo);
   }, [module]);
 
+  // 필터 쿼리 적용하기
+  const getFilterQuery = (
+    doc: Query_DocumentData,
+    info: CommentsAllInfoTypes
+  ) => {
+    // 선택되어 있는 카테고리가 있다면 해당 카테고리 조회
+    if (info.selectCategory !== "all" && info.selectCategory) {
+      doc = doc.where("category", "==", info.selectCategory);
+    }
+
+    // 과거순 및 최신순으로 조회하기
+    doc = doc.orderBy("createdAt", info.filter.list.oddest ? "asc" : "desc");
+
+    // 삭제되지 않은 댓글만 조회
+    doc = doc.where("deletedAt", "==", null);
+
+    return doc;
+  };
+
   // 댓글 리스트 조회
   const fetchCommentsList = async (info?: CommentsAllInfoTypes) => {
     if (wating) return;
     wating = true;
 
     if (module) {
-      let doc = getDoc("comments", module, "comment") as Query_DocumentData;
       const _info = info || commentsInfo;
 
-      // 최신순, 과거순으로 조회
-      doc = doc.orderBy(
-        "createdAt",
-        _info?.filter.sort === "newest" ? "desc" : "asc"
+      const doc = getFilterQuery(
+        getDoc("comments", module, "comment") as Query_DocumentData,
+        _info
       );
-      // 삭제되지 않은 댓글만 조회
-      doc = doc.where("deletedAt", "==", null);
 
-      // 선택되어 있는 카테고리가 있다면 해당 카테고리 조회
-      if (_info.selectCategory !== "all" && _info.selectCategory) {
-        doc = doc.where("category", "==", _info.selectCategory);
-      }
-
-      // 검색어가 있다면 해당 검색어 조회
-      //   if (_info.filter.search) {
-      //     doc = doc.where("contents", "==", _info.filter.search);
-      //   }
+      // 최신순, 과거순으로 조회
+      // doc = doc.orderBy(
+      //   "createdAt",
+      //   _info?.filter.sort === "newest" ? "desc" : "asc"
+      // );
 
       try {
         const result = await apis(doc).read();
@@ -63,9 +74,11 @@ export default function CommentsPage() {
 
         // 댓글 리스트 저장하기
         _commentInfo.commentsList = commentsList;
-        // 카테고리 개수 저장하기
-        _commentInfo.countList = await saveCategoryCount(_commentInfo);
 
+        if (_commentInfo.countList.all === undefined) {
+          // 카테고리 개수 저장하기
+          _commentInfo.countList = await saveCategoryCount(_commentInfo);
+        }
         setCommentsInfo(_commentInfo);
         wating = false;
       } catch (err) {
@@ -216,7 +229,6 @@ export default function CommentsPage() {
     const _info = { ...commentsInfo, ...info };
     fetchCommentsList(_info);
   };
-  console.log(commentsInfo);
 
   return (
     <CommentsUIPage

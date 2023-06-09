@@ -24,7 +24,7 @@ export default function ContentsSelectFunctionalUIPage({
 }) {
   return (
     <form onSubmit={confirm}>
-      <OptionalWrapper>
+      <OptionalWrapper isDelete={type === "delete"}>
         <_Title titleLevel="h2">
           {type === "modify" ? "댓글 수정" : "댓글 삭제"}
         </_Title>

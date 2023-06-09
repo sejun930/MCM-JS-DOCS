@@ -14,6 +14,7 @@ export const SelectWrapper = styled.div`
   width: 120px;
   height: 0px;
   transition: all 0.3s;
+  right: 0;
 
   .mcm-unit-select-close-button {
     position: absolute;

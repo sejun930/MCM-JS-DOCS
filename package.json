@@ -18,7 +18,7 @@
     "@emotion/styled": "^11.10.5",
     "crypto": "^1.0.1",
     "firebase": "^9.10.0",
-    "mcm-js": "^0.0.33",
+    "mcm-js": "^0.0.35",
     "mcm-js-commons": "^0.0.59",
     "mcm-js-dev": "^0.0.18",
     "next": "13.1.6",

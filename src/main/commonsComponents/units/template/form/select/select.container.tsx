@@ -3,9 +3,8 @@ import _SelectFormUIPage from "./select.presenter";
 
 import { SelectProps } from "./select.render";
 
-// let ableClose = true; // 닫기가 가능한지?
 export default function _SelectForm(props: SelectProps) {
-  const { show, closeEvent, offAutoClose } = props;
+  const { show, closeEvent, offAutoClose, autoCloseOffTargetName } = props;
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
@@ -18,7 +17,6 @@ export default function _SelectForm(props: SelectProps) {
 
     if (show && !offAutoClose) {
       // 외부 클릭시 자동 종료 설정
-      //   ableClose = false;
       body.addEventListener("mousedown", handleClickEvent);
     }
 
@@ -31,25 +29,34 @@ export default function _SelectForm(props: SelectProps) {
     return () => {
       if (!offAutoClose)
         body.removeEventListener("mousedown", handleClickEvent);
-      //   ableClose = true;
     };
   }, [show]);
 
   // 외부 클릭시 닫기
-  const handleClickEvent = (event: any) => {
-    if (_wrapperRef.current && !_wrapperRef.current.contains(event.target)) {
+  const handleClickEvent = (event: MouseEvent) => {
+    let autoCloseAble =
+      _wrapperRef.current &&
+      !_wrapperRef.current.contains(event.target as Node);
+
+    // 클릭 범위 조절 (해당 id 값을 가지는 element가 있다면 작동 안함)
+    if (autoCloseOffTargetName) {
+      autoCloseAble =
+        autoCloseAble &&
+        !document.querySelectorAll(`[data-name="${autoCloseOffTargetName}"]`)
+          .length;
+    }
+
+    if (autoCloseAble) {
       closeSelect();
     }
   };
 
   // 닫기
   const closeSelect = () => {
-    // ableClose = false;
     if (_wrapperRef?.current?.style) _wrapperRef.current.style.height = "0px";
 
     window.setTimeout(() => {
       closeEvent();
-      //   ableClose = true;
     }, 200);
   };
 

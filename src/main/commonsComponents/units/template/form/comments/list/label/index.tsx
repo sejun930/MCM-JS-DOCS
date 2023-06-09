@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { _SpanText } from "mcm-js-commons";
 import { CSSProperties } from "react";
 
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+
 // label 렌더용 컴포넌트
 export default function CommentsLabel({
   children,
@@ -13,8 +15,12 @@ export default function CommentsLabel({
   styles?: CSSProperties;
   className?: string;
 }) {
+  const { getAllComponentsClassName } = CommonsHooksComponents();
   return (
-    <Label style={styles} className={className}>
+    <Label
+      style={styles}
+      className={getAllComponentsClassName("category-label-button", className)}
+    >
       {children}
     </Label>
   );

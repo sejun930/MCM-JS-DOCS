@@ -5,6 +5,9 @@ import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
 import { Modal } from "mcm-js";
+// const { Modal } = require(Boolean(process.env.NEXT_PUBLIC_DEVELOP)
+//   ? "mcm-js-dev"
+//   : "mcm-js");
 import { InfoTypes } from "../../comments.types";
 import ContentsOptionalPage from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.container";
 
@@ -31,6 +34,10 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const [showSelect, setShowSelect] = useState(false);
   // hover 여부
   const [hover, setHover] = useState(false);
+
+  const Name: string = String(
+    Number(new Date()) + Math.floor(Math.random() * (10 - 1) + 1)
+  );
 
   useEffect(() => {
     let allLen = 0;
@@ -62,7 +69,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   };
 
   // 댓글 삭제하기
-  const deleteComments = (type: "delete" | "modify") => () => {
+  const deleteComments = (type: "delete" | "modify", name: string) => () => {
     Modal.open({
       children: (
         <ContentsOptionalPage
@@ -73,7 +80,8 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
         />
       ),
       id: "comments-functional-modal",
-      modalSize: { width: "400px", height: "400px" },
+      name,
+      modalSize: { width: "400px", height: "460px" },
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,
@@ -92,6 +100,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       toggleShowSelect={toggleShowSelect}
       deleteComments={deleteComments}
       hover={hover}
+      name={Name}
     />
   );
 }

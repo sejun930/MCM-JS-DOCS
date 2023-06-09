@@ -70,16 +70,7 @@ export const EmptyWrapper = styled.div`
 export const CommentListItems = styled.ul`
   display: flex;
   flex-direction: column;
-
-  /* ${(props: StyleTypes) =>
-    !props.render && {
-      filter: "blur(5px)",
-      transition: "all 0.4s ease",
-    }}
-
-  .leng {
-    font-size: 14px;
-  } */
+  /* min-height: 300px; */
 `;
 
 export const LoadingWrapper = styled.div`

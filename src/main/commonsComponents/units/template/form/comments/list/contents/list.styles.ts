@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import { _Button } from "mcm-js-commons";
+
 interface StyleTypes {
   render?: boolean;
   hover?: boolean;
@@ -9,6 +11,7 @@ export const CommentsList = styled.li`
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
   padding: 20px;
   border-top: dotted 1px black;
   transition: all 0.3s ease-out;
@@ -108,10 +111,23 @@ export const SelectWrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  cursor: default;
 
   .mcm-unit-select {
-    margin-top: 30px;
-    margin-right: 30px;
+    top: 30px;
+    /* margin-right: 30px; */
+  }
+`;
+
+export const Select = styled.li`
+  :hover {
+    background-color: #c2dedc;
+  }
+`;
+
+export const SelectButton = styled(_Button)`
+  :hover {
+    background-color: #c2dedc;
   }
 `;
 

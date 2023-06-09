@@ -104,4 +104,7 @@ const getUuid = () => {
   return v4();
 };
 
+// 현재 쿼리 구성하기
+const getUrlQuery = () => {};
+
 export { removeTag, getDateForm, changeMultipleLine, getHashPassword, getUuid };

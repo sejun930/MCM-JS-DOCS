@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 interface StyleTypes {
   isSuccess?: boolean;
+  isDelete?: boolean;
 }
 
 export const OptionalWrapper = styled.div`
@@ -20,8 +21,13 @@ export const OptionalWrapper = styled.div`
     margin-top: 30px;
 
     .mcm-textArea-unit {
-      height: 160px;
+      height: 220px;
       resize: none;
+
+      ${(props: StyleTypes) =>
+        props.isDelete && {
+          cursor: "default",
+        }}
     }
   }
 `;

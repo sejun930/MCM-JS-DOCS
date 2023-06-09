@@ -1,3 +1,4 @@
+import React from "react";
 import {
   CommentsInfoWrapper,
   CommentsList,
@@ -7,9 +8,9 @@ import {
   OptionalButton,
   OptionalWrapper,
   SelectWrapper,
+  SelectButton,
   DateWrapper,
 } from "./list.styles";
-import React from "react";
 
 import { _SpanTextWithHtml, _Button } from "mcm-js-commons";
 import { ListContentsIProps } from "./list.contents.container";
@@ -18,7 +19,6 @@ import { ListContentsIProps } from "./list.contents.container";
 
 import _SelectForm from "../../../select/select.container";
 import { getDateForm, getUuid } from "src/main/commonsComponents/functional";
-import { InfoTypes } from "../../comments.types";
 
 interface ListContentsUIProps {
   isMore: boolean;
@@ -28,8 +28,9 @@ interface ListContentsUIProps {
   contents: string;
   showSelect: boolean;
   toggleShowSelect: (bool?: boolean) => void;
-  deleteComments: (type: "delete" | "modify") => () => void;
+  deleteComments: (type: "delete" | "modify", name: string) => () => void;
   hover: boolean;
+  name: string;
 }
 
 export default function ListContentsInfoUIPage({
@@ -44,9 +45,10 @@ export default function ListContentsInfoUIPage({
   toggleShowSelect,
   deleteComments,
   hover,
+  name,
 }: ListContentsIProps & ListContentsUIProps) {
   return (
-    <CommentsList hover={hover}>
+    <CommentsList hover={hover} onClick={() => toggleShowSelect(true)}>
       {/* {render && ( */}
       <CommentsInfoWrapper>
         <LabelWrapper>
@@ -78,14 +80,12 @@ export default function ListContentsInfoUIPage({
               )}
             </DateWrapper>
 
-            <SelectWrapper>
-              <OptionalButton onClick={() => toggleShowSelect(true)}>
-                ...
-              </OptionalButton>
+            <SelectWrapper className="select-wrapper">
+              <OptionalButton>...</OptionalButton>
               <_SelectForm
                 show={showSelect}
                 closeEvent={() => toggleShowSelect(false)}
-                // offAutoClose
+                autoCloseOffTargetName={name}
               >
                 {(
                   [
@@ -94,22 +94,15 @@ export default function ListContentsInfoUIPage({
                   ] as Array<{ name: string; value: "modify" | "delete" }>
                 ).map((el) => {
                   return (
-                    <button onClick={deleteComments(el.value)}>
+                    <SelectButton
+                      onClickEvent={deleteComments(el.value, name)}
+                      key={`comments-select-list-${info.id}`}
+                    >
                       {el.name}
-                    </button>
+                    </SelectButton>
                   );
                 })}
               </_SelectForm>
-              {/* <SelectListOptional
-                show={showSelect}
-                closeEvent={() => toggleShowSelect(false)}
-                list={[
-                  { name: "수정", value: "modify" },
-                  { name: "삭제", value: "delete" },
-                ]}
-                info={info}
-                modifyComments={modifyComments}
-              /> */}
             </SelectWrapper>
           </OptionalWrapper>
         </ContentsWrapper>

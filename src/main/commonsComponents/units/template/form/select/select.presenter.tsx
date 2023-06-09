@@ -9,8 +9,6 @@ import {
 } from "./select.styles";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
-import { CSSProperties, MutableRefObject, ReactNode } from "react";
-
 import { SelectProps, IProps } from "./select.render";
 
 export default function _SelectFormUIPage({
@@ -41,11 +39,13 @@ export default function _SelectFormUIPage({
               ref={_listRef}
               className="mcm-unit-select-list-wrapper"
             >
-              {Array.from(children).map((el) => (
-                <Select key={getUuid()} className="mcm-unit-select-list">
-                  {el}
-                </Select>
-              ))}
+              {(Array.isArray(children) &&
+                Array.from(children).map((el) => (
+                  <Select key={getUuid()} className="mcm-unit-select-list">
+                    {el}
+                  </Select>
+                ))) ||
+                children}
             </SelectListWrapper>
           )}
         </SelectItems>

@@ -65,9 +65,12 @@ export default function CommentsListUIPage({
           })}
         </CategoryItems>
 
-        {/* {commentsInfo.countList.all !== undefined && (
-          <CommentsFilterPage commentsInfo={commentsInfo} />
-        )} */}
+        {commentsInfo.countList.all !== undefined && (
+          <CommentsFilterPage
+            commentsInfo={commentsInfo}
+            changeInfo={changeInfo}
+          />
+        )}
       </CategoryWrapper>
 
       {!commentsInfo.commentsList.length ? (
