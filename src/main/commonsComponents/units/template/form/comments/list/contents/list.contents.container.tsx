@@ -1,5 +1,5 @@
 import ListContentsInfoUIPage from "./list.contents.presenter";
-import { useEffect, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
@@ -38,6 +38,8 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const Name: string = String(
     Number(new Date()) + Math.floor(Math.random() * (10 - 1) + 1)
   );
+
+  const _wrapperRef = useRef() as MutableRefObject<HTMLLIElement>;
 
   useEffect(() => {
     let allLen = 0;
@@ -81,10 +83,11 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       ),
       id: "comments-functional-modal",
       name,
-      modalSize: { width: "400px", height: "460px" },
+      modalSize: { width: "400px", height: "430px" },
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,
+      onFixWindow: true,
     });
   };
 
@@ -101,6 +104,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       deleteComments={deleteComments}
       hover={hover}
       name={Name}
+      _wrapperRef={_wrapperRef}
     />
   );
 }

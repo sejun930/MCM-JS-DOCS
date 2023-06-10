@@ -38,11 +38,45 @@ export default function CommentsPage() {
       doc = doc.where("category", "==", info.selectCategory);
     }
 
-    // 과거순 및 최신순으로 조회하기
-    doc = doc.orderBy("createdAt", info.filter.list.oddest ? "asc" : "desc");
+    switch (info.selectCategory) {
+      case "bug":
+        // 카테고리가 버그일 경우
+        if (info.filter.list["bug-complete"])
+          // 해결 완료만 보기
+          doc = doc.where("bugStatus", "==", 2);
+        break;
+
+      case "question":
+        // 카테고리가 문의일 경우
+        if (info.filter.list["question-complete"])
+          // 답변 완료만 보기
+          doc = doc
+            .where("completeAnswer", "!=", null)
+            .orderBy("completeAnswer");
+        break;
+
+      case "review":
+        // 카테고리가 리뷰일 경우
+        let ratingArr = [];
+
+        // 선택한 평점들만 모아보기
+        for (const rating in info.filter.list) {
+          if (info.filter.list[rating]) {
+            const _rating = rating.split("-");
+
+            if (_rating[0] === "review") ratingArr.push(Number(_rating[1]));
+          }
+        }
+
+        if (ratingArr.length) doc = doc.where("rating", "in", ratingArr); // 5점대 보기
+        break;
+    }
 
     // 삭제되지 않은 댓글만 조회
     doc = doc.where("deletedAt", "==", null);
+
+    // 과거순 및 최신순으로 조회하기
+    doc = doc.orderBy("createdAt", info.filter.list.oddest ? "asc" : "desc");
 
     return doc;
   };
@@ -60,25 +94,16 @@ export default function CommentsPage() {
         _info
       );
 
-      // 최신순, 과거순으로 조회
-      // doc = doc.orderBy(
-      //   "createdAt",
-      //   _info?.filter.sort === "newest" ? "desc" : "asc"
-      // );
-
       try {
         const result = await apis(doc).read();
         let _commentInfo = { ..._info };
 
-        const commentsList = getResult(result);
-
         // 댓글 리스트 저장하기
-        _commentInfo.commentsList = commentsList;
+        _commentInfo.commentsList = getResult(result);
 
-        if (_commentInfo.countList.all === undefined) {
-          // 카테고리 개수 저장하기
-          _commentInfo.countList = await saveCategoryCount(_commentInfo);
-        }
+        // 카테고리 개수 저장하기
+        _commentInfo.countList = await saveCategoryCount(_commentInfo);
+
         setCommentsInfo(_commentInfo);
         wating = false;
       } catch (err) {

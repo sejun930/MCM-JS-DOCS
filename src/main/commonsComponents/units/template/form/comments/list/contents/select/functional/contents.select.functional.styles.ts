@@ -14,14 +14,14 @@ export const OptionalWrapper = styled.div`
 
   .mcm-title-unit {
     text-align: center;
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .optional-input {
     margin-top: 30px;
 
     .mcm-textArea-unit {
-      height: 220px;
+      height: 200px;
       resize: none;
 
       ${(props: StyleTypes) =>

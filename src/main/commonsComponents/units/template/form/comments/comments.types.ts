@@ -6,7 +6,7 @@ export interface CommentsInfoTypes {
   contents: string;
   rating: number;
   bugStatus: number; // 버그 처리 여부 (0 : 대기중, 1 : 처리중, 2 : 처리 완료)
-  complateAnswer: boolean; // 문의 답변 완료 (false : 대기중, true : 답변 완료)
+  completeAnswer: null | string; // 문의 답변
 }
 
 // 날짜 관련 type

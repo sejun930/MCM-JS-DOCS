@@ -12,18 +12,18 @@ import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHook
 import { SelectProps, IProps } from "./select.render";
 
 export default function _SelectFormUIPage({
-  show,
   className,
   styles,
   _wrapperRef,
   _listRef,
   children,
   closeSelect,
+  render,
 }: SelectProps & IProps) {
   const { getAllComponentsClassName } = CommonsHooksComponents();
 
   return (
-    (show && (
+    (render && (
       <SelectWrapper
         className={getAllComponentsClassName("mcm-unit-select", className)}
         style={styles}

@@ -110,7 +110,7 @@ export default function ContentsSelectFunctionalPage({
         : {
             border: "double 5px #19a7ce",
           },
-      onAfterCloseEvent: _afterCloseEvent,
+      onCloseModal: _afterCloseEvent,
     });
   };
 

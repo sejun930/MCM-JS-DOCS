@@ -23,17 +23,20 @@ import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsFilterPage from "./filter";
 
 import { CommentsAllInfoTypes } from "../comments.types";
+import { MutableRefObject } from "react";
 
 export default function CommentsListUIPage({
   commentsInfo,
   getLabel,
   modifyComments,
   changeInfo,
+  listRef,
 }: {
   commentsInfo: CommentsAllInfoTypes;
   getLabel: (info: InfoTypes) => Array<JSX.Element>;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
+  listRef: MutableRefObject<HTMLUListElement>;
 }) {
   return (
     <CommentsListWrapper>
@@ -81,7 +84,7 @@ export default function CommentsListUIPage({
           </_PText>
         </EmptyWrapper>
       ) : (
-        <CommentListItems>
+        <CommentListItems ref={listRef}>
           {commentsInfo.commentsList.map((el) => (
             <ListContentsInfoPage
               key={getUuid()}

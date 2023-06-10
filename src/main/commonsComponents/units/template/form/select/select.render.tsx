@@ -18,6 +18,7 @@ export interface IProps {
   _wrapperRef: MutableRefObject<HTMLDivElement>;
   _listRef: MutableRefObject<HTMLUListElement>;
   closeSelect: () => void;
+  render: boolean;
 }
 
 export default function _SelectRenderPage(props: SelectProps) {

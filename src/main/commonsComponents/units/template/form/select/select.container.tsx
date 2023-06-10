@@ -1,36 +1,60 @@
-import { useRef, MutableRefObject, useEffect } from "react";
+import { useRef, MutableRefObject, useEffect, useState } from "react";
 import _SelectFormUIPage from "./select.presenter";
 
 import { SelectProps } from "./select.render";
 
 export default function _SelectForm(props: SelectProps) {
-  const { show, closeEvent, offAutoClose, autoCloseOffTargetName } = props;
+  const { show, closeEvent, offAutoClose, autoCloseOffTargetName, children } =
+    props;
+  // Select 컴포넌트 최종 렌더 여부
+  const [render, setRender] = useState(false);
+
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
   useEffect(() => {
     const body = document.body;
 
-    // 전체 크기 구하기
-    let height = 0;
-    if (_listRef.current) height = _listRef.current.clientHeight + 4;
+    if (show) {
+      setRender(true);
 
-    if (show && !offAutoClose) {
-      // 외부 클릭시 자동 종료 설정
-      body.addEventListener("mousedown", handleClickEvent);
+      if (!offAutoClose) {
+        // 외부 클릭시 자동 종료 설정
+        body.addEventListener("mousedown", handleClickEvent);
+
+        return () => {
+          body.removeEventListener("mousedown", handleClickEvent);
+        };
+      }
+    } else {
+      closeSelect();
     }
+  }, [show]);
 
-    if (_wrapperRef.current) {
+  useEffect(() => {
+    if (render) {
+      // 선택창 전체 크기 구하기
+      resizeSelect();
+    } else {
+      closeSelect();
+    }
+  }, [render]);
+
+  useEffect(() => {
+    if (render && show) resizeSelect();
+  }, [children]);
+
+  // 선택창 전체 크기 변경하기
+  const resizeSelect = () => {
+    if (_listRef.current && _wrapperRef.current) {
       window.setTimeout(() => {
-        _wrapperRef.current.style.height = `${height}px`;
+        // 전체 크기 구하기
+        _wrapperRef.current.style.height = `${
+          _listRef.current.clientHeight + 4
+        }px`;
       }, 0);
     }
-
-    return () => {
-      if (!offAutoClose)
-        body.removeEventListener("mousedown", handleClickEvent);
-    };
-  }, [show]);
+  };
 
   // 외부 클릭시 닫기
   const handleClickEvent = (event: MouseEvent) => {
@@ -56,7 +80,10 @@ export default function _SelectForm(props: SelectProps) {
     if (_wrapperRef?.current?.style) _wrapperRef.current.style.height = "0px";
 
     window.setTimeout(() => {
-      closeEvent();
+      if (closeEvent) {
+        setRender(false);
+        closeEvent();
+      }
     }, 200);
   };
 
@@ -66,6 +93,7 @@ export default function _SelectForm(props: SelectProps) {
       _wrapperRef={_wrapperRef}
       _listRef={_listRef}
       closeSelect={closeSelect}
+      render={render}
     />
   );
 }

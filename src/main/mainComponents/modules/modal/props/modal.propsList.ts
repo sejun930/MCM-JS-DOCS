@@ -102,4 +102,10 @@ export const modalPropsList: Array<PropsModuleListType> = [
     type: "Function",
     notice: "모달이 종료되는 시점 후에 실행될 이벤트입니다.",
   },
+  {
+    name: "onFixWindow",
+    default: "-",
+    type: "Boolean",
+    notice: "모달이 실행될 때 화면 스크롤 이동을 방지할 수 있습니다.",
+  },
 ];

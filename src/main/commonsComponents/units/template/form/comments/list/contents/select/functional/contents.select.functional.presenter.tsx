@@ -51,7 +51,7 @@ export default function ContentsSelectFunctionalUIPage({
           >
             {type === "delete"
               ? "위의 댓글을 삭제합니다."
-              : "위의 댓글로 수정합니다."}
+              : "위의 내용으로 수정합니다."}
           </_Button>
         </ConfirmButtonWrapper>
       </OptionalWrapper>

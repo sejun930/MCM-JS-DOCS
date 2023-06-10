@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import {
   CommentsInfoWrapper,
   CommentsList,
@@ -31,6 +31,7 @@ interface ListContentsUIProps {
   deleteComments: (type: "delete" | "modify", name: string) => () => void;
   hover: boolean;
   name: string;
+  _wrapperRef: MutableRefObject<HTMLLIElement>;
 }
 
 export default function ListContentsInfoUIPage({
@@ -46,9 +47,14 @@ export default function ListContentsInfoUIPage({
   deleteComments,
   hover,
   name,
+  _wrapperRef,
 }: ListContentsIProps & ListContentsUIProps) {
   return (
-    <CommentsList hover={hover} onClick={() => toggleShowSelect(true)}>
+    <CommentsList
+      hover={hover}
+      onClick={() => toggleShowSelect(true)}
+      ref={_wrapperRef}
+    >
       {/* {render && ( */}
       <CommentsInfoWrapper>
         <LabelWrapper>

@@ -20,7 +20,7 @@ export const initInfo: WriteInfoTypes = {
   modifyAt: null,
   deletedAt: null,
   bugStatus: 0,
-  complateAnswer: false,
+  completeAnswer: null,
 };
 
 export type CategoryTypes = "all" | "bug" | "review" | "question";
