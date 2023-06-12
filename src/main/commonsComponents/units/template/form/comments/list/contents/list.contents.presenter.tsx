@@ -86,7 +86,7 @@ export default function ListContentsInfoUIPage({
               )}
             </DateWrapper>
 
-            <SelectWrapper className="select-wrapper">
+            <SelectWrapper className="select-wrapper" hover={hover}>
               <OptionalButton>...</OptionalButton>
               <_SelectForm
                 show={showSelect}

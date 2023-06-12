@@ -2124,14 +2124,6 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.6.22.tgz#ae09b4744fddc74714ee9f9d6f17a66e77c43573"
   integrity sha512-TDoPum4SHdfPiGSAaRBw7ECyI8VaHpK8GJugbJIJuqyh6kzw9ZLJZW3HGL3NNrJGxcAixUvqROm+YuQOo5eXtg==
 
-"@mdx-js/react@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-2.3.0.tgz#4208bd6d70f0d0831def28ef28c26149b03180b3"
-  integrity sha512-zQH//gdOmuu7nt2oJR29vFhDv88oGPmVw6BggmrHeMI+xgEkp1B2dX9/bMBSYtK0dyLX/aOmesKS09g222K1/g==
-  dependencies:
-    "@types/mdx" "^2.0.0"
-    "@types/react" ">=16"
-
 "@mdx-js/util@1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.22.tgz#219dfd89ae5b97a8801f015323ffa4b62f45718b"
@@ -3695,11 +3687,6 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/mdx@^2.0.0":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@types/mdx/-/mdx-2.0.4.tgz#d1cad61ccc803b3c248c3d9990a2a6880bef537f"
-  integrity sha512-qCYrNdpKwN6YO6FVnx+ulfqifKlE3lQGsNhvDaW9Oxzyob/cRLBJWow8GHBBD4NxQ7BVvtsATgLsX0vZAWmtrg==
-
 "@types/mime-types@^2.1.0":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@types/mime-types/-/mime-types-2.1.1.tgz#d9ba43490fa3a3df958759adf69396c3532cf2c1"
@@ -3780,7 +3767,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@>=16":
+"@types/react@*":
   version "18.0.31"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.31.tgz#a69ef8dd7bfa849734d258c793a8fe343a338205"
   integrity sha512-EEG67of7DsvRDU6BLLI0p+k1GojDLz9+lZsnCpCRTa/lOokvyPBvp8S5x+A24hME3yyQuIipcP70KJ6H7Qupww==
@@ -4726,6 +4713,15 @@ axe-core@^4.6.2:
   version "4.6.3"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.6.3.tgz#fc0db6fdb65cc7a80ccf85286d91d64ababa3ece"
   integrity sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==
+
+axios@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.4.0.tgz#38a7bf1224cd308de271146038b551d725f0be1f"
+  integrity sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==
+  dependencies:
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 axobject-query@^3.1.1:
   version "3.1.1"
@@ -7391,6 +7387,11 @@ focus-lock@^0.8.0:
   dependencies:
     tslib "^1.9.3"
 
+follow-redirects@^1.15.0:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
+
 for-each@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/for-each/-/for-each-0.3.3.tgz#69b447e88a0a5d32c3e7084f3f1710034b21376e"
@@ -9796,18 +9797,6 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
-mcm-js-commons@^0.0.23:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/mcm-js-commons/-/mcm-js-commons-0.0.23.tgz#18249fd9b3ab6f5f87754c9b60a1a2d88b7ba3af"
-  integrity sha512-xQZfQtjD6l8cOLR0tG47QniQOH3mshdYccFRJU1SX95CqLMOEebZDnlCU+iSXgu7tp+fi5vApbm5zN3nINNG1g==
-  dependencies:
-    "@emotion/react" "^11.10.6"
-    "@emotion/styled" "^11.10.6"
-    dompurify "^3.0.1"
-    next "13.1.6"
-    react "18.2.0"
-    react-dom "18.2.0"
-
 mcm-js-commons@^0.0.43:
   version "0.0.43"
   resolved "https://registry.yarnpkg.com/mcm-js-commons/-/mcm-js-commons-0.0.43.tgz#9a12f879feb953d758d0ce84c08bc4c1890d76b7"
@@ -9834,23 +9823,23 @@ mcm-js-commons@^0.0.60:
     react-dom "18.2.0"
     uuid "^9.0.0"
 
-mcm-js-dev@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.18.tgz#36ee8b90515fd7bbc755322c5c7a29fabe11ea10"
-  integrity sha512-+AHahjutjMzcW2Av86fuUwVlt/U16lCm6iFkFA81VOn1d/oGT9oGfPwnxiOHvjUATn1kgUV4xcPmliNPmVI3Gg==
+mcm-js-dev@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.20.tgz#2d87c3ebd1c58dd346cffa20ea71cca8334b9e61"
+  integrity sha512-ETC2PJJ2ka1DaORQ9C0E/vpqmLXputQDSYUcKvtLgLEhxGYQjT8oyPbbEuVlnTfIBWKm5avbpAAPcwMqHOkqTQ==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
-    "@mdx-js/react" "^2.3.0"
-    mcm-js-commons "^0.0.23"
-    next "13.1.6"
+    mcm-js-commons "^0.0.43"
+    next "^13.3.0"
     react "18.2.0"
-    react-dom "18.2.0"
+    react-dom "^18.2.0"
+    uuid "^9.0.0"
 
-mcm-js@^0.0.37:
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/mcm-js/-/mcm-js-0.0.37.tgz#4b9d415a71a6ad1b658650858ba3d937f936d187"
-  integrity sha512-DyoUhO1ArDoe19G57gNSKMPGPbUU/5DqqosgypPVRgDur9d3KVhRGXh2M6QJHjMwrQhEoMdAE44LWCXcYy1akQ==
+mcm-js@^0.0.39:
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/mcm-js/-/mcm-js-0.0.39.tgz#9acf300f5de67e9ee8f65d72e0b0ac3825b95bf7"
+  integrity sha512-TVcTHWuZQpc8jPMnmUaEKDMORpU7+x6+6Kkbbt4iIo+Y1HaW/imHZy7EnOEylyRrlFQKy0T7kVsqLdhQVIf7lg==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
@@ -11328,7 +11317,7 @@ proxy-addr@~2.0.7:
     forwarded "0.2.0"
     ipaddr.js "1.9.1"
 
-proxy-from-env@^1.0.0:
+proxy-from-env@^1.0.0, proxy-from-env@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
   integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==

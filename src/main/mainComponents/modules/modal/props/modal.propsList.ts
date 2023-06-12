@@ -3,7 +3,7 @@ import { PropsModuleListType } from "src/commons/data/props/props.commons.data";
 export const modalPropsList: Array<PropsModuleListType> = [
   {
     name: "children",
-    default: "-",
+    default: '""',
     type: "String | Node",
     notice:
       "모달에 출력되는 내용을 나타냅니다. <br />Modal.open을 사용하는 경우에는 children Props를 전달해줘야 합니다.",
@@ -19,7 +19,7 @@ export const modalPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "onCloseModal",
-    default: "-",
+    default: "() => {}",
     type: "Function",
     notice:
       "모달을 종료할 때 실행하는 이벤트입니다. <br /> Modal.open을 사용하는 경우에는 자동으로 적용됩니다.",
@@ -27,35 +27,43 @@ export const modalPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "id",
-    default: "-",
+    default: '""',
     type: "String",
     notice: "모달의 id 선택자 값을 지정합니다. id는 wrapper 태그에 적용됩니다.",
   },
   {
     name: "className",
-    default: "-",
+    default: '""',
     type: "String",
     notice:
       "모달의 class 선택자 값을 지정합니다. className은 wrapper 태그에 적용됩니다.",
   },
   {
+    name: "name",
+    default: '""',
+    type: "String",
+    notice:
+      "모달의 name 속성 값을 지정합니다. 지정된 name값은 wrapper 태그에 data-name 속성으로 적용됩니다.",
+  },
+  {
     name: "modalSize",
-    default: "{}",
+    default: '{ width : "", height : "" }',
     type: "Object",
     notice: "모달창의 크기(width, height)를 직접 지정할 수 있습니다.",
   },
   {
     name: "mobileModalSize",
-    default: "{}",
+    default: '{ width : "", height : "" }',
     type: "Object",
     notice:
       "모바일 환경에서의 모달창의 크기(width, height)를 직접 지정할 수 있습니다.",
   },
   {
     name: "modalStyles",
-    default: "{}",
+    default: "{ wrapper : {} .. }",
     type: "Object",
-    notice: "모달의 스타일을 직접 구성할 수 있습니다.",
+    notice:
+      "모달의 각각의 태그(wrapper, items, closeButton, contents)별로 스타일을 직접 적용할 수 있습니다.",
   },
   {
     name: "showBGAnimation",
@@ -79,15 +87,16 @@ export const modalPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "closeMent",
-    default: "-",
+    default: '""',
     type: "String",
     notice: "닫기에 대한 부가설명 멘트를 작성할 수 있습니다.",
   },
   {
     name: "closeButtonInfo",
-    default: "{}",
+    default: '{ buttonSize : 0, buttonWeight : 0, buttonColor : "black" }',
     type: "Object",
-    notice: "닫기 버튼에 대한 넓이, 높이, 굵기를 직접 설정합니다.",
+    notice:
+      "닫기 버튼에 대한 넓이, 높이(buttonSize), 굵기(buttonWeight), 색상(buttonColor)을 직접 설정합니다.",
   },
   {
     name: "offAutoClose",
@@ -98,13 +107,13 @@ export const modalPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "onAfterCloseEvent",
-    default: "-",
+    default: "() => {}",
     type: "Function",
     notice: "모달이 종료되는 시점 후에 실행될 이벤트입니다.",
   },
   {
     name: "onFixWindow",
-    default: "-",
+    default: "false",
     type: "Boolean",
     notice: "모달이 실행될 때 화면 스크롤 이동을 방지할 수 있습니다.",
   },

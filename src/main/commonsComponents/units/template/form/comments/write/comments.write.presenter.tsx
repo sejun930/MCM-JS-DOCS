@@ -4,11 +4,13 @@ import {
   OptionWrapper,
   SelectCategory,
   WriteWrapper,
+  SubmitWrapper,
+  AgreeUserPrivacyWrapper,
+  PrivacyItems,
 } from "./comments.write.styles";
-import { FormEvent, MutableRefObject } from "react";
 
-import { _Input, _SpanText } from "mcm-js-commons";
-import { WriteInfoTypes } from "./comments.write.types";
+import { _Input, _SpanText, _Button } from "mcm-js-commons";
+import { IPropsTypes } from "./comments.write.types";
 import StarsForm from "./stars";
 
 const placeList: { [key: string]: string } = {
@@ -33,15 +35,8 @@ export default function CommentsWriteUIPage({
   categoryRef,
   contentsRef,
   passwordRef,
-}: {
-  categoryList: Array<{ [key: string]: string }>;
-  changeInfo: (value: string | number) => (name: string) => void;
-  info: WriteInfoTypes;
-  write: (e?: FormEvent<Element>) => void;
-  categoryRef: MutableRefObject<HTMLSelectElement>;
-  contentsRef: MutableRefObject<HTMLTextAreaElement>;
-  passwordRef: MutableRefObject<HTMLInputElement>;
-}) {
+  openPrivacyNotice,
+}: IPropsTypes) {
   return (
     <Form onSubmit={write}>
       <fieldset>
@@ -113,6 +108,38 @@ export default function CommentsWriteUIPage({
 ${info.category && defaultPlace}`}
         />
       </WriteWrapper>
+
+      <SubmitWrapper>
+        {/* 개인정보 수집 동의 */}
+        <AgreeUserPrivacyWrapper>
+          <PrivacyItems checked={info.agreeProvacy}>
+            <input
+              id="privacy-checkbox"
+              type="checkbox"
+              onChange={() => changeInfo(!info.agreeProvacy)("agreeProvacy")}
+            />
+            <label
+              id="privacy-checkbox-label"
+              htmlFor="privacy-checkbox"
+            ></label>
+          </PrivacyItems>
+
+          <label
+            id="privacy-label"
+            htmlFor="privacy-checkbox"
+            className={(info.agreeProvacy && "checked") || undefined}
+          >
+            개인정보 (IP) 수집에 동의합니다.
+          </label>
+          <_Button
+            onClickEvent={openPrivacyNotice}
+            buttonType="button"
+            className="privacy-notice"
+          >
+            [약관 보기]
+          </_Button>
+        </AgreeUserPrivacyWrapper>
+      </SubmitWrapper>
     </Form>
   );
 }

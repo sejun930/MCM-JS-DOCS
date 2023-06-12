@@ -103,13 +103,11 @@ export default function ContentsSelectFunctionalPage({
       showBGAnimation: true,
       showModalOpenAnimation: true,
       modalSize: { width: "300px", height: "60px" },
-      modalStyles: !isSuccess
-        ? {
-            border: "double 5px #aa5656",
-          }
-        : {
-            border: "double 5px #19a7ce",
-          },
+      modalStyles: {
+        items: {
+          border: `double 5px #${isSuccess ? "19a7ce" : "aa5656"}`,
+        },
+      },
       onCloseModal: _afterCloseEvent,
     });
   };

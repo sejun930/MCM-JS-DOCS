@@ -34,6 +34,10 @@ export const CommentsList = styled.li`
 
   :hover {
     background-color: ${(props) => !props.hover && "#dddddd"};
+
+    .select-wrapper {
+      display: flex;
+    }
   }
 `;
 
@@ -99,6 +103,7 @@ export const OptionalWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  height: 20px;
 `;
 
 export const OptionalButton = styled.button`
@@ -109,13 +114,17 @@ export const OptionalButton = styled.button`
 
 export const SelectWrapper = styled.div`
   position: relative;
-  display: flex;
+  display: none;
   justify-content: center;
   cursor: default;
 
+  ${(props: StyleTypes) =>
+    props.hover && {
+      display: "flex",
+    }}
+
   .mcm-unit-select {
     top: 30px;
-    /* margin-right: 30px; */
   }
 `;
 

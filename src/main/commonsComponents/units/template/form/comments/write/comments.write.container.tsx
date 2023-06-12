@@ -9,8 +9,9 @@ import { Message } from "./comments.write.styles";
 
 import CommentsWriteUIPage from "./comments.write.presenter";
 import ModalResultForm from "../../modal/modal.result";
+import PrivacyNoticePage from "./privacy";
 
-import { Modal } from "mcm-js";
+import { Modal } from "mcm-js-dev";
 import { _SpanTextWithHtml } from "mcm-js-commons";
 
 import { getHashPassword } from "src/main/commonsComponents/functional";
@@ -29,6 +30,9 @@ export default function CommentsWritePage({
 }: {
   addComments: (data: InfoTypes) => Promise<boolean>;
 }) {
+  // 개인정보 수집 동의 여부
+  // const [privacy, setPrivacy] = useState(false);
+
   // 카테고리 선택
   const [categoryList, setCategoryList] = useState<
     Array<{ [key: string]: string }>
@@ -57,7 +61,7 @@ export default function CommentsWritePage({
   }, [info.category]);
 
   // 정보 변경하기
-  const changeInfo = (value: string | number) => (name: string) => {
+  const changeInfo = (value: string | number | boolean) => (name: string) => {
     if (info[name] !== undefined) {
       setInfo({
         ...info,
@@ -89,6 +93,10 @@ export default function CommentsWritePage({
 
       if (errorType === "contents") contentsRef.current.focus();
       else if (errorType === "password") passwordRef.current.focus();
+      else if (errorType === "privacy")
+        window.setTimeout(() => {
+          openPrivacyNotice();
+        }, 0);
     };
 
     // 에러모달 띄우기
@@ -146,12 +154,15 @@ export default function CommentsWritePage({
           // 비밀번호를 입력하지 않은 경우
           errorMessage = "비밀번호를 입력해주세요.";
           errorType = "password";
-
-          // if (passwordRef.current) afterEvent = passwordRef.current.focus;
         } else if (info.category === "review") {
           if (!info.rating) {
+            // 평점을 선택하지 않을 경우
             errorMessage = "평점을 선택해주세요.";
           }
+        } else if (!info.agreeProvacy) {
+          // 개인정보 수집에 동의하지 않을 경우
+          errorMessage = "개인정보 (IP) 수집에 동의해주세요.";
+          errorType = "privacy";
         }
       }
     }
@@ -168,27 +179,89 @@ export default function CommentsWritePage({
       // 등록일 설정
       info.createdAt = getServerTime();
 
-      // 리뷰가 아닌 경우에는 평점 초기화
-      if (info.category !== "review") info.rating = 0;
+      // ip 주소 1차 가져오기
+      const axios = require("axios");
+      try {
+        const { data } = await axios.get(
+          "https://api64.ipify.org/?format=json"
+        );
+        // ip 주소 저장
+        info.ip = data.ip;
+      } catch (err) {
+        // 호출에 실패하면 다음 방법 시도
+        console.log("1차 IP 조회에 실패했습니다. : " + err);
 
-      // 댓글 작성 가능
-      // if (module) {
-      writing = true;
+        // ip 주소 2차 가져오기
+        try {
+          const { data } = await axios.get("https://geolocation-db.com/json/");
+          info.ip = data.IPv4;
+        } catch (err2) {
+          // 2차 실패
+          console.log("2차 IP 조회에 실패했습니다. : " + err);
 
-      const addResult = await addComments(info as InfoTypes);
-      if (addResult) {
-        // 등록에 성공할 경우
-        openErrorModal({
-          message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
-          className: "success-modal",
-        });
+          // ip 주소 최종 가져오기
+          try {
+            const { data } = await axios.get("https://ipapi.co/json/");
+            info.ip = data.ip;
+          } catch (err3) {
+            // 3차 최종 실패
+            console.log("3차 IP 조회에 실패했습니다. : " + err3);
+          }
+        }
       }
-      writing = false;
-      // }
 
-      // 초기화
-      setInfo({ ...initInfo });
+      if (!info.ip) {
+        openErrorModal({
+          message:
+            "IP 주소를 조회할 수 없습니다. <br />관리자에게 직접 문의 부탁드립니다.",
+        });
+      } else {
+        // 리뷰가 아닌 경우에는 평점 초기화
+        if (info.category !== "review") info.rating = 0;
+
+        // 댓글 작성 가능
+        // if (module) {
+        writing = true;
+
+        const addResult = await addComments(info as InfoTypes);
+        if (addResult) {
+          // 등록에 성공할 경우
+          openErrorModal({
+            message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
+            className: "success-modal",
+          });
+        }
+        writing = false;
+
+        // 초기화
+        setInfo({ ...initInfo });
+      }
     }
+  };
+
+  // 약관보기 오픈
+  const openPrivacyNotice = () => {
+    const agreeProvacyEvent = () => {
+      // 약관에 동의
+      changeInfo(true)("agreeProvacy");
+
+      // 모달 close
+      Modal.close({
+        id: "privacy-notice-modal",
+      });
+    };
+
+    Modal.open({
+      children: <PrivacyNoticePage privacyAgreeEvent={agreeProvacyEvent} />,
+      id: "privacy-notice-modal",
+      onFixWindow: true,
+      closeMent: "닫기",
+      modalStyles: {
+        contents: {
+          padding: "2rem",
+        },
+      },
+    });
   };
 
   return (
@@ -200,6 +273,7 @@ export default function CommentsWritePage({
       categoryRef={categoryRef}
       contentsRef={contentsRef}
       passwordRef={passwordRef}
+      openPrivacyNotice={openPrivacyNotice}
     />
   );
 }

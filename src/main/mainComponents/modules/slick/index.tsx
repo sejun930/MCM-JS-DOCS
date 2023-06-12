@@ -18,6 +18,7 @@ export default function ModalExamplePage() {
           showBGAnimation: true,
           showModalOpenAnimation: true,
           id: "modal",
+          name: "aaa",
         })
       }
     >

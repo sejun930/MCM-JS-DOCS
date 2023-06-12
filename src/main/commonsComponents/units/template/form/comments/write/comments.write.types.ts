@@ -1,3 +1,5 @@
+import { FormEvent, MutableRefObject } from "react";
+
 import { FieldValue } from "src/commons/libraries/firebase";
 import { CommentsInfoTypes } from "../comments.types";
 
@@ -12,15 +14,17 @@ export type WriteInfoTypes = {
 
 // 정보 저장하기
 export const initInfo: WriteInfoTypes = {
-  category: "all",
-  password: "",
-  contents: "",
-  rating: 0,
-  createdAt: null,
-  modifyAt: null,
-  deletedAt: null,
-  bugStatus: 0,
-  completeAnswer: null,
+  category: "all", // 댓글 카테고리
+  password: "", // 비밀번호
+  contents: "", // 댓글 내용
+  rating: 0, // 평점 점수
+  createdAt: null, // 작성 일자
+  modifyAt: null, // 수정 일자
+  deletedAt: null, // 삭제 일자
+  bugStatus: 0, // 버그 현황 (0 : 확인 대기중, 1 : 수정 중, 2 : 해결 완료)
+  completeAnswer: null, // 문의 답변
+  ip: "", // 작성자 아이피
+  agreeProvacy: false, // 개인정보 수집 여부
 };
 
 export type CategoryTypes = "all" | "bug" | "review" | "question";
@@ -41,9 +45,14 @@ export const categoryListArray = Object.entries(categoryInitList).map((el) => {
   return obj;
 });
 
-// export const categoryInitList: Array<CategoryListType> = [
-//   { name: "카테고리 선택", value: "", secondName: "전체" },
-//   { name: "버그 신고", value: "bug" },
-//   { name: "문의", value: "question" },
-//   { name: "리뷰", value: "review" },
-// ];
+// props type
+export interface IPropsTypes {
+  categoryList: Array<{ [key: string]: string }>;
+  changeInfo: (value: string | number | boolean) => (name: string) => void;
+  info: WriteInfoTypes;
+  write: (e?: FormEvent<Element>) => void;
+  categoryRef: MutableRefObject<HTMLSelectElement>;
+  contentsRef: MutableRefObject<HTMLTextAreaElement>;
+  passwordRef: MutableRefObject<HTMLInputElement>;
+  openPrivacyNotice: () => void;
+}

@@ -12,7 +12,7 @@ export const modalTreeList: Array<TreeModuleListTypes> = [
     tag: "div",
     class: classList?.modal?.items || "mcm-modal-items",
     depth: 1,
-    role: "모달 창을 나타내는 태그입니다. <br /> width, height 값으로 <b>모달의 내부 크기를 조절</b>할 수 있습니다. <br /><br /><b>modalSize와 mobileModalSize</b>로 모달의 크기를 직접 설정할 수 있으며 <br /><br /><b>modalStyles</b>를 통해 모달의 스타일을 직접 구성할 수 있습니다.",
+    role: "모달 창을 나타내는 태그입니다. <br /> width, height 값으로 <b>모달의 내부 크기를 조절</b>할 수 있습니다. <br /><br /><b>modalSize</b>와 <b>mobileModalSize</b>로 모달의 크기를 직접 설정할 수 있습니다.",
   },
   {
     tag: "div",

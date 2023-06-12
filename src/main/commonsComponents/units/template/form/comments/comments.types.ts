@@ -7,6 +7,8 @@ export interface CommentsInfoTypes {
   rating: number;
   bugStatus: number; // 버그 처리 여부 (0 : 대기중, 1 : 처리중, 2 : 처리 완료)
   completeAnswer: null | string; // 문의 답변
+  ip: string; // 작성자 아이피
+  agreeProvacy: boolean; // 개인정보 수집 여부
 }
 
 // 날짜 관련 type
