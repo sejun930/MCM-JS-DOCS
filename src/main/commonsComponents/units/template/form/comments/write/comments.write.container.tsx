@@ -102,12 +102,14 @@ export default function CommentsWritePage({
     // 에러모달 띄우기
     const openErrorModal = ({
       message, // 에러메세지
-      isSuccess, // 성공 여부
       className, // 클래스 선택자
+      offClose, // 닫기 금지
+      id, // 아이디 선택자
     }: {
       message: string;
-      isSuccess?: boolean;
       className?: string;
+      offClose?: boolean;
+      id?: string;
     }) => {
       Modal.open({
         className: `error-modal ${className || ""}`,
@@ -121,6 +123,7 @@ export default function CommentsWritePage({
             </Message>
           ),
         }),
+        id,
         showBGAnimation: true,
         showModalOpenAnimation: true,
         modalSize: {
@@ -129,7 +132,10 @@ export default function CommentsWritePage({
         mobileModalSize: {
           height: "30%",
         },
+        onCloseModal: () => Modal.close({ id: "writing-modal" }),
         onAfterCloseEvent: afterEvent,
+        offAutoClose: offClose || false,
+        hideCloseButton: offClose || false,
       });
     };
 
@@ -222,14 +228,24 @@ export default function CommentsWritePage({
         // 댓글 작성 가능
         // if (module) {
         writing = true;
+        openErrorModal({
+          message: `댓글을 등록하고 있습니다. <br />잠시만 기다려주세요.`,
+          className: "success-modal",
+          id: "writing-modal",
+          offClose: true,
+        });
 
         const addResult = await addComments(info as InfoTypes);
         if (addResult) {
-          // 등록에 성공할 경우
-          openErrorModal({
-            message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
-            className: "success-modal",
-          });
+          Modal.close({ id: "writing-modal" });
+
+          window.setTimeout(() => {
+            // 등록에 성공할 경우
+            openErrorModal({
+              message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
+              className: "success-modal",
+            });
+          }, 300);
         }
         writing = false;
 
