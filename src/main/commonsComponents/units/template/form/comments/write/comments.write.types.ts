@@ -54,5 +54,5 @@ export interface IPropsTypes {
   categoryRef: MutableRefObject<HTMLSelectElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
   passwordRef: MutableRefObject<HTMLInputElement>;
-  openPrivacyNotice: () => void;
+  openPrivacy: boolean;
 }

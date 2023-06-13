@@ -9,7 +9,6 @@ import { Message } from "./comments.write.styles";
 
 import CommentsWriteUIPage from "./comments.write.presenter";
 import ModalResultForm from "../../modal/modal.result";
-import PrivacyNoticePage from "./privacy";
 
 import { Modal } from "mcm-js-dev";
 import { _SpanTextWithHtml } from "mcm-js-commons";
@@ -30,8 +29,8 @@ export default function CommentsWritePage({
 }: {
   addComments: (data: InfoTypes) => Promise<boolean>;
 }) {
-  // 개인정보 수집 동의 여부
-  // const [privacy, setPrivacy] = useState(false);
+  // 개인정보 수집 약관창 오픈 여부
+  const [openPrivacy, setOpenPrivacy] = useState(false);
 
   // 카테고리 선택
   const [categoryList, setCategoryList] = useState<
@@ -95,8 +94,12 @@ export default function CommentsWritePage({
       else if (errorType === "password") passwordRef.current.focus();
       else if (errorType === "privacy")
         window.setTimeout(() => {
-          openPrivacyNotice();
-        }, 0);
+          // 약관창 오픈
+          setOpenPrivacy(true);
+          window.setTimeout(() => {
+            setOpenPrivacy(false);
+          }, 100);
+        }, 100);
     };
 
     // 에러모달 띄우기
@@ -185,6 +188,14 @@ export default function CommentsWritePage({
       // 등록일 설정
       info.createdAt = getServerTime();
 
+      writing = true;
+      openErrorModal({
+        message: `댓글을 등록하고 있습니다. <br />잠시만 기다려주세요.`,
+        className: "success-modal",
+        id: "writing-modal",
+        offClose: true,
+      });
+
       // ip 주소 1차 가져오기
       const axios = require("axios");
       try {
@@ -227,13 +238,6 @@ export default function CommentsWritePage({
 
         // 댓글 작성 가능
         // if (module) {
-        writing = true;
-        openErrorModal({
-          message: `댓글을 등록하고 있습니다. <br />잠시만 기다려주세요.`,
-          className: "success-modal",
-          id: "writing-modal",
-          offClose: true,
-        });
 
         const addResult = await addComments(info as InfoTypes);
         if (addResult) {
@@ -255,31 +259,6 @@ export default function CommentsWritePage({
     }
   };
 
-  // 약관보기 오픈
-  const openPrivacyNotice = () => {
-    const agreeProvacyEvent = () => {
-      // 약관에 동의
-      changeInfo(true)("agreeProvacy");
-
-      // 모달 close
-      Modal.close({
-        id: "privacy-notice-modal",
-      });
-    };
-
-    Modal.open({
-      children: <PrivacyNoticePage privacyAgreeEvent={agreeProvacyEvent} />,
-      id: "privacy-notice-modal",
-      onFixWindow: true,
-      closeMent: "닫기",
-      modalStyles: {
-        contents: {
-          padding: "2rem",
-        },
-      },
-    });
-  };
-
   return (
     <CommentsWriteUIPage
       categoryList={categoryList}
@@ -289,7 +268,7 @@ export default function CommentsWritePage({
       categoryRef={categoryRef}
       contentsRef={contentsRef}
       passwordRef={passwordRef}
-      openPrivacyNotice={openPrivacyNotice}
+      openPrivacy={openPrivacy}
     />
   );
 }

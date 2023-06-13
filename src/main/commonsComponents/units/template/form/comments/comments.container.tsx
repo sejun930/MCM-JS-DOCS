@@ -4,18 +4,24 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
-import { CommentsInfoTypes, InfoTypes } from "./comments.types";
+import { CommentsInfoTypes, InfoTypes, initCountList } from "./comments.types";
 import apis from "src/commons/libraries/commons.apis";
 import {
+  CollectionReference_DocumentData,
   getDoc,
   getResult,
   Query_DocumentData,
 } from "src/commons/libraries/firebase";
 
 import { initCommentsInfo, CommentsAllInfoTypes } from "./comments.types";
+import { DocumentData } from "src/commons/libraries/firebase";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
+// 한 번에 가져올 수 있는 댓글 개수 단위
+// const limit = 10;
+// let startAfter;
+
 export default function CommentsPage() {
   // 댓글 전체 정보 (댓글 리스트, 카테고리 등등)
   const [commentsInfo, setCommentsInfo] =
@@ -89,10 +95,7 @@ export default function CommentsPage() {
     if (module) {
       const _info = info || commentsInfo;
 
-      const doc = getFilterQuery(
-        getDoc("comments", module, "comment") as Query_DocumentData,
-        _info
-      );
+      const doc = getFilterQuery(getCommentDoc() as Query_DocumentData, _info);
 
       try {
         const result = await apis(doc).read();
@@ -121,25 +124,48 @@ export default function CommentsPage() {
       review: 0,
     };
     if (module) {
-      let doc = getDoc("comments", module, "count") as Query_DocumentData;
-
       try {
+        const doc = getDoc("comments", module, "count");
+
         const result = await apis(doc).read();
         if (result.empty) {
           // 비어있을 경우 새로 생성하기
-        }
+          initCountList.forEach((el) => {
+            (doc as CollectionReference_DocumentData).add(el);
+          });
+        } else {
+          result.forEach((data) => {
+            const _data = data.data();
+            // 모든 개수 카운트하기
+            _list[_data.category] = _data.count;
 
-        result.forEach((data) => {
-          const _data = data.data();
-          _list[_data.category] = _data.count;
-        });
+            if (_data.category === "review") {
+              // 평점 필터가 있는지 검증
+              const isFilter = Array.from(
+                new Array(5),
+                (_, idx) => 1 + idx
+              ).some((num) => info.filter.list[`review-${num}`]);
 
-        // 전체 개수 구하기
-        let allCount = 0;
-        for (const key in _list) {
-          allCount += _list[key];
+              if (isFilter) {
+                _list.review = 0;
+
+                // 필터가 하나라도 있는 경우
+                Array.from(new Array(5), (_, idx) => 1 + idx).forEach((num) => {
+                  if (info.filter.list[`review-${num}`]) {
+                    _list.review += _data[`review-${num}`];
+                  }
+                });
+              }
+            }
+          });
+
+          // 전체 개수 구하기
+          let allCount = 0;
+          for (const key in _list) {
+            allCount += _list[key];
+          }
+          _list["all"] = allCount;
         }
-        _list["all"] = allCount;
       } catch (err) {
         console.log(err);
       }
@@ -147,7 +173,7 @@ export default function CommentsPage() {
     return _list;
   };
 
-  // Comment DOC 저장하기
+  // Comment DOC 받아오기
   const getCommentDoc = () => {
     return getDoc("comments", module, "comment");
   };
@@ -163,10 +189,7 @@ export default function CommentsPage() {
         const _info = { ...commentsInfo };
 
         // 해당 카테고리 1 증가 결과
-        const updateCountResult = await updateCountList(
-          "up",
-          newComment.category
-        );
+        const updateCountResult = await updateCountList("up", newComment);
 
         if (updateCountResult && updateCountResult.category) {
           // 카운트 최신화
@@ -204,7 +227,7 @@ export default function CommentsPage() {
 
         if (isDelete) {
           // 삭제라면 해당 카테고리 1개 감소
-          if (isDelete) updateCountList("down", editData.category);
+          if (isDelete) updateCountList("down", editData);
         }
         fetchCommentsList();
 
@@ -219,29 +242,43 @@ export default function CommentsPage() {
   };
 
   // 카테고리 갯수 업데이트
-  const updateCountList = async (type: "up" | "down", category: string) => {
-    // type : "up" = 1 증가, "down" = 1 감소
+  const updateCountList = async (
+    updateType: "up" | "down",
+    info: InfoTypes
+  ) => {
+    // updateType : "up" = 1 증가, "down" = 1 감소
     // category : 변경시킬 카테고리 이름
 
     try {
       const updateDoc = await getDoc("comments", module, "count")
-        .where("category", "==", category)
+        .where("category", "==", info.category)
         .get();
 
       if (!updateDoc.empty) {
         const docId = updateDoc.docs[0].id;
         // up일 경우 1개 증가, down일 경우 1개 감소
-        const num = type === "up" ? 1 : -1;
+        const num = updateType === "up" ? 1 : -1;
         const count = updateDoc.docs[0].data().count + num;
+        let updateList = { ...updateDoc.docs[0].data(), ["count"]: count };
 
         try {
-          await getDoc("comments", module, "count").doc(docId).update({
-            count,
-          });
+          // 카운트 필터 데이터도 업데이트 진행
+          if (info.category === "review") {
+            // 리뷰일 경우 각각의 평점에 대한 카운트도 저장
+            updateList = updateFilterCount(
+              updateList,
+              "up",
+              `review-${info.rating}`
+            ) as { count: number };
+          }
 
-          return { category, count };
-        } catch (err) {
-          console.log(`카테고리 개수 변경에 실패했습니다. ${err}`);
+          await getDoc("comments", module, "count")
+            .doc(docId)
+            .update(updateList);
+
+          return { category: info.category, count };
+        } catch (err2) {
+          console.log(`카테고리 개수 변경에 실패했습니다. ${err2}`);
         }
       }
     } catch (err) {
@@ -249,9 +286,30 @@ export default function CommentsPage() {
     }
   };
 
+  // 카테고리 각각의 필터 카운트에 대한 업데이트
+  const updateFilterCount = (
+    updateList: { [key: string]: number },
+    updateType: "up" | "down",
+    columnName: string
+  ) => {
+    // updateList : 해당 카테고리의 댓글 정보들
+    // updateType : "up" = 1 증가, "down" = 1 감소
+    // columnName : 변경할 필터 카테고리 이름
+    return {
+      ...updateList,
+      [columnName]: updateList[columnName] + (updateType === "up" ? 1 : -1),
+    };
+  };
+
   // 데이터 정보 변경하기
   const changeInfo = (info: CommentsAllInfoTypes) => {
     const _info = { ...commentsInfo, ...info };
+
+    // 카테고리가 변경될 경우, 필터 리스트 초기화
+    if (commentsInfo.selectCategory !== info.selectCategory) {
+      _info.filter.list = {};
+    }
+
     fetchCommentsList(_info);
   };
 

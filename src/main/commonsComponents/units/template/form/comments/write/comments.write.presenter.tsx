@@ -5,13 +5,13 @@ import {
   SelectCategory,
   WriteWrapper,
   SubmitWrapper,
-  AgreeUserPrivacyWrapper,
-  PrivacyItems,
 } from "./comments.write.styles";
 
 import { _Input, _SpanText, _Button } from "mcm-js-commons";
 import { IPropsTypes } from "./comments.write.types";
 import StarsForm from "./stars";
+
+import PrivacyPage from "./privacy";
 
 const placeList: { [key: string]: string } = {
   bug: `모듈 사용시 발생하는 버그 이슈등을 자세하게 알려주세요.
@@ -35,7 +35,7 @@ export default function CommentsWriteUIPage({
   categoryRef,
   contentsRef,
   passwordRef,
-  openPrivacyNotice,
+  openPrivacy,
 }: IPropsTypes) {
   return (
     <Form onSubmit={write}>
@@ -111,34 +111,11 @@ ${info.category && defaultPlace}`}
 
       <SubmitWrapper>
         {/* 개인정보 수집 동의 */}
-        <AgreeUserPrivacyWrapper>
-          <PrivacyItems checked={info.agreeProvacy}>
-            <input
-              id="privacy-checkbox"
-              type="checkbox"
-              onChange={() => changeInfo(!info.agreeProvacy)("agreeProvacy")}
-            />
-            <label
-              id="privacy-checkbox-label"
-              htmlFor="privacy-checkbox"
-            ></label>
-          </PrivacyItems>
-
-          <label
-            id="privacy-label"
-            htmlFor="privacy-checkbox"
-            className={(info.agreeProvacy && "checked") || undefined}
-          >
-            개인정보 (IP) 수집에 동의합니다.
-          </label>
-          <_Button
-            onClickEvent={openPrivacyNotice}
-            buttonType="button"
-            className="privacy-notice"
-          >
-            [약관 보기]
-          </_Button>
-        </AgreeUserPrivacyWrapper>
+        <PrivacyPage
+          changeInfo={changeInfo}
+          info={info}
+          openPrivacy={openPrivacy}
+        />
       </SubmitWrapper>
     </Form>
   );

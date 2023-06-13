@@ -3,6 +3,8 @@ import _SelectFormUIPage from "./select.presenter";
 
 import { SelectProps } from "./select.render";
 
+// let waiting = false;
+// let debouncing: ReturnType<typeof setTimeout> | number;
 export default function _SelectForm(props: SelectProps) {
   const { show, closeEvent, offAutoClose, autoCloseOffTargetName, children } =
     props;
@@ -15,6 +17,7 @@ export default function _SelectForm(props: SelectProps) {
   useEffect(() => {
     const body = document.body;
 
+    // if (!waiting) {
     if (show) {
       setRender(true);
 
@@ -29,15 +32,19 @@ export default function _SelectForm(props: SelectProps) {
     } else {
       closeSelect();
     }
+    // }
   }, [show]);
 
   useEffect(() => {
+    // if (!waiting) {
     if (render) {
       // 선택창 전체 크기 구하기
       resizeSelect();
+      // waiting = true;
     } else {
       closeSelect();
     }
+    // }
   }, [render]);
 
   useEffect(() => {
@@ -46,12 +53,16 @@ export default function _SelectForm(props: SelectProps) {
 
   // 선택창 전체 크기 변경하기
   const resizeSelect = () => {
-    if (_listRef.current && _wrapperRef.current) {
+    if (_listRef?.current && _wrapperRef?.current) {
       window.setTimeout(() => {
         // 전체 크기 구하기
         _wrapperRef.current.style.height = `${
           _listRef.current.clientHeight + 4
         }px`;
+
+        // window.setTimeout(() => {
+        //   waiting = false;
+        // }, 200);
       }, 0);
     }
   };

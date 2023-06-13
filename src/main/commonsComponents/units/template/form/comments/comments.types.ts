@@ -63,3 +63,18 @@ export const initCommentsInfo: CommentsAllInfoTypes = {
   countList: {}, // 카테고리 개수 리스트
   filter: { search: "", page: 1, list: {} }, // 필터 정보
 };
+
+// count (카테고리 별 개수) 초기값
+export const initCountList = [
+  { category: "bug", count: 0, "bug-complete": 0 },
+  { category: "question", count: 0, "question-complete": 0 },
+  {
+    category: "review",
+    count: 0,
+    "review-1": 0,
+    "review-2": 0,
+    "review-3": 0,
+    "review-4": 0,
+    "review-5": 0,
+  },
+];
