@@ -27,13 +27,11 @@ import { MutableRefObject } from "react";
 
 export default function CommentsListUIPage({
   commentsInfo,
-  getLabel,
   modifyComments,
   changeInfo,
   listRef,
 }: {
   commentsInfo: CommentsAllInfoTypes;
-  getLabel: (info: InfoTypes) => Array<JSX.Element>;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   listRef: MutableRefObject<HTMLUListElement>;
@@ -89,8 +87,9 @@ export default function CommentsListUIPage({
             <ListContentsInfoPage
               key={getUuid()}
               info={el}
-              getLabel={getLabel}
               modifyComments={modifyComments}
+              commentsInfo={commentsInfo}
+              changeInfo={changeInfo}
             />
           ))}
         </CommentListItems>

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 interface StyleTypes {
   isSuccess?: boolean;
   isDelete?: boolean;
+  isReviewCategory?: boolean;
 }
 
 export const OptionalWrapper = styled.div`
@@ -18,17 +19,27 @@ export const OptionalWrapper = styled.div`
   }
 
   .optional-input {
-    margin-top: 30px;
+    /* margin-top: 30px; */
 
     .mcm-textArea-unit {
-      height: 200px;
+      height: 220px;
       resize: none;
 
       ${(props: StyleTypes) =>
+        props.isReviewCategory && {
+          height: "160px",
+        }}
+
+      ${(props) =>
         props.isDelete && {
           cursor: "default",
         }}
     }
+  }
+
+  .stars-wrapper {
+    justify-content: flex-start;
+    margin-top: 10px;
   }
 `;
 
@@ -63,5 +74,26 @@ export const Message = styled.div`
       props.isSuccess && {
         color: "rgb(25, 167, 206) !important",
       }}
+  }
+`;
+
+export const CommentsInfoWrapper = styled.div`
+  margin: 24px 0px;
+  margin-bottom: 10px;
+`;
+
+export const CategoryInfo = styled.div`
+  display: flex;
+  width: 100%;
+
+  .label-wrapper {
+    flex-direction: row;
+    gap: 0px 12px;
+    width: 100%;
+
+    .stars-wrapper {
+      margin-top: 0px;
+      width: auto;
+    }
   }
 `;

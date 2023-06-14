@@ -1,33 +1,101 @@
 import styled from "@emotion/styled";
 
-import { _SpanText } from "mcm-js-commons";
-import { CSSProperties } from "react";
+import { _SpanText, _Button } from "mcm-js-commons";
+import React, { MouseEvent } from "react";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+import { CommentsAllInfoTypes, InfoTypes } from "../../comments.types";
+import { getUuid } from "src/main/commonsComponents/functional";
+
+import { categoryInitList } from "../../write/comments.write.types";
+import StarsForm from "../../write/stars";
 
 // label 렌더용 컴포넌트
 export default function CommentsLabel({
-  children,
-  styles,
-  className,
+  info,
+  commentsInfo,
+  changeInfo,
+  showCategoryName,
+  modifyRatingEvent,
 }: {
-  children: JSX.Element;
-  styles?: CSSProperties;
-  className?: string;
+  info: InfoTypes;
+  commentsInfo?: CommentsAllInfoTypes;
+  changeInfo?: (info: CommentsAllInfoTypes) => void; // 댓글 정보 수정하기
+  showCategoryName?: boolean; // 카테고리 출력 여부
+  modifyRatingEvent?: (value: number) => void; // 평점 수정 이벤트 (평점 수정 가능)
 }) {
-  const { getAllComponentsClassName } = CommonsHooksComponents();
+  const renderLabel = () => {
+    let nodeList = [];
+
+    // 전체 카테고리일 경우, 각각의 카테고리 명 출력
+    if (showCategoryName || commentsInfo?.selectCategory === "all") {
+      // 카테고리 변경하기
+      const changeCategory = (e?: MouseEvent<HTMLButtonElement>) => {
+        if (showCategoryName) return;
+        if (e) e.stopPropagation();
+
+        if (commentsInfo && changeInfo)
+          changeInfo({ ...commentsInfo, ["selectCategory"]: info.category });
+      };
+
+      nodeList.push(
+        <_Button onClickEvent={changeCategory} buttonType="button">
+          <Label>{categoryInitList[info.category]}</Label>
+        </_Button>
+      );
+    }
+
+    if (info.category === "review") {
+      // 리뷰일 경우 평점 추가
+      nodeList.push(
+        <StarsForm
+          isView={!modifyRatingEvent}
+          category="review"
+          rating={info.rating}
+          changeEvent={modifyRatingEvent}
+        />
+      );
+    } else if (info.category === "bug") {
+      // 버그일 경우 처리 결과
+      const bugStatus: { [key: number]: string } = {
+        0: "확인 대기 중",
+        1: "버그 수리 중",
+        2: "해결 완료",
+      };
+      nodeList.push(
+        <Label className={`bug-label-${info.bugStatus || 0}`}>
+          {bugStatus[info.bugStatus || 0]}
+        </Label>
+      );
+    } else if (info.category === "question") {
+      // 문의일 경우
+      nodeList.push(
+        <Label className={`question-label-${info.completeAnswer ? 1 : 0}`}>
+          {info.completeAnswer ? "답변 완료" : "답변 대기 중"}
+        </Label>
+      );
+    }
+
+    return nodeList;
+  };
+
   return (
-    <Label
-      style={styles}
-      className={getAllComponentsClassName("category-label-button", className)}
-    >
-      {children}
-    </Label>
+    <LabelWrapper className="label-wrapper">
+      {renderLabel().map((node) => (
+        <React.Fragment key={getUuid()}>{node}</React.Fragment>
+      ))}
+    </LabelWrapper>
   );
 }
 
-export const Label = styled.label`
-  cursor: default;
+export const LabelWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 14px 0px;
+`;
+
+export const Label = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,9 +103,9 @@ export const Label = styled.label`
   font-weight: 700;
   padding: 6px 10px;
   border-radius: 10px;
-  min-width: 82px;
   background-color: #c88ea7;
   color: #ffffff;
+  margin: 0px;
 
   &.bug-label-0,
   &.question-label-0 {

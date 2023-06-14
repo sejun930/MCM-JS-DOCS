@@ -8,19 +8,24 @@ import { Modal } from "mcm-js";
 // const { Modal } = require(Boolean(process.env.NEXT_PUBLIC_DEVELOP)
 //   ? "mcm-js-dev"
 //   : "mcm-js");
-import { InfoTypes } from "../../comments.types";
+import {
+  CategoryTypes,
+  CommentsAllInfoTypes,
+  InfoTypes,
+} from "../../comments.types";
 import ContentsOptionalPage from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.container";
 
 export interface ListContentsIProps {
   info: InfoTypes;
-  getLabel: (info: InfoTypes) => Array<JSX.Element>;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
+  commentsInfo: CommentsAllInfoTypes;
+  changeInfo: (info: CommentsAllInfoTypes) => void;
 }
 
 const MAX_LINE = 200; // 더 보기가 실행 될 최소 글자수
 
 export default function ListContentsInfoPage(props: ListContentsIProps) {
-  const { info, modifyComments } = props;
+  const { info, modifyComments, changeInfo } = props;
   const { contents } = info;
 
   const [module] = useRecoilState(moduleState);
@@ -83,11 +88,12 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       ),
       id: "comments-functional-modal",
       name,
-      modalSize: { width: "400px", height: "430px" },
+      modalSize: { width: "400px", height: "480px" },
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,
       onFixWindow: true,
+      offAutoClose: type === "modify",
     });
   };
 
@@ -105,6 +111,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       hover={hover}
       name={Name}
       _wrapperRef={_wrapperRef}
+      changeInfo={changeInfo}
     />
   );
 }

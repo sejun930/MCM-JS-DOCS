@@ -1,13 +1,22 @@
-import { _Title, _Input, _Button } from "mcm-js-commons";
+import { FormEvent, MutableRefObject } from "react";
 import {
   ConfirmButtonWrapper,
   OptionalWrapper,
+  CommentsInfoWrapper,
+  CategoryInfo,
 } from "./contents.select.functional.styles";
-import { FormEvent, MutableRefObject } from "react";
+
+import { _Title, _Input, _Button } from "mcm-js-commons";
+import { InfoTypes } from "../../../../comments.types";
+
+import { categoryInitList } from "../../../../write/comments.write.types";
+// import
+
+import CommentsLabel from "../../../label";
 
 export default function ContentsSelectFunctionalUIPage({
   type,
-  contents,
+  info,
   contentsRef,
   passwordRef,
   confirmRef,
@@ -15,11 +24,14 @@ export default function ContentsSelectFunctionalUIPage({
   confirm,
 }: {
   type: "modify" | "delete";
-  contents: string;
+  info: InfoTypes;
   passwordRef: MutableRefObject<HTMLInputElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
   confirmRef: MutableRefObject<HTMLButtonElement>;
-  changeData: (text: string, type: "contents" | "password") => void;
+  changeData: (
+    value: string | number,
+    type: "contents" | "password" | "rating"
+  ) => void;
   confirm: (e?: FormEvent) => void;
 }) {
   return (
@@ -28,9 +40,22 @@ export default function ContentsSelectFunctionalUIPage({
         <_Title titleLevel="h2">
           {type === "modify" ? "댓글 수정" : "댓글 삭제"}
         </_Title>
+        <CommentsInfoWrapper>
+          <CategoryInfo>
+            <CommentsLabel
+              showCategoryName
+              info={info}
+              modifyRatingEvent={
+                type === "modify"
+                  ? (value: number) => changeData(value, "rating")
+                  : undefined
+              }
+            />
+          </CategoryInfo>
+        </CommentsInfoWrapper>
         <_Input
           isTextArea
-          defaultValue={contents.split("<br />").join("\n")}
+          defaultValue={info.contents.split("<br />").join("\n")}
           readOnly={type === "delete"}
           className="optional-input"
           onChangeEvent={(text) => changeData(text, "contents")}
@@ -42,7 +67,6 @@ export default function ContentsSelectFunctionalUIPage({
           maxLength={20}
           inputRef={passwordRef}
         />
-
         <ConfirmButtonWrapper>
           <_Button
             onClickEvent={confirm}
@@ -51,7 +75,7 @@ export default function ContentsSelectFunctionalUIPage({
           >
             {type === "delete"
               ? "위의 댓글을 삭제합니다."
-              : "위의 내용으로 수정합니다."}
+              : "위의 내용으로 댓글을 수정합니다."}
           </_Button>
         </ConfirmButtonWrapper>
       </OptionalWrapper>

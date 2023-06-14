@@ -69,14 +69,8 @@ export const CommentsInfoWrapper = styled.div`
 `;
 
 export const LabelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   min-width: 82px;
-
-  button label {
-    cursor: pointer;
-  }
+  height: 100%;
 `;
 
 export const MoreShowWrapper = styled.div`

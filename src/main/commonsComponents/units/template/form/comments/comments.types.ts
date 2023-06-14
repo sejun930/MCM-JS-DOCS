@@ -1,7 +1,10 @@
+// 카테고리 원본 타입
+export type CategoryTypes = "all" | "bug" | "question" | "review" | string;
+
 // 댓글 공통 기본값
 export interface CommentsInfoTypes {
   id?: string;
-  category: string;
+  category: CategoryTypes;
   password: string;
   contents: string;
   rating: number;
@@ -27,7 +30,7 @@ export type InfoTypes = CommentsInfoTypes & {
 
 // 카테고리 개수 타입
 export interface CountListTypes {
-  category: string;
+  category: CategoryTypes;
   count: number;
 }
 
@@ -36,7 +39,7 @@ export interface CountListTypes {
 
 export interface CommentsAllInfoTypes {
   commentsList: Array<InfoTypes>;
-  selectCategory: string;
+  selectCategory: CategoryTypes | string;
   countList: { [key: string]: number };
   filter:
     | {

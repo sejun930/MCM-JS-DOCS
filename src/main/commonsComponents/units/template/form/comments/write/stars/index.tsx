@@ -1,10 +1,9 @@
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 import { getUuid } from "src/main/commonsComponents/functional";
 import { _Button, _SpanText } from "mcm-js-commons";
-import { useEffect, useState } from "react";
 
-let selectRating = 0;
 export default function StarsForm({
   rating,
   category,
@@ -16,82 +15,63 @@ export default function StarsForm({
   changeEvent?: (rating: number) => void;
   isView?: boolean;
 }) {
-  const [starList, setStarList] = useState<Array<Element>>([]);
+  // 별점 선택시 영역 계산 state
+  const [selectRating, setSelectRating] = useState(0);
+  // 마우스 호버시 영역 계산 state
+  const [hoverRating, setHoverRating] = useState(0);
 
   useEffect(() => {
-    selectRating = 0;
-
-    if (!starList.length) {
-      setStarList(Array.from(document.getElementsByClassName("star")));
-    }
-  }, []);
+    setSelectRating(rating || 0);
+  }, [rating]);
 
   useEffect(() => {
     if (!category) {
       selectStar(0);
-    } else if (selectRating) {
-      selectRating;
     }
-  }, [category]);
+  }, [category, rating]);
 
   // 평점 hover 하기
-  const hoverStar = (idx: number, remove?: boolean) => {
-    let tempList = Array.from(document.getElementsByClassName("star"));
-
-    // 기존의 hover 되어 있는 평점 제거
-    tempList.forEach((node) => node.classList.remove("hover-star"));
-
-    if (!remove) {
-      tempList = tempList.slice(0, idx);
-      // hover 적용하기
-      tempList.forEach((node) => node.classList.add("hover-star"));
-    }
+  const hoverStar = (idx: number) => () => {
+    if (!isView) setHoverRating(idx);
   };
 
   // 평점 선택하기
-  const selectStar = (idx: number) => {
-    let tempList = Array.from(document.getElementsByClassName("star"));
-    tempList.forEach((node) => {
-      node.classList.remove("select-star");
-      node.classList.remove("last-star");
-    });
-    selectRating = idx;
+  const selectStar = (idx: number) => () => {
+    if (isView) return;
+    setSelectRating(idx);
 
-    tempList = tempList.slice(0, idx);
-    tempList.forEach((node, key) => {
-      node.classList.add("select-star");
-
-      if (key + 1 === selectRating) node.classList.add("last-star");
-    });
-    if (!isView && changeEvent) changeEvent(selectRating);
+    if (changeEvent) changeEvent(idx);
   };
 
   return (
-    <Wrapper onMouseLeave={() => hoverStar(0, true)} isView={isView}>
-      {!isView ? (
-        Array.from(new Array(5), () => 1).map((_, key) => (
+    <Wrapper
+      onMouseLeave={hoverStar(0)}
+      isView={isView}
+      className="stars-wrapper"
+    >
+      {Array.from(new Array(isView ? 1 : 5), () => 1).map((_, idx) => {
+        const star = idx + 1;
+        // 호버된 영역 표시
+        const isHoverArea = hoverRating >= star;
+        // 선택된 영역 표시
+        const isSelect = selectRating >= star;
+
+        return (
           <Star
             key={getUuid()}
-            onClick={() =>
-              (selectRating !== key + 1 && selectStar(key + 1)) || undefined
-            }
-            onMouseEnter={() => hoverStar(key + 1)}
-            className={`star ${
-              (selectRating >= key + 1 && "select-star") || ""
-            }`}
             type="button"
+            isHoverArea={isHoverArea}
+            onMouseEnter={hoverStar(star)}
+            onClick={selectStar(star)}
+            isSelect={isSelect}
+            isView={isView}
+            rating={selectRating}
           >
             ⭐
           </Star>
-        ))
-      ) : (
-        <>
-          <Star isView={isView} rating={rating}>
-            ⭐
-          </Star>
-          <_SpanText className="rating-number">({rating})</_SpanText>
-        </>
-      )}
+        );
+      })}
+      {isView && <_SpanText className="rating-number">({rating})</_SpanText>}
     </Wrapper>
   );
 }
@@ -99,6 +79,8 @@ export default function StarsForm({
 interface StylesTypes {
   isView?: boolean;
   rating?: number;
+  isHoverArea?: boolean;
+  isSelect?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -115,10 +97,6 @@ export const Wrapper = styled.div`
       width: "auto",
       gap: "0px 6px",
     }}
-
-  .hover-star {
-    text-shadow: 0 0 0 rgba(170, 86, 86, 0.3); /* 새 이모지 색상 부여 */
-  }
 
   .select-star {
     text-shadow: 0 0 0 rgba(170, 86, 86) !important; /* 새 이모지 색상 부여 */
@@ -140,7 +118,18 @@ export const Star = styled.button`
   transition: all 0.3s;
 
   ${(props: StylesTypes) =>
+    props.isHoverArea && {
+      textShadow: "0 0 0 rgba(170, 86, 86, 0.3)",
+    }}
+
+  ${(props) =>
+    props.isSelect && {
+      textShadow: "0 0 0 rgba(170, 86, 86)",
+    }}
+
+  ${(props) =>
     props.isView && {
+      textShadow: "0 0 0 #999999",
       fontSize: "22px",
       position: "relative",
       display: "flex",
@@ -155,7 +144,7 @@ export const Star = styled.button`
     color: transparent;
     text-shadow: 0 0 0 #aa5656;
     font-size: 22px;
-    left: -0.2px;
+    /* left: var(--rating); // -0.2px; */
     transform: scale(var(--rating));
     display: ${(props) => (props.isView ? "flex" : "none")};
   }

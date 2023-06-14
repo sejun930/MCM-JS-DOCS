@@ -19,6 +19,7 @@ import { ListContentsIProps } from "./list.contents.container";
 
 import _SelectForm from "../../../select/select.container";
 import { getDateForm, getUuid } from "src/main/commonsComponents/functional";
+import CommentsLabel from "../label";
 
 interface ListContentsUIProps {
   isMore: boolean;
@@ -36,7 +37,6 @@ interface ListContentsUIProps {
 
 export default function ListContentsInfoUIPage({
   info,
-  getLabel,
   subContents,
   isMore,
   toggleMoreShow,
@@ -48,6 +48,8 @@ export default function ListContentsInfoUIPage({
   hover,
   name,
   _wrapperRef,
+  commentsInfo,
+  changeInfo,
 }: ListContentsIProps & ListContentsUIProps) {
   return (
     <CommentsList
@@ -58,9 +60,14 @@ export default function ListContentsInfoUIPage({
       {/* {render && ( */}
       <CommentsInfoWrapper>
         <LabelWrapper>
-          {getLabel(info).map((el) => {
+          <CommentsLabel
+            info={info}
+            commentsInfo={commentsInfo}
+            changeInfo={changeInfo}
+          />
+          {/* {getLabel(info).map((el) => {
             return <React.Fragment key={getUuid()}>{el}</React.Fragment>;
-          })}
+          })} */}
         </LabelWrapper>
         <ContentsWrapper>
           <_SpanTextWithHtml
