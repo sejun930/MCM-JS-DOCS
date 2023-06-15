@@ -139,6 +139,7 @@ export default function CommentsWritePage({
         onAfterCloseEvent: afterEvent,
         offAutoClose: offClose || false,
         hideCloseButton: offClose || false,
+        onFixWindow: true,
       });
     };
 
@@ -167,6 +168,11 @@ export default function CommentsWritePage({
           if (!info.rating) {
             // 평점을 선택하지 않을 경우
             errorMessage = "평점을 선택해주세요.";
+          }
+        } else if (info.category === "bug") {
+          if (!info.bugLevel) {
+            // 이슈 중요도를 선택하지 않을 경우
+            errorMessage = "이슈 중요도를 선택해주세요.";
           }
         } else if (!info.agreeProvacy) {
           // 개인정보 수집에 동의하지 않을 경우

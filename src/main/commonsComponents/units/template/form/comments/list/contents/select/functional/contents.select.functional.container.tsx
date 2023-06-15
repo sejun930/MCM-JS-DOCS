@@ -18,6 +18,7 @@ import { getHashPassword } from "src/main/commonsComponents/functional";
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
 let rating = 0; // 평점 내용 저장
+let bugLevel = 0; // 버그 중요도 저장
 
 let waiting = false; // 중복 클릭 방지
 let disableOpenModal = false; // 모달 중복 실행 방지
@@ -52,11 +53,14 @@ export default function ContentsSelectFunctionalPage({
   // 데이터 변경하기
   const changeData = (
     value: string | number,
-    type: "contents" | "password" | "rating"
+    type: "contents" | "password" | "rating" | "bugLevel"
   ) => {
     if (type === "password") password = String(value).trim();
     else if (type === "contents") _contents = String(value).trim();
     else if (type === "rating") rating = Number(value);
+    else if (type === "bugLevel") bugLevel = Number(value);
+
+    console.log(bugLevel);
 
     // 버튼 비활성화 여부 체크하기
     if (confirmRef.current) {
@@ -156,7 +160,10 @@ export default function ContentsSelectFunctionalPage({
         _info.contents = changeMultipleLine(_contents);
 
         // 평점 변경하기
-        _info.rating = rating;
+        if (_info.category === "review") _info.rating = rating;
+
+        // 버그 중요도 변경하기
+        if (_info.category === "bug") _info.bugLevel = bugLevel;
 
         // 수정 시간 저장
         _info.modifyAt = getServerTime();

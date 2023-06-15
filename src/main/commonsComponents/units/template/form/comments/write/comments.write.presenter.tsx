@@ -16,9 +16,13 @@ import PrivacyPage from "./privacy";
 const placeList: { [key: string]: string } = {
   bug: `모듈 사용시 발생하는 버그 이슈등을 자세하게 알려주세요.
 빠른 시간내에 확인 후 처리해드리겠습니다.
+
+주의 : 이슈 확인 및 해결된 댓글은 수정이 불가능합니다.
 `,
   question: `모듈에 대한 사용법 및 궁금한 점을 문의해주세요.
-빠른 시간내에 확인 후 답변해드리겠습니다.  
+빠른 시간내에 확인 후 답변해드리겠습니다.
+
+주의 : 답변이 등록된 댓글은 수정이 불가능합니다.
 `,
   review: `모듈을 사용한 후기를 솔직하게 입력해주세요.
 솔직한 평가가 저에겐 큰 도움이 됩니다.  
@@ -67,16 +71,22 @@ export default function CommentsWriteUIPage({
           <OptionItems
             className="rating-wrapper"
             isRating={true}
-            show={info.category === "review"}
+            show={info.category === "review" || info.category === "bug"}
           >
-            <StarsForm
-              rating={info.rating}
-              changeEvent={(rating: number) => {
-                changeInfo(rating)("rating");
-              }}
-              category={info.category}
-            />
+            {(info.category === "review" || info.category === "bug") && (
+              <StarsForm
+                rating={info.category === "bug" ? info.bugLevel : info.rating}
+                changeEvent={(value: number) => {
+                  changeInfo(value)(
+                    info.category === "bug" ? "bugLevel" : "rating"
+                  );
+                }}
+                category={info.category}
+                isBugMode={info.category === "bug"}
+              />
+            )}
           </OptionItems>
+
           <OptionItems>
             <_Input
               onChangeEvent={(value) => changeInfo(value)("password")}
@@ -108,7 +118,7 @@ export default function CommentsWriteUIPage({
 ${info.category && defaultPlace}`}
         />
       </WriteWrapper>
-
+      {/* {info.category === "bug" && <BugStatusWrapper>222</BugStatusWrapper>} */}
       <SubmitWrapper>
         {/* 개인정보 수집 동의 */}
         <PrivacyPage

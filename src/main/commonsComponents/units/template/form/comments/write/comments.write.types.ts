@@ -25,6 +25,7 @@ export const initInfo: WriteInfoTypes = {
   completeAnswer: null, // 문의 답변
   ip: "", // 작성자 아이피
   agreeProvacy: false, // 개인정보 수집 여부
+  bugLevel: 0, // 버그 중요도
 };
 
 export type CategoryTypes = "all" | "bug" | "review" | "question";
@@ -32,7 +33,7 @@ export type CategoryTypes = "all" | "bug" | "review" | "question";
 // 카테고리 리스트 (카테고리 value - 카테고리 name)
 export const categoryInitList: { [key: string]: string } = {
   all: "전체",
-  bug: "버그 신고",
+  bug: "이슈",
   question: "문의",
   review: "리뷰",
 };

@@ -12,6 +12,7 @@ export interface CommentsInfoTypes {
   completeAnswer: null | string; // 문의 답변
   ip: string; // 작성자 아이피
   agreeProvacy: boolean; // 개인정보 수집 여부
+  bugLevel: number;
 }
 
 // 날짜 관련 type
@@ -55,6 +56,7 @@ export interface CommentsAllInfoTypes {
           | boolean
           | { [key: string]: boolean };
       };
+  countFilterList: { [key: string]: number }; // 각각의 필터들의 총 개수 정보 저장
 }
 
 export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
@@ -65,11 +67,21 @@ export const initCommentsInfo: CommentsAllInfoTypes = {
   selectCategory: "all", // 선택된 카테고리
   countList: {}, // 카테고리 개수 리스트
   filter: { search: "", page: 1, list: {} }, // 필터 정보
+  countFilterList: {},
 };
 
 // count (카테고리 별 개수) 초기값
 export const initCountList = [
-  { category: "bug", count: 0, "bug-complete": 0 },
+  {
+    category: "bug",
+    count: 0,
+    "bug-complete": 0,
+    "bug-1": 0,
+    "bug-2": 0,
+    "bug-3": 0,
+    "bug-4": 0,
+    "bug-5": 0,
+  },
   { category: "question", count: 0, "question-complete": 0 },
   {
     category: "review",

@@ -3,14 +3,12 @@ import {
   ConfirmButtonWrapper,
   OptionalWrapper,
   CommentsInfoWrapper,
+  CommentsInfoItems,
   CategoryInfo,
 } from "./contents.select.functional.styles";
 
 import { _Title, _Input, _Button } from "mcm-js-commons";
 import { InfoTypes } from "../../../../comments.types";
-
-import { categoryInitList } from "../../../../write/comments.write.types";
-// import
 
 import CommentsLabel from "../../../label";
 
@@ -30,7 +28,7 @@ export default function ContentsSelectFunctionalUIPage({
   confirmRef: MutableRefObject<HTMLButtonElement>;
   changeData: (
     value: string | number,
-    type: "contents" | "password" | "rating"
+    type: "contents" | "password" | "rating" | "bugLevel"
   ) => void;
   confirm: (e?: FormEvent) => void;
 }) {
@@ -47,20 +45,28 @@ export default function ContentsSelectFunctionalUIPage({
               info={info}
               modifyRatingEvent={
                 type === "modify"
-                  ? (value: number) => changeData(value, "rating")
+                  ? (value: number) =>
+                      changeData(
+                        value,
+                        info.category === "review" ? "rating" : "bugLevel"
+                      )
                   : undefined
               }
             />
           </CategoryInfo>
         </CommentsInfoWrapper>
-        <_Input
-          isTextArea
-          defaultValue={info.contents.split("<br />").join("\n")}
-          readOnly={type === "delete"}
-          className="optional-input"
-          onChangeEvent={(text) => changeData(text, "contents")}
-          inputRef={contentsRef}
-        />
+
+        <CommentsInfoItems>
+          <_Input
+            isTextArea
+            defaultValue={info.contents.split("<br />").join("\n")}
+            readOnly={type === "delete"}
+            className="optional-input"
+            onChangeEvent={(text) => changeData(text, "contents")}
+            inputRef={contentsRef}
+          />
+        </CommentsInfoItems>
+
         <_Input
           inputType="password"
           onChangeEvent={(text) => changeData(text, "password")}

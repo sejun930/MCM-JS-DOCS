@@ -123,3 +123,8 @@ export const SubmitWrapper = styled.div`
   justify-content: space-between;
   margin-top: 10px;
 `;
+
+export const BugStatusWrapper = styled.div`
+  display: flex;
+  margin: 10px 0px;
+`;

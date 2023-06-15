@@ -41,6 +41,10 @@ export const OptionalWrapper = styled.div`
     justify-content: flex-start;
     margin-top: 10px;
   }
+
+  .mcm-close-button-unit {
+    border-top: unset;
+  }
 `;
 
 export const ConfirmButtonWrapper = styled.div`
@@ -80,6 +84,15 @@ export const Message = styled.div`
 export const CommentsInfoWrapper = styled.div`
   margin: 24px 0px;
   margin-bottom: 10px;
+`;
+
+export const CommentsInfoItems = styled.div`
+  display: flex;
+  width: 100%;
+
+  .optional-input {
+    width: 100%;
+  }
 `;
 
 export const CategoryInfo = styled.div`

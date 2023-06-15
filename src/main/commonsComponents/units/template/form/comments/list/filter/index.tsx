@@ -25,32 +25,39 @@ export default function CommentsFilterPage({
     // 카테고리가 변경될 경우 필터 변경하기
     let _filterList = [...filterInitList];
 
-    if (categoryFilterList[commentsInfo.selectCategory]) {
-      // 해당 카테고리에서만 사용 가능한 필터가 존재할 경우
-      // 기존의 필터리스트에 추가
-      _filterList = [
-        ..._filterList,
-        ...categoryFilterList[commentsInfo.selectCategory],
-      ];
-    }
-
-    // 노출될 수 있는 필터 리스트
-    const ableFilterList = _filterList.reduce(
-      (acc: { [key: string]: boolean }, cur) => {
-        acc[cur.target] = true;
-        return acc;
-      },
-      {}
-    );
-
-    // 현재 노출될 필터가 아니라면 모두 비활성화
-    for (const list in commentsInfo.filter.list) {
-      if (!ableFilterList[list] || ableFilterList[list] === undefined) {
-        commentsInfo.filter.list[list] = false;
+    if (commentsInfo.commentsList.length) {
+      if (categoryFilterList[commentsInfo.selectCategory]) {
+        // 해당 카테고리에서만 사용 가능한 필터가 존재할 경우
+        // 기존의 필터리스트에 추가
+        _filterList = [
+          ..._filterList,
+          ...categoryFilterList[commentsInfo.selectCategory],
+        ];
       }
-    }
 
-    setFilterList(_filterList);
+      // 노출될 수 있는 필터 리스트
+      const ableFilterList = _filterList.reduce(
+        (acc: { [key: string]: boolean }, cur) => {
+          acc[cur.target] = true;
+          return acc;
+        },
+        {}
+      );
+
+      // 현재 노출될 필터가 아니라면 모두 비활성화
+      for (const list in commentsInfo.filter.list) {
+        if (!ableFilterList[list] || ableFilterList[list] === undefined) {
+          commentsInfo.filter.list[list] = false;
+        }
+      }
+
+      setFilterList(_filterList);
+    } else {
+      // setFilterList([]);
+      window.setTimeout(() => {
+        setOpen(false);
+      }, 100);
+    }
   }, [commentsInfo.selectCategory]);
 
   // 필터 현재 이미지 렌더
@@ -74,11 +81,14 @@ export default function CommentsFilterPage({
 
   // 필터창 오픈 및 닫기
   const toggleFilter = (bool?: boolean) => {
-    setOpen(bool !== undefined ? bool : (prev) => !prev);
+    if (commentsInfo.commentsList.length)
+      setOpen(bool !== undefined ? bool : (prev) => !prev);
   };
 
   // 필터 정보 변경하기
-  const changeFilter = (info: InitTypes) => () => {
+  const changeFilter = (info: InitTypes, isEmpty: boolean) => () => {
+    if (isEmpty) return;
+
     commentsInfo.filter.list[info.target] =
       commentsInfo.filter.list[info.target] !== undefined
         ? !commentsInfo.filter.list[info.target]
@@ -113,26 +123,35 @@ export default function CommentsFilterPage({
   return (
     <FilterWrapper>
       {renderResetButton()}
-      {/* <_CloseButton onClickEvent={reset} /> */}
       <FilterItems>
-        <FilterButton onClickEvent={() => toggleFilter()}>
+        <FilterButton
+          onClickEvent={() => toggleFilter()}
+          className="filter-button"
+          disable={!commentsInfo.commentsList.length}
+        >
           <_Image src={getFilterImage()} className="filter-image" />
         </FilterButton>
         <_SelectForm
           show={open}
           closeEvent={() => toggleFilter(false)}
           offAutoClose
+          className="filter-select"
         >
           {filterList.map((el) => {
             const isSelected = commentsInfo.filter.list[el.target] || false;
+            // 필터의 개수가 0개인지 검증
+            const isEmpty = !commentsInfo.countFilterList[el.target];
 
             return (
               <FilterList
-                onClickEvent={changeFilter(el)}
+                onClickEvent={changeFilter(el, isEmpty)}
                 key={`comments-filter-list-${el.name}`}
                 isSelected={isSelected}
+                isEmpty={isEmpty}
               >
-                {(isSelected && "✔") || ""} {el.name}
+                {(isSelected && "✔") || ""} {el.name}{" "}
+                {el.target !== "oddest" &&
+                  `(${commentsInfo.countFilterList[el.target]})`}
               </FilterList>
             );
           })}
@@ -144,6 +163,8 @@ export default function CommentsFilterPage({
 
 interface StyleTypes {
   isSelected?: boolean;
+  isEmpty?: boolean;
+  disable?: boolean;
 }
 
 export const FilterWrapper = styled.div`
@@ -169,9 +190,20 @@ export const FilterButton = styled(_Button)`
   .filter-image {
     width: 18px;
   }
+
+  ${(props: StyleTypes) =>
+    props.disable && {
+      cursor: "not-allowed",
+    }}
 `;
 
 export const FilterList = styled(_Button)`
+  ${(props) =>
+    props.isEmpty && {
+      cursor: "not-allowed",
+      color: "gray",
+    }}
+
   ${(props: StyleTypes) =>
     props.isSelected && {
       backgroundColor: "#00C4FF",

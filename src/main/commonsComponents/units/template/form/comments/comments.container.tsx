@@ -14,7 +14,6 @@ import {
 } from "src/commons/libraries/firebase";
 
 import { initCommentsInfo, CommentsAllInfoTypes } from "./comments.types";
-import { DocumentData } from "src/commons/libraries/firebase";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
@@ -95,6 +94,12 @@ export default function CommentsPage() {
     if (module) {
       const _info = info || commentsInfo;
 
+      for (const filter in _info.filter.list) {
+        if (!_info.countFilterList[filter]) {
+          _info.filter.list[filter] = false;
+        }
+      }
+
       const doc = getFilterQuery(getCommentDoc() as Query_DocumentData, _info);
 
       try {
@@ -105,7 +110,11 @@ export default function CommentsPage() {
         _commentInfo.commentsList = getResult(result);
 
         // 카테고리 개수 저장하기
-        _commentInfo.countList = await saveCategoryCount(_commentInfo);
+        const getCountList = await saveCategoryCount(_commentInfo);
+        _commentInfo.countList = getCountList._list;
+
+        // 카테고리 필터 개수 저장하기
+        _commentInfo.countFilterList = getCountList.filterCountList;
 
         setCommentsInfo(_commentInfo);
         wating = false;
@@ -123,6 +132,8 @@ export default function CommentsPage() {
       question: 0,
       review: 0,
     };
+    let filterCountList: { [key: string]: number } = {};
+
     if (module) {
       try {
         const doc = getDoc("comments", module, "count");
@@ -136,23 +147,29 @@ export default function CommentsPage() {
         } else {
           result.forEach((data) => {
             const _data = data.data();
-            // 모든 개수 카운트하기
-            _list[_data.category] = _data.count;
 
-            if (_data.category === "review") {
-              // 평점 필터가 있는지 검증
+            // count와 카테고리만 제외한 나머지 필터 키값만 가져오기
+            const { count, category, ...countFilterList } = _data;
+            filterCountList = { ...filterCountList, ...countFilterList };
+
+            // 모든 개수 카운트하기
+            _list[category] = _data.count;
+
+            // 카테고리가 리뷰 또는 버그일 경우
+            if (category === "review" || category === "bug") {
+              // 점수별로 필터가 있는지 검증
               const isFilter = Array.from(
                 new Array(5),
                 (_, idx) => 1 + idx
-              ).some((num) => info.filter.list[`review-${num}`]);
+              ).some((num) => info.filter.list[`${category}-${num}`]);
 
               if (isFilter) {
-                _list.review = 0;
+                _list[category] = 0;
 
                 // 필터가 하나라도 있는 경우
                 Array.from(new Array(5), (_, idx) => 1 + idx).forEach((num) => {
-                  if (info.filter.list[`review-${num}`]) {
-                    _list.review += _data[`review-${num}`];
+                  if (info.filter.list[`${category}-${num}`]) {
+                    _list[category] += _data[`${category}-${num}`];
                   }
                 });
               }
@@ -170,7 +187,10 @@ export default function CommentsPage() {
         console.log(err);
       }
     }
-    return _list;
+
+    // 과거순 정렬은 무조건 선택 가능
+    filterCountList.oddest = 1;
+    return { _list, filterCountList };
   };
 
   // Comment DOC 받아오기
@@ -180,7 +200,7 @@ export default function CommentsPage() {
 
   // 댓글 추가하기
   const addComments = async (comment: InfoTypes): Promise<boolean> => {
-    const { category, rating } = comment;
+    const { category, rating, bugLevel } = comment;
     try {
       const addDoc = await getCommentDoc().add(comment);
       const newComment = (await addDoc.get()).data() as InfoTypes;
@@ -202,12 +222,14 @@ export default function CommentsPage() {
             ["count"]: result.count + 1,
           };
 
-          // 리뷰 카테고리일 경우 평점별로 카운트 올리기
-          if (category === "review") {
-            if (countList[`review-${rating}`] !== undefined)
+          // 리뷰 & 버그 카테고리일 경우 점수별로 카운트 올리기
+          if (category === "review" || category === "bug") {
+            const target = category === "review" ? rating : bugLevel;
+
+            if (countList[`${category}-${target}`] !== undefined)
               // 해당 평점 필터 리스트 1개 증가하기 (ex : 1점이라면 review-1 1개 증가)
-              countList[`review-${rating}`] =
-                Number(countList[`review-${rating}`]) + 1;
+              countList[`${category}-${target}`] =
+                Number(countList[`${category}-${target}`]) + 1;
           }
 
           // 리스트 업데이트
@@ -246,7 +268,8 @@ export default function CommentsPage() {
     comment: InfoTypes,
     isDelete?: boolean
   ): Promise<boolean> => {
-    const { category, id, rating } = comment;
+    const { category, id, rating, bugLevel, completeAnswer, bugStatus } =
+      comment;
 
     try {
       // 댓글 정보 수정하기
@@ -274,25 +297,50 @@ export default function CommentsPage() {
             // 삭제라면 해당 카테고리 개수 및 필터 개수 업데이트
             // 전체 개수(count) 1개 제거하기
             countList.count = Number(countList.count) - 1;
+
+            // 카테고리가 리뷰 또는 버그일 경우
+            if (category === "review" || category === "bug") {
+              const target = category === "review" ? rating : bugLevel;
+              // 해당 필터 점수에서도 1개 제거
+              countList[`${category}-${target}`] =
+                Number(countList[`${category}-${target}`]) - 1;
+            }
           }
 
-          // 카테고리가 리뷰일 경우
-          if (category === "review") {
-            // 어떤 평점 필터를 하나 제거할건지 정한다.
-            let targetRating = rating;
-            if (!isDelete && rating !== originData.rating) {
-              // 수정이면서, 평점을 변경했을 경우에는 기존에 있던 평점을 1개 제거한다.
-              targetRating = originData.rating;
+          // 카테고리가 리뷰 또는 버그일 경우
+          if (category === "review" || category === "bug") {
+            // 어떤 점수 필터를 하나 제거할건지 정한다.
+            let originTargetData = category == "review" ? rating : bugLevel;
+            // 비교할 원본 데이터
+            const _originData =
+              category === "review" ? originData.rating : originData.bugLevel;
+            // 변경된 데이터
+            const changeData = originTargetData;
+
+            if (!isDelete && changeData !== _originData) {
+              // 수정이면서, 점수를 변경했을 경우에는 기존에 있던 점수를 1개 제거한다.
+              originTargetData = _originData;
             }
 
-            // 해당 필터 평점에서도 1개 제거
-            countList[`review-${targetRating}`] =
-              Number(countList[`review-${targetRating}`]) - 1;
+            if (originTargetData !== changeData) {
+              // 해당 필터 점수에서도 1개 제거
+              countList[`${category}-${originTargetData}`] =
+                Number(countList[`${category}-${originTargetData}`]) - 1;
 
-            if (targetRating !== rating) {
-              // 새로 변경한 평점의 필터를 1개 증가시킨다.
-              countList[`review-${rating}`] =
-                Number(countList[`review-${rating}`]) + 1;
+              // 새로 변경한 점수의 필터를 1개 증가시킨다.
+              countList[`${category}-${changeData}`] =
+                Number(countList[`${category}-${changeData}`]) + 1;
+            }
+
+            if (bugStatus === 2) {
+              // 해결 완료된 이슈라면 필터에서 제거
+              countList["bug-complete"] = Number(countList["bug-complete"]) - 1;
+            }
+          } else if (category === "question") {
+            // 답변이 있다면 필터에서 제거
+            if (completeAnswer) {
+              countList["question-complete"] =
+                Number(countList["question-complete"]) - 1;
             }
           }
 
@@ -303,7 +351,15 @@ export default function CommentsPage() {
           );
 
           if (updateReulst) {
+            const { count, category, ...countFilterList } = countList as {
+              [key: string]: number;
+            };
             _info.countList[category] = Number(countList.count);
+
+            _info.countFilterList = {
+              ..._info.countFilterList,
+              ...countFilterList,
+            };
 
             fetchCommentsList(_info);
             return true;

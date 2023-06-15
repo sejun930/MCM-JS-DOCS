@@ -45,17 +45,20 @@ export default function CommentsLabel({
       );
     }
 
-    if (info.category === "review") {
+    if (info.category === "review" || info.category === "bug") {
       // 리뷰일 경우 평점 추가
       nodeList.push(
         <StarsForm
           isView={!modifyRatingEvent}
-          category="review"
-          rating={info.rating}
+          category={info.category}
+          rating={info.category === "review" ? info.rating : info.bugLevel}
           changeEvent={modifyRatingEvent}
+          isBugMode={info.category === "bug"}
         />
       );
-    } else if (info.category === "bug") {
+    }
+
+    if (info.category === "bug") {
       // 버그일 경우 처리 결과
       const bugStatus: { [key: number]: string } = {
         0: "확인 대기 중",
@@ -80,7 +83,7 @@ export default function CommentsLabel({
   };
 
   return (
-    <LabelWrapper className="label-wrapper">
+    <LabelWrapper className="label-wrapper" readOnly={!changeInfo}>
       {renderLabel().map((node) => (
         <React.Fragment key={getUuid()}>{node}</React.Fragment>
       ))}
@@ -88,11 +91,22 @@ export default function CommentsLabel({
   );
 }
 
+interface StyleTypes {
+  readOnly?: boolean;
+}
+
 export const LabelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: 14px 0px;
+  gap: 10px 0px;
+
+  .cmm-button-unit {
+    ${(props: StyleTypes) =>
+      props.readOnly && {
+        cursor: "default",
+      }}
+  }
 `;
 
 export const Label = styled.p`

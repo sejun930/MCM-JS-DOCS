@@ -1,5 +1,11 @@
 import ListContentsInfoUIPage from "./list.contents.presenter";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import {
+  MouseEvent,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
@@ -22,7 +28,7 @@ export interface ListContentsIProps {
   changeInfo: (info: CommentsAllInfoTypes) => void;
 }
 
-const MAX_LINE = 200; // 더 보기가 실행 될 최소 글자수
+const MAX_LINE = 160; // 더 보기가 실행 될 최소 글자수
 
 export default function ListContentsInfoPage(props: ListContentsIProps) {
   const { info, modifyComments, changeInfo } = props;
@@ -62,11 +68,15 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       }
     });
 
-    setSubContents(str.substring(0, MAX_LINE));
+    setSubContents(
+      str.substring(0, MAX_LINE) + ((allLen > MAX_LINE && "...") || "")
+    );
     setIsMore(allLen > MAX_LINE);
   }, []);
 
-  const toggleMoreShow = () => {
+  // 더 보기 & 간략히 토글
+  const toggleMoreShow = (e?: MouseEvent<HTMLButtonElement>) => {
+    if (e) e.stopPropagation();
     setMoreShow((prev) => !prev);
   };
 
@@ -88,7 +98,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       ),
       id: "comments-functional-modal",
       name,
-      modalSize: { width: "400px", height: "480px" },
+      modalSize: { width: "460px", height: "480px" },
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,

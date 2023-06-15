@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from "react";
+import React, { MouseEvent, MutableRefObject } from "react";
 import {
   CommentsInfoWrapper,
   CommentsList,
@@ -10,6 +10,9 @@ import {
   SelectWrapper,
   SelectButton,
   DateWrapper,
+  ContentsInfo,
+  Filedset,
+  QuestionTitle,
 } from "./list.styles";
 
 import { _SpanTextWithHtml, _Button } from "mcm-js-commons";
@@ -20,11 +23,12 @@ import { ListContentsIProps } from "./list.contents.container";
 import _SelectForm from "../../../select/select.container";
 import { getDateForm, getUuid } from "src/main/commonsComponents/functional";
 import CommentsLabel from "../label";
+import StarsForm from "../../write/stars";
 
 interface ListContentsUIProps {
   isMore: boolean;
   subContents: string;
-  toggleMoreShow: () => void;
+  toggleMoreShow: (e?: MouseEvent<HTMLButtonElement>) => void;
   moreShow: boolean;
   contents: string;
   showSelect: boolean;
@@ -59,26 +63,53 @@ export default function ListContentsInfoUIPage({
     >
       {/* {render && ( */}
       <CommentsInfoWrapper>
-        <LabelWrapper>
+        <LabelWrapper hover={hover}>
           <CommentsLabel
             info={info}
             commentsInfo={commentsInfo}
             changeInfo={changeInfo}
           />
-          {/* {getLabel(info).map((el) => {
-            return <React.Fragment key={getUuid()}>{el}</React.Fragment>;
-          })} */}
         </LabelWrapper>
         <ContentsWrapper>
-          <_SpanTextWithHtml
-            dangerouslySetInnerHTML={moreShow ? contents : subContents}
-          />
+          <Filedset isBug={info.category === "bug"}>
+            <legend>
+              <StarsForm
+                isView
+                isBugMode
+                rating={info.bugLevel || 0}
+                category=""
+              />
+            </legend>
+            <ContentsInfo hasQuestion={info.category === "question"}>
+              {info.category === "question" && (
+                <QuestionTitle> Q. </QuestionTitle>
+              )}
+              <_SpanTextWithHtml
+                dangerouslySetInnerHTML={moreShow ? contents : subContents}
+              />
+            </ContentsInfo>
+          </Filedset>
+
           {isMore && (
             <MoreShowWrapper>
               <_Button onClickEvent={toggleMoreShow} className="more-show">
                 {moreShow ? "간략히" : "더 보기"}
               </_Button>
             </MoreShowWrapper>
+          )}
+
+          {info.category === "question" && info.completeAnswer && (
+            <ContentsInfo
+              hasQuestion={info.category === "question"}
+              isAnswer={true}
+            >
+              {info.category === "question" && (
+                <QuestionTitle> A. </QuestionTitle>
+              )}
+              <_SpanTextWithHtml
+                dangerouslySetInnerHTML={info.completeAnswer}
+              />
+            </ContentsInfo>
           )}
 
           <OptionalWrapper>
@@ -94,7 +125,7 @@ export default function ListContentsInfoUIPage({
             </DateWrapper>
 
             <SelectWrapper className="select-wrapper" hover={hover}>
-              <OptionalButton>...</OptionalButton>
+              <OptionalButton hover={hover}>...</OptionalButton>
               <_SelectForm
                 show={showSelect}
                 closeEvent={() => toggleShowSelect(false)}
@@ -104,7 +135,16 @@ export default function ListContentsInfoUIPage({
                   [
                     { name: "수정", value: "modify" },
                     { name: "삭제", value: "delete" },
-                  ] as Array<{ name: string; value: "modify" | "delete" }>
+                  ].filter((el) => {
+                    if (el.name === "수정") {
+                      if (info.category === "bug" && info.bugStatus !== 0)
+                        return false;
+                      if (info.category === "question" && info.completeAnswer)
+                        return false;
+                      return true;
+                    }
+                    return true;
+                  }) as Array<{ name: string; value: "modify" | "delete" }>
                 ).map((el) => {
                   return (
                     <SelectButton
@@ -120,7 +160,6 @@ export default function ListContentsInfoUIPage({
           </OptionalWrapper>
         </ContentsWrapper>
       </CommentsInfoWrapper>
-      {/* )} */}
     </CommentsList>
   );
 }
