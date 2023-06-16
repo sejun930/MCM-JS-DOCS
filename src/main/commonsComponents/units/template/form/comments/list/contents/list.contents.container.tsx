@@ -67,11 +67,12 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
         allLen += el.length;
       }
     });
+    console.log(contents, allLen, MAX_LINE);
 
     setSubContents(
-      str.substring(0, MAX_LINE) + ((allLen > MAX_LINE && "...") || "")
+      str.substring(0, MAX_LINE) + ((allLen >= MAX_LINE && "...") || "")
     );
-    setIsMore(allLen > MAX_LINE);
+    setIsMore(allLen >= MAX_LINE);
   }, []);
 
   // 더 보기 & 간략히 토글

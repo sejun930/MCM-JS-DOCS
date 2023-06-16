@@ -44,10 +44,6 @@ export default function FunctionalDetailInfoListPage({
     }
   };
 
-  const renderComponent = (str: any) => {
-    return str;
-  };
-
   return (
     <FunctionalWrapper>
       {list.map((el) => {

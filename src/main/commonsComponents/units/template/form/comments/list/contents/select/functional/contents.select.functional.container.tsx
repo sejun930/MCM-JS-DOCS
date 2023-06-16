@@ -55,12 +55,10 @@ export default function ContentsSelectFunctionalPage({
     value: string | number,
     type: "contents" | "password" | "rating" | "bugLevel"
   ) => {
-    if (type === "password") password = String(value).trim();
-    else if (type === "contents") _contents = String(value).trim();
+    if (type === "password") password = String(value);
+    else if (type === "contents") _contents = String(value);
     else if (type === "rating") rating = Number(value);
     else if (type === "bugLevel") bugLevel = Number(value);
-
-    console.log(bugLevel);
 
     // 버튼 비활성화 여부 체크하기
     if (confirmRef.current) {
@@ -157,7 +155,7 @@ export default function ContentsSelectFunctionalPage({
         // 수정 모드일 경우
 
         // 줄바꿈 처리하기
-        _info.contents = changeMultipleLine(_contents);
+        _info.contents = changeMultipleLine(_contents).trim();
 
         // 평점 변경하기
         if (_info.category === "review") _info.rating = rating;

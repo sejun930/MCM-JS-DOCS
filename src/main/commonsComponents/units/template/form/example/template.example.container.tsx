@@ -29,7 +29,6 @@ export default function _ExampleForm(props: IProps) {
 
     setOpenList(_openList);
   }, [vers]);
-  // console.log(allLen, openList);
 
   const changeOpenList = (
     idx: number,

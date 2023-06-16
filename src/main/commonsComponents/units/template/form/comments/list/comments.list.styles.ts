@@ -9,13 +9,21 @@ export const CommentsListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-  gap: 50px 0px;
+  /* gap: 30px 0px; */
 `;
 
 export const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: double 5px black;
+
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 100;
+  padding: 20px 0px;
 `;
 
 export const CategoryItems = styled.ul`

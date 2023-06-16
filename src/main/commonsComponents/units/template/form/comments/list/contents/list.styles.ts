@@ -16,7 +16,7 @@ export const CommentsList = styled.li`
   position: relative;
   cursor: pointer;
   padding: 24px 20px;
-  border-top: dotted 1px black;
+  border-bottom: dotted 1px black;
   transition: all 0.3s ease-out;
   min-height: 70px;
 

@@ -11,6 +11,7 @@ import {
   getDoc,
   getResult,
   Query_DocumentData,
+  // QueryDocumentSnapshot_DocumentData,
 } from "src/commons/libraries/firebase";
 
 import { initCommentsInfo, CommentsAllInfoTypes } from "./comments.types";
@@ -18,8 +19,9 @@ import { initCommentsInfo, CommentsAllInfoTypes } from "./comments.types";
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
 // 한 번에 가져올 수 있는 댓글 개수 단위
-// const limit = 10;
-// let startAfter;
+const limit = 3;
+// 댓글의 총 페이지 개수
+let allPage = 0;
 
 export default function CommentsPage() {
   // 댓글 전체 정보 (댓글 리스트, 카테고리 등등)
@@ -38,12 +40,14 @@ export default function CommentsPage() {
     doc: Query_DocumentData,
     info: CommentsAllInfoTypes
   ) => {
+    const { selectCategory } = info;
+
     // 선택되어 있는 카테고리가 있다면 해당 카테고리 조회
-    if (info.selectCategory !== "all" && info.selectCategory) {
-      doc = doc.where("category", "==", info.selectCategory);
+    if (selectCategory !== "all" && selectCategory) {
+      doc = doc.where("category", "==", selectCategory);
     }
 
-    switch (info.selectCategory) {
+    switch (selectCategory) {
       case "bug":
         // 카테고리가 버그일 경우
         if (info.filter.list["bug-complete"])
@@ -59,22 +63,24 @@ export default function CommentsPage() {
             .where("completeAnswer", "!=", null)
             .orderBy("completeAnswer");
         break;
+    }
 
-      case "review":
-        // 카테고리가 리뷰일 경우
-        let ratingArr = [];
+    // 카테고리가 버그 및 리뷰일 경우
+    if (selectCategory === "bug" || selectCategory === "review") {
+      const numArr = [];
 
-        // 선택한 평점들만 모아보기
-        for (const rating in info.filter.list) {
-          if (info.filter.list[rating]) {
-            const _rating = rating.split("-");
+      // 선택한 점수들만 모아보기
+      for (const num in info.filter.list) {
+        if (info.filter.list[num]) {
+          const _rating = num.split("-");
 
-            if (_rating[0] === "review") ratingArr.push(Number(_rating[1]));
-          }
+          if (_rating[0] === selectCategory) numArr.push(Number(_rating[1]));
         }
+      }
 
-        if (ratingArr.length) doc = doc.where("rating", "in", ratingArr); // 5점대 보기
-        break;
+      const column = selectCategory === "review" ? "rating" : "bugLevel";
+      // 해당 점수로 필터하기
+      if (numArr.length) doc = doc.where(column, "in", numArr);
     }
 
     // 삭제되지 않은 댓글만 조회
@@ -82,6 +88,9 @@ export default function CommentsPage() {
 
     // 과거순 및 최신순으로 조회하기
     doc = doc.orderBy("createdAt", info.filter.list.oddest ? "asc" : "desc");
+
+    // 페이지 별로 데이터 10개씩 노출
+    doc = doc.limit(limit * info.filter.page);
 
     return doc;
   };
@@ -115,6 +124,13 @@ export default function CommentsPage() {
 
         // 카테고리 필터 개수 저장하기
         _commentInfo.countFilterList = getCountList.filterCountList;
+
+        window.setTimeout(() => {
+          // 전체 페이지 개수 구하기
+          allPage = Math.ceil(
+            getCountList._list[_commentInfo.selectCategory] / limit
+          );
+        }, 0);
 
         setCommentsInfo(_commentInfo);
         wating = false;
@@ -405,6 +421,7 @@ export default function CommentsPage() {
   // 데이터 정보 변경하기
   const changeInfo = (info: CommentsAllInfoTypes) => {
     const _info = { ...commentsInfo, ...info };
+    _info.filter.page = 1;
 
     // 카테고리가 변경될 경우, 필터 리스트 초기화
     if (commentsInfo.selectCategory !== info.selectCategory) {
@@ -414,12 +431,27 @@ export default function CommentsPage() {
     fetchCommentsList(_info);
   };
 
+  // 다음 데이터 가져오기
+  const moreLoad = () => {
+    const _info = { ...commentsInfo };
+
+    if (allPage) {
+      if (allPage > _info.filter.page) {
+        _info.filter.page++;
+
+        fetchCommentsList(_info);
+      }
+    }
+  };
+
   return (
     <CommentsUIPage
       commentsInfo={commentsInfo}
       addComments={addComments}
       modifyComments={modifyComments}
       changeInfo={changeInfo}
+      moreLoad={moreLoad}
+      allPage={allPage}
     />
   );
 }

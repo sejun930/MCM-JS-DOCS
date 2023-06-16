@@ -40,6 +40,9 @@ export type CollectionReference_DocumentData =
 export type DocumentReference_DocumentData =
   firebase.firestore.DocumentReference<DocumentData>;
 export type Query_DocumentData = firebase.firestore.Query<DocumentData>;
+export type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
+export type QueryDocumentSnapshot_DocumentData =
+  firebase.firestore.QueryDocumentSnapshot<DocumentData>;
 
 // export const analytics = getAnalytics(firebaseApp);
 

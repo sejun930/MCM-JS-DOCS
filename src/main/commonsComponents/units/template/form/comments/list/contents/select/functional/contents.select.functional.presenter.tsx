@@ -64,6 +64,7 @@ export default function ContentsSelectFunctionalUIPage({
             className="optional-input"
             onChangeEvent={(text) => changeData(text, "contents")}
             inputRef={contentsRef}
+            maxLength={500}
           />
         </CommentsInfoItems>
 

@@ -7,6 +7,7 @@ import { CommentsAllInfoTypes } from "../../comments.types";
 import _SelectForm from "../../../select/select.container";
 import { filterInitList, InitTypes, categoryFilterList } from "./filter.init";
 
+let waiting = false; // 선택에 대한 딜레이 지정
 export default function CommentsFilterPage({
   commentsInfo,
   changeInfo,
@@ -87,7 +88,8 @@ export default function CommentsFilterPage({
 
   // 필터 정보 변경하기
   const changeFilter = (info: InitTypes, isEmpty: boolean) => () => {
-    if (isEmpty) return;
+    if (isEmpty || waiting) return;
+    waiting = true;
 
     commentsInfo.filter.list[info.target] =
       commentsInfo.filter.list[info.target] !== undefined
@@ -95,6 +97,9 @@ export default function CommentsFilterPage({
         : true;
 
     changeInfo(commentsInfo);
+    window.setTimeout(() => {
+      waiting = false;
+    }, 0);
   };
 
   // 모든 필터 리셋하기

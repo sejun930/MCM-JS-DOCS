@@ -21,6 +21,7 @@ import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsFilterPage from "./filter";
+import PageNationPage from "../../pageNation";
 
 import { CommentsAllInfoTypes } from "../comments.types";
 import { MutableRefObject } from "react";
