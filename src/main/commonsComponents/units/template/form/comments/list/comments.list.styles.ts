@@ -22,7 +22,8 @@ export const CategoryWrapper = styled.div`
   top: 0;
   width: 100%;
   background-color: white;
-  z-index: 100;
+  /* z-index: 90; */
+  z-index: 3;
   padding: 20px 0px;
 `;
 
@@ -78,6 +79,7 @@ export const EmptyWrapper = styled.div`
 export const CommentListItems = styled.ul`
   display: flex;
   flex-direction: column;
+  z-index: 1;
   /* min-height: 300px; */
 `;
 

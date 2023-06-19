@@ -4,6 +4,8 @@
 import { useState, useEffect } from "react";
 import CommentsPage from "./comments.container";
 
+import { Wrapper } from "../../../../../mainComponents";
+
 // 디바운싱 적용
 let debouncing: ReturnType<typeof setTimeout>;
 export default function RenderCommentsPage() {
@@ -50,5 +52,9 @@ export default function RenderCommentsPage() {
   };
 
   // 1. 댓글에 필요한 스크립트 우선 호출
-  return (render && <CommentsPage />) || <></>;
+  return (
+    <Wrapper id="comments-form">
+      {(render && <CommentsPage />) || <></>}
+    </Wrapper>
+  );
 }

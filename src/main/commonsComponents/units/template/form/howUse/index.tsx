@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React from "react";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 import { CopyWrapper } from "./index.styles";
 
@@ -29,7 +29,7 @@ export default function _HowUseForm({
   const { getExampleCode } = getExampleCodeComponnet();
 
   return (
-    <Wrapper>
+    <Wrapper id="how-use-form">
       <_SubTitleTemplate
         title="How To Use"
         className="howUse-subTitle"

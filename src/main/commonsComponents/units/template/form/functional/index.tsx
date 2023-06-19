@@ -18,7 +18,7 @@ export default function _FunctionalForm({
   const [module] = useRecoilState(moduleState);
   return (
     (functionalList[module] && functionalList[module].length && (
-      <Wrapper>
+      <Wrapper id="functional-form">
         <_SubTitleTemplate
           title="Functional"
           className="functional-form"

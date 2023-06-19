@@ -1,4 +1,4 @@
-import { ModulesInfoWrapper } from "../index.styles";
+import { ModulesInfoWrapper, TitleWrapper } from "../index.styles";
 
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -21,6 +21,7 @@ import _FunctionalForm from "src/main/commonsComponents/units/template/form/func
 import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
 import _PropsForm from "src/main/commonsComponents/units/template/form/props";
 import _CommentsForm from "src/main/commonsComponents/units/template/form/comments/comments.render";
+import _IndexForm from "src/main/commonsComponents/units/index/index.container";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 export default function MyModal() {
@@ -67,7 +68,7 @@ export default function MyModal() {
   return (
     <Template>
       <ModulesInfoWrapper>
-        <_MainTitleTemplate />
+        <_MainTitleTemplate id="main-title-form" />
         <ModulesInfoWrapper ref={endPointRef}>
           {(render && (
             <>

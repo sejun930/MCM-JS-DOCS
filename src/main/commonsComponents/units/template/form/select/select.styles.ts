@@ -24,7 +24,7 @@ export const SelectWrapper = styled.div`
     background-color: white;
     border: solid 2px black;
     border-radius: 100%;
-    z-index: 100;
+    z-index: 11;
 
     ::after,
     ::before {

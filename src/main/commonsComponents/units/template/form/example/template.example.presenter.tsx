@@ -42,7 +42,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
   let _idx = 0;
 
   return (
-    <Wrapper>
+    <Wrapper id="example-form">
       <ExampleTitleWrapper>
         <_SubTitleTemplate
           title="Example"

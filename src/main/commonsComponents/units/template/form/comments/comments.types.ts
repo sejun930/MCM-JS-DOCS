@@ -67,7 +67,7 @@ export const initCommentsInfo: CommentsAllInfoTypes = {
   selectCategory: "all", // 선택된 카테고리
   countList: {}, // 카테고리 개수 리스트
   filter: { search: "", page: 1, list: {} }, // 필터 정보
-  countFilterList: {},
+  countFilterList: {}, // 카테고리 필터 개수
 };
 
 // count (카테고리 별 개수) 초기값

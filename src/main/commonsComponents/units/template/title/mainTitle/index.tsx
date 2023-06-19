@@ -1,28 +1,56 @@
 import styled from "@emotion/styled";
-import { mouduleRemarksList } from "./data";
-import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
 
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { moduleState, versState } from "src/commons/store";
+
+import { moduleRemarksList } from "./data";
+import { moduleIndexList } from "src/commons/data/index/index.commons.data";
 import { _PTextWithHtml, _Title } from "mcm-js-commons";
 
-export default function _MainTitleTemplate() {
+import IndexRenderPage from "../../../index/index.render";
+
+// let deboucing: ReturnType<typeof setTimeout> | number;
+export default function _MainTitleTemplate({ id }: { id?: string }) {
   const [module] = useRecoilState(moduleState);
+  const [vers] = useRecoilState(versState);
+
+  const [list, setList] = useState<Array<{ id: string; title: string }>>([]);
+
+  // 리스트 가져오기
+  useEffect(() => {
+    window.setTimeout(() => {
+      if (moduleIndexList(module, vers)) {
+        setList(moduleIndexList(module, vers)());
+      }
+    }, 100);
+  }, [module, vers]);
 
   return (
-    <Wrapper className="main-title-wrapper">
-      <_Title className="main-title">📖 {module}</_Title>
-      <_PTextWithHtml
-        className="main-title-remarks"
-        dangerouslySetInnerHTML={mouduleRemarksList[module]}
-      />
+    <Wrapper className="main-title-wrapper" id={id}>
+      <Items>
+        <_Title className="main-title">📖 {module}</_Title>
+        <_PTextWithHtml
+          className="main-title-remarks"
+          dangerouslySetInnerHTML={moduleRemarksList[module]}
+        />
+      </Items>
+
+      {(list.length && <IndexRenderPage indexList={list} />) || <></>}
     </Wrapper>
   );
 }
 
 export const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
   position: relative;
+`;
+
+export const Items = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 10px 0px;
 
   .main-title {

@@ -26,7 +26,7 @@ export default function CommentsUIPage({
   allPage: number;
 }) {
   return (
-    <Wrapper>
+    <>
       <_SubTitleTemplate
         title="Comments"
         className="comments-subTitle"
@@ -41,12 +41,12 @@ export default function CommentsUIPage({
         />
       </_InfinityScroll>
       <TitleWrapper>
-        {commentsInfo.commentsList.length &&
+        {(commentsInfo.commentsList.length &&
           allPage === commentsInfo.filter.page && (
             <_Title titleLevel="h2"> 모든 데이터를 조회했습니다. </_Title>
-          )}
+          )) || <></>}
       </TitleWrapper>
-    </Wrapper>
+    </>
   );
 }
 

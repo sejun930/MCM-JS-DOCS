@@ -18,7 +18,7 @@ export default function _PropsForm({
   const [module] = useRecoilState(moduleState);
 
   return (
-    <Wrapper ref={propsRef}>
+    <Wrapper ref={propsRef} id="props-form">
       <_SubTitleTemplate
         title="Props List"
         className="props-subTitle"
