@@ -92,7 +92,7 @@ export const OptionWrapper = styled.div`
   justify-content: space-around;
   width: 100px;
   height: 28px;
-  right: -18px;
+  right: -10px;
   top: -20px;
   border: dotted 1px black;
   background-color: white;
@@ -106,6 +106,18 @@ export const OptionWrapper = styled.div`
     ::before,
     ::after {
       width: 80% !important;
+    }
+  }
+
+  .mcm-tooltip-tail-contents {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .mcm-index-fix-button {
+    &.off {
+      text-shadow: 0 0 0 gray;
+      color: transparent;
     }
   }
 `;

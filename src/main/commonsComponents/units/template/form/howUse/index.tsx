@@ -47,24 +47,6 @@ export default function _HowUseForm({
             vers={vers}
           />
         )}
-        {/* <TapWrapper
-          hasMultiple={codeInfo.title.length > 1}
-          ref={_wrapperRef}
-          allLength={codeInfo.title.length || 0}
-          vers={tempVers}
-          isFixed={fixed}
-        >
-          <TapItems isFixed={fixed} itemsHeight={itemsHeight}>
-            <TapListPage tapList={codeInfo.title || []} />
-          </TapItems>
-          <FixedTap ref={_fixedRef}>
-            <TapListPage
-              tapList={codeInfo.title || []}
-              changeTempVers={changeTempVers}
-              isFixedMode={fixed}
-            />
-          </FixedTap>
-        </TapWrapper> */}
 
         {codeInfo.basic[vers] !== undefined && (
           <_Copy

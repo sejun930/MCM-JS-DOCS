@@ -1,11 +1,11 @@
 import { CopyButton, CopyText, CopyWrapper } from "./copy.styles";
-import { Pre } from "./code-highlight/codeHighlight.styles";
 import { MutableRefObject, useRef, useState } from "react";
 import { _PText } from "mcm-js-commons";
 
 import CommonsHooksComponents from "../../hooks/commonsHooks";
 import { CodeTypes } from "./copy.types";
 import { removeTag } from "../../functional";
+import { Pre } from "./code-highlight/codeHighlight.styles";
 
 // 글자 복사 기능 컴포넌트
 export default function _Copy({
