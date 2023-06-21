@@ -3,8 +3,6 @@ import {
   IndexListWrapper,
   Items,
   OptionWrapper,
-  FixButton,
-  ResizeButton,
 } from "./index.styles";
 
 import { _Button, _CloseButton } from "mcm-js-commons";
@@ -21,16 +19,7 @@ import {
 
 type allTypes = IndexIPropsTypes & IndexUIPropsTypes & IndexPagePropsTypes;
 export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
-  const {
-    indexList,
-    current,
-    moveIndex,
-    closeIndex,
-    toggleFix,
-    fix,
-    isMinimum,
-    toggleMinimum,
-  } = props;
+  const { indexList, current, moveIndex, closeIndex, isMinimum } = props;
 
   return (
     <Items className="mcm-index-items">

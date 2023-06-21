@@ -121,15 +121,3 @@ export const OptionWrapper = styled.div`
     }
   }
 `;
-
-export const FixButton = styled(_Button)`
-  ${(props: StyleTypes) =>
-    !props.fix && {
-      textShadow: "0 0 0 gray",
-      color: "transparent",
-    }}
-`;
-
-export const ResizeButton = styled(_Button)`
-  font-size: 14px;
-`;
