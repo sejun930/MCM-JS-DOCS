@@ -1,29 +1,41 @@
 import styled from "@emotion/styled";
-import { breakPoints } from "mcm-js-commons/dist/responsive";
+// import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   render?: boolean;
+  isMobileTap?: boolean;
 }
 
 export const LayoutNavWrapper = styled.nav`
   min-width: 15%;
-  /* max-width: 20%; */
   height: auto;
   border-right: solid 3px #aa5656;
   display: flex;
   opacity: 0;
   position: relative;
-  /* z-index: 100; */
 
   ${(props: StyleTypes) =>
     props.render && {
       opacity: 1,
     }}
 
-  @media ${breakPoints.mobile} {
-    min-width: auto;
+  @media (max-width: 767px) {
     max-width: auto;
     display: none;
+
+    ${(props) =>
+      props.isMobileTap && {
+        display: "flex",
+        border: "unset",
+      }}
+
+    .nav-list-wrapper {
+      padding: 0px;
+    }
+
+    .nav-list-select-wrapper {
+      padding-top: 28px;
+    }
   }
 `;
 
@@ -33,7 +45,6 @@ export const LayoutNavListWrapper = styled.article`
   gap: 10px 0px;
   width: 100%;
   height: 100%;
-  /* padding: 1rem; */
 
   .mcm-p-unit {
     transition: all 0.25s ease-in;
@@ -51,15 +62,8 @@ export const LayoutNavListWrapper = styled.article`
     font-weight: 800;
   }
 
-  @media ${breakPoints.mobile} {
-    padding: 0rem 2vw;
-    gap: 3vw 0px;
-    padding-top: 4vw;
-
-    .mcm-p-unit {
-      font-size: 0.6rem;
-      padding: 2vw;
-    }
+  @media (max-width: 767px) {
+    gap: 16px 0px;
   }
 `;
 
@@ -71,4 +75,10 @@ export const LayoutNavListItems = styled.div`
   position: sticky;
   top: 0px;
   background-color: white;
+
+  ${(props: StyleTypes) =>
+    props.isMobileTap && {
+      padding: "0px",
+      paddingBottom: "20px",
+    }}
 `;

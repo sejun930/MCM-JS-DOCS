@@ -4,7 +4,20 @@ import { CSSProperties } from "react";
 export const Wrapper = styled.section`
   border: solid 1px #dddddd;
   border-top: unset;
-  /* border-bottom: solid 1px #dddddd; */
+  width: 100%;
+
+  .mcm-tooltip-wrapper {
+    width: 100%;
+    display: flex;
+
+    .mcm-tooltip-items {
+      width: 100%;
+
+      .mcm-tooltip-layout {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export const OptionalWrapper = styled.button`

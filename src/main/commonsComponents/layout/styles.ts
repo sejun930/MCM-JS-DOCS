@@ -4,7 +4,8 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 export const LayoutWrapper = styled.div`
   height: 100%;
 
-  @media ${breakPoints.mobile} {
+  @media (max-width: 767px) {
+    /* @media ${breakPoints.mobile767} { */
     ._halfDrag_controller_ {
       display: none;
     }
@@ -19,7 +20,8 @@ export const LayoutContentsWrapper = styled.div`
     background-color: #e8e2e2;
   }
 
-  @media ${breakPoints.mobile} {
+  @media (max-width: 767px) {
+    /* @media ${breakPoints.mobile767} { */
     ._halfDrag_leftPage_ {
       width: 20% !important;
     }

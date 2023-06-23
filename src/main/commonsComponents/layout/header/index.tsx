@@ -21,20 +21,25 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 220px;
 
   .layout-header-link {
-    height: 220px;
+    height: 100%;
 
     .layout-header-logo {
-      /* width: 280px; */
       height: 220px;
       object-fit: cover;
     }
   }
 
-  @media ${breakPoints.mobile} {
+  @media (max-width: 767px) {
+    /* @media ${breakPoints.mobile767} { */
     height: auto;
-    padding: 5vw 0px;
+
+    .layout-header-link {
+      .layout-header-logo {
+        height: 160px;
+      }
+    }
   }
 `;

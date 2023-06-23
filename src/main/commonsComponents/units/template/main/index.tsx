@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
+import { _Button, _Image } from "mcm-js-commons";
+import MainMobileNavigationTapPage from "./mobileNavigation/main.mobileNavigation";
+
 // DOC 페이지 메인 템플릿
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <Wrapper className="main-template-wrapper">{children}</Wrapper>;
+  return (
+    <Wrapper className="main-template-wrapper">
+      {/* 모바일 nav */}
+      <MainMobileNavigationTapPage />
+      {children}
+    </Wrapper>
+  );
 }
 
 export const Wrapper = styled.main`
@@ -94,7 +103,24 @@ export const Wrapper = styled.main`
     }
   }
 
-  @media ${breakPoints.mobile} {
-    padding: 5vw;
+  #mobile-nav-modal {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    /* @media ${breakPoints.mobile767} { */
+    min-width: 100%;
+    padding: 20px;
+
+    #mobile-nav-modal {
+      display: flex;
+
+      .mcm-modal-items {
+        height: 80% !important;
+        width: 80% !important;
+        max-width: 420px !important;
+        top: 20px;
+      }
+    }
   }
 `;

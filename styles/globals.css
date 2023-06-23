@@ -21,6 +21,12 @@ a {
   height: 100%;
 }
 
+@media (max-width: 767px) {
+  #__next {
+    padding-top: 30px;
+  }
+}
+
 button {
   border: unset;
   padding: 0;

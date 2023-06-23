@@ -12,8 +12,13 @@ import {
 import { navList, NavListTypes } from "./nav.data";
 
 import NavListPage from "./list";
+import NavSearchPage from "./search";
 
-export default function LayoutNavPage() {
+export default function LayoutNavPage({
+  isMobileTap,
+}: {
+  isMobileTap?: boolean;
+}) {
   const [module] = useRecoilState(moduleState);
   // 모듈 검색어
   const [search, setSearch] = useState<string>("");
@@ -45,17 +50,17 @@ export default function LayoutNavPage() {
     );
 
   return (
-    <LayoutNavWrapper className="nav-wrapper" render={render}>
+    <LayoutNavWrapper
+      className="nav-wrapper"
+      render={render}
+      isMobileTap={isMobileTap}
+    >
       <LayoutNavListWrapper className="nav-list-wrapper">
-        <LayoutNavListItems>
-          <_Input
-            onChangeEvent={onChangeSearch}
-            className="nav-search-input"
-            placeHolder="모듈 입력"
-            maxLength={10}
-            delay={300}
-            value={search}
-          />
+        <LayoutNavListItems
+          className="nav-list-items"
+          isMobileTap={isMobileTap}
+        >
+          <NavSearchPage search={search} onChangeSearch={onChangeSearch} />
           {module && module !== "404" && (
             // 선택된 탭의 정보 렌더하기
             <NavListPage list={[selectTapInfo]} isSelect={true} />
