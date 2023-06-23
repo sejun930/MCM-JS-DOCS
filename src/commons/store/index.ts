@@ -12,3 +12,9 @@ export const versState = atom({
   key: `versState`,
   default: 0,
 });
+
+// 현재 유저의 아이피 값 저장
+export const ipState = atom({
+  key: `ipState`,
+  default: "",
+});

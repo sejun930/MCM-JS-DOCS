@@ -2,7 +2,7 @@ import CommentsUIPage from "./comments.presenter";
 
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { ipState, moduleState } from "src/commons/store";
 
 import { InfoTypes, initCountList, CategoryTypes } from "./comments.types";
 import apis from "src/commons/libraries/commons.apis";
@@ -11,10 +11,10 @@ import {
   getDoc,
   getResult,
   Query_DocumentData,
-  // QueryDocumentSnapshot_DocumentData,
 } from "src/commons/libraries/firebase";
 
 import { initCommentsInfo, CommentsAllInfoTypes } from "./comments.types";
+import { getUserIp } from "src/main/commonsComponents/functional";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
@@ -27,13 +27,24 @@ export default function CommentsPage() {
   // 댓글 전체 정보 (댓글 리스트, 카테고리 등등)
   const [commentsInfo, setCommentsInfo] =
     useState<CommentsAllInfoTypes>(initCommentsInfo);
-
   const [module] = useRecoilState<string>(moduleState);
+  const [ip, setIp] = useRecoilState<string>(ipState);
 
   useEffect(() => {
     // 최초 댓글 리스트 가져오기
     fetchCommentsList(commentsInfo);
   }, [module]);
+
+  useEffect(() => {
+    // 유저의 아이피 주소 저장하기
+    getUserIp()
+      .then((result) => {
+        setIp(result);
+      })
+      .catch((err) => {
+        console.log(`아이피 조회에 실패했습니다. : ${err}`);
+      });
+  }, []);
 
   // 필터 쿼리 적용하기
   const getFilterQuery = (

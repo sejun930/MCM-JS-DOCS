@@ -104,7 +104,47 @@ const getUuid = () => {
   return v4();
 };
 
-// 현재 쿼리 구성하기
-const getUrlQuery = () => {};
+// ip 가져오기
+const getUserIp = async () => {
+  let ip = "";
 
-export { removeTag, getDateForm, changeMultipleLine, getHashPassword, getUuid };
+  // ip 주소 1차 가져오기
+  const axios = require("axios");
+  try {
+    const { data } = await axios.get("https://api64.ipify.org/?format=json");
+    // ip 주소 저장
+    ip = data.ip;
+  } catch (err) {
+    // 호출에 실패하면 다음 방법 시도
+    console.log("1차 IP 조회에 실패했습니다. : " + err);
+
+    // ip 주소 2차 가져오기
+    try {
+      const { data } = await axios.get("https://geolocation-db.com/json/");
+      ip = data.IPv4;
+    } catch (err2) {
+      // 2차 실패
+      console.log("2차 IP 조회에 실패했습니다. : " + err);
+
+      // ip 주소 최종 가져오기
+      try {
+        const { data } = await axios.get("https://ipapi.co/json/");
+        ip = data.ip;
+      } catch (err3) {
+        // 3차 최종 실패
+        console.log("3차 IP 조회에 실패했습니다. : " + err3);
+      }
+    }
+  }
+
+  return ip;
+};
+
+export {
+  removeTag,
+  getDateForm,
+  changeMultipleLine,
+  getHashPassword,
+  getUuid,
+  getUserIp,
+};

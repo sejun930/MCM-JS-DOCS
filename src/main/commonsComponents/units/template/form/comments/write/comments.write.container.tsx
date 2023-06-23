@@ -5,6 +5,8 @@ import {
   useRef,
   useState,
 } from "react";
+import { useRecoilState } from "recoil";
+import { ipState } from "src/commons/store";
 import { Message } from "./comments.write.styles";
 
 import CommentsWriteUIPage from "./comments.write.presenter";
@@ -41,6 +43,8 @@ export default function CommentsWritePage({
   const [info, setInfo] = useState<WriteInfoTypes>({
     ...initInfo,
   });
+  // 유저의 아이피 주소
+  const [ip] = useRecoilState(ipState);
 
   // 카테고리 ref
   const categoryRef = useRef() as MutableRefObject<HTMLSelectElement>;
@@ -202,49 +206,20 @@ export default function CommentsWritePage({
         offClose: true,
       });
 
-      // ip 주소 1차 가져오기
-      const axios = require("axios");
-      try {
-        const { data } = await axios.get(
-          "https://api64.ipify.org/?format=json"
-        );
-        // ip 주소 저장
-        info.ip = data.ip;
-      } catch (err) {
-        // 호출에 실패하면 다음 방법 시도
-        console.log("1차 IP 조회에 실패했습니다. : " + err);
-
-        // ip 주소 2차 가져오기
-        try {
-          const { data } = await axios.get("https://geolocation-db.com/json/");
-          info.ip = data.IPv4;
-        } catch (err2) {
-          // 2차 실패
-          console.log("2차 IP 조회에 실패했습니다. : " + err);
-
-          // ip 주소 최종 가져오기
-          try {
-            const { data } = await axios.get("https://ipapi.co/json/");
-            info.ip = data.ip;
-          } catch (err3) {
-            // 3차 최종 실패
-            console.log("3차 IP 조회에 실패했습니다. : " + err3);
-          }
-        }
-      }
-
-      if (!info.ip) {
+      if (!ip) {
+        // 아이피 주소 조회에 실패할 경우
         openErrorModal({
           message:
             "IP 주소를 조회할 수 없습니다. <br />관리자에게 직접 문의 부탁드립니다.",
         });
       } else {
+        // 아이피 주소 저장
+        info.ip = ip;
+
         // 리뷰가 아닌 경우에는 평점 초기화
         if (info.category !== "review") info.rating = 0;
 
         // 댓글 작성 가능
-        // if (module) {
-
         const addResult = await addComments(info as InfoTypes);
         if (addResult) {
           Modal.close({ id: "writing-modal" });

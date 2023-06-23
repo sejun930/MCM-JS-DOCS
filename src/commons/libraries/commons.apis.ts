@@ -1,8 +1,4 @@
-import {
-  CollectionReference_DocumentData,
-  DocumentReference_DocumentData,
-  Query_DocumentData,
-} from "./firebase";
+import { Query_DocumentData } from "./firebase";
 
 const apis = (
   doc: Query_DocumentData
