@@ -120,4 +120,8 @@ export const FixedTap = styled.div`
   align-items: center;
   justify-content: space-around;
   transition: all 0.3s ease;
+
+  @media (max-width: 767px) {
+    top: 10%;
+  }
 `;

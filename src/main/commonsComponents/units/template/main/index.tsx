@@ -120,6 +120,10 @@ export const Wrapper = styled.main`
         width: 80% !important;
         max-width: 420px !important;
         top: 20px;
+
+        .mcm-modal-contents {
+          overflow-x: hidden;
+        }
       }
     }
   }

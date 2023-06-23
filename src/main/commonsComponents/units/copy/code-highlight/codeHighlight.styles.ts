@@ -7,4 +7,10 @@ export const Pre = styled.pre`
   code {
     font-family: "Manlo";
   }
+
+  @media (max-width: 500px) {
+    code {
+      font-size: 12px;
+    }
+  }
 `;

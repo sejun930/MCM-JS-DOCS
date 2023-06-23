@@ -36,7 +36,7 @@ export default function _MainTitleTemplate({ id }: { id?: string }) {
         />
       </Items>
 
-      {(list.length && <IndexRenderPage indexList={list} />) || <></>}
+      {/* {(list.length && <IndexRenderPage indexList={list} />) || <></>} */}
     </Wrapper>
   );
 }
@@ -52,6 +52,7 @@ export const Items = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px 0px;
+  width: 100%;
 
   .main-title {
     display: flex;
@@ -61,5 +62,17 @@ export const Items = styled.div`
   .main-title-remarks {
     line-height: 28px;
     letter-spacing: -0.02rem;
+  }
+
+  @media (max-width: 767px) {
+    padding-top: 40px;
+    gap: 16px 0px;
+    align-items: center;
+
+    .main-title-remarks {
+      text-align: center;
+      font-size: 14px;
+      line-height: 22px;
+    }
   }
 `;

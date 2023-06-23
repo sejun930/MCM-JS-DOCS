@@ -56,12 +56,24 @@ export const Wrapper = styled.div`
     margin: 6px 0px;
     margin-bottom: 20px;
   }
+
+  @media (max-width: 767px) {
+    .subTitle-remarks {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 767px) {
+    .subTitle {
+      font-size: 26px;
+    }
+  }
 `;
 
 export const Line = styled.div`

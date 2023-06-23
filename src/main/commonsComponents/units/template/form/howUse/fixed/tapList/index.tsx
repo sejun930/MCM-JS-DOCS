@@ -10,16 +10,20 @@ export default function TapListPage({
   tapList,
   changeTempVers,
   isFixedMode,
+  fixed,
 }: //   vers,
 {
   tapList: string[];
   changeTempVers?: (i: number) => void;
   isFixedMode?: boolean;
+  fixed?: boolean;
   //   vers: number;
 }) {
   const [vers, setVers] = useRecoilState(versState);
   // 버전 체인지 이벤트
   const changeVers = (e: MouseEvent<HTMLButtonElement>) => (i: number) => {
+    if (fixed === false) return;
+
     const el = e.currentTarget;
     if (el) {
       Array.from(document.getElementsByClassName("select-tap")).forEach(

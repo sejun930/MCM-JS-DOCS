@@ -37,6 +37,7 @@ export default function ExampleFixedUIPage({
           tapList={codeInfo.title || []}
           changeTempVers={changeTempVers}
           isFixedMode={fixed}
+          fixed={fixed}
         />
       </FixedTap>
     </TapWrapper>
