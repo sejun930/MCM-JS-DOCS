@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-// import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   render?: boolean;
@@ -19,7 +19,7 @@ export const LayoutNavWrapper = styled.nav`
       opacity: 1,
     }}
 
-  @media (max-width: 767px) {
+  @media ${breakPoints.mobileLarge} {
     max-width: auto;
     display: none;
 
@@ -62,7 +62,7 @@ export const LayoutNavListWrapper = styled.article`
     font-weight: 800;
   }
 
-  @media (max-width: 767px) {
+  @media ${breakPoints.mobileLarge} {
     gap: 16px 0px;
   }
 `;

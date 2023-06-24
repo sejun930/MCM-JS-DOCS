@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
@@ -107,8 +107,7 @@ export const Wrapper = styled.main`
     display: none;
   }
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     min-width: 100%;
     padding: 20px;
 

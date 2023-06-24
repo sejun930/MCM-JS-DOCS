@@ -5,6 +5,8 @@ import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHook
 import { subTitleEmoji } from "./data";
 import { _Title, _PText } from "mcm-js-commons";
 
+import { breakPoints } from "mcm-js-commons/dist/responsive";
+
 interface IProps {
   children?: React.ReactNode;
   title: string;
@@ -57,7 +59,7 @@ export const Wrapper = styled.div`
     margin-bottom: 20px;
   }
 
-  @media (max-width: 767px) {
+  @media ${breakPoints.mobileLarge} {
     .subTitle-remarks {
       font-size: 14px;
     }
@@ -69,7 +71,7 @@ export const TitleWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 767px) {
+  @media ${breakPoints.mobileLarge} {
     .subTitle {
       font-size: 26px;
     }

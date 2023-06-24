@@ -32,8 +32,7 @@ const HeaderWrapper = styled.header`
     }
   }
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     height: auto;
 
     .layout-header-link {

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   offBoard?: boolean;
@@ -21,6 +22,14 @@ export const ExampleTitleWrapper = styled.div`
       font-size: 16px;
     }
   }
+
+  @media ${breakPoints.mobileLarge} {
+    .subTitle-title-wrapper {
+      .toggle-all-code-btn {
+        font-size: 14px;
+      }
+    }
+  }
 `;
 
 export const ExampleContentsWrapper = styled.div`
@@ -29,6 +38,21 @@ export const ExampleContentsWrapper = styled.div`
   flex-wrap: wrap;
   margin-top: 40px;
   gap: 60px 0px;
+
+  @media ${breakPoints.mobileLarge} {
+    flex-direction: column;
+
+    .example-list-wrapper {
+      .example-list-items {
+        display: flex;
+        flex-direction: column;
+
+        .example-list {
+          width: 100% !important;
+        }
+      }
+    }
+  }
 `;
 
 export const ExampleContentsItems = styled.div`
@@ -51,14 +75,20 @@ export const ExampleContentsItems = styled.div`
     props.isFull && {
       width: "100%",
     }}
+
+  @media ${breakPoints.mobileLarge} {
+    width: 100%;
+
+    h3 {
+      font-size: 18px;
+    }
+  }
 `;
 
 export const ExampleResultList = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  /* border: solid 1px #dddddd; */
-  /* border-bottom: 0px; */
   margin-top: 15px;
   border-radius: 5px;
 
@@ -89,11 +119,15 @@ export const ExampleListItems = styled.div`
   padding: 1.3rem 1rem;
   border: solid 1px #dddddd;
 
-  ._module_open_button_ {
-    width: fit-content;
-  }
-
   .mcm-error-unit {
     margin-top: 0px;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 1rem;
+
+    .mcm-error-unit {
+      margin: 0;
+    }
   }
 `;

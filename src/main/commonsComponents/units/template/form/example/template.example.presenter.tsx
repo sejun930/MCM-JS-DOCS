@@ -73,6 +73,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                 <ExampleContentsItems
                   key={`${module}_${idx + 1}`}
                   isFull={el.isFull ?? false}
+                  className={(el.isFull && "example-list-wrapper") || undefined}
                 >
                   <_Title
                     titleLevel="h3"
@@ -80,7 +81,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                   >
                     {el.isError ? "❗ 모듈 호출시 에러 발생 예시" : el.title}
                   </_Title>
-                  <ExampleResultList>
+                  <ExampleResultList className="example-list-items">
                     {el.contents &&
                       el.contents.length &&
                       el.contents.map(
@@ -113,6 +114,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                             <ExampleListWrapper
                               key={`${module}_${idx}_${idx2}`}
                               style={{ width }}
+                              className="example-list"
                             >
                               <ExampleListItems>
                                 {renderTemplateList[module] &&

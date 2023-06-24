@@ -77,19 +77,21 @@ export default function MyModal() {
                 exmapleContents="기본 모달 페이지입니다."
                 endPointRef={endPointRef.current}
               />
-              {/* <_ExampleForm
+              <_ExampleForm
                 exampleList={modalExampleList(vers)}
                 initProps={modalExampleInitProps}
                 commonsProps={commonsProps}
               />
               {modalFunctionalData[vers] && (
                 <_FunctionalForm propsRef={propsRef} />
-              )} */}
+              )}
             </>
           )) || <></>}
         </ModulesInfoWrapper>
-        {/* <_TreeForm />
+        <_TreeForm />
         <_PropsForm propsRef={propsRef} />
+
+        {/* 
         <_CommentsForm /> */}
       </ModulesInfoWrapper>
     </Template>

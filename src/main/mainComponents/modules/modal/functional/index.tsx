@@ -3,6 +3,7 @@ import { getCommonsHighlight } from "src/commons/highlight";
 import { modalCommonsExampleCode } from "../example/modal.example.commons.code";
 
 import { Modal } from "mcm-js";
+import { OpenModalButton } from "../example/modal.example.template";
 
 export default function ModalFunctionalList(): FunctionalListType[] {
   return [
@@ -27,9 +28,8 @@ export default function ModalFunctionalList(): FunctionalListType[] {
         },
       })}`,
       setExampleCode: (
-        <button
-          className="open_module_button"
-          onClick={() =>
+        <OpenModalButton
+          onClickEvent={() =>
             Modal.open({
               children: <span>함수로 실행된 모달입니다.</span>,
               showBGAnimation: true,
@@ -37,8 +37,20 @@ export default function ModalFunctionalList(): FunctionalListType[] {
             })
           }
         >
-          Modal Open Functional{" "}
-        </button>
+          Modal Open Functional
+        </OpenModalButton>
+        // <button
+        //   className="open-module-button"
+        // onClick={() =>
+        //   Modal.open({
+        //     children: <span>함수로 실행된 모달입니다.</span>,
+        //     showBGAnimation: true,
+        //     showModalOpenAnimation: true,
+        //   })
+        // }
+        // >
+        //   Modal Open Functional
+        // </button>
       ),
     },
     {
@@ -93,9 +105,8 @@ export default function ModalFunctionalList(): FunctionalListType[] {
         "전달된 선택자와 <b>일치한 선택자가 없다면</b> 함수가 정상적으로 작동하지 않을 수도 있습니다.",
       ],
       setExampleCode: (
-        <button
-          className="open_module_button"
-          onClick={() =>
+        <OpenModalButton
+          onClickEvent={() =>
             Modal.open({
               children: (
                 <button
@@ -114,7 +125,7 @@ export default function ModalFunctionalList(): FunctionalListType[] {
           }
         >
           Modal Close Functional
-        </button>
+        </OpenModalButton>
       ),
     },
   ];

@@ -100,8 +100,7 @@ export const CopyButton = styled.button`
     color: ${(props) => (props.isCode ? "white" : "#333333")};
   }
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     display: none;
   }
 `;

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import { useState } from "react";
 import { useRecoilState } from "recoil";
@@ -69,4 +70,9 @@ export const TreeWrapper = styled.div`
   height: 300px;
   border-radius: 10px;
   position: relative;
+
+  @media ${breakPoints.mobileLarge} {
+    height: auto;
+    flex-direction: column;
+  }
 `;

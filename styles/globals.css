@@ -79,7 +79,7 @@ table {
   border-collapse: collapse;
 }
 
-.open_module_button {
+/* .open-module-button {
   padding: 0.7rem 1.5rem;
   border-radius: 10px;
   border: double 3px #7b2869;
@@ -89,11 +89,11 @@ table {
   transition: all 0.3s ease;
 }
 
-.open_module_button:hover {
+.open-module-button:hover {
   background-color: #7b2869;
   color: white;
   border: double 3px white;
-}
+} */
 
 .error-modal .mcm-modal-items {
   border: double 6px #aa5656;

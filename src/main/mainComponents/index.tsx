@@ -57,8 +57,7 @@ export const ProjectInfoWrapper = styled.section`
   flex-direction: column;
   gap: 12px 0px;
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     gap: 16px 0px;
     padding-top: 40px;
 
@@ -67,7 +66,9 @@ export const ProjectInfoWrapper = styled.section`
     }
   }
 
-  @media (max-width: 500px) {
+  /*   @media ${breakPoints.mobileSmall} {
+ */
+  @media ${breakPoints.mobileSmall} {
     gap: 30px 0px;
     padding-top: 60px;
 
@@ -93,16 +94,14 @@ export const ProjectInfo = styled.div`
     line-height: 26px;
   }
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     .mcm-p-unit {
       font-size: 14px;
       line-height: 24px;
     }
   }
 
-  @media (max-width: 500px) {
-    /* @media ${breakPoints.mobile500} { */
+  @media ${breakPoints.mobileSmall} {
     .mcm-p-unit {
       display: flex;
       flex-direction: column;
@@ -115,15 +114,13 @@ export const ProjectInfo = styled.div`
 export const ProjectDetailInfoWrapper = styled.section`
   padding-top: 120px;
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     h2 {
       font-size: 22px;
     }
   }
 
-  @media (max-width: 500px) {
-    /* @media ${breakPoints.mobile500} { */
+  @media ${breakPoints.mobileSmall} {
     padding-top: 140px;
   }
 `;
@@ -148,8 +145,7 @@ export const InstallWrapper = styled.div`
   padding-top: 30px;
   gap: 20px 0px;
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     padding-top: 20px;
   }
 `;
@@ -163,8 +159,7 @@ export const InstallItems = styled.div`
     padding-bottom: 0px;
   }
 
-  @media (max-width: 767px) {
-    /* @media ${breakPoints.mobile767} { */
+  @media ${breakPoints.mobileLarge} {
     .mcm-title-unit {
       font-size: 18px;
     }

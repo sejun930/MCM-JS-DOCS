@@ -43,7 +43,7 @@ export const CategoryItems = styled.ul`
 `;
 
 export const Category = styled.li`
-  .cmm-button-unit {
+  .mcm-button-unit {
     transition: all 0.3s;
     font-size: 14px;
     color: #666666;

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   isOpen?: boolean;
@@ -11,7 +12,7 @@ export const MobileTapWrapper = styled.nav`
   top: 0;
   left: 0;
   width: 100%;
-  height: 40px;
+  height: 50px;
   background-color: #aa5656;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +23,7 @@ export const MobileTapWrapper = styled.nav`
     width: 50px;
   }
 
-  @media (max-width: 767px) {
+  @media ${breakPoints.mobileLarge} {
     display: flex;
   }
 `;

@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
 
-  .cmm-button-unit {
+  .mcm-button-unit {
     padding: 10px 16px;
     border-radius: 10px;
     font-size: 16px;

@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface IStyleProps {
   hasMultiple?: boolean;
@@ -121,7 +122,7 @@ export const FixedTap = styled.div`
   justify-content: space-around;
   transition: all 0.3s ease;
 
-  @media (max-width: 767px) {
+  @media ${breakPoints.mobileLarge} {
     top: 10%;
   }
 `;

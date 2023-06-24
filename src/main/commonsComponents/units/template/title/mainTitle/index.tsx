@@ -9,6 +9,7 @@ import { moduleIndexList } from "src/commons/data/index/index.commons.data";
 import { _PTextWithHtml, _Title } from "mcm-js-commons";
 
 import IndexRenderPage from "../../../index/index.render";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 // let deboucing: ReturnType<typeof setTimeout> | number;
 export default function _MainTitleTemplate({ id }: { id?: string }) {
@@ -64,7 +65,7 @@ export const Items = styled.div`
     letter-spacing: -0.02rem;
   }
 
-  @media (max-width: 767px) {
+  @media ${breakPoints.mobileLarge} {
     padding-top: 40px;
     gap: 16px 0px;
     align-items: center;

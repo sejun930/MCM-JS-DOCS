@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import { Modal } from "mcm-js";
 import { _Button } from "mcm-js-commons";
@@ -40,14 +42,13 @@ export default function MyModalExample(props: ExampleContentsTypes) {
     <>
       {/* 모달 실행 버튼 */}
       {!isError && (
-        <_Button
+        <OpenModalButton
           onClickEvent={() =>
             props.vers === 0 ? openModal(idx ?? 0)() : Modal.open({ ..._props })
           }
-          className="open_module_button"
         >
           {buttonName ?? "Open Modal"}
-        </_Button>
+        </OpenModalButton>
       )}
       {isShow &&
         ((props.vers === 0 && (
@@ -74,3 +75,24 @@ export const CloseMultipleModal = () => {
     </div>
   );
 };
+
+export const OpenModalButton = styled(_Button)`
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  border: double 3px #7b2869;
+  font-weight: 700;
+  font-size: 14px;
+  width: fit-content;
+  transition: all 0.3s ease;
+
+  :hover {
+    background-color: #7b2869;
+    color: white;
+    border: double 3px white;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    width: 100%;
+    padding: 0.8rem;
+  }
+`;
