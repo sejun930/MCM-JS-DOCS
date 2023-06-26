@@ -99,11 +99,17 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       id: "comments-functional-modal",
       name,
       modalSize: { width: "460px", height: "480px" },
+      mobileModalSize: { width: "90%" },
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,
       onFixWindow: true,
       offAutoClose: type === "modify",
+      modalStyles: {
+        wrapper: {
+          zIndex: 9999,
+        },
+      },
     });
   };
 

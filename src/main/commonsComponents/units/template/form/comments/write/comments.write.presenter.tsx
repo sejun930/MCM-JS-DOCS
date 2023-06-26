@@ -87,7 +87,7 @@ export default function CommentsWriteUIPage({
             )}
           </OptionItems>
 
-          <OptionItems>
+          <OptionItems className="comments-password-wrapper">
             <_Input
               onChangeEvent={(value) => changeInfo(value)("password")}
               inputClassName="password-input"
@@ -126,6 +126,9 @@ ${info.category && defaultPlace}`}
           info={info}
           openPrivacy={openPrivacy}
         />
+        <_Button onClickEvent={write} className="write-comments-button">
+          📝 댓글 등록
+        </_Button>
       </SubmitWrapper>
     </Form>
   );

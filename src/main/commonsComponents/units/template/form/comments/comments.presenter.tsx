@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import _SubTitleTemplate from "../../title/subTitle";
-import { Wrapper } from "../form.commons.styles";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import CommentsListPage from "./list/comments.list.container";
 import CommentsWritePage from "./write/comments.write.container";
@@ -58,5 +58,12 @@ const TitleWrapper = styled.div`
 
   h2 {
     cursor: default;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 40px 0px;
+    h2 {
+      font-size: 20px;
+    }
   }
 `;

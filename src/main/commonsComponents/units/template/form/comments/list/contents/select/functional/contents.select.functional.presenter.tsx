@@ -1,5 +1,6 @@
 import { FormEvent, MutableRefObject } from "react";
 import {
+  Form,
   ConfirmButtonWrapper,
   OptionalWrapper,
   CommentsInfoWrapper,
@@ -33,7 +34,7 @@ export default function ContentsSelectFunctionalUIPage({
   confirm: (e?: FormEvent) => void;
 }) {
   return (
-    <form onSubmit={confirm}>
+    <Form onSubmit={confirm}>
       <OptionalWrapper isDelete={type === "delete"}>
         <_Title titleLevel="h2">
           {type === "modify" ? "댓글 수정" : "댓글 삭제"}
@@ -70,6 +71,7 @@ export default function ContentsSelectFunctionalUIPage({
 
         <_Input
           inputType="password"
+          className="optional-password-input"
           onChangeEvent={(text) => changeData(text, "password")}
           maxLength={20}
           inputRef={passwordRef}
@@ -86,6 +88,6 @@ export default function ContentsSelectFunctionalUIPage({
           </_Button>
         </ConfirmButtonWrapper>
       </OptionalWrapper>
-    </form>
+    </Form>
   );
 }

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import { _SpanText, _Button } from "mcm-js-commons";
 import React, { MouseEvent } from "react";
@@ -106,6 +107,11 @@ export const LabelWrapper = styled.div`
       props.readOnly && {
         cursor: "default",
       }}
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    flex-direction: row;
+    gap: 0px 10px;
   }
 `;
 

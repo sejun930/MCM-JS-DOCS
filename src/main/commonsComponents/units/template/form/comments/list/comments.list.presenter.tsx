@@ -49,6 +49,11 @@ export default function CommentsListUIPage({
 
             const info = { ...commentsInfo, ["selectCategory"]: name };
 
+            // 해당 카테고리의 개수
+            let categoryLen: string | number =
+              commentsInfo.countList[name || "all"];
+            if (categoryLen > 999) categoryLen = `999+`;
+
             return (
               <Category
                 key={`comments-category-list-${name}-${key}`}
@@ -59,8 +64,7 @@ export default function CommentsListUIPage({
                     (!isSelected && changeInfo(info)) || undefined
                   }
                 >
-                  {categoryInitList[name]} ({" "}
-                  {commentsInfo.countList[name || "all"]} )
+                  {categoryInitList[name]} ( {categoryLen} )
                 </_Button>
               </Category>
             );

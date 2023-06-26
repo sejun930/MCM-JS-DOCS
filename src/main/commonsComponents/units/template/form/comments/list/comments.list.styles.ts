@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   render?: boolean;
@@ -9,7 +10,10 @@ export const CommentsListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-  /* gap: 30px 0px; */
+
+  @media ${breakPoints.mobileLarge} {
+    margin-top: 20px;
+  }
 `;
 
 export const CategoryWrapper = styled.div`
@@ -17,14 +21,18 @@ export const CategoryWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   border-bottom: double 5px black;
-
   position: sticky;
   top: 0;
   width: 100%;
   background-color: white;
-  /* z-index: 90; */
   z-index: 3;
   padding: 20px 0px;
+
+  @media ${breakPoints.mobileLarge} {
+    gap: 10px 0px;
+    position: unset;
+    align-items: flex-end;
+  }
 `;
 
 export const CategoryItems = styled.ul`
@@ -40,6 +48,20 @@ export const CategoryItems = styled.ul`
     props.render && {
       opacity: 1,
     }};
+
+  @media ${breakPoints.mobileLarge} {
+    gap: 0px 20px;
+    padding-left: 10px;
+    height: auto;
+    width: 100%;
+    /* justify-content: space-between; */
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px 0px;
+  }
 `;
 
 export const Category = styled.li`
@@ -73,6 +95,13 @@ export const EmptyWrapper = styled.div`
     line-height: 30px;
     letter-spacing: -0.04rem;
     color: #656565;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    .empty-list {
+      font-size: 16px;
+      line-height: 26px;
+    }
   }
 `;
 

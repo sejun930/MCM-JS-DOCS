@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import { _Title, _Button } from "mcm-js-commons";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 // 개인정보 수집 약관 및 동의 페이지
 export default function PrivacyNoticePage({
@@ -9,10 +10,10 @@ export default function PrivacyNoticePage({
   privacyAgreeEvent: () => void;
 }) {
   return (
-    <Wrapper>
+    <Wrapper className="privacy-notice-wrapper">
       <TitleWrapper>
         <_Title className="privacy-notice-title">
-          개인정보 (IP) 수집 약관
+          개인정보 (IP) <div className="web-hide" /> 수집 약관
         </_Title>
       </TitleWrapper>
       <NoticeContentsWrapper>
@@ -42,6 +43,7 @@ export default function PrivacyNoticePage({
           </li>
         </NoticeContents>
       </NoticeContentsWrapper>
+      {/* <Tooltip tooltipText="개인정보 (IP) 수집에 동의합니다." useShowAnimation> */}
       <_Button
         className="privacy-agree-button"
         onClickEvent={privacyAgreeEvent}
@@ -49,6 +51,7 @@ export default function PrivacyNoticePage({
       >
         개인정보 (IP) 수집 동의
       </_Button>
+      {/* </Tooltip> */}
     </Wrapper>
   );
 }
@@ -69,17 +72,46 @@ export const Wrapper = styled.article`
     font-size: 16px;
     font-weight: 500;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    height: 100%;
+    justify-content: space-between;
+
+    .privacy-agree-button {
+      position: relative;
+      border-radius: 0px;
+      font-size: 14px;
+      height: 40px;
+    }
+  }
 `;
 
 export const TitleWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 20px;
+  width: 100%;
 
   .privacy-notice-title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
     font-size: 28px;
     font-family: sans-serif;
     word-spacing: -0.1rem;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 0;
+
+    .privacy-notice-title {
+      flex-direction: column;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 26px;
+      margin-top: 20px;
+    }
   }
 `;
 
@@ -89,6 +121,11 @@ export const NoticeContentsWrapper = styled.div`
   border-radius: 10px;
   margin-top: 20px;
   padding: 1rem;
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 0.5rem;
+    margin-top: 0px;
+  }
 `;
 
 export const NoticeContents = styled.ul`
@@ -103,5 +140,15 @@ export const NoticeContents = styled.ul`
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.02rem;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    gap: 16px 0px;
+    /* height: 80%; */
+
+    li {
+      font-size: 12px;
+      line-height: 18px;
+    }
   }
 `;

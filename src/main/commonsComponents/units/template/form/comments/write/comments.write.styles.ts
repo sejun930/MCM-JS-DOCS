@@ -1,6 +1,8 @@
 import { CSSProperties } from "styled-components";
 import styled from "@emotion/styled";
 
+import { breakPoints } from "mcm-js-commons/dist/responsive";
+
 interface StyleTypes {
   category?: string;
   isRating?: boolean;
@@ -25,6 +27,8 @@ export const WriteWrapper = styled.article`
 
     .mcm-input-unit-items {
       border: unset;
+      overflow: unset;
+      position: unset;
 
       .contents-input {
         min-height: 180px;
@@ -34,6 +38,20 @@ export const WriteWrapper = styled.article`
         font-size: 15px;
         font-family: system-ui;
         line-height: 24px;
+      }
+    }
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    flex-direction: column;
+
+    .mcm-input-unit-wrapper {
+      .mcm-input-unit-items {
+        .contents-input {
+          padding: 10px;
+          font-size: 12px;
+          line-height: 18px;
+        }
       }
     }
   }
@@ -58,6 +76,10 @@ export const SelectCategory = styled.select`
     cursor: pointer;
     font-size: 14px;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 16px 0px;
+  }
 `;
 
 export const OptionWrapper = styled.div`
@@ -66,6 +88,21 @@ export const OptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-right: solid 2px black;
+
+  @media ${breakPoints.mobileLarge} {
+    min-width: auto;
+    max-width: 100%;
+    border: unset;
+
+    .comments-password-wrapper {
+      border-bottom: dotted 1px black;
+      min-height: auto;
+
+      .mcm-input-unit-wrapper {
+        min-height: auto;
+      }
+    }
+  }
 `;
 
 export const OptionItems = styled.div`
@@ -73,7 +110,6 @@ export const OptionItems = styled.div`
   align-items: center;
   border-top: dotted 1px black;
   min-height: 40px;
-  overflow: hidden;
 
   ${(props: StyleTypes) => {
     const styles: { [key: string]: string } & CSSProperties = {};
@@ -103,6 +139,16 @@ export const OptionItems = styled.div`
       }
     }
   }
+
+  @media ${breakPoints.mobileLarge} {
+    .mcm-input-unit-wrapper {
+      .mcm-input-unit-items {
+        .password-input {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 `;
 
 export const Message = styled.div`
@@ -121,7 +167,21 @@ export const Message = styled.div`
 export const SubmitWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 16px;
+
+  @media ${breakPoints.mobileLarge} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px 0px;
+
+    .write-comments-button {
+      width: 100%;
+      padding: 8px 0px;
+      border: solid 1px gray;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+  }
 `;
 
 export const BugStatusWrapper = styled.div`

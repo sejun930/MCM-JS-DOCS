@@ -90,9 +90,7 @@ export default function MyModal() {
         </ModulesInfoWrapper>
         <_TreeForm />
         <_PropsForm propsRef={propsRef} />
-
-        {/* 
-        <_CommentsForm /> */}
+        <_CommentsForm />
       </ModulesInfoWrapper>
     </Template>
   );

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
 
+import { breakPoints } from "mcm-js-commons/dist/responsive";
+
 interface StyleTypes {
   isSelected?: boolean;
   fix?: boolean;
@@ -50,6 +52,12 @@ export const Wrapper = styled.div`
     ::before {
       width: 50%;
     }
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    right: 12px;
+    padding: 10px;
+    display: none;
   }
 `;
 

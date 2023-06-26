@@ -37,7 +37,7 @@ export default function _MainTitleTemplate({ id }: { id?: string }) {
         />
       </Items>
 
-      {/* {(list.length && <IndexRenderPage indexList={list} />) || <></>} */}
+      {(list.length && <IndexRenderPage indexList={list} />) || <></>}
     </Wrapper>
   );
 }

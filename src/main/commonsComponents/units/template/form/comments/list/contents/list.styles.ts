@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import { _Button } from "mcm-js-commons";
 
@@ -42,6 +43,10 @@ export const CommentsList = styled.li`
       display: flex;
     }
   }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 20px 16px;
+  }
 `;
 
 export const CommentsInfoWrapper = styled.div`
@@ -69,6 +74,14 @@ export const CommentsInfoWrapper = styled.div`
     font-family: "Manlo";
     word-spacing: 1px;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    flex-direction: column;
+
+    .date {
+      font-size: 10px;
+    }
+  }
 `;
 
 export const LabelWrapper = styled.div`
@@ -80,6 +93,12 @@ export const LabelWrapper = styled.div`
       props.hover && {
         textShadow: "0 0 0 #ffffff",
       }}
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    min-width: auto;
+    width: 100%;
+    display: flex;
   }
 `;
 
@@ -106,6 +125,11 @@ export const ContentsWrapper = styled.div`
 
   .mcm-span-unit {
     width: 100%;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 0px;
+    margin-top: 12px;
   }
 `;
 
@@ -164,6 +188,11 @@ export const DateWrapper = styled.div`
   .date {
     transition: all 0.3s ease-out;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    flex-direction: column;
+    gap: 4px 0px;
+  }
 `;
 
 export const ContentsInfo = styled.div`
@@ -185,10 +214,20 @@ export const ContentsInfo = styled.div`
       backgroundColor: "antiquewhite",
       marginTop: "10px",
     }}
+
+    @media ${breakPoints.mobileLarge} {
+    flex-direction: column;
+    align-items: baseline;
+    gap: 10px 0px;
+
+    span {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const QuestionTitle = styled.span`
-  font-size: 20px;
+  font-size: 20px !important;
   font-weight: 500;
   width: 20px;
   display: flex;

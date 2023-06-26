@@ -116,3 +116,13 @@ table {
   -ms-use-select: none;
   user-select: none;
 }
+
+.web-hide {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .web-hide {
+    display: block;
+  }
+}
