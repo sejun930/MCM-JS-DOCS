@@ -9,7 +9,7 @@ import { _Button, _CloseButton } from "mcm-js-commons";
 import { getUuid } from "../../functional";
 
 import { indexOptionalDataList } from "./index.data";
-import { Tooltip } from "mcm-js-dev";
+import { Tooltip } from "mcm-js";
 
 import {
   IndexIPropsTypes,
@@ -28,7 +28,6 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
           <Tooltip
             key={`index-option-list-${info.target}-${idx}`}
             useShowAnimation
-            position={{ top: "-50px" }}
             tooltipText={
               Array.isArray(info.tooltipText)
                 ? info.tooltipText[Number(props[info.target])]

@@ -82,7 +82,6 @@ export default function StarsForm({
           <Tooltip
             key={getUuid()}
             tooltipText={tooltipMessage}
-            position={{ top: "-50px" }}
             isDisable={!tooltipMessage}
           >
             <Star
