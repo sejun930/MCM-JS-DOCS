@@ -6,19 +6,34 @@ export default function ModalExamplePage() {
       onClick={() =>
         Modal.open({
           children: (
-            <button
-              onClick={() => {
-                alert("모달을 종료합니다.");
-                Modal.close({ id: "modal" });
-              }}
-            >
-              모달 종료하기
-            </button>
+            <span>
+              {" "}
+              wrapper, items, closeButton, contents 태그의 스타일을 각각 지정할
+              수 있습니다.{" "}
+            </span>
           ),
-          showBGAnimation: true,
-          showModalOpenAnimation: true,
-          id: "modal",
-          name: "aaa",
+          modalStyles: {
+            wrapper: {
+              backgroundColor: "rgba(30, 0, 50, 0.7)",
+            },
+            items: {
+              backgroundColor: "black",
+              border: "double 6px white",
+              borderRadius: "0px",
+              width: "250px",
+              height: "250px",
+            },
+            closeButton: {
+              backgroundColor: "black",
+              borderRadius: "100%",
+              border: "solid 1px white",
+              marginTop: "-10px",
+            },
+            contents: {
+              backgroundColor: "white",
+              width: "90%",
+            },
+          },
         })
       }
     >

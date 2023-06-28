@@ -131,7 +131,7 @@ export const NoticeContentsWrapper = styled.div`
 export const NoticeContents = styled.ul`
   display: flex;
   flex-direction: column;
-  height: 230px;
+  height: 260px;
   overflow: auto;
   gap: 24px 0px;
 

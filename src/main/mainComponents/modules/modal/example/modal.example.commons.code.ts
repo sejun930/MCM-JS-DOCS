@@ -1,5 +1,50 @@
 import { getCommonsHighlight } from "src/commons/highlight";
 
+// modalStyles 렌더용
+const getModalStyles = (space?: string, otherVers?: boolean) => {
+  space = space || "";
+  return `${getCommonsHighlight.getComma([
+    `${space}<span class="skyblue">wrapper:</span> <span class="deepPurple">{</span>
+            ${getCommonsHighlight.getComma([
+              `${space}<span class="skyblue">backgroundColor:</span> <span class='lightOrange'>"rgba(${
+                otherVers ? 100 : 30
+              }, 0, 50, 0.7)"</span>`,
+            ])}
+          ${space}<span class="deepPurple">}</span>`,
+    `         ${space}<span class="skyblue">items:</span> <span class="deepPurple">{</span>
+  ${getCommonsHighlight.getComma([
+    `          ${space}<span class="skyblue">backgroundColor:</span> <span class='lightOrange'>"black"</span>`,
+    `           ${space}<span class="skyblue">border:</span> <span class='lightOrange'>"double 6px white"</span>`,
+    `           ${space}<span class="skyblue">borderRadius:</span> <span class='lightOrange'>"0px"</span>`,
+    `           ${space}<span class="skyblue">width:</span> <span class='lightOrange'>"${
+      otherVers ? "50%" : "250px"
+    }"</span>`,
+    `           ${space}<span class="skyblue">height:</span> <span class='lightOrange'>"${
+      otherVers ? "40%" : "250px"
+    }"</span>`,
+  ])}
+          ${space}<span class="deepPurple">}</span>`,
+    `         ${space}<span class="skyblue">closeButton:</span> <span class="deepPurple">{</span>
+  ${getCommonsHighlight.getComma([
+    `          ${space}<span class="skyblue">backgroundColor:</span> <span class='lightOrange'>"black"</span>`,
+    `           ${space}<span class="skyblue">borderRadius:</span> <span class='lightOrange'>"${
+      otherVers ? "0" : "100%"
+    }"</span>`,
+    `           ${space}<span class="skyblue">border:</span> <span class='lightOrange'>"solid 1px white"</span>`,
+    `           ${space}<span class="skyblue">marginTop:</span> <span class='lightOrange'>"-10px"</span>`,
+  ])}
+          ${space}<span class="deepPurple">}</span>`,
+    `         ${space}<span class="skyblue">contents:</span> <span class="deepPurple">{</span>
+  ${getCommonsHighlight.getComma([
+    `          ${space}<span class="skyblue">backgroundColor:</span> <span class='lightOrange'>"white"</span>`,
+    `           ${space}<span class="skyblue">${
+      otherVers ? "height" : "width"
+    }:</span> <span class='lightOrange'>"${otherVers ? "50%" : "90%"}"</span>`,
+  ])}
+          ${space}<span class="deepPurple">}</span>`,
+  ])}`;
+};
+
 export const modalCommonsExampleCode = {
   children: (text: string) => [
     ``,
@@ -27,6 +72,22 @@ export const modalCommonsExampleCode = {
   mobileModalSize: [
     `<span class='skyblue'>mobileModalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>`,
     `<span class='skyblue'>mobileModalSize:</span> <span class='blue'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='blue'>}</span>`,
+  ],
+  modalStyles: [
+    `<span class="skyblue">modalStyles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span>
+          ${getModalStyles()}
+        <span class='yellow'>}</span><span class='blue'>}</span>`,
+    `<span class="skyblue">modalStyles</span><span class='lightGray'>:</span> <span class='blue'>{</span>
+          ${getModalStyles("  ")}
+          <span class='blue'>}</span>`,
+  ],
+  mobileModalStyles: [
+    `<span class="skyblue">mobileModalStyles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span>
+          ${getModalStyles("", true)}
+        <span class='blue'>}</span><span class='yellow'>}</span>`,
+    `<span class="skyblue">mobileModalStyles</span><span class='lightGray'>:</span> <span class='blue'>{</span>
+          ${getModalStyles("  ", true)}
+          <span class='blue'>}</span>`,
   ],
   hideCloseButton: [
     `<span class='skyblue'>hideCloseButton</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='darkBlue'>true</span><span class='blue'>}</span>`,

@@ -53,7 +53,7 @@ export const modalReturnCommonsData = ({
   return [
     getCommonsHighlight.tag.div(`
       ${getCommonsHighlight.tag.button({
-        children: getCommonsHighlight.text("모달 실행하기"),
+        children: getCommonsHighlight.text("모달 실행하기 "),
         clickEvent: {
           // useArrow: true,
           eventName: "openModal",
@@ -151,14 +151,28 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${modalCommonsExampleCode.mobileModalSize[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        // modalCommonsExampleCode.onCloseModal[idx],
         modalCommonsExampleCode.mobileModalSize[idx],
       ])}`,
+    ],
+    modalStyle: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.modalStyles[idx]}
+      `,
+      `${modalCommonsExampleCode.modalStyles[idx]}`,
+    ],
+    mobileModalStyles: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.mobileModalStyles[idx]}
+      `,
+      `${modalCommonsExampleCode.mobileModalStyles[idx]}`,
     ],
     hideCloseButton: [
       `${modalCommonsExampleCode.show[idx]} ${modalCommonsExampleCode.onCloseModal[idx]} ${modalCommonsExampleCode.hideCloseButton[idx]}`,
       `${getCommonsHighlight.getComma([
-        // modalCommonsExampleCode.onCloseModal[idx],
         modalCommonsExampleCode.hideCloseButton[idx],
       ])}`,
     ],

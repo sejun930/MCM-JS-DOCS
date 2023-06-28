@@ -49,21 +49,29 @@ export const modalPropsList: Array<PropsModuleListType> = [
     name: "modalSize",
     default: '{ width : "", height : "" }',
     type: "Object",
-    notice: "모달창의 크기(width, height)를 직접 지정할 수 있습니다.",
+    notice:
+      "모달창의 크기(width, height)를 직접 지정할 수 있습니다. <br />modalStyles와 함께 설정되면 modalSize가 우선순위를 가집니다.",
   },
   {
     name: "mobileModalSize",
     default: '{ width : "", height : "" }',
     type: "Object",
     notice:
-      "모바일 환경에서의 모달창의 크기(width, height)를 직접 지정할 수 있습니다.",
+      "모바일 환경에서의 모달창의 크기(width, height)를 직접 지정할 수 있습니다. <br /> mobileModalStyles와 함께 설정되면 mobileModalSize 우선순위를 가집니다.",
   },
   {
     name: "modalStyles",
-    default: "{ wrapper : {} .. }",
+    default: "{ wrapper : {}, itmes : {}, closeButton : {}, contents : {} }",
     type: "Object",
     notice:
       "모달의 각각의 태그(wrapper, items, closeButton, contents)별로 스타일을 직접 적용할 수 있습니다.",
+  },
+  {
+    name: "mobileModalStyles",
+    default: "{ wrapper : {}, itmes : {}, closeButton : {}, contents : {} }",
+    type: "Object",
+    notice:
+      "모바일 환경의 모달의 각각의 태그(wrapper, items, closeButton, contents)별로 스타일을 직접 적용할 수 있습니다.",
   },
   {
     name: "showBGAnimation",

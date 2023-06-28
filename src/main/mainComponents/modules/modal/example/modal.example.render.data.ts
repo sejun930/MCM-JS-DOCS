@@ -81,7 +81,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     // isFull: true,
     contents: [
       {
-        remakrs: "모바일에서의 크기를 별도로 조절할 수도 있습니다.",
+        remakrs: "모바일(767px 이하)에서의 크기를 별도로 조절할 수도 있습니다.",
         addProps: {
           ...modalExampleInitProps,
           modalSize: { width: "767px" },
@@ -90,8 +90,84 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Mobile Responsive Modal",
         },
-        content: `모바일에서만 width 50%, height 50% 크기를 가집니다.`,
+        content: `모바일(767px 이하)에서만 width 50%, height 50% 크기를 가집니다.`,
         code: modalCodeList(idx).responsive,
+      },
+    ],
+  },
+  {
+    title: "스타일 적용 (웹, 모바일)",
+    isFull: true,
+    contents: [
+      {
+        remakrs:
+          "(웹과 모바일 동일 적용) 각각의 태그에 스타일을 직접 지정할 수 있습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          modalStyles: {
+            wrapper: {
+              backgroundColor: "rgba(30, 0, 50, 0.7)",
+            },
+            items: {
+              backgroundColor: "black",
+              border: "double 6px white",
+              borderRadius: "0px",
+              width: "250px",
+              height: "250px",
+            },
+            closeButton: {
+              backgroundColor: "black",
+              borderRadius: "100%",
+              border: "solid 1px white",
+              marginTop: "-10px",
+            },
+            contents: {
+              backgroundColor: "white",
+              width: "90%",
+            },
+          },
+        },
+        info: {
+          buttonName: "Open Custom Styles of Web Modal",
+        },
+        content:
+          "wrapper, items, closeButton, contents 태그의 스타일을 각각 지정할 수 있습니다.",
+        code: modalCodeList(idx).modalStyle,
+      },
+      {
+        remakrs:
+          "(모바일 : 767px 이하에서만 적용) 각각의 태그에 스타일을 직접 지정할 수 있습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          mobileModalStyles: {
+            wrapper: {
+              backgroundColor: "rgba(100, 0, 50, 0.7)",
+            },
+            items: {
+              backgroundColor: "black",
+              border: "double 6px white",
+              borderRadius: "0px",
+              width: "50%",
+              height: "40%",
+            },
+            closeButton: {
+              backgroundColor: "black",
+              borderRadius: "0",
+              border: "solid 1px white",
+              marginTop: "-10px",
+            },
+            contents: {
+              backgroundColor: "white",
+              height: "50%",
+            },
+          },
+        },
+        info: {
+          buttonName: "Open Custom Styles of Mobile Modal",
+        },
+        content:
+          "모바일 환경에서만 적용되는 wrapper, items, closeButton, contents 태그의 스타일을 각각 지정할 수 있습니다.",
+        code: modalCodeList(idx).mobileModalStyles,
       },
     ],
   },
@@ -157,6 +233,25 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
       },
     ],
   },
+  // {
+  //   title: "닫기 후 이벤트 실행",
+  //   contents: [
+  //     {
+  //       remakrs: "모달을 닫은 후에 설정한 이벤트를 실행시킬 수 있습니다.",
+  //       addProps: {
+  //         ...modalExampleInitProps,
+  //         onAfterCloseEvent: () => {
+  //           alert("모달이 닫혔습니다.");
+  //         },
+  //       },
+  //       info: {
+  //         buttonName: "Open After Close Event",
+  //       },
+  //       content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+  //       code: modalCodeList(idx).offAutoClose,
+  //     },
+  //   ],
+  // },
   {
     title: "",
     isError: true,
