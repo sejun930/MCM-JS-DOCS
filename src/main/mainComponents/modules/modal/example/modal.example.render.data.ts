@@ -233,25 +233,44 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
       },
     ],
   },
-  // {
-  //   title: "닫기 후 이벤트 실행",
-  //   contents: [
-  //     {
-  //       remakrs: "모달을 닫은 후에 설정한 이벤트를 실행시킬 수 있습니다.",
-  //       addProps: {
-  //         ...modalExampleInitProps,
-  //         onAfterCloseEvent: () => {
-  //           alert("모달이 닫혔습니다.");
-  //         },
-  //       },
-  //       info: {
-  //         buttonName: "Open After Close Event",
-  //       },
-  //       content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
-  //       code: modalCodeList(idx).offAutoClose,
-  //     },
-  //   ],
-  // },
+  {
+    title: "자동 종료 예약",
+    contents: [
+      {
+        remakrs: "원하는 시간 (1/1000초) 후에 모달을 자동으로 종료시킵니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          timer: 2000,
+          showBGAnimation: true,
+          showModalOpenAnimation: true,
+          offAutoClose: true,
+          hideCloseButton: true,
+        },
+        info: {
+          buttonName: "Open Auto Close Timer Modal",
+        },
+        content: `2초 후에 모달이 자동으로 종료됩니다.`,
+        code: modalCodeList(idx).autoCloseTimer,
+      },
+    ],
+  },
+  {
+    title: "스크롤 방지",
+    contents: [
+      {
+        remakrs: "모달이 실행되면 스크롤 이동을 방지합니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          onFixWindow: true,
+        },
+        info: {
+          buttonName: "Open Fix Window",
+        },
+        content: `이 모달이 실행되는 동안에는 스크롤을 제어할 수 없습니다.`,
+        code: modalCodeList(idx).onFixWindow,
+      },
+    ],
+  },
   {
     title: "",
     isError: true,

@@ -105,4 +105,12 @@ export const modalCommonsExampleCode = {
     `<span class='skyblue'>offAutoClose</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='darkBlue'>true</span><span class='blue'>}</span>`,
     `<span class='skyblue'>offAutoClose:</span> <span class='darkBlue'>true</span>`,
   ],
+  onFixWindow: [
+    `<span class='skyblue'>onFixWindow</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='darkBlue'>true</span><span class='blue'>}</span>`,
+    `<span class='skyblue'>onFixWindow:</span> <span class='darkBlue'>true</span>`,
+  ],
+  timer: (timer: number) => [
+    `<span class='skyblue'>timer</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='darkBlue'>${timer}</span><span class='blue'>}</span>`,
+    `<span class='skyblue'>timer:</span> <span class='darkBlue'>${timer}</span>`,
+  ],
 };

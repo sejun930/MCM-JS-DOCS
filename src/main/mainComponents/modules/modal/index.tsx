@@ -88,8 +88,8 @@ export default function MyModal() {
             </>
           )) || <></>}
         </ModulesInfoWrapper>
-        <_TreeForm />
         <_PropsForm propsRef={propsRef} />
+        <_TreeForm />
         <_CommentsForm />
       </ModulesInfoWrapper>
     </Template>

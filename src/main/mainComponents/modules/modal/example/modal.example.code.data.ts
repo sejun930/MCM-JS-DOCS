@@ -217,6 +217,34 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
       ])}`,
     ],
+    onFixWindow: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.onFixWindow[idx]}
+      `,
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.onFixWindow[idx],
+      ])}`,
+    ],
+    autoCloseTimer: [
+      `
+        ${modalCommonsExampleCode.show[idx]}
+        ${modalCommonsExampleCode.onCloseModal[idx]}
+        ${modalCommonsExampleCode.timer(2000)[idx]}
+        ${modalCommonsExampleCode.showBGAnimation[idx]}
+        ${modalCommonsExampleCode.showModalOpenAnimation[idx]}
+        ${modalCommonsExampleCode.offAutoClose[idx]}
+        ${modalCommonsExampleCode.hideCloseButton[idx]}
+      `,
+      `${getCommonsHighlight.getComma([
+        modalCommonsExampleCode.timer(2000)[idx],
+        `         ` + modalCommonsExampleCode.showBGAnimation[idx],
+        `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
+        `         ` + modalCommonsExampleCode.offAutoClose[idx],
+        `         ` + modalCommonsExampleCode.hideCloseButton[idx],
+      ])}`,
+    ],
   };
 };
 // {

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
 
 import { _Input } from "mcm-js-commons";
-
-import { moduleState } from "src/commons/store";
 import {
   LayoutNavListWrapper,
   LayoutNavWrapper,
@@ -16,10 +13,11 @@ import NavSearchPage from "./search";
 
 export default function LayoutNavPage({
   isMobileTap,
+  module,
 }: {
   isMobileTap?: boolean;
+  module: string;
 }) {
-  const [module] = useRecoilState(moduleState);
   // 모듈 검색어
   const [search, setSearch] = useState<string>("");
   // 렌더 여부

@@ -3,8 +3,8 @@ const initIndexList = (module: string) => [
   { title: `📖 ${module}`, id: "main-title-form" },
   { title: "🔍 How To Use", id: "how-use-form" },
   { title: "📝 Example", id: "example-form" },
-  { title: "📂 Module Tree", id: "tree-form" },
   { title: "📤 Props List", id: "props-form" },
+  { title: "📂 Module Tree", id: "tree-form" },
   { title: "🌟 Comments", id: "comments-form" },
 ];
 

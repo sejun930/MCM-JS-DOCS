@@ -117,12 +117,21 @@ export const modalPropsList: Array<PropsModuleListType> = [
     name: "onAfterCloseEvent",
     default: "() => {}",
     type: "Function",
-    notice: "모달이 종료되는 시점 후에 실행될 이벤트입니다.",
+    notice:
+      "모달이 종료되는 시점 후(onCloseModal 함수 실행 후)에 실행될 이벤트입니다. <br /> 모달이 닫힌 후에 input 태그등을 foucs 하는 등의 용도로 사용할 수 있습니다.",
+  },
+  {
+    name: "timer",
+    default: "0",
+    type: "Number",
+    notice:
+      "설정한 시간(Millisecond : 1/1000)이 경과 후 모달을 자동으로 종료시킬 수 있습니다. <br /> 예를 들어, 1초 후에 모달을 종료하고 싶다면 1초의 Millisecond인 1000을 전달합니다. <br />1초(=1000) 미만의 숫자를 기입하면 실행되지 않습니다.",
   },
   {
     name: "onFixWindow",
     default: "false",
     type: "Boolean",
-    notice: "모달이 실행될 때 화면 스크롤 이동을 방지할 수 있습니다.",
+    notice:
+      "모달이 실행될 때 화면 스크롤 이동을 방지할 수 있습니다. <br /> 상위 모달, 하위 모달 상관없이 모달 전체에 적용됩니다.",
   },
 ];
