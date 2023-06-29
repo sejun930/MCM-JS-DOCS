@@ -24,5 +24,9 @@ module.exports = {
     "space-before-function-paren": "off",
     "react/react-in-jsx-scope": "off",
     "react/no-danger-with-children": "off",
+    "array-callback-return": "off",
+    "no-useless-computed-key": "off",
+    "react/no-children-prop": "off",
+    "react/no-unescaped-entities": "off",
   },
 };

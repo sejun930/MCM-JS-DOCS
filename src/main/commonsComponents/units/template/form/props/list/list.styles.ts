@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-import { _PText } from "mcm-js-commons";
+// import { _PText } from "mcm-js-commons";
 
 interface StyleTypes {
   isRequired?: boolean;

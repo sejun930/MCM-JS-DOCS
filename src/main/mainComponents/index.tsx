@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
-import { _PText, _Title, _Anchor, _Image } from "mcm-js-commons";
+import { _PText, _Title } from "mcm-js-commons";
 
 import Template from "../commonsComponents/units/template/main";
 import _SubTitleTemplate from "../commonsComponents/units/template/title/subTitle";

@@ -72,7 +72,7 @@ export const getCommonsHighlight = {
     div: (children: string, endSpace?: string) =>
       getCommonsHighlight.tag.tag({
         tagName: "div",
-        children: children,
+        children,
         endSpace,
       }),
     // button 태그

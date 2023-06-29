@@ -14,7 +14,7 @@ import { MutableRefObject } from "react";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import { FunctionalListType } from "src/commons/data/functional/functional.commons.data";
-import { _Title, _SpanText, _PText } from "mcm-js-commons";
+import { _Title, _PText } from "mcm-js-commons";
 import ModulePropsListFormPage from "../../props/list";
 import _Copy from "src/main/commonsComponents/units/copy";
 

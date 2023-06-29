@@ -15,12 +15,16 @@ import ModalResultForm from "../../modal/modal.result";
 import { Modal } from "mcm-js-dev";
 import { _SpanTextWithHtml } from "mcm-js-commons";
 
-import { getHashPassword } from "src/main/commonsComponents/functional";
+import {
+  getHashPassword,
+  changeMultipleLine,
+} from "src/main/commonsComponents/functional";
 import { getServerTime } from "src/commons/libraries/firebase";
-import { changeMultipleLine } from "src/main/commonsComponents/functional";
-import { categoryListArray } from "./comments.write.types";
-
-import { initInfo, WriteInfoTypes } from "./comments.write.types";
+import {
+  initInfo,
+  WriteInfoTypes,
+  categoryListArray,
+} from "./comments.write.types";
 import { InfoTypes } from "../comments.types";
 
 // 중복 실행 방지

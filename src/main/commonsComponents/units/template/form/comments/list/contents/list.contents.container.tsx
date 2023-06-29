@@ -15,7 +15,7 @@ import { Modal } from "mcm-js";
 //   ? "mcm-js-dev"
 //   : "mcm-js");
 import {
-  CategoryTypes,
+  // CategoryTypes,
   CommentsAllInfoTypes,
   InfoTypes,
 } from "../../comments.types";

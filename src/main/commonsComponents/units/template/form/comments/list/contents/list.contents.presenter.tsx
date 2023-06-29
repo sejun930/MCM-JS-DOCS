@@ -21,7 +21,7 @@ import { ListContentsIProps } from "./list.contents.container";
 // import ContentsOptionalPage from "./functional/contents.select.functional.container";
 
 import _SelectForm from "../../../select/select.container";
-import { getDateForm, getUuid } from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional";
 import CommentsLabel from "../label";
 import StarsForm from "../../write/stars";
 

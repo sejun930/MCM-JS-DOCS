@@ -4,16 +4,21 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { ipState, moduleState } from "src/commons/store";
 
-import { InfoTypes, initCountList, CategoryTypes } from "./comments.types";
 import apis from "src/commons/libraries/commons.apis";
 import {
-  CollectionReference_DocumentData,
+  CollectionReferenceDocumentData,
   getDoc,
   getResult,
-  Query_DocumentData,
+  QueryDocumentData,
 } from "src/commons/libraries/firebase";
 
-import { initCommentsInfo, CommentsAllInfoTypes } from "./comments.types";
+import {
+  InfoTypes,
+  initCountList,
+  CategoryTypes,
+  initCommentsInfo,
+  CommentsAllInfoTypes,
+} from "./comments.types";
 import { getUserIp } from "src/main/commonsComponents/functional";
 
 // 데이터 조회중 (중복 실행 방지)
@@ -28,7 +33,7 @@ export default function CommentsPage() {
   const [commentsInfo, setCommentsInfo] =
     useState<CommentsAllInfoTypes>(initCommentsInfo);
   const [module] = useRecoilState<string>(moduleState);
-  const [ip, setIp] = useRecoilState<string>(ipState);
+  const [, setIp] = useRecoilState<string>(ipState);
 
   useEffect(() => {
     // 최초 댓글 리스트 가져오기
@@ -48,7 +53,7 @@ export default function CommentsPage() {
 
   // 필터 쿼리 적용하기
   const getFilterQuery = (
-    doc: Query_DocumentData,
+    doc: QueryDocumentData,
     info: CommentsAllInfoTypes
   ) => {
     const { selectCategory } = info;
@@ -120,11 +125,11 @@ export default function CommentsPage() {
         }
       }
 
-      const doc = getFilterQuery(getCommentDoc() as Query_DocumentData, _info);
+      const doc = getFilterQuery(getCommentDoc() as QueryDocumentData, _info);
 
       try {
         const result = await apis(doc).read();
-        let _commentInfo = { ..._info };
+        const _commentInfo = { ..._info };
 
         // 댓글 리스트 저장하기
         _commentInfo.commentsList = getResult(result);
@@ -153,7 +158,7 @@ export default function CommentsPage() {
 
   // 카테고리 개수 저장하기
   const saveCategoryCount = async (info: CommentsAllInfoTypes) => {
-    let _list: { [key: string]: number } = {
+    const _list: { [key: string]: number } = {
       all: 0,
       bug: 0,
       question: 0,
@@ -169,7 +174,7 @@ export default function CommentsPage() {
         if (result.empty) {
           // 비어있을 경우 새로 생성하기
           initCountList.forEach((el) => {
-            (doc as CollectionReference_DocumentData).add(el);
+            (doc as CollectionReferenceDocumentData).add(el);
           });
         } else {
           result.forEach((data) => {
@@ -208,7 +213,7 @@ export default function CommentsPage() {
           for (const key in _list) {
             allCount += _list[key];
           }
-          _list["all"] = allCount;
+          _list.all = allCount;
         }
       } catch (err) {
         console.log(err);
@@ -316,7 +321,7 @@ export default function CommentsPage() {
 
         if (!updateDoc.empty) {
           const result = updateDoc.docs[0].data();
-          let countList: {
+          const countList: {
             [key: string]: number | CategoryTypes;
           } = { ...result };
 
@@ -337,7 +342,7 @@ export default function CommentsPage() {
           // 카테고리가 리뷰 또는 버그일 경우
           if (category === "review" || category === "bug") {
             // 어떤 점수 필터를 하나 제거할건지 정한다.
-            let originTargetData = category == "review" ? rating : bugLevel;
+            let originTargetData = category === "review" ? rating : bugLevel;
             // 비교할 원본 데이터
             const _originData =
               category === "review" ? originData.rating : originData.bugLevel;

@@ -1,15 +1,14 @@
-import { InfoTypes } from "../comments.types";
+import { InfoTypes, CommentsAllInfoTypes } from "../comments.types";
 import CommentsListUIPage from "./comments.list.presenter";
 
-import { categoryInitList } from "../write/comments.write.types";
-import CommentsLabel from "./label";
-import StarsForm from "../write/stars";
+// import { categoryInitList } from "../write/comments.write.types";
+// import CommentsLabel from "./label";
+// import StarsForm from "../write/stars";
 
-import { CommentsAllInfoTypes } from "../comments.types";
-import { _Button, _SpanText } from "mcm-js-commons";
+// import { _Button, _SpanText } from "mcm-js-commons";
 import { MutableRefObject, useEffect, useRef } from "react";
 
-let search = "";
+// let search = "";
 let saveCategory = "all";
 export default function CommentsListPage({
   commentsInfo,

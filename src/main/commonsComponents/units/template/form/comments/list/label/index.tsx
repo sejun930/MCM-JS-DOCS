@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-import { _SpanText, _Button } from "mcm-js-commons";
+import { _Button } from "mcm-js-commons";
 import React, { MouseEvent } from "react";
 
-import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+// import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import { CommentsAllInfoTypes, InfoTypes } from "../../comments.types";
 import { getUuid } from "src/main/commonsComponents/functional";
 
@@ -26,7 +26,7 @@ export default function CommentsLabel({
   modifyRatingEvent?: (value: number) => void; // 평점 수정 이벤트 (평점 수정 가능)
 }) {
   const renderLabel = () => {
-    let nodeList = [];
+    const nodeList = [];
 
     // 전체 카테고리일 경우, 각각의 카테고리 명 출력
     if (showCategoryName || commentsInfo?.selectCategory === "all") {

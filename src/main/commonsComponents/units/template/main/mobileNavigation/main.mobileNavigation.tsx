@@ -12,7 +12,7 @@ import { Modal } from "mcm-js";
 
 import LayoutNavPage from "src/main/commonsComponents/layout/nav";
 
-let open = false;
+// let open = false;
 export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);

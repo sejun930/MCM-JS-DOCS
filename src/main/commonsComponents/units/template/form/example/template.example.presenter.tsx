@@ -1,6 +1,5 @@
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
-import { versState } from "src/commons/store";
+import { versState, moduleState } from "src/commons/store";
 
 import { _Button, _Title, _PText } from "mcm-js-commons";
 import _SubTitleTemplate from "../../title/subTitle";
@@ -23,7 +22,7 @@ import {
 } from "./template.example.types";
 
 // 모든 코드들의 높이값을 저장하는 객체
-let allHeightList = {};
+const allHeightList = {};
 export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
   const {
     exampleList,

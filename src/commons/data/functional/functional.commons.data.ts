@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { PropsModuleListType } from "../props/props.commons.data";
 
+import ModalFunctionalList from "src/main/mainComponents/modules/modal/functional";
+
 export interface FunctionalListType {
   name: string; // 부가기능 이름
   remakrs: string; // 간단 설명
@@ -12,8 +14,6 @@ export interface FunctionalListType {
   info?: Array<string>; // 추가 정보
   setExampleCode?: ReactNode; // 예시 실행 코드
 }
-
-import ModalFunctionalList from "src/main/mainComponents/modules/modal/functional";
 
 export const functionalList: { [key: string]: Array<FunctionalListType> } = {
   Modal: ModalFunctionalList(),

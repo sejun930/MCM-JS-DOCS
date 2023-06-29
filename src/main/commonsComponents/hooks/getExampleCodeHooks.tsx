@@ -59,8 +59,8 @@ export default function getExampleCodeComponnet() {
 
     const getReturnStr = getReturn(
       getCommonsReturn({
-        code: code,
-        children: children,
+        code,
+        children,
         idx: idx || 0,
         changeContent,
         funcName,

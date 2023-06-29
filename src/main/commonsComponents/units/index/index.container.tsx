@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { _CloseButton, _Button } from "mcm-js-commons";
+// import { _CloseButton, _Button } from "mcm-js-commons";
 import { IndexIPropsTypes, IndexPagePropsTypes } from "./index.type";
 
 import _IndexUIForm from "./index.presenter";

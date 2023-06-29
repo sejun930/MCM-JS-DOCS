@@ -32,16 +32,16 @@ db.settings({
 export type FieldValue = firebase.firestore.FieldValue;
 export type DocumentData = firebase.firestore.DocumentData;
 export type QuerySnapshot = firebase.firestore.QuerySnapshot;
-export type QuerySnapshot_DocumentData =
+export type QuerySnapshotDocumentData =
   firebase.firestore.QuerySnapshot<DocumentData>;
 export type CollectionReference = firebase.firestore.CollectionReference;
-export type CollectionReference_DocumentData =
+export type CollectionReferenceDocumentData =
   firebase.firestore.CollectionReference<DocumentData>;
-export type DocumentReference_DocumentData =
+export type DocumentReferenceDocumentData =
   firebase.firestore.DocumentReference<DocumentData>;
-export type Query_DocumentData = firebase.firestore.Query<DocumentData>;
+export type QueryDocumentData = firebase.firestore.Query<DocumentData>;
 export type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
-export type QueryDocumentSnapshot_DocumentData =
+export type QueryDocumentSnapshotDocumentData =
   firebase.firestore.QueryDocumentSnapshot<DocumentData>;
 
 // export const analytics = getAnalytics(firebaseApp);

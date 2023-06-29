@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { _Button } from "mcm-js-commons";
+// import { _Button } from "mcm-js-commons";
 
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 

@@ -1,4 +1,4 @@
-import { ModulesInfoWrapper, TitleWrapper } from "../index.styles";
+import { ModulesInfoWrapper } from "../index.styles";
 
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -13,15 +13,15 @@ import { modalCodeList } from "./example/modal.example.code.data";
 
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
-import _VersionForm from "src/main/commonsComponents/units/template/form/version";
-import _FixedForm from "src/main/commonsComponents/units/template/form/fixed";
+// import _VersionForm from "src/main/commonsComponents/units/template/form/version";
+// import _FixedForm from "src/main/commonsComponents/units/template/form/fixed";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
 import _FunctionalForm from "src/main/commonsComponents/units/template/form/functional";
 import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
 import _PropsForm from "src/main/commonsComponents/units/template/form/props";
 import _CommentsForm from "src/main/commonsComponents/units/template/form/comments/comments.render";
-import _IndexForm from "src/main/commonsComponents/units/index/index.container";
+// import _IndexForm from "src/main/commonsComponents/units/index/index.container";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 export default function MyModal() {

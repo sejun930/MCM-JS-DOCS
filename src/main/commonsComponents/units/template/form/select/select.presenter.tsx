@@ -1,4 +1,4 @@
-import { _CloseButton, _Button } from "mcm-js-commons";
+import { _CloseButton } from "mcm-js-commons";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import {

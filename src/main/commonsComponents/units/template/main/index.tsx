@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-import { _Button, _Image } from "mcm-js-commons";
 import MainMobileNavigationTapPage from "./mobileNavigation/main.mobileNavigation";
 
 // DOC 페이지 메인 템플릿

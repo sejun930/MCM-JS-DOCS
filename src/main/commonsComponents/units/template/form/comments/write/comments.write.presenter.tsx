@@ -7,7 +7,7 @@ import {
   SubmitWrapper,
 } from "./comments.write.styles";
 
-import { _Input, _SpanText, _Button } from "mcm-js-commons";
+import { _Input, _Button } from "mcm-js-commons";
 import { IPropsTypes } from "./comments.write.types";
 import StarsForm from "./stars";
 

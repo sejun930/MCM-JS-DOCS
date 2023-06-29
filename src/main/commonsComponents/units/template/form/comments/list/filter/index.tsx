@@ -6,7 +6,7 @@ import {
 } from "./filter.styles";
 import { useEffect, useState } from "react";
 
-import { _Button, _Image, _CloseButton } from "mcm-js-commons";
+import { _Image, _CloseButton } from "mcm-js-commons";
 import { CommentsAllInfoTypes } from "../../comments.types";
 
 import _SelectForm from "../../../select/select.container";
@@ -68,7 +68,7 @@ export default function CommentsFilterPage({
 
   // 필터 현재 이미지 렌더
   const getFilterImage = (): string => {
-    let src = "/images/commons/icons/filter-";
+    const src = "/images/commons/icons/filter-";
 
     // 필터 오픈 전 / 후
     let icon = open ? "click" : "off";

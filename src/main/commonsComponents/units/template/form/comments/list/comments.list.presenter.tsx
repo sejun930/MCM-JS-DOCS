@@ -6,25 +6,23 @@ import {
   CommentsListWrapper,
   EmptyWrapper,
 } from "./comments.list.styles";
+import { MutableRefObject } from "react";
 
-import { InfoTypes } from "../comments.types";
+import { InfoTypes, CommentsAllInfoTypes } from "../comments.types";
 import { categoryInitList } from "../write/comments.write.types";
 
 import {
   _PText,
   _Button,
-  _SpanTextWithHtml,
-  _Title,
-  _Input,
+  // _SpanTextWithHtml,
+  // _Title,
+  // _Input,
 } from "mcm-js-commons";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsFilterPage from "./filter";
-import PageNationPage from "../../pageNation";
-
-import { CommentsAllInfoTypes } from "../comments.types";
-import { MutableRefObject } from "react";
+// import PageNationPage from "../../pageNation";
 
 export default function CommentsListUIPage({
   commentsInfo,

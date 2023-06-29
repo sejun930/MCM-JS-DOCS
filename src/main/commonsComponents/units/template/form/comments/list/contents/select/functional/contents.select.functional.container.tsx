@@ -12,8 +12,10 @@ import { InfoTypes } from "../../../../comments.types";
 
 import ModalResultForm from "../../../../../modal/modal.result";
 
-import { changeMultipleLine } from "src/main/commonsComponents/functional";
-import { getHashPassword } from "src/main/commonsComponents/functional";
+import {
+  changeMultipleLine,
+  getHashPassword,
+} from "src/main/commonsComponents/functional";
 
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
@@ -107,7 +109,7 @@ export default function ContentsSelectFunctionalPage({
               </_SpanText>
             </Message>
           }
-        ></ModalResultForm>
+        />
       ),
       showBGAnimation: true,
       showModalOpenAnimation: true,

@@ -7,7 +7,7 @@ let eventStart: boolean = false; // 스크롤 이벤트 시작여부
 let itemsHeight: number = 0; // tap items 태그의 높이값 설정
 let eventDebouncing: ReturnType<typeof setTimeout> | number; // 디바운싱 이벤트
 
-const bonusHeight = 80; // 스크롤 오차 범위
+// const bonusHeight = 80; // 스크롤 오차 범위
 export default function ExampleFixedPage({
   codeInfo,
   endPointRef,

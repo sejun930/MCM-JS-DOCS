@@ -2,7 +2,7 @@ import { Star, Wrapper } from "./stars.styles";
 import React, { useEffect, useState } from "react";
 
 import { getUuid } from "src/main/commonsComponents/functional";
-import { _Button, _SpanText } from "mcm-js-commons";
+import { _SpanText } from "mcm-js-commons";
 import { Tooltip } from "mcm-js";
 
 import { starsTooltipTextList } from "./stars.tooltip.text";

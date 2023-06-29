@@ -1,5 +1,5 @@
 import { AgreeUserPrivacyWrapper, PrivacyItems } from "./privacy.styles";
-import { _Title, _Button } from "mcm-js-commons";
+import { _Button } from "mcm-js-commons";
 import { WriteInfoTypes } from "../comments.write.types";
 
 import { Modal } from "mcm-js";
