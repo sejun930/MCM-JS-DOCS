@@ -21,7 +21,9 @@ export default function NavListPage({
     >
       {(list.length &&
         list.map((el, key) => {
-          const _href = `/modules/${(el?.href || el?.name).toLowerCase()}`;
+          const _href = `/modules/${String(
+            el?.href || el?.name
+          ).toLowerCase()}`;
           let name = el?.name || "";
 
           if (search) {

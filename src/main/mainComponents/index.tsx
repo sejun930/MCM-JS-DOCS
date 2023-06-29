@@ -25,7 +25,7 @@ export default function MainHomePage() {
           </_PText>
           <_PText>
             <span>이용중에 발생되는 이슈나 개선점들을</span>{" "}
-            <span>가감없이 말씀해주시면 감사하겠습니다! 🙇.</span>
+            <span>가감없이 말씀해주시면 감사하겠습니다! 🙇</span>
           </_PText>
         </ProjectInfo>
       </ProjectInfoWrapper>
