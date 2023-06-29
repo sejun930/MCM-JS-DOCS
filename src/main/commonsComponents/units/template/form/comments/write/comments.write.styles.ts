@@ -1,4 +1,4 @@
-import { CSSProperties } from "styled-components";
+import { CSSProperties } from "react";
 import styled from "@emotion/styled";
 
 import { breakPoints } from "mcm-js-commons/dist/responsive";
