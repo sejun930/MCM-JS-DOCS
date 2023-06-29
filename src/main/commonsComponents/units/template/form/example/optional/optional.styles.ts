@@ -1,9 +1,23 @@
 import styled from "@emotion/styled";
+import { CSSProperties } from "react";
 
 export const Wrapper = styled.section`
   border: solid 1px #dddddd;
   border-top: unset;
-  /* border-bottom: solid 1px #dddddd; */
+  width: 100%;
+
+  .mcm-tooltip-wrapper {
+    width: 100%;
+    display: flex;
+
+    .mcm-tooltip-items {
+      width: 100%;
+
+      .mcm-tooltip-layout {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export const OptionalWrapper = styled.button`
@@ -16,10 +30,9 @@ export const OptionalWrapper = styled.button`
 `;
 
 export const CodeInfoWrapper = styled.div`
-  /* max-height: 0px; */
   overflow: hidden;
   transition: all 0.65s ease-out;
-  max-height: 0px;
+  /* max-height: 0px; */
 
   .copy-wrapper {
     border-radius: 0px;
@@ -29,8 +42,11 @@ export const CodeInfoWrapper = styled.div`
     }
   }
 
-  ${(props: { showCode?: boolean }) =>
-    props.showCode && {
-      maxHeight: "60vh",
-    }}
+  ${(props: { showCode?: boolean; allHeight?: number }) => {
+    const styles: { [key: string]: string } & CSSProperties = {
+      maxHeight: !props.showCode ? "0px" : `${props.allHeight}px`,
+    };
+
+    return styles;
+  }}
 `;

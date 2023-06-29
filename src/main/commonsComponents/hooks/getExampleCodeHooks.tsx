@@ -1,7 +1,8 @@
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { moduleState, versState } from "src/commons/store";
 
 import {
+  ExampleCommonsTypes,
   exampleCommonsList,
   exampleCommonsReturnList,
 } from "src/commons/data/example/example.commons.data";
@@ -11,13 +12,27 @@ import React from "react";
 
 export default function getExampleCodeComponnet() {
   const [module] = useRecoilState(moduleState);
-  const commonsInfo = exampleCommonsList[module];
+  const [vers] = useRecoilState(versState);
+
+  const getCommonsInfo: ExampleCommonsTypes[] =
+    exampleCommonsList[module || "Modal"];
+  const commonsInfo: ExampleCommonsTypes =
+    getCommonsInfo && getCommonsInfo[vers || 0];
 
   // 해당 모듈의 이름으로 호출하는 코드 출력
-  const getExampleCode = (
-    code: string,
-    children: React.ReactNode | string
-  ): string => {
+  const getExampleCode = ({
+    code,
+    children,
+    idx,
+    changeContent,
+    funcName,
+  }: {
+    code: string;
+    children: React.ReactNode | string;
+    idx?: number;
+    changeContent?: string;
+    funcName?: string;
+  }): string => {
     let str = "";
     str += `<span class='purple'>import</span>`;
     str += `<span class='yellow'> { </span>`;
@@ -41,7 +56,17 @@ export default function getExampleCodeComponnet() {
     if (commonsInfo?.code) {
       str += `${commonsInfo.code}`;
     }
-    str += `/&tap&/${getReturn(getCommonsReturn(code, children))}`;
+
+    const getReturnStr = getReturn(
+      getCommonsReturn({
+        code: code,
+        children: children,
+        idx: idx || 0,
+        changeContent,
+        funcName,
+      }) || code
+    );
+    if (getReturnStr) str += `/&tap&/${getReturnStr}`;
     str += "/&tap&/<span class='yellow'>}</span>";
 
     return str;
@@ -67,25 +92,37 @@ export default function getExampleCodeComponnet() {
 
   // return 붙여서 렌더하기
   const getReturn = (code: string) => {
-    const str = `  <span class='purple'>return (</span>
-    ${code}
-  <span class='purple'>)</span><span class='lightGray'>;</span>`;
+    const str = `  <span class='purple'>return</span> <span class='deepPurple'>(</span>
+    ${(code && code) || ""}
+  <span class='deepPurple'>)</span><span class='lightGray'>;</span>`;
 
     return str;
   };
 
   // return 안에서 모듈 각각의 공통 태그들 추가하기
-  const getCommonsReturn = (
-    code: string,
-    children: React.ReactNode | string
-  ) => {
-    const returnInfo = exampleCommonsReturnList[module];
+  const getCommonsReturn = ({
+    code,
+    children,
+    idx,
+    changeContent,
+    funcName,
+  }: {
+    code: string;
+    children: React.ReactNode | string;
+    idx: number;
+    changeContent?: string;
+    funcName?: string;
+  }): string => {
+    const returnInfo = exampleCommonsReturnList({
+      changeContent: changeContent || "",
+      funcName,
+    })[module];
     let _children = children;
     if (typeof children === "string") {
       _children = `<span class='lightGray'>${children}</span>`;
     }
 
-    if (returnInfo) return returnInfo(code, _children);
+    if (returnInfo) return returnInfo(code, _children)[idx || 0];
     return code;
   };
 

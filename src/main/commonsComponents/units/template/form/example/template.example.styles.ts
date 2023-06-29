@@ -1,15 +1,10 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   offBoard?: boolean;
   isFull?: boolean;
 }
-
-export const ExampleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* margin-top: 100px; */
-`;
 
 export const ExampleTitleWrapper = styled.div`
   display: flex;
@@ -27,6 +22,14 @@ export const ExampleTitleWrapper = styled.div`
       font-size: 16px;
     }
   }
+
+  @media ${breakPoints.mobileLarge} {
+    .subTitle-title-wrapper {
+      .toggle-all-code-btn {
+        font-size: 14px;
+      }
+    }
+  }
 `;
 
 export const ExampleContentsWrapper = styled.div`
@@ -35,6 +38,21 @@ export const ExampleContentsWrapper = styled.div`
   flex-wrap: wrap;
   margin-top: 40px;
   gap: 60px 0px;
+
+  @media ${breakPoints.mobileLarge} {
+    flex-direction: column;
+
+    .example-list-wrapper {
+      .example-list-items {
+        display: flex;
+        flex-direction: column;
+
+        .example-list {
+          width: 100% !important;
+        }
+      }
+    }
+  }
 `;
 
 export const ExampleContentsItems = styled.div`
@@ -46,28 +64,31 @@ export const ExampleContentsItems = styled.div`
     font-size: 20px;
   }
 
-  ._open_module_button_ {
-    padding: 0.7rem 1.5rem;
-    border-radius: 10px;
-    background-color: #7b2869;
-    color: white;
+  .error-form {
+    display: flex;
+    align-items: center;
+    /* color: #7b2869; */
     font-weight: 700;
-    font-size: 14px;
-    width: fit-content;
   }
 
   ${(props: StyleTypes) =>
     props.isFull && {
       width: "100%",
     }}
+
+  @media ${breakPoints.mobileLarge} {
+    width: 100%;
+
+    h3 {
+      font-size: 18px;
+    }
+  }
 `;
 
 export const ExampleResultList = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  /* border: solid 1px #dddddd; */
-  /* border-bottom: 0px; */
   margin-top: 15px;
   border-radius: 5px;
 
@@ -85,8 +106,10 @@ export const ExampleListWrapper = styled.div`
 
   .example-remarks {
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 16px;
     color: #666666;
+    line-height: 20px;
+    letter-spacing: -0.01rem;
   }
 `;
 
@@ -95,9 +118,16 @@ export const ExampleListItems = styled.div`
   flex-direction: column;
   padding: 1.3rem 1rem;
   border: solid 1px #dddddd;
-  /* border-bottom: solid 1px #dddddd; */
 
-  ._module_open_button_ {
-    width: fit-content;
+  .mcm-error-unit {
+    margin-top: 0px;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 1rem;
+
+    .mcm-error-unit {
+      margin: 0;
+    }
   }
 `;

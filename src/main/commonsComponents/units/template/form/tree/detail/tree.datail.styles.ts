@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const Wrapper = styled.div`
   width: 40%;
   position: relative;
+
+  @media ${breakPoints.mobileLarge} {
+    width: 100%;
+    min-height: 60px;
+  }
 `;
 
 export const EmptySelect = styled.div`
@@ -24,6 +30,11 @@ export const DetailRole = styled.div`
   overflow: auto;
   overflow-x: hidden;
   height: 100%;
+
+  @media ${breakPoints.mobileLarge} {
+    height: 140px;
+    padding: 0.8rem;
+  }
 `;
 
 export const DetailInfoWrapper = styled.article`
@@ -36,8 +47,16 @@ export const DetailInfoWrapper = styled.article`
     line-height: 24px;
     color: #444444;
     letter-spacing: -0.8px;
+
     b {
       color: black;
+    }
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    .tree-detail-info-role {
+      font-size: 14px;
+      line-height: 20px;
     }
   }
 `;
@@ -62,6 +81,13 @@ export const DetailTitleInfo = styled.div`
     font-size: 14px;
     word-spacing: 1px;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    gap: 0;
+    justify-content: space-between;
+    height: 70px;
+    min-height: 70px;
+  }
 `;
 
 export const DetailTitle = styled.div`
@@ -69,12 +95,25 @@ export const DetailTitle = styled.div`
   display: flex;
 
   span {
-    width: 30%;
+    min-width: 120px;
   }
 
   code {
-    padding-left: 30px;
-    padding-right: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    span {
+      font-size: 14px;
+      min-width: 100px;
+    }
+
+    code {
+      padding: 0;
+      font-size: 14px;
+      padding-right: 20px;
+    }
   }
 `;
 
@@ -86,7 +125,8 @@ export const ParentsWrapper = styled.div`
   .tree-detail-button {
     height: 100%;
     width: 100%;
-    background-color: gainsboro;
+    /* background-color: gainsboro; */
+    border-top: double 2px black;
     border-radius: 0px 0px 10px 0px;
 
     .my-parents {
@@ -102,6 +142,24 @@ export const ParentsWrapper = styled.div`
 
       code {
         margin-left: 6px;
+      }
+    }
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    height: 40px;
+    display: flex;
+
+    .tree-detail-button {
+      .my-parents {
+        font-size: 12px;
+        padding: 0.8rem;
+        padding-bottom: 0;
+        padding-top: 0;
+
+        code {
+          font-size: 12px;
+        }
       }
     }
   }

@@ -21,8 +21,8 @@ export default function NavListPage({
     >
       {(list.length &&
         list.map((el, key) => {
-          const _href = `/modules/${el.href || el.name}`;
-          let name = el.name;
+          const _href = `/modules/${el?.href || el?.name}`;
+          let name = el?.name || "";
 
           if (search) {
             const startIdx = name.toLowerCase().indexOf(search.toLowerCase());
@@ -39,9 +39,9 @@ export default function NavListPage({
           }
 
           return (
-            <li key={`tap-name-${el.name}-${key}`}>
+            <li key={`tap-name-${el?.name}-${key}`}>
               <_Link href={_href}>
-                <_SpanTextWithHtml dangerouslySetInnerHTML={name} />
+                <_SpanTextWithHtml dangerouslySetInnerHTML={name || "-"} />
               </_Link>
             </li>
           );
@@ -83,7 +83,7 @@ export const ListWrapper = styled.ul`
           borderRadius: "10px",
           backgroundColor: "#aa5656",
           color: "white",
-          width: "16vw",
+          width: "calc(100% + 50px)",
         }}
     }
   }

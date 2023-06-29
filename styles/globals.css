@@ -21,6 +21,12 @@ a {
   height: 100%;
 }
 
+@media (max-width: 767px) {
+  #__next {
+    padding-top: 30px;
+  }
+}
+
 button {
   border: unset;
   padding: 0;
@@ -71,4 +77,52 @@ ol {
 table {
   border-spacing: 0px;
   border-collapse: collapse;
+}
+
+/* .open-module-button {
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  border: double 3px #7b2869;
+  font-weight: 700;
+  font-size: 14px;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.open-module-button:hover {
+  background-color: #7b2869;
+  color: white;
+  border: double 3px white;
+} */
+
+.error-modal .mcm-modal-items {
+  border: double 6px #aa5656;
+}
+
+.writing-modal .mcm-modal-items {
+  border: double 6px #1b9c85;
+}
+
+.success-modal .mcm-modal-items {
+  border: double 6px #2cd3e1;
+}
+
+/* 드래그 방지 */
+.disable-drag {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+}
+
+.web-hide {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .web-hide {
+    display: block;
+  }
 }

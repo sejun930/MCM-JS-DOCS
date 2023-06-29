@@ -15,7 +15,7 @@ interface IProps {
 
 export default function LayoutPage(props: IProps) {
   const { getRouter, getModuleNamewithJadenCase } = CommonsHooksComponents();
-  const [, setModule] = useRecoilState(moduleState);
+  const [module, setModule] = useRecoilState(moduleState);
 
   useEffect(() => {
     // 현재 선택한 모듈 저장하기
@@ -26,7 +26,7 @@ export default function LayoutPage(props: IProps) {
     <LayoutWrapper className="layout-home-wrapper">
       <LayoutHeadPage />
       <LayoutContentsWrapper>
-        <LayoutNavPage />
+        <LayoutNavPage module={module} />
         {props.children}
       </LayoutContentsWrapper>
     </LayoutWrapper>

@@ -1,13 +1,6 @@
-import {
-  ChangeEvent,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
 
-import { moduleState } from "src/commons/store";
+import { _Input } from "mcm-js-commons";
 import {
   LayoutNavListWrapper,
   LayoutNavWrapper,
@@ -15,39 +8,29 @@ import {
 } from "./nav.styles";
 import { navList, NavListTypes } from "./nav.data";
 
-import NavSearchPage from "./search";
 import NavListPage from "./list";
+import NavSearchPage from "./search";
 
-// 디바운싱 저장 변수
-let _debounce: ReturnType<typeof setTimeout> | number;
-export default function LayoutNavPage() {
-  const _inputRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const [module] = useRecoilState(moduleState);
-
+export default function LayoutNavPage({
+  isMobileTap,
+  module,
+}: {
+  isMobileTap?: boolean;
+  module: string;
+}) {
   // 모듈 검색어
   const [search, setSearch] = useState<string>("");
   // 렌더 여부
-  const [render, setRender] = useState(false);
+  const [render, setRender] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!module) resetSearch();
+    if (!module) setSearch("");
 
     setRender(true);
   }, [module]);
 
-  const changeSearch = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    window.clearTimeout(_debounce);
-
-    _debounce = window.setTimeout(() => {
-      const { value } = target;
-      setSearch(value.trim());
-    }, 300);
-  };
-
-  // 검색어 초기화
-  const resetSearch = () => {
-    setSearch("");
-    if (_inputRef.current) _inputRef.current.value = "";
+  const onChangeSearch = (text: string) => {
+    setSearch(text);
   };
 
   // 선택한 탭의 정보
@@ -65,15 +48,17 @@ export default function LayoutNavPage() {
     );
 
   return (
-    <LayoutNavWrapper className="nav-wrapper" render={render}>
+    <LayoutNavWrapper
+      className="nav-wrapper"
+      render={render}
+      isMobileTap={isMobileTap}
+    >
       <LayoutNavListWrapper className="nav-list-wrapper">
-        <LayoutNavListItems>
-          <NavSearchPage
-            changeSearch={changeSearch}
-            _inputRef={_inputRef}
-            search={search}
-            resetSearch={resetSearch}
-          />
+        <LayoutNavListItems
+          className="nav-list-items"
+          isMobileTap={isMobileTap}
+        >
+          <NavSearchPage search={search} onChangeSearch={onChangeSearch} />
           {module && module !== "404" && (
             // 선택된 탭의 정보 렌더하기
             <NavListPage list={[selectTapInfo]} isSelect={true} />

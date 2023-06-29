@@ -1,6 +1,9 @@
 import { ExampleIProps } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 import { ModalPropsType } from "mcm-js/dist/commons/types";
 import { modalCodeList } from "./modal.example.code.data";
+import { modalCommonsExampleCode } from "./modal.example.commons.code";
+import { CloseMultipleModal } from "./modal.example.template";
+import { getCommonsHighlight } from "src/commons/highlight";
 
 // Modal default Props값
 export const modalExampleInitProps: ModalPropsType = {
@@ -11,7 +14,7 @@ export const modalExampleInitProps: ModalPropsType = {
 };
 
 // 모듈별 사용 예시 데이터
-export const modalExampleList: Array<ExampleIProps> = [
+export const modalExampleList = (idx: number): Array<ExampleIProps> => [
   {
     title: "기본 (Basic)",
     contents: [
@@ -21,7 +24,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open Basic Modal",
         },
         content: `기본 모달 페이지입니다.`,
-        code: modalCodeList.basic,
+        code: modalCodeList(idx).basic,
       },
     ],
   },
@@ -39,7 +42,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open Animation Modal",
         },
         content: `애니메이션이 적용된 모달입니다.`,
-        code: modalCodeList.animation,
+        code: modalCodeList(idx).animation,
       },
     ],
   },
@@ -51,25 +54,25 @@ export const modalExampleList: Array<ExampleIProps> = [
         remakrs: "width 300px, height : 300px 크기의 모달을 만들 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
-          styles: { width: "300px", height: "300px" },
+          modalSize: { width: "300px", height: "300px" },
         },
         info: {
           buttonName: "Open width 300px, height 300px Modal",
         },
         content: `크기가 300px로 설정된 모달입니다.`,
-        code: modalCodeList.size300,
+        code: modalCodeList(idx).size300,
       },
       {
         remakrs: "width 30%, height : 40% 크기의 모달을 만들 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
-          styles: { width: "30%", height: "40%" },
+          modalSize: { width: "30%", height: "40%" },
         },
         info: {
           buttonName: "Open width 30%, height 40% Modal",
         },
         content: `%로 크기 설정된 모달입니다.`,
-        code: modalCodeList.sizePercent,
+        code: modalCodeList(idx).sizePercent,
       },
     ],
   },
@@ -78,17 +81,93 @@ export const modalExampleList: Array<ExampleIProps> = [
     // isFull: true,
     contents: [
       {
-        remakrs: "모바일에서의 크기를 별도로 조절할 수도 있습니다.",
+        remakrs: "모바일(767px 이하)에서의 크기를 별도로 조절할 수도 있습니다.",
         addProps: {
           ...modalExampleInitProps,
-          styles: { width: "767px" },
-          mobileDefaultStyles: { width: "50%", height: "50%" },
+          modalSize: { width: "767px" },
+          mobileModalSize: { width: "50%", height: "50%" },
         },
         info: {
           buttonName: "Open Mobile Responsive Modal",
         },
-        content: `모바일에서만 width 50%, height 50% 크기를 가집니다.`,
-        code: modalCodeList.responsive,
+        content: `모바일(767px 이하)에서만 width 50%, height 50% 크기를 가집니다.`,
+        code: modalCodeList(idx).responsive,
+      },
+    ],
+  },
+  {
+    title: "스타일 적용 (웹, 모바일)",
+    isFull: true,
+    contents: [
+      {
+        remakrs:
+          "(웹과 모바일 동일 적용) 각각의 태그에 스타일을 직접 지정할 수 있습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          modalStyles: {
+            wrapper: {
+              backgroundColor: "rgba(30, 0, 50, 0.7)",
+            },
+            items: {
+              backgroundColor: "black",
+              border: "double 6px white",
+              borderRadius: "0px",
+              width: "250px",
+              height: "250px",
+            },
+            closeButton: {
+              backgroundColor: "black",
+              borderRadius: "100%",
+              border: "solid 1px white",
+              marginTop: "-10px",
+            },
+            contents: {
+              backgroundColor: "white",
+              width: "90%",
+            },
+          },
+        },
+        info: {
+          buttonName: "Open Custom Styles of Web Modal",
+        },
+        content:
+          "wrapper, items, closeButton, contents 태그의 스타일을 각각 지정할 수 있습니다.",
+        code: modalCodeList(idx).modalStyle,
+      },
+      {
+        remakrs:
+          "(모바일 : 767px 이하에서만 적용) 각각의 태그에 스타일을 직접 지정할 수 있습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          mobileModalStyles: {
+            wrapper: {
+              backgroundColor: "rgba(100, 0, 50, 0.7)",
+            },
+            items: {
+              backgroundColor: "black",
+              border: "double 6px white",
+              borderRadius: "0px",
+              width: "50%",
+              height: "40%",
+            },
+            closeButton: {
+              backgroundColor: "black",
+              borderRadius: "0",
+              border: "solid 1px white",
+              marginTop: "-10px",
+            },
+            contents: {
+              backgroundColor: "white",
+              height: "50%",
+            },
+          },
+        },
+        info: {
+          buttonName: "Open Custom Styles of Mobile Modal",
+        },
+        content:
+          "모바일 환경에서만 적용되는 wrapper, items, closeButton, contents 태그의 스타일을 각각 지정할 수 있습니다.",
+        code: modalCodeList(idx).mobileModalStyles,
       },
     ],
   },
@@ -106,7 +185,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open Hide Close Button Modal",
         },
         content: `닫기 버튼이 사라진 모달입니다.`,
-        code: modalCodeList.hideCloseButton,
+        code: modalCodeList(idx).hideCloseButton,
       },
       {
         remakrs: "닫기에 대한 설명을 덧붙일 수 있습니다.",
@@ -118,7 +197,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open Add CloseMent Button Modal",
         },
         content: `닫기에 대한 설명이 추가됩니다.`,
-        code: modalCodeList.addCloseMent,
+        code: modalCodeList(idx).addCloseMent,
       },
       {
         remakrs: "닫기 버튼 사이즈를 조절합니다.",
@@ -132,7 +211,7 @@ export const modalExampleList: Array<ExampleIProps> = [
           buttonName: "Open Resize Button Modal",
         },
         content: `닫기 버튼의 사이즈가 조절됩니다.`,
-        code: modalCodeList.resizeBtn,
+        code: modalCodeList(idx).resizeBtn,
       },
     ],
   },
@@ -144,13 +223,129 @@ export const modalExampleList: Array<ExampleIProps> = [
         addProps: {
           ...modalExampleInitProps,
           offAutoClose: true,
+          closeMent: "닫기",
         },
         info: {
           buttonName: "Open Off Auto-close Modal",
         },
-        content: `닫기 버튼을 클릭해 모달을 종료하세요.`,
-        code: modalCodeList.offAutoClose,
+        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+        code: modalCodeList(idx).offAutoClose,
+      },
+    ],
+  },
+  {
+    title: "자동 종료 예약",
+    contents: [
+      {
+        remakrs: "원하는 시간 (1/1000초) 후에 모달을 자동으로 종료시킵니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          timer: 2000,
+          showBGAnimation: true,
+          showModalOpenAnimation: true,
+          offAutoClose: true,
+          hideCloseButton: true,
+        },
+        info: {
+          buttonName: "Open Auto Close Timer Modal",
+        },
+        content: `2초 후에 모달이 자동으로 종료됩니다.`,
+        code: modalCodeList(idx).autoCloseTimer,
+      },
+    ],
+  },
+  {
+    title: "스크롤 방지",
+    contents: [
+      {
+        remakrs: "모달이 실행되면 스크롤 이동을 방지합니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          onFixWindow: true,
+        },
+        info: {
+          buttonName: "Open Fix Window",
+        },
+        content: `이 모달이 실행되는 동안에는 스크롤을 제어할 수 없습니다.`,
+        code: modalCodeList(idx).onFixWindow,
+      },
+    ],
+  },
+  {
+    title: "",
+    isError: true,
+    isHide: [false, true][idx],
+    contents: [
+      {
+        remakrs:
+          "Modal 모듈을 사용하기 위해서는 'show', 'onCloseModal' props가 필수로 전달되어야 합니다. 전달되지 않는다면 모듈을 실행할 수 없으므로 해당 에러메세지가 보여진다면 props 값을 다시 확인해주세요. ",
+        addProps: {
+          ...modalExampleInitProps,
+          offAutoClose: true,
+          closeMent: "닫기",
+          // @ts-ignore
+          show: undefined,
+          // @ts-ignore
+          onCloseModal: undefined,
+        },
+        info: {
+          buttonName: "Open Off Auto-close Modal",
+        },
+        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+        code: null,
+      },
+    ],
+  },
+  {
+    title: "모달 선택 종료",
+    isHide: [true, false][idx],
+    contents: [
+      {
+        remakrs:
+          "여러개의 모달 중 id 또는 class 선택자가 지정된 모달을 선택해서 종료할 수 있습니다.",
+        addProps: {
+          ...modalExampleInitProps,
+          id: "parents-modal",
+          showBGAnimation: true,
+          showModalOpenAnimation: true,
+          // @ts-ignore
+          children: CloseMultipleModal(),
+        },
+        info: {
+          buttonName: "Close Selected Modal",
+        },
+        // 새로운 content 사용
+        changeContent: `<span class='blue'>(</span>
+            ${getCommonsHighlight.tag.div(
+              `
+              ${getCommonsHighlight.tag.span("상위 모달")}
+              ${getCommonsHighlight.tag.component({
+                componentName: "Modal",
+                childrenSpace: `
+                `,
+                props: `
+                <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='darkBlue'>true</span><span class='yellow'>}</span>
+                <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='darkBlue'>=></span> <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='purple'>(</span><span class='blue'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span> <span class='blue'>}</span><span class='purple'>)</span><span class='yellow'>}</span>
+                ${modalCommonsExampleCode.modalSize("400px", "400px")[0]}
+                ${modalCommonsExampleCode.showBGAnimation[0]}
+                ${modalCommonsExampleCode.showModalOpenAnimation[0]}
+              `,
+                children: getCommonsHighlight.tag.span(
+                  "하위 모달을 종료하면 상위 모달도 함께 종료됩니다."
+                ),
+                endSpace: `
+              `,
+                // isClose: true,
+              })}`,
+              `
+            `
+            )}
+          <span class='blue'>)</span>${getCommonsHighlight.text(",")}`,
+        content: `하위 모달을 종료하면 상위 모달도 함께 종료됩니다.`,
+        code: modalCodeList(idx).selectClose,
       },
     ],
   },
 ];
+
+export const modalFunctionalData: any = [null, 2];

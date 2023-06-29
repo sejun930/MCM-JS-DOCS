@@ -1,8 +1,11 @@
+import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
+
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
-import { Wrapper, TreeWrapper } from "./tree.styles";
+import { Wrapper } from "../form.commons.styles";
 
 import {
   TreeModuleListTypes,
@@ -16,7 +19,7 @@ import ModuleTreeDetailPage from "./detail";
 // 폴더 구조 예시용 폼
 export default function _TreeForm() {
   // 선택한 데이터
-  const [select, setSelect] = useState<number>(5);
+  const [select, setSelect] = useState<number>(0);
   const [module] = useRecoilState(moduleState);
 
   const list = treeModuleList[module] || [];
@@ -27,7 +30,7 @@ export default function _TreeForm() {
   };
 
   return (
-    <Wrapper>
+    <Wrapper id="tree-form">
       <_SubTitleTemplate
         title="Module Tree"
         className="tree-subTitle"
@@ -58,3 +61,18 @@ export interface TreeIProps {
   selectTree: (num: number) => void;
   select: number;
 }
+
+export const TreeWrapper = styled.div`
+  display: flex;
+  margin-top: 30px;
+  border: solid 1px #777777;
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  position: relative;
+
+  @media ${breakPoints.mobileLarge} {
+    height: auto;
+    flex-direction: column;
+  }
+`;

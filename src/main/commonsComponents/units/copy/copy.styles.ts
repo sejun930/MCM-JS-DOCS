@@ -19,6 +19,7 @@ export const CopyWrapper = styled.div`
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  padding-right: 10px;
 
   ${(props) =>
     props.isCode && {
@@ -37,8 +38,8 @@ export const CopyWrapper = styled.div`
     transition: all 0.3s ease-out;
   }
 
-  :before,
-  :after {
+  ::before,
+  ::after {
     content: "";
     position: absolute;
     width: 0px;
@@ -58,7 +59,7 @@ export const CopyWrapper = styled.div`
       }}
   }
 
-  :before {
+  ::before {
     bottom: 0;
     left: 0;
     border-left: 2px solid #95bdff;
@@ -66,7 +67,7 @@ export const CopyWrapper = styled.div`
     border-radius: 0 0 0 4px;
   }
 
-  :after {
+  ::after {
     top: 0;
     right: 0;
     border-right: 2px solid #95bdff;
@@ -82,6 +83,7 @@ export const CopyButton = styled.button`
   align-items: center;
   justify-content: center;
   position: absolute;
+  top: 0;
   right: 0;
 
   ${(props: StyleTypes) =>
@@ -98,7 +100,7 @@ export const CopyButton = styled.button`
     color: ${(props) => (props.isCode ? "white" : "#333333")};
   }
 
-  @media ${breakPoints.mobile} {
+  @media ${breakPoints.mobileLarge} {
     display: none;
   }
 `;
@@ -108,4 +110,5 @@ export const CopyText = styled.div`
   padding: 0px 1rem;
   padding-bottom: 1rem;
   overflow-x: auto;
+  width: 100%;
 `;

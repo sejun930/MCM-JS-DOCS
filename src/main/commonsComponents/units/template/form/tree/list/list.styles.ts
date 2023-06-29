@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const TreeListWrapper = styled.div`
   width: 60%;
@@ -37,8 +38,26 @@ export const TreeListWrapper = styled.div`
             width: 100%;
             height: 30px;
             --left: 0;
-            padding-left: calc(var(--left) * 20px);
+            padding-left: calc((var(--left) * 20px) + 10px);
           }
+        }
+      }
+    }
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0px 0px;
+
+    .tree-list {
+      border-radius: 5px 5px 0px 0px;
+      padding-right: 0px;
+
+      .copy-text .copy-code-list .copy-code {
+        .select-tree {
+          display: flex;
+          align-items: center;
         }
       }
     }
