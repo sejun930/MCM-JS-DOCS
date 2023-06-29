@@ -5,7 +5,7 @@ export interface NavListTypes {
 
 export const navList: Array<NavListTypes> = [
   { name: "Modal" },
-  { name: "Slick" },
+  // { name: "Slick" },
   // { name: "Half", href: "halfPage" },
   // { name: "b" },
   // { name: "c" },
