@@ -12,5 +12,5 @@ export const navList: Array<NavListTypes> = [
   // { name: "z" },
   // { name: "c" },
   // { name: "d" },
-  // { name: "e" },
+  // { name: "e" }, //
 ];
