@@ -123,6 +123,6 @@ export const FixedTap = styled.div`
   transition: all 0.3s ease;
 
   @media ${breakPoints.mobileLarge} {
-    top: 10%;
+    top: 70px;
   }
 `;
