@@ -144,7 +144,7 @@ export default function CommentsWritePage({
         },
         mobileModalSize: {
           width: "95%",
-          height: height,
+          height,
         },
         onCloseModal: () => Modal.close({ id: "writing-modal" }),
         onAfterCloseEvent: afterEvent,
@@ -232,7 +232,7 @@ export default function CommentsWritePage({
     // able : 작성 가능 여부 (true일 경우 작성 가능)
     // message : 에러 메세지
     // type : 에러 타입
-    let result = { able: false, error: { message: "", type: "" } };
+    const result = { able: false, error: { message: "", type: "" } };
 
     if (info.category === "all") {
       // 카테고리가 선택되지 않았을 경우

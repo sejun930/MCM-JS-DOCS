@@ -19,7 +19,9 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
 
   // 목차창 on/off
   const toggleIndex = (bool?: boolean) => {
-    setShow((prev) => (bool ? bool : !prev));
+    if (bool) setShow(bool);
+    else setShow((prev) => !prev);
+
     setFix(true);
   };
 
