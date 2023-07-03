@@ -63,3 +63,7 @@ export const MobileNavigationTap = styled(_Button)`
       }}
   }
 `;
+
+export const GoHome = styled(_Button)`
+  font-size: 24px;
+`;

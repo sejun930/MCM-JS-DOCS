@@ -41,6 +41,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Star = styled.button`
+  width: 20px;
   font-size: 20px; /* 이모지 크기 */
   color: transparent; /* 기존 이모지 컬러 제거 */
   text-shadow: 0 0 0 #999999; /* 새 이모지 색상 부여 */
