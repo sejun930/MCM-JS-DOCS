@@ -110,6 +110,8 @@ export default function CommentsWritePage({
         }, 100);
     };
 
+    // 모달의 height
+    let height = "90px";
     // 에러모달 띄우기
     const openErrorModal = ({
       message, // 에러메세지
@@ -138,10 +140,11 @@ export default function CommentsWritePage({
         showBGAnimation: true,
         showModalOpenAnimation: true,
         modalSize: {
-          height: "200px",
+          height: "160px",
         },
         mobileModalSize: {
-          height: "30%",
+          width: "95%",
+          height: height,
         },
         onCloseModal: () => Modal.close({ id: "writing-modal" }),
         onAfterCloseEvent: afterEvent,
@@ -157,42 +160,22 @@ export default function CommentsWritePage({
         message: "댓글을 등록하고 있습니다. <br /> 잠시만 기다려주세요.",
       });
     } else {
-      if (info.category === "all") {
-        // 카테고리를 선택하지 않은 경우
-        errorMessage = "카테고리를 선택해주세요.";
-      } else {
-        // 카테고리를 선택한 경우
-        if (!info.contents) {
-          // 댓글 내용을 입력하지 않은 경우
-          errorMessage = "댓글 내용을 작성해주세요.";
-          errorType = "contents";
+      height = "10%";
+      // 댓글 작성시 누락된 부분 체크하기
+      const errorCheck = checkWriteAble();
 
-          // if (contentsRef.current) afterEvent = ;
-        } else if (!info.password) {
-          // 비밀번호를 입력하지 않은 경우
-          errorMessage = "비밀번호를 입력해주세요.";
-          errorType = "password";
-        } else if (info.category === "review") {
-          if (!info.rating) {
-            // 평점을 선택하지 않을 경우
-            errorMessage = "평점을 선택해주세요.";
-          }
-        } else if (info.category === "bug") {
-          if (!info.bugLevel) {
-            // 이슈 중요도를 선택하지 않을 경우
-            errorMessage = "이슈 중요도를 선택해주세요.";
-          }
-        } else if (!info.agreeProvacy) {
-          // 개인정보 수집에 동의하지 않을 경우
-          errorMessage = "개인정보 (IP) 수집에 동의해주세요.";
-          errorType = "privacy";
-        }
+      // 누락된 부분 저장
+      if (!errorCheck.able) {
+        errorMessage = errorCheck.error.message;
+        errorType = errorCheck.error.type;
       }
     }
 
     if (errorMessage) {
       openErrorModal({ message: errorMessage });
     } else {
+      height = "90px";
+
       // 줄바꿈 처리하기
       info.contents = changeMultipleLine(info.contents.trim());
 
@@ -244,6 +227,57 @@ export default function CommentsWritePage({
     }
   };
 
+  // 댓글 작성 가능 여부 확인하기
+  const checkWriteAble = () => {
+    // able : 작성 가능 여부 (true일 경우 작성 가능)
+    // message : 에러 메세지
+    // type : 에러 타입
+    let result = { able: false, error: { message: "", type: "" } };
+
+    if (info.category === "all") {
+      // 카테고리가 선택되지 않았을 경우
+      result.error.message = "카테고리를 선택해주세요.";
+      result.error.type = "category";
+
+      //
+    } else if (!info.contents) {
+      // 댓글 내용이 입력되지 않을 경우
+      result.error.message = "댓글 내용을 작성해주세요.";
+      result.error.type = "contents";
+
+      //
+    } else if (!info.password) {
+      // 비밀번호를 입력하지 않을 경우
+      result.error.message = "비밀번호를 입력해주세요.";
+      result.error.type = "password";
+
+      //
+    } else if (!info.agreeProvacy) {
+      // ip 수집에 동의하지 않을 경우
+      result.error.message = "개인정보 (IP) 수집에 동의해주세요.";
+      result.error.type = "privacy";
+
+      //
+    } else if (info.category === "review") {
+      // 카테고리가 리뷰일 때
+      if (!info.rating) {
+        // 평점을 선택하지 않을 경우
+        result.error.message = "평점을 선택해주세요.";
+        result.error.type = "rating";
+      }
+    } else if (info.category === "bug") {
+      // 카테고리가 버그일 때
+      if (!info.bugLevel) {
+        // 이슈 중요도를 선택하지 않을 경우
+        result.error.message = "이슈 중요도를 선택해주세요.";
+        result.error.type = "bug-level";
+      }
+    }
+
+    if (!result.error.message && !result.error.type) result.able = true;
+    return result;
+  };
+
   return (
     <CommentsWriteUIPage
       categoryList={categoryList}
@@ -254,6 +288,7 @@ export default function CommentsWritePage({
       contentsRef={contentsRef}
       passwordRef={passwordRef}
       openPrivacy={openPrivacy}
+      checkWriteAble={checkWriteAble}
     />
   );
 }

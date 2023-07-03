@@ -32,13 +32,16 @@ export default function ExampleFixedUIPage({
       <TapItems isFixed={fixed} itemsHeight={itemsHeight}>
         <TapListPage tapList={codeInfo.title || []} />
       </TapItems>
+
       <FixedTap ref={_fixedRef}>
-        <TapListPage
-          tapList={codeInfo.title || []}
-          changeTempVers={changeTempVers}
-          isFixedMode={fixed}
-          fixed={fixed}
-        />
+        {fixed && (
+          <TapListPage
+            tapList={codeInfo.title || []}
+            changeTempVers={changeTempVers}
+            isFixedMode={fixed}
+            fixed={fixed}
+          />
+        )}
       </FixedTap>
     </TapWrapper>
   );

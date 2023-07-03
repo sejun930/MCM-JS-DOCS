@@ -17,9 +17,10 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
   // 최소화 여부
   const [isMinimum, setIsMinimum] = useState(false);
 
-  // 목차창 닫기
-  const closeIndex = () => {
-    setShow(false);
+  // 목차창 on/off
+  const toggleIndex = (bool?: boolean) => {
+    setShow((prev) => (bool ? bool : !prev));
+    setFix(true);
   };
 
   // 고정 toggle
@@ -34,16 +35,15 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
 
   // 페이지 렌더 여부 확인 및 최종 렌더하기
   const renderIndexPage = () => {
-    if (!show) return <></>;
-
     let node = (
       <_IndexForm
         {...props}
-        closeIndex={closeIndex}
+        toggleIndex={toggleIndex}
         fix={fix}
         toggleFix={toggleFix}
         isMinimum={isMinimum}
         toggleMinimum={toggleMinimum}
+        show={show}
       />
     );
     let errorMessage;
@@ -94,6 +94,7 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
         className="mcm-index-wrapper"
         fix={offFixed ? false : fix}
         isMinimum={isMinimum}
+        show={show}
       >
         {node}
       </Wrapper>

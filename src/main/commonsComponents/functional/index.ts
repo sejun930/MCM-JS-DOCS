@@ -140,6 +140,26 @@ const getUserIp = async () => {
   return ip;
 };
 
+// id 값을 이용해 해당 document 위치로 이동하기
+const moveDocument = (id: string, bonus?: number | 0) => {
+  const doc = document.getElementById(id);
+
+  if (doc) {
+    const { top } = doc.getBoundingClientRect();
+
+    // 해당 document의 위치로 이동
+    const destination =
+      top +
+      (window.pageYOffset || document.documentElement.scrollTop) -
+      50 +
+      (bonus || 0);
+
+    window.scrollTo({
+      top: destination,
+    });
+  }
+};
+
 export {
   removeTag,
   getDateForm,
@@ -147,4 +167,5 @@ export {
   getHashPassword,
   getUuid,
   getUserIp,
+  moveDocument,
 };

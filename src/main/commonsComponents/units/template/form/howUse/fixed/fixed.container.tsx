@@ -2,6 +2,7 @@ import { useState, useRef, MutableRefObject, useEffect } from "react";
 
 import ExampleFixedUIPage from "./fixed.presenter";
 import { ExampleCodeListTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
+import { moveDocument } from "src/main/commonsComponents/functional";
 
 let eventStart: boolean = false; // 스크롤 이벤트 시작여부
 let itemsHeight: number = 0; // tap items 태그의 높이값 설정
@@ -47,10 +48,6 @@ export default function ExampleFixedPage({
         // functional의 상대적 위치값 가져오기
         const { top } = _wrapperRef.current.getBoundingClientRect();
 
-        // const startFixedPoint = // Fixed 시작 위치
-        //   scrollTop +
-        //   (_wrapperRef.current?.offsetTop - scrollTop) +
-        //   _wrapperRef.current?.clientHeight;
         setTempVers(vers);
 
         const endFixedPoint = // Fixed 종료 위치

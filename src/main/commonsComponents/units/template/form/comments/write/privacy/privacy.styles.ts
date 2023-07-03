@@ -13,7 +13,7 @@ export const AgreeUserPrivacyWrapper = styled.div`
   #privacy-label {
     font-size: 14px;
     cursor: pointer;
-    color: gray;
+    color: #666666;
     width: 194px;
   }
 
@@ -23,7 +23,7 @@ export const AgreeUserPrivacyWrapper = styled.div`
   }
 
   .privacy-notice {
-    color: gray;
+    color: #666666;
   }
 
   @media ${breakPoints.mobileLarge} {

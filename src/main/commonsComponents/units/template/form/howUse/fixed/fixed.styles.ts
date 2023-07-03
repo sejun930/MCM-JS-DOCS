@@ -31,6 +31,7 @@ export const TapWrapper = styled.div`
 
   .widen {
     width: ${(props) => (props.allLength || 1) * 150 + "px"};
+    height: 60px;
   }
 
   .fixed-mode {
@@ -108,7 +109,7 @@ export const FixedTap = styled.div`
   opacity: 0;
   position: fixed;
   width: 60px;
-  height: 60px;
+  height: 0px;
   left: 50%;
   right: 50%;
   transform: translateX(-50%);

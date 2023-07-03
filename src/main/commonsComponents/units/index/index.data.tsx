@@ -7,7 +7,7 @@ export const indexOptionalDataList: Array<{
   clickEvent?: string; // 버튼 클릭 함수 이름
 }> = [
   {
-    tooltipText: ["목차 고정", "목차 가리기"],
+    tooltipText: ["목차 고정", "목차 고정 해제"],
     target: "fix",
     isClose: false,
     emoji: "📌",
@@ -20,5 +20,5 @@ export const indexOptionalDataList: Array<{
     emoji: ["↙", "↗"],
     clickEvent: "toggleMinimum",
   },
-  { tooltipText: "목차 닫기", target: "close", isClose: true },
+  { tooltipText: "목차 숨기기", target: "close", isClose: true },
 ];

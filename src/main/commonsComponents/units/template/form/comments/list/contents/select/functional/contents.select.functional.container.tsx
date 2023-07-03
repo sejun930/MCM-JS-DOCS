@@ -119,6 +119,10 @@ export default function ContentsSelectFunctionalPage({
           border: `double 5px #${isSuccess ? "19a7ce" : "aa5656"}`,
         },
       },
+      mobileModalSize: {
+        width: "100%",
+        height: "10%",
+      },
       onCloseModal: _afterCloseEvent,
     });
   };

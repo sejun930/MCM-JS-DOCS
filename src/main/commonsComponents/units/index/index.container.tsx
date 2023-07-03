@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 
-// import { _CloseButton, _Button } from "mcm-js-commons";
 import { IndexIPropsTypes, IndexPagePropsTypes } from "./index.type";
+import { moveDocument } from "../../functional";
 
 import _IndexUIForm from "./index.presenter";
 
 // 목차 렌더 페이지
 let deboucing: ReturnType<typeof setTimeout> | number;
+// 해당 목차가 아직 렌더되지 않았을 경우 해당 목차가 렌더될 때까지 재요청하는 변수
+let infiniteRequestDocument: number | ReturnType<typeof setInterval>;
 export default function _IndexForm(
   props: IndexIPropsTypes & IndexPagePropsTypes
 ) {
@@ -54,19 +56,21 @@ export default function _IndexForm(
 
   // 해당 목차로 이동하기
   const moveIndex = (id: string) => {
-    const documents = document.getElementById(id);
+    // 해당 목차 위치로 스크롤 이동
+    moveDocument(id);
+    clearInterval(infiniteRequestDocument);
 
-    if (documents) {
-      const { top } = documents.getBoundingClientRect();
+    // 댓글 목차를 선택했을 경우
+    if (id === "comments-form") {
+      // 댓글 목차가 렌더 될때까지 무한하게 스크롤 이동
+      infiniteRequestDocument = setInterval(() => {
+        const doc = document.getElementsByClassName("comments-subTitle");
 
-      // 해당 목차의 시작 위치 구하기
-      const destination =
-        top + (window.pageYOffset || document.documentElement.scrollTop) - 50;
-
-      window.scrollTo({
-        top: destination,
-        // behavior: "smooth",
-      });
+        if (doc) {
+          moveDocument(id);
+          clearInterval(infiniteRequestDocument);
+        }
+      }, 200);
     }
   };
 

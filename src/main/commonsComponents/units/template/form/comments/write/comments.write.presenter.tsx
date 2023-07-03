@@ -5,6 +5,7 @@ import {
   SelectCategory,
   WriteWrapper,
   SubmitWrapper,
+  WriteButton,
 } from "./comments.write.styles";
 
 import { _Input, _Button } from "mcm-js-commons";
@@ -40,7 +41,9 @@ export default function CommentsWriteUIPage({
   contentsRef,
   passwordRef,
   openPrivacy,
+  checkWriteAble,
 }: IPropsTypes) {
+  console.log(checkWriteAble());
   return (
     <Form onSubmit={write}>
       <fieldset>
@@ -126,9 +129,13 @@ ${info.category && defaultPlace}`}
           info={info}
           openPrivacy={openPrivacy}
         />
-        <_Button onClickEvent={write} className="write-comments-button">
+        <WriteButton
+          onClickEvent={write}
+          className="write-comments-button"
+          isAble={checkWriteAble().able}
+        >
           📝 댓글 등록
-        </_Button>
+        </WriteButton>
       </SubmitWrapper>
     </Form>
   );

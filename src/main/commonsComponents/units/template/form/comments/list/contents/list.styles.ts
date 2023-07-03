@@ -165,7 +165,12 @@ export const SelectWrapper = styled.div`
     }}
 
   .mcm-unit-select {
-    top: 30px;
+    top: -90px;
+    flex-direction: column-reverse;
+
+    .mcm-close-button-unit {
+      transform: translate3d(5px, 5px, 0px);
+    }
   }
 `;
 

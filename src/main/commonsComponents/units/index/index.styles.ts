@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-// import { _Button } from "mcm-js-commons";
+import { _Button } from "mcm-js-commons";
 
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
@@ -7,6 +7,7 @@ interface StyleTypes {
   isSelected?: boolean;
   fix?: boolean;
   isMinimum?: boolean;
+  show?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -32,7 +33,13 @@ export const Wrapper = styled.div`
       opacity: 1,
     }}
 
-  ${(props) => props.isMinimum && {}}
+  ${(props) =>
+    !props.show && {
+      padding: "0px",
+      width: "auto",
+      borderRadius: "100%",
+      border: "solid 2px gray",
+    }}
 
   .error-message {
     line-height: 30px;
@@ -128,4 +135,8 @@ export const OptionWrapper = styled.div`
       color: transparent;
     }
   }
+`;
+
+export const OpenIndexButton = styled(_Button)`
+  padding: 10px 12px;
 `;

@@ -56,4 +56,8 @@ export interface IPropsTypes {
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
   passwordRef: MutableRefObject<HTMLInputElement>;
   openPrivacy: boolean;
+  checkWriteAble: () => {
+    able: boolean;
+    error: { message: string; type: string };
+  };
 }

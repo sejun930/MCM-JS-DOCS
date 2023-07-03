@@ -6,11 +6,12 @@ export interface IndexIPropsTypes {
 
 // index.container Props type
 export interface IndexPagePropsTypes {
-  closeIndex: () => void; // 목차창 닫기
+  toggleIndex: (bool: boolean) => void; // 목차창 토글
   toggleFix: () => void; // 고정 toggle
   toggleMinimum: () => void; // 최소화 toggle
   fix: boolean;
   isMinimum: boolean;
+  show: boolean;
 }
 
 // index.presenter Props type

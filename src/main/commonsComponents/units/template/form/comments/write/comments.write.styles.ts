@@ -2,12 +2,14 @@ import { CSSProperties } from "react";
 import styled from "@emotion/styled";
 
 import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { _Button } from "mcm-js-commons";
 
 interface StyleTypes {
   category?: string;
   isRating?: boolean;
   show?: boolean;
   checked?: boolean;
+  isAble?: boolean;
 }
 
 export const Form = styled.form`
@@ -162,6 +164,13 @@ export const Message = styled.div`
     align-items: center;
     text-align: center;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    .message {
+      font-size: 18px;
+      white-space: pre;
+    }
+  }
 `;
 
 export const SubmitWrapper = styled.div`
@@ -173,18 +182,35 @@ export const SubmitWrapper = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 12px 0px;
-
-    .write-comments-button {
-      width: 100%;
-      padding: 8px 0px;
-      border: solid 1px gray;
-      border-radius: 5px;
-      font-size: 14px;
-    }
   }
 `;
 
 export const BugStatusWrapper = styled.div`
   display: flex;
   margin: 10px 0px;
+`;
+
+export const WriteButton = styled(_Button)`
+  font-weight: 700;
+
+  // 누락된 부분으로 등록이 불가능한 상태
+  ${(props: StyleTypes) =>
+    !props.isAble && {
+      cursor: "not-allowed",
+      color: "#666666",
+      fontWeight: 400,
+    }}
+
+  @media ${breakPoints.mobileLarge} {
+    width: 100%;
+    padding: 8px 0px;
+    border: solid 1px #999999;
+    border-radius: 5px;
+    font-size: 14px;
+
+    ${(props) =>
+      props.isAble && {
+        borderColor: "black",
+      }}
+  }
 `;
