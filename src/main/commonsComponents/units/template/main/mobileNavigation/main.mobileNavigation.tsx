@@ -1,13 +1,13 @@
 import {
   MobileTapWrapper,
   MobileNavigationTap,
+  GoHome,
 } from "./main.mobileNavigation.styles";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
-import { _Button, _Image } from "mcm-js-commons";
 import { Modal } from "mcm-js";
 
 import LayoutNavPage from "src/main/commonsComponents/layout/nav";
@@ -23,6 +23,10 @@ export default function MainMobileNavigationTapPage() {
     const router = getRouter();
     if (router.pathname !== "/") router.push("/");
   };
+
+  useEffect(() => {
+    Modal.close({ id: "mobile-nav-modal" });
+  }, [getRouter()]);
 
   // 모바일 nav 토글
   const toggleNav = (bool: boolean) => {
@@ -58,28 +62,13 @@ export default function MainMobileNavigationTapPage() {
   return (
     <>
       <MobileTapWrapper>
-        <_Button onClickEvent={moveHome}>
-          <_Image
-            src="/images/commons/logo/MCM_white_logo.png"
-            className="mobile-nav-logo"
-          />
-        </_Button>
+        <GoHome onClickEvent={moveHome}>🏠</GoHome>
         <MobileNavigationTap
           onClickEvent={() => toggleNav(!openNav)}
           className="mobile-nav-button"
           isOpen={openNav}
         ></MobileNavigationTap>
       </MobileTapWrapper>
-      {/* <Modal
-        id="mobile-nav-modal"
-        show={openNav}
-        onCloseModal={() => toggleNav(false)}
-        hideCloseButton
-        showBGAnimation
-        onFixWindow
-      >
-        <LayoutNavPage isMobileTap={true} />
-      </Modal> */}
     </>
   );
 }

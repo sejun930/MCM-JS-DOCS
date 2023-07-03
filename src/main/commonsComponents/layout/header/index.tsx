@@ -27,6 +27,7 @@ const HeaderWrapper = styled.header`
     height: 100%;
 
     .layout-header-logo {
+      width: 220px;
       height: 220px;
       object-fit: cover;
     }
@@ -37,6 +38,7 @@ const HeaderWrapper = styled.header`
 
     .layout-header-link {
       .layout-header-logo {
+        width: 160px;
         height: 160px;
       }
     }
