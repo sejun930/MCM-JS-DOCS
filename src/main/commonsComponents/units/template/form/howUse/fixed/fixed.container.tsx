@@ -45,7 +45,7 @@ export default function ExampleFixedPage({
       eventDebouncing = setTimeout(() => {
         const scrollTop = window.scrollY;
         // functional의 상대적 위치값 가져오기
-        const { top } = _wrapperRef.current.getBoundingClientRect();
+        const { top } = _wrapperRef?.current?.getBoundingClientRect();
 
         setTempVers(vers);
 

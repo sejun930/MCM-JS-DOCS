@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import { _Title, _PText, _Link } from "mcm-js-commons";
 import Template from "src/main/commonsComponents/units/template/main";
-import Link from "next/link";
 
 let timeEvent: number | ReturnType<typeof setInterval>;
 // 404 에러 발생시 렌더되는 화면

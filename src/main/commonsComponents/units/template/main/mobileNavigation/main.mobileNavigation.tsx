@@ -3,7 +3,7 @@ import {
   MobileNavigationTap,
   GoHome,
 } from "./main.mobileNavigation.styles";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
@@ -21,12 +21,11 @@ export default function MainMobileNavigationTapPage() {
   // 홈으로 이동하기
   const moveHome = () => {
     const router = getRouter();
-    if (router.pathname !== "/") router.push("/");
+    if (router.pathname !== "/") {
+      Modal.close({ className: "mcm-modal-window-type" });
+      router.push("/");
+    }
   };
-
-  useEffect(() => {
-    Modal.close({ id: "mobile-nav-modal" });
-  }, [getRouter()]);
 
   // 모바일 nav 토글
   const toggleNav = (bool: boolean) => {
@@ -51,13 +50,7 @@ export default function MainMobileNavigationTapPage() {
     } else {
       Modal.close({ id: "mobile-nav-modal" });
     }
-    // setOpenNav(bool ? bool : (prev) => !prev);
   };
-
-  // 주소가 변경되면 자동으로 탭 닫기
-  useEffect(() => {
-    setOpenNav(false);
-  }, [getRouter().asPath]);
 
   return (
     <>

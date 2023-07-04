@@ -17,16 +17,20 @@ export default function LayoutPage(props: IProps) {
   const { getRouter, getModuleNamewithJadenCase } = CommonsHooksComponents();
   const [module, setModule] = useRecoilState(moduleState);
 
+  const router = getRouter();
+  // 현재가 관리자 페이지인지?
+  const isAdmin = router.pathname.split("/")[1] === "admin";
+
   useEffect(() => {
     // 현재 선택한 모듈 저장하기
-    setModule(getModuleNamewithJadenCase());
-  }, [getRouter()]);
+    if (!isAdmin) setModule(getModuleNamewithJadenCase());
+  }, [router]);
 
   return (
     <LayoutWrapper className="layout-home-wrapper">
       <LayoutHeadPage />
       <LayoutContentsWrapper>
-        <LayoutNavPage module={module} />
+        {!isAdmin && <LayoutNavPage module={module} isAdmin={isAdmin} />}
         {props.children}
       </LayoutContentsWrapper>
     </LayoutWrapper>
