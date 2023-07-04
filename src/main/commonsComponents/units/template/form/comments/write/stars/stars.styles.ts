@@ -6,6 +6,7 @@ interface StylesTypes {
   isHoverArea?: boolean;
   isSelect?: boolean;
   isBugMode?: boolean;
+  isAlready?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -37,6 +38,10 @@ export const Wrapper = styled.div`
 
   .mcm-tooltip-tail-contents {
     font-size: 14px;
+
+    .star {
+      height: 100%;
+    }
   }
 `;
 
@@ -65,6 +70,11 @@ export const Star = styled.button`
       display: "flex",
       "--rating": `${0.2 * (props.rating || 1)}`,
       opacity: 0.8,
+      cursor: "default",
+    }}
+
+    ${(props) =>
+    props.isAlready && {
       cursor: "default",
     }}
   
