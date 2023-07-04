@@ -28,5 +28,6 @@ module.exports = {
     "no-useless-computed-key": "off",
     "react/no-children-prop": "off",
     "react/no-unescaped-entities": "off",
+    "react/display-name": "off",
   },
 };

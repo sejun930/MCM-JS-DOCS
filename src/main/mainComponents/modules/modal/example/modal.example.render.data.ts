@@ -327,6 +327,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
                 <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='darkBlue'>true</span><span class='yellow'>}</span>
                 <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='darkBlue'>=></span> <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='purple'>(</span><span class='blue'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span> <span class='blue'>}</span><span class='purple'>)</span><span class='yellow'>}</span>
                 ${modalCommonsExampleCode.modalSize("400px", "400px")[0]}
+                ${modalCommonsExampleCode.mobileModalSize("50%", "50%")[0]}
                 ${modalCommonsExampleCode.showBGAnimation[0]}
                 ${modalCommonsExampleCode.showModalOpenAnimation[0]}
               `,

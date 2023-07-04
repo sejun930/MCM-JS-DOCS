@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// import { _Input } from "mcm-js-commons";
 import {
   LayoutNavListWrapper,
   LayoutNavWrapper,
@@ -14,9 +13,11 @@ import NavSearchPage from "./search";
 export default function LayoutNavPage({
   isMobileTap,
   module,
+  isAdmin,
 }: {
   isMobileTap?: boolean;
   module: string;
+  isAdmin?: boolean; // 관리자 페이지 여부
 }) {
   // 모듈 검색어
   const [search, setSearch] = useState<string>("");

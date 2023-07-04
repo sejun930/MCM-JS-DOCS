@@ -69,9 +69,9 @@ export const modalCommonsExampleCode = {
     `<span class='skyblue'>modalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"${width}"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"${height}"</span> <span class='yellow'>}</span><span class='blue'>}</span>`,
     `<span class='skyblue'>modalSize:</span> <span class='blue'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"${width}"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"${height}"</span> <span class='blue'>}</span>`,
   ],
-  mobileModalSize: [
-    `<span class='skyblue'>mobileModalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='yellow'>}</span><span class='blue'>}</span>`,
-    `<span class='skyblue'>mobileModalSize:</span> <span class='blue'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"50%"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"50%"</span> <span class='blue'>}</span>`,
+  mobileModalSize: (width: string, height: string) => [
+    `<span class='skyblue'>mobileModalSize</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"${width}"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"${height}"</span> <span class='yellow'>}</span><span class='blue'>}</span>`,
+    `<span class='skyblue'>mobileModalSize:</span> <span class='blue'>{</span> <span class='skyblue'>width:</span> <span class='lightOrange'>"${width}"</span>${getCommonsHighlight.comma()} <span class='skyblue'>height:</span> <span class='lightOrange'>"${height}"</span> <span class='blue'>}</span>`,
   ],
   modalStyles: [
     `<span class="skyblue">modalStyles</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='yellow'>{</span>

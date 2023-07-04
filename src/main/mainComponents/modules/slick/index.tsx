@@ -6,9 +6,23 @@ export default function ModalExamplePage() {
       onClick={() =>
         Modal.open({
           children: (
-            <span> 닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다. </span>
+            <div>
+              <span> 상위 모달 </span>
+              <Modal
+                show={true}
+                onCloseModal={() => Modal.close({ id: "parents-modal" })}
+                modalSize={{ width: "400px", height: "400px" }}
+                mobileModalSize={{ width: "50%", height: "50%" }}
+                showBGAnimation={true}
+                showModalOpenAnimation={true}
+              >
+                <span> 하위 모달을 종료하면 상위 모달도 함께 종료됩니다. </span>
+              </Modal>
+            </div>
           ),
-          offAutoClose: true,
+          id: "parents-modal",
+          showBGAnimation: true,
+          showModalOpenAnimation: true,
         })
       }
     >

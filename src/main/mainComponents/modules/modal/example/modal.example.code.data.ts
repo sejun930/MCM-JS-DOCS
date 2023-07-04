@@ -148,10 +148,10 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
-        ${modalCommonsExampleCode.mobileModalSize[idx]}
+        ${modalCommonsExampleCode.mobileModalSize("50%", "50%")[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.mobileModalSize[idx],
+        modalCommonsExampleCode.mobileModalSize("50%", "50%")[idx],
       ])}`,
     ],
     modalStyle: [

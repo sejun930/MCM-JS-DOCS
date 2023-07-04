@@ -23,7 +23,7 @@ export default function StarsForm({
   // 별점 선택시 영역 계산 state
   const [selectRating, setSelectRating] = useState(0);
   // 마우스 호버시 영역 계산 state
-  const [hoverRating, setHoverRating] = useState(0);
+  // const [hoverRating, setHoverRating] = useState(0);
 
   useEffect(() => {
     setSelectRating(rating || 0);
@@ -35,14 +35,9 @@ export default function StarsForm({
     }
   }, [category, rating]);
 
-  // 평점 hover 하기
-  const hoverStar = (idx: number) => () => {
-    if (!isView) setHoverRating(idx);
-  };
-
   // 평점 선택하기
   const selectStar = (idx: number) => () => {
-    if (isView) return;
+    if (isView || idx === selectRating) return;
     setSelectRating(idx);
 
     if (changeEvent) changeEvent(idx);
@@ -57,17 +52,17 @@ export default function StarsForm({
   };
 
   return (
-    <Wrapper
-      onMouseOut={hoverStar(0)}
-      isView={isView}
-      className="stars-wrapper"
-    >
+    <Wrapper isView={isView} className="stars-wrapper">
       {Array.from(new Array(isView ? 1 : 5), () => 1).map((_, idx) => {
         const star = idx + 1;
         // 호버된 영역 표시
-        const isHoverArea = hoverRating >= star;
+        // const isHoverArea = hoverRating >= star;
         // 선택된 영역 표시
         const isSelect = selectRating >= star;
+        // 이미 선택된 영역인지
+        const isAlready = selectRating === idx + 1;
+
+        console.log(star, idx, selectRating);
 
         // Tooltip 메세지
         let tooltipMessage = "";
@@ -83,17 +78,18 @@ export default function StarsForm({
             key={getUuid()}
             tooltipText={tooltipMessage}
             isDisable={!tooltipMessage}
+            useShowAnimation
           >
             <Star
               type="button"
-              isHoverArea={isHoverArea}
-              onMouseOver={hoverStar(star)}
+              // isHoverArea={isHoverArea}
               onClick={selectStar(star)}
               isSelect={isSelect}
               isView={isView}
               rating={selectRating}
               className={`star star-${idx}`}
               isBugMode={isBugMode}
+              isAlready={isAlready}
             >
               {renderEmoji()}
             </Star>
