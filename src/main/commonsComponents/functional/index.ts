@@ -9,16 +9,25 @@ const removeTag = (str: string) => {
 };
 
 // 시간에 대한 차이 구하기
-const getDateForm = (
-  date: {
-    seconds: number;
-    nanoseconds: number;
-  },
-  getDate?: boolean // 날짜 정보만 얻고 싶을 경우
-): string => {
-  const _date: Date = new Date(
-    date.seconds * 1000 + date.nanoseconds / 1000000
-  );
+const getDateForm = ({
+  firebaseTimer,
+  date,
+  getDate,
+}: {
+  firebaseTimer?: { seconds: number; nanoseconds: number };
+  date?: Date;
+  getDate?: boolean;
+}): string => {
+  let _date = new Date();
+  // 파이어베이스로 가져온 시간인 경우
+  if (firebaseTimer) {
+    _date = new Date(
+      firebaseTimer.seconds * 1000 + firebaseTimer.nanoseconds / 1000000
+    );
+  } else if (date) {
+    _date = date;
+  }
+  console.log(_date, date);
 
   let result = "";
 
@@ -54,12 +63,16 @@ const getDateForm = (
       year: _date.getFullYear(), // 연도
       month: _date.getMonth() + 1, // 월
       day: _date.getDate(), // 일
+      hours: _date.getHours(), // 시간
+      minutes: _date.getMinutes(), // 분
     };
 
     result = `${String(dateInfo.year)}년 ${String(dateInfo.month).padStart(
       2,
       "0"
-    )}월 ${String(dateInfo.day).padStart(2, "0")}일`;
+    )}월 ${String(dateInfo.day).padStart(2, "0")}일 ${String(
+      dateInfo.hours
+    ).padStart(2, "0")}:${String(dateInfo.minutes).padStart(2, "0")}`;
   }
 
   return result;
@@ -70,8 +83,8 @@ const changeMultipleLine = (str: string) => {
   return str.replaceAll("\n", "<br />");
 };
 
-// 비밀번호 해쉬화
-const getHashPassword = async (
+// 텍스트 해쉬화
+const getHashText = async (
   data:
     | Array<string | number> // 배열
     | { [key: string]: string | number } // 객체
@@ -91,10 +104,10 @@ const getHashPassword = async (
     str = data.join(" + ");
   }
   // salt 적용하기
-  let _salt = process.env.NEXT_PUBLIC_SALT || "mcm-sejun3278-Salt-data-0515";
-  if (salt) _salt = salt;
+  str += salt
+    ? salt
+    : process.env.NEXT_PUBLIC_SALT || "mcm-sejun3278-Salt-data-0515";
 
-  str += _salt;
   return createHash("sha256").update(str).digest("hex");
 };
 
@@ -164,7 +177,7 @@ export {
   removeTag,
   getDateForm,
   changeMultipleLine,
-  getHashPassword,
+  getHashText,
   getUuid,
   getUserIp,
   moveDocument,
