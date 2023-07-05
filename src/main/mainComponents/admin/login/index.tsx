@@ -1,11 +1,31 @@
-import styled from "@emotion/styled";
-import { breakPoints } from "mcm-js-commons/dist/responsive";
+import {
+  InputWrapper,
+  LoginAlertWrapper,
+  LoginForm,
+  Message,
+  SubmitButton,
+} from "./login.styles";
 
-import { _Title, _Input, _Button } from "mcm-js-commons";
-import { FormEvent, useState } from "react";
+import { Modal } from "mcm-js";
+import { _Title, _Input, _Button, _PTextWithHtml } from "mcm-js-commons";
+import { FormEvent, MutableRefObject, useRef, useState } from "react";
+
+import {
+  getHashText,
+  getDateForm,
+} from "src/main/commonsComponents/functional";
+import { adminLoginInfoData } from "./login.data";
 
 let debouncing: number | ReturnType<typeof setTimeout>;
-export default function AdminLoginPage() {
+let loading = false; // 중복 클릭 방지
+export default function AdminLoginPage({
+  loginComplete,
+}: {
+  loginComplete: () => void;
+}) {
+  const idRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const pwRef = useRef() as MutableRefObject<HTMLInputElement>;
+
   // 관리자 아이디 및 비밀번호 기입 정보 저장
   const [info, setInfo] = useState<{ id: string; password: string }>({
     id: "",
@@ -17,7 +37,7 @@ export default function AdminLoginPage() {
     clearTimeout(debouncing);
 
     debouncing = setTimeout(() => {
-      setInfo({ ...info, [type]: text });
+      setInfo({ ...info, [type]: text.trim() });
     }, 200);
   };
 
@@ -27,9 +47,90 @@ export default function AdminLoginPage() {
   };
 
   // 로그인
-  const login = (e?: FormEvent) => {
+  const login = async (e?: FormEvent) => {
     if (e) e.preventDefault();
-    console.log(123);
+    if (loading) return;
+
+    // 에러 및 성공 메세지
+    let msg: string | JSX.Element = "";
+    // focus 이벤트
+    let _focusEvent = () => {};
+
+    const focusEvent: { [key: string]: () => void } = {
+      id: () => {
+        if (idRef?.current) {
+          idRef.current.focus();
+        }
+      },
+      password: () => {
+        if (pwRef?.current) {
+          pwRef.current.focus();
+        }
+      },
+      success: () => {
+        loading = false;
+        loginComplete();
+        Modal.close({ className: "admin-login-modal" });
+      },
+    };
+
+    // 아이디 및 비밀번호가 누락되어 있을 경우
+    if (!checkInfo()) {
+      if (!info.id) {
+        msg = "아이디를 입력해주세요.";
+        _focusEvent = focusEvent.id;
+      } else if (!info.password) {
+        msg = "비밀번호를 입력해주세요.";
+        _focusEvent = focusEvent.password;
+      }
+    } else {
+      // 아이디 및 비밀번호 일치 확인
+      const hashId = await getHashText(info.id); // 아이디 해쉬화
+      const hashpw = await getHashText(info.password); // 비밀번화 해쉬화
+
+      const now = new Date();
+      // 현재 요일값 가져오기
+      const currentWeek = now.getDay();
+      // 어드민 로그인 정보 가져오기
+      const adminInfo = adminLoginInfoData[currentWeek];
+
+      if (hashId !== adminInfo.id) {
+        // 아이디가 불일치 할 경우
+        msg = "아이디가 일치하지 않습니다.";
+        _focusEvent = focusEvent.id;
+      } else if (hashpw !== adminInfo.password) {
+        // 비밀번호가 불일치 할 경우
+        msg = "비밀번호가 일치하지 않습니다.";
+        _focusEvent = focusEvent.password;
+      } else {
+        loading = true;
+        // 로그인 성공
+        msg = `관리자로 로그인 되었습니다.<b>(${getDateForm({
+          date: now,
+          getDate: true,
+        })})</b>`;
+        _focusEvent = focusEvent.success;
+
+        // 로그인 시간 저장하기
+        localStorage.setItem("login-date", JSON.stringify(now));
+        // accessToken 저장하기
+        localStorage.setItem(
+          "admin-accessToken",
+          JSON.stringify(await getHashText(JSON.stringify(now)))
+        );
+      }
+    }
+
+    if (msg && _focusEvent) {
+      Modal.open({
+        children: <Message isSuccess={loading} dangerouslySetInnerHTML={msg} />,
+        showBGAnimation: true,
+        showModalOpenAnimation: true,
+        modalSize: { width: "220px", height: `${loading ? 80 : 60}px` },
+        mobileModalSize: { width: "220px", height: "60px" },
+        onAfterCloseEvent: _focusEvent,
+      });
+    }
   };
 
   return (
@@ -43,19 +144,23 @@ export default function AdminLoginPage() {
 
       <LoginForm onSubmit={login}>
         <InputWrapper>
+          {/* 아이디 입력창 */}
           <_Input
             onChangeEvent={(text) => changeInfo(text, "id")}
             placeHolder="관리자 아이디를 입력해주세요."
             maxLength={30}
+            inputRef={idRef}
           />
+          {/* 비밀번호 입력창 */}
           <_Input
             onChangeEvent={(text) => changeInfo(text, "password")}
             inputType="password"
             placeHolder="관리자 비밀번호를 입력해주세요."
             maxLength={30}
+            inputRef={pwRef}
           />
         </InputWrapper>
-
+        {/* 로그인 버튼 */}
         <SubmitButton onClickEvent={login} isSubmit={checkInfo()}>
           로그인
         </SubmitButton>
@@ -63,88 +168,3 @@ export default function AdminLoginPage() {
     </LoginAlertWrapper>
   );
 }
-
-interface StyleTypes {
-  isSubmit?: boolean;
-}
-
-export const LoginAlertWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 0px;
-  justify-content: space-between;
-  height: 100%;
-
-  .admin-login-title {
-    p {
-      font-size: 26px;
-      line-height: 38px;
-      text-align: center;
-      letter-spacing: -0.04rem;
-      word-spacing: 4px;
-      margin: 0;
-
-      b {
-        color: #aa5656;
-      }
-    }
-  }
-
-  @media ${breakPoints.mobileLarge} {
-    padding: 1rem 0px;
-
-    .admin-login-title {
-      p {
-        font-size: 20px;
-        line-height: 30px;
-      }
-    }
-  }
-`;
-
-export const LoginForm = styled.form`
-  display: flex;
-  justify-content: space-between;
-
-  @media ${breakPoints.mobileLarge} {
-    flex-direction: column;
-    justify-content: unset;
-    gap: 20px 0px;
-  }
-`;
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px 0px;
-  width: 100%;
-
-  .mcm-input-unit-wrapper {
-    height: 36px;
-
-    .mcm-input-unit-items {
-      border: unset;
-      box-shadow: 2px 2px 3px 1px;
-    }
-  }
-`;
-
-export const SubmitButton = styled(_Button)`
-  min-width: 80px;
-  margin-left: 20px;
-  box-shadow: 2px 2px 3px 1px;
-  transition: all 0.25s;
-
-  ${(props: StyleTypes) =>
-    !props.isSubmit && {
-      cursor: "not-allowed",
-      backgroundColor: "#dddddd",
-      color: "#666666",
-      boxShadow: "0px 0px 0px 0px",
-    }}
-
-  @media ${breakPoints.mobileLarge} {
-    margin-left: 0px;
-    height: 36px;
-  }
-`;

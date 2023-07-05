@@ -115,11 +115,15 @@ export default function ListContentsInfoUIPage({
           <OptionalWrapper>
             <DateWrapper className="createdAt">
               {info.createdAt && ( // 작성일
-                <b className="date">{getDateForm(info.createdAt)}</b>
+                <b className="date">
+                  {getDateForm({ firebaseTimer: info.createdAt })}
+                </b>
               )}
               {info.modifyAt && (
                 <b className="date">
-                  (수정 일자 : {getDateForm(info.modifyAt, true)})
+                  (수정 일자 :{" "}
+                  {getDateForm({ firebaseTimer: info.modifyAt, getDate: true })}
+                  )
                 </b>
               )}
             </DateWrapper>

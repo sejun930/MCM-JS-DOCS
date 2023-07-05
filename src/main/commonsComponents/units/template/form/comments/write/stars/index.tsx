@@ -62,8 +62,6 @@ export default function StarsForm({
         // 이미 선택된 영역인지
         const isAlready = selectRating === idx + 1;
 
-        console.log(star, idx, selectRating);
-
         // Tooltip 메세지
         let tooltipMessage = "";
         if (starsTooltipTextList[category]) {

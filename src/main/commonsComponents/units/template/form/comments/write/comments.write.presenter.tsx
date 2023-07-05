@@ -43,7 +43,6 @@ export default function CommentsWriteUIPage({
   openPrivacy,
   checkWriteAble,
 }: IPropsTypes) {
-  console.log(checkWriteAble());
   return (
     <Form onSubmit={write}>
       <fieldset>

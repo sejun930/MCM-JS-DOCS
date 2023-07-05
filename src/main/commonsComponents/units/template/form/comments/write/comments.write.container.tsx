@@ -16,7 +16,7 @@ import { Modal } from "mcm-js-dev";
 import { _SpanTextWithHtml } from "mcm-js-commons";
 
 import {
-  getHashPassword,
+  getHashText,
   changeMultipleLine,
 } from "src/main/commonsComponents/functional";
 import { getServerTime } from "src/commons/libraries/firebase";
@@ -180,7 +180,7 @@ export default function CommentsWritePage({
       info.contents = changeMultipleLine(info.contents.trim());
 
       // 비밀번호 해쉬화
-      info.password = await getHashPassword(info.password);
+      info.password = await getHashText(info.password);
 
       // 등록일 설정
       info.createdAt = getServerTime();

@@ -14,7 +14,7 @@ import ModalResultForm from "../../../../../modal/modal.result";
 
 import {
   changeMultipleLine,
-  getHashPassword,
+  getHashText,
 } from "src/main/commonsComponents/functional";
 
 let password = ""; // 패스워드 저장
@@ -145,7 +145,7 @@ export default function ContentsSelectFunctionalPage({
       const _info = { ...info } as WriteInfoTypes;
 
       // 비밀번호 체크하기
-      const hashPw = await getHashPassword(password);
+      const hashPw = await getHashText(password);
 
       if (hashPw !== info.password || !info.password) {
         openModal({

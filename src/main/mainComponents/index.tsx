@@ -5,8 +5,13 @@ import { _PText, _Title } from "mcm-js-commons";
 import Template from "../commonsComponents/units/template/main";
 import _SubTitleTemplate from "../commonsComponents/units/template/title/subTitle";
 import _Copy from "../commonsComponents/units/copy";
+import { useEffect } from "react";
 
 export default function MainHomePage() {
+  useEffect(() => {
+    // 모
+  }, []);
+
   return (
     <Template>
       <ProjectInfoWrapper>

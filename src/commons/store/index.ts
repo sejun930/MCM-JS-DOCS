@@ -18,3 +18,9 @@ export const ipState = atom({
   key: `ipState`,
   default: "",
 });
+
+// 어드민 로그인 정보
+export const adminLoginState = atom({
+  key: `adminLoginState`,
+  default: false,
+});
