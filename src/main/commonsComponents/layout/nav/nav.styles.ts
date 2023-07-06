@@ -4,6 +4,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 interface StyleTypes {
   render?: boolean;
   isMobileTap?: boolean;
+  isAdmin?: boolean;
 }
 
 export const LayoutNavWrapper = styled.nav`
@@ -19,9 +20,15 @@ export const LayoutNavWrapper = styled.nav`
       opacity: 1,
     }}
 
+  ${(props) =>
+    props.isAdmin && {
+      padding: "1rem",
+    }}
+
   @media ${breakPoints.mobileLarge} {
     max-width: auto;
     display: none;
+    height: 100%;
 
     ${(props) =>
       props.isMobileTap && {
@@ -29,26 +36,21 @@ export const LayoutNavWrapper = styled.nav`
         border: "unset",
       }}
 
-    .nav-list-wrapper {
-      padding: 0px;
-    }
-
-    .nav-list-select-wrapper {
-      padding-top: 28px;
-    }
+    ${(props) =>
+      props.isAdmin && {
+        padding: "0rem",
+      }}
   }
 `;
 
 export const LayoutNavListWrapper = styled.article`
   display: flex;
   flex-direction: column;
-  gap: 10px 0px;
   width: 100%;
   height: 100%;
 
   .mcm-p-unit {
     transition: all 0.25s ease-in;
-    padding: 10px;
     border-radius: 10px;
     font-size: 1rem;
 
@@ -62,8 +64,26 @@ export const LayoutNavListWrapper = styled.article`
     font-weight: 800;
   }
 
+  .admin-mode {
+    position: fixed;
+    bottom: 0px;
+    padding: 0.7rem 1rem;
+    min-width: 15%;
+    border-top: dotted 1px gray;
+    font-size: 14px;
+    word-spacing: 4px;
+    letter-spacing: -0.02rem;
+  }
+
   @media ${breakPoints.mobileLarge} {
     gap: 16px 0px;
+    justify-content: space-between;
+
+    .admin-mode {
+      position: relative;
+      padding: 0px;
+      padding-top: 1rem;
+    }
   }
 `;
 
@@ -72,13 +92,29 @@ export const LayoutNavListItems = styled.div`
   flex-direction: column;
   padding: 1rem;
   border-bottom: solid 2px #ababab;
-  position: sticky;
-  top: 0px;
   background-color: white;
 
   ${(props: StyleTypes) =>
     props.isMobileTap && {
       padding: "0px",
-      paddingBottom: "20px",
+      paddingBottom: "0px",
+    }}
+
+  ${(props) =>
+    props.isAdmin && {
+      padding: "0px",
+      border: "unset",
+    }}
+`;
+
+export const LayoutNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0px;
+
+  ${(props: StyleTypes) =>
+    props.isAdmin && {
+      gap: "1rem 0px",
     }}
 `;

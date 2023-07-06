@@ -5,14 +5,24 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 import MainMobileNavigationTapPage from "./mobileNavigation/main.mobileNavigation";
 
 // DOC 페이지 메인 템플릿
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({
+  children,
+  isFull,
+}: {
+  children: React.ReactNode;
+  isFull?: boolean;
+}) {
   return (
-    <Wrapper className="main-template-wrapper">
+    <Wrapper className="main-template-wrapper" isFull={isFull}>
       {/* 모바일 nav */}
       <MainMobileNavigationTapPage />
       {children}
     </Wrapper>
   );
+}
+
+interface StyleTypes {
+  isFull?: boolean;
 }
 
 export const Wrapper = styled.main`
@@ -21,6 +31,11 @@ export const Wrapper = styled.main`
   flex-direction: column;
   min-width: 85%;
   position: relative;
+
+  ${(props: StyleTypes) =>
+    props.isFull && {
+      minWidth: "100%",
+    }}
 
   // 코드에 관한 색상 스타일 지정
   code {

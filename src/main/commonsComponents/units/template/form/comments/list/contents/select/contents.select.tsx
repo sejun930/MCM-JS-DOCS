@@ -6,7 +6,7 @@ import {
 } from "./contents.select.styles";
 import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { adminLoginState } from "src/commons/store";
 
 import CommonsHooksComponents from "../../../../../../../hooks/commonsHooks";
 import { getUuid } from "src/main/commonsComponents/functional";
@@ -39,7 +39,7 @@ export default function SelectListOptional({
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const _listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
-  const [module] = useRecoilState(moduleState);
+  const [adminLogin] = useRecoilState(adminLoginState);
 
   useEffect(() => {
     const body = document.body;
@@ -91,12 +91,12 @@ export default function SelectListOptional({
         <ContentsOptionalPage
           type={type}
           info={info}
-          module={module}
           modifyComments={modifyComments}
+          adminLogin={adminLogin}
         />
       ),
       id: "comments-functional-modal",
-      modalSize: { width: "400px", height: "400px" },
+      // modalSize: { width: "400px", height: "400px" },
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,

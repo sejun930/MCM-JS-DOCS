@@ -1,17 +1,15 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { useEffect } from "react";
+
 import { _PText, _Title } from "mcm-js-commons";
+import { Modal } from "mcm-js";
 
 import Template from "../commonsComponents/units/template/main";
 import _SubTitleTemplate from "../commonsComponents/units/template/title/subTitle";
 import _Copy from "../commonsComponents/units/copy";
-import { useEffect } from "react";
 
 export default function MainHomePage() {
-  useEffect(() => {
-    // 모
-  }, []);
-
   return (
     <Template>
       <ProjectInfoWrapper>

@@ -164,9 +164,15 @@ export const SelectWrapper = styled.div`
       display: "flex",
     }}
 
+  .mcm-unit-select-list-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   .mcm-unit-select {
-    top: -90px;
+    top: -50px;
     flex-direction: column-reverse;
+    width: max-content;
 
     .mcm-close-button-unit {
       transform: translate3d(5px, 5px, 0px);

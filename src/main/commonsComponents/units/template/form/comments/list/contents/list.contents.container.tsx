@@ -8,18 +8,12 @@ import {
 } from "react";
 
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { adminLoginState } from "src/commons/store";
 
 import { Modal } from "mcm-js";
-// const { Modal } = require(Boolean(process.env.NEXT_PUBLIC_DEVELOP)
-//   ? "mcm-js-dev"
-//   : "mcm-js");
-import {
-  // CategoryTypes,
-  CommentsAllInfoTypes,
-  InfoTypes,
-} from "../../comments.types";
+import { CommentsAllInfoTypes, InfoTypes } from "../../comments.types";
 import ContentsOptionalPage from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.container";
+import { ListContentsSelectType } from "./list.data";
 
 export interface ListContentsIProps {
   info: InfoTypes;
@@ -34,7 +28,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const { info, modifyComments, changeInfo } = props;
   const { contents } = info;
 
-  const [module] = useRecoilState(moduleState);
+  const [adminLogin] = useRecoilState(adminLoginState);
 
   // 더 보기 기능 (8줄 이상 넘어갈 경우에만 적용)
   const [subContents, setSubContents] = useState("");
@@ -86,14 +80,14 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   };
 
   // 댓글 삭제하기
-  const deleteComments = (type: "delete" | "modify", name: string) => () => {
+  const deleteComments = (type: ListContentsSelectType, name: string) => () => {
     Modal.open({
       children: (
         <ContentsOptionalPage
           type={type}
           info={info}
-          module={module}
           modifyComments={modifyComments}
+          adminLogin={adminLogin}
         />
       ),
       id: "comments-functional-modal",
@@ -128,6 +122,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       name={Name}
       _wrapperRef={_wrapperRef}
       changeInfo={changeInfo}
+      adminLogin={adminLogin}
     />
   );
 }

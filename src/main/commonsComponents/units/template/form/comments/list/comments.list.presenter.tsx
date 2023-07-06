@@ -29,11 +29,13 @@ export default function CommentsListUIPage({
   modifyComments,
   changeInfo,
   listRef,
+  adminLogin,
 }: {
   commentsInfo: CommentsAllInfoTypes;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   listRef: MutableRefObject<HTMLUListElement>;
+  adminLogin: boolean;
 }) {
   return (
     <CommentsListWrapper>

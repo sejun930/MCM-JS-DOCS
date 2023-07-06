@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import { NavListTypes } from "../nav.data";
 import { _Link, _PText, _SpanTextWithHtml } from "mcm-js-commons";
@@ -7,10 +8,12 @@ export default function NavListPage({
   list,
   isSelect,
   search,
+  isAdmin,
 }: {
   list: Array<NavListTypes>;
   isSelect: boolean;
   search?: string;
+  isAdmin?: boolean;
 }) {
   return (
     <ListWrapper
@@ -18,13 +21,14 @@ export default function NavListPage({
       className={`nav-list-wrapper${
         isSelect ? " nav-list-select-wrapper" : ""
       }`}
+      isAdmin={isAdmin}
     >
       {(list.length &&
         list.map((el, key) => {
-          const _href = `/modules/${String(
+          const _href = `/${(!isAdmin ? "modules/" : "admin/") || ""}${String(
             el?.href || el?.name
           ).toLowerCase()}`;
-          let name = el?.name || "";
+          let name = el?.remarks || el?.name;
 
           if (search) {
             const startIdx = name.toLowerCase().indexOf(search.toLowerCase());
@@ -58,11 +62,11 @@ export default function NavListPage({
 
 interface StyleTypes {
   isSelect?: boolean;
+  isAdmin?: boolean;
 }
 
 export const ListWrapper = styled.ul`
-  padding: 0px 1rem;
-  padding-top: 0.5rem;
+  padding: 20px 1rem;
   display: flex;
   flex-direction: column;
   gap: 20px 0px;
@@ -73,6 +77,11 @@ export const ListWrapper = styled.ul`
     props.isSelect && {
       padding: "0px",
       paddingTop: "1rem",
+    }}
+
+  ${(props) =>
+    props.isAdmin && {
+      padding: "0px",
     }}
 
   li {
@@ -94,5 +103,14 @@ export const ListWrapper = styled.ul`
     padding: 0px;
     font-size: 14px;
     color: #777777;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 1rem 0px;
+
+    ${(props) =>
+      props.isAdmin && {
+        padding: "0px",
+      }}
   }
 `;

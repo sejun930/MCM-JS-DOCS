@@ -10,15 +10,13 @@ import { MutableRefObject, useEffect, useRef } from "react";
 
 // let search = "";
 let saveCategory = "all";
-export default function CommentsListPage({
-  commentsInfo,
-  modifyComments,
-  changeInfo,
-}: {
+export default function CommentsListPage(props: {
   commentsInfo: CommentsAllInfoTypes;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
+  adminLogin: boolean;
 }) {
+  const { commentsInfo } = props;
   const listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
   useEffect(() => {
@@ -42,12 +40,5 @@ export default function CommentsListPage({
     }
   }, [commentsInfo]);
 
-  return (
-    <CommentsListUIPage
-      commentsInfo={commentsInfo}
-      modifyComments={modifyComments}
-      changeInfo={changeInfo}
-      listRef={listRef}
-    />
-  );
+  return <CommentsListUIPage listRef={listRef} {...props} />;
 }

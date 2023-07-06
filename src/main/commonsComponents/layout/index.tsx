@@ -4,7 +4,7 @@ import { LayoutWrapper, LayoutContentsWrapper } from "./styles";
 import CommonsHooksComponents from "../hooks/commonsHooks";
 // import CommonsHooksComponents from "mcm-js-commons/dist/hooks";
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { moduleState, adminLoginState } from "src/commons/store";
 
 import LayoutHeadPage from "./header";
 import LayoutNavPage from "./nav";
@@ -16,6 +16,7 @@ interface IProps {
 export default function LayoutPage(props: IProps) {
   const { getRouter, getModuleNamewithJadenCase } = CommonsHooksComponents();
   const [module, setModule] = useRecoilState(moduleState);
+  const [adminLogin] = useRecoilState(adminLoginState);
 
   const router = getRouter();
   // 현재가 관리자 페이지인지?
@@ -23,14 +24,17 @@ export default function LayoutPage(props: IProps) {
 
   useEffect(() => {
     // 현재 선택한 모듈 저장하기
-    if (!isAdmin) setModule(getModuleNamewithJadenCase());
+    setModule(getModuleNamewithJadenCase());
   }, [router]);
+
+  let navRenderCondition = !isAdmin;
+  if (isAdmin && adminLogin) navRenderCondition = true;
 
   return (
     <LayoutWrapper className="layout-home-wrapper">
       <LayoutHeadPage />
       <LayoutContentsWrapper>
-        {!isAdmin && <LayoutNavPage module={module} isAdmin={isAdmin} />}
+        {navRenderCondition && <LayoutNavPage module={module} />}
         {props.children}
       </LayoutContentsWrapper>
     </LayoutWrapper>

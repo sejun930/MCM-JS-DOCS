@@ -27,7 +27,6 @@ const getDateForm = ({
   } else if (date) {
     _date = date;
   }
-  console.log(_date, date);
 
   let result = "";
 

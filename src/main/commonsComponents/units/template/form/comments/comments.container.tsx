@@ -2,7 +2,7 @@ import CommentsUIPage from "./comments.presenter";
 
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { ipState, moduleState } from "src/commons/store";
+import { ipState, moduleState, adminLoginState } from "src/commons/store";
 
 import apis from "src/commons/libraries/commons.apis";
 import {
@@ -20,6 +20,7 @@ import {
   CommentsAllInfoTypes,
 } from "./comments.types";
 import { getUserIp } from "src/main/commonsComponents/functional";
+import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
@@ -34,6 +35,7 @@ export default function CommentsPage() {
     useState<CommentsAllInfoTypes>(initCommentsInfo);
   const [module] = useRecoilState<string>(moduleState);
   const [, setIp] = useRecoilState<string>(ipState);
+  const [adminLogin, setAdminLogin] = useRecoilState<boolean>(adminLoginState);
 
   useEffect(() => {
     // 최초 댓글 리스트 가져오기
@@ -50,6 +52,13 @@ export default function CommentsPage() {
         console.log(`아이피 조회에 실패했습니다. : ${err}`);
       });
   }, []);
+
+  useEffect(() => {
+    // 관리자 로그인 체크하기
+    checkAccessToken().then((result) => {
+      setAdminLogin(result);
+    });
+  }, [commentsInfo]);
 
   // 필터 쿼리 적용하기
   const getFilterQuery = (
@@ -468,6 +477,7 @@ export default function CommentsPage() {
       changeInfo={changeInfo}
       moreLoad={moreLoad}
       allPage={allPage}
+      adminLogin={adminLogin}
     />
   );
 }
