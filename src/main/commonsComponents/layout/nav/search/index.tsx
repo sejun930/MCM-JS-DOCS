@@ -28,9 +28,7 @@ export default function NavSearchPage({
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: sticky;
   height: auto;
-  top: 10px;
   z-index: 100;
 `;
 

@@ -1,4 +1,6 @@
 import { ComponentType, useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { adminLoginState } from "src/commons/store";
 import Template from "../units/template/main";
 
 import { Modal } from "mcm-js";
@@ -14,21 +16,25 @@ const WithAuthAdmin =
     let loading = false;
     // 로그인 상태에서만 페이지 렌더 가능
     const [render, setRender] = useState(false);
+    const [, setAdminLogin] = useRecoilState(adminLoginState);
 
     const { getRouter } = CommonsHooksComponents();
+
+    const loginComplete = () => {
+      setRender(true);
+      setAdminLogin(true);
+    };
 
     useEffect(() => {
       if (loading) {
         checkAccessToken().then((result: boolean) => {
           if (result) {
             // 로그인이 완료되었다면 페이지 렌더
-            setRender(true);
+            loginComplete();
           } else {
             // 로그인이 안되어 있는 경우
             Modal.open({
-              children: (
-                <AdminLoginPage loginComplete={() => setRender(true)} />
-              ),
+              children: <AdminLoginPage loginComplete={loginComplete} />,
               modalSize: { width: "360px", height: "340px" },
               mobileModalSize: { height: "320px" },
               modalStyles: {
@@ -47,7 +53,11 @@ const WithAuthAdmin =
       } else loading = true;
     }, [getRouter().pathname]);
 
-    return <Template>{(render && <Component {...props} />) || <></>}</Template>;
+    return (
+      <Template isFull>
+        {(render && <Component {...props} />) || <></>}
+      </Template>
+    );
   };
 
 export default WithAuthAdmin;

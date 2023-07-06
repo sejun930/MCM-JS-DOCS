@@ -5,22 +5,24 @@ import {
 } from "./main.mobileNavigation.styles";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
-import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+import { moduleState, adminLoginState } from "src/commons/store";
 
 import { Modal } from "mcm-js";
-
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import LayoutNavPage from "src/main/commonsComponents/layout/nav";
 
 // let open = false;
 export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);
+  const [adminLogin] = useRecoilState(adminLoginState);
+
   const { getRouter } = CommonsHooksComponents();
+  const router = getRouter();
+  const isAdmin = router.pathname.split("/")[1] === "admin";
 
   // 홈으로 이동하기
   const moveHome = () => {
-    const router = getRouter();
     if (router.pathname !== "/") {
       Modal.close({ className: "mcm-modal-window-type" });
       router.push("/");
@@ -29,6 +31,8 @@ export default function MainMobileNavigationTapPage() {
 
   // 모바일 nav 토글
   const toggleNav = (bool: boolean) => {
+    if (isAdmin && !adminLogin) return;
+
     setOpenNav(bool);
 
     if (bool) {

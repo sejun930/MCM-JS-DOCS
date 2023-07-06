@@ -13,21 +13,23 @@ export const checkAccessToken = async (): Promise<boolean> => {
   let loginDate: Date | string | null | number =
     localStorage.getItem("login-date");
 
+  if (!loginAccessToken && !loginDate)
+    return removeLocalStorage("비로그인 상태입니다.");
+
   // 둘 중 하나라도 없는 경우 = 비로그인 상태
-  if (!loginAccessToken || !loginDate) {
-    console.log("로그인 정보가 삭제되었습니다.");
-    return removeLocalStorage();
-  }
+  if (!loginAccessToken || !loginDate)
+    return removeLocalStorage("비정상적인 로그인이 감지되었습니다.");
+
   loginAccessToken = JSON.parse(loginAccessToken);
 
   if (loginDate) {
     // 로그인한 시간대가 존재하는 경우
     // 시간이 변경되었는지를 검증한다.
-    if ((await getHashText(loginDate)) !== loginAccessToken) {
+    if ((await getHashText(loginDate)) !== loginAccessToken)
       // 일치하지 않는 경우 (= 로그인 시간이 사용자가 임의로 강제 변경한 경우)
-      console.log("로그인 시간이 일치하지 않아 비로그인 되었습니다.");
-      return removeLocalStorage();
-    }
+      return removeLocalStorage(
+        "로그인 시간이 일치하지 않아 비로그인 되었습니다."
+      );
 
     // 로그인 시간이 경과하는지 체크한다. (로그인으로부터 1시간까지만 사용 가능)
     loginDate = new Date(JSON.parse(loginDate));
@@ -37,10 +39,8 @@ export const checkAccessToken = async (): Promise<boolean> => {
     const now = Number(new Date());
 
     // 1시간이 경과했을 경우
-    if (Number(limit) - now < 0) {
-      console.log("로그인 시간이 경과되었습니다.");
-      return removeLocalStorage();
-    }
+    if (Number(limit) - now < 0)
+      return removeLocalStorage("로그인 시간이 경과되었습니다.");
   }
 
   console.log(`로그인 완료 : ${loginDate}후 만료`);
@@ -48,9 +48,11 @@ export const checkAccessToken = async (): Promise<boolean> => {
 };
 
 // 로그인 정보 모두 제거
-const removeLocalStorage = (): boolean => {
+const removeLocalStorage = (log: string): boolean => {
   localStorage.removeItem("admin-accessToken");
   localStorage.removeItem("login-date");
+
+  console.log(log);
 
   return false;
 };
