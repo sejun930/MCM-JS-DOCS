@@ -1,13 +1,16 @@
 import styled from "@emotion/styled";
+import { _Input } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   isSuccess?: boolean;
   isDelete?: boolean;
   isReviewCategory?: boolean;
+  adminLogin?: boolean;
 }
 
 export const Form = styled.form`
+  height: 100%;
   @media ${breakPoints.mobileLarge} {
     display: flex;
     width: 100%;
@@ -19,6 +22,7 @@ export const Form = styled.form`
 export const OptionalWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -141,6 +145,7 @@ export const CategoryInfo = styled.div`
     flex-direction: row;
     gap: 0px 12px;
     width: 100%;
+    align-items: center;
 
     .stars-wrapper {
       margin-top: 0px;

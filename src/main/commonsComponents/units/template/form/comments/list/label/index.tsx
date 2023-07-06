@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { Label, LabelWrapper, UserIP } from "./label.styles";
 
 import { _Button } from "mcm-js-commons";
 import React, { MouseEvent } from "react";
@@ -18,12 +17,14 @@ export default function CommentsLabel({
   changeInfo,
   showCategoryName,
   modifyRatingEvent,
+  adminLogin,
 }: {
   info: InfoTypes;
   commentsInfo?: CommentsAllInfoTypes;
   changeInfo?: (info: CommentsAllInfoTypes) => void; // 댓글 정보 수정하기
   showCategoryName?: boolean; // 카테고리 출력 여부
   modifyRatingEvent?: (value: number) => void; // 평점 수정 이벤트 (평점 수정 가능)
+  adminLogin: boolean;
 }) {
   const renderLabel = () => {
     const nodeList = [];
@@ -80,6 +81,10 @@ export default function CommentsLabel({
       );
     }
 
+    // 관리자일 경우 아이피 노출
+    if (adminLogin)
+      nodeList.push(<UserIP className="user-ip">({info.ip})</UserIP>);
+
     return nodeList;
   };
 
@@ -91,56 +96,3 @@ export default function CommentsLabel({
     </LabelWrapper>
   );
 }
-
-interface StyleTypes {
-  readOnly?: boolean;
-}
-
-export const LabelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 10px 0px;
-
-  .mcm-button-unit {
-    ${(props: StyleTypes) =>
-      props.readOnly && {
-        cursor: "default",
-      }}
-  }
-
-  @media ${breakPoints.mobileLarge} {
-    flex-direction: row;
-    gap: 0px 10px;
-  }
-`;
-
-export const Label = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 10px;
-  border-radius: 10px;
-  background-color: #c88ea7;
-  color: #ffffff;
-  margin: 0px;
-
-  &.bug-label-0,
-  &.question-label-0 {
-    background-color: #eeeeee;
-    color: gray;
-  }
-
-  &.bug-label-1 {
-    background-color: #e5f9db;
-    color: black;
-  }
-
-  &.bug-label-2,
-  &.question-label-1 {
-    background-color: #19a7ce;
-    color: white;
-  }
-`;

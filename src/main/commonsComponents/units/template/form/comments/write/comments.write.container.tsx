@@ -26,6 +26,7 @@ import {
   categoryListArray,
 } from "./comments.write.types";
 import { InfoTypes } from "../comments.types";
+import { db } from "src/commons/libraries/firebase";
 
 // 중복 실행 방지
 let writing = false;
@@ -154,6 +155,31 @@ export default function CommentsWritePage({
       });
     };
 
+    if (!ip) {
+      // 아이피 주소 조회에 실패할 경우
+      openErrorModal({
+        message:
+          "IP 주소를 조회할 수 없습니다. <br />관리자에게 직접 문의 부탁드립니다.",
+      });
+    } else {
+      // 아이피 주소 저장
+      info.ip = ip;
+
+      // 차단된 유저인지 검증
+      const checkBlock = await db
+        .collection("block")
+        .where("ip", "==", ip)
+        .get();
+
+      // 차단된 로그가 있는 경우
+      if (!checkBlock.empty) {
+        return openErrorModal({
+          message:
+            "차단된 IP 주소입니다. <br />관리자에게 직접 문의 부탁드립니다.",
+        });
+      }
+    }
+
     // 중복 클릭 방지하기
     if (writing) {
       openErrorModal({
@@ -193,37 +219,26 @@ export default function CommentsWritePage({
         offClose: true,
       });
 
-      if (!ip) {
-        // 아이피 주소 조회에 실패할 경우
-        openErrorModal({
-          message:
-            "IP 주소를 조회할 수 없습니다. <br />관리자에게 직접 문의 부탁드립니다.",
-        });
-      } else {
-        // 아이피 주소 저장
-        info.ip = ip;
+      // 리뷰가 아닌 경우에는 평점 초기화
+      if (info.category !== "review") info.rating = 0;
 
-        // 리뷰가 아닌 경우에는 평점 초기화
-        if (info.category !== "review") info.rating = 0;
+      // 댓글 작성 가능
+      const addResult = await addComments(info as InfoTypes);
+      if (addResult) {
+        Modal.close({ id: "writing-modal" });
 
-        // 댓글 작성 가능
-        const addResult = await addComments(info as InfoTypes);
-        if (addResult) {
-          Modal.close({ id: "writing-modal" });
-
-          window.setTimeout(() => {
-            // 등록에 성공할 경우
-            openErrorModal({
-              message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
-              className: "success-modal",
-            });
-          }, 300);
-        }
-        writing = false;
-
-        // 초기화
-        setInfo({ ...initInfo });
+        window.setTimeout(() => {
+          // 등록에 성공할 경우
+          openErrorModal({
+            message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
+            className: "success-modal",
+          });
+        }, 300);
       }
+      writing = false;
+
+      // 초기화
+      setInfo({ ...initInfo });
     }
   };
 

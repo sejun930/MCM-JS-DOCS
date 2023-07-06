@@ -14,14 +14,13 @@ import {
   Filedset,
   QuestionTitle,
 } from "./list.styles";
+import { getDateForm } from "src/main/commonsComponents/functional";
+import { getListContentsInfo, ListContentsSelectType } from "./list.data";
 
 import { _SpanTextWithHtml, _Button } from "mcm-js-commons";
 import { ListContentsIProps } from "./list.contents.container";
 
-// import ContentsOptionalPage from "./functional/contents.select.functional.container";
-
 import _SelectForm from "../../../select/select.container";
-import { getDateForm } from "src/main/commonsComponents/functional";
 import CommentsLabel from "../label";
 import StarsForm from "../../write/stars";
 
@@ -33,10 +32,11 @@ interface ListContentsUIProps {
   contents: string;
   showSelect: boolean;
   toggleShowSelect: (bool?: boolean) => void;
-  deleteComments: (type: "delete" | "modify", name: string) => () => void;
+  deleteComments: (type: ListContentsSelectType, name: string) => () => void;
   hover: boolean;
   name: string;
   _wrapperRef: MutableRefObject<HTMLLIElement>;
+  adminLogin: boolean;
 }
 
 export default function ListContentsInfoUIPage({
@@ -54,6 +54,7 @@ export default function ListContentsInfoUIPage({
   _wrapperRef,
   commentsInfo,
   changeInfo,
+  adminLogin,
 }: ListContentsIProps & ListContentsUIProps) {
   return (
     <CommentsList
@@ -68,6 +69,7 @@ export default function ListContentsInfoUIPage({
             info={info}
             commentsInfo={commentsInfo}
             changeInfo={changeInfo}
+            adminLogin={adminLogin}
           />
         </LabelWrapper>
         <ContentsWrapper>
@@ -135,21 +137,7 @@ export default function ListContentsInfoUIPage({
                 closeEvent={() => toggleShowSelect(false)}
                 autoCloseOffTargetName={name}
               >
-                {(
-                  [
-                    { name: "수정", value: "modify" },
-                    { name: "삭제", value: "delete" },
-                  ].filter((el) => {
-                    if (el.name === "수정") {
-                      if (info.category === "bug" && info.bugStatus !== 0)
-                        return false;
-                      if (info.category === "question" && info.completeAnswer)
-                        return false;
-                      return true;
-                    }
-                    return true;
-                  }) as Array<{ name: string; value: "modify" | "delete" }>
-                ).map((el) => {
+                {getListContentsInfo(adminLogin, info).map((el) => {
                   return (
                     <SelectButton
                       onClickEvent={deleteComments(el.value, name)}

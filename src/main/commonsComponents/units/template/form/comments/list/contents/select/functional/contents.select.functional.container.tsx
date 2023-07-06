@@ -1,7 +1,7 @@
 import ContentsSelectFunctionalUIPage from "./contents.select.functional.presenter";
 import { Message } from "./contents.select.functional.styles";
 
-import { FormEvent, MutableRefObject, useRef } from "react";
+import { FormEvent, MutableRefObject, useEffect, useRef } from "react";
 
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
@@ -16,6 +16,11 @@ import {
   changeMultipleLine,
   getHashText,
 } from "src/main/commonsComponents/functional";
+import {
+  ListContentsSelectType,
+  ContentsSelectTypeName,
+} from "../../list.data";
+import { db } from "src/commons/libraries/firebase";
 
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
@@ -27,13 +32,13 @@ let disableOpenModal = false; // 모달 중복 실행 방지
 export default function ContentsSelectFunctionalPage({
   info,
   type,
-  module,
   modifyComments,
+  adminLogin,
 }: {
   info: InfoTypes;
-  type: "modify" | "delete";
-  module: string;
+  type: ListContentsSelectType;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
+  adminLogin: boolean;
 }) {
   _contents = info.contents;
   rating = info.rating;
@@ -42,12 +47,19 @@ export default function ContentsSelectFunctionalPage({
   const contentsRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
+  useEffect(() => {
+    // 관리자일 경우 비밀번호 자동 저장
+    password = info.password;
+  }, [adminLogin]);
+
   // 수정 및 삭제 가능 여부 반환
   const checkAble = () => {
     let able = true;
 
     // 비밀번호가 빈칸일 경우
     if (!password || !_contents) able = false;
+    // 관리자라면 무조건 가능
+    if (adminLogin) able = true;
 
     return able;
   };
@@ -124,6 +136,7 @@ export default function ContentsSelectFunctionalPage({
         height: "10%",
       },
       onCloseModal: _afterCloseEvent,
+      onAfterCloseEvent: () => (waiting = false),
     });
   };
 
@@ -134,7 +147,7 @@ export default function ContentsSelectFunctionalPage({
       openModal({ text: "처리중입니다. 잠시만 기다려주세요." });
       return;
     }
-    const typeName = type === "modify" ? "수정" : "삭제";
+    const typeName = ContentsSelectTypeName[type][0];
 
     // 버튼이 비활성화일 경우
     if (!checkAble()) {
@@ -147,12 +160,14 @@ export default function ContentsSelectFunctionalPage({
       // 비밀번호 체크하기
       const hashPw = await getHashText(password);
 
-      if (hashPw !== info.password || !info.password) {
-        openModal({
-          text: "비밀번호가 일치하지 않습니다.",
-          focus: "password",
-        });
-        return;
+      if (!adminLogin) {
+        if (hashPw !== info.password || !info.password) {
+          openModal({
+            text: "비밀번호가 일치하지 않습니다.",
+            focus: "password",
+          });
+          return;
+        }
       }
 
       waiting = true;
@@ -171,12 +186,24 @@ export default function ContentsSelectFunctionalPage({
 
         // 수정 시간 저장
         _info.modifyAt = getServerTime();
-      } else {
-        // 삭제 모드일 경우
+      } else if (type === "delete" || type === "block") {
+        // 삭제 & 차단 모드일 경우 (= 댓글 삭제)
         _info.deletedAt = getServerTime();
+
+        if (type === "block") {
+          // 차단 모드일 경우
+          const doc = db.collection("block");
+          doc.add({
+            commentId: _info.id, // 차단된 댓글 아이디 값
+            ip: _info.ip, // 차단된 유저 아이피
+            createdAt: getServerTime(), // 차단날짜
+            contents: _info.contents, // 차단된 댓글 내용
+          });
+        }
       }
+      const isDelete = type === "delete" || type === "block"; // 댓글 삭제 여부
       // 수정 완료 여부 저장
-      isComplete = await modifyComments(_info as InfoTypes, type === "delete");
+      isComplete = await modifyComments(_info as InfoTypes, isDelete);
 
       if (isComplete) {
         openModal({
@@ -198,6 +225,7 @@ export default function ContentsSelectFunctionalPage({
       contentsRef={contentsRef}
       confirmRef={confirmRef}
       confirm={confirm}
+      adminLogin={adminLogin}
     />
   );
 }

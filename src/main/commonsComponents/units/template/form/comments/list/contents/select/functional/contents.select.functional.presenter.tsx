@@ -12,6 +12,10 @@ import { _Title, _Input, _Button } from "mcm-js-commons";
 import { InfoTypes } from "../../../../comments.types";
 
 import CommentsLabel from "../../../label";
+import {
+  ListContentsSelectType,
+  ContentsSelectTypeName,
+} from "../../list.data";
 
 export default function ContentsSelectFunctionalUIPage({
   type,
@@ -21,8 +25,9 @@ export default function ContentsSelectFunctionalUIPage({
   confirmRef,
   changeData,
   confirm,
+  adminLogin,
 }: {
-  type: "modify" | "delete";
+  type: ListContentsSelectType;
   info: InfoTypes;
   passwordRef: MutableRefObject<HTMLInputElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
@@ -32,18 +37,18 @@ export default function ContentsSelectFunctionalUIPage({
     type: "contents" | "password" | "rating" | "bugLevel"
   ) => void;
   confirm: (e?: FormEvent) => void;
+  adminLogin: boolean;
 }) {
   return (
     <Form onSubmit={confirm}>
       <OptionalWrapper isDelete={type === "delete"}>
-        <_Title titleLevel="h2">
-          {type === "modify" ? "댓글 수정" : "댓글 삭제"}
-        </_Title>
+        <_Title titleLevel="h2">댓글 {ContentsSelectTypeName[type][0]}</_Title>
         <CommentsInfoWrapper>
           <CategoryInfo>
             <CommentsLabel
               showCategoryName
               info={info}
+              adminLogin={adminLogin}
               modifyRatingEvent={
                 type === "modify"
                   ? (value: number) =>
@@ -61,7 +66,7 @@ export default function ContentsSelectFunctionalUIPage({
           <_Input
             isTextArea
             defaultValue={info.contents.split("<br />").join("\n")}
-            readOnly={type === "delete"}
+            readOnly={type !== "modify"}
             className="optional-input"
             onChangeEvent={(text) => changeData(text, "contents")}
             inputRef={contentsRef}
@@ -69,22 +74,23 @@ export default function ContentsSelectFunctionalUIPage({
           />
         </CommentsInfoItems>
 
-        <_Input
-          inputType="password"
-          className="optional-password-input"
-          onChangeEvent={(text) => changeData(text, "password")}
-          maxLength={20}
-          inputRef={passwordRef}
-        />
+        {!adminLogin && (
+          <_Input
+            inputType="password"
+            className="optional-password-input"
+            onChangeEvent={(text) => changeData(text, "password")}
+            maxLength={20}
+            inputRef={passwordRef}
+            readOnly={adminLogin}
+          />
+        )}
         <ConfirmButtonWrapper>
           <_Button
             onClickEvent={confirm}
             className="confirm-button disable"
             buttonRef={confirmRef}
           >
-            {type === "delete"
-              ? "위의 댓글을 삭제합니다."
-              : "위의 내용으로 댓글을 수정합니다."}
+            {ContentsSelectTypeName[type][1]}
           </_Button>
         </ConfirmButtonWrapper>
       </OptionalWrapper>

@@ -17,6 +17,7 @@ export default function CommentsUIPage({
   changeInfo,
   moreLoad,
   allPage,
+  adminLogin,
 }: {
   commentsInfo: CommentsAllInfoTypes;
   addComments: (data: InfoTypes) => Promise<boolean>;
@@ -24,13 +25,16 @@ export default function CommentsUIPage({
   changeInfo: (info: CommentsAllInfoTypes) => void;
   moreLoad: () => void;
   allPage: number;
+  adminLogin: boolean;
 }) {
   return (
     <>
       <_SubTitleTemplate
         title="Comments"
         className="comments-subTitle"
-        remakrs="해당 모듈에 대한 사용후기 및 개선점 등을 남겨주세요!"
+        remakrs={`해당 모듈에 대한 사용후기 및 개선점 등을 남겨주세요! ${
+          (adminLogin && "[🛠]") || ""
+        }`}
       />
       <CommentsWritePage addComments={addComments} />
       <_InfinityScroll moreLoad={moreLoad}>
@@ -38,6 +42,7 @@ export default function CommentsUIPage({
           commentsInfo={commentsInfo}
           modifyComments={modifyComments}
           changeInfo={changeInfo}
+          adminLogin={adminLogin}
         />
       </_InfinityScroll>
       <TitleWrapper>
