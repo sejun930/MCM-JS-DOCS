@@ -15,27 +15,22 @@ import { _Link } from "mcm-js-commons";
 export default function LayoutNavPage({
   isMobileTap,
   module,
+  isAdmin,
 }: {
   isMobileTap?: boolean;
   module: string;
+  isAdmin?: boolean;
 }) {
   // 모듈 검색어
   const [search, setSearch] = useState<string>("");
   // 렌더 여부
   const [render, setRender] = useState<boolean>(false);
-  // 현재 페이지가 관리자 페이지인지 검증
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!module) setSearch("");
 
     setRender(true);
   }, [module]);
-
-  // 관리자 페이지 검증하기
-  useEffect(() => {
-    setIsAdmin(location.pathname.split("/")[1] === "admin");
-  });
 
   const onChangeSearch = (text: string) => {
     setSearch(text);

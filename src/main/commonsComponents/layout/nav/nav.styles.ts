@@ -23,6 +23,7 @@ export const LayoutNavWrapper = styled.nav`
   ${(props) =>
     props.isAdmin && {
       padding: "1rem",
+      borderRightColor: "#525FE1",
     }}
 
   @media ${breakPoints.mobileLarge} {

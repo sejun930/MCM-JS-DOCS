@@ -24,7 +24,7 @@ export default function CommentsLabel({
   changeInfo?: (info: CommentsAllInfoTypes) => void; // 댓글 정보 수정하기
   showCategoryName?: boolean; // 카테고리 출력 여부
   modifyRatingEvent?: (value: number) => void; // 평점 수정 이벤트 (평점 수정 가능)
-  adminLogin: boolean;
+  adminLogin: boolean | null;
 }) {
   const renderLabel = () => {
     const nodeList = [];

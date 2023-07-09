@@ -58,6 +58,12 @@ export default function CommonsHooksComponents() {
     }, "");
   };
 
+  // 현재 페이지가 관리자 페이지인지 검증
+  const getIsAdminPage = () => {
+    const pathName = router.pathname;
+    return pathName.includes("admin") && pathName.split("/")[1] === "admin";
+  };
+
   return {
     componentRender,
     getAllComponentsClassName,
@@ -65,5 +71,6 @@ export default function CommonsHooksComponents() {
     getModuleNamewithJadenCase,
     getAllExampleComponentLength,
     getOriginTemplate,
+    getIsAdminPage,
   };
 }

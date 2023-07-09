@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 import { _Image, _Link } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-export default function LayoutHeadPage() {
+export default function LayoutHeadPage({ isAdmin }: { isAdmin?: boolean }) {
   return (
-    <HeaderWrapper className="layout-header-wrapper">
+    <HeaderWrapper className="layout-header-wrapper" isAdmin={isAdmin}>
       <_Link href="/" className="layout-header-link">
         <_Image
           src="/images/commons/logo/MCM_white_logo.png"
@@ -22,6 +22,11 @@ const HeaderWrapper = styled.header`
   justify-content: center;
   align-items: center;
   height: 220px;
+
+  ${(props: { isAdmin?: boolean }) =>
+    props.isAdmin && {
+      backgroundColor: "#525FE1",
+    }}
 
   .layout-header-link {
     height: 100%;

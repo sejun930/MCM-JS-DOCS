@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { _Input } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {

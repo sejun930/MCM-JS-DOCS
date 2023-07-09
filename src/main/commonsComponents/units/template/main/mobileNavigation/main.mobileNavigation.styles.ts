@@ -4,6 +4,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
   isOpen?: boolean;
+  isAdmin?: boolean;
 }
 
 export const MobileTapWrapper = styled.nav`
@@ -18,6 +19,11 @@ export const MobileTapWrapper = styled.nav`
   align-items: center;
   padding: 0px 20px;
   z-index: 1111;
+
+  ${(props: StyleTypes) =>
+    props.isAdmin && {
+      backgroundColor: "#525FE1",
+    }}
 
   .mobile-nav-logo {
     width: 50px;

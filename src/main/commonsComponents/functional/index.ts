@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 // 태그 제거하기
 const removeTag = (str: string) => {
   return str
@@ -103,9 +105,7 @@ const getHashText = async (
     str = data.join(" + ");
   }
   // salt 적용하기
-  str += salt
-    ? salt
-    : process.env.NEXT_PUBLIC_SALT || "mcm-sejun3278-Salt-data-0515";
+  str += salt || process.env.NEXT_PUBLIC_SALT || "mcm-sejun3278-Salt-data-0515";
 
   return createHash("sha256").update(str).digest("hex");
 };
@@ -170,6 +170,14 @@ const moveDocument = (id: string, bonus?: number | 0) => {
       top: destination,
     });
   }
+};
+
+// 현재 페이지가 관리자 페이지인지 검증
+const getIsAdminPage = () => {
+  const router = useRouter();
+
+  const pathName = router.pathname;
+  return pathName.includes("admin") && pathName.split("/")[1] === "admin";
 };
 
 export {

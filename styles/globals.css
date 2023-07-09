@@ -126,3 +126,7 @@ table {
     display: block;
   }
 }
+
+.admin-backcolor {
+  background-color: #525fe1;
+}

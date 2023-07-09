@@ -6,7 +6,7 @@ import { FormEvent, MutableRefObject, useEffect, useRef } from "react";
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
-import { getServerTime } from "src/commons/libraries/firebase";
+import { getServerTime, db } from "src/commons/libraries/firebase";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { InfoTypes } from "../../../../comments.types";
 
@@ -20,7 +20,6 @@ import {
   ListContentsSelectType,
   ContentsSelectTypeName,
 } from "../../list.data";
-import { db } from "src/commons/libraries/firebase";
 
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
@@ -38,7 +37,7 @@ export default function ContentsSelectFunctionalPage({
   info: InfoTypes;
   type: ListContentsSelectType;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
-  adminLogin: boolean;
+  adminLogin: boolean | null;
 }) {
   _contents = info.contents;
   rating = info.rating;

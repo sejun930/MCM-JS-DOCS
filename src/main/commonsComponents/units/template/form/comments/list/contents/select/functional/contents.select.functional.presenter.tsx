@@ -37,7 +37,7 @@ export default function ContentsSelectFunctionalUIPage({
     type: "contents" | "password" | "rating" | "bugLevel"
   ) => void;
   confirm: (e?: FormEvent) => void;
-  adminLogin: boolean;
+  adminLogin: boolean | null;
 }) {
   return (
     <Form onSubmit={confirm}>
@@ -81,7 +81,7 @@ export default function ContentsSelectFunctionalUIPage({
             onChangeEvent={(text) => changeData(text, "password")}
             maxLength={20}
             inputRef={passwordRef}
-            readOnly={adminLogin}
+            readOnly={adminLogin || false}
           />
         )}
         <ConfirmButtonWrapper>
