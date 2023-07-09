@@ -14,27 +14,31 @@ interface IProps {
 }
 
 export default function LayoutPage(props: IProps) {
-  const { getRouter, getModuleNamewithJadenCase } = CommonsHooksComponents();
+  const { getRouter, getModuleNamewithJadenCase, getIsAdminPage } =
+    CommonsHooksComponents();
   const [module, setModule] = useRecoilState(moduleState);
   const [adminLogin] = useRecoilState(adminLoginState);
 
   const router = getRouter();
-  // 현재가 관리자 페이지인지?
-  const isAdmin = router.pathname.split("/")[1] === "admin";
 
   useEffect(() => {
     // 현재 선택한 모듈 저장하기
     setModule(getModuleNamewithJadenCase());
   }, [router]);
 
+  // 현재가 관리자 페이지인지?
+  const isAdmin = getIsAdminPage();
+
   let navRenderCondition = !isAdmin;
   if (isAdmin && adminLogin) navRenderCondition = true;
 
   return (
     <LayoutWrapper className="layout-home-wrapper">
-      <LayoutHeadPage />
+      <LayoutHeadPage isAdmin={isAdmin} />
       <LayoutContentsWrapper>
-        {navRenderCondition && <LayoutNavPage module={module} />}
+        {navRenderCondition && (
+          <LayoutNavPage module={module} isAdmin={isAdmin} />
+        )}
         {props.children}
       </LayoutContentsWrapper>
     </LayoutWrapper>

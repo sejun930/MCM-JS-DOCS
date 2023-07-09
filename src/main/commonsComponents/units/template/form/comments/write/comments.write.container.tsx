@@ -19,14 +19,13 @@ import {
   getHashText,
   changeMultipleLine,
 } from "src/main/commonsComponents/functional";
-import { getServerTime } from "src/commons/libraries/firebase";
+import { getServerTime, db } from "src/commons/libraries/firebase";
 import {
   initInfo,
   WriteInfoTypes,
   categoryListArray,
 } from "./comments.write.types";
 import { InfoTypes } from "../comments.types";
-import { db } from "src/commons/libraries/firebase";
 
 // 중복 실행 방지
 let writing = false;

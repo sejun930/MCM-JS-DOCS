@@ -3,6 +3,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import { NavListTypes } from "../nav.data";
 import { _Link, _PText, _SpanTextWithHtml } from "mcm-js-commons";
+import { CSSProperties } from "react";
 
 export default function NavListPage({
   list,
@@ -88,14 +89,25 @@ export const ListWrapper = styled.ul`
     .mcm-link-unit {
       display: block;
 
-      ${(props: StyleTypes) =>
-        props.isSelect && {
-          padding: "0.5rem",
-          borderRadius: "10px",
-          backgroundColor: "#aa5656",
-          color: "white",
-          width: "calc(100% + 50px)",
-        }}
+      ${(props) => {
+        let styles: CSSProperties & { [key: string]: string } = {};
+
+        if (props.isSelect) {
+          styles = {
+            padding: "0.5rem",
+            borderRadius: "10px",
+            backgroundColor: "#aa5656",
+            color: "white",
+            width: "calc(100% + 50px)",
+          };
+
+          if (props.isAdmin) {
+            styles.backgroundColor = "#525FE1";
+          }
+        }
+
+        return styles;
+      }}
     }
   }
 

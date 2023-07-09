@@ -17,9 +17,9 @@ export default function MainMobileNavigationTapPage() {
   const [module] = useRecoilState(moduleState);
   const [adminLogin] = useRecoilState(adminLoginState);
 
-  const { getRouter } = CommonsHooksComponents();
+  const { getRouter, getIsAdminPage } = CommonsHooksComponents();
   const router = getRouter();
-  const isAdmin = router.pathname.split("/")[1] === "admin";
+  const isAdmin = getIsAdminPage();
 
   // 홈으로 이동하기
   const moveHome = () => {
@@ -38,7 +38,9 @@ export default function MainMobileNavigationTapPage() {
     if (bool) {
       // 모달 오픈
       Modal.open({
-        children: <LayoutNavPage isMobileTap={true} module={module} />,
+        children: (
+          <LayoutNavPage isMobileTap={true} module={module} isAdmin={isAdmin} />
+        ),
         id: "mobile-nav-modal",
         showBGAnimation: true,
         showModalOpenAnimation: true,
@@ -58,7 +60,7 @@ export default function MainMobileNavigationTapPage() {
 
   return (
     <>
-      <MobileTapWrapper>
+      <MobileTapWrapper isAdmin={isAdmin}>
         <GoHome onClickEvent={moveHome}>🏠</GoHome>
         <MobileNavigationTap
           onClickEvent={() => toggleNav(!openNav)}
