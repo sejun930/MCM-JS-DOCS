@@ -6,7 +6,7 @@ import {
 } from "./contents.select.styles";
 import { CSSProperties, MutableRefObject, useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { adminLoginState } from "src/commons/store";
+import { adminLoginState, moduleState } from "src/commons/store";
 
 import CommonsHooksComponents from "../../../../../../../hooks/commonsHooks";
 import { getUuid } from "src/main/commonsComponents/functional";
@@ -40,6 +40,7 @@ export default function SelectListOptional({
   const _listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
   const [adminLogin] = useRecoilState(adminLoginState);
+  const [module] = useRecoilState(moduleState);
 
   useEffect(() => {
     const body = document.body;
@@ -93,6 +94,7 @@ export default function SelectListOptional({
           info={info}
           modifyComments={modifyComments}
           adminLogin={adminLogin}
+          module={module}
         />
       ),
       id: "comments-functional-modal",

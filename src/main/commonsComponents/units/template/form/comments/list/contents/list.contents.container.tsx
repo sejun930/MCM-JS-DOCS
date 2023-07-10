@@ -8,7 +8,7 @@ import {
 } from "react";
 
 import { useRecoilState } from "recoil";
-import { adminLoginState } from "src/commons/store";
+import { adminLoginState, moduleState } from "src/commons/store";
 
 import { Modal } from "mcm-js";
 import { CommentsAllInfoTypes, InfoTypes } from "../../comments.types";
@@ -29,6 +29,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const { contents } = info;
 
   const [adminLogin] = useRecoilState(adminLoginState);
+  const [module] = useRecoilState(moduleState);
 
   // 더 보기 기능 (8줄 이상 넘어갈 경우에만 적용)
   const [subContents, setSubContents] = useState("");
@@ -88,6 +89,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
           info={info}
           modifyComments={modifyComments}
           adminLogin={adminLogin}
+          module={module}
         />
       ),
       id: "comments-functional-modal",

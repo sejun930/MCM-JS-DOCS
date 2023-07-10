@@ -6,12 +6,22 @@ import {
   WriteWrapper,
   SubmitWrapper,
   WriteButton,
+  BlockNoticeWrapper,
+  BlockExampleWrapper,
+  BlockOptionalWrapper,
 } from "./comments.write.styles";
 
-import { _Input } from "mcm-js-commons";
-import { IPropsTypes } from "./comments.write.types";
-import StarsForm from "./stars";
+import {
+  _Input,
+  _PText,
+  _Button,
+  _PTextWithHtml,
+  _SpanText,
+} from "mcm-js-commons";
+import { IPropsTypes, categoryInitList } from "./comments.write.types";
+import { getDateForm } from "src/main/commonsComponents/functional";
 
+import StarsForm from "./stars";
 import PrivacyPage from "./privacy";
 
 const placeList: { [key: string]: string } = {
@@ -42,100 +52,136 @@ export default function CommentsWriteUIPage({
   passwordRef,
   openPrivacy,
   checkWriteAble,
+  isBlockInfo,
 }: IPropsTypes) {
   return (
     <Form onSubmit={write}>
-      <fieldset>
-        <legend>댓글 작성</legend>
-      </fieldset>
-      <WriteWrapper>
-        <OptionWrapper>
-          <SelectCategory
-            onChange={(e) => changeInfo(String(e.target.value))("category")}
-            category={info.category}
-            value={info.category}
-            ref={categoryRef}
-          >
-            {categoryList.map((category) => {
-              const [value, name] = Object.entries(category)[0];
-              return (
-                <option
-                  key={`comment-category-${name}-${value}`}
-                  value={value}
-                  disabled={value === "all"}
-                >
-                  - {name}
-                </option>
-              );
-            })}
-          </SelectCategory>
-
-          <OptionItems
-            className="rating-wrapper"
-            isRating={true}
-            show={info.category === "review" || info.category === "bug"}
-          >
-            {(info.category === "review" || info.category === "bug") && (
-              <StarsForm
-                rating={info.category === "bug" ? info.bugLevel : info.rating}
-                changeEvent={(value: number) => {
-                  changeInfo(value)(
-                    info.category === "bug" ? "bugLevel" : "rating"
-                  );
-                }}
+      {(!isBlockInfo?.ip && (
+        <>
+          <fieldset>
+            <legend>댓글 작성</legend>
+          </fieldset>
+          <WriteWrapper>
+            <OptionWrapper>
+              <SelectCategory
+                onChange={(e) => changeInfo(String(e.target.value))("category")}
                 category={info.category}
-                isBugMode={info.category === "bug"}
-              />
-            )}
-          </OptionItems>
+                value={info.category}
+                ref={categoryRef}
+              >
+                {categoryList.map((category) => {
+                  const [value, name] = Object.entries(category)[0];
+                  return (
+                    <option
+                      key={`comment-category-${name}-${value}`}
+                      value={value}
+                      disabled={value === "all"}
+                    >
+                      - {name}
+                    </option>
+                  );
+                })}
+              </SelectCategory>
 
-          <OptionItems className="comments-password-wrapper">
+              <OptionItems
+                className="rating-wrapper"
+                isRating={true}
+                show={info.category === "review" || info.category === "bug"}
+              >
+                {(info.category === "review" || info.category === "bug") && (
+                  <StarsForm
+                    rating={
+                      info.category === "bug" ? info.bugLevel : info.rating
+                    }
+                    changeEvent={(value: number) => {
+                      changeInfo(value)(
+                        info.category === "bug" ? "bugLevel" : "rating"
+                      );
+                    }}
+                    category={info.category}
+                    isBugMode={info.category === "bug"}
+                  />
+                )}
+              </OptionItems>
+
+              <OptionItems className="comments-password-wrapper">
+                <_Input
+                  onChangeEvent={(value) => changeInfo(value)("password")}
+                  inputClassName="password-input"
+                  inputType="password"
+                  placeHolder="비밀번호 입력"
+                  inputRef={passwordRef}
+                  value={info.password}
+                  delay={200}
+                  maxLength={20}
+                />
+              </OptionItems>
+            </OptionWrapper>
+
             <_Input
-              onChangeEvent={(value) => changeInfo(value)("password")}
-              inputClassName="password-input"
-              inputType="password"
-              placeHolder="비밀번호 입력"
-              inputRef={passwordRef}
-              value={info.password}
+              onChangeEvent={(value) => changeInfo(value)("contents")}
+              inputClassName="contents-input"
+              isTextArea
+              onSubmitEvent={write}
+              inputRef={contentsRef}
+              maxLength={500}
               delay={200}
-              maxLength={20}
-            />
-          </OptionItems>
-        </OptionWrapper>
-
-        <_Input
-          onChangeEvent={(value) => changeInfo(value)("contents")}
-          inputClassName="contents-input"
-          isTextArea
-          onSubmitEvent={write}
-          inputRef={contentsRef}
-          maxLength={500}
-          delay={200}
-          value={info.contents}
-          placeHolder={`${
-            placeList[info.category] ||
-            `카테고리를 먼저 선택해주세요.
+              value={info.contents}
+              placeHolder={`${
+                placeList[info.category] ||
+                `카테고리를 먼저 선택해주세요.
             `
-          }
+              }
 ${info.category && defaultPlace}`}
-        />
-      </WriteWrapper>
-      {/* {info.category === "bug" && <BugStatusWrapper>222</BugStatusWrapper>} */}
-      <SubmitWrapper>
-        {/* 개인정보 수집 동의 */}
-        <PrivacyPage
-          changeInfo={changeInfo}
-          info={info}
-          openPrivacy={openPrivacy}
-        />
-        <WriteButton
-          onClickEvent={write}
-          className="write-comments-button"
-          isAble={checkWriteAble().able}
-        >
-          📝 댓글 등록
-        </WriteButton>
-      </SubmitWrapper>
+            />
+          </WriteWrapper>
+          <SubmitWrapper>
+            {/* 개인정보 수집 동의 */}
+            <PrivacyPage
+              changeInfo={changeInfo}
+              info={info}
+              openPrivacy={openPrivacy}
+            />
+            <WriteButton
+              onClickEvent={write}
+              className="write-comments-button"
+              isAble={checkWriteAble().able}
+            >
+              📝 댓글 등록
+            </WriteButton>
+          </SubmitWrapper>
+        </>
+      )) || (
+        <BlockNoticeWrapper>
+          <_PText>
+            현재 접속된 아이피 <b>({isBlockInfo?.ip})</b>는 차단되어 댓글 등록이
+            불가능합니다.
+          </_PText>
+
+          <BlockExampleWrapper>
+            <BlockOptionalWrapper>
+              <_SpanText>
+                {isBlockInfo?.module} (
+                {categoryInitList[isBlockInfo?.category || "all"]})
+              </_SpanText>
+
+              {isBlockInfo?.createdAt && (
+                <_SpanText>
+                  차단일자 |{" "}
+                  {getDateForm({
+                    firebaseTimer: isBlockInfo.createdAt,
+                    getDate: true,
+                  })}
+                </_SpanText>
+              )}
+            </BlockOptionalWrapper>
+            <_PTextWithHtml
+              dangerouslySetInnerHTML={isBlockInfo?.contents || ""}
+              className="block-example-contents"
+            />
+          </BlockExampleWrapper>
+        </BlockNoticeWrapper>
+      )}
     </Form>
   );
 }

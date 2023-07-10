@@ -26,7 +26,7 @@ const WithAuthAdmin =
     }, [getRouter().pathname]);
 
     return (
-      <Template isFull>
+      <Template>
         {openModal && !adminLogin && (
           <Modal
             show={!adminLogin}

@@ -19,7 +19,7 @@ import {
   getHashText,
   changeMultipleLine,
 } from "src/main/commonsComponents/functional";
-import { getServerTime, db } from "src/commons/libraries/firebase";
+import { getServerTime } from "src/commons/libraries/firebase";
 import {
   initInfo,
   WriteInfoTypes,
@@ -27,13 +27,17 @@ import {
 } from "./comments.write.types";
 import { InfoTypes } from "../comments.types";
 
+import { IsBlockTypes } from "src/commons/store/store.types";
+
 // 중복 실행 방지
 let writing = false;
 let clicked = false;
 export default function CommentsWritePage({
   addComments,
+  isBlockInfo,
 }: {
   addComments: (data: InfoTypes) => Promise<boolean>;
+  isBlockInfo: null | IsBlockTypes;
 }) {
   // 개인정보 수집 약관창 오픈 여부
   const [openPrivacy, setOpenPrivacy] = useState(false);
@@ -164,14 +168,8 @@ export default function CommentsWritePage({
       // 아이피 주소 저장
       info.ip = ip;
 
-      // 차단된 유저인지 검증
-      const checkBlock = await db
-        .collection("block")
-        .where("ip", "==", ip)
-        .get();
-
       // 차단된 로그가 있는 경우
-      if (!checkBlock.empty) {
+      if (isBlockInfo?.ip && isBlockInfo?.ip === ip) {
         return openErrorModal({
           message:
             "차단된 IP 주소입니다. <br />관리자에게 직접 문의 부탁드립니다.",
@@ -248,43 +246,49 @@ export default function CommentsWritePage({
     // type : 에러 타입
     const result = { able: false, error: { message: "", type: "" } };
 
-    if (info.category === "all") {
-      // 카테고리가 선택되지 않았을 경우
-      result.error.message = "카테고리를 선택해주세요.";
-      result.error.type = "category";
+    if (isBlockInfo?.ip) {
+      // 이미 차단된 유저인 경우
+      result.error.message = "해당 아이피는 차단되어 댓글 작성이 불가능합니다.";
+      result.error.type = "block";
+    } else {
+      if (info.category === "all") {
+        // 카테고리가 선택되지 않았을 경우
+        result.error.message = "카테고리를 선택해주세요.";
+        result.error.type = "category";
 
-      //
-    } else if (!info.contents) {
-      // 댓글 내용이 입력되지 않을 경우
-      result.error.message = "댓글 내용을 작성해주세요.";
-      result.error.type = "contents";
+        //
+      } else if (!info.contents) {
+        // 댓글 내용이 입력되지 않을 경우
+        result.error.message = "댓글 내용을 작성해주세요.";
+        result.error.type = "contents";
 
-      //
-    } else if (!info.password) {
-      // 비밀번호를 입력하지 않을 경우
-      result.error.message = "비밀번호를 입력해주세요.";
-      result.error.type = "password";
+        //
+      } else if (!info.password) {
+        // 비밀번호를 입력하지 않을 경우
+        result.error.message = "비밀번호를 입력해주세요.";
+        result.error.type = "password";
 
-      //
-    } else if (!info.agreeProvacy) {
-      // ip 수집에 동의하지 않을 경우
-      result.error.message = "개인정보 (IP) 수집에 동의해주세요.";
-      result.error.type = "privacy";
+        //
+      } else if (!info.agreeProvacy) {
+        // ip 수집에 동의하지 않을 경우
+        result.error.message = "개인정보 (IP) 수집에 동의해주세요.";
+        result.error.type = "privacy";
 
-      //
-    } else if (info.category === "review") {
-      // 카테고리가 리뷰일 때
-      if (!info.rating) {
-        // 평점을 선택하지 않을 경우
-        result.error.message = "평점을 선택해주세요.";
-        result.error.type = "rating";
-      }
-    } else if (info.category === "bug") {
-      // 카테고리가 버그일 때
-      if (!info.bugLevel) {
-        // 이슈 중요도를 선택하지 않을 경우
-        result.error.message = "이슈 중요도를 선택해주세요.";
-        result.error.type = "bug-level";
+        //
+      } else if (info.category === "review") {
+        // 카테고리가 리뷰일 때
+        if (!info.rating) {
+          // 평점을 선택하지 않을 경우
+          result.error.message = "평점을 선택해주세요.";
+          result.error.type = "rating";
+        }
+      } else if (info.category === "bug") {
+        // 카테고리가 버그일 때
+        if (!info.bugLevel) {
+          // 이슈 중요도를 선택하지 않을 경우
+          result.error.message = "이슈 중요도를 선택해주세요.";
+          result.error.type = "bug-level";
+        }
       }
     }
 
@@ -303,6 +307,7 @@ export default function CommentsWritePage({
       passwordRef={passwordRef}
       openPrivacy={openPrivacy}
       checkWriteAble={checkWriteAble}
+      isBlockInfo={isBlockInfo}
     />
   );
 }
