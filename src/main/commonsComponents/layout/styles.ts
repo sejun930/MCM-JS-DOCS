@@ -14,6 +14,7 @@ export const LayoutWrapper = styled.div`
 export const LayoutContentsWrapper = styled.div`
   display: flex;
   min-width: 100%;
+  min-height: 100%;
 
   ._halfDrag_controller_ {
     background-color: #e8e2e2;

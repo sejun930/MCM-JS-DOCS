@@ -33,11 +33,13 @@ export default function ContentsSelectFunctionalPage({
   type,
   modifyComments,
   adminLogin,
+  module,
 }: {
   info: InfoTypes;
   type: ListContentsSelectType;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   adminLogin: boolean | null;
+  module: string;
 }) {
   _contents = info.contents;
   rating = info.rating;
@@ -196,7 +198,10 @@ export default function ContentsSelectFunctionalPage({
             commentId: _info.id, // 차단된 댓글 아이디 값
             ip: _info.ip, // 차단된 유저 아이피
             createdAt: getServerTime(), // 차단날짜
+            canceledAt: null, // 차단취소일
             contents: _info.contents, // 차단된 댓글 내용
+            category: _info.category, // 차단된 카테고리 이름
+            module, // 차단된 모듈 이름
           });
         }
       }

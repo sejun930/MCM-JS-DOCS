@@ -214,3 +214,43 @@ export const WriteButton = styled(_Button)`
       }}
   }
 `;
+
+export const BlockNoticeWrapper = styled.div`
+  min-height: 100px;
+  background-color: #dddddd;
+  border-radius: 10px;
+  padding: 16px;
+
+  p {
+    font-size: 14px;
+    letter-spacing: -0.02rem;
+    color: gray;
+  }
+`;
+
+export const BlockExampleWrapper = styled.div`
+  margin-top: 20px;
+
+  .block-example-contents {
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    max-height: 160px;
+    overflow: auto;
+  }
+`;
+
+export const BlockOptionalWrapper = styled.div`
+  display: flex;
+  gap: 0px 20px;
+
+  span {
+    font-size: 12px;
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    flex-direction: column;
+    gap: 6px 0px;
+  }
+`;

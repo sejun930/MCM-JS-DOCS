@@ -10,6 +10,8 @@ import _InfinityScroll from "../infinity";
 import { CommentsAllInfoTypes, InfoTypes } from "./comments.types";
 import { _Title } from "mcm-js-commons";
 
+import { IsBlockTypes } from "src/commons/store/store.types";
+
 export default function CommentsUIPage({
   commentsInfo,
   addComments,
@@ -18,6 +20,7 @@ export default function CommentsUIPage({
   moreLoad,
   allPage,
   adminLogin,
+  isBlockInfo,
 }: {
   commentsInfo: CommentsAllInfoTypes;
   addComments: (data: InfoTypes) => Promise<boolean>;
@@ -26,6 +29,7 @@ export default function CommentsUIPage({
   moreLoad: () => void;
   allPage: number;
   adminLogin: boolean;
+  isBlockInfo: null | IsBlockTypes;
 }) {
   return (
     <>
@@ -36,7 +40,8 @@ export default function CommentsUIPage({
           (adminLogin && "[🛠]") || ""
         }`}
       />
-      <CommentsWritePage addComments={addComments} />
+
+      <CommentsWritePage addComments={addComments} isBlockInfo={isBlockInfo} />
       <_InfinityScroll moreLoad={moreLoad}>
         <CommentsListPage
           commentsInfo={commentsInfo}

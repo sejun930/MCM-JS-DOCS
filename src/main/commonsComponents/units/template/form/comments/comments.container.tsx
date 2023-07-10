@@ -3,6 +3,9 @@ import CommentsUIPage from "./comments.presenter";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { ipState, moduleState, adminLoginState } from "src/commons/store";
+import { IsBlockTypes } from "src/commons/store/store.types";
+
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 import apis from "src/commons/libraries/commons.apis";
 import {
@@ -10,6 +13,7 @@ import {
   getDoc,
   getResult,
   QueryDocumentData,
+  db,
 } from "src/commons/libraries/firebase";
 
 import {
@@ -28,8 +32,12 @@ let wating = false;
 const limit = 3;
 // 댓글의 총 페이지 개수
 let allPage = 0;
+// 차단된 유저의 정보 저장
+let isBlockInfo: null | IsBlockTypes = null;
 
 export default function CommentsPage() {
+  const { getRouter } = CommonsHooksComponents();
+
   // 댓글 전체 정보 (댓글 리스트, 카테고리 등등)
   const [commentsInfo, setCommentsInfo] =
     useState<CommentsAllInfoTypes>(initCommentsInfo);
@@ -45,20 +53,36 @@ export default function CommentsPage() {
   useEffect(() => {
     // 유저의 아이피 주소 저장하기
     getUserIp()
-      .then((result) => {
-        setIp(result);
+      .then((ip: string) => {
+        setIp(ip);
+
+        // 해당 유저가 차단된 유저인지 검증
+        db.collection("block")
+          .where("ip", "==", ip)
+          .where("canceledAt", "==", null)
+          .get()
+          .then((result) => {
+            if (!result.empty) {
+              result.forEach((info) => {
+                if (!isBlockInfo) {
+                  // 차단된 유저 정보 저장
+                  isBlockInfo = info.data() as IsBlockTypes;
+                }
+              });
+            }
+          });
       })
       .catch((err) => {
         console.log(`아이피 조회에 실패했습니다. : ${err}`);
       });
-  }, []);
+  }, [module]);
 
   useEffect(() => {
     // 관리자 로그인 체크하기
     checkAccessToken().then((result) => {
       setAdminLogin(result);
     });
-  }, [commentsInfo]);
+  }, [commentsInfo, commentsInfo]);
 
   // 필터 쿼리 적용하기
   const getFilterQuery = (
@@ -478,6 +502,7 @@ export default function CommentsPage() {
       moreLoad={moreLoad}
       allPage={allPage}
       adminLogin={adminLogin}
+      isBlockInfo={isBlockInfo}
     />
   );
 }

@@ -1,5 +1,5 @@
 import { AgreeUserPrivacyWrapper, PrivacyItems } from "./privacy.styles";
-import { _Button } from "mcm-js-commons";
+import { _Button, _Checkbox } from "mcm-js-commons";
 import { WriteInfoTypes } from "../comments.write.types";
 
 import { Modal } from "mcm-js";
@@ -48,15 +48,11 @@ export default function PrivacyPage({
 
   return (
     <AgreeUserPrivacyWrapper>
-      <PrivacyItems checked={info.agreeProvacy}>
-        <input
-          id="privacy-checkbox"
-          type="checkbox"
-          onChange={() => changeInfo(!info.agreeProvacy)("agreeProvacy")}
-        />
-        <label id="privacy-checkbox-label" htmlFor="privacy-checkbox"></label>
-      </PrivacyItems>
-
+      <_Checkbox
+        inputId="privacy-checkbox"
+        onChangeEvent={() => changeInfo(!info.agreeProvacy)("agreeProvacy")}
+        isChecked={info.agreeProvacy}
+      />
       <label
         id="privacy-label"
         htmlFor="privacy-checkbox"
