@@ -59,7 +59,10 @@ export default function AdminBlockPage() {
   // checkbox 선택하기
   const checkBlockInfo = (idx: number) => {
     const _blockList = [...blockList];
-    _blockList[idx].checked = !_blockList[idx].checked;
+    if (_blockList[idx].canceledAt) return;
+
+    if (!_blockList[idx].canceledAt)
+      _blockList[idx].checked = !_blockList[idx].checked;
 
     setBlockList(_blockList);
   };
@@ -108,31 +111,36 @@ export default function AdminBlockPage() {
           </OptionalWrapper>
           <BlockListItems>
             <thead>
-              <tr>
+              <Tr>
                 <td className="block-select"></td>
                 <td className="block-ip">아이피</td>
                 <td className="block-contents">차단 사유</td>
                 <td className="block-date">차단일</td>
                 <td className="block-cancel">취소일</td>
-              </tr>
+              </Tr>
             </thead>
 
             <tbody>
               {blockList.map((info, idx) => {
-                const isChecked = info.checked || false;
+                // 이미 차단이 해제된 유저인지 체크
+                const alreadyCancel = info.canceledAt !== null;
+                // 선택한 유저인지 체크
+                const isChecked = alreadyCancel ? false : info.checked || false;
 
                 return (
-                  <tr
+                  <Tr
                     key={getUuid()}
                     style={{ border: (idx === 0 && "none") || "" }}
                     onClick={() => checkBlockInfo(idx)}
-                    className={(isChecked && "checked") || undefined}
+                    isTbody={true}
+                    alreadyCancel={alreadyCancel}
                   >
                     <td className="block-select">
                       <_Checkbox
                         inputId={info.inputId}
                         onChangeEvent={() => checkBlockInfo(idx)}
                         isChecked={isChecked}
+                        readOnly={alreadyCancel}
                       />
                     </td>
                     <td className="block-ip">
@@ -161,7 +169,7 @@ export default function AdminBlockPage() {
                         : "-"}{" "}
                       {(info.canceledAt && <span>(취소일)</span>) || ""}
                     </td>
-                  </tr>
+                  </Tr>
                 );
               })}
             </tbody>
@@ -170,6 +178,11 @@ export default function AdminBlockPage() {
       )}
     </Wrapper>
   );
+}
+
+interface StyleTypes {
+  isTbody?: boolean;
+  alreadyCancel?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -234,11 +247,6 @@ export const BlockListItems = styled.table`
     flex-direction: column;
 
     tr {
-      padding: 16px 10px;
-      border-top: dotted;
-      align-items: center;
-      cursor: pointer;
-
       td {
         font-size: 12px;
       }
@@ -246,15 +254,6 @@ export const BlockListItems = styled.table`
       .block-contents {
         padding-right: 20px;
       }
-    }
-  }
-
-  tr {
-    padding: 10px;
-    display: flex;
-
-    td {
-      text-align: center;
     }
   }
 
@@ -307,9 +306,6 @@ export const BlockListItems = styled.table`
 
     tbody {
       tr {
-        flex-direction: column;
-        gap: 16px 0px;
-
         .block-contents {
           padding: 0;
         }
@@ -322,5 +318,30 @@ export const BlockListItems = styled.table`
         }
       }
     }
+  }
+`;
+
+export const Tr = styled.tr`
+  padding: 10px;
+  display: flex;
+
+  td {
+    text-align: center;
+  }
+
+  ${(props: StyleTypes) =>
+    props.isTbody && {
+      padding: "16px 10px",
+      borderTop: "dotted",
+      alignItems: "center",
+      cursor: props.alreadyCancel ? "default" : "pointer",
+    }}
+
+  @media ${breakPoints.mobileLarge} {
+    ${(props: StyleTypes) =>
+      props.isTbody && {
+        flexDirection: "column",
+        gap: "16px 0px",
+      }}
   }
 `;
