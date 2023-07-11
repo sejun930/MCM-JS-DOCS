@@ -65,6 +65,7 @@ export default function CommentsPage() {
             if (!result.empty) {
               result.forEach((info) => {
                 if (!isBlockInfo) {
+                  console.log(isBlockInfo);
                   // 차단된 유저 정보 저장
                   isBlockInfo = info.data() as IsBlockTypes;
                 }
@@ -75,7 +76,7 @@ export default function CommentsPage() {
       .catch((err) => {
         console.log(`아이피 조회에 실패했습니다. : ${err}`);
       });
-  }, [module]);
+  }, [module, getRouter()]);
 
   useEffect(() => {
     // 관리자 로그인 체크하기
