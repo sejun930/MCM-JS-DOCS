@@ -4,6 +4,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 interface StyleTypes {
   isTbody?: boolean;
   alreadyCancel?: boolean;
+  isLoading?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -20,7 +21,9 @@ export const Wrapper = styled.div`
 export const BlockListWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 12px 0px;
+  transition: all 0.3s;
 `;
 
 export const OptionalWrapper = styled.div`
@@ -32,6 +35,11 @@ export const OptionalWrapper = styled.div`
 export const BlockListItems = styled.table`
   width: 100%;
   border: solid 1px black;
+
+  ${(props: StyleTypes) =>
+    props.isLoading && {
+      filter: "blur(5px)",
+    }}
 
   .checked {
     background-color: #efefef;
@@ -54,10 +62,6 @@ export const BlockListItems = styled.table`
     tr {
       td {
         font-size: 12px;
-      }
-
-      .block-contents {
-        padding-right: 20px;
       }
     }
   }
@@ -221,10 +225,44 @@ export const FilterItems = styled.div`
     }
   }
 
+  .search-ip-input {
+    min-height: auto;
+
+    input {
+      font-size: 12px;
+      padding: 6px;
+    }
+  }
+
   @media ${breakPoints.mobileLarge} {
     .block-filter-list {
       left: -25px;
       top: 30px;
     }
+  }
+`;
+
+export const LoadingData = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  -webkit-user-select: none; // 드래그 방지
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+
+  .loading-data {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    align-items: flex-end;
+    padding-bottom: 100px;
   }
 `;

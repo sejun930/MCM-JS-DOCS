@@ -1,4 +1,4 @@
-import { AgreeUserPrivacyWrapper, PrivacyItems } from "./privacy.styles";
+import { AgreeUserPrivacyWrapper } from "./privacy.styles";
 import { _Button, _Checkbox } from "mcm-js-commons";
 import { WriteInfoTypes } from "../comments.write.types";
 

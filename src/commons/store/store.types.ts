@@ -1,5 +1,3 @@
-import { FieldValue } from "../libraries/firebase";
-
 export interface IsBlockTypes {
   ip: string;
   commentId: string; // 차단된 댓글 아이디 값

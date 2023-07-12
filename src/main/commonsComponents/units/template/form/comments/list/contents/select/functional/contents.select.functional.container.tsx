@@ -1,7 +1,13 @@
 import ContentsSelectFunctionalUIPage from "./contents.select.functional.presenter";
 import { Message } from "./contents.select.functional.styles";
 
-import { FormEvent, MutableRefObject, useEffect, useRef } from "react";
+import {
+  FormEvent,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
@@ -26,7 +32,6 @@ let _contents = ""; // 댓글 내용 저장
 let rating = 0; // 평점 내용 저장
 let bugLevel = 0; // 버그 중요도 저장
 
-let waiting = false; // 중복 클릭 방지
 let disableOpenModal = false; // 모달 중복 실행 방지
 export default function ContentsSelectFunctionalPage({
   info,
@@ -41,6 +46,8 @@ export default function ContentsSelectFunctionalPage({
   adminLogin: boolean | null;
   module: string;
 }) {
+  // 중복 클릭 방지
+  const [waiting, setWaiting] = useState(false);
   _contents = info.contents;
   rating = info.rating;
 
@@ -94,7 +101,7 @@ export default function ContentsSelectFunctionalPage({
     text: string;
     isSuccess?: boolean;
     focus?: "contents" | "password";
-    afterCloseEvent?: () => {};
+    afterCloseEvent?: () => void;
   }) => {
     if (disableOpenModal) return;
     disableOpenModal = true;
@@ -102,8 +109,10 @@ export default function ContentsSelectFunctionalPage({
     const _afterCloseEvent = () => {
       disableOpenModal = false;
 
-      if (afterCloseEvent) afterCloseEvent();
-      else {
+      if (afterCloseEvent) {
+        afterCloseEvent();
+        setWaiting(false);
+      } else {
         if (!_contents || focus === "contents") {
           if (contentsRef.current) contentsRef.current.focus();
         } else if (!password || focus === "password") {
@@ -137,7 +146,7 @@ export default function ContentsSelectFunctionalPage({
         height: "10%",
       },
       onCloseModal: _afterCloseEvent,
-      onAfterCloseEvent: () => (waiting = false),
+      // onAfterCloseEvent: () => setWaiting(false),
     });
   };
 
@@ -145,9 +154,10 @@ export default function ContentsSelectFunctionalPage({
   const confirm = async (e?: FormEvent) => {
     if (e) e.preventDefault();
     if (waiting) {
-      openModal({ text: "처리중입니다. 잠시만 기다려주세요." });
+      // openModal({ text: "처리중입니다. 잠시만 기다려주세요." });
       return;
     }
+
     const typeName = ContentsSelectTypeName[type][0];
 
     // 버튼이 비활성화일 경우
@@ -171,7 +181,7 @@ export default function ContentsSelectFunctionalPage({
         }
       }
 
-      waiting = true;
+      setWaiting(true);
       let isComplete = false; // 성공 여부
       if (type === "modify") {
         // 수정 모드일 경우
@@ -213,11 +223,11 @@ export default function ContentsSelectFunctionalPage({
         openModal({
           text: `${typeName} 완료되었습니다.`,
           isSuccess: true,
-          afterCloseEvent: () =>
-            Modal.close({ id: "comments-functional-modal" }),
+          afterCloseEvent: () => {
+            Modal.close({ id: "comments-functional-modal" });
+          },
         });
       }
-      waiting = false;
     }
   };
   return (
@@ -230,6 +240,7 @@ export default function ContentsSelectFunctionalPage({
       confirmRef={confirmRef}
       confirm={confirm}
       adminLogin={adminLogin}
+      waiting={waiting}
     />
   );
 }

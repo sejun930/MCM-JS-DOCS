@@ -1,37 +1,31 @@
 import { useEffect, useState } from "react";
 import { db, getServerTime } from "src/commons/libraries/firebase";
 
-import {
-  _PText,
-  _Title,
-  _Checkbox,
-  _PTextWithHtml,
-  _Button,
-  _Image,
-} from "mcm-js-commons";
 import { getUuid } from "src/main/commonsComponents/functional";
 import { BlockInfoType, FilterType, filterInit } from "./block.types";
 
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
-import _SelectForm from "src/main/commonsComponents/units/template/form/select/select.container";
 import AdminBlockUIPage from "./block.presenter";
 
-let waiting = false;
 // 필터 리스트
-let filter: FilterType = { ...filterInit };
+const filter: FilterType = { ...filterInit };
 
 export default function AdminBlockPage() {
   // 차단된 유저 리스트
   const [blockList, setBlockList] = useState<Array<BlockInfoType>>([]);
   // 필터 on/off
   const [showFilter, setShowFilter] = useState(false);
+  // 데이터 조회중일 경우
+  const [loading, setLoading] = useState(false);
 
   // 차단 리스트 가져오기
   const getBlockList = async () => {
+    // return;
     if (!checkAccessToken(true)) {
       alert("인증이 만료되었습니다. 재로그인 해주세요.");
       return false;
     }
+    setLoading(true);
 
     // 과거순 & 최신순 정렬
     const createdAt = filter.past ? "asc" : "desc";
@@ -81,6 +75,7 @@ export default function AdminBlockPage() {
           if (dataList && dataList.length) {
             setBlockList(dataList);
           }
+          setLoading(false);
         }
       })
       .catch((err) => {
@@ -106,7 +101,7 @@ export default function AdminBlockPage() {
 
   // 차단 해제하기
   const cancelBlock = async () => {
-    if (waiting) return alert("이벤트가 작동중입니다. 잠시만 기다려주세요.");
+    if (loading) return alert("이벤트가 작동중입니다. 잠시만 기다려주세요.");
     if (!checkAccessToken(true)) {
       alert("인증이 만료되었습니다. 재로그인 해주세요.");
       return false;
@@ -141,7 +136,7 @@ export default function AdminBlockPage() {
 
   // 필터 on / off
   const toggleShowFilter = (bool?: boolean) => {
-    setShowFilter(bool ? bool : (prev) => !prev);
+    setShowFilter((prev) => bool || !prev);
   };
 
   // 필터가 현재 적용되어 있는지 체크
@@ -158,6 +153,14 @@ export default function AdminBlockPage() {
     getBlockList();
   };
 
+  // 페이지 변경 이벤트
+  const changePage = (page: number) => {
+    if (loading) return;
+    filter.page = page;
+
+    getBlockList();
+  };
+
   return (
     <AdminBlockUIPage
       filter={filter}
@@ -168,6 +171,8 @@ export default function AdminBlockPage() {
       fetchFilter={fetchFilter}
       checkBlockInfo={checkBlockInfo}
       cancelBlock={cancelBlock}
+      changePage={changePage}
+      isLoading={loading}
     />
   );
 }

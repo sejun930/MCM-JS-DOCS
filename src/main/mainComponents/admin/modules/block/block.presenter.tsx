@@ -6,13 +6,22 @@ import {
   OptionalWrapper,
   Tr,
   Wrapper,
+  LoadingData,
 } from "./block.styles";
 
-import { _Title, _PText, _Button, _Image, _Checkbox } from "mcm-js-commons";
+import {
+  _Title,
+  _PText,
+  _Button,
+  _Image,
+  _Checkbox,
+  _SpanText,
+} from "mcm-js-commons";
 import { getUuid, getDateForm } from "src/main/commonsComponents/functional";
 import { IProps } from "./block.types";
 
 import _SelectForm from "src/main/commonsComponents/units/template/form/select/select.container";
+import _PagiNationForm from "src/main/commonsComponents/units/template/form/pagination";
 
 export default function AdminBlockUIPage(props: IProps) {
   const {
@@ -24,6 +33,8 @@ export default function AdminBlockUIPage(props: IProps) {
     checkBlockInfo,
     getFilterOn,
     cancelBlock,
+    changePage,
+    isLoading,
   } = props;
 
   return (
@@ -34,6 +45,11 @@ export default function AdminBlockUIPage(props: IProps) {
         </_Title>
       ) : (
         <BlockListWrapper>
+          {isLoading && (
+            <LoadingData>
+              <_SpanText className="loading-data">데이터 로딩 중</_SpanText>
+            </LoadingData>
+          )}
           <OptionalWrapper>
             <_PText>- {filter.allData}명의 차단된 유저가 있습니다.</_PText>
 
@@ -79,7 +95,7 @@ export default function AdminBlockUIPage(props: IProps) {
               </_Button>
             </FilterWrapper>
           </OptionalWrapper>
-          <BlockListItems>
+          <BlockListItems isLoading={isLoading || false}>
             <thead>
               <Tr>
                 <td className="block-select"></td>
@@ -144,6 +160,14 @@ export default function AdminBlockUIPage(props: IProps) {
               })}
             </tbody>
           </BlockListItems>
+
+          <_PagiNationForm
+            // allData={1201}
+            currentPage={filter.page}
+            allData={filter.allData}
+            limit={filter.limit}
+            changePageEvent={changePage}
+          />
         </BlockListWrapper>
       )}
     </Wrapper>

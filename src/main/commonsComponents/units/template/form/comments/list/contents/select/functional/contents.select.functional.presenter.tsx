@@ -6,9 +6,10 @@ import {
   CommentsInfoWrapper,
   CommentsInfoItems,
   CategoryInfo,
+  ConfirmButton,
 } from "./contents.select.functional.styles";
 
-import { _Title, _Input, _Button } from "mcm-js-commons";
+import { _Title, _Input } from "mcm-js-commons";
 import { InfoTypes } from "../../../../comments.types";
 
 import CommentsLabel from "../../../label";
@@ -26,6 +27,7 @@ export default function ContentsSelectFunctionalUIPage({
   changeData,
   confirm,
   adminLogin,
+  waiting,
 }: {
   type: ListContentsSelectType;
   info: InfoTypes;
@@ -38,6 +40,7 @@ export default function ContentsSelectFunctionalUIPage({
   ) => void;
   confirm: (e?: FormEvent) => void;
   adminLogin: boolean | null;
+  waiting: boolean;
 }) {
   return (
     <Form onSubmit={confirm}>
@@ -85,13 +88,14 @@ export default function ContentsSelectFunctionalUIPage({
           />
         )}
         <ConfirmButtonWrapper>
-          <_Button
-            onClickEvent={confirm}
-            className="confirm-button disable"
+          <ConfirmButton
+            onClickEvent={() => (waiting ? confirm : undefined)}
+            // className="confirm-button disable"
             buttonRef={confirmRef}
+            waiting={waiting}
           >
-            {ContentsSelectTypeName[type][1]}
-          </_Button>
+            {waiting ? "처리중입니다..." : ContentsSelectTypeName[type][1]}
+          </ConfirmButton>
         </ConfirmButtonWrapper>
       </OptionalWrapper>
     </Form>

@@ -11,13 +11,7 @@ import {
   BlockOptionalWrapper,
 } from "./comments.write.styles";
 
-import {
-  _Input,
-  _PText,
-  _Button,
-  _PTextWithHtml,
-  _SpanText,
-} from "mcm-js-commons";
+import { _Input, _PText, _PTextWithHtml, _SpanText } from "mcm-js-commons";
 import { IPropsTypes, categoryInitList } from "./comments.write.types";
 import { getDateForm } from "src/main/commonsComponents/functional";
 

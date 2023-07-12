@@ -6,7 +6,7 @@ export type BlockInfoType = IsBlockTypes & {
   checked: boolean;
 };
 
-export type FilterType = { [key: string]: number | boolean } & {
+export type FilterType = { [key: string]: number | boolean | string } & {
   page: number; // 현재 페이지 번호
   limit: number; // 각 페이지 별로 보여질 데이터 수
   allData: number; // 전체 데이터 개수
@@ -31,4 +31,6 @@ export interface IProps {
   checkBlockInfo: (idx: number) => void;
   getFilterOn: () => boolean;
   cancelBlock: () => void;
+  changePage: (page: number) => void;
+  isLoading: boolean;
 }
