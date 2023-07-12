@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
@@ -6,6 +7,7 @@ interface StyleTypes {
   isDelete?: boolean;
   isReviewCategory?: boolean;
   adminLogin?: boolean;
+  waiting?: boolean;
 }
 
 export const Form = styled.form`
@@ -79,26 +81,22 @@ export const ConfirmButtonWrapper = styled.div`
   margin-top: 40px;
   text-align: center;
 
-  .confirm-button {
-    font-size: 16px;
-  }
-
-  .disable {
-    color: gray;
-    cursor: not-allowed;
-  }
-
-  .able {
-    color: black;
-    cursor: pointer;
-  }
-
   @media ${breakPoints.mobileLarge} {
     margin-top: 20px;
+  }
+`;
 
-    .confirm-button {
-      font-size: 14px;
-    }
+export const ConfirmButton = styled(_Button)`
+  font-size: 16px;
+
+  ${(props: StyleTypes) =>
+    props.waiting && {
+      cursor: "default",
+      color: "gray",
+    }}
+
+  @media ${breakPoints.mobileLarge} {
+    font-size: 14px;
   }
 `;
 

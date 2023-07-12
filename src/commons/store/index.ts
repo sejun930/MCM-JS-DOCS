@@ -1,8 +1,6 @@
 import { atom } from "recoil";
 import { getUuid } from "src/main/commonsComponents/functional";
 
-import { isBlockInit, IsBlockTypes } from "./store.types";
-
 // 현재 페이지의 모듈 이름 저장
 export const moduleState = atom({
   key: `moduleState_${getUuid()}`,

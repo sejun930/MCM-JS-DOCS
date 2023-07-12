@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-
 // 태그 제거하기
 const removeTag = (str: string) => {
   return str
@@ -170,14 +168,6 @@ const moveDocument = (id: string, bonus?: number | 0) => {
       top: destination,
     });
   }
-};
-
-// 현재 페이지가 관리자 페이지인지 검증
-const getIsAdminPage = () => {
-  const router = useRouter();
-
-  const pathName = router.pathname;
-  return pathName.includes("admin") && pathName.split("/")[1] === "admin";
 };
 
 export {
