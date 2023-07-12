@@ -31,6 +31,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 100px 0px;
 
+  .admin-module-title {
+    font-size: 40px;
+  }
+
   @media ${breakPoints.mobileLarge} {
     text-align: center;
     gap: 80px 0px;

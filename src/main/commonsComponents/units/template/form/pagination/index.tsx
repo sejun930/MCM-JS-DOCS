@@ -1,11 +1,15 @@
-import styled from "@emotion/styled";
+import {
+  Page,
+  PageJumpWrapper,
+  PageListWrapper,
+  PagiNationWrapper,
+} from "./pagination.styles";
 
 import { memo } from "react";
-import { _Error, _Button } from "mcm-js-commons";
+import { _Error } from "mcm-js-commons";
 import { IProps, pageInfoInit } from "./pagination.types";
 
 import { getUuid } from "src/main/commonsComponents/functional";
-import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 // 페이지네이션 form
 const _PagiNationForm = (props: IProps) => {
@@ -60,8 +64,6 @@ const _PagiNationForm = (props: IProps) => {
       // 처음 페이지로 이동
       num = 1;
     } else if (type === "prev") {
-      console.log(num, pageInfoList);
-
       // 이전 페이지로 이동
       num = pageInfoList.startPage - 1;
     } else if (type === "next") {
@@ -80,7 +82,7 @@ const _PagiNationForm = (props: IProps) => {
       propsList={props}
       requiredList={["allData", "currentPage", "limit", "changePageEvent"]}
     >
-      <PagiNationWrapper>
+      <PagiNationWrapper className="mcm-pagination-wrapper">
         {pageInfoList.prev && (
           <PageJumpWrapper>
             <Page onClickEvent={() => jumpPage("first")}>처음</Page>
@@ -114,51 +116,5 @@ const _PagiNationForm = (props: IProps) => {
     </_Error>
   );
 };
-
-interface StyleTypes {
-  isSelected?: boolean;
-}
-
-export const PagiNationWrapper = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0px 20px;
-
-  @media ${breakPoints.mobileLarge} {
-    flex-wrap: wrap;
-    gap: 10px 20px;
-  }
-`;
-
-export const PageJumpWrapper = styled.div`
-  display: flex;
-  gap: 0px 10px;
-`;
-
-export const PageListWrapper = styled.ul`
-  display: flex;
-  gap: 0px 10px;
-`;
-
-export const Page = styled(_Button)`
-  font-size: 14px;
-
-  -webkit-user-select: none; // 드래그 방지
-  -moz-user-select: none;
-  -ms-use-select: none;
-  user-select: none;
-
-  ${(props: StyleTypes) =>
-    props.isSelected && {
-      cursor: "default",
-      fontWeight: 700,
-      color: "#00c4ff",
-    }}
-
-  @media ${breakPoints.mobileLarge} {
-    font-size: 12px;
-  }
-`;
 
 export default memo(_PagiNationForm);

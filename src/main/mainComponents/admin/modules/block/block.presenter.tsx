@@ -35,79 +35,81 @@ export default function AdminBlockUIPage(props: IProps) {
     cancelBlock,
     changePage,
     isLoading,
+    render,
   } = props;
 
-  return (
+  return render ? (
     <Wrapper>
-      {!blockList.length ? (
+      {/* {(!blockList.length && (
         <_Title className="empty-block-list-title">
           차단된 유저가 없습니다.
         </_Title>
-      ) : (
-        <BlockListWrapper>
-          {isLoading && (
-            <LoadingData>
-              <_SpanText className="loading-data">데이터 로딩 중</_SpanText>
-            </LoadingData>
-          )}
-          <OptionalWrapper>
-            <_PText>- {filter.allData}명의 차단된 유저가 있습니다.</_PText>
+      )) || ( */}
+      <BlockListWrapper>
+        {isLoading && (
+          <LoadingData>
+            <_SpanText className="loading-data">데이터 로딩 중</_SpanText>
+          </LoadingData>
+        )}
+        <OptionalWrapper>
+          <_PText>- 총 {filter.allData}명의 차단된 유저가 있습니다.</_PText>
 
-            <FilterWrapper>
-              <FilterItems>
-                <_Button onClickEvent={() => toggleShowFilter(true)}>
-                  <_Image
-                    src={`/images/commons/icons/filter-${
-                      getFilterOn() ? "on" : "off"
-                    }.png`}
-                    className="filter-icon"
-                  />
-                </_Button>
-                <_SelectForm
-                  show={showFilter}
-                  closeEvent={() => toggleShowFilter(false)}
-                  className="block-filter-list"
-                >
-                  <_Button
-                    onClickEvent={() => fetchFilter("showOnlyBlock")}
-                    className={`show-block-user-btn ${
-                      (filter.showOnlyBlock && "selected") || undefined
-                    }`}
-                  >
-                    차단중인 유저만 보기
-                  </_Button>
-                  <_Button
-                    onClickEvent={() => fetchFilter("past")}
-                    className={`show-past-user-btn ${
-                      (filter.past && "selected") || undefined
-                    }`}
-                  >
-                    과거순으로 보기
-                  </_Button>
-                </_SelectForm>
-              </FilterItems>
-
-              <_Button
-                onClickEvent={cancelBlock}
-                className="remove-block-user-btn"
-              >
-                선택 차단 해제
+          <FilterWrapper>
+            <FilterItems>
+              <_Button onClickEvent={() => toggleShowFilter(true)}>
+                <_Image
+                  src={`/images/commons/icons/filter-${
+                    getFilterOn() ? "on" : "off"
+                  }.png`}
+                  className="filter-icon"
+                />
               </_Button>
-            </FilterWrapper>
-          </OptionalWrapper>
-          <BlockListItems isLoading={isLoading || false}>
-            <thead>
-              <Tr>
-                <td className="block-select"></td>
-                <td className="block-ip">아이피</td>
-                <td className="block-contents">차단 사유</td>
-                <td className="block-date">차단일</td>
-                <td className="block-cancel">차단 해제일</td>
-              </Tr>
-            </thead>
+              <_SelectForm
+                show={showFilter}
+                closeEvent={() => toggleShowFilter(false)}
+                className="block-filter-list"
+              >
+                <_Button
+                  onClickEvent={() => fetchFilter("showOnlyBlock")}
+                  className={`show-block-user-btn ${
+                    (filter.showOnlyBlock && "selected") || undefined
+                  }`}
+                >
+                  차단중인 유저만 보기
+                </_Button>
+                <_Button
+                  onClickEvent={() => fetchFilter("past")}
+                  className={`show-past-user-btn ${
+                    (filter.past && "selected") || undefined
+                  }`}
+                >
+                  과거순으로 보기
+                </_Button>
+              </_SelectForm>
+            </FilterItems>
 
-            <tbody>
-              {blockList.map((info, idx) => {
+            <_Button
+              onClickEvent={cancelBlock}
+              className="remove-block-user-btn"
+            >
+              선택 차단 해제
+            </_Button>
+          </FilterWrapper>
+        </OptionalWrapper>
+        <BlockListItems isLoading={isLoading || false}>
+          <thead>
+            <Tr>
+              <td className="block-select"></td>
+              <td className="block-ip">아이피</td>
+              <td className="block-contents">차단 사유</td>
+              <td className="block-date">차단일</td>
+              <td className="block-cancel">차단 해제일</td>
+            </Tr>
+          </thead>
+
+          <tbody>
+            {blockList.length ? (
+              blockList.map((info, idx) => {
                 // 이미 차단이 해제된 유저인지 체크
                 const alreadyCancel = info.canceledAt !== null;
                 // 선택한 유저인지 체크
@@ -157,10 +159,16 @@ export default function AdminBlockUIPage(props: IProps) {
                     </td>
                   </Tr>
                 );
-              })}
-            </tbody>
-          </BlockListItems>
+              })
+            ) : (
+              <_Title titleLevel="h2" className="empty-filter-list">
+                조회된 유저가 없습니다.
+              </_Title>
+            )}
+          </tbody>
+        </BlockListItems>
 
+        {(blockList.length && (
           <_PagiNationForm
             // allData={1201}
             currentPage={filter.page}
@@ -168,8 +176,12 @@ export default function AdminBlockUIPage(props: IProps) {
             limit={filter.limit}
             changePageEvent={changePage}
           />
-        </BlockListWrapper>
-      )}
+        )) ||
+          undefined}
+      </BlockListWrapper>
+      {/* )} */}
     </Wrapper>
+  ) : (
+    <_Title>리스트 불러오는 중...</_Title>
   );
 }

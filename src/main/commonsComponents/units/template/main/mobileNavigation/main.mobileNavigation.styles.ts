@@ -5,6 +5,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 interface StyleTypes {
   isOpen?: boolean;
   isAdmin?: boolean;
+  hide?: boolean;
 }
 
 export const MobileTapWrapper = styled.nav`
@@ -44,6 +45,11 @@ export const MobileNavigationTap = styled(_Button)`
   justify-content: center;
   gap: 4px 0px;
 
+  ${(props: StyleTypes) =>
+    props.hide && {
+      display: "none",
+    }};
+
   ::after,
   ::before {
     content: "";
@@ -54,7 +60,7 @@ export const MobileNavigationTap = styled(_Button)`
   }
 
   ::after {
-    ${(props: StyleTypes) =>
+    ${(props) =>
       props.isOpen && {
         transform: "rotate(-45deg) translateY(-5px)",
         marginLeft: "8px",

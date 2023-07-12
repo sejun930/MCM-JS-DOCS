@@ -5,6 +5,7 @@ interface StyleTypes {
   isTbody?: boolean;
   alreadyCancel?: boolean;
   isLoading?: boolean;
+  render?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -16,6 +17,10 @@ export const Wrapper = styled.div`
     letter-spacing: -0.05rem;
     color: gray;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    padding-bottom: 30px;
+  }
 `;
 
 export const BlockListWrapper = styled.div`
@@ -24,6 +29,18 @@ export const BlockListWrapper = styled.div`
   position: relative;
   gap: 12px 0px;
   transition: all 0.3s;
+
+  @media ${breakPoints.mobileLarge} {
+    .mcm-pagination-wrapper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 0px;
+      background-color: white;
+      border-top: double 2px black;
+    }
+  }
 `;
 
 export const OptionalWrapper = styled.div`
@@ -43,6 +60,12 @@ export const BlockListItems = styled.table`
 
   .checked {
     background-color: #efefef;
+  }
+
+  .empty-filter-list {
+    padding: 20px;
+    text-align: center;
+    color: gray;
   }
 
   thead {
@@ -112,6 +135,11 @@ export const BlockListItems = styled.table`
       display: none;
     }
 
+    .empty-filter-list {
+      padding: 16px;
+      font-size: 30px;
+    }
+
     tbody {
       tr {
         .block-contents {
@@ -131,6 +159,12 @@ export const BlockListItems = styled.table`
           }
         }
       }
+    }
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    .empty-filter-list {
+      font-size: 24px;
     }
   }
 `;
@@ -249,7 +283,7 @@ export const LoadingData = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 10;
 
   -webkit-user-select: none; // 드래그 방지
   -moz-user-select: none;
@@ -266,3 +300,5 @@ export const LoadingData = styled.div`
     padding-bottom: 100px;
   }
 `;
+
+export const Rendering = styled.div``;

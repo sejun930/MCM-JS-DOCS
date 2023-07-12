@@ -66,7 +66,8 @@ export default function MainMobileNavigationTapPage() {
           onClickEvent={() => toggleNav(!openNav)}
           className="mobile-nav-button"
           isOpen={openNav}
-        ></MobileNavigationTap>
+          hide={isAdmin && !adminLogin}
+        />
       </MobileTapWrapper>
     </>
   );
