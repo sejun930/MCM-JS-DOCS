@@ -56,9 +56,10 @@ export default function _SelectForm(props: SelectProps) {
     if (_listRef?.current && _wrapperRef?.current) {
       window.setTimeout(() => {
         // 전체 크기 구하기
-        _wrapperRef.current.style.height = `${
-          _listRef.current.clientHeight + 4
-        }px`;
+        if (_wrapperRef?.current?.style)
+          _wrapperRef.current.style.height = `${
+            _listRef.current.clientHeight + 4
+          }px`;
 
         // window.setTimeout(() => {
         //   waiting = false;

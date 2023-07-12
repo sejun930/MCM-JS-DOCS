@@ -8,7 +8,7 @@ import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import AdminBlockUIPage from "./block.presenter";
 
 // 필터 리스트
-const filter: FilterType = { ...filterInit };
+let filter: FilterType = { ...filterInit };
 
 export default function AdminBlockPage() {
   // 차단된 유저 리스트
@@ -17,6 +17,8 @@ export default function AdminBlockPage() {
   const [showFilter, setShowFilter] = useState(false);
   // 데이터 조회중일 경우
   const [loading, setLoading] = useState(false);
+  // 페이지 렌더하기
+  const [render, setRender] = useState(false);
 
   // 차단 리스트 가져오기
   const getBlockList = async () => {
@@ -41,8 +43,9 @@ export default function AdminBlockPage() {
     // 전체 데이터 수 가져오기
     try {
       const allDataList = await _db.get();
+      filter.allData = allDataList.size;
+
       if (allDataList.size) {
-        filter.allData = allDataList.size;
         // 데이터 조회 시작 시점
         startAt = allDataList.docs[(filter.page - 1) * filter.limit];
       }
@@ -56,27 +59,30 @@ export default function AdminBlockPage() {
       .limit(filter.limit) // 페이지별 데이터 개수 지정 (기본 : 10개)
       .get()
       .then((result) => {
-        if (!result.empty) {
-          const dataList: Array<BlockInfoType> = [];
+        console.log(result.size);
+        // if (!result.empty) {
+        const dataList: Array<BlockInfoType> = [];
 
-          result.forEach((info) => {
-            const _info = info.data() as BlockInfoType;
+        result.forEach((info) => {
+          const _info = info.data() as BlockInfoType;
 
-            const inputId = getUuid();
-            _info.id = info.id;
-            // checkbox의 inputId 값 추가
-            _info.inputId = inputId;
-            // 체크 여부 검증
-            _info.checked = false;
+          const inputId = getUuid();
+          _info.id = info.id;
+          // checkbox의 inputId 값 추가
+          _info.inputId = inputId;
+          // 체크 여부 검증
+          _info.checked = false;
 
-            dataList.push(_info);
-          });
+          dataList.push(_info);
+        });
 
-          if (dataList && dataList.length) {
-            setBlockList(dataList);
-          }
-          setLoading(false);
-        }
+        // if (dataList && dataList.length) {
+        setBlockList(dataList);
+        // }
+        // }
+        setLoading(false);
+
+        if (!render) setRender(true);
       })
       .catch((err) => {
         console.log(err);
@@ -85,6 +91,7 @@ export default function AdminBlockPage() {
   };
 
   useEffect(() => {
+    filter = { ...filterInit };
     getBlockList();
   }, []);
 
@@ -173,6 +180,7 @@ export default function AdminBlockPage() {
       cancelBlock={cancelBlock}
       changePage={changePage}
       isLoading={loading}
+      render={render}
     />
   );
 }

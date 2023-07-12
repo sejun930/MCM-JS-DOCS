@@ -8,11 +8,10 @@ export type IProps = {
 export interface PageInfoInitType {
   allPage: number; // 전체 페이지 개수
   pageLimit: number; // 한 블럭당 보여질 페이지 개수 (1 block = 10 page)
-  allBlock: number; // 전체 블록 개수
   next: boolean; // 다음 페이지로 이동 가능 여부
   prev: boolean; // 이전 페이지로 이동 가능 여부
-  first: boolean; // 끝 페이지로 이동 가능 여부
-  last: boolean; // 처음 페이지로 이동 가능 여부
+  //   first: boolean; // 끝 페이지로 이동 가능 여부
+  //   last: boolean; // 처음 페이지로 이동 가능 여부
   startPage: number; // 페이지네이션의 시작 페이지
 }
 
@@ -20,10 +19,9 @@ export interface PageInfoInitType {
 export const pageInfoInit: PageInfoInitType = {
   allPage: 0,
   pageLimit: 10,
-  allBlock: 0,
   next: false,
   prev: false,
-  first: false,
-  last: false,
+  //   first: false,
+  //   last: false,
   startPage: 1,
 };

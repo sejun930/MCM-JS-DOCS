@@ -33,4 +33,5 @@ export interface IProps {
   cancelBlock: () => void;
   changePage: (page: number) => void;
   isLoading: boolean;
+  render: boolean;
 }
