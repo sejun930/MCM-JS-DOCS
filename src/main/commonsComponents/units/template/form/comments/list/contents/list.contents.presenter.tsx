@@ -13,11 +13,12 @@ import {
   ContentsInfo,
   Filedset,
   QuestionTitle,
+  AnswerInfoWrapper,
 } from "./list.styles";
 import { getDateForm } from "src/main/commonsComponents/functional";
 import { getListContentsInfo, ListContentsSelectType } from "./list.data";
 
-import { _SpanTextWithHtml, _Button } from "mcm-js-commons";
+import { _SpanTextWithHtml, _Button, _PText } from "mcm-js-commons";
 import { ListContentsIProps } from "./list.contents.container";
 
 import _SelectForm from "../../../select/select.container";
@@ -56,6 +57,13 @@ export default function ListContentsInfoUIPage({
   changeInfo,
   adminLogin,
 }: ListContentsIProps & ListContentsUIProps) {
+  let answerClass = "answer";
+
+  if (info.answer) {
+    if (info.category === "bug") answerClass += " bug-answer";
+    else if (info.category === "review") answerClass += " review-answer";
+  }
+
   return (
     <CommentsList
       hover={hover}
@@ -87,6 +95,7 @@ export default function ListContentsInfoUIPage({
                 <QuestionTitle> Q. </QuestionTitle>
               )}
               <_SpanTextWithHtml
+                className="comments"
                 dangerouslySetInnerHTML={moreShow ? contents : subContents}
               />
             </ContentsInfo>
@@ -100,17 +109,26 @@ export default function ListContentsInfoUIPage({
             </MoreShowWrapper>
           )}
 
-          {info.category === "question" && info.completeAnswer && (
+          {info.answer && (
             <ContentsInfo
               hasQuestion={info.category === "question"}
               isAnswer={true}
+              className={answerClass}
             >
               {info.category === "question" && (
                 <QuestionTitle> A. </QuestionTitle>
               )}
-              <_SpanTextWithHtml
-                dangerouslySetInnerHTML={info.completeAnswer}
-              />
+              <AnswerInfoWrapper>
+                <_SpanTextWithHtml
+                  className="comments"
+                  dangerouslySetInnerHTML={info.answer}
+                />
+                {info.answerCreatedAt && (
+                  <_PText className="answer-date">
+                    {getDateForm({ firebaseTimer: info.answerCreatedAt })}
+                  </_PText>
+                )}
+              </AnswerInfoWrapper>
             </ContentsInfo>
           )}
 

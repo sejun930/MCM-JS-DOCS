@@ -7,16 +7,20 @@ import {
   CommentsInfoItems,
   CategoryInfo,
   ConfirmButton,
+  BugStatusWrapper,
+  BugStatusButton,
 } from "./contents.select.functional.styles";
 
-import { _Title, _Input } from "mcm-js-commons";
+import { _Title, _Input, _Button, _SpanText } from "mcm-js-commons";
 import { InfoTypes } from "../../../../comments.types";
+import { Tooltip } from "mcm-js";
 
 import CommentsLabel from "../../../label";
 import {
   ListContentsSelectType,
   ContentsSelectTypeName,
 } from "../../list.data";
+import { AdminBugStatusSelectList } from "./contents.select.functional.data";
 
 export default function ContentsSelectFunctionalUIPage({
   type,
@@ -28,6 +32,8 @@ export default function ContentsSelectFunctionalUIPage({
   confirm,
   adminLogin,
   waiting,
+  changeBugStatus,
+  bugStatus,
 }: {
   type: ListContentsSelectType;
   info: InfoTypes;
@@ -36,12 +42,21 @@ export default function ContentsSelectFunctionalUIPage({
   confirmRef: MutableRefObject<HTMLButtonElement>;
   changeData: (
     value: string | number,
-    type: "contents" | "password" | "rating" | "bugLevel"
+    type: "contents" | "password" | "rating" | "bugLevel" | "answer"
   ) => void;
   confirm: (e?: FormEvent) => void;
   adminLogin: boolean | null;
   waiting: boolean;
+  changeBugStatus: (status: number) => void;
+  bugStatus: number;
 }) {
+  // 답변이 가능한 댓글인 경우
+  const isAnswerType = type === "question";
+
+  // 답변창 보이기
+  const showAnswer =
+    info.answer || (info.answer && adminLogin) || type === "question";
+
   return (
     <Form onSubmit={confirm}>
       <OptionalWrapper isDelete={type === "delete"}>
@@ -65,7 +80,7 @@ export default function ContentsSelectFunctionalUIPage({
           </CategoryInfo>
         </CommentsInfoWrapper>
 
-        <CommentsInfoItems>
+        <CommentsInfoItems isAnswerType={isAnswerType}>
           <_Input
             isTextArea
             defaultValue={info.contents.split("<br />").join("\n")}
@@ -75,6 +90,16 @@ export default function ContentsSelectFunctionalUIPage({
             inputRef={contentsRef}
             maxLength={500}
           />
+          {showAnswer && (
+            <_Input
+              isTextArea
+              onChangeEvent={(text) => changeData(text, "answer")}
+              className="optional-answer-input"
+              maxLength={500}
+              defaultValue={info.answer?.split("<br />").join("\n")}
+              readOnly={!isAnswerType || !adminLogin}
+            />
+          )}
         </CommentsInfoItems>
 
         {!adminLogin && (
@@ -87,6 +112,35 @@ export default function ContentsSelectFunctionalUIPage({
             readOnly={adminLogin || false}
           />
         )}
+        {adminLogin && info.category === "bug" && type === "question" && (
+          <BugStatusWrapper>
+            {AdminBugStatusSelectList.slice(info.bugStatus).map((listInfo) => {
+              {
+                /* {AdminBugStatusSelectList.map((listInfo) => { */
+              }
+              return (
+                <Tooltip
+                  key={`bug-status-${listInfo.name}-${status}`}
+                  tooltipText={listInfo.tooltipText || ""}
+                  isDisable={
+                    !listInfo.tooltipText || bugStatus === listInfo.status
+                  }
+                  position="right"
+                  useShowAnimation
+                >
+                  <BugStatusButton
+                    onClickEvent={() => changeBugStatus(listInfo.status)}
+                    buttonType="button"
+                    isSelected={listInfo.status === bugStatus}
+                  >
+                    {listInfo.name}
+                  </BugStatusButton>
+                </Tooltip>
+              );
+            })}
+          </BugStatusWrapper>
+        )}
+
         <ConfirmButtonWrapper>
           <ConfirmButton
             onClickEvent={() => (waiting ? confirm : undefined)}

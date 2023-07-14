@@ -63,9 +63,9 @@ export default function CommentsLabel({
     if (info.category === "bug") {
       // 버그일 경우 처리 결과
       const bugStatus: { [key: number]: string } = {
-        0: "확인 대기 중",
-        1: "버그 수리 중",
-        2: "해결 완료",
+        0: "확인 대기중",
+        1: "이슈 처리중",
+        2: "이슈 해결",
       };
       nodeList.push(
         <Label className={`bug-label-${info.bugStatus || 0}`}>
@@ -75,8 +75,8 @@ export default function CommentsLabel({
     } else if (info.category === "question") {
       // 문의일 경우
       nodeList.push(
-        <Label className={`question-label-${info.completeAnswer ? 1 : 0}`}>
-          {info.completeAnswer ? "답변 완료" : "답변 대기 중"}
+        <Label className={`question-label-${info.answer ? 1 : 0}`}>
+          {info.answer ? "답변 완료" : "답변 대기 중"}
         </Label>
       );
     }

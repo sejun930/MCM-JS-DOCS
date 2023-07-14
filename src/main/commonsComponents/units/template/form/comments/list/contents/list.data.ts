@@ -25,17 +25,17 @@ export const getListContentsInfo = (
       { name: "차단", value: "block" },
     ];
 
-    if (info.category !== "bug" && info.category !== "question") {
-      // 카테고리가 이슈 및 질문이 아니라면 답변 항목 삭제
-      result.splice(1, 1);
-    }
+    // if (info.category !== "bug" && info.category !== "question") {
+    //   // 카테고리가 이슈 및 질문이 아니라면 답변 항목 삭제
+    //   result.splice(1, 1);
+    // }
   } else {
     result = result.filter((el) => {
       if (el.name === "수정") {
         // 버그 이슈가 확인될 경우 수정 불가능
         if (info.category === "bug" && info.bugStatus !== 0) return false;
         // 이미 답변이 있을 경우에는 수정 불가능
-        if (info.category === "question" && info.completeAnswer) return false;
+        if (info.category === "question" && info.answer) return false;
         return true;
       }
       return true;

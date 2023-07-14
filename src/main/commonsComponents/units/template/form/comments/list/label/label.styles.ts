@@ -58,7 +58,6 @@ export const Label = styled.p`
 
 export const UserIP = styled(_PText)`
   font-size: 10px;
-  color: gray;
   white-space: pre;
   text-align: center;
 

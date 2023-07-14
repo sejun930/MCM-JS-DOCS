@@ -8,6 +8,9 @@ interface StyleTypes {
   isReviewCategory?: boolean;
   adminLogin?: boolean;
   waiting?: boolean;
+  isAnswerType?: boolean;
+  isSelected?: boolean;
+  disableSelected?: boolean;
 }
 
 export const Form = styled.form`
@@ -129,8 +132,24 @@ export const CommentsInfoItems = styled.div`
   display: flex;
   width: 100%;
 
-  .optional-input {
+  .mcm-input-unit-wrapper {
     width: 100%;
+
+    .mcm-input-unit-items {
+      height: 220px;
+
+      textArea {
+        resize: none;
+        height: 100%;
+        width: 100%;
+
+        ${(props: StyleTypes) =>
+          props.isAnswerType && {
+            resize: "none",
+            width: "100%",
+          }}
+      }
+    }
   }
 `;
 
@@ -161,4 +180,28 @@ export const CategoryInfo = styled.div`
       padding: 6px;
     }
   }
+`;
+
+export const BugStatusWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
+  margin-top: 10px;
+  gap: 0px 24px;
+`;
+
+export const BugStatusButton = styled(_Button)`
+  font-size: 12px;
+  color: gray;
+
+  ${(props: StyleTypes) =>
+    props.isSelected && {
+      color: "#19a7ce",
+      fontWeight: "700",
+      cursor: "default",
+    }}
+
+  ${(props) =>
+    props.disableSelected && {
+      cursor: "not-allowed",
+    }}
 `;

@@ -54,7 +54,6 @@ const removeLocalStorage = (log: string, reload?: boolean): boolean => {
   localStorage.removeItem("login-date");
 
   console.log(log);
-
   if (reload) {
     location.reload();
   }
