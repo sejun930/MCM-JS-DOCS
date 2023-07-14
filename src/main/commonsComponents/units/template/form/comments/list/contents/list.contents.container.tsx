@@ -100,7 +100,8 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       showBGAnimation: true,
       showModalOpenAnimation: true,
       onFixWindow: true,
-      offAutoClose: type === "modify",
+      offAutoClose: true,
+      // offAutoClose: type === "modify",
       modalStyles: {
         wrapper: {
           zIndex: 9999,

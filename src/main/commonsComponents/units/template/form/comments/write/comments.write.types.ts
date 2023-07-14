@@ -11,6 +11,7 @@ export type WriteInfoTypes = {
     createdAt: FieldValue | null;
     modifyAt: FieldValue | null;
     deletedAt: FieldValue | null;
+    answerCreatedAt: FieldValue | null;
   };
 
 // 정보 저장하기
@@ -23,7 +24,8 @@ export const initInfo: WriteInfoTypes = {
   modifyAt: null, // 수정 일자
   deletedAt: null, // 삭제 일자
   bugStatus: 0, // 버그 현황 (0 : 확인 대기중, 1 : 수정 중, 2 : 해결 완료)
-  completeAnswer: null, // 문의 답변
+  answer: null, // 문의 답변
+  answerCreatedAt: null, // 답변 일자
   ip: "", // 작성자 아이피
   agreeProvacy: false, // 개인정보 수집 여부
   bugLevel: 0, // 버그 중요도

@@ -36,6 +36,10 @@ export const CommentsList = styled.li`
     }
   }
 
+  .mcm-tooltip-wrapper {
+    color: black;
+  }
+
   :hover {
     background-color: ${(props) => !props.hover && "#dddddd"};
 
@@ -107,12 +111,9 @@ export const MoreShowWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  /* margin-top: 18px; */
 
   .more-show {
-    padding: 10px 0px;
     padding-top: 18px;
-    width: 100%;
   }
 `;
 
@@ -213,7 +214,6 @@ export const ContentsInfo = styled.div`
 
   ${(props: StyleTypes) =>
     props.hasQuestion && {
-      gap: "0px 18px",
       padding: "10px 14px",
       backgroundColor: "aliceblue",
       borderRadius: "10px",
@@ -223,10 +223,33 @@ export const ContentsInfo = styled.div`
   ${(props) =>
     props.isAnswer && {
       backgroundColor: "antiquewhite",
-      marginTop: "10px",
+      marginTop: "16px",
     }}
 
-    @media ${breakPoints.mobileLarge} {
+    &.answer {
+    padding: 14px;
+    border-radius: 10px;
+    color: black;
+    align-items: baseline;
+  }
+
+  .comments {
+    ${(props) =>
+      props.hasQuestion && {
+        paddingLeft: "16px",
+      }}
+  }
+
+  .anwser-date {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .mcm-span-unit {
+    overflow-wrap: anywhere;
+  }
+
+  @media ${breakPoints.mobileLarge} {
     flex-direction: column;
     align-items: baseline;
     gap: 10px 0px;
@@ -234,7 +257,15 @@ export const ContentsInfo = styled.div`
     span {
       font-size: 14px;
     }
+
+    .comments {
+      padding: 0;
+    }
   }
+`;
+
+export const AnswerContents = styled.div`
+  display: flex;
 `;
 
 export const QuestionTitle = styled.span`
@@ -265,5 +296,16 @@ export const Filedset = styled.fieldset`
         display: "block",
         padding: "0px 10px",
       }}
+  }
+`;
+
+export const AnswerInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .answer-date {
+    margin-top: 10px;
+    font-size: 12px;
+    color: gray;
   }
 `;

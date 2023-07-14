@@ -11,18 +11,11 @@ import { MutableRefObject } from "react";
 import { InfoTypes, CommentsAllInfoTypes } from "../comments.types";
 import { categoryInitList } from "../write/comments.write.types";
 
-import {
-  _PText,
-  _Button,
-  // _SpanTextWithHtml,
-  // _Title,
-  // _Input,
-} from "mcm-js-commons";
+import { _PText, _Button } from "mcm-js-commons";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsFilterPage from "./filter";
-// import PageNationPage from "../../pageNation";
 
 export default function CommentsListUIPage({
   commentsInfo,

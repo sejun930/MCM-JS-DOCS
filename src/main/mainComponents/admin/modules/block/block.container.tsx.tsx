@@ -59,7 +59,6 @@ export default function AdminBlockPage() {
       .limit(filter.limit) // 페이지별 데이터 개수 지정 (기본 : 10개)
       .get()
       .then((result) => {
-        console.log(result.size);
         // if (!result.empty) {
         const dataList: Array<BlockInfoType> = [];
 

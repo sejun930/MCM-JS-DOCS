@@ -29,7 +29,7 @@ import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
 // 한 번에 가져올 수 있는 댓글 개수 단위
-const limit = 3;
+const limit = 5;
 // 댓글의 총 페이지 개수
 let allPage = 0;
 // 차단된 유저의 정보 저장
@@ -65,7 +65,6 @@ export default function CommentsPage() {
             if (!result.empty) {
               result.forEach((info) => {
                 if (!isBlockInfo) {
-                  console.log(isBlockInfo);
                   // 차단된 유저 정보 저장
                   isBlockInfo = info.data() as IsBlockTypes;
                 }
@@ -76,7 +75,7 @@ export default function CommentsPage() {
       .catch((err) => {
         console.log(`아이피 조회에 실패했습니다. : ${err}`);
       });
-  }, [module, getRouter()]);
+  }, [getRouter()]);
 
   useEffect(() => {
     // 관리자 로그인 체크하기
@@ -109,9 +108,7 @@ export default function CommentsPage() {
         // 카테고리가 문의일 경우
         if (info.filter.list["question-complete"])
           // 답변 완료만 보기
-          doc = doc
-            .where("completeAnswer", "!=", null)
-            .orderBy("completeAnswer");
+          doc = doc.where("answer", "!=", null).orderBy("answer");
         break;
     }
 
@@ -124,7 +121,8 @@ export default function CommentsPage() {
         if (info.filter.list[num]) {
           const _rating = num.split("-");
 
-          if (_rating[0] === selectCategory) numArr.push(Number(_rating[1]));
+          if (_rating[0] === selectCategory && Number(_rating[1]))
+            numArr.push(Number(_rating[1]));
         }
       }
 
@@ -332,10 +330,19 @@ export default function CommentsPage() {
   // 댓글 정보 수정하기
   const modifyComments = async (
     comment: InfoTypes,
-    isDelete?: boolean
+    isDelete?: boolean,
+    type?: string,
+    origin?: InfoTypes
   ): Promise<boolean> => {
-    const { category, id, rating, bugLevel, completeAnswer, bugStatus } =
-      comment;
+    const {
+      category,
+      id,
+      rating,
+      bugLevel,
+      answer,
+      bugStatus,
+      answerCreatedAt,
+    } = comment;
 
     try {
       // 댓글 정보 수정하기
@@ -374,7 +381,11 @@ export default function CommentsPage() {
           }
 
           // 카테고리가 리뷰 또는 버그일 경우
-          if (category === "review" || category === "bug") {
+          if (
+            category === "review" ||
+            category === "bug" ||
+            category === "question"
+          ) {
             // 어떤 점수 필터를 하나 제거할건지 정한다.
             let originTargetData = category === "review" ? rating : bugLevel;
             // 비교할 원본 데이터
@@ -398,15 +409,33 @@ export default function CommentsPage() {
                 Number(countList[`${category}-${changeData}`]) + 1;
             }
 
-            if (bugStatus === 2) {
-              // 해결 완료된 이슈라면 필터에서 제거
-              countList["bug-complete"] = Number(countList["bug-complete"]) - 1;
-            }
-          } else if (category === "question") {
-            // 답변이 있다면 필터에서 제거
-            if (completeAnswer) {
-              countList["question-complete"] =
-                Number(countList["question-complete"]) - 1;
+            // 이슈 완료일 경우 필터 변경
+            if (category === "bug" && bugStatus === 2) {
+              if (type === "question") {
+                if (comment.bugStatus !== origin?.bugStatus) {
+                  // 답변 완료일 경우 필터에서 1개 증가
+                  countList["bug-complete"] =
+                    Number(countList["bug-complete"]) + 1;
+                }
+              } else if (type === "delete" || type === "block") {
+                // 삭제, 차단일 경우 필터에서 1개 감소
+                countList["bug-complete"] =
+                  Number(countList["bug-complete"]) - 1;
+              }
+            } else if (category === "question") {
+              if (type === "question") {
+                if (!origin?.answer && !origin?.answerCreatedAt) {
+                  // 답변이 등록된 경우, 답변 완료 필터 1개 증가
+                  countList["question-complete"] =
+                    Number(countList["question-complete"]) + 1;
+                }
+              } else if (type === "delete" || type === "block") {
+                if (answer && answerCreatedAt) {
+                  // 삭제, 차단일 경우 필터에서 1개 감소
+                  countList["question-complete"] =
+                    Number(countList["question-complete"]) - 1;
+                }
+              }
             }
           }
 

@@ -14,10 +14,15 @@ import { getUuid } from "src/main/commonsComponents/functional";
 // 페이지네이션 form
 const _PagiNationForm = (props: IProps) => {
   let waiting = false; // 중복 클릭 방지
-  const { allData, currentPage, limit, changePageEvent } = props;
+  const { allData, currentPage, limit, changePageEvent, limitPage } = props;
 
   // 페이지 정보
   const pageInfoList = { ...pageInfoInit };
+
+  // 한 블럭당 보여질 페이지 수 지정
+  if (limitPage) {
+    pageInfoList.pageLimit = limitPage;
+  }
 
   // 전체 페이지 개수 구하기
   pageInfoList.allPage = Math.ceil(allData / limit);

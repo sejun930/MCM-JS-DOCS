@@ -15,6 +15,7 @@ import { _SpanText } from "mcm-js-commons";
 import { getServerTime, db } from "src/commons/libraries/firebase";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { InfoTypes } from "../../../../comments.types";
+import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 
 import ModalResultForm from "../../../../../modal/modal.result";
 
@@ -42,10 +43,18 @@ export default function ContentsSelectFunctionalPage({
 }: {
   info: InfoTypes;
   type: ListContentsSelectType;
-  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
+  modifyComments: (
+    comment: InfoTypes,
+    isDelete?: boolean,
+    type?: string,
+    origin?: InfoTypes
+  ) => Promise<boolean>;
   adminLogin: boolean | null;
   module: string;
 }) {
+  let answer = info.answer || ""; // 답변 내용 저장
+  const [bugStatus, setBugStatus] = useState<number>(info.bugStatus || 0);
+
   // 중복 클릭 방지
   const [waiting, setWaiting] = useState(false);
   _contents = info.contents;
@@ -75,12 +84,13 @@ export default function ContentsSelectFunctionalPage({
   // 데이터 변경하기
   const changeData = (
     value: string | number,
-    type: "contents" | "password" | "rating" | "bugLevel"
+    type: "contents" | "password" | "rating" | "bugLevel" | "answer"
   ) => {
     if (type === "password") password = String(value);
     else if (type === "contents") _contents = String(value);
     else if (type === "rating") rating = Number(value);
     else if (type === "bugLevel") bugLevel = Number(value);
+    else if (type === "answer") answer = String(value);
 
     // 버튼 비활성화 여부 체크하기
     if (confirmRef.current) {
@@ -179,6 +189,18 @@ export default function ContentsSelectFunctionalPage({
           });
           return;
         }
+      } else {
+        if (type === "block" || type === "question") {
+          // 차단 및 답변일 경우, 현재 로그인이 유지되어 있는 상태인지 검증
+
+          if (!checkAccessToken()) {
+            // 로그인이 만료될 경우
+            openModal({
+              text: "로그인이 만료되었습니다.",
+            });
+            return;
+          }
+        }
       }
 
       setWaiting(true);
@@ -202,7 +224,7 @@ export default function ContentsSelectFunctionalPage({
         _info.deletedAt = getServerTime();
 
         if (type === "block") {
-          // 차단 모드일 경우
+          // 차단 모드일 경우, 차단된 유저 정보 추가하기
           const doc = db.collection("block");
           doc.add({
             commentId: _info.id, // 차단된 댓글 아이디 값
@@ -214,10 +236,38 @@ export default function ContentsSelectFunctionalPage({
             module, // 차단된 모듈 이름
           });
         }
+      } else if (type === "question") {
+        // 답변 모드일 경우
+        if (answer) {
+          _info.answer = answer.split("\n").join("<br />");
+        } else {
+          if (info.category === "bug") {
+            if (bugStatus === 1)
+              _info.answer =
+                "이슈 확인중입니다. <br />불편을 드려서 죄송합니다. 🙇 <br /><br />빠른 시일내에 수정하겠습니다. <br />작성해주셔서 감사합니다! 🧡";
+            else if (bugStatus === 2)
+              _info.answer =
+                "이슈 수정이 완료되었습니다. <br /><br />신고해주셔서 감사합니다! 🧡<br />";
+          }
+        }
+        // 답변 작성일 저장
+        _info.answerCreatedAt = getServerTime();
+
+        // 이슈 처리 처리하기
+        if (info.category === "bug") {
+          // 이슈 확인중일 경우 처리중으로 자동 변경
+          if (!info.bugStatus) _info.bugStatus = 1;
+          if (bugStatus !== info.bugStatus) _info.bugStatus = bugStatus;
+        }
       }
       const isDelete = type === "delete" || type === "block"; // 댓글 삭제 여부
       // 수정 완료 여부 저장
-      isComplete = await modifyComments(_info as InfoTypes, isDelete);
+      isComplete = await modifyComments(
+        _info as InfoTypes,
+        isDelete,
+        type,
+        info
+      );
 
       if (isComplete) {
         openModal({
@@ -230,6 +280,13 @@ export default function ContentsSelectFunctionalPage({
       }
     }
   };
+
+  // 이슈 처리 선택하기
+  const changeBugStatus = (status: number) => {
+    if (!checkAccessToken()) return;
+    setBugStatus(status);
+  };
+
   return (
     <ContentsSelectFunctionalUIPage
       type={type}
@@ -241,6 +298,8 @@ export default function ContentsSelectFunctionalPage({
       confirm={confirm}
       adminLogin={adminLogin}
       waiting={waiting}
+      changeBugStatus={changeBugStatus}
+      bugStatus={bugStatus}
     />
   );
 }
