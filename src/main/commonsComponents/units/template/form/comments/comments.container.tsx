@@ -13,7 +13,6 @@ import {
   getDoc,
   getResult,
   QueryDocumentData,
-  db,
 } from "src/commons/libraries/firebase";
 
 import {
@@ -57,7 +56,7 @@ export default function CommentsPage() {
         setIp(ip);
 
         // 해당 유저가 차단된 유저인지 검증
-        db.collection("block")
+        getDoc("block", "user", "ip")
           .where("ip", "==", ip)
           .where("canceledAt", "==", null)
           .get()
@@ -69,6 +68,8 @@ export default function CommentsPage() {
                   isBlockInfo = info.data() as IsBlockTypes;
                 }
               });
+            } else {
+              isBlockInfo = null;
             }
           });
       })

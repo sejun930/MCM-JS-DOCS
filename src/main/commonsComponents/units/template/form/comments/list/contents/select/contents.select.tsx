@@ -102,6 +102,7 @@ export default function SelectListOptional({
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,
+      offAutoClose: true,
     });
   };
 

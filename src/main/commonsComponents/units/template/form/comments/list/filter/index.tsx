@@ -144,7 +144,6 @@ export default function CommentsFilterPage({
         <_SelectForm
           show={open}
           closeEvent={() => toggleFilter(false)}
-          offAutoClose
           className="filter-select"
         >
           {filterList.map((el) => {

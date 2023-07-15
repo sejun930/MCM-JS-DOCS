@@ -21,7 +21,7 @@ export default function _ExampleOptionalFormPage({
   allHeightList,
 }: {
   code: string;
-  content: string;
+  content: string | JSX.Element;
   isOpen: boolean;
   changeOpenList: (idx: number, list?: Array<boolean>) => void;
   codeIdx: number;

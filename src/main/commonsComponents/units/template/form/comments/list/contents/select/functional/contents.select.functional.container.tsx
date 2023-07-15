@@ -12,7 +12,7 @@ import {
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
-import { getServerTime, db } from "src/commons/libraries/firebase";
+import { getServerTime, getDoc } from "src/commons/libraries/firebase";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
@@ -53,12 +53,14 @@ export default function ContentsSelectFunctionalPage({
   module: string;
 }) {
   let answer = info.answer || ""; // 답변 내용 저장
+  // 이슈 단계도 (0 : 확인 전, 1 : 확인 및 처리 중, 2 : 수정 완료)
   const [bugStatus, setBugStatus] = useState<number>(info.bugStatus || 0);
-
   // 중복 클릭 방지
   const [waiting, setWaiting] = useState(false);
+
   _contents = info.contents;
   rating = info.rating;
+  bugLevel = info.bugLevel;
 
   const confirmRef = useRef() as MutableRefObject<HTMLButtonElement>;
   const contentsRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
@@ -156,7 +158,6 @@ export default function ContentsSelectFunctionalPage({
         height: "10%",
       },
       onCloseModal: _afterCloseEvent,
-      // onAfterCloseEvent: () => setWaiting(false),
     });
   };
 
@@ -225,7 +226,7 @@ export default function ContentsSelectFunctionalPage({
 
         if (type === "block") {
           // 차단 모드일 경우, 차단된 유저 정보 추가하기
-          const doc = db.collection("block");
+          const doc = getDoc("block", "user", "ip");
           doc.add({
             commentId: _info.id, // 차단된 댓글 아이디 값
             ip: _info.ip, // 차단된 유저 아이피
