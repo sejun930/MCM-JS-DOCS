@@ -40,6 +40,8 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const [showSelect, setShowSelect] = useState(false);
   // hover 여부
   const [hover, setHover] = useState(false);
+  // 자동닫기 사용 가능 여부
+  // const [ableAutoClose, setAbleAutoClose] = useState(false);
 
   const Name: string = String(
     Number(new Date()) + Math.floor(Math.random() * (10 - 1) + 1)
@@ -100,13 +102,15 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       showBGAnimation: true,
       showModalOpenAnimation: true,
       onFixWindow: true,
-      offAutoClose: true,
-      // offAutoClose: type === "modify",
+      offAutoClose: type === "modify",
       modalStyles: {
         wrapper: {
           zIndex: 9999,
         },
       },
+      // onAfterCloseEvent: () => {
+      //   if (ableAutoClose) setAbleAutoClose(false);
+      // },
     });
   };
 

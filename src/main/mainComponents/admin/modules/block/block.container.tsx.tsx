@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db, getServerTime } from "src/commons/libraries/firebase";
+import { getServerTime, getDoc } from "src/commons/libraries/firebase";
 
 import { getUuid } from "src/main/commonsComponents/functional";
 import { BlockInfoType, FilterType, filterInit } from "./block.types";
@@ -31,7 +31,7 @@ export default function AdminBlockPage() {
 
     // 과거순 & 최신순 정렬
     const createdAt = filter.past ? "asc" : "desc";
-    let _db = db.collection("block").orderBy("createdAt", createdAt);
+    let _db = getDoc("block", "user", "ip").orderBy("createdAt", createdAt);
 
     // 차단된 유저(차단이 해제되지 않는 유저)만 조회할 경우
     if (filter.showOnlyBlock) {
@@ -120,7 +120,7 @@ export default function AdminBlockPage() {
       // 선택된 항목이 하나도 없는 경우
       alert("선택된 항목이 없습니다.");
     } else {
-      const _db = db.collection("block");
+      const _db = getDoc("block", "user", "ip");
 
       // 선택된 유저 차단 해제하기
       await Promise.all(

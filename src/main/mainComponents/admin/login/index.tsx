@@ -9,12 +9,16 @@ import {
 import { Modal } from "mcm-js";
 import { _Title, _Input } from "mcm-js-commons";
 import { FormEvent, MutableRefObject, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { ipState } from "src/commons/store";
 
 import {
   getHashText,
   getDateForm,
+  getUserIp,
 } from "src/main/commonsComponents/functional";
 import { adminLoginInfoData } from "./login.data";
+import { getDoc, getServerTime } from "src/commons/libraries/firebase";
 
 let debouncing: number | ReturnType<typeof setTimeout>;
 let loading = false; // 중복 클릭 방지
@@ -23,6 +27,8 @@ export default function AdminLoginPage({
 }: {
   loginComplete: () => void;
 }) {
+  const [ip, setIp] = useRecoilState(ipState);
+
   const idRef = useRef() as MutableRefObject<HTMLInputElement>;
   const pwRef = useRef() as MutableRefObject<HTMLInputElement>;
 
@@ -104,24 +110,48 @@ export default function AdminLoginPage({
         _focusEvent = focusEvent.password;
       } else {
         loading = true;
-        // 로그인 성공
-        msg = `관리자로 로그인 되었습니다.<b>(${getDateForm({
-          date: now,
-          getDate: true,
-        })})</b>`;
-        _focusEvent = focusEvent.success;
 
-        // 로그인 시간 저장하기
-        localStorage.setItem("login-date", JSON.stringify(now));
-        // accessToken 저장하기
-        localStorage.setItem(
-          "admin-accessToken",
-          JSON.stringify(await getHashText(JSON.stringify(now)))
-        );
+        let _ip = ip;
+        if (!_ip) {
+          try {
+            // 유저 아이피 가져오기
+            _ip = await getUserIp();
+            setIp(ip);
+          } catch (err) {
+            msg = "아이피 조회에 실패하여 로그인이 불가능합니다.";
+          }
+        }
+
+        if (_ip) {
+          try {
+            await getDoc("admin", "login", "log").add({
+              loginTime: getServerTime(), // 로그인 시간
+              ip: _ip, // 로그인 아이피
+            });
+
+            // 로그인 성공
+            msg = `관리자로 로그인 되었습니다.<b>(${getDateForm({
+              date: now,
+              getDate: true,
+            })})</b>`;
+            _focusEvent = focusEvent.success;
+
+            // 로그인 시간 저장하기
+            localStorage.setItem("login-date", JSON.stringify(now));
+            // accessToken 저장하기
+            localStorage.setItem(
+              "admin-accessToken",
+              JSON.stringify(await getHashText(JSON.stringify(now)))
+            );
+          } catch (err) {
+            msg = "관리자 로그인에 실패했습니다.";
+            console.log(err);
+          }
+        }
       }
     }
 
-    if (msg && _focusEvent) {
+    if (msg) {
       Modal.open({
         children: <Message isSuccess={loading} dangerouslySetInnerHTML={msg} />,
         showBGAnimation: true,

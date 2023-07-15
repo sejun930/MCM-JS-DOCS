@@ -58,6 +58,7 @@ export interface CommentsAllInfoTypes {
           | { [key: string]: boolean };
       };
   countFilterList: { [key: string]: number }; // 각각의 필터들의 총 개수 정보 저장
+  isBlockUser: boolean;
 }
 
 export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
@@ -69,6 +70,7 @@ export const initCommentsInfo: CommentsAllInfoTypes = {
   countList: {}, // 카테고리 개수 리스트
   filter: { search: "", page: 1, list: {} }, // 필터 정보
   countFilterList: {}, // 카테고리 필터 개수
+  isBlockUser: false, // 차단 여부
 };
 
 // count (카테고리 별 개수) 초기값
