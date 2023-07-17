@@ -40,11 +40,6 @@ export default function AdminBlockUIPage(props: IProps) {
 
   return render ? (
     <Wrapper>
-      {/* {(!blockList.length && (
-        <_Title className="empty-block-list-title">
-          차단된 유저가 없습니다.
-        </_Title>
-      )) || ( */}
       <BlockListWrapper>
         {isLoading && (
           <LoadingData>
