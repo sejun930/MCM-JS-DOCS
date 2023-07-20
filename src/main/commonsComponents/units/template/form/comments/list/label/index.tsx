@@ -9,6 +9,7 @@ import { getUuid } from "src/main/commonsComponents/functional";
 
 import { categoryInitList } from "../../write/comments.write.types";
 import StarsForm from "../../write/stars";
+import { AdminCommentsInitType } from "src/main/mainComponents/admin/modules/comments/admin.comments.types";
 
 // label 렌더용 컴포넌트
 export default function CommentsLabel({

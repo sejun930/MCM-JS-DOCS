@@ -23,7 +23,7 @@ export const Items = styled.div`
 export const ModuleSelectWrapper = styled.div`
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 `;
 

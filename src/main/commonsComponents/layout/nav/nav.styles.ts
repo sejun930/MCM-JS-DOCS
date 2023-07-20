@@ -117,5 +117,6 @@ export const LayoutNav = styled.div`
   ${(props: StyleTypes) =>
     props.isAdmin && {
       gap: "1rem 0px",
+      top: "16px",
     }}
 `;

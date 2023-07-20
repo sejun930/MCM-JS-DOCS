@@ -8,8 +8,8 @@ const categoryList = [...categoryListArray];
 export default function AdminCommentsCategoryPage({
   info,
   changeInfo,
-  render,
-}: {
+}: // render,
+{
   info: AdminCommentsInitType;
   changeInfo: (info: AdminCommentsInitType) => void;
   render: boolean;
@@ -21,7 +21,7 @@ export default function AdminCommentsCategoryPage({
   };
 
   return (
-    <CategoryWrapper render={render}>
+    <CategoryWrapper>
       <CategoryListContents>
         {categoryList &&
           categoryList.map((category, idx) => {
@@ -29,16 +29,18 @@ export default function AdminCommentsCategoryPage({
             const isSelected = info.selectCategory === data[0];
 
             // 해당 카테고리의 전체 데이터 수
-            let categoryLen = info.count[data[0]] || 0;
+            let categoryLen = info.countList[data[0]] || 0;
             if (categoryLen > 999) categoryLen = 999;
 
             return (
               <CategoryBtn
                 onClickEvent={() =>
-                  (!isSelected && changeCategory(data[0])) || undefined
+                  (!isSelected && categoryLen && changeCategory(data[0])) ||
+                  undefined
                 }
                 key={`admin-comments-${info.selectModule}-category-${data[0]}-${data[1]}-${idx}`}
                 isSelected={isSelected}
+                isEmpty={categoryLen === 0}
               >
                 {data[1]} ({categoryLen})
               </CategoryBtn>
@@ -51,7 +53,7 @@ export default function AdminCommentsCategoryPage({
 
 interface StyleTypes {
   isSelected?: boolean;
-  render?: boolean;
+  isEmpty?: boolean;
 }
 
 export const CategoryWrapper = styled.div`
@@ -59,12 +61,6 @@ export const CategoryWrapper = styled.div`
   margin-top: 20px;
   height: 20px;
   width: 100%;
-  opacity: 0;
-
-  ${(props: StyleTypes) =>
-    props.render && {
-      opacity: 1,
-    }}
 `;
 
 export const CategoryListContents = styled.div`
@@ -73,14 +69,20 @@ export const CategoryListContents = styled.div`
 `;
 
 export const CategoryBtn = styled(_Button)`
-  font-size: 16px;
+  font-size: 14px;
   color: gray;
   transition: all 0.2s ease;
 
   ${(props: StyleTypes) =>
     props.isSelected && {
       cursor: "default",
-      color: "#525FE1",
+      color: "#525FE1 !important",
       fontWeight: 700,
+    }}
+
+  ${(props) =>
+    props.isEmpty && {
+      cursor: "not-allowed",
+      color: "#cccccc",
     }}
 `;
