@@ -13,6 +13,9 @@ export default function AdminCommentsPage() {
   const [render, setRender] = useState(false);
   // 페이지 일시정지
   const [isLoading, setIsLoading] = useState(false);
+  // 자동 동기화
+  const [update, setUpdate] = useState(false);
+
   // 댓글 정보 및 필터 정보 저장
   const [info, setInfo] = useState<AdminCommentsInitType>({
     ...adminCommentsInit,
@@ -67,9 +70,12 @@ export default function AdminCommentsPage() {
       if (commentsList && commentsList?.length) {
         const _commentsList: Array<InfoTypes> = [];
         commentsList.forEach((el) => {
-          _commentsList.push(el.data() as InfoTypes);
+          const commentData = { ...el.data() };
+          commentData.id = el.id;
+
+          _commentsList.push(commentData as InfoTypes);
         });
-        _info.list = _commentsList;
+        _info.commentsList = _commentsList;
 
         try {
           // 댓글 개수 조회
@@ -92,9 +98,9 @@ export default function AdminCommentsPage() {
               filterCountList[data.category] = filterCount;
             });
             // 카테고리 별 전체 개수 저장
-            _info.count = countList;
+            _info.countList = countList;
             // 카테고리 별 필터별 개수 저장
-            _info.filterCount = filterCountList;
+            _info.countFilterList = filterCountList;
           }
         } catch (err2) {
           alert("댓글 개수 조회에 실패했습니다.");
@@ -119,6 +125,7 @@ export default function AdminCommentsPage() {
   const changeLoading = (bool: boolean) => {
     setIsLoading(bool);
   };
+
   return (
     <AdminCommentsUIPage
       info={info}

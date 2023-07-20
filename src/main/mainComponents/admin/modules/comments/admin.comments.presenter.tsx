@@ -12,6 +12,7 @@ import { AdminCommentsPropsType } from "./admin.comments.types";
 
 import UpdateComments from "./update";
 import AdminCommentsCategoryPage from "./category/admin.comments.category";
+import AdminCommentsListPage from "./list";
 
 export default function AdminCommentsUIPage({
   info,
@@ -59,6 +60,8 @@ export default function AdminCommentsUIPage({
           changeInfo={changeInfo}
           render={render}
         />
+
+        <AdminCommentsListPage info={info} changeLoading={changeLoading} />
       </Items>
     </Wrapper>
   );

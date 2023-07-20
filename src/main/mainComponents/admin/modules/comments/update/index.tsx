@@ -5,8 +5,8 @@ import { _Button } from "mcm-js-commons";
 
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import { getDoc } from "src/commons/libraries/firebase";
-import { AdminCommentsInitType } from "../admin.comments.types";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
+import { AdminCommentsInitType } from "../admin.comments.types";
 
 // 댓글 정보와 개수 최신화 업데이트
 export default function UpdateComments({
@@ -39,14 +39,14 @@ export default function UpdateComments({
         ).docs;
 
         // 현재 모듈의 카운트 리스트 가져오기
-        const countList: { [key: string]: number } = { ...info.count };
+        const countList: { [key: string]: number } = { ...info.countList };
         // 모든 개수 초기화
         for (const key in countList) {
           countList[key] = 0;
         }
 
         // 필터 정보도 함께 가져오기
-        const filterCountList = { ...info.filterCount };
+        const filterCountList = { ...info.countFilterList };
         // 모든 필터 개수 초기화
         Object.entries(filterCountList).forEach((el) => {
           const keyName = el[0]; // key 이름
@@ -106,8 +106,8 @@ export default function UpdateComments({
             );
 
             const _info = { ...info };
-            _info.count = countList;
-            _info.filterCount = filterCountList;
+            _info.countList = countList;
+            _info.countFilterList = filterCountList;
 
             fetchComments(_info);
             alert("동기화가 완료되었습니다.");
