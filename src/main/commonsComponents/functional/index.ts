@@ -170,6 +170,15 @@ const moveDocument = (id: string, bonus?: number | 0) => {
   }
 };
 
+// 이슈에 대한 매크로 답변 가져오기
+const getBugAutoAnswer = (status: number): string => {
+  if (status === 1)
+    return "이슈 확인중입니다. <br />불편을 드려서 죄송합니다. 🙇 <br /><br />빠른 시일내에 수정하겠습니다. <br />작성해주셔서 감사합니다! 🧡";
+  else if (status === 2)
+    return "이슈 수정이 완료되었습니다. <br /><br />신고해주셔서 감사합니다! 🧡<br />";
+  return "";
+};
+
 export {
   removeTag,
   getDateForm,
@@ -178,4 +187,5 @@ export {
   getUuid,
   getUserIp,
   moveDocument,
+  getBugAutoAnswer,
 };

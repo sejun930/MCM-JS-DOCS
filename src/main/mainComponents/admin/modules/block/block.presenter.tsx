@@ -106,7 +106,8 @@ export default function AdminBlockUIPage(props: IProps) {
             {blockList.length ? (
               blockList.map((info, idx) => {
                 // 이미 차단이 해제된 유저인지 체크
-                const alreadyCancel = info.canceledAt !== null;
+                const alreadyCancel =
+                  info.canceledAt !== null && info.canceledAt !== undefined;
                 // 선택한 유저인지 체크
                 const isChecked = alreadyCancel ? false : info.checked || false;
 

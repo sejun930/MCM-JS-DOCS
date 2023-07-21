@@ -30,6 +30,6 @@ export interface AdminCommentsPropsType {
   changeSelectModule: (e: ChangeEvent<HTMLSelectElement>) => void;
   render: boolean;
   changeLoading: (bool: boolean) => void;
-  fetchComments: (info: AdminCommentsInitType) => void;
+  fetchComments: (info?: AdminCommentsInitType) => void;
   changeInfo: (info: AdminCommentsInitType, forcing?: boolean) => void;
 }

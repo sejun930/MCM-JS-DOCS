@@ -55,6 +55,7 @@ const removeLocalStorage = (log: string, reload?: boolean): boolean => {
 
   console.log(log);
   if (reload) {
+    alert("재로그인이 필요합니다.");
     location.reload();
   }
 

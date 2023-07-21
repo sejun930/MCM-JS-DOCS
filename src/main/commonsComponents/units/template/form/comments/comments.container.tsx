@@ -7,7 +7,7 @@ import { IsBlockTypes } from "src/commons/store/store.types";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
-import apis from "src/commons/libraries/commons.apis";
+import apis from "src/commons/libraries/apis/commons.apis";
 import {
   CollectionReferenceDocumentData,
   getDoc,
@@ -161,7 +161,7 @@ export default function CommentsPage() {
       const doc = getFilterQuery(getCommentDoc() as QueryDocumentData, _info);
 
       try {
-        const result = await apis(doc).read();
+        const result = await apis().read(doc);
         const _commentInfo = { ..._info };
 
         // 댓글 리스트 저장하기
@@ -203,7 +203,7 @@ export default function CommentsPage() {
       try {
         const doc = getDoc("comments", module, "count");
 
-        const result = await apis(doc).read();
+        const result = await apis().read(doc);
         if (result.empty) {
           // 비어있을 경우 새로 생성하기
           initCountList.forEach((el) => {

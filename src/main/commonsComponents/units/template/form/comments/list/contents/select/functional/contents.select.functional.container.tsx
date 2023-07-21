@@ -16,6 +16,8 @@ import { getServerTime, getDoc } from "src/commons/libraries/firebase";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import { getBugAutoAnswer } from "src/main/commonsComponents/functional";
+import apis from "src/commons/libraries/apis/commons.apis";
 
 import ModalResultForm from "../../../../../modal/modal.result";
 
@@ -226,15 +228,12 @@ export default function ContentsSelectFunctionalPage({
 
         if (type === "block") {
           // 차단 모드일 경우, 차단된 유저 정보 추가하기
-          const doc = getDoc("block", "user", "ip");
-          doc.add({
-            commentId: _info.id, // 차단된 댓글 아이디 값
-            ip: _info.ip, // 차단된 유저 아이피
-            createdAt: getServerTime(), // 차단날짜
-            canceledAt: null, // 차단취소일
-            contents: _info.contents, // 차단된 댓글 내용
-            category: _info.category, // 차단된 카테고리 이름
-            module, // 차단된 모듈 이름
+          apis().block({
+            module,
+            commentId: _info.id || "",
+            ip: _info.ip,
+            contents: _info.contents,
+            category: _info.category,
           });
         }
       } else if (type === "question") {
@@ -243,12 +242,8 @@ export default function ContentsSelectFunctionalPage({
           _info.answer = answer.split("\n").join("<br />");
         } else {
           if (info.category === "bug") {
-            if (bugStatus === 1)
-              _info.answer =
-                "이슈 확인중입니다. <br />불편을 드려서 죄송합니다. 🙇 <br /><br />빠른 시일내에 수정하겠습니다. <br />작성해주셔서 감사합니다! 🧡";
-            else if (bugStatus === 2)
-              _info.answer =
-                "이슈 수정이 완료되었습니다. <br /><br />신고해주셔서 감사합니다! 🧡<br />";
+            // 자동 매크로 적용
+            _info.answer = getBugAutoAnswer(bugStatus);
           }
         }
         // 답변 작성일 저장

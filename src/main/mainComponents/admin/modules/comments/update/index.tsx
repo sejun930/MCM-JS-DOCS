@@ -70,7 +70,7 @@ export default function UpdateComments({
                 filterCountList.bug["bug-complete"]++;
               }
               // 해당 버그 레벨 1개 증가
-              filterCountList.bug[`bug-${data.bugLevel}`]++;
+              if (data.bugLevel) filterCountList.bug[`bug-${data.bugLevel}`]++;
             } else if (data.category === "question") {
               // 카테고리가 문의일 경우
               if (data.answer && data.answerCreatedAt) {
@@ -79,7 +79,8 @@ export default function UpdateComments({
               }
             } else if (data.category === "review") {
               // 카테고리가 리뷰일 경우, 해당 리뷰 점수 1개 증가
-              filterCountList.review[`review-${data.rating}`]++;
+              if (data.rating)
+                filterCountList.review[`review-${data.rating}`]++;
             }
           });
         }
