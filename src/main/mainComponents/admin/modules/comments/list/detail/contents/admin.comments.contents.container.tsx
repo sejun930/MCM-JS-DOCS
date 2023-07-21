@@ -1,14 +1,6 @@
-import {
-  Contents,
-  ContentsBtn,
-  ContentsItems,
-  ContentsWrapper,
-  OptionWrapper,
-  OptionList,
-  OptionBtn,
-} from "./admin.comments.contents.styles";
+import { OptionList, OptionBtn } from "./admin.comments.contents.styles";
 import { MouseEvent, MutableRefObject, useRef } from "react";
-import { Tooltip } from "mcm-js";
+import AdminCommentsContentsUIPage from "./admin.comments.contents.presenter";
 
 import { _Input, _SpanText, _Button } from "mcm-js-commons";
 import {
@@ -20,7 +12,7 @@ import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/c
 
 import { getServerTime, getDoc } from "src/commons/libraries/firebase";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
-import { getDateForm } from "src/main/commonsComponents/functional";
+import { getBugAutoAnswer } from "src/main/commonsComponents/functional";
 
 import { AdminBugStatusSelectList } from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.data";
 
@@ -29,11 +21,15 @@ export default function AdminCommentsContentsPage({
   changeLoading,
   commentsInfo,
   updateFilterCount,
+  fetchComments,
+  isAlreadyDeleted,
 }: {
   info: InfoTypes;
   changeLoading: (bool: boolean) => void;
   commentsInfo: CommentsAllInfoTypes & AdminCommentsInitType;
   updateFilterCount: (info: InfoTypes) => Promise<boolean>;
+  fetchComments: (info?: AdminCommentsInitType) => void;
+  isAlreadyDeleted: boolean;
 }) {
   let answer = "";
   let bugStatus = info.bugStatus || 0;
@@ -62,20 +58,30 @@ export default function AdminCommentsContentsPage({
   const changeAnswer = async () => {
     // 관리자 로그인 체크
     checkAccessToken(true);
+    if (isAlreadyDeleted)
+      return alert("삭제된 댓글에는 답변을 등록할 수 없습니다.");
 
+    const _info: WriteInfoTypes = { ...(info as WriteInfoTypes) };
+
+    if (_info.category === "bug") {
+      // 답변이 등록됐다면 이슈 처리중으로 자동 변환
+      _info.bugStatus = bugStatus;
+      if (!_info.bugStatus) _info.bugStatus = 1;
+
+      if (!answer.trim())
+        // 답변이 비어있다면 자동 매크로 적용
+        answer = getBugAutoAnswer(_info.bugStatus);
+    }
     if (!answer.trim()) {
-      // 답변이 비어있을 경우
       alert("답변을 입력해주세요.");
       if (textRef && textRef.current) textRef.current.focus();
     } else {
       changeLoading(true);
-      const _info: WriteInfoTypes = { ...(info as WriteInfoTypes) };
       _info.answer = answer;
       _info.answerCreatedAt = getServerTime();
 
       // 답변 업데이트
       try {
-        console.log(_info);
         await getDoc("comments", commentsInfo.selectModule, "comment")
           .doc(_info.id)
           .update(_info);
@@ -84,6 +90,8 @@ export default function AdminCommentsContentsPage({
           // 개수 업데이트 후 최종 종료
           if (await updateFilterCount(_info as InfoTypes)) {
             changeLoading(false);
+
+            fetchComments(commentsInfo);
             alert("답변이 업데이트 되었습니다.");
           }
         } catch (err2) {
@@ -98,42 +106,53 @@ export default function AdminCommentsContentsPage({
   };
 
   const renderOptionList = () => {
+    let _AdminBugStatusSelectList = [...AdminBugStatusSelectList].slice(
+      info.bugStatus
+    );
+    if (isAlreadyDeleted)
+      _AdminBugStatusSelectList = _AdminBugStatusSelectList.slice(
+        info.bugStatus,
+        info.bugStatus + 1
+      );
+
     const getOptionList = () => {
       // 이슈일 때만 선택지 렌더
       if (info.category === "bug") {
         // 버그 레벨 선택하기
         const selectBugLevel =
           (num: number) => (e?: MouseEvent<HTMLButtonElement>) => {
-            if (num > info.bugStatus && num !== info.bugStatus) {
-              bugStatus = num;
+            // if (num > info.bugStatus && num !== info.bugStatus) {
+            bugStatus = num;
 
-              if (e?.currentTarget) {
-                // 모든 선택 제거
-                const target = e?.currentTarget;
-                // 선택 여부 확인
-                const selectList =
-                  target.parentElement?.getElementsByClassName("select");
+            if (e?.currentTarget) {
+              // 모든 선택 제거
+              const target = e?.currentTarget;
+              // 선택 여부 확인
+              const selectList =
+                target.parentElement?.getElementsByClassName("select");
 
-                // 선택 제거
-                if (selectList && selectList.length) {
-                  Array.from(selectList).forEach((node) =>
-                    node.classList.remove("select")
-                  );
-                }
-
-                // 선택 체크
-                target.classList.add("select");
+              // 선택 제거
+              if (selectList && selectList.length) {
+                Array.from(selectList).forEach((node) =>
+                  node.classList.remove("select")
+                );
               }
+
+              // 선택 체크
+              target.classList.add("select");
             }
           };
 
-        return AdminBugStatusSelectList.map((el, level) => {
+        return _AdminBugStatusSelectList.map((el, level) => {
+          level += info.bugStatus;
           let className = "option-btn";
 
-          // 이미 선택되어 있는지
-          if (bugStatus === level) className += " select";
-          // 선택할 수 없는지
-          else if (bugStatus > level) className += " disable";
+          if (!isAlreadyDeleted) {
+            // 이미 선택되어 있는지
+            if (bugStatus === level) className += " select";
+            // 선택할 수 없는지
+            else if (bugStatus > level) className += " disable";
+          } else className += " select";
 
           return (
             <OptionBtn
@@ -156,40 +175,21 @@ export default function AdminCommentsContentsPage({
     return <OptionList>{getOptionList()}</OptionList>;
   };
 
+  const saveAnswer = (text: string) => {
+    answer = text;
+  };
+
   return (
-    <ContentsWrapper>
-      <ContentsItems>
-        <ContentsBtn onClickEvent={toggleMoreShow}>
-          <Contents
-            className="contents"
-            dangerouslySetInnerHTML={info.contents}
-            _ref={contentsRef}
-          />
-        </ContentsBtn>
-        <_Input
-          className="answer-teatarea-wrapper"
-          inputClassName="answer-textarea"
-          onChangeEvent={(text: string) => (answer = text)}
-          onSubmitEvent={changeAnswer}
-          isTextArea
-          placeHolder="답변 입력"
-          value={answer}
-          inputRef={textRef}
-        />
-      </ContentsItems>
-      <OptionWrapper>
-        {renderOptionList()}
-        {info.answerCreatedAt && (
-          <Tooltip tooltipText="답변 작성일" useShowAnimation>
-            <_SpanText className="answer-date">
-              {getDateForm({
-                firebaseTimer: info.answerCreatedAt,
-                getDate: true,
-              })}
-            </_SpanText>
-          </Tooltip>
-        )}
-      </OptionWrapper>
-    </ContentsWrapper>
+    <AdminCommentsContentsUIPage
+      info={info}
+      toggleMoreShow={toggleMoreShow}
+      contentsRef={contentsRef}
+      changeAnswer={changeAnswer}
+      saveAnswer={saveAnswer}
+      textRef={textRef}
+      isAlreadyDeleted={isAlreadyDeleted}
+      renderOptionList={renderOptionList}
+      answer={answer}
+    />
   );
 }

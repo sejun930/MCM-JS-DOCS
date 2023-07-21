@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { getServerTime, getDoc } from "src/commons/libraries/firebase";
+import { getDoc } from "src/commons/libraries/firebase";
 
 import { getUuid } from "src/main/commonsComponents/functional";
 import { BlockInfoType, FilterType, filterInit } from "./block.types";
 
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import AdminBlockUIPage from "./block.presenter";
+import apis from "src/commons/libraries/apis/commons.apis";
 
 // 필터 리스트
 let filter: FilterType = { ...filterInit };
@@ -74,11 +75,7 @@ export default function AdminBlockPage() {
 
           dataList.push(_info);
         });
-
-        // if (dataList && dataList.length) {
         setBlockList(dataList);
-        // }
-        // }
         setLoading(false);
 
         if (!render) setRender(true);
@@ -120,16 +117,11 @@ export default function AdminBlockPage() {
       // 선택된 항목이 하나도 없는 경우
       alert("선택된 항목이 없습니다.");
     } else {
-      const _db = getDoc("block", "user", "ip");
-
       // 선택된 유저 차단 해제하기
       await Promise.all(
         checkList.map((el) =>
-          // 최종 데이터 저장
-          _db.doc(el.id).update({
-            ...el,
-            ["canceledAt"]: getServerTime(), // 차단해제 시간 입력 (= 차단 해제)
-          })
+          // 차단된 유저 해제 데이터 최종 업데이트
+          apis().unblock(el.id)
         )
       ).then(() => {
         alert("차단 해제가 완료되었습니다.");

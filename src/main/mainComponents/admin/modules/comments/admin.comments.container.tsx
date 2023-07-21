@@ -13,8 +13,6 @@ export default function AdminCommentsPage() {
   const [render, setRender] = useState(false);
   // 페이지 일시정지
   const [isLoading, setIsLoading] = useState(false);
-  // 자동 동기화
-  const [update, setUpdate] = useState(false);
 
   // 댓글 정보 및 필터 정보 저장
   const [info, setInfo] = useState<AdminCommentsInitType>({
@@ -43,9 +41,10 @@ export default function AdminCommentsPage() {
   };
 
   // 댓글 정보 가져오기
-  const fetchComments = async (info: AdminCommentsInitType) => {
+  const fetchComments = async (info?: AdminCommentsInitType) => {
     if (isLoading) return;
-    let _info = { ...info };
+
+    let _info = { ...(info || adminCommentsInit) };
 
     // 댓글 정보 모두 가져오기
     let doc = getDoc("comments", _info.selectModule, "comment").orderBy(
@@ -67,14 +66,16 @@ export default function AdminCommentsPage() {
       // 댓글들 조회
       const commentsList = (await doc.get()).docs;
 
-      if (commentsList && commentsList?.length) {
+      if (commentsList) {
         const _commentsList: Array<InfoTypes> = [];
-        commentsList.forEach((el) => {
+
+        commentsList.forEach(async (el) => {
           const commentData = { ...el.data() };
           commentData.id = el.id;
 
           _commentsList.push(commentData as InfoTypes);
         });
+
         _info.commentsList = _commentsList;
 
         try {

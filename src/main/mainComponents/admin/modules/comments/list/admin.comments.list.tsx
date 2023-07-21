@@ -2,23 +2,19 @@ import styled from "@emotion/styled";
 import { _Title, _SpanText, _Button, _PTextWithHtml } from "mcm-js-commons";
 
 import { AdminCommentsInitType } from "../admin.comments.types";
-import { getDateForm } from "src/main/commonsComponents/functional";
-import { useState } from "react";
-
-import AdminCommentsDetailPage from "./detail";
+import AdminCommentsDetailPage from "./detail/admin.comments.detail.container";
 
 export default function AdminCommentsListPage({
   info,
   changeLoading,
+  fetchComments,
 }: {
   info: AdminCommentsInitType;
   changeLoading: (bool: boolean) => void;
+  fetchComments: (info?: AdminCommentsInitType) => void;
 }) {
   const { commentsList, selectModule, selectCategory } = info;
   const isEmpty = commentsList.length === 0;
-
-  // 댓글 삭제하기
-  const removeComments = () => {};
 
   return (
     <Wrapper isEmpty={isEmpty}>
@@ -32,6 +28,7 @@ export default function AdminCommentsListPage({
               // @ts-ignore
               commentsInfo={info}
               changeLoading={changeLoading}
+              fetchComments={fetchComments}
             />
           ))) || (
           <_Title titleLevel="h2" className="empty-title">
