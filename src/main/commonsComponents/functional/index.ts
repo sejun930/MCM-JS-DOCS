@@ -179,6 +179,19 @@ const getBugAutoAnswer = (status: number): string => {
   return "";
 };
 
+// 랜덤한 숫자 생성하기
+const getRandomNumber = (max: number, min: number) => {
+  max = Math.floor(max + 1 || 2);
+  min = Math.ceil(min || 0);
+
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+// 깊은 복사
+const deepCopy = <T>(data: T) => {
+  return JSON.parse(JSON.stringify(data));
+};
+
 export {
   removeTag,
   getDateForm,
@@ -188,4 +201,6 @@ export {
   getUserIp,
   moveDocument,
   getBugAutoAnswer,
+  getRandomNumber,
+  deepCopy,
 };

@@ -166,7 +166,6 @@ export default function AdminBlockUIPage(props: IProps) {
 
         {(blockList.length && (
           <_PagiNationForm
-            // allData={1201}
             currentPage={filter.page}
             allData={filter.allData}
             limit={filter.limit}

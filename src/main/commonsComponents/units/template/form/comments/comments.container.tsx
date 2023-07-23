@@ -24,6 +24,7 @@ import {
 } from "./comments.types";
 import { getUserIp } from "src/main/commonsComponents/functional";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import { WriteInfoTypes } from "./write/comments.write.types";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
@@ -161,7 +162,9 @@ export default function CommentsPage() {
       const doc = getFilterQuery(getCommentDoc() as QueryDocumentData, _info);
 
       try {
-        const result = await apis().read(doc);
+        const result = await apis(
+          doc as CollectionReferenceDocumentData
+        ).read();
         const _commentInfo = { ..._info };
 
         // 댓글 리스트 저장하기
@@ -203,7 +206,7 @@ export default function CommentsPage() {
       try {
         const doc = getDoc("comments", module, "count");
 
-        const result = await apis().read(doc);
+        const result = await apis(doc).read();
         if (result.empty) {
           // 비어있을 경우 새로 생성하기
           initCountList.forEach((el) => {
@@ -265,67 +268,23 @@ export default function CommentsPage() {
 
   // 댓글 추가하기
   const addComments = async (comment: InfoTypes): Promise<boolean> => {
-    const { category, rating, bugLevel } = comment;
+    const { category } = comment;
+    const _info = { ...commentsInfo };
+
     try {
-      const addDoc = await getCommentDoc().add(comment);
-      const newComment = (await addDoc.get()).data() as InfoTypes;
+      const addDoc = getDoc("comments", module, "comment");
+      // 댓글 추가 완료
+      await apis(addDoc).addComments(comment as WriteInfoTypes, module);
 
-      if (newComment) {
-        // 등록에 성공할 경우
-        const _info = { ...commentsInfo };
+      // 카테고리 변경하기
+      _info.selectCategory = category;
+      fetchCommentsList(_info);
 
-        // 해당 카테고리의 전체 개수 데이터 가져오기
-        const updateDoc = await getCommentsCountList(category);
-
-        if (!updateDoc.empty) {
-          const result = updateDoc.docs[0].data();
-          // 전체 개수(count) 1개 더하기
-          const countList: {
-            [key: string]: number | CategoryTypes;
-          } = {
-            ...result,
-            ["count"]: result.count + 1,
-          };
-
-          // 리뷰 & 버그 카테고리일 경우 점수별로 카운트 올리기
-          if (category === "review" || category === "bug") {
-            const target = category === "review" ? rating : bugLevel;
-
-            if (countList[`${category}-${target}`] !== undefined)
-              // 해당 평점 필터 리스트 1개 증가하기 (ex : 1점이라면 review-1 1개 증가)
-              countList[`${category}-${target}`] =
-                Number(countList[`${category}-${target}`]) + 1;
-          }
-
-          // 리스트 업데이트
-          const updateReulst = await updateCountList(
-            updateDoc.docs[0].id,
-            countList
-          );
-
-          if (updateReulst) {
-            if (countList && countList.category) {
-              // 카운트 최신화
-              _info.countList[countList.category] = Number(countList.count);
-
-              // 카테고리 변경하기
-              _info.selectCategory = countList.category as CategoryTypes;
-            }
-          }
-
-          fetchCommentsList(_info);
-          return true;
-        }
-
-        return false;
-      }
+      return true;
     } catch (err) {
-      // 댓글 등록 실패
-      console.log(`댓글 등록에 실패했습니다. ${err}`);
-
+      console.log(err);
       return false;
     }
-    return false;
   };
 
   // 댓글 정보 수정하기

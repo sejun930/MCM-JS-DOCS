@@ -17,6 +17,8 @@ export default function AdminCommentsCategoryPage({
   // 카테고리 변경하기
   const changeCategory = (category: string) => {
     const _info = { ...info, ["selectCategory"]: category };
+    _info.filter.page = 1;
+
     changeInfo(_info);
   };
 
