@@ -19,7 +19,6 @@ import {
   getHashText,
   changeMultipleLine,
 } from "src/main/commonsComponents/functional";
-import { getServerTime } from "src/commons/libraries/firebase";
 import {
   initInfo,
   WriteInfoTypes,
@@ -206,7 +205,7 @@ export default function CommentsWritePage({
       info.password = await getHashText(info.password);
 
       // 등록일 설정
-      info.createdAt = getServerTime();
+      // info.createdAt = getServerTime();
 
       writing = true;
       openErrorModal({

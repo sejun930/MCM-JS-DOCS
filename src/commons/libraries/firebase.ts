@@ -43,6 +43,8 @@ export type QueryDocumentData = firebase.firestore.Query<DocumentData>;
 export type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
 export type QueryDocumentSnapshotDocumentData =
   firebase.firestore.QueryDocumentSnapshot<DocumentData>;
+export type OrderByDirection = firebase.firestore.OrderByDirection;
+export type WhereFilterOp = firebase.firestore.WhereFilterOp;
 
 // export const analytics = getAnalytics(firebaseApp);
 

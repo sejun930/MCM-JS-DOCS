@@ -42,7 +42,7 @@ export default function AdminCommentsDetailPage({
   ) => {
     const { category, answer } = changeData;
     const countDoc = getDoc("comments", commentsInfo.selectModule, "count");
-    const countList = getResult(await apis().read(countDoc));
+    const countList = getResult(await apis(countDoc).read());
 
     const target = countList.filter(
       (el) => el.category === changeData.category
@@ -126,19 +126,20 @@ export default function AdminCommentsDetailPage({
           .update(_info);
 
         if (isBlock) {
+          const blockDoc = getDoc("block", "user", "ip");
           // 이미 차단된 유저인지 검증
-          const blockDoc = await getDoc("block", "user", "ip")
+          const blockResult = await blockDoc
             .where("ip", "==", info.ip) // 해당 아이피 검색
             .where("canceledAt", "==", null)
             .limit(1)
             .get(); // 차단 해제되지 않은 유저만 검색
 
-          if (!blockDoc.empty) {
+          if (!blockResult.empty) {
             alert("이미 차단된 유저입니다.");
             ableBlock = false;
           } else {
             // 해당 유저 차단하기
-            await apis().block({
+            await apis(blockDoc).block({
               commentId: info.id,
               ip: info.ip,
               contents: info.contents,

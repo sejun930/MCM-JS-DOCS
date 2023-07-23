@@ -1,31 +1,17 @@
-import styled from "@emotion/styled";
-
-import { Tooltip } from "mcm-js";
 import { _Button } from "mcm-js-commons";
 
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import { getDoc } from "src/commons/libraries/firebase";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
-import { AdminCommentsInitType } from "../admin.comments.types";
+import { FunctionPropsTypes } from "../../admin.comments.types";
 
 // 댓글 정보와 개수 최신화 업데이트
-export default function UpdateComments({
-  module,
-  loading,
-  changeLoading,
-  info,
-  fetchComments,
-}: {
-  module: string;
-  loading: boolean;
-  changeLoading: (bool: boolean, forcing?: boolean) => void;
-  info: AdminCommentsInitType;
-  fetchComments: (info: AdminCommentsInitType) => void;
-}) {
+export default function SyncCommentsFunction(props: FunctionPropsTypes) {
+  const { changeLoading, module, info, fetchComments, checkLoading } = props;
+
   // 개수 최신화하기
-  const updateComments = async () => {
-    checkAccessToken(true); // 관리자 로그인 체크
-    if (loading) return alert("동기화 작업중입니다.");
+  const syncComments = async () => {
+    if (!checkLoading()) return;
 
     if (window.confirm("댓글 동기화 작업을 실행하시겠습니까?")) {
       try {
@@ -126,30 +112,8 @@ export default function UpdateComments({
   };
 
   return (
-    <Tooltip
-      tooltipText={
-        loading ? "동기화 진행중입니다." : "댓글의 개수를 동기화합니다."
-      }
-      useShowAnimation
-    >
-      <UpdateBtn onClickEvent={updateComments} loading={loading}>
-        댓글 동기화
-      </UpdateBtn>
-    </Tooltip>
+    <_Button onClickEvent={syncComments} className="admin-function-btn">
+      댓글 동기화
+    </_Button>
   );
 }
-
-interface StyleTypes {
-  loading?: boolean;
-}
-
-export const UpdateBtn = styled(_Button)`
-  border: unset;
-  height: 100%;
-
-  ${(props: StyleTypes) =>
-    props.loading && {
-      cursor: "default",
-      color: "gray",
-    }}
-`;

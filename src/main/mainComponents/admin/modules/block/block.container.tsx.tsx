@@ -117,11 +117,13 @@ export default function AdminBlockPage() {
       // 선택된 항목이 하나도 없는 경우
       alert("선택된 항목이 없습니다.");
     } else {
+      const doc = getDoc("block", "user", "ip");
+
       // 선택된 유저 차단 해제하기
       await Promise.all(
         checkList.map((el) =>
           // 차단된 유저 해제 데이터 최종 업데이트
-          apis().unblock(el.id)
+          apis(doc).unblock(el.id)
         )
       ).then(() => {
         alert("차단 해제가 완료되었습니다.");

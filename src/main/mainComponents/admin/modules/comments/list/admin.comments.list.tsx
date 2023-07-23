@@ -17,7 +17,7 @@ export default function AdminCommentsListPage({
   const isEmpty = commentsList.length === 0;
 
   return (
-    <Wrapper isEmpty={isEmpty}>
+    <Wrapper isEmpty={isEmpty} id="admin-comments-list-wrapper">
       <ListWrapper>
         {(commentsList &&
           commentsList.length &&
@@ -49,7 +49,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   margin-top: 30px;
   border-top: double 4px black;
-  border-bottom: solid 3px black;
+  /* border-bottom: solid 3px black; */
 
   ${(props: StyleTypes) =>
     props.isEmpty && {

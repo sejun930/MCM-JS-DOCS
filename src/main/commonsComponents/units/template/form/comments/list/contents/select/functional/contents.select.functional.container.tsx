@@ -227,8 +227,9 @@ export default function ContentsSelectFunctionalPage({
         _info.deletedAt = getServerTime();
 
         if (type === "block") {
+          const blockDoc = getDoc("block", "user", "ip");
           // 차단 모드일 경우, 차단된 유저 정보 추가하기
-          apis().block({
+          apis(blockDoc).block({
             module,
             commentId: _info.id || "",
             ip: _info.ip,

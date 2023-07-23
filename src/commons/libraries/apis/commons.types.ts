@@ -1,6 +1,17 @@
-import { FieldValue } from "../firebase";
+import { FieldValue, OrderByDirection, WhereFilterOp } from "../firebase";
 
-export type GetOptionsTypes = Array<{}>;
+export type OptionsTypes = Array<{
+  orderBy?: Array<{
+    pathName: string;
+    direction: OrderByDirection;
+  }>;
+  where?: Array<{
+    pathName: string;
+    filter: WhereFilterOp;
+    value: string | number | null;
+  }>;
+  limit?: { value: number }; // limit는 항상 마지막에 실행
+}>;
 
 // 유저 차단 Input props type
 export interface BlockInputTypes {
