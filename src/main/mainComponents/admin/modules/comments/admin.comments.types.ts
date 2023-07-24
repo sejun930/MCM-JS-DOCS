@@ -2,19 +2,26 @@ import { InfoTypes } from "src/main/commonsComponents/units/template/form/commen
 import { navList } from "src/main/commonsComponents/layout/nav/nav.data";
 import { ChangeEvent } from "react";
 
-export interface AdminCommentsInitType {
+import { CommentsAllInfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
+
+export type AdminCommentsInitType = CommentsAllInfoTypes & {
   selectModule: string;
-  commentsList: Array<InfoTypes>;
-  countList: { [key: string]: number };
-  countFilterList: { [key: string]: { [key: string]: number } };
-  selectCategory: string;
-  filter: {
-    allData: number;
-    page: number;
-    limit: number;
-  };
-  isBlockUser: boolean;
-}
+};
+
+// export interface AdminCommentsInitType {
+//   selectModule: string;
+//   commentsList: Array<InfoTypes>;
+//   countList: { [key: string]: number };
+//   countFilterList: { [key: string]: { [key: string]: number } };
+//   selectCategory: string;
+//   filter: {
+//     allData: number;
+//     page: number;
+//     limit: number;
+//     list: any;
+//   };
+//   isBlockUser: boolean;
+// }
 
 export const adminCommentsInit: AdminCommentsInitType = {
   selectModule: navList[0].name || "", // 현재 선택된 모듈 이름
@@ -26,6 +33,7 @@ export const adminCommentsInit: AdminCommentsInitType = {
     allData: 0, // 전체 댓글 수
     page: 1, // 페이지 번호
     limit: 20, // 렌더될 댓글 수
+    list: {},
   }, // 현재 필터 정보
   isBlockUser: false, // 차단 여부
 };

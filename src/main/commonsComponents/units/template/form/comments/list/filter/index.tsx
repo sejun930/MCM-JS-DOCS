@@ -160,6 +160,7 @@ export default function CommentsFilterPage({
               >
                 {(isSelected && "✔") || ""} {el.name}{" "}
                 {el.target !== "oddest" &&
+                  !el.isHide &&
                   `(${commentsInfo.countFilterList[el.target]})`}
               </FilterList>
             );

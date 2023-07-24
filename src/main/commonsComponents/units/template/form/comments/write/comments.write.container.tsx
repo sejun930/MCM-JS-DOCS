@@ -5,8 +5,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { useRecoilState } from "recoil";
-import { ipState } from "src/commons/store";
 import { Message } from "./comments.write.styles";
 
 import CommentsWriteUIPage from "./comments.write.presenter";
@@ -16,27 +14,31 @@ import { Modal } from "mcm-js-dev";
 import { _SpanTextWithHtml } from "mcm-js-commons";
 
 import {
-  getHashText,
-  changeMultipleLine,
-} from "src/main/commonsComponents/functional";
-import {
   initInfo,
   WriteInfoTypes,
   categoryListArray,
 } from "./comments.write.types";
-import { InfoTypes } from "../comments.types";
+import { CommentsAllInfoTypes } from "../comments.types";
 
-import { IsBlockTypes } from "src/commons/store/store.types";
+import {
+  getHashText,
+  changeMultipleLine,
+  getUserIp,
+} from "src/main/commonsComponents/functional";
+import apis from "src/commons/libraries/apis/commons.apis";
+import { getDoc } from "src/commons/libraries/firebase";
 
 // 중복 실행 방지
 let writing = false;
 let clicked = false;
 export default function CommentsWritePage({
-  addComments,
-  isBlockInfo,
+  module,
+  commentsInfo,
+  fetchCommentsList,
 }: {
-  addComments: (data: InfoTypes) => Promise<boolean>;
-  isBlockInfo: null | IsBlockTypes;
+  module: string;
+  commentsInfo: CommentsAllInfoTypes;
+  fetchCommentsList: (info: CommentsAllInfoTypes) => void;
 }) {
   // 개인정보 수집 약관창 오픈 여부
   const [openPrivacy, setOpenPrivacy] = useState(false);
@@ -50,8 +52,6 @@ export default function CommentsWritePage({
   const [info, setInfo] = useState<WriteInfoTypes>({
     ...initInfo,
   });
-  // 유저의 아이피 주소
-  const [ip] = useRecoilState(ipState);
 
   // 카테고리 ref
   const categoryRef = useRef() as MutableRefObject<HTMLSelectElement>;
@@ -157,18 +157,24 @@ export default function CommentsWritePage({
       });
     };
 
-    if (!ip) {
-      // 아이피 주소 조회에 실패할 경우
-      openErrorModal({
-        message:
-          "IP 주소를 조회할 수 없습니다. <br />관리자에게 직접 문의 부탁드립니다.",
-      });
+    const { userIp } = commentsInfo;
+    if (!userIp) {
+      // 실시간으로 유저의 아이피 조회하기
+      const getIp = await getUserIp();
+
+      if (!getIp)
+        // 아이피 주소 조회에 실패할 경우
+        return openErrorModal({
+          message:
+            "IP 주소를 조회할 수 없습니다. <br />관리자에게 직접 문의 부탁드립니다.",
+        });
+      else info.ip = getIp;
     } else {
       // 아이피 주소 저장
-      info.ip = ip;
+      info.ip = userIp;
 
       // 차단된 로그가 있는 경우
-      if (isBlockInfo?.ip && isBlockInfo?.ip === ip) {
+      if (commentsInfo.blockInfo.ip) {
         return openErrorModal({
           message:
             "차단된 IP 주소입니다. <br />관리자에게 직접 문의 부탁드립니다.",
@@ -204,9 +210,6 @@ export default function CommentsWritePage({
       // 비밀번호 해쉬화
       info.password = await getHashText(info.password);
 
-      // 등록일 설정
-      // info.createdAt = getServerTime();
-
       writing = true;
       openErrorModal({
         message: `댓글을 등록하고 있습니다. <br />잠시만 기다려주세요.`,
@@ -219,20 +222,29 @@ export default function CommentsWritePage({
       if (info.category !== "review") info.rating = 0;
 
       // 댓글 작성 가능
-      const addResult = await addComments(info as InfoTypes);
-      if (addResult) {
-        Modal.close({ id: "writing-modal" });
+      const addResult = await apis(
+        getDoc("comments", module, "comment")
+      ).addComments(info, module);
 
-        window.setTimeout(() => {
-          // 등록에 성공할 경우
-          openErrorModal({
-            message: `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.`,
-            className: "success-modal",
-          });
-        }, 300);
+      const _info = { ...commentsInfo };
+
+      Modal.close({ id: "writing-modal" });
+      if (addResult.success) {
+        // 등록에 성공할 경우
+        _info.selectCategory = info.category;
       }
-      writing = false;
 
+      window.setTimeout(() => {
+        openErrorModal({
+          message: addResult.success
+            ? `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.` // 등록 성공
+            : addResult.msg, // 등록 실패
+          className: "success-modal",
+        });
+        writing = false;
+      }, 300);
+
+      fetchCommentsList(_info);
       // 초기화
       setInfo({ ...initInfo });
     }
@@ -245,7 +257,8 @@ export default function CommentsWritePage({
     // type : 에러 타입
     const result = { able: false, error: { message: "", type: "" } };
 
-    if (isBlockInfo?.ip) {
+    const { blockInfo } = commentsInfo;
+    if (blockInfo?.ip) {
       // 이미 차단된 유저인 경우
       result.error.message = "해당 아이피는 차단되어 댓글 작성이 불가능합니다.";
       result.error.type = "block";
@@ -306,7 +319,8 @@ export default function CommentsWritePage({
       passwordRef={passwordRef}
       openPrivacy={openPrivacy}
       checkWriteAble={checkWriteAble}
-      isBlockInfo={isBlockInfo}
+      blockInfo={commentsInfo.blockInfo}
+      userIp={commentsInfo.userIp}
     />
   );
 }

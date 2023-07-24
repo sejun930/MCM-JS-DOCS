@@ -68,7 +68,7 @@ export const AdminFunctionalWrapper = styled.div`
   }
 
   .admin-function-select {
-    top: 30px;
+    top: 60px;
   }
 `;
 
@@ -88,4 +88,11 @@ export const PaginationItems = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+`;
+
+export const CategoryFilterWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 `;

@@ -60,7 +60,6 @@ interface StyleTypes {
 
 export const CategoryWrapper = styled.div`
   display: flex;
-  margin-top: 20px;
   height: 20px;
   width: 100%;
 `;

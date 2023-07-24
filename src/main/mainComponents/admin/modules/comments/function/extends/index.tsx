@@ -32,7 +32,7 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
               ip: "admin",
               password: "admin",
               agreeProvacy: true,
-              answer: "",
+              answer: null,
               answerCreatedAt: null,
               deletedAt: null,
               modifyAt: null,

@@ -2,10 +2,7 @@ import CommentsUIPage from "./comments.presenter";
 
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { ipState, moduleState, adminLoginState } from "src/commons/store";
-import { IsBlockTypes } from "src/commons/store/store.types";
-
-import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
+import { moduleState, adminLoginState } from "src/commons/store";
 
 import apis from "src/commons/libraries/apis/commons.apis";
 import {
@@ -22,27 +19,20 @@ import {
   initCommentsInfo,
   CommentsAllInfoTypes,
 } from "./comments.types";
-import { getUserIp } from "src/main/commonsComponents/functional";
+import { deepCopy, getUserIp } from "src/main/commonsComponents/functional";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
-import { WriteInfoTypes } from "./write/comments.write.types";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
-// 한 번에 가져올 수 있는 댓글 개수 단위
-const limit = 5;
-// 댓글의 총 페이지 개수
-let allPage = 0;
-// 차단된 유저의 정보 저장
-let isBlockInfo: null | IsBlockTypes = null;
-
 export default function CommentsPage() {
-  const { getRouter } = CommonsHooksComponents();
-
   // 댓글 전체 정보 (댓글 리스트, 카테고리 등등)
-  const [commentsInfo, setCommentsInfo] =
-    useState<CommentsAllInfoTypes>(initCommentsInfo);
+  const [commentsInfo, setCommentsInfo] = useState<CommentsAllInfoTypes>(
+    deepCopy(initCommentsInfo)
+  );
+  // 댓글 작성, 리스트 페이지 렌더 여부
+  const [render, setRender] = useState(false);
+
   const [module] = useRecoilState<string>(moduleState);
-  const [, setIp] = useRecoilState<string>(ipState);
   const [adminLogin, setAdminLogin] = useRecoilState<boolean>(adminLoginState);
 
   useEffect(() => {
@@ -51,40 +41,11 @@ export default function CommentsPage() {
   }, [module]);
 
   useEffect(() => {
-    // 유저의 아이피 주소 저장하기
-    getUserIp()
-      .then((ip: string) => {
-        setIp(ip);
-
-        // 해당 유저가 차단된 유저인지 검증
-        getDoc("block", "user", "ip")
-          .where("ip", "==", ip)
-          .where("canceledAt", "==", null)
-          .get()
-          .then((result) => {
-            if (!result.empty) {
-              result.forEach((info) => {
-                if (!isBlockInfo) {
-                  // 차단된 유저 정보 저장
-                  isBlockInfo = info.data() as IsBlockTypes;
-                }
-              });
-            } else {
-              isBlockInfo = null;
-            }
-          });
-      })
-      .catch((err) => {
-        console.log(`아이피 조회에 실패했습니다. : ${err}`);
-      });
-  }, [getRouter()]);
-
-  useEffect(() => {
     // 관리자 로그인 체크하기
     checkAccessToken().then((result) => {
       setAdminLogin(result);
     });
-  }, [commentsInfo, commentsInfo]);
+  }, [commentsInfo]);
 
   // 필터 쿼리 적용하기
   const getFilterQuery = (
@@ -110,7 +71,7 @@ export default function CommentsPage() {
         // 카테고리가 문의일 경우
         if (info.filter.list["question-complete"])
           // 답변 완료만 보기
-          doc = doc.where("answer", "!=", null).orderBy("answer");
+          doc = doc.where("answer", "!=", "").orderBy("answer");
         break;
     }
 
@@ -139,8 +100,8 @@ export default function CommentsPage() {
     // 과거순 및 최신순으로 조회하기
     doc = doc.orderBy("createdAt", info.filter.list.oddest ? "asc" : "desc");
 
-    // 페이지 별로 데이터 10개씩 노출
-    doc = doc.limit(limit * info.filter.page);
+    // 페이지 별로 데이터 limit 개씩 노출
+    doc = doc.limit(info.filter.limit * info.filter.page);
 
     return doc;
   };
@@ -151,21 +112,20 @@ export default function CommentsPage() {
     wating = true;
 
     if (module) {
-      const _info = info || commentsInfo;
+      const _info = deepCopy(info || commentsInfo);
 
       for (const filter in _info.filter.list) {
         if (!_info.countFilterList[filter]) {
           _info.filter.list[filter] = false;
         }
       }
-
       const doc = getFilterQuery(getCommentDoc() as QueryDocumentData, _info);
 
       try {
         const result = await apis(
           doc as CollectionReferenceDocumentData
         ).read();
-        const _commentInfo = { ..._info };
+        const _commentInfo = deepCopy(_info) as CommentsAllInfoTypes;
 
         // 댓글 리스트 저장하기
         _commentInfo.commentsList = getResult(result);
@@ -174,15 +134,26 @@ export default function CommentsPage() {
         const getCountList = await saveCategoryCount(_commentInfo);
         _commentInfo.countList = getCountList._list;
 
+        // 전체 데이터 수 저장하기
+        _commentInfo.filter.allData =
+          getCountList._list[_commentInfo.selectCategory];
+
         // 카테고리 필터 개수 저장하기
         _commentInfo.countFilterList = getCountList.filterCountList;
 
-        window.setTimeout(() => {
-          // 전체 페이지 개수 구하기
-          allPage = Math.ceil(
-            getCountList._list[_commentInfo.selectCategory] / limit
-          );
-        }, 0);
+        // 유저 아이피 조회
+        const userIp: string = await getUserIp();
+
+        if (userIp) {
+          _commentInfo.userIp = userIp;
+
+          // 조회된 아이피가 차단된 유저인지 검증
+          _commentInfo.blockInfo = await apis(
+            getDoc("block", "user", "ip")
+          ).checkBlock(userIp);
+
+          if (!render) setRender(true);
+        }
 
         setCommentsInfo(_commentInfo);
         wating = false;
@@ -209,9 +180,11 @@ export default function CommentsPage() {
         const result = await apis(doc).read();
         if (result.empty) {
           // 비어있을 경우 새로 생성하기
-          initCountList.forEach((el) => {
-            (doc as CollectionReferenceDocumentData).add(el);
-          });
+          Promise.all(
+            initCountList.map(async (el) => {
+              await (doc as CollectionReferenceDocumentData).add(el);
+            })
+          );
         } else {
           result.forEach((data) => {
             const _data = data.data();
@@ -223,8 +196,22 @@ export default function CommentsPage() {
             // 모든 개수 카운트하기
             _list[category] = _data.count;
 
-            // 카테고리가 리뷰 또는 버그일 경우
-            if (category === "review" || category === "bug") {
+            if (
+              category === "question" &&
+              info.filter.list["question-complete"]
+            ) {
+              // 카테고리가 문의이면서 완료된 항목만 검색할 경우
+              _list.question = _data["question-complete"];
+            } else if (category === "review" || category === "bug") {
+              // 카테고리가 리뷰 또는 버그일 경우
+
+              let hasComplete = false;
+              if (category === "bug" && info.filter.list["bug-complete"]) {
+                // 카테고리가 버그이면서 완료된 항목 검색시
+                _list[category] = _data["bug-complete"];
+                hasComplete = true;
+              }
+
               // 점수별로 필터가 있는지 검증
               const isFilter = Array.from(
                 new Array(5),
@@ -258,33 +245,13 @@ export default function CommentsPage() {
 
     // 과거순 정렬은 무조건 선택 가능
     filterCountList.oddest = 1;
+
     return { _list, filterCountList };
   };
 
   // Comment DOC 받아오기
   const getCommentDoc = () => {
     return getDoc("comments", module, "comment");
-  };
-
-  // 댓글 추가하기
-  const addComments = async (comment: InfoTypes): Promise<boolean> => {
-    const { category } = comment;
-    const _info = { ...commentsInfo };
-
-    try {
-      const addDoc = getDoc("comments", module, "comment");
-      // 댓글 추가 완료
-      await apis(addDoc).addComments(comment as WriteInfoTypes, module);
-
-      // 카테고리 변경하기
-      _info.selectCategory = category;
-      fetchCommentsList(_info);
-
-      return true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
   };
 
   // 댓글 정보 수정하기
@@ -473,9 +440,12 @@ export default function CommentsPage() {
   // 다음 데이터 가져오기
   const moreLoad = () => {
     const _info = { ...commentsInfo };
+    console.log(_info.filter.allData, _info.filter.page);
 
-    if (allPage) {
-      if (allPage > _info.filter.page) {
+    if (render && !wating) {
+      const currentPage = _info.filter.page * _info.filter.limit;
+
+      if (_info.filter.allData > currentPage) {
         _info.filter.page++;
 
         fetchCommentsList(_info);
@@ -486,13 +456,13 @@ export default function CommentsPage() {
   return (
     <CommentsUIPage
       commentsInfo={commentsInfo}
-      addComments={addComments}
       modifyComments={modifyComments}
       changeInfo={changeInfo}
       moreLoad={moreLoad}
-      allPage={allPage}
       adminLogin={adminLogin}
-      isBlockInfo={isBlockInfo}
+      module={module}
+      fetchCommentsList={fetchCommentsList}
+      render={render}
     />
   );
 }

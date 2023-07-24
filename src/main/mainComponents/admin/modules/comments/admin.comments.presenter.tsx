@@ -7,6 +7,7 @@ import {
   AdminFunctionalWrapper,
   PaginationWrapper,
   PaginationItems,
+  CategoryFilterWrapper,
 } from "./admin.comments.styles";
 import { _Title, _Button, _Image } from "mcm-js-commons";
 
@@ -24,6 +25,7 @@ import AdminCommentsListPage from "./list/admin.comments.list";
 import _InfinityScroll from "src/main/commonsComponents/units/template/form/infinity";
 import _SelectForm from "src/main/commonsComponents/units/template/form/select/select.container";
 import Pagination from "src/main/commonsComponents/units/template/form/pagination";
+import CommentsFilterPage from "src/main/commonsComponents/units/template/form/comments/list/filter";
 
 export default function AdminCommentsUIPage({
   info,
@@ -60,24 +62,6 @@ export default function AdminCommentsUIPage({
           </LoadingWrapper>
         )) || <></>}
         <Items isLoading={isLoading || false}>
-          <AdminFunctionalWrapper>
-            <_Button onClickEvent={toggleSettings(true)}>
-              <_Image
-                src={`/images/commons/icons/settings${
-                  (oepnSettings && "-on") || ""
-                }.png`}
-                className="settings-icon"
-              />
-            </_Button>
-            <_SelectForm
-              show={oepnSettings}
-              closeEvent={toggleSettings(false)}
-              className="admin-function-select"
-            >
-              <ExtendsFunction {...functionProps} />
-              <SyncComments {...functionProps} />
-            </_SelectForm>
-          </AdminFunctionalWrapper>
           <ModuleSelectWrapper>
             <ModuleSelector
               onChange={changeSelectModule}
@@ -94,12 +78,35 @@ export default function AdminCommentsUIPage({
                   </option>
                 ))}
             </ModuleSelector>
+            <AdminFunctionalWrapper>
+              <_Button onClickEvent={toggleSettings(true)}>
+                <_Image
+                  src={`/images/commons/icons/settings${
+                    (oepnSettings && "-on") || ""
+                  }.png`}
+                  className="settings-icon"
+                />
+              </_Button>
+              <_SelectForm
+                show={oepnSettings}
+                closeEvent={toggleSettings(false)}
+                className="admin-function-select"
+              >
+                <ExtendsFunction {...functionProps} />
+                <SyncComments {...functionProps} />
+              </_SelectForm>
+            </AdminFunctionalWrapper>
           </ModuleSelectWrapper>
-          <AdminCommentsCategoryPage
-            info={info}
-            changeInfo={changeInfo}
-            render={render}
-          />
+
+          <CategoryFilterWrapper>
+            <AdminCommentsCategoryPage
+              info={info}
+              changeInfo={changeInfo}
+              render={render}
+            />
+            {/* <CommentsFilterPage commentsInfo={info} /> */}
+          </CategoryFilterWrapper>
+
           <AdminCommentsListPage
             info={info}
             changeLoading={changeLoading}
