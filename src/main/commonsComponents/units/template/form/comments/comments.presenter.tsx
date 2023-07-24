@@ -14,22 +14,22 @@ import { IsBlockTypes } from "src/commons/store/store.types";
 
 export default function CommentsUIPage({
   commentsInfo,
-  addComments,
   modifyComments,
   changeInfo,
   moreLoad,
-  allPage,
   adminLogin,
-  isBlockInfo,
+  module,
+  fetchCommentsList,
+  render,
 }: {
   commentsInfo: CommentsAllInfoTypes;
-  addComments: (data: InfoTypes) => Promise<boolean>;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   moreLoad: () => void;
-  allPage: number;
   adminLogin: boolean;
-  isBlockInfo: null | IsBlockTypes;
+  module: string;
+  fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
+  render: boolean;
 }) {
   return (
     <>
@@ -41,24 +41,42 @@ export default function CommentsUIPage({
         }`}
       />
 
-      <CommentsWritePage addComments={addComments} isBlockInfo={isBlockInfo} />
-      <_InfinityScroll moreLoad={moreLoad}>
-        <CommentsListPage
-          commentsInfo={commentsInfo}
-          modifyComments={modifyComments}
-          changeInfo={changeInfo}
-          adminLogin={adminLogin}
-        />
-      </_InfinityScroll>
+      {render && (
+        <>
+          <CommentsInfoWrapper>
+            <CommentsWritePage
+              module={module}
+              commentsInfo={commentsInfo}
+              fetchCommentsList={fetchCommentsList}
+            />
+          </CommentsInfoWrapper>
+
+          <_InfinityScroll moreLoad={moreLoad}>
+            <CommentsListPage
+              commentsInfo={commentsInfo}
+              modifyComments={modifyComments}
+              changeInfo={changeInfo}
+              adminLogin={adminLogin}
+            />
+          </_InfinityScroll>
+        </>
+      )}
+
       <TitleWrapper>
         {(commentsInfo.commentsList.length &&
-          allPage === commentsInfo.filter.page && (
+          commentsInfo.filter.allData <=
+            commentsInfo.filter.page * commentsInfo.filter.limit && (
             <_Title titleLevel="h2"> 모든 데이터를 조회했습니다. </_Title>
           )) || <></>}
       </TitleWrapper>
     </>
   );
 }
+
+export const CommentsInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const TitleWrapper = styled.div`
   display: flex;

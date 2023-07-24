@@ -36,45 +36,8 @@ export interface CountListTypes {
   count: number;
 }
 
-// 필터 타입 (newest : 최신순, oldest : 과거순)
-// type SortType = "newest" | "oldest";
-
-export interface CommentsAllInfoTypes {
-  commentsList: Array<InfoTypes>;
-  selectCategory: CategoryTypes | string;
-  countList: { [key: string]: number };
-  filter:
-    | {
-        search: string; // 검색어
-        page: number; // 페이지
-        // sort: SortType; // 정렬 순서
-        list: { [key: string]: boolean }; // 현재 적용된 필터 정보들
-      } & {
-        [key: string]:
-          | string
-          | number
-          // | SortType
-          | boolean
-          | { [key: string]: boolean };
-      };
-  countFilterList: { [key: string]: number }; // 각각의 필터들의 총 개수 정보 저장
-  isBlockUser: boolean;
-}
-
-export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
-
-// 댓글 정보들 초기값
-export const initCommentsInfo: CommentsAllInfoTypes = {
-  commentsList: [], // 댓글 리스트
-  selectCategory: "all", // 선택된 카테고리
-  countList: {}, // 카테고리 개수 리스트
-  filter: { search: "", page: 1, list: {} }, // 필터 정보
-  countFilterList: {}, // 카테고리 필터 개수
-  isBlockUser: false, // 차단 여부
-};
-
 // count (카테고리 별 개수) 초기값
-export const initCountList = [
+export const initCountList: Array<{ [key: string]: number | string }> = [
   {
     category: "bug",
     count: 0,
@@ -96,3 +59,54 @@ export const initCountList = [
     "review-5": 0,
   },
 ];
+
+export interface BlockInfoTypes {
+  canceledAt?: null;
+  category?: string;
+  commentId?: string;
+  contents?: string;
+  createdAt?: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  ip?: string;
+  module?: string;
+}
+
+export interface CommentsAllInfoTypes {
+  commentsList: Array<InfoTypes>;
+  selectCategory: CategoryTypes | string;
+  countList: { [key: string]: number };
+  filter:
+    | {
+        // search: string; // 검색어
+        page: number; // 페이지
+        // sort: SortType; // 정렬 순서
+        list: { [key: string]: boolean }; // 현재 적용된 필터 정보들
+      } & {
+        [key: string]:
+          | string
+          | number
+          // | SortType
+          | boolean
+          | { [key: string]: boolean };
+        allData: number; // 전체 데이터 수
+        limit: number; // 렌더될 데이터 수
+      };
+  countFilterList: { [key: string]: number }; // 각각의 필터들의 총 개수 정보 저장
+  blockInfo: BlockInfoTypes; // 차단된 유저라면 해당 사유 및 아이피 저장
+  userIp: string; // 유저 아이피 저장
+}
+
+export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
+
+// 댓글 정보들 초기값
+export const initCommentsInfo: CommentsAllInfoTypes = {
+  commentsList: [], // 댓글 리스트
+  selectCategory: "all", // 선택된 카테고리
+  countList: {}, // 카테고리 개수 리스트
+  countFilterList: {}, // 카테고리 필터 개수
+  filter: { allData: 0, limit: 5, page: 1, list: {} }, // 필터 정보
+  blockInfo: {},
+  userIp: "",
+};

@@ -1,7 +1,7 @@
 import { FormEvent, MutableRefObject } from "react";
 
 import { FieldValue } from "src/commons/libraries/firebase";
-import { CommentsInfoTypes } from "../comments.types";
+import { BlockInfoTypes, CommentsInfoTypes } from "../comments.types";
 import { IsBlockTypes } from "src/commons/store/store.types";
 
 // 작성용 type
@@ -63,5 +63,6 @@ export interface IPropsTypes {
     able: boolean;
     error: { message: string; type: string };
   };
-  isBlockInfo: IsBlockTypes | null;
+  blockInfo: BlockInfoTypes;
+  userIp: string;
 }

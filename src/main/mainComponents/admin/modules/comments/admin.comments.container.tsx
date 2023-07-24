@@ -2,10 +2,6 @@ import AdminCommentsUIPage from "./admin.comments.presenter";
 import { useState, useEffect, ChangeEvent } from "react";
 
 import {
-  AdminCommentsInitType,
-  adminCommentsInit,
-} from "./admin.comments.types";
-import {
   CollectionReferenceDocumentData,
   getDoc,
 } from "src/commons/libraries/firebase";
@@ -13,6 +9,13 @@ import { InfoTypes } from "src/main/commonsComponents/units/template/form/commen
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import apis from "src/commons/libraries/apis/commons.apis";
 import { deepCopy, moveDocument } from "src/main/commonsComponents/functional";
+
+import {
+  initCommentsInfo,
+  CommentsAllInfoTypes,
+} from "src/main/commonsComponents/units/template/form/comments/comments.types";
+import { AdminCommentsInitType } from "./admin.comments.types";
+import { navList } from "src/main/commonsComponents/layout/nav/nav.data";
 
 let startClickedPage = 1; // 페이지네이션으로 선택한 페이지
 export default function AdminCommentsPage() {
@@ -24,13 +27,17 @@ export default function AdminCommentsPage() {
   const [oepnSettings, setOpenSettings] = useState(false);
 
   // 댓글 정보 및 필터 정보 저장
-  const [info, setInfo] = useState<AdminCommentsInitType>({
-    ...adminCommentsInit,
-  });
+  const [info, setInfo] = useState<AdminCommentsInitType>(
+    deepCopy(initCommentsInfo)
+  );
 
   // 댓글 리스트 가져오기
   useEffect(() => {
-    const _info = deepCopy(adminCommentsInit);
+    const _info = deepCopy(initCommentsInfo) as AdminCommentsInitType;
+    // 모듈 지정하기
+    _info.selectModule = navList[0].name;
+    _info.filter.limit = 20;
+
     fetchComments(_info);
   }, []);
 
@@ -42,7 +49,7 @@ export default function AdminCommentsPage() {
     if (value) {
       setRender(false);
 
-      const _info = deepCopy(adminCommentsInit);
+      const _info = deepCopy(initCommentsInfo);
 
       _info.selectModule = value;
       _info.selectCategory = "all";
@@ -53,13 +60,13 @@ export default function AdminCommentsPage() {
 
   // 댓글 정보 가져오기
   const fetchComments = async (
-    info?: AdminCommentsInitType,
+    info?: CommentsAllInfoTypes,
     isInfinite?: boolean
   ) => {
     // isInfinite: 무한 스크롤로 데이터를 조회할 경우
     if (isLoading) return;
 
-    let _info = { ...(info || deepCopy(adminCommentsInit)) };
+    let _info = { ...(info || deepCopy(initCommentsInfo)) };
     // 댓글 정보 모두 가져오기
     let doc = getDoc("comments", _info.selectModule, "comment").orderBy(
       "createdAt",
@@ -155,7 +162,7 @@ export default function AdminCommentsPage() {
   };
 
   // 변경된 info 내용 저장하기
-  const changeInfo = (info: AdminCommentsInitType, forcing?: boolean) => {
+  const changeInfo = (info: CommentsAllInfoTypes, forcing?: boolean) => {
     if (isLoading && !forcing) return;
     setIsLoading(true);
     fetchComments(info);

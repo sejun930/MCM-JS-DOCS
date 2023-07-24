@@ -6,17 +6,14 @@ import {
   WriteWrapper,
   SubmitWrapper,
   WriteButton,
-  BlockNoticeWrapper,
-  BlockExampleWrapper,
-  BlockOptionalWrapper,
 } from "./comments.write.styles";
 
 import { _Input, _PText, _PTextWithHtml, _SpanText } from "mcm-js-commons";
-import { IPropsTypes, categoryInitList } from "./comments.write.types";
-import { getDateForm } from "src/main/commonsComponents/functional";
+import { IPropsTypes } from "./comments.write.types";
 
 import StarsForm from "./stars";
 import PrivacyPage from "./privacy";
+import IsBlockPage from "./isBlock";
 
 const placeList: { [key: string]: string } = {
   bug: `모듈 사용시 발생하는 버그 이슈등을 자세하게 알려주세요.
@@ -46,11 +43,11 @@ export default function CommentsWriteUIPage({
   passwordRef,
   openPrivacy,
   checkWriteAble,
-  isBlockInfo,
+  blockInfo,
 }: IPropsTypes) {
   return (
     <Form onSubmit={write}>
-      {(!isBlockInfo?.ip && (
+      {(blockInfo.ip && <IsBlockPage blockInfo={blockInfo} />) || (
         <>
           <fieldset>
             <legend>댓글 작성</legend>
@@ -145,36 +142,6 @@ ${info.category && defaultPlace}`}
             </WriteButton>
           </SubmitWrapper>
         </>
-      )) || (
-        <BlockNoticeWrapper>
-          <_PText>
-            현재 접속된 아이피 <b>({isBlockInfo?.ip})</b>는 차단되어 댓글 등록이
-            불가능합니다.
-          </_PText>
-
-          <BlockExampleWrapper>
-            <BlockOptionalWrapper>
-              <_SpanText>
-                {isBlockInfo?.module} (
-                {categoryInitList[isBlockInfo?.category || "all"]})
-              </_SpanText>
-
-              {isBlockInfo?.createdAt && (
-                <_SpanText>
-                  차단일자 |{" "}
-                  {getDateForm({
-                    firebaseTimer: isBlockInfo.createdAt,
-                    getDate: true,
-                  })}
-                </_SpanText>
-              )}
-            </BlockOptionalWrapper>
-            <_PTextWithHtml
-              dangerouslySetInnerHTML={isBlockInfo?.contents || ""}
-              className="block-example-contents"
-            />
-          </BlockExampleWrapper>
-        </BlockNoticeWrapper>
       )}
     </Form>
   );

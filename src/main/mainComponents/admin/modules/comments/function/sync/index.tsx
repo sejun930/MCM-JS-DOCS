@@ -1,9 +1,12 @@
 import { _Button } from "mcm-js-commons";
 
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import { getDoc } from "src/commons/libraries/firebase";
-import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
+import {
+  InfoTypes,
+  initCountList,
+} from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { FunctionPropsTypes } from "../../admin.comments.types";
+import { deepCopy } from "src/main/commonsComponents/functional";
 
 // 댓글 정보와 개수 최신화 업데이트
 export default function SyncCommentsFunction(props: FunctionPropsTypes) {
@@ -25,21 +28,22 @@ export default function SyncCommentsFunction(props: FunctionPropsTypes) {
         ).docs;
 
         // 현재 모듈의 카운트 리스트 가져오기
-        const countList: { [key: string]: number } = { ...info.countList };
+        const countList: { [key: string]: number } = deepCopy(info.countList);
         // 모든 개수 초기화
         for (const key in countList) {
           countList[key] = 0;
         }
 
         // 필터 정보도 함께 가져오기
-        const filterCountList = { ...info.countFilterList };
-        // 모든 필터 개수 초기화
-        Object.entries(filterCountList).forEach((el) => {
-          const keyName = el[0]; // key 이름
+        const filterCountList: {
+          [key: string]: { [key: string]: number };
+        } = {};
 
-          for (const key in el[1]) {
-            filterCountList[keyName][key] = 0;
-          }
+        // 모든 필터 개수 초기화
+        initCountList.forEach((el) => {
+          const { category, count, ...filterList } = el;
+          // @ts-ignore
+          filterCountList[category] = filterList;
         });
 
         if (commentsList && commentsList.length) {
