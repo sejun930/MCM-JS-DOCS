@@ -27,6 +27,7 @@ interface StyleTypes {
 
 export const Wrapper = styled.main`
   padding: 3rem 4rem;
+  padding-bottom: 0px;
   display: flex;
   flex-direction: column;
   min-width: 85%;

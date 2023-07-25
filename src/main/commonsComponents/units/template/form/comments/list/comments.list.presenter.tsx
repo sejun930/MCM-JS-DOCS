@@ -1,10 +1,13 @@
 import {
   Category,
   CategoryWrapper,
+  CategoryContents,
   CategoryItems,
   CommentListItems,
   CommentsListWrapper,
   EmptyWrapper,
+  Shadow,
+  // PaginationWrapper,
 } from "./comments.list.styles";
 import { MutableRefObject } from "react";
 
@@ -16,51 +19,57 @@ import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsFilterPage from "./filter";
+import _PaginationForm from "../../pagination";
 
 export default function CommentsListUIPage({
   commentsInfo,
   modifyComments,
   changeInfo,
   listRef,
-}: {
+}: // changePage,
+{
   commentsInfo: CommentsAllInfoTypes;
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   listRef: MutableRefObject<HTMLUListElement>;
+  changePage: (page: number) => void;
 }) {
   return (
-    <CommentsListWrapper>
+    <CommentsListWrapper id="comments-list-wrapper">
       <CategoryWrapper>
-        <CategoryItems render={commentsInfo.countList.all !== undefined}>
-          {Object.entries(commentsInfo.countList).map((el, key) => {
-            const [name] = el;
+        <CategoryContents>
+          <CategoryItems render={commentsInfo.countList.all !== undefined}>
+            {Object.entries(commentsInfo.countList).map((el, key) => {
+              const [name] = el;
 
-            // 현재 선택되어 있는 카테고리인지?
-            const isSelected = commentsInfo.selectCategory === name;
+              // 현재 선택되어 있는 카테고리인지?
+              const isSelected = commentsInfo.selectCategory === name;
 
-            const info = { ...commentsInfo, ["selectCategory"]: name };
+              const info = { ...commentsInfo, ["selectCategory"]: name };
 
-            // 해당 카테고리의 개수
-            let categoryLen: string | number =
-              commentsInfo.countList[name || "all"];
-            if (categoryLen > 999) categoryLen = `999+`;
+              // 해당 카테고리의 개수
+              let categoryLen: string | number =
+                commentsInfo.countList[name || "all"];
+              if (categoryLen > 999) categoryLen = `999+`;
 
-            return (
-              <Category
-                key={`comments-category-list-${name}-${key}`}
-                selected={isSelected}
-              >
-                <_Button
-                  onClickEvent={() =>
-                    (!isSelected && changeInfo(info)) || undefined
-                  }
+              return (
+                <Category
+                  key={`comments-category-list-${name}-${key}`}
+                  selected={isSelected}
                 >
-                  {categoryInitList[name]} ( {categoryLen} )
-                </_Button>
-              </Category>
-            );
-          })}
-        </CategoryItems>
+                  <_Button
+                    onClickEvent={() =>
+                      (!isSelected && changeInfo(info)) || undefined
+                    }
+                  >
+                    {categoryInitList[name]} ( {categoryLen} )
+                  </_Button>
+                </Category>
+              );
+            })}
+          </CategoryItems>
+          <Shadow />
+        </CategoryContents>
 
         {commentsInfo.countList.all !== undefined && (
           <CommentsFilterPage
@@ -88,6 +97,15 @@ export default function CommentsListUIPage({
               changeInfo={changeInfo}
             />
           ))}
+          {/* <PaginationWrapper>
+            <_PaginationForm
+              allData={commentsInfo.filter.allData}
+              currentPage={commentsInfo.filter.page}
+              limit={commentsInfo.filter.limit}
+              changePageEvent={changePage}
+              startPage={commentsInfo.filter.startPage}
+            />
+          </PaginationWrapper> */}
         </CommentListItems>
       )}
     </CommentsListWrapper>

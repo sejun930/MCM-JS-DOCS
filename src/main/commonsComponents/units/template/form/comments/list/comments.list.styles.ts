@@ -18,7 +18,7 @@ export const CommentsListWrapper = styled.div`
 
 export const CategoryWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   border-bottom: double 5px black;
   position: sticky;
@@ -30,19 +30,30 @@ export const CategoryWrapper = styled.div`
 
   @media ${breakPoints.mobileLarge} {
     gap: 10px 0px;
-    position: unset;
+    top: 50px;
     align-items: flex-end;
+    padding: 10px 0px;
+  }
+`;
+
+export const CategoryContents = styled.div`
+  display: flex;
+  height: 24px;
+  border-left: solid 3px gray;
+  padding-left: 16px;
+  position: relative;
+  /* width: 100%; */
+
+  @media ${breakPoints.mobileLarge} {
+    max-width: 80%;
   }
 `;
 
 export const CategoryItems = styled.ul`
   display: flex;
   align-items: center;
-  gap: 0px 26px;
-  height: 24px;
-  border-left: solid 3px gray;
-  padding-left: 16px;
   opacity: 0;
+  gap: 0px 26px;
 
   ${(props: StyleTypes) =>
     props.render && {
@@ -50,17 +61,29 @@ export const CategoryItems = styled.ul`
     }};
 
   @media ${breakPoints.mobileLarge} {
-    gap: 0px 20px;
-    padding-left: 10px;
     height: auto;
     width: 100%;
-    /* justify-content: space-between; */
+    gap: 0px 20px;
   }
 
   @media ${breakPoints.mobileSmall} {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px 0px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    padding-right: 30px;
+  }
+`;
+
+export const Shadow = styled.div`
+  display: none;
+
+  @media ${breakPoints.mobileSmall} {
+    display: flex;
+    position: absolute;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
   }
 `;
 
@@ -76,6 +99,10 @@ export const Category = styled.li`
         cursor: "default",
         fontWeight: 700,
       }}
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    white-space: pre;
   }
 `;
 
@@ -109,7 +136,6 @@ export const CommentListItems = styled.ul`
   display: flex;
   flex-direction: column;
   z-index: 1;
-  /* min-height: 300px; */
 `;
 
 export const LoadingWrapper = styled.div`
@@ -119,4 +145,15 @@ export const LoadingWrapper = styled.div`
   border: double 3px #0a4d68;
   align-items: center;
   justify-content: center;
+`;
+
+export const PaginationWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  position: sticky;
+  bottom: 0;
 `;

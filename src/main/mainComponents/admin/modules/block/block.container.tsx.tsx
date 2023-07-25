@@ -6,7 +6,7 @@ import { BlockInfoType, FilterType, filterInit } from "./block.types";
 
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import AdminBlockUIPage from "./block.presenter";
-import apis from "src/commons/libraries/apis/commons.apis";
+import blockApis from "src/commons/libraries/apis/block/block.apis";
 
 // 필터 리스트
 let filter: FilterType = { ...filterInit };
@@ -123,7 +123,7 @@ export default function AdminBlockPage() {
       await Promise.all(
         checkList.map((el) =>
           // 차단된 유저 해제 데이터 최종 업데이트
-          apis(doc).unblock(el.id)
+          blockApis().unblock(el.id)
         )
       ).then(() => {
         alert("차단 해제가 완료되었습니다.");

@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   position: fixed;
   right: 2rem;
-  bottom: 3rem;
+  bottom: 5rem;
   width: 200px;
   /* height: 200px; */
 

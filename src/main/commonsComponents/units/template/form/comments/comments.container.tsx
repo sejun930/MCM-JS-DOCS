@@ -5,6 +5,8 @@ import { useRecoilState } from "recoil";
 import { moduleState, adminLoginState } from "src/commons/store";
 
 import apis from "src/commons/libraries/apis/commons.apis";
+import blockApis from "src/commons/libraries/apis/block/block.apis";
+
 import {
   CollectionReferenceDocumentData,
   getDoc,
@@ -19,7 +21,11 @@ import {
   initCommentsInfo,
   CommentsAllInfoTypes,
 } from "./comments.types";
-import { deepCopy, getUserIp } from "src/main/commonsComponents/functional";
+import {
+  deepCopy,
+  getUserIp,
+  moveDocument,
+} from "src/main/commonsComponents/functional";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 
 // 데이터 조회중 (중복 실행 방지)
@@ -31,6 +37,8 @@ export default function CommentsPage() {
   );
   // 댓글 작성, 리스트 페이지 렌더 여부
   const [render, setRender] = useState(false);
+  // 데이터 조회중 여부
+  const [loading, setLoading] = useState(false);
 
   const [module] = useRecoilState<string>(moduleState);
   const [adminLogin, setAdminLogin] = useRecoilState<boolean>(adminLoginState);
@@ -48,10 +56,17 @@ export default function CommentsPage() {
   }, [commentsInfo]);
 
   // 필터 쿼리 적용하기
-  const getFilterQuery = (
-    doc: QueryDocumentData,
-    info: CommentsAllInfoTypes
-  ) => {
+  const getFilterQuery = ({
+    doc,
+    info,
+    notLimit,
+    startPage,
+  }: {
+    doc: QueryDocumentData;
+    info: CommentsAllInfoTypes;
+    notLimit?: boolean; // 전체 데이터로 가져오기
+    startPage?: number; // 시작용 페이지
+  }) => {
     const { selectCategory } = info;
 
     // 선택되어 있는 카테고리가 있다면 해당 카테고리 조회
@@ -101,15 +116,19 @@ export default function CommentsPage() {
     doc = doc.orderBy("createdAt", info.filter.list.oddest ? "asc" : "desc");
 
     // 페이지 별로 데이터 limit 개씩 노출
-    doc = doc.limit(info.filter.limit * info.filter.page);
+    if (!notLimit) doc = doc.limit(info.filter.limit * info.filter.page);
 
     return doc;
   };
 
   // 댓글 리스트 조회
-  const fetchCommentsList = async (info?: CommentsAllInfoTypes) => {
-    if (wating) return;
+  const fetchCommentsList = async (
+    info?: CommentsAllInfoTypes,
+    startPage?: number // 페이지네이션을 이용해 이동했을 경우
+  ) => {
+    if (wating || loading) return;
     wating = true;
+    setLoading(true);
 
     if (module) {
       const _info = deepCopy(info || commentsInfo);
@@ -119,7 +138,11 @@ export default function CommentsPage() {
           _info.filter.list[filter] = false;
         }
       }
-      const doc = getFilterQuery(getCommentDoc() as QueryDocumentData, _info);
+      const doc = getFilterQuery({
+        doc: getCommentDoc() as QueryDocumentData,
+        info: _info,
+        startPage,
+      });
 
       try {
         const result = await apis(
@@ -138,8 +161,47 @@ export default function CommentsPage() {
         _commentInfo.filter.allData =
           getCountList._list[_commentInfo.selectCategory];
 
+        // 버그 카테고리이면서 필터 중 "완료된 것만 보기"가 적용되어 있을 경우
+        if (
+          _commentInfo.selectCategory === "bug" &&
+          _commentInfo.filter.list["bug-complete"]
+        ) {
+          const filterBug = Object.entries(_commentInfo.filter.list).filter(
+            (el) => {
+              const splitResult = el[0].split("-");
+              // 카테고리가 bug이면서, bug-level에 해당하는 필터일 경우에만
+              return (
+                splitResult[0] === "bug" &&
+                !Number.isNaN(Number(splitResult[1])) &&
+                _commentInfo.filter.list[el[0]]
+              );
+            }
+          );
+          if (filterBug.length) {
+            // 모든 데이터 조회하기
+            const bugDoc = getFilterQuery({
+              doc: getCommentDoc() as QueryDocumentData,
+              info: _info,
+              notLimit: true,
+            });
+
+            const allSize = (await bugDoc.get()).size;
+            _commentInfo.filter.allData = allSize;
+            _commentInfo.countList[_commentInfo.selectCategory] = allSize;
+
+            // 필터가 제외된 전체 데이터 가져오기
+            _commentInfo.countList["all"] =
+              _commentInfo.countList.review +
+              _commentInfo.countList.question +
+              allSize;
+          }
+        }
+
         // 카테고리 필터 개수 저장하기
         _commentInfo.countFilterList = getCountList.filterCountList;
+
+        // 시작 페이지 저장
+        if (startPage) _commentInfo.filter.startPage = startPage;
 
         // 유저 아이피 조회
         const userIp: string = await getUserIp();
@@ -148,11 +210,13 @@ export default function CommentsPage() {
           _commentInfo.userIp = userIp;
 
           // 조회된 아이피가 차단된 유저인지 검증
-          _commentInfo.blockInfo = await apis(
-            getDoc("block", "user", "ip")
-          ).checkBlock(userIp);
+          _commentInfo.blockInfo = await blockApis().checkBlock(userIp);
 
           if (!render) setRender(true);
+        }
+
+        if (_commentInfo.filter.page === 1) {
+          moveDocument("comments-list-wrapper");
         }
 
         setCommentsInfo(_commentInfo);
@@ -161,6 +225,7 @@ export default function CommentsPage() {
         console.log(`댓글을 정상적으로 불러오지 못했습니다. : ${err}`);
       }
     }
+    setLoading(false);
   };
 
   // 카테고리 개수 저장하기
@@ -205,11 +270,9 @@ export default function CommentsPage() {
             } else if (category === "review" || category === "bug") {
               // 카테고리가 리뷰 또는 버그일 경우
 
-              let hasComplete = false;
               if (category === "bug" && info.filter.list["bug-complete"]) {
                 // 카테고리가 버그이면서 완료된 항목 검색시
                 _list[category] = _data["bug-complete"];
-                hasComplete = true;
               }
 
               // 점수별로 필터가 있는지 검증
@@ -428,6 +491,7 @@ export default function CommentsPage() {
   const changeInfo = (info: CommentsAllInfoTypes) => {
     const _info = { ...commentsInfo, ...info };
     _info.filter.page = 1;
+    _info.filter.startPage = 0;
 
     // 카테고리가 변경될 경우, 필터 리스트 초기화
     if (commentsInfo.selectCategory !== info.selectCategory) {
@@ -440,7 +504,6 @@ export default function CommentsPage() {
   // 다음 데이터 가져오기
   const moreLoad = () => {
     const _info = { ...commentsInfo };
-    console.log(_info.filter.allData, _info.filter.page);
 
     if (render && !wating) {
       const currentPage = _info.filter.page * _info.filter.limit;
@@ -463,6 +526,7 @@ export default function CommentsPage() {
       module={module}
       fetchCommentsList={fetchCommentsList}
       render={render}
+      loading={loading}
     />
   );
 }

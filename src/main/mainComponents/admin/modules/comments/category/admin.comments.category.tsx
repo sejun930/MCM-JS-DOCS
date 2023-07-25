@@ -18,6 +18,7 @@ export default function AdminCommentsCategoryPage({
   const changeCategory = (category: string) => {
     const _info = { ...info, ["selectCategory"]: category };
     _info.filter.page = 1;
+    _info.filter.startPage = 0;
 
     changeInfo(_info);
   };

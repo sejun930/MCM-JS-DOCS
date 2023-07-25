@@ -1,3 +1,4 @@
+import { deepCopy } from "src/main/commonsComponents/functional";
 import { InfoTypes, CommentsAllInfoTypes } from "../comments.types";
 import CommentsListUIPage from "./comments.list.presenter";
 
@@ -9,8 +10,9 @@ export default function CommentsListPage(props: {
   modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   adminLogin: boolean;
+  fetchCommentsList: (info: CommentsAllInfoTypes, startPage: number) => void;
 }) {
-  const { commentsInfo } = props;
+  const { commentsInfo, fetchCommentsList } = props;
   const listRef = useRef() as MutableRefObject<HTMLUListElement>;
 
   useEffect(() => {
@@ -34,5 +36,14 @@ export default function CommentsListPage(props: {
     }
   }, [commentsInfo]);
 
-  return <CommentsListUIPage listRef={listRef} {...props} />;
+  const changePage = (page: number) => {
+    const _commentsInfo: CommentsAllInfoTypes = deepCopy(commentsInfo);
+    _commentsInfo.filter.page = page;
+
+    fetchCommentsList(_commentsInfo, page);
+  };
+
+  return (
+    <CommentsListUIPage listRef={listRef} {...props} changePage={changePage} />
+  );
 }
