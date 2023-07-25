@@ -34,8 +34,10 @@ export const adminCommentsInit: AdminCommentsInitType = {
     page: 1, // 페이지 번호
     limit: 20, // 렌더될 댓글 수
     list: {},
+    startPage: 0,
   }, // 현재 필터 정보
-  isBlockUser: false, // 차단 여부
+  blockInfo: {},
+  userIp: "",
 };
 
 export interface AdminCommentsPropsType {

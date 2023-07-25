@@ -25,8 +25,7 @@ import {
   changeMultipleLine,
   getUserIp,
 } from "src/main/commonsComponents/functional";
-import apis from "src/commons/libraries/apis/commons.apis";
-import { getDoc } from "src/commons/libraries/firebase";
+import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 
 // 중복 실행 방지
 let writing = false;
@@ -49,7 +48,7 @@ export default function CommentsWritePage({
   >([]);
 
   // 정보 저장하기
-  const [info, setInfo] = useState<WriteInfoTypes>({
+  const [input, setInfo] = useState<WriteInfoTypes>({
     ...initInfo,
   });
 
@@ -61,26 +60,26 @@ export default function CommentsWritePage({
   const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
-    if (info.category !== "all") {
+    if (input.category !== "all") {
       // 디폴트 상태의 카테고리 없애기
       setCategoryList([...categoryListArray].slice(1));
     } else {
       // 카테고리 선택 포함하기
       setCategoryList([...categoryListArray]);
     }
-  }, [info.category]);
+  }, [input.category]);
 
   // 정보 변경하기
   const changeInfo = (value: string | number | boolean) => (name: string) => {
-    if (info[name] !== undefined) {
+    if (input[name] !== undefined) {
       setInfo({
-        ...info,
+        ...input,
         [name]: value,
       });
 
       if (name === "password") {
         // 첫 문자열이 빈 문자열을 입력할 경우
-        if (!String(info[name]).length) {
+        if (!String(input[name]).length) {
           // input 빈칸으로 만들기
           if (passwordRef.current) passwordRef.current.value = "";
         }
@@ -168,10 +167,10 @@ export default function CommentsWritePage({
           message:
             "IP 주소를 조회할 수 없습니다. <br />관리자에게 직접 문의 부탁드립니다.",
         });
-      else info.ip = getIp;
+      else input.ip = getIp;
     } else {
       // 아이피 주소 저장
-      info.ip = userIp;
+      input.ip = userIp;
 
       // 차단된 로그가 있는 경우
       if (commentsInfo.blockInfo.ip) {
@@ -205,10 +204,10 @@ export default function CommentsWritePage({
       height = "90px";
 
       // 줄바꿈 처리하기
-      info.contents = changeMultipleLine(info.contents.trim());
+      input.contents = changeMultipleLine(input.contents.trim());
 
       // 비밀번호 해쉬화
-      info.password = await getHashText(info.password);
+      input.password = await getHashText(input.password);
 
       writing = true;
       openErrorModal({
@@ -219,19 +218,16 @@ export default function CommentsWritePage({
       });
 
       // 리뷰가 아닌 경우에는 평점 초기화
-      if (info.category !== "review") info.rating = 0;
+      if (input.category !== "review") input.rating = 0;
 
-      // 댓글 작성 가능
-      const addResult = await apis(
-        getDoc("comments", module, "comment")
-      ).addComments(info, module);
-
+      // 댓글 추가하기
+      const addResult = await commentsApis({ module, input }).addComments(true);
       const _info = { ...commentsInfo };
 
       Modal.close({ id: "writing-modal" });
       if (addResult.success) {
         // 등록에 성공할 경우
-        _info.selectCategory = info.category;
+        _info.selectCategory = input.category;
       }
 
       window.setTimeout(() => {
@@ -263,40 +259,40 @@ export default function CommentsWritePage({
       result.error.message = "해당 아이피는 차단되어 댓글 작성이 불가능합니다.";
       result.error.type = "block";
     } else {
-      if (info.category === "all") {
+      if (input.category === "all") {
         // 카테고리가 선택되지 않았을 경우
         result.error.message = "카테고리를 선택해주세요.";
         result.error.type = "category";
 
         //
-      } else if (!info.contents) {
+      } else if (!input.contents) {
         // 댓글 내용이 입력되지 않을 경우
         result.error.message = "댓글 내용을 작성해주세요.";
         result.error.type = "contents";
 
         //
-      } else if (!info.password) {
+      } else if (!input.password) {
         // 비밀번호를 입력하지 않을 경우
         result.error.message = "비밀번호를 입력해주세요.";
         result.error.type = "password";
 
         //
-      } else if (!info.agreeProvacy) {
+      } else if (!input.agreeProvacy) {
         // ip 수집에 동의하지 않을 경우
         result.error.message = "개인정보 (IP) 수집에 동의해주세요.";
         result.error.type = "privacy";
 
         //
-      } else if (info.category === "review") {
+      } else if (input.category === "review") {
         // 카테고리가 리뷰일 때
-        if (!info.rating) {
+        if (!input.rating) {
           // 평점을 선택하지 않을 경우
           result.error.message = "평점을 선택해주세요.";
           result.error.type = "rating";
         }
-      } else if (info.category === "bug") {
+      } else if (input.category === "bug") {
         // 카테고리가 버그일 때
-        if (!info.bugLevel) {
+        if (!input.bugLevel) {
           // 이슈 중요도를 선택하지 않을 경우
           result.error.message = "이슈 중요도를 선택해주세요.";
           result.error.type = "bug-level";
@@ -312,7 +308,7 @@ export default function CommentsWritePage({
     <CommentsWriteUIPage
       categoryList={categoryList}
       changeInfo={changeInfo}
-      info={info}
+      input={input}
       write={write}
       categoryRef={categoryRef}
       contentsRef={contentsRef}

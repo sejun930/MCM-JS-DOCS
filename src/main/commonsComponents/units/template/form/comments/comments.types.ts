@@ -92,6 +92,7 @@ export interface CommentsAllInfoTypes {
           | { [key: string]: boolean };
         allData: number; // 전체 데이터 수
         limit: number; // 렌더될 데이터 수
+        startPage: number; // 페이지네이션용 시작용 페이지 (1 이상 페이지부터 작동)
       };
   countFilterList: { [key: string]: number }; // 각각의 필터들의 총 개수 정보 저장
   blockInfo: BlockInfoTypes; // 차단된 유저라면 해당 사유 및 아이피 저장
@@ -106,7 +107,7 @@ export const initCommentsInfo: CommentsAllInfoTypes = {
   selectCategory: "all", // 선택된 카테고리
   countList: {}, // 카테고리 개수 리스트
   countFilterList: {}, // 카테고리 필터 개수
-  filter: { allData: 0, limit: 5, page: 1, list: {} }, // 필터 정보
+  filter: { allData: 0, limit: 10, page: 1, startPage: 0, list: {} }, // 필터 정보
   blockInfo: {},
   userIp: "",
 };

@@ -36,7 +36,7 @@ const defaultPlace =
 export default function CommentsWriteUIPage({
   categoryList,
   changeInfo,
-  info,
+  input,
   write,
   categoryRef,
   contentsRef,
@@ -56,8 +56,8 @@ export default function CommentsWriteUIPage({
             <OptionWrapper>
               <SelectCategory
                 onChange={(e) => changeInfo(String(e.target.value))("category")}
-                category={info.category}
-                value={info.category}
+                category={input.category}
+                value={input.category}
                 ref={categoryRef}
               >
                 {categoryList.map((category) => {
@@ -77,20 +77,20 @@ export default function CommentsWriteUIPage({
               <OptionItems
                 className="rating-wrapper"
                 isRating={true}
-                show={info.category === "review" || info.category === "bug"}
+                show={input.category === "review" || input.category === "bug"}
               >
-                {(info.category === "review" || info.category === "bug") && (
+                {(input.category === "review" || input.category === "bug") && (
                   <StarsForm
                     rating={
-                      info.category === "bug" ? info.bugLevel : info.rating
+                      input.category === "bug" ? input.bugLevel : input.rating
                     }
                     changeEvent={(value: number) => {
                       changeInfo(value)(
-                        info.category === "bug" ? "bugLevel" : "rating"
+                        input.category === "bug" ? "bugLevel" : "rating"
                       );
                     }}
-                    category={info.category}
-                    isBugMode={info.category === "bug"}
+                    category={input.category}
+                    isBugMode={input.category === "bug"}
                   />
                 )}
               </OptionItems>
@@ -102,7 +102,7 @@ export default function CommentsWriteUIPage({
                   inputType="password"
                   placeHolder="비밀번호 입력"
                   inputRef={passwordRef}
-                  value={info.password}
+                  value={input.password}
                   delay={200}
                   maxLength={20}
                 />
@@ -117,20 +117,20 @@ export default function CommentsWriteUIPage({
               inputRef={contentsRef}
               maxLength={500}
               delay={200}
-              value={info.contents}
+              value={input.contents}
               placeHolder={`${
-                placeList[info.category] ||
+                placeList[input.category] ||
                 `카테고리를 먼저 선택해주세요.
             `
               }
-${info.category && defaultPlace}`}
+${input.category && defaultPlace}`}
             />
           </WriteWrapper>
           <SubmitWrapper>
             {/* 개인정보 수집 동의 */}
             <PrivacyPage
               changeInfo={changeInfo}
-              info={info}
+              info={input}
               openPrivacy={openPrivacy}
             />
             <WriteButton

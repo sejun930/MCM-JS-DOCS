@@ -14,7 +14,15 @@ import { getUuid } from "src/main/commonsComponents/functional";
 // 페이지네이션 form
 const _PagiNationForm = (props: IProps) => {
   let waiting = false; // 중복 클릭 방지
-  const { allData, currentPage, limit, changePageEvent, limitPage } = props;
+  const {
+    allData,
+    currentPage,
+    limit,
+    changePageEvent,
+    limitPage,
+    startPage,
+    disable,
+  } = props;
 
   // 페이지 정보
   const pageInfoList = { ...pageInfoInit };
@@ -63,6 +71,7 @@ const _PagiNationForm = (props: IProps) => {
 
   // 페이지 처음, 이전, 다음, 끝으로 점프하기
   const jumpPage = (type: "first" | "prev" | "next" | "end") => {
+    if (disable) return alert("동기화 작업중입니다.");
     let num = currentPage;
 
     if (type === "first") {
@@ -87,11 +96,15 @@ const _PagiNationForm = (props: IProps) => {
       propsList={props}
       requiredList={["allData", "currentPage", "limit", "changePageEvent"]}
     >
-      <PagiNationWrapper className="mcm-pagination-wrapper">
+      <PagiNationWrapper className="mcm-pagination-wrapper" disable={disable}>
         {pageInfoList.prev && (
           <PageJumpWrapper>
-            <Page onClickEvent={() => jumpPage("first")}>처음</Page>
-            <Page onClickEvent={() => jumpPage("prev")}>이전</Page>
+            <Page onClickEvent={() => jumpPage("first")} buttonType="button">
+              처음
+            </Page>
+            <Page onClickEvent={() => jumpPage("prev")} buttonType="button">
+              이전
+            </Page>
           </PageJumpWrapper>
         )}
         <PageListWrapper>
@@ -104,6 +117,8 @@ const _PagiNationForm = (props: IProps) => {
                 onClickEvent={() => clickChangePage(page, isSelected)}
                 key={`pagination-page-${getUuid()}`}
                 isSelected={isSelected}
+                isStartPage={page === startPage}
+                buttonType="button"
               >
                 {page}
               </Page>
@@ -113,8 +128,12 @@ const _PagiNationForm = (props: IProps) => {
 
         {pageInfoList.next && (
           <PageJumpWrapper>
-            <Page onClickEvent={() => jumpPage("next")}>다음</Page>
-            <Page onClickEvent={() => jumpPage("end")}>끝</Page>
+            <Page onClickEvent={() => jumpPage("next")} buttonType="button">
+              다음
+            </Page>
+            <Page onClickEvent={() => jumpPage("end")} buttonType="button">
+              끝
+            </Page>
           </PageJumpWrapper>
         )}
       </PagiNationWrapper>

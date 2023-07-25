@@ -20,6 +20,7 @@ import {
   getServerTime,
 } from "src/commons/libraries/firebase";
 import apis from "src/commons/libraries/apis/commons.apis";
+import blockApis from "src/commons/libraries/apis/block/block.apis";
 
 export default function AdminCommentsDetailPage({
   info,
@@ -139,7 +140,7 @@ export default function AdminCommentsDetailPage({
             ableBlock = false;
           } else {
             // 해당 유저 차단하기
-            await apis(blockDoc).block({
+            await blockApis().block({
               commentId: info.id,
               ip: info.ip,
               contents: info.contents,

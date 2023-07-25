@@ -121,6 +121,8 @@ export default function AdminCommentsUIPage({
                 currentPage={info.filter.page}
                 limit={info.filter.limit}
                 changePageEvent={changePage}
+                startPage={info.filter.startPage}
+                disable={isLoading}
               />
             </PaginationItems>
           </PaginationWrapper>

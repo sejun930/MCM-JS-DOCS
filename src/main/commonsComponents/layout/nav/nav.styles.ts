@@ -68,6 +68,7 @@ export const LayoutNavListWrapper = styled.article`
   }
 
   .admin-mode {
+    height: 40px;
     position: fixed;
     bottom: 0px;
     padding: 0.7rem 1rem;

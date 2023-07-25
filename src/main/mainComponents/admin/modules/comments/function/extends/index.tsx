@@ -4,8 +4,11 @@ import { getDoc } from "src/commons/libraries/firebase";
 import { FunctionPropsTypes } from "../../admin.comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
-import apis from "src/commons/libraries/apis/commons.apis";
-import { getRandomNumber } from "src/main/commonsComponents/functional";
+import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
+import {
+  getRandomNumber,
+  getUserIp,
+} from "src/main/commonsComponents/functional";
 import { randomContents } from "./data";
 
 // 테스트용을 위한 임의의 댓글 게시물 생성하기
@@ -24,12 +27,12 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
     if (!Number.isNaN(Number(num)) && num > 0) {
       try {
         changeLoading(true);
+        const ip = await getUserIp();
 
-        const doc = getDoc("comments", module, "comment");
         await Promise.all(
           Array.from(new Array(num), () => 1).map(async (_) => {
             const input = {
-              ip: "admin",
+              ip: ip || "admin",
               password: "admin",
               agreeProvacy: true,
               answer: null,
@@ -57,7 +60,7 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
               input.rating = getRandomNumber(5, 1);
             }
 
-            return await apis(doc).addComments(input, info.selectModule);
+            return await commentsApis({ module }).addComments(input);
           })
         );
         alert(`${num}개의 댓글이 추가되었습니다.`);

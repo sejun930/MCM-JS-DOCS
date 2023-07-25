@@ -5,6 +5,8 @@ import { _Button } from "mcm-js-commons";
 
 interface StyleTypes {
   isSelected?: boolean;
+  isStartPage?: boolean;
+  disable?: boolean;
 }
 
 export const PagiNationWrapper = styled.section`
@@ -12,6 +14,14 @@ export const PagiNationWrapper = styled.section`
   justify-content: center;
   align-items: center;
   gap: 0px 20px;
+
+  button {
+    ${(props: StyleTypes) =>
+      props.disable && {
+        cursor: "not-allowed",
+        opacity: 0.3,
+      }}
+  }
 
   @media ${breakPoints.mobileLarge} {
     flex-wrap: wrap;
@@ -47,4 +57,16 @@ export const Page = styled(_Button)`
       fontWeight: 700,
       color: "#00c4ff",
     }}
+
+  ::before {
+    position: absolute;
+    content: "🔒";
+    font-size: 10px;
+    margin-left: -14px;
+
+    ${(props) =>
+      !props.isStartPage && {
+        display: "none",
+      }}
+  }
 `;

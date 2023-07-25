@@ -190,6 +190,7 @@ export default function AdminCommentsPage() {
   // 페이지 변환하기
   const changePage = (page: number, isInfinite?: boolean) => {
     const _info = { ...info };
+
     if (isInfinite) {
       // 무한 스크롤과 함께 사용될 경우
       const lastPage = Math.ceil(_info.filter.allData / _info.filter.limit); // 전체 페이지 수 구하기
@@ -198,6 +199,8 @@ export default function AdminCommentsPage() {
       }
     } else {
       startClickedPage = page;
+      _info.filter.startPage = page;
+
       moveDocument("admin-comments-list-wrapper", -100);
     }
 

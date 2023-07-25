@@ -45,7 +45,7 @@ export default function ExampleFixedPage({
       eventDebouncing = setTimeout(() => {
         const scrollTop = window.scrollY;
         // functional의 상대적 위치값 가져오기
-        const { top } = _wrapperRef?.current?.getBoundingClientRect();
+        const el = _wrapperRef?.current?.getBoundingClientRect();
 
         setTempVers(vers);
 
@@ -56,9 +56,10 @@ export default function ExampleFixedPage({
 
         if (
           !eventStart &&
+          el &&
           // scrollTop + bonusHeight >= startFixedPoint
           // scrollTop >= top &&
-          top <= 10 &&
+          el.top <= 10 &&
           endFixedPoint > scrollTop
         ) {
           // fixed 모드 돌입
@@ -72,7 +73,7 @@ export default function ExampleFixedPage({
           }, 100);
           // fixed 모드 종료
         } else if (
-          (eventStart && top >= 30) ||
+          (eventStart && el.top >= 30) ||
           scrollTop > endFixedPoint
           // (scrollTop + bonusHeight <= _wrapperRef.current.offsetTop ||
           //   scrollTop > endFixedPoint)

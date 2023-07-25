@@ -12,13 +12,13 @@ import {
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
-import { getServerTime, getDoc } from "src/commons/libraries/firebase";
+import { getServerTime } from "src/commons/libraries/firebase";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import { getBugAutoAnswer } from "src/main/commonsComponents/functional";
-import apis from "src/commons/libraries/apis/commons.apis";
 
+import blockApis from "src/commons/libraries/apis/block/block.apis";
 import ModalResultForm from "../../../../../modal/modal.result";
 
 import {
@@ -227,9 +227,8 @@ export default function ContentsSelectFunctionalPage({
         _info.deletedAt = getServerTime();
 
         if (type === "block") {
-          const blockDoc = getDoc("block", "user", "ip");
           // 차단 모드일 경우, 차단된 유저 정보 추가하기
-          apis(blockDoc).block({
+          blockApis().block({
             module,
             commentId: _info.id || "",
             ip: _info.ip,

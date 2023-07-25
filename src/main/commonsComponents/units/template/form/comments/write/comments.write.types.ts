@@ -53,7 +53,7 @@ export const categoryListArray = Object.entries(categoryInitList).map((el) => {
 export interface IPropsTypes {
   categoryList: Array<{ [key: string]: string }>;
   changeInfo: (value: string | number | boolean) => (name: string) => void;
-  info: WriteInfoTypes;
+  input: WriteInfoTypes;
   write: (e?: FormEvent<Element>) => void;
   categoryRef: MutableRefObject<HTMLSelectElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
