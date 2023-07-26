@@ -192,6 +192,17 @@ const deepCopy = <T>(data: T) => {
   return JSON.parse(JSON.stringify(data));
 };
 
+// 비밀번호 동일 체크
+const checkSamePassword = async (
+  hashPassword: string,
+  inputPassword: string
+): Promise<boolean> => {
+  // hashPassword : 기존에 해쉬 형태로 저장되어 있는 원본 비밀번호
+  // inputPassword : 비교할 비밀번호 (해쉬 X)
+
+  return hashPassword === (await getHashText(inputPassword));
+};
+
 export {
   removeTag,
   getDateForm,
@@ -203,4 +214,5 @@ export {
   getBugAutoAnswer,
   getRandomNumber,
   deepCopy,
+  checkSamePassword,
 };

@@ -1,15 +1,21 @@
 import { _Button } from "mcm-js-commons";
-import { getDoc } from "src/commons/libraries/firebase";
 
 import { FunctionPropsTypes } from "../../admin.comments.types";
-import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
+import {
+  WriteInfoTypes,
+  initInfo,
+} from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
 import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 import {
+  deepCopy,
   getRandomNumber,
   getUserIp,
 } from "src/main/commonsComponents/functional";
 import { randomContents } from "./data";
+import { InitTypes } from "src/main/commonsComponents/units/template/form/comments/list/filter/filter.init";
+import countApis from "src/commons/libraries/apis/comments/count/count.apis";
+import { initCountList } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
 // 테스트용을 위한 임의의 댓글 게시물 생성하기
 export default function ExtendsFunction(props: FunctionPropsTypes) {
@@ -29,44 +35,114 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
         changeLoading(true);
         const ip = await getUserIp();
 
-        await Promise.all(
-          Array.from(new Array(num), () => 1).map(async (_) => {
-            const input = {
-              ip: ip || "admin",
-              password: "admin",
-              agreeProvacy: true,
-              answer: null,
-              answerCreatedAt: null,
-              deletedAt: null,
-              modifyAt: null,
-              bugStatus: 0,
-              bugLevel: 0,
-              rating: 0,
-            } as WriteInfoTypes;
-            // 댓글 내용 지정
-            input.contents =
-              randomContents[getRandomNumber(randomContents.length - 1, 0)];
+        // 전체 카테고리 초기값 객체
+        let allCountList = await countApis({ module }).getAllCountList();
 
-            // 카테고리 랜덤 지정
-            input.category = ["bug", "question", "review"][
-              getRandomNumber(2, 0)
-            ];
+        const createComments = async (
+          i: number,
+          allCountList: { [key: string]: { [key: string]: string | number } }
+        ): Promise<void | boolean> => {
+          if (i === num) {
+            return true;
+          }
 
-            if (input.category === "bug") {
-              // 이슈일 경우 레벨 랜덤 설정
-              input.bugLevel = getRandomNumber(5, 1);
-            } else if (input.category === "review") {
-              // 리뷰일 경우 평점 랜덤 설정
-              input.rating = getRandomNumber(5, 1);
-            }
+          // 새로운 댓글 생성하기
+          const input: WriteInfoTypes = deepCopy(initInfo);
 
-            return await commentsApis({ module }).addComments(input);
+          input.ip = ip;
+          input.password = "admin";
+          input.agreeProvacy = true;
+
+          // 댓글 내용 지정
+          input.contents =
+            randomContents[getRandomNumber(randomContents.length - 1, 0)];
+
+          // 카테고리 랜덤 지정
+          input.category = ["bug", "question", "review"][getRandomNumber(2, 0)];
+
+          if (input.category === "bug") {
+            // 이슈일 경우 레벨 랜덤 설정
+            input.bugLevel = getRandomNumber(5, 1);
+          } else if (input.category === "review") {
+            // 리뷰일 경우 평점 랜덤 설정
+            input.rating = getRandomNumber(5, 1);
+          }
+
+          // 댓글 등록하기
+          (await commentsApis({ module, input })).addComments();
+
+          // 해당 카테고리에 맞는 카운트 객체 가져오기
+          const currentList = allCountList[input.category];
+          const { id, ...countList } = allCountList[input.category];
+          const countListResult = { docId: currentList.id, countList };
+
+          //   업데이트 된 리스트 가져오기
+          const countAddResult = await countApis({ module }).add({
+            input,
+            // @ts-ignore
+            countList: countListResult,
+          });
+
+          allCountList[countAddResult.countList.category] =
+            countAddResult.countList;
+
+          allCountList[countAddResult.countList.category].id =
+            countAddResult.docId;
+
+          return createComments(++i, allCountList);
+        };
+        return await createComments(0, allCountList)
+          .then(async () => {
+            // 카테고리 리스트 전체 업데이트
+            await Promise.all(
+              Object.values(allCountList).map(async (el) => {
+                const { id, ...countList } = el;
+
+                return await countApis({ module }).update(id, countList);
+              })
+            );
+
+            alert(`${num}개의 댓글이 추가되었습니다.`);
+
+            changeLoading(false);
+            fetchComments(info);
           })
-        );
-        alert(`${num}개의 댓글이 추가되었습니다.`);
+          .catch((err) => {
+            alert("동기화에 실패했습니다.");
+            console.log(err);
+          });
 
-        changeLoading(false);
-        fetchComments(info);
+        //   // 업데이트 된 리스트 저장하기
+        //   allCountList[countAddResult.countList.category] =
+        //     countAddResult.countList;
+        //   })
+        // );
+
+        // if (addCommentsList.length) {
+        //   addCommentsList.forEach(async (el) => {
+        //     console.log(allCountList, el);
+        //     console.log(allCountList[el.category]);
+        //     console.log(
+        //       await countApis({ module }).add({
+        //         input: el,
+        //         countList: allCountList,
+        //       })
+        //     );
+        //   });
+        // }
+
+        // 댓글들 병렬로 등록하기
+        // await Promise.all(promiseAll);
+
+        // 카테고리 카운트 병렬 처리하기
+        // const promiseAllCountList = Object.values(allCountList).map(
+        //   async (el) => {
+        //     const { id, ...countList } = el;
+
+        //     await countApis({ module }).update(id, countList);
+        //   }
+        // );
+        // await Promise.all(promiseAllCountList);
       } catch (err) {
         alert("댓글 추가에 실패했습니다.");
         console.log(err);

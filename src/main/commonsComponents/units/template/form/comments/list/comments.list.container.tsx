@@ -7,10 +7,9 @@ import { MutableRefObject, useEffect, useRef } from "react";
 let saveCategory = "all";
 export default function CommentsListPage(props: {
   commentsInfo: CommentsAllInfoTypes;
-  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   adminLogin: boolean;
-  fetchCommentsList: (info: CommentsAllInfoTypes, startPage: number) => void;
+  fetchCommentsList: (info?: CommentsAllInfoTypes, startPage?: number) => void;
 }) {
   const { commentsInfo, fetchCommentsList } = props;
   const listRef = useRef() as MutableRefObject<HTMLUListElement>;

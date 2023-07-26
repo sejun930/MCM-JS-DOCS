@@ -1,15 +1,22 @@
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
-import { CollectionReferenceDocumentData, getDoc } from "../../firebase";
+import {
+  CollectionReferenceDocumentData,
+  QueryDocumentData,
+  getDoc,
+} from "../../firebase";
 
 import blockApis from "../block/block.apis";
 import countApis from "./count/count.apis";
+
 import { getServerTime } from "../../firebase";
+import { checkSamePassword } from "src/main/commonsComponents/functional";
 
 // 댓글 관련 apis
-const commentsApis = ({
+const commentsApis = async ({
   input,
   docs,
   module,
+  isAdmin,
 }: {
   input: WriteInfoTypes;
   docs?: {
@@ -17,6 +24,7 @@ const commentsApis = ({
     countDoc: CollectionReferenceDocumentData;
   };
   module: string;
+  isAdmin?: boolean; // 관리자 권한 여부
 }) => {
   // 댓글 리스트 docs
   const commentDoc =
@@ -25,18 +33,21 @@ const commentsApis = ({
   const countDoc =
     (docs && docs.countDoc) || getDoc("comments", module, "count");
 
+  // 차단된 유저인지 체크
+  const checkBlockUser = await blockApis().checkBlock(input.ip);
+
+  // 결과 리턴하기
+  const result: ReturnCommentsResultType = {
+    success: false,
+    msg: "",
+  };
+
   return {
     // 댓글 추가하기
     addComments: async (
       updateCategory?: boolean // 카테고리 업데이트 여부
-    ): Promise<{ success: boolean; msg: string }> => {
-      const result: { success: boolean; msg: string } = {
-        success: false,
-        msg: "",
-      };
-
-      // 차단된 유저인지 체크
-      if (await blockApis().checkBlock(input.ip)) {
+    ): Promise<ReturnCommentsResultType> => {
+      if (checkBlockUser?.ip) {
         // 차단된 유저라면 게시물 작성 금지
         result.msg = "차단된 유저입니다.";
       } else {
@@ -52,13 +63,14 @@ const commentsApis = ({
           if (addResult.id && updateCategory) {
             try {
               // 해당 카테고리 1개 추가
-              const addCountResult = await countApis({ module }).add({ input });
+              const { docId, countList } = await countApis({ module }).add({
+                input,
+              });
               // 카테고리 업데이트
 
-              return await countApis({ module }).update(
-                addCountResult.docId,
-                addCountResult.countList
-              );
+              if (docId) {
+                return await countApis({ module }).update(docId, countList);
+              }
             } catch (err2) {
               console.log(err2);
               result.msg = "카테고리 개수 업데이트에 실패했습니다.";
@@ -73,8 +85,114 @@ const commentsApis = ({
       return result;
     },
     // 댓글 삭제하기
-    removeComments: () => {},
+    removeComments: async ({
+      password,
+      updateCategory,
+    }: {
+      password: string;
+      updateCategory?: boolean; // 카테고리 업데이트 여부
+    }): Promise<ReturnCommentsResultType> => {
+      console.log(password);
+
+      // 관리자이거나 비밀번호 체크하기 (관리자일 경우 비밀번호 체크를 하지 않음)
+      const samePw =
+        isAdmin || (await checkSamePassword(input.password, password));
+
+      // 입력한 비밀번호가 일치하는 경우에만 삭제 가능
+      if (samePw) {
+        // 삭제일 기입하기 (수정 모드에서는 작동 X)
+        if (!input.deletedAt) input.deletedAt = getServerTime();
+
+        try {
+          // 댓글 삭제하기
+          await commentDoc.doc(input.id).update(input);
+          result.success = true;
+
+          // 카테고리 업데이트
+          if (updateCategory) {
+            try {
+              // 해당 카테고리에서 1개 제거하기
+              const { docId, countList } = await countApis({ module }).remove({
+                input,
+              });
+
+              if (docId) {
+                // 카테고리 최종 업데이트
+                return await countApis({ module }).update(docId, countList);
+              }
+            } catch (err2) {
+              console.log(err2);
+              result.msg = "카테고리 (삭제)업데이트에 실패했습니다.";
+            }
+          }
+        } catch (err) {
+          console.log(err);
+          result.msg = "댓글 삭제에 실패했습니다.";
+        }
+      } else {
+        result.msg = "비밀번호가 일치하지 않습니다.";
+      }
+
+      return result;
+    },
+    modifyComments: async ({
+      password,
+      originInput,
+      changeInput,
+      updateCategory,
+    }: {
+      password: string;
+      originInput: WriteInfoTypes; // 수정전 원본 데이터
+      changeInput: WriteInfoTypes; // 수정할 데이터
+      updateCategory?: boolean;
+    }): Promise<ReturnCommentsResultType> => {
+      // 관리자이거나 비밀번호 체크하기 (관리자일 경우 비밀번호 체크를 하지 않음)
+      const samePw =
+        isAdmin || (await checkSamePassword(originInput.password, password));
+
+      if (samePw) {
+        try {
+          changeInput.modifyAt = getServerTime(); // 수정일 기입
+
+          if (originInput.answer !== changeInput.answer) {
+            // 새로운 답변이 등록될 경우, 답변일 변경
+            changeInput.answerCreatedAt = getServerTime();
+          }
+
+          // 수정된 내용 최종 저장
+          await commentDoc.doc(originInput.id).update(changeInput);
+          result.success = true;
+
+          try {
+            if (updateCategory) {
+              // 카테고리 업데이트
+              const { docId, countList } = await countApis({ module }).modify({
+                originInput,
+                changeInput,
+              });
+
+              // 카테고리 최종 업데이트
+              if (docId)
+                return await countApis({ module }).update(docId, countList);
+            }
+          } catch (err2) {
+            console.log(err2);
+            result.msg = "카테고리 (수정)업데이트에 실패했습니다.";
+          }
+        } catch (err) {
+          console.log(err);
+          result.msg = "댓글 수정에 실패했습니다.";
+        }
+      } else {
+        // 비밀번호가 일치하지 않을 경우
+        result.msg = "비밀번호가 일치하지 않습니다.";
+      }
+
+      return result;
+    },
   };
 };
 
 export default commentsApis;
+
+type ReturnCommentsResultType = { success: boolean; msg: string };
