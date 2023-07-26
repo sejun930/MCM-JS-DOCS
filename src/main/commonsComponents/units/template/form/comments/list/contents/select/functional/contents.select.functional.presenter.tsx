@@ -31,22 +31,22 @@ export default function ContentsSelectFunctionalUIPage({
   changeData,
   confirm,
   adminLogin,
-  waiting,
   changeBugStatus,
   bugStatus,
+  answerRef,
 }: {
   type: ListContentsSelectType;
   info: InfoTypes;
   passwordRef: MutableRefObject<HTMLInputElement>;
   contentsRef: MutableRefObject<HTMLTextAreaElement>;
   confirmRef: MutableRefObject<HTMLButtonElement>;
+  answerRef: MutableRefObject<HTMLTextAreaElement>;
   changeData: (
     value: string | number,
     type: "contents" | "password" | "rating" | "bugLevel" | "answer"
   ) => void;
   confirm: (e?: FormEvent) => void;
   adminLogin: boolean | null;
-  waiting: boolean;
   changeBugStatus: (status: number) => void;
   bugStatus: number;
 }) {
@@ -98,6 +98,7 @@ export default function ContentsSelectFunctionalUIPage({
               maxLength={500}
               defaultValue={info.answer?.split("<br />").join("\n")}
               readOnly={!isAnswerType || !adminLogin}
+              inputRef={answerRef}
             />
           )}
         </CommentsInfoItems>
@@ -142,13 +143,8 @@ export default function ContentsSelectFunctionalUIPage({
         )}
 
         <ConfirmButtonWrapper>
-          <ConfirmButton
-            onClickEvent={() => (waiting ? confirm : undefined)}
-            // className="confirm-button disable"
-            buttonRef={confirmRef}
-            waiting={waiting}
-          >
-            {waiting ? "처리중입니다..." : ContentsSelectTypeName[type][1]}
+          <ConfirmButton onClickEvent={confirm} buttonRef={confirmRef}>
+            {ContentsSelectTypeName[type][1]}
           </ConfirmButton>
         </ConfirmButtonWrapper>
       </OptionalWrapper>

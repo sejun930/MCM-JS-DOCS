@@ -12,9 +12,8 @@ import {
 import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
-import { getServerTime } from "src/commons/libraries/firebase";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
-import { InfoTypes } from "../../../../comments.types";
+import { CommentsAllInfoTypes, InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import { getBugAutoAnswer } from "src/main/commonsComponents/functional";
 
@@ -22,13 +21,11 @@ import blockApis from "src/commons/libraries/apis/block/block.apis";
 import ModalResultForm from "../../../../../modal/modal.result";
 
 import {
-  changeMultipleLine,
-  getHashText,
-} from "src/main/commonsComponents/functional";
-import {
   ListContentsSelectType,
   ContentsSelectTypeName,
 } from "../../list.data";
+import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
+import { exchangeKey } from "./contents.select.functional.data";
 
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
@@ -36,23 +33,20 @@ let rating = 0; // 평점 내용 저장
 let bugLevel = 0; // 버그 중요도 저장
 
 let disableOpenModal = false; // 모달 중복 실행 방지
+let updating = false; // 업데이트 진행중 여부 (중복 클릭 방지)
+
 export default function ContentsSelectFunctionalPage({
   info,
   type,
-  modifyComments,
   adminLogin,
   module,
+  fetchCommentsList,
 }: {
   info: InfoTypes;
   type: ListContentsSelectType;
-  modifyComments: (
-    comment: InfoTypes,
-    isDelete?: boolean,
-    type?: string,
-    origin?: InfoTypes
-  ) => Promise<boolean>;
   adminLogin: boolean | null;
   module: string;
+  fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }) {
   let answer = info.answer || ""; // 답변 내용 저장
   // 이슈 단계도 (0 : 확인 전, 1 : 확인 및 처리 중, 2 : 수정 완료)
@@ -60,29 +54,41 @@ export default function ContentsSelectFunctionalPage({
   // 중복 클릭 방지
   const [waiting, setWaiting] = useState(false);
 
-  _contents = info.contents;
-  rating = info.rating;
-  bugLevel = info.bugLevel;
+  const [detailInfo, setDetailInfo] = useState<InfoTypes>(info);
 
   const confirmRef = useRef() as MutableRefObject<HTMLButtonElement>;
   const contentsRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
   const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const answerRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
 
   useEffect(() => {
     // 관리자일 경우 비밀번호 자동 저장
-    password = info.password;
+    if (adminLogin) password = info.password;
   }, [adminLogin]);
+
+  useEffect(() => {
+    // 데이터 최초 저장
+    _contents = info.contents;
+    rating = info.rating;
+    bugLevel = info.bugLevel;
+    updating = false;
+  }, []);
 
   // 수정 및 삭제 가능 여부 반환
   const checkAble = () => {
-    let able = true;
-
-    // 비밀번호가 빈칸일 경우
-    if (!password || !_contents) able = false;
     // 관리자라면 무조건 가능
-    if (adminLogin) able = true;
-
-    return able;
+    if (!adminLogin) {
+      console.log(_contents);
+      if (!_contents) return exchangeKey.emptyContents;
+      // 비밀번호가 빈칸일 경우
+      if (!password) return exchangeKey.emptyPassword;
+    } else {
+      if (info.category !== "bug" && type === "question") {
+        // 문의 및 리뷰의 답변 카테고리일 경우
+        if (!answer) return exchangeKey.emptyAnswer;
+      }
+    }
+    return "";
   };
 
   // 데이터 변경하기
@@ -99,7 +105,8 @@ export default function ContentsSelectFunctionalPage({
     // 버튼 비활성화 여부 체크하기
     if (confirmRef.current) {
       confirmRef.current.classList.remove("able");
-      if (checkAble()) {
+      if (!checkAble()) {
+        // 빈 문자열 (에러메세지가 없을 경우)에는 등록 가능
         confirmRef.current.classList.add("able");
       }
     }
@@ -109,12 +116,10 @@ export default function ContentsSelectFunctionalPage({
   const openModal = ({
     text,
     isSuccess,
-    focus,
     afterCloseEvent,
   }: {
     text: string;
     isSuccess?: boolean;
-    focus?: "contents" | "password";
     afterCloseEvent?: () => void;
   }) => {
     if (disableOpenModal) return;
@@ -127,10 +132,15 @@ export default function ContentsSelectFunctionalPage({
         afterCloseEvent();
         setWaiting(false);
       } else {
-        if (!_contents || focus === "contents") {
+        if (text === "댓글 내용을 입력해주세요.") {
           if (contentsRef.current) contentsRef.current.focus();
-        } else if (!password || focus === "password") {
+        } else if (
+          text === "비밀번호를 입력해주세요." ||
+          text === "비밀번호가 일치하지 않습니다."
+        ) {
           if (passwordRef.current) passwordRef.current.focus();
+        } else if (text === "답변을 입력해주세요.") {
+          if (answerRef.current) answerRef.current.focus();
         }
       }
     };
@@ -160,121 +170,124 @@ export default function ContentsSelectFunctionalPage({
         height: "10%",
       },
       onCloseModal: _afterCloseEvent,
+      offAutoClose: false,
     });
   };
 
-  // 최종 삭제 및 수정하기
+  // 삭제 및 수정
   const confirm = async (e?: FormEvent) => {
     if (e) e.preventDefault();
-    if (waiting) {
-      // openModal({ text: "처리중입니다. 잠시만 기다려주세요." });
-      return;
-    }
+    if (waiting || updating) return;
+    updating = true;
 
     const typeName = ContentsSelectTypeName[type][0];
+    let failMsg = ""; // 실패 메세지
 
+    console.log(checkAble());
     // 버튼이 비활성화일 경우
-    if (!checkAble()) {
+    if (checkAble()) {
       openModal({
-        text: !_contents ? "댓글을 입력해주세요." : "비밀번호를 입력해주세요.",
+        text: checkAble(), // 에러메세지 출력
       });
     } else {
-      const _info = { ...info } as WriteInfoTypes;
-
-      // 비밀번호 체크하기
-      const hashPw = await getHashText(password);
-
-      if (!adminLogin) {
-        if (hashPw !== info.password || !info.password) {
-          openModal({
-            text: "비밀번호가 일치하지 않습니다.",
-            focus: "password",
-          });
-          return;
-        }
-      } else {
+      if (adminLogin) {
         if (type === "block" || type === "question") {
           // 차단 및 답변일 경우, 현재 로그인이 유지되어 있는 상태인지 검증
+          checkAccessToken(true);
+        }
+      }
 
-          if (!checkAccessToken()) {
-            // 로그인이 만료될 경우
-            openModal({
-              text: "로그인이 만료되었습니다.",
+      const commentApi = await commentsApis({
+        input: info as WriteInfoTypes,
+        module,
+        isAdmin: adminLogin || false,
+      });
+
+      // 삭제 및 차단일 경우 댓글 1차 삭제
+      if (typeName === "삭제" || typeName === "차단") {
+        // 기존에 있던 데이터에 업데이트
+        const { msg } = await commentApi.removeComments({
+          password,
+          updateCategory: true,
+        });
+
+        // 해당 유저 차단
+        if (typeName === "차단") {
+          try {
+            const { ip, contents, category, id } = info;
+            await blockApis().block({
+              ip,
+              contents,
+              category,
+              module,
+              commentId: id,
             });
-            return;
+          } catch (blockErr) {
+            console.log(blockErr);
           }
         }
-      }
 
-      setWaiting(true);
-      let isComplete = false; // 성공 여부
-      if (type === "modify") {
-        // 수정 모드일 경우
+        // 실패 메세지 저장
+        failMsg = msg;
 
-        // 줄바꿈 처리하기
-        _info.contents = changeMultipleLine(_contents).trim();
+        // 수정 및 답변일 경우
+      } else if (typeName === "수정" || typeName === "답변") {
+        const changeInput = {
+          ...info,
+          ["contents"]: _contents.split("\n").join("<br />"), // 댓글 내용 수정
+          rating,
+          bugLevel,
+        };
+        // 새로운 답변이 등록될 경우
+        if (typeName === "답변") {
+          if (answer) {
+            changeInput.answer = answer.split("\n").join("<br />");
+          } else {
+            if (info.category === "bug")
+              // 이슈에서는 답장 미작성시 매크로 답변으로 자동 등록
+              changeInput.answer = getBugAutoAnswer(bugStatus);
+          }
+          changeInput.bugStatus = bugStatus;
 
-        // 평점 변경하기
-        if (_info.category === "review") _info.rating = rating;
-
-        // 버그 중요도 변경하기
-        if (_info.category === "bug") _info.bugLevel = bugLevel;
-
-        // 수정 시간 저장
-        _info.modifyAt = getServerTime();
-      } else if (type === "delete" || type === "block") {
-        // 삭제 & 차단 모드일 경우 (= 댓글 삭제)
-        _info.deletedAt = getServerTime();
-
-        if (type === "block") {
-          // 차단 모드일 경우, 차단된 유저 정보 추가하기
-          blockApis().block({
-            module,
-            commentId: _info.id || "",
-            ip: _info.ip,
-            contents: _info.contents,
-            category: _info.category,
-          });
-        }
-      } else if (type === "question") {
-        // 답변 모드일 경우
-        if (answer) {
-          _info.answer = answer.split("\n").join("<br />");
-        } else {
           if (info.category === "bug") {
-            // 자동 매크로 적용
-            _info.answer = getBugAutoAnswer(bugStatus);
+            if (!bugStatus) {
+              // 답변을 등록했으나, "이슈 확인전" 상태라면 "이슈 확인중"으로 자동 변환
+              changeInput.bugStatus = 1;
+            }
           }
         }
-        // 답변 작성일 저장
-        _info.answerCreatedAt = getServerTime();
 
-        // 이슈 처리 처리하기
-        if (info.category === "bug") {
-          // 이슈 확인중일 경우 처리중으로 자동 변경
-          if (!info.bugStatus) _info.bugStatus = 1;
-          if (bugStatus !== info.bugStatus) _info.bugStatus = bugStatus;
-        }
+        const { msg } = await commentApi.modifyComments({
+          password,
+          originInput: info as WriteInfoTypes,
+          changeInput: changeInput as WriteInfoTypes,
+          updateCategory: true,
+        });
+
+        // 실패 메세지 저장
+        failMsg = msg;
       }
-      const isDelete = type === "delete" || type === "block"; // 댓글 삭제 여부
-      // 수정 완료 여부 저장
-      isComplete = await modifyComments(
-        _info as InfoTypes,
-        isDelete,
-        type,
-        info
-      );
 
-      if (isComplete) {
+      // 에러 메세지 출력
+      if (failMsg) {
+        openModal({
+          text: failMsg,
+          isSuccess: failMsg === "",
+        });
+      } else {
+        // 삭제 & 수정 완료
         openModal({
           text: `${typeName} 완료되었습니다.`,
           isSuccess: true,
           afterCloseEvent: () => {
             Modal.close({ id: "comments-functional-modal" });
+            // 댓글 리스트 최신화
+            fetchCommentsList();
           },
         });
       }
     }
+    updating = false;
   };
 
   // 이슈 처리 선택하기
@@ -286,16 +299,16 @@ export default function ContentsSelectFunctionalPage({
   return (
     <ContentsSelectFunctionalUIPage
       type={type}
-      info={info}
+      info={detailInfo}
       changeData={changeData}
       passwordRef={passwordRef}
       contentsRef={contentsRef}
       confirmRef={confirmRef}
       confirm={confirm}
       adminLogin={adminLogin}
-      waiting={waiting}
       changeBugStatus={changeBugStatus}
       bugStatus={bugStatus}
+      answerRef={answerRef}
     />
   );
 }

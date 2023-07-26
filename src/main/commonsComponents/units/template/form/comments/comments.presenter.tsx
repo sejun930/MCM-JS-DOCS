@@ -12,7 +12,6 @@ import { _Title } from "mcm-js-commons";
 
 export default function CommentsUIPage({
   commentsInfo,
-  modifyComments,
   changeInfo,
   moreLoad,
   adminLogin,
@@ -22,7 +21,6 @@ export default function CommentsUIPage({
   loading,
 }: {
   commentsInfo: CommentsAllInfoTypes;
-  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   moreLoad: () => void;
   adminLogin: boolean;
@@ -70,7 +68,6 @@ export default function CommentsUIPage({
           <_InfinityScroll moreLoad={moreLoad}>
             <CommentsListPage
               commentsInfo={commentsInfo}
-              modifyComments={modifyComments}
               changeInfo={changeInfo}
               adminLogin={adminLogin}
               fetchCommentsList={fetchCommentsList}

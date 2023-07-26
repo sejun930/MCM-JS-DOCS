@@ -18,3 +18,11 @@ export const AdminBugStatusSelectList: Array<AdminBugStatusSelectListType> = [
     status: 2,
   },
 ];
+
+// afterEvent용 key 체인지 객체
+export const exchangeKey: { [key: string]: string } = {
+  emptyPassword: "비밀번호를 입력해주세요.",
+  emptyContents: "댓글 내용을 입력해주세요.",
+  emptyAnswer: "답변을 입력해주세요.",
+  failPassword: "비밀번호가 일치하지 않습니다.",
+};

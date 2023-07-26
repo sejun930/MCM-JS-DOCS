@@ -23,16 +23,16 @@ import _PaginationForm from "../../pagination";
 
 export default function CommentsListUIPage({
   commentsInfo,
-  modifyComments,
   changeInfo,
   listRef,
+  fetchCommentsList,
 }: // changePage,
 {
   commentsInfo: CommentsAllInfoTypes;
-  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   listRef: MutableRefObject<HTMLUListElement>;
   changePage: (page: number) => void;
+  fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }) {
   return (
     <CommentsListWrapper id="comments-list-wrapper">
@@ -92,9 +92,9 @@ export default function CommentsListUIPage({
             <ListContentsInfoPage
               key={getUuid()}
               info={el}
-              modifyComments={modifyComments}
               commentsInfo={commentsInfo}
               changeInfo={changeInfo}
+              fetchCommentsList={fetchCommentsList}
             />
           ))}
           {/* <PaginationWrapper>

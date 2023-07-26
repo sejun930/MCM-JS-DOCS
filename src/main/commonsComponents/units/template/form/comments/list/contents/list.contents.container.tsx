@@ -17,15 +17,15 @@ import { ListContentsSelectType } from "./list.data";
 
 export interface ListContentsIProps {
   info: InfoTypes;
-  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
   commentsInfo: CommentsAllInfoTypes;
   changeInfo: (info: CommentsAllInfoTypes) => void;
+  fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }
 
 const MAX_LINE = 160; // 더 보기가 실행 될 최소 글자수
 
 export default function ListContentsInfoPage(props: ListContentsIProps) {
-  const { info, modifyComments, changeInfo } = props;
+  const { info, changeInfo, fetchCommentsList } = props;
   const { contents } = info;
 
   const [adminLogin] = useRecoilState(adminLoginState);
@@ -89,9 +89,9 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
         <ContentsOptionalPage
           type={type}
           info={info}
-          modifyComments={modifyComments}
           adminLogin={adminLogin}
           module={module}
+          fetchCommentsList={fetchCommentsList}
         />
       ),
       id: "comments-functional-modal",

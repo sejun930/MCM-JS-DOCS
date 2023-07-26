@@ -318,149 +318,149 @@ export default function CommentsPage() {
   };
 
   // 댓글 정보 수정하기
-  const modifyComments = async (
-    comment: InfoTypes,
-    isDelete?: boolean,
-    type?: string,
-    origin?: InfoTypes
-  ): Promise<boolean> => {
-    const {
-      category,
-      id,
-      rating,
-      bugLevel,
-      answer,
-      bugStatus,
-      answerCreatedAt,
-    } = comment;
+  // const modifyComments = async (
+  //   comment: InfoTypes,
+  //   isDelete?: boolean,
+  //   type?: string,
+  //   origin?: InfoTypes
+  // ): Promise<boolean> => {
+  //   const {
+  //     category,
+  //     id,
+  //     rating,
+  //     bugLevel,
+  //     answer,
+  //     bugStatus,
+  //     answerCreatedAt,
+  //   } = comment;
 
-    try {
-      // 댓글 정보 수정하기
-      const modifyDoc = getCommentDoc().doc(id);
-      // 수정 전의 원본 복사하기
-      const originData = (await modifyDoc.get()).data() as InfoTypes;
-      // 댓글 수정 요청
-      await modifyDoc.update(comment);
+  //   try {
+  //     // 댓글 정보 수정하기
+  //     const modifyDoc = getCommentDoc().doc(id);
+  //     // 수정 전의 원본 복사하기
+  //     const originData = (await modifyDoc.get()).data() as InfoTypes;
+  //     // 댓글 수정 요청
+  //     await modifyDoc.update(comment);
 
-      const editData = (await modifyDoc.get()).data() as InfoTypes;
-      if (editData) {
-        const _info = { ...commentsInfo };
+  //     const editData = (await modifyDoc.get()).data() as InfoTypes;
+  //     if (editData) {
+  //       const _info = { ...commentsInfo };
 
-        // 수정이 완료된 경우
-        // 해당 카테고리의 전체 개수 데이터 가져오기
-        const updateDoc = await getCommentsCountList(category);
+  //       // 수정이 완료된 경우
+  //       // 해당 카테고리의 전체 개수 데이터 가져오기
+  //       const updateDoc = await getCommentsCountList(category);
 
-        if (!updateDoc.empty) {
-          const result = updateDoc.docs[0].data();
-          const countList: {
-            [key: string]: number | CategoryTypes;
-          } = { ...result };
+  //       if (!updateDoc.empty) {
+  //         const result = updateDoc.docs[0].data();
+  //         const countList: {
+  //           [key: string]: number | CategoryTypes;
+  //         } = { ...result };
 
-          if (isDelete) {
-            // 삭제라면 해당 카테고리 개수 및 필터 개수 업데이트
-            // 전체 개수(count) 1개 제거하기
-            countList.count = Number(countList.count) - 1;
+  //         if (isDelete) {
+  //           // 삭제라면 해당 카테고리 개수 및 필터 개수 업데이트
+  //           // 전체 개수(count) 1개 제거하기
+  //           countList.count = Number(countList.count) - 1;
 
-            // 카테고리가 리뷰 또는 버그일 경우
-            if (category === "review" || category === "bug") {
-              const target = category === "review" ? rating : bugLevel;
-              // 해당 필터 점수에서도 1개 제거
-              countList[`${category}-${target}`] =
-                Number(countList[`${category}-${target}`]) - 1;
-            }
-          }
+  //           // 카테고리가 리뷰 또는 버그일 경우
+  //           if (category === "review" || category === "bug") {
+  //             const target = category === "review" ? rating : bugLevel;
+  //             // 해당 필터 점수에서도 1개 제거
+  //             countList[`${category}-${target}`] =
+  //               Number(countList[`${category}-${target}`]) - 1;
+  //           }
+  //         }
 
-          // 카테고리가 리뷰 또는 버그일 경우
-          if (
-            category === "review" ||
-            category === "bug" ||
-            category === "question"
-          ) {
-            // 어떤 점수 필터를 하나 제거할건지 정한다.
-            let originTargetData = category === "review" ? rating : bugLevel;
-            // 비교할 원본 데이터
-            const _originData =
-              category === "review" ? originData.rating : originData.bugLevel;
-            // 변경된 데이터
-            const changeData = originTargetData;
+  //         // 카테고리가 리뷰 또는 버그일 경우
+  //         if (
+  //           category === "review" ||
+  //           category === "bug" ||
+  //           category === "question"
+  //         ) {
+  //           // 어떤 점수 필터를 하나 제거할건지 정한다.
+  //           let originTargetData = category === "review" ? rating : bugLevel;
+  //           // 비교할 원본 데이터
+  //           const _originData =
+  //             category === "review" ? originData.rating : originData.bugLevel;
+  //           // 변경된 데이터
+  //           const changeData = originTargetData;
 
-            if (!isDelete && changeData !== _originData) {
-              // 수정이면서, 점수를 변경했을 경우에는 기존에 있던 점수를 1개 제거한다.
-              originTargetData = _originData;
-            }
+  //           if (!isDelete && changeData !== _originData) {
+  //             // 수정이면서, 점수를 변경했을 경우에는 기존에 있던 점수를 1개 제거한다.
+  //             originTargetData = _originData;
+  //           }
 
-            if (originTargetData !== changeData) {
-              // 해당 필터 점수에서도 1개 제거
-              countList[`${category}-${originTargetData}`] =
-                Number(countList[`${category}-${originTargetData}`]) - 1;
+  //           if (originTargetData !== changeData) {
+  //             // 해당 필터 점수에서도 1개 제거
+  //             countList[`${category}-${originTargetData}`] =
+  //               Number(countList[`${category}-${originTargetData}`]) - 1;
 
-              // 새로 변경한 점수의 필터를 1개 증가시킨다.
-              countList[`${category}-${changeData}`] =
-                Number(countList[`${category}-${changeData}`]) + 1;
-            }
+  //             // 새로 변경한 점수의 필터를 1개 증가시킨다.
+  //             countList[`${category}-${changeData}`] =
+  //               Number(countList[`${category}-${changeData}`]) + 1;
+  //           }
 
-            // 이슈 완료일 경우 필터 변경
-            if (category === "bug" && bugStatus === 2) {
-              if (type === "question") {
-                if (comment.bugStatus !== origin?.bugStatus) {
-                  // 답변 완료일 경우 필터에서 1개 증가
-                  countList["bug-complete"] =
-                    Number(countList["bug-complete"]) + 1;
-                }
-              } else if (type === "delete" || type === "block") {
-                // 삭제, 차단일 경우 필터에서 1개 감소
-                countList["bug-complete"] =
-                  Number(countList["bug-complete"]) - 1;
-              }
-            } else if (category === "question") {
-              if (type === "question") {
-                if (!origin?.answer && !origin?.answerCreatedAt) {
-                  // 답변이 등록된 경우, 답변 완료 필터 1개 증가
-                  countList["question-complete"] =
-                    Number(countList["question-complete"]) + 1;
-                }
-              } else if (type === "delete" || type === "block") {
-                if (answer && answerCreatedAt) {
-                  // 삭제, 차단일 경우 필터에서 1개 감소
-                  countList["question-complete"] =
-                    Number(countList["question-complete"]) - 1;
-                }
-              }
-            }
-          }
+  //           // 이슈 완료일 경우 필터 변경
+  //           if (category === "bug" && bugStatus === 2) {
+  //             if (type === "question") {
+  //               if (comment.bugStatus !== origin?.bugStatus) {
+  //                 // 답변 완료일 경우 필터에서 1개 증가
+  //                 countList["bug-complete"] =
+  //                   Number(countList["bug-complete"]) + 1;
+  //               }
+  //             } else if (type === "delete" || type === "block") {
+  //               // 삭제, 차단일 경우 필터에서 1개 감소
+  //               countList["bug-complete"] =
+  //                 Number(countList["bug-complete"]) - 1;
+  //             }
+  //           } else if (category === "question") {
+  //             if (type === "question") {
+  //               if (!origin?.answer && !origin?.answerCreatedAt) {
+  //                 // 답변이 등록된 경우, 답변 완료 필터 1개 증가
+  //                 countList["question-complete"] =
+  //                   Number(countList["question-complete"]) + 1;
+  //               }
+  //             } else if (type === "delete" || type === "block") {
+  //               if (answer && answerCreatedAt) {
+  //                 // 삭제, 차단일 경우 필터에서 1개 감소
+  //                 countList["question-complete"] =
+  //                   Number(countList["question-complete"]) - 1;
+  //               }
+  //             }
+  //           }
+  //         }
 
-          // 리스트 업데이트
-          const updateReulst = await updateCountList(
-            updateDoc.docs[0].id,
-            countList
-          );
+  //         // 리스트 업데이트
+  //         const updateReulst = await updateCountList(
+  //           updateDoc.docs[0].id,
+  //           countList
+  //         );
 
-          if (updateReulst) {
-            const { count, category, ...countFilterList } = countList as {
-              [key: string]: number;
-            };
-            _info.countList[category] = Number(countList.count);
+  //         if (updateReulst) {
+  //           const { count, category, ...countFilterList } = countList as {
+  //             [key: string]: number;
+  //           };
+  //           _info.countList[category] = Number(countList.count);
 
-            _info.countFilterList = {
-              ..._info.countFilterList,
-              ...countFilterList,
-            };
+  //           _info.countFilterList = {
+  //             ..._info.countFilterList,
+  //             ...countFilterList,
+  //           };
 
-            fetchCommentsList(_info);
-            return true;
-          }
-          return false;
-        }
+  //           fetchCommentsList(_info);
+  //           return true;
+  //         }
+  //         return false;
+  //       }
 
-        return false;
-      }
-    } catch (err) {
-      console.log(`댓글 수정에 실패했습니다. ${err}`);
-      return false;
-    }
-    // }
-    return false;
-  };
+  //       return false;
+  //     }
+  //   } catch (err) {
+  //     console.log(`댓글 수정에 실패했습니다. ${err}`);
+  //     return false;
+  //   }
+  //   // }
+  //   return false;
+  // };
 
   // 댓글 개수 리스트 DOC 가져오기
   const getCommentsCountList = async (category: string) => {
@@ -519,7 +519,6 @@ export default function CommentsPage() {
   return (
     <CommentsUIPage
       commentsInfo={commentsInfo}
-      modifyComments={modifyComments}
       changeInfo={changeInfo}
       moreLoad={moreLoad}
       adminLogin={adminLogin}
