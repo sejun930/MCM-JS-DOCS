@@ -14,7 +14,7 @@ import {
   Filedset,
   QuestionTitle,
   AnswerInfoWrapper,
-} from "./list.styles";
+} from "./list.contents.styles";
 import { getDateForm } from "src/main/commonsComponents/functional";
 import { getListContentsInfo, ListContentsSelectType } from "./list.data";
 

@@ -58,13 +58,19 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   gap: 10px 0px;
   width: 100%;
+`;
+
+export const InputItems = styled.div`
+  display: flex;
+  box-shadow: 2px 2px 3px 1px;
+  width: 100%;
 
   .mcm-input-unit-wrapper {
+    width: 100%;
     height: 36px;
 
     .mcm-input-unit-items {
       border: unset;
-      box-shadow: 2px 2px 3px 1px;
 
       .mcm-input-unit {
         font-size: 14px;
@@ -120,4 +126,12 @@ export const Message = styled(_PTextWithHtml)`
     color: #666666;
     font-size: 14px;
   }
+`;
+
+export const ShowPw = styled(_Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  min-width: 30px;
 `;

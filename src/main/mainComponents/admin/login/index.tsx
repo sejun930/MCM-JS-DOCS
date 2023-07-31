@@ -1,12 +1,14 @@
 import {
   InputWrapper,
+  InputItems,
   LoginAlertWrapper,
   LoginForm,
   Message,
   SubmitButton,
+  ShowPw,
 } from "./login.styles";
 
-import { Modal } from "mcm-js";
+import { Modal, Tooltip } from "mcm-js";
 import { _Title, _Input } from "mcm-js-commons";
 import { FormEvent, MutableRefObject, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -37,6 +39,8 @@ export default function AdminLoginPage({
     id: "",
     password: "",
   });
+  // 비밀번호 가리기 여부
+  const [showPw, setShowPw] = useState(false);
 
   // 기입 정보 변경
   const changeInfo = (text: string, type: string) => {
@@ -100,14 +104,9 @@ export default function AdminLoginPage({
       // 어드민 로그인 정보 가져오기
       const adminInfo = adminLoginInfoData[currentWeek];
 
-      if (hashId !== adminInfo.id) {
-        // 아이디가 불일치 할 경우
-        msg = "아이디가 일치하지 않습니다.";
-        _focusEvent = focusEvent.id;
-      } else if (hashpw !== adminInfo.password) {
-        // 비밀번호가 불일치 할 경우
-        msg = "비밀번호가 일치하지 않습니다.";
-        _focusEvent = focusEvent.password;
+      if (hashId !== adminInfo.id || hashpw !== adminInfo.password) {
+        // 아이디 & 비밀번호가 불일치 할 경우
+        msg = "아이디 & 비밀번호 오류";
       } else {
         loading = true;
 
@@ -163,6 +162,11 @@ export default function AdminLoginPage({
     }
   };
 
+  // 비밀번호 보이기 / 숨기기
+  const toggleShowPw = () => {
+    setShowPw((prev) => !prev);
+  };
+
   return (
     <LoginAlertWrapper>
       <_Title className="admin-login-title">
@@ -171,24 +175,34 @@ export default function AdminLoginPage({
           관리자로 <b>로그인</b>해주세요.
         </p>
       </_Title>
-
       <LoginForm onSubmit={login}>
         <InputWrapper>
-          {/* 아이디 입력창 */}
-          <_Input
-            onChangeEvent={(text) => changeInfo(text, "id")}
-            placeHolder="관리자 아이디를 입력해주세요."
-            maxLength={30}
-            inputRef={idRef}
-          />
-          {/* 비밀번호 입력창 */}
-          <_Input
-            onChangeEvent={(text) => changeInfo(text, "password")}
-            inputType="password"
-            placeHolder="관리자 비밀번호를 입력해주세요."
-            maxLength={30}
-            inputRef={pwRef}
-          />
+          <InputItems>
+            {/* 아이디 입력창 */}
+            <_Input
+              onChangeEvent={(text) => changeInfo(text, "id")}
+              placeHolder="관리자 아이디를 입력해주세요."
+              maxLength={30}
+              inputRef={idRef}
+            />
+          </InputItems>
+
+          <InputItems>
+            {/* 비밀번호 입력창 */}
+            <_Input
+              onChangeEvent={(text) => changeInfo(text, "password")}
+              inputClassName="password-input"
+              inputType={showPw ? "text" : "password"}
+              placeHolder="관리자 비밀번호를 입력해주세요."
+              maxLength={30}
+              inputRef={pwRef}
+            />
+            <ShowPw buttonType="button" onClickEvent={toggleShowPw}>
+              <Tooltip tooltipText={`비밀번호 ${showPw ? "가리기" : "보이기"}`}>
+                {showPw ? "🙈" : "🙉"}
+              </Tooltip>
+            </ShowPw>
+          </InputItems>
         </InputWrapper>
         {/* 로그인 버튼 */}
         <SubmitButton onClickEvent={login} isSubmit={checkInfo()}>

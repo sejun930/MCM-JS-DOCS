@@ -98,8 +98,7 @@ export default function SyncCommentsFunction(props: FunctionPropsTypes) {
 
             const _info = { ...info };
             _info.countList = countList;
-
-            console.log(filterCountList);
+            // @ts-ignore
             _info.countFilterList = filterCountList;
 
             fetchComments(_info);

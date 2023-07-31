@@ -60,7 +60,6 @@ export const OptionWrapper = styled.div`
   display: flex;
   margin-top: 16px;
   justify-content: space-between;
-  align-items: center;
 
   .answer-date {
     font-size: 12px;
@@ -91,5 +90,16 @@ export const OptionBtn = styled(_Button)`
     background-color: gray;
     color: #dddddd;
     cursor: not-allowed;
+  }
+`;
+
+export const ListOptionalModifiedWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px 0px;
+
+  .answer-date {
+    width: 100%;
+    text-align: left;
   }
 `;

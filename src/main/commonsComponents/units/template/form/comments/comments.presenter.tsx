@@ -7,7 +7,7 @@ import CommentsListPage from "./list/comments.list.container";
 import CommentsWritePage from "./write/comments.write.container";
 import _InfinityScroll from "../infinity";
 
-import { CommentsAllInfoTypes, InfoTypes } from "./comments.types";
+import { CommentsAllInfoTypes } from "./comments.types";
 import { _Title } from "mcm-js-commons";
 
 export default function CommentsUIPage({

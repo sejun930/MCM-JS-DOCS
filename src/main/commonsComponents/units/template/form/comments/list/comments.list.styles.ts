@@ -1,15 +1,18 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { CSSProperties } from "react";
 
 interface StyleTypes {
   render?: boolean;
   selected?: boolean;
+  isDisable?: boolean;
 }
 
 export const CommentsListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
+  padding-bottom: 40px;
 
   @media ${breakPoints.mobileLarge} {
     margin-top: 20px;
@@ -83,7 +86,7 @@ export const Shadow = styled.div`
     right: 0;
     width: 20px;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 `;
 
@@ -93,12 +96,26 @@ export const Category = styled.li`
     font-size: 14px;
     color: #666666;
 
-    ${(props: StyleTypes) =>
-      props.selected && {
-        color: "#aa5656",
-        cursor: "default",
-        fontWeight: 700,
-      }}
+    ${(props: StyleTypes) => {
+      let styles: CSSProperties & { [key: string]: string | number } = {};
+
+      if (props.selected) {
+        // 선택된 카테고리라면
+        styles = {
+          color: "#aa5656",
+          cursor: "default",
+          fontWeight: 700,
+        };
+      } else if (props.isDisable) {
+        // 선택이 불가능한 카테고리라면
+        styles = {
+          color: "#bbbbbb",
+          cursor: "not-allowed",
+        };
+      }
+
+      return styles;
+    }}
   }
 
   @media ${breakPoints.mobileSmall} {

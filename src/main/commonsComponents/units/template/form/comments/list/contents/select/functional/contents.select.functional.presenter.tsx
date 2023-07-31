@@ -80,7 +80,7 @@ export default function ContentsSelectFunctionalUIPage({
           </CategoryInfo>
         </CommentsInfoWrapper>
 
-        <CommentsInfoItems isAnswerType={isAnswerType}>
+        <CommentsInfoItems isAnswerType={showAnswer !== "" || isAnswerType}>
           <_Input
             isTextArea
             defaultValue={info.contents.split("<br />").join("\n")}
@@ -89,6 +89,7 @@ export default function ContentsSelectFunctionalUIPage({
             onChangeEvent={(text) => changeData(text, "contents")}
             inputRef={contentsRef}
             maxLength={500}
+            onSubmitEvent={confirm}
           />
           {showAnswer && (
             <_Input
@@ -99,6 +100,7 @@ export default function ContentsSelectFunctionalUIPage({
               defaultValue={info.answer?.split("<br />").join("\n")}
               readOnly={!isAnswerType || !adminLogin}
               inputRef={answerRef}
+              placeHolder="답변을 입력해주세요."
             />
           )}
         </CommentsInfoItems>

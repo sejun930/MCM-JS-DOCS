@@ -49,7 +49,18 @@ export const CommentsList = styled.li`
   }
 
   @media ${breakPoints.mobileLarge} {
-    padding: 20px 16px;
+    padding: 20px 0px;
+
+    :hover {
+      background-color: ${(props) => !props.hover && "unset"};
+    }
+
+    ${(props: StyleTypes) =>
+      props.hover && {
+        backgroundColor: "#9BABB8",
+        color: "white",
+        paddingLeft: "10px",
+      }}
   }
 `;
 
