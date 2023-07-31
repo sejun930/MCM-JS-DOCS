@@ -67,10 +67,10 @@ export const OptionalWrapper = styled.div`
     }
 
     .optional-input {
-      .mcm-textArea-unit {
+      /* .mcm-textArea-unit {
         height: 180px;
         font-size: 12px;
-      }
+      } */
     }
   }
 `;
@@ -131,7 +131,7 @@ export const CommentsInfoItems = styled.div`
     width: 100%;
 
     .mcm-input-unit-items {
-      height: 240px;
+      height: 230px;
 
       textArea {
         resize: none;
@@ -149,22 +149,20 @@ export const CommentsInfoItems = styled.div`
 
   @media ${breakPoints.mobileLarge} {
     .mcm-input-unit-wrapper {
+      height: 260px;
+
       .mcm-input-unit-items {
-        height: 270px;
+        height: 100%;
       }
     }
   }
 
   @media ${breakPoints.mobileSmall} {
     flex-direction: column;
+    height: 260px;
 
     .mcm-input-unit-wrapper {
-      .mcm-input-unit-items {
-        ${(props: StyleTypes) =>
-          props.isAnswerType && {
-            height: "140px",
-          }}
-      }
+      height: 100%;
     }
   }
 `;

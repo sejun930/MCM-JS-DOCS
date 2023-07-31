@@ -35,7 +35,10 @@ export default function CommentsListUIPage({
   fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }) {
   return (
-    <CommentsListWrapper id="comments-list-wrapper">
+    <CommentsListWrapper
+      id="comments-list-wrapper"
+      className="comments-list-render"
+    >
       <CategoryWrapper>
         <CategoryContents>
           <CategoryItems render={commentsInfo.countList.all !== undefined}>

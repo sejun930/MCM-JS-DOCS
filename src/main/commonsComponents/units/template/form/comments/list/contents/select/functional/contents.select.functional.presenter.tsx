@@ -101,6 +101,7 @@ export default function ContentsSelectFunctionalUIPage({
               readOnly={!isAnswerType || !adminLogin}
               inputRef={answerRef}
               placeHolder="답변을 입력해주세요."
+              onSubmitEvent={confirm}
             />
           )}
         </CommentsInfoItems>
@@ -118,9 +119,6 @@ export default function ContentsSelectFunctionalUIPage({
         {adminLogin && info.category === "bug" && type === "question" && (
           <BugStatusWrapper>
             {AdminBugStatusSelectList.slice(info.bugStatus).map((listInfo) => {
-              {
-                /* {AdminBugStatusSelectList.map((listInfo) => { */
-              }
               return (
                 <Tooltip
                   key={`bug-status-${listInfo.name}-${status}`}

@@ -127,7 +127,8 @@ export const LoadingPageTitle = styled(_Title)`
   /* margin: 60px 0px; */
   color: gray;
   cursor: wait;
-  margin: 30px 0px;
+  margin: 40px 0px;
+  margin-bottom: 60px;
 
   @media ${breakPoints.mobileLarge} {
     text-align: center;
@@ -158,5 +159,6 @@ export const LoadingContents = styled.div`
     position: sticky;
     top: 50%;
     text-align: center;
+    cursor: wait;
   }
 `;

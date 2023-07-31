@@ -12,6 +12,8 @@ export interface IndexPagePropsTypes {
   fix: boolean;
   isMinimum: boolean;
   show: boolean;
+  loading: boolean;
+  changeLoading: (bool: boolean) => void;
 }
 
 // index.presenter Props type
