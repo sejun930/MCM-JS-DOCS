@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 export const Items = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: 48px;
 
   ${(props: StyleTypes) =>
     props.isLoading && {

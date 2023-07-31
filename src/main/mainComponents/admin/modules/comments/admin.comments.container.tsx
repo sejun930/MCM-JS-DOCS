@@ -63,6 +63,9 @@ export default function AdminCommentsPage() {
     info?: CommentsAllInfoTypes,
     isInfinite?: boolean
   ) => {
+    // 관리자 권한 검증
+    checkAccessToken(true);
+
     // isInfinite: 무한 스크롤로 데이터를 조회할 경우
     if (isLoading) return;
 

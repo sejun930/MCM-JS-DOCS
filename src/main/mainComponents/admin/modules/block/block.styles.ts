@@ -11,6 +11,7 @@ interface StyleTypes {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
 
   .empty-block-list-title {
     font-size: 24px;
@@ -19,7 +20,7 @@ export const Wrapper = styled.div`
   }
 
   @media ${breakPoints.mobileLarge} {
-    padding-bottom: 30px;
+    padding-bottom: 40px;
   }
 `;
 

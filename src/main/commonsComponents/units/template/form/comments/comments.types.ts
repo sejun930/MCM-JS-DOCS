@@ -30,12 +30,6 @@ export type InfoTypes = CommentsInfoTypes & {
   answerCreatedAt: DateTypes | null;
 };
 
-// 카테고리 개수 타입
-export interface CountListTypes {
-  category: CategoryTypes;
-  count: number;
-}
-
 // count (카테고리 별 개수) 초기값
 export const initCountList: Array<{ [key: string]: number | string }> = [
   {
@@ -60,15 +54,13 @@ export const initCountList: Array<{ [key: string]: number | string }> = [
   },
 ];
 
+// 차단 유저 정보 저장
 export interface BlockInfoTypes {
   canceledAt?: null;
   category?: string;
   commentId?: string;
   contents?: string;
-  createdAt?: {
-    seconds: number;
-    nanoseconds: number;
-  };
+  createdAt?: DateTypes;
   ip?: string;
   module?: string;
 }

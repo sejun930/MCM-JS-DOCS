@@ -4,10 +4,11 @@ import {
   ContentsItems,
   ContentsWrapper,
   OptionWrapper,
+  ListOptionalModifiedWrapper,
 } from "./admin.comments.contents.styles";
 
 import { Tooltip } from "mcm-js";
-import { _Input, _SpanText } from "mcm-js-commons";
+import { _Input, _SpanText, _PText } from "mcm-js-commons";
 import { MutableRefObject } from "react";
 import { getDateForm } from "src/main/commonsComponents/functional";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
@@ -56,10 +57,24 @@ export default function AdminCommentsContentsUIPage({
         />
       </ContentsItems>
       <OptionWrapper>
-        {renderOptionList()}
+        <ListOptionalModifiedWrapper>
+          {info.modifyAt && (
+            <Tooltip tooltipText="댓글 수정일" useShowAnimation>
+              <_PText className="answer-date">
+                수정일 |{" "}
+                {getDateForm({
+                  firebaseTimer: info.modifyAt,
+                  getDate: true,
+                })}
+              </_PText>
+            </Tooltip>
+          )}
+          {renderOptionList()}
+        </ListOptionalModifiedWrapper>
         {info.answerCreatedAt && (
           <Tooltip tooltipText="답변 작성일" useShowAnimation>
             <_SpanText className="answer-date">
+              답변일 |{" "}
               {getDateForm({
                 firebaseTimer: info.answerCreatedAt,
                 getDate: true,

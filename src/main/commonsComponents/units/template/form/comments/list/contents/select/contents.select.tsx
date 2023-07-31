@@ -15,7 +15,7 @@ import { _CloseButton, _Button } from "mcm-js-commons";
 
 import { Modal } from "mcm-js";
 import ContentsOptionalPage from "./functional/contents.select.functional.container";
-import { InfoTypes } from "../../../comments.types";
+import { CommentsAllInfoTypes, InfoTypes } from "../../../comments.types";
 
 let ableClose = true;
 export default function SelectListOptional({
@@ -25,7 +25,7 @@ export default function SelectListOptional({
   className,
   closeEvent,
   show,
-  modifyComments,
+  fetchCommentsList,
 }: {
   show: boolean;
   list: Array<{ name: string; value: "delete" | "modify" }>;
@@ -33,7 +33,7 @@ export default function SelectListOptional({
   closeEvent: () => void;
   styles?: CSSProperties;
   className?: string;
-  modifyComments: (comment: InfoTypes, isDelete?: boolean) => Promise<boolean>;
+  fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }) {
   const { getAllComponentsClassName } = CommonsHooksComponents();
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -92,9 +92,9 @@ export default function SelectListOptional({
         <ContentsOptionalPage
           type={type}
           info={info}
-          modifyComments={modifyComments}
           adminLogin={adminLogin}
           module={module}
+          fetchCommentsList={fetchCommentsList}
         />
       ),
       id: "comments-functional-modal",

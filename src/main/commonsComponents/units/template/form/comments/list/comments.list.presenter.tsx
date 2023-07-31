@@ -52,14 +52,19 @@ export default function CommentsListUIPage({
                 commentsInfo.countList[name || "all"];
               if (categoryLen > 999) categoryLen = `999+`;
 
+              // 선택 불가능한 카테고리인지? (개수가 0개일 때)
+              const isDisable = categoryLen === 0;
+
               return (
                 <Category
                   key={`comments-category-list-${name}-${key}`}
                   selected={isSelected}
+                  isDisable={isDisable}
                 >
                   <_Button
                     onClickEvent={() =>
-                      (!isSelected && changeInfo(info)) || undefined
+                      (!isSelected && !isDisable && changeInfo(info)) ||
+                      undefined
                     }
                   >
                     {categoryInitList[name]} ( {categoryLen} )
