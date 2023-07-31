@@ -38,7 +38,7 @@ export const OptionalWrapper = styled.div`
 
   .optional-input {
     .mcm-textArea-unit {
-      height: 220px;
+      height: 100%;
       resize: none;
 
       ${(props: StyleTypes) =>
@@ -58,16 +58,11 @@ export const OptionalWrapper = styled.div`
     margin-top: 10px;
   }
 
-  .mcm-close-button-unit {
-    border-top: unset;
-  }
-
   @media ${breakPoints.mobileLarge} {
     padding: 0rem;
     height: auto;
 
     .mcm-title-unit {
-      /* margin: 10px 0px; */
       margin-bottom: 20px;
     }
 
@@ -136,7 +131,7 @@ export const CommentsInfoItems = styled.div`
     width: 100%;
 
     .mcm-input-unit-items {
-      height: 220px;
+      height: 240px;
 
       textArea {
         resize: none;
@@ -147,6 +142,27 @@ export const CommentsInfoItems = styled.div`
           props.isAnswerType && {
             resize: "none",
             width: "100%",
+          }}
+      }
+    }
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    .mcm-input-unit-wrapper {
+      .mcm-input-unit-items {
+        height: 270px;
+      }
+    }
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    flex-direction: column;
+
+    .mcm-input-unit-wrapper {
+      .mcm-input-unit-items {
+        ${(props: StyleTypes) =>
+          props.isAnswerType && {
+            height: "140px",
           }}
       }
     }

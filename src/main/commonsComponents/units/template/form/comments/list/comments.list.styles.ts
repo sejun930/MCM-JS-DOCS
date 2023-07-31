@@ -86,7 +86,7 @@ export const Shadow = styled.div`
     right: 0;
     width: 20px;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 `;
 
