@@ -42,14 +42,17 @@ const blockApis = () => {
     },
     // 차단된 유저인지 검증
     checkBlock: async (userIp: string): Promise<BlockInfoTypes> => {
-      let result = {};
+      let result = { isBlock: false };
       const isBlock = await blockDocs
         .where("ip", "==", userIp) // 해당 유저의 아이피가 차단된 내역이 있는지 검증
         .where("canceledAt", "==", null) // 차단이 해제되지 않은 유저인지 검증
         .limit(1)
         .get();
 
-      if (!isBlock.empty) result = isBlock.docs[0].data();
+      if (!isBlock.empty) {
+        // 차단된 유저라면
+        result = { ...isBlock.docs[0].data(), ["isBlock"]: true };
+      }
 
       return result; // 비어있다면 차단되지 않은 유저
     },

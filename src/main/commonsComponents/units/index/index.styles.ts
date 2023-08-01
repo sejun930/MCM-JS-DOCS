@@ -8,6 +8,7 @@ interface StyleTypes {
   fix?: boolean;
   isMinimum?: boolean;
   show?: boolean;
+  isLoading?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -17,12 +18,10 @@ export const Wrapper = styled.div`
   right: 2rem;
   bottom: 5rem;
   width: 200px;
-  /* height: 200px; */
 
   background-color: white;
   border: double 3px black;
   opacity: 0.3;
-  /* background-color: rgba(255, 255, 255, 0.5); */
   border-radius: 10px;
   z-index: 900;
   padding: 1rem;
@@ -97,6 +96,11 @@ export const IndexList = styled.li`
         fontWeight: 700,
         cursor: "default",
       }}
+
+    ${(props) =>
+      props.isLoading && {
+        cursor: "default",
+      }}
   }
 `;
 
@@ -112,9 +116,19 @@ export const OptionWrapper = styled.div`
   border: dotted 1px black;
   background-color: white;
 
+  ${(props: StyleTypes) =>
+    props.isLoading && {
+      filter: "blur(2px)",
+    }}
+
   button {
     width: 15px;
     height: 15px;
+
+    ${(props) =>
+      props.isLoading && {
+        cursor: "default",
+      }}
   }
 
   .mcm-index-close-button {
@@ -139,4 +153,22 @@ export const OptionWrapper = styled.div`
 
 export const OpenIndexButton = styled(_Button)`
   padding: 10px 12px;
+`;
+
+export const Loading = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+
+  .mcm-p-unit {
+    font-size: 20px;
+    font-weight: 700;
+  }
 `;

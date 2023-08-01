@@ -63,12 +63,17 @@ export interface BlockInfoTypes {
   createdAt?: DateTypes;
   ip?: string;
   module?: string;
+  isBlock: boolean;
+}
+interface CountFilterCommonsType {
+  count: number;
+  category: string;
+  id: string;
 }
 
 export interface CommentsAllInfoTypes {
   commentsList: Array<InfoTypes>;
   selectCategory: CategoryTypes | string;
-  countList: { [key: string]: number };
   filter:
     | {
         // search: string; // 검색어
@@ -85,10 +90,23 @@ export interface CommentsAllInfoTypes {
         allData: number; // 전체 데이터 수
         limit: number; // 렌더될 데이터 수
         startPage: number; // 페이지네이션용 시작용 페이지 (1 이상 페이지부터 작동)
+        oddest: boolean; // 과거순 보기
       };
-  countFilterList: { [key: string]: number }; // 각각의 필터들의 총 개수 정보 저장
   blockInfo: BlockInfoTypes; // 차단된 유저라면 해당 사유 및 아이피 저장
   userIp: string; // 유저 아이피 저장
+  countFilterList:
+    | {
+        // 카테고리별 전체 개수 및 필터별 개수
+        all: CountFilterCommonsType | { [key: string]: number };
+        bug: CountFilterCommonsType | { [key: string]: number };
+        question: CountFilterCommonsType | { [key: string]: number };
+        review: CountFilterCommonsType | { [key: string]: number };
+      } & {
+        [key: string]:
+          | { [key: string]: number }
+          | CountFilterCommonsType
+          | (number & string);
+      };
 }
 
 export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
@@ -97,9 +115,20 @@ export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
 export const initCommentsInfo: CommentsAllInfoTypes = {
   commentsList: [], // 댓글 리스트
   selectCategory: "all", // 선택된 카테고리
-  countList: {}, // 카테고리 개수 리스트
-  countFilterList: {}, // 카테고리 필터 개수
-  filter: { allData: 0, limit: 10, page: 1, startPage: 0, list: {} }, // 필터 정보
-  blockInfo: {},
+  filter: {
+    allData: 0,
+    limit: 10,
+    page: 1,
+    startPage: 0,
+    list: {},
+    oddest: false,
+  }, // 필터 정보
+  blockInfo: { isBlock: false },
   userIp: "",
+  countFilterList: {
+    all: { count: 0, category: "all", id: "" },
+    bug: { count: 0, category: "bug", id: "" },
+    question: { count: 0, category: "question", id: "" },
+    review: { count: 0, category: "review", id: "" },
+  },
 };

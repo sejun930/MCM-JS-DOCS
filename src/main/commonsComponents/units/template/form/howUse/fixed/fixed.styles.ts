@@ -32,6 +32,7 @@ export const TapWrapper = styled.div`
   .widen {
     width: ${(props) => (props.allLength || 1) * 150 + "px"};
     height: 60px;
+    z-index: 500;
   }
 
   .fixed-mode {
@@ -115,13 +116,13 @@ export const FixedTap = styled.div`
   transform: translateX(-50%);
   top: 2%;
   background-color: white;
-  z-index: 500;
   border: double 4px #617a55;
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   transition: all 0.3s ease;
+  z-index: -1;
 
   @media ${breakPoints.mobileLarge} {
     top: 70px;

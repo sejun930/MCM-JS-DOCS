@@ -14,13 +14,9 @@ import {
 import { AdminCommentsInitType } from "../../admin.comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
-import {
-  getDoc,
-  getResult,
-  getServerTime,
-} from "src/commons/libraries/firebase";
-import apis from "src/commons/libraries/apis/commons.apis";
 import blockApis from "src/commons/libraries/apis/block/block.apis";
+import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
+import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 
 export default function AdminCommentsDetailPage({
   info,
@@ -36,78 +32,10 @@ export default function AdminCommentsDetailPage({
   // 이미 삭제된 댓글인지 체크
   const isAlreadyDeleted = info.deletedAt !== null;
 
-  // 개수 카운트 정보 가져오기
-  const updateFilterCount = async (
-    changeData: InfoTypes,
-    isDelete?: boolean
-  ) => {
-    const { category, answer } = changeData;
-    const countDoc = getDoc("comments", commentsInfo.selectModule, "count");
-    const countList = getResult(await apis(countDoc).read());
-
-    const target = countList.filter(
-      (el) => el.category === changeData.category
-    )[0];
-
-    if (target) {
-      if (isDelete) {
-        // 전체 개수에서 1개 제거
-        target["count"]--;
-      }
-
-      if (category === "question") {
-        if (!isDelete) {
-          // 질문에 답변이 등록될 경우 (= 기존 원본에 답변이 없었을 경우)
-          if (answer && !info.answer) {
-            target["question-complete"]++;
-          }
-        } else {
-          if (answer) {
-            // 답변이 완료된 댓글 삭제라면 해당 개수만큼 제거
-            target["question-complete"]--;
-          }
-        }
-      } else if (category === "bug") {
-        if (!isDelete) {
-          // 이슈에 답변 등록
-          if (info.bugStatus !== 2 && changeData.bugStatus === 2) {
-            // 이슈 처리 완료라면 완료에 추가
-            target["bug-complete"]++;
-          }
-        } else {
-          if (info.bugStatus === 2) {
-            // 해결이 완료된 이슈라면 해당 개수만큼 제거
-            target["bug-complete"]--;
-          }
-          // 버그 레벨만큼 삭제
-          target[`bug-${info.bugLevel}`]--;
-        }
-      } else if (category === "review") {
-        // 리뷰 삭제하기
-        if (isDelete) {
-          // 해당 리뷰 점수만큼 제거
-          target[`review-${info.rating}`]--;
-        }
-      }
-    }
-
-    // id값 제외하기
-    const { id, ...updateResult } = target;
-
-    // 개수 업데이트
-    try {
-      await countDoc.doc(id).update(updateResult);
-      return true;
-    } catch (err) {
-      alert("개수 업데이트에 실패했습니다.");
-      console.log(err);
-
-      return false;
-    }
-  };
-
   // 댓글 삭제하기
   const removeComments = async (isBlock: boolean) => {
+    // 관리자 권한 체크
+    if (!checkAccessToken(true)) return;
     // 삭제일 경우 이미 삭제된 게시물인지 체크
     if (!isBlock && info.deletedAt) return;
 
@@ -117,51 +45,59 @@ export default function AdminCommentsDetailPage({
 
     if (window.confirm(msg)) {
       const _info: WriteInfoTypes = { ...(info as WriteInfoTypes) };
-      // 삭제일 등록
-      _info.deletedAt = getServerTime();
-
       let ableBlock = isBlock; // 차단 가능 여부
+
       try {
-        await getDoc("comments", commentsInfo.selectModule, "comment")
-          .doc(_info.id)
-          .update(_info);
+        // 댓글 삭제하기
+        const removeResult = await (
+          await commentsApis({
+            module: commentsInfo.selectModule,
+            input: _info,
+            isAdmin: true,
+          })
+        ).removeComments({
+          password: "",
+          updateCategory: true,
+        });
 
-        if (isBlock) {
-          const blockDoc = getDoc("block", "user", "ip");
-          // 이미 차단된 유저인지 검증
-          const blockResult = await blockDoc
-            .where("ip", "==", info.ip) // 해당 아이피 검색
-            .where("canceledAt", "==", null)
-            .limit(1)
-            .get(); // 차단 해제되지 않은 유저만 검색
+        if (removeResult.msg) {
+          // 삭제 실패
+          alert(removeResult.msg);
+        } else if (isBlock) {
+          // 삭제 성공, 차단이라면 유저까지 차단
+          if (!(await blockApis().checkBlock(_info.ip)).isBlock) {
+            try {
+              // 차단되지 않은 유저일 경우에만 차단
+              const { ip, contents, category } = info;
 
-          if (!blockResult.empty) {
+              // 유저 차단하기
+              await blockApis().block({
+                commentId: info.id,
+                ip,
+                contents,
+                category,
+                module: commentsInfo.selectModule,
+              });
+            } catch (blockErr) {
+              console.log(blockErr);
+              alert("유저 차단에 실패했습니다.");
+            }
+          } else {
+            // 차단된 유저일 경우
             alert("이미 차단된 유저입니다.");
             ableBlock = false;
-          } else {
-            // 해당 유저 차단하기
-            await blockApis().block({
-              commentId: info.id,
-              ip: info.ip,
-              contents: info.contents,
-              category: info.category,
-              module: commentsInfo.selectModule,
-            });
           }
         }
 
-        // 전체 개수 및 필터 조정
-        if (await updateFilterCount(_info as InfoTypes, true)) {
-          alert(
-            isBlock && ableBlock
-              ? "차단이 완료되었습니다."
-              : "댓글 삭제가 완료되었습니다."
-          );
-          fetchComments(commentsInfo);
-        }
+        alert(
+          isBlock && ableBlock
+            ? "차단이 완료되었습니다."
+            : "댓글 삭제가 완료되었습니다."
+        );
+        fetchComments(commentsInfo);
       } catch (err) {
-        alert("댓글 삭제에 실패했습니다.");
         console.log(err);
+        alert(`${isBlock ? "유저 차단" : "댓글 삭제"}에 실패했습니다.`);
       }
     }
   };
@@ -173,7 +109,6 @@ export default function AdminCommentsDetailPage({
       isAlreadyDeleted={isAlreadyDeleted}
       removeComments={removeComments}
       changeLoading={changeLoading}
-      updateFilterCount={updateFilterCount}
       fetchComments={fetchComments}
     />
   );

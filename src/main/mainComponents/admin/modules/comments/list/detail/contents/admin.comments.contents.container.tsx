@@ -10,31 +10,29 @@ import {
 import { AdminCommentsInitType } from "../../../admin.comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
-import { getServerTime, getDoc } from "src/commons/libraries/firebase";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
-import { getBugAutoAnswer } from "src/main/commonsComponents/functional";
+import { changeClientText } from "src/main/commonsComponents/functional";
 
 import { AdminBugStatusSelectList } from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.data";
+import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 
 export default function AdminCommentsContentsPage({
   info,
   changeLoading,
   commentsInfo,
-  updateFilterCount,
   fetchComments,
   isAlreadyDeleted,
 }: {
   info: InfoTypes;
   changeLoading: (bool: boolean) => void;
   commentsInfo: CommentsAllInfoTypes & AdminCommentsInitType;
-  updateFilterCount: (info: InfoTypes) => Promise<boolean>;
   fetchComments: (info?: AdminCommentsInitType) => void;
   isAlreadyDeleted: boolean;
 }) {
   let answer = "";
   let bugStatus = info.bugStatus || 0;
   // 기존의 답변 저장
-  if (info.answer) answer = info.answer.split("<br />").join("\n");
+  if (info.answer) answer = changeClientText(info.answer);
 
   const contentsRef = useRef() as MutableRefObject<HTMLParagraphElement>;
   const textRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
@@ -57,52 +55,47 @@ export default function AdminCommentsContentsPage({
   // 답변 수정하기
   const changeAnswer = async () => {
     // 관리자 로그인 체크
-    checkAccessToken(true);
+    if (!checkAccessToken(true)) return;
     if (isAlreadyDeleted)
       return alert("삭제된 댓글에는 답변을 등록할 수 없습니다.");
 
     const _info: WriteInfoTypes = { ...(info as WriteInfoTypes) };
+    _info.answer = answer;
+    _info.bugStatus = bugStatus;
 
-    if (_info.category === "bug") {
-      // 답변이 등록됐다면 이슈 처리중으로 자동 변환
-      _info.bugStatus = bugStatus;
-      if (!_info.bugStatus) _info.bugStatus = 1;
+    changeLoading(true);
 
-      if (!answer.trim())
-        // 답변이 비어있다면 자동 매크로 적용
-        answer = getBugAutoAnswer(_info.bugStatus);
-    }
-    if (!answer.trim()) {
-      alert("답변을 입력해주세요.");
-      if (textRef && textRef.current) textRef.current.focus();
-    } else {
-      changeLoading(true);
-      _info.answer = answer;
-      _info.answerCreatedAt = getServerTime();
+    // 답변 업데이트
+    try {
+      const updateResult = await (
+        await commentsApis({
+          module: commentsInfo.selectModule,
+          input: _info,
+          isAdmin: true,
+        })
+      ).modifyComments({
+        password: "",
+        originInput: info as WriteInfoTypes,
+        changeInput: _info,
+        updateCategory: true,
+      });
 
-      // 답변 업데이트
-      try {
-        await getDoc("comments", commentsInfo.selectModule, "comment")
-          .doc(_info.id)
-          .update(_info);
-
-        try {
-          // 개수 업데이트 후 최종 종료
-          if (await updateFilterCount(_info as InfoTypes)) {
-            changeLoading(false);
-
-            fetchComments(commentsInfo);
-            alert("답변이 업데이트 되었습니다.");
-          }
-        } catch (err2) {
-          alert("댓글 개수 업데이트에 실패했습니다.");
-          console.log(err2);
-        }
-      } catch (err) {
-        alert("답변 등록에 실패했습니다.");
-        console.log(err);
+      if (updateResult.msg) {
+        // 업데이트에 실패할 경우
+        alert(updateResult.msg);
+        if (updateResult.msg === "답변을 입력해주세요.")
+          textRef.current.focus();
+      } else {
+        // 업데이트에 성공한 경우
+        fetchComments(commentsInfo);
+        alert("답변이 업데이트 되었습니다.");
       }
+    } catch (err) {
+      console.log(err);
+      alert("답변 업데이트에 실패했습니다.");
     }
+
+    changeLoading(false);
   };
 
   const renderOptionList = () => {
@@ -175,6 +168,7 @@ export default function AdminCommentsContentsPage({
     return <OptionList>{getOptionList()}</OptionList>;
   };
 
+  // 답변 내용 변경하기
   const saveAnswer = (text: string) => {
     answer = text;
   };

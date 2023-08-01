@@ -21,6 +21,7 @@ import {
   ContentsSelectTypeName,
 } from "../../list.data";
 import { AdminBugStatusSelectList } from "./contents.select.functional.data";
+import { changeClientText } from "src/main/commonsComponents/functional";
 
 export default function ContentsSelectFunctionalUIPage({
   type,
@@ -83,7 +84,7 @@ export default function ContentsSelectFunctionalUIPage({
         <CommentsInfoItems isAnswerType={showAnswer !== "" || isAnswerType}>
           <_Input
             isTextArea
-            defaultValue={info.contents.split("<br />").join("\n")}
+            defaultValue={changeClientText(info.contents)}
             readOnly={type !== "modify"}
             className="optional-input"
             onChangeEvent={(text) => changeData(text, "contents")}
@@ -97,10 +98,11 @@ export default function ContentsSelectFunctionalUIPage({
               onChangeEvent={(text) => changeData(text, "answer")}
               className="optional-answer-input"
               maxLength={500}
-              defaultValue={info.answer?.split("<br />").join("\n")}
+              defaultValue={changeClientText(info?.answer || "")}
               readOnly={!isAnswerType || !adminLogin}
               inputRef={answerRef}
               placeHolder="답변을 입력해주세요."
+              onSubmitEvent={confirm}
             />
           )}
         </CommentsInfoItems>
@@ -118,9 +120,6 @@ export default function ContentsSelectFunctionalUIPage({
         {adminLogin && info.category === "bug" && type === "question" && (
           <BugStatusWrapper>
             {AdminBugStatusSelectList.slice(info.bugStatus).map((listInfo) => {
-              {
-                /* {AdminBugStatusSelectList.map((listInfo) => { */
-              }
               return (
                 <Tooltip
                   key={`bug-status-${listInfo.name}-${status}`}

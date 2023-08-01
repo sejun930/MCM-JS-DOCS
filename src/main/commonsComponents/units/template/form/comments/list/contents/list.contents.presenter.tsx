@@ -64,8 +64,6 @@ export default function ListContentsInfoUIPage({
     else if (info.category === "review") answerClass += " review-answer";
   }
 
-  console.log(info.modifyAt, info);
-
   return (
     <CommentsList
       hover={hover}

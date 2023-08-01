@@ -9,7 +9,11 @@ import blockApis from "../block/block.apis";
 import countApis from "./count/count.apis";
 
 import { getServerTime } from "../../firebase";
-import { checkSamePassword } from "src/main/commonsComponents/functional";
+import {
+  changeServerText,
+  checkSamePassword,
+  getBugAutoAnswer,
+} from "src/main/commonsComponents/functional";
 
 // 댓글 관련 apis
 const commentsApis = async ({
@@ -47,7 +51,7 @@ const commentsApis = async ({
     addComments: async (
       updateCategory?: boolean // 카테고리 업데이트 여부
     ): Promise<ReturnCommentsResultType> => {
-      if (checkBlockUser?.ip) {
+      if (checkBlockUser.isBlock) {
         // 차단된 유저라면 게시물 작성 금지
         result.msg = "차단된 유저입니다.";
       } else {
@@ -92,8 +96,6 @@ const commentsApis = async ({
       password: string;
       updateCategory?: boolean; // 카테고리 업데이트 여부
     }): Promise<ReturnCommentsResultType> => {
-      console.log(password);
-
       // 관리자이거나 비밀번호 체크하기 (관리자일 경우 비밀번호 체크를 하지 않음)
       const samePw =
         isAdmin || (await checkSamePassword(input.password, password));
@@ -154,30 +156,56 @@ const commentsApis = async ({
         try {
           changeInput.modifyAt = getServerTime(); // 수정일 기입
 
+          // 답변 등록용
           if (originInput.answer !== changeInput.answer) {
             // 새로운 답변이 등록될 경우, 답변일 변경
             changeInput.answerCreatedAt = getServerTime();
+
+            if (changeInput.category === "bug") {
+              // 이슈 카테고리일 경우
+              if (changeInput.bugStatus === 0) {
+                // 이슈 레벨이 "확인 대기중"일 경우
+                changeInput.bugStatus = 1; // 이슈 처리중으로 변경
+              }
+
+              if (!changeInput.answer?.trim()) {
+                // 이슈 답장이 없을 경우 자동매크로 답변 등록
+                changeInput.answer = getBugAutoAnswer(changeInput.bugStatus);
+              }
+            } else {
+              // 답장이 비어있을 경우
+              if (!changeInput.answer?.trim())
+                result.msg = "답변을 입력해주세요.";
+            }
+            changeInput.answer = changeServerText(
+              (changeInput?.answer || "").trim()
+            );
           }
 
-          // 수정된 내용 최종 저장
-          await commentDoc.doc(originInput.id).update(changeInput);
-          result.success = true;
+          // 에러 메세지가 없을 경우 (= 업데이트 가능)
+          if (!result.msg) {
+            // 수정된 내용 최종 저장
+            await commentDoc.doc(originInput.id).update(changeInput);
+            result.success = true;
 
-          try {
-            if (updateCategory) {
-              // 카테고리 업데이트
-              const { docId, countList } = await countApis({ module }).modify({
-                originInput,
-                changeInput,
-              });
+            try {
+              if (updateCategory) {
+                // 카테고리 업데이트
+                const { docId, countList } = await countApis({ module }).modify(
+                  {
+                    originInput,
+                    changeInput,
+                  }
+                );
 
-              // 카테고리 최종 업데이트
-              if (docId)
-                return await countApis({ module }).update(docId, countList);
+                // 카테고리 최종 업데이트
+                if (docId)
+                  return await countApis({ module }).update(docId, countList);
+              }
+            } catch (err2) {
+              console.log(err2);
+              result.msg = "카테고리 (수정)업데이트에 실패했습니다.";
             }
-          } catch (err2) {
-            console.log(err2);
-            result.msg = "카테고리 (수정)업데이트에 실패했습니다.";
           }
         } catch (err) {
           console.log(err);

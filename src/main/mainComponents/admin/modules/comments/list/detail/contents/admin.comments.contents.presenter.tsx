@@ -7,9 +7,10 @@ import {
   ListOptionalModifiedWrapper,
 } from "./admin.comments.contents.styles";
 
+import { MutableRefObject } from "react";
 import { Tooltip } from "mcm-js";
 import { _Input, _SpanText, _PText } from "mcm-js-commons";
-import { MutableRefObject } from "react";
+
 import { getDateForm } from "src/main/commonsComponents/functional";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 

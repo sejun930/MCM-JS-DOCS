@@ -4,7 +4,7 @@ import { adminLoginState } from "src/commons/store";
 import Template from "../units/template/main";
 
 import { Modal } from "mcm-js";
-import AdminLoginPage from "src/main/mainComponents/admin/login";
+import AdminLoginPage from "src/main/mainComponents/admin/login/admin.login.container";
 import CommonsHooksComponents from "../hooks/commonsHooks";
 
 import { checkAccessToken } from "./check";

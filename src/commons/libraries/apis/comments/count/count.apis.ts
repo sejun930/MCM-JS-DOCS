@@ -4,6 +4,11 @@ import {
   QueryDocumentSnapshotDocumentData,
   getDoc,
 } from "src/commons/libraries/firebase";
+import { deepCopy } from "src/main/commonsComponents/functional";
+import {
+  CommentsAllInfoTypes,
+  initCountList,
+} from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
 // 카운트 관련 apis
@@ -48,6 +53,7 @@ const countApis = ({ module }: { module: string }) => {
 
       return result;
     },
+
     // 댓글 삭제시 카운트 업데이트 (최종 업데이트 X)
     remove: async ({
       input,
@@ -89,6 +95,7 @@ const countApis = ({ module }: { module: string }) => {
 
       return result;
     },
+
     // 댓글 수정시 카운트 업데이트 (최종 업데이트 X)
     modify: async ({
       originInput,
@@ -160,6 +167,7 @@ const countApis = ({ module }: { module: string }) => {
 
       return result;
     },
+
     // 카운트 Doc 가져오기
     getCountDoc: async (category: string) => {
       const docs = (await countDoc.where("category", "==", category).get())
@@ -169,6 +177,7 @@ const countApis = ({ module }: { module: string }) => {
         docId: docs.id,
       };
     },
+
     // 전체 리스트 가져오기
     getAllCountList: async () => {
       return (await countDoc.get()).docs.reduce(
@@ -181,6 +190,89 @@ const countApis = ({ module }: { module: string }) => {
         },
         {}
       );
+    },
+
+    // 카테고리 개수 동기화 시키기 (+ 필터 적용하기)
+    asyncAllCountList: async (info: CommentsAllInfoTypes) => {
+      const filterCountList = deepCopy(info.countFilterList);
+
+      if (module) {
+        try {
+          // 전체 카테고리 리스트 가져오기
+          const categoryList = Object.entries(
+            await countApis({ module }).getAllCountList()
+          );
+
+          if (!categoryList.length) {
+            // 비어있을 경우 새로 생성하기
+            const doc = getDoc("comments", module, "count");
+            Promise.all(
+              initCountList.map(
+                async (el) =>
+                  await (doc as CollectionReferenceDocumentData).add(el)
+              )
+            );
+          } else {
+            // 각각의 카테고리 정보 가져오기
+            categoryList.forEach((data) => {
+              const [category, categoryInfo] = data;
+
+              // 서버에서 가져온 데이터와 종합하기
+              filterCountList[category] = {
+                ...filterCountList[category],
+                ...categoryInfo,
+              };
+
+              // count와 카테고리만 제외한 나머지 필터 키값만 가져오기
+              // 현재 선택되어 있는 필터 정보 가져오기
+              const { list } = info.filter;
+
+              if (category === "question" && list["question-complete"]) {
+                // 카테고리가 문의이면서 완료된 항목만 검색할 경우
+                filterCountList[category].count =
+                  categoryInfo["question-complete"];
+              } else if (category === "review" || category === "bug") {
+                // 카테고리가 리뷰 또는 버그일 경우
+
+                if (category === "bug" && list["bug-complete"]) {
+                  // 카테고리가 버그이면서 완료된 항목 검색시
+                  filterCountList[category].count =
+                    categoryInfo["bug-complete"];
+                }
+
+                // 점수별로 필터가 있는지 검증
+                const isFilter = Array.from(
+                  new Array(5),
+                  (_, idx) => 1 + idx
+                ).some((num) => list[`${category}-${num}`]);
+
+                if (isFilter) {
+                  // 필터 검증을 위해 전체 개수 초기화
+                  filterCountList[category].count = 0;
+
+                  // 필터가 하나라도 있는 경우
+                  Array.from(new Array(5), (_, idx) => 1 + idx).forEach(
+                    (num) => {
+                      if (info.filter.list[`${category}-${num}`]) {
+                        filterCountList[category].count +=
+                          categoryInfo[`${category}-${num}`];
+                      }
+                    }
+                  );
+                }
+              }
+            });
+            // 전체 개수 구하기
+            filterCountList.all.count = 0;
+            for (const category in filterCountList) {
+              filterCountList.all.count += filterCountList[category].count;
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      return filterCountList;
     },
   };
 };

@@ -32,7 +32,7 @@ export default function AdminCommentsCategoryPage({
             const isSelected = info.selectCategory === data[0];
 
             // 해당 카테고리의 전체 데이터 수
-            let categoryLen = info.countList[data[0]] || 0;
+            let categoryLen = info[data[0]] || 0;
             if (categoryLen > 999) categoryLen = 999;
 
             return (

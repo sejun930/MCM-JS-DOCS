@@ -16,6 +16,8 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
   const [fix, setFix] = useState(true);
   // 최소화 여부
   const [isMinimum, setIsMinimum] = useState(false);
+  // 데이터 로딩중 여부
+  const [isLoading, setIsLoading] = useState(false);
 
   // 목차창 on/off
   const toggleIndex = (bool?: boolean) => {
@@ -37,6 +39,10 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
 
   // 페이지 렌더 여부 확인 및 최종 렌더하기
   const renderIndexPage = () => {
+    const changeLoading = (bool: boolean) => {
+      setIsLoading(bool);
+    };
+
     let node = (
       <_IndexForm
         {...props}
@@ -46,6 +52,8 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
         isMinimum={isMinimum}
         toggleMinimum={toggleMinimum}
         show={show}
+        isLoading={isLoading}
+        changeLoading={changeLoading}
       />
     );
     let errorMessage;
@@ -97,6 +105,7 @@ export default function IndexRenderPage(props: IndexIPropsTypes) {
         fix={offFixed ? false : fix}
         isMinimum={isMinimum}
         show={show}
+        isLoading={isLoading || false}
       >
         {node}
       </Wrapper>

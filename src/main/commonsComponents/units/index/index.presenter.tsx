@@ -4,9 +4,10 @@ import {
   Items,
   OptionWrapper,
   OpenIndexButton,
+  Loading,
 } from "./index.styles";
 
-import { _Button, _CloseButton } from "mcm-js-commons";
+import { _Button, _CloseButton, _PText } from "mcm-js-commons";
 import { getUuid } from "../../functional";
 
 import { indexOptionalDataList } from "./index.data";
@@ -20,13 +21,30 @@ import {
 
 type allTypes = IndexIPropsTypes & IndexUIPropsTypes & IndexPagePropsTypes;
 export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
-  const { indexList, current, moveIndex, toggleIndex, isMinimum, show } = props;
+  const {
+    indexList,
+    current,
+    moveIndex,
+    toggleIndex,
+    isMinimum,
+    show,
+    isLoading,
+  } = props;
 
   return (
     <Items className="mcm-index-items">
+      {(isLoading && (
+        <Loading>
+          <_PText>페이지 로딩중</_PText>
+        </Loading>
+      )) || <></>}
+
       {show ? (
         <>
-          <OptionWrapper className="mcm-index-option-wrapper">
+          <OptionWrapper
+            className="mcm-index-option-wrapper"
+            isLoading={isLoading}
+          >
             {indexOptionalDataList.map((info, idx) => (
               <Tooltip
                 key={`index-option-list-${info.target}-${idx}`}
@@ -36,10 +54,13 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
                     ? info.tooltipText[Number(props[info.target])]
                     : info.tooltipText
                 }
+                isDisable={isLoading}
               >
                 {info.isClose ? (
                   <_CloseButton
-                    onClickEvent={() => toggleIndex(false)}
+                    onClickEvent={() =>
+                      (!isLoading && toggleIndex(false)) || undefined
+                    }
                     className="mcm-index-close-button"
                   />
                 ) : (
@@ -48,7 +69,10 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
                       info.target
                     }-button ${props[info.target] ? "on" : "off"}`}
                     onClickEvent={() =>
-                      (info.clickEvent && props[info.clickEvent]()) || undefined
+                      (info.clickEvent &&
+                        !isLoading &&
+                        props[info.clickEvent]()) ||
+                      undefined
                     }
                   >
                     {Array.isArray(info.emoji)
@@ -62,9 +86,16 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
           <IndexListWrapper>
             {!isMinimum ? (
               indexList.map((list, idx) => (
-                <IndexList key={getUuid()} isSelected={current === idx}>
+                <IndexList
+                  key={getUuid()}
+                  isSelected={current === idx}
+                  isLoading={isLoading}
+                >
                   <_Button
-                    onClickEvent={() => current !== idx && moveIndex(list.id)}
+                    onClickEvent={() =>
+                      (current !== idx && !isLoading && moveIndex(list.id)) ||
+                      undefined
+                    }
                     className="index-button"
                   >
                     {list.title}
