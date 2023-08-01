@@ -76,7 +76,6 @@ export default function ContentsSelectFunctionalPage({
   const checkAble = () => {
     // 관리자라면 무조건 가능
     if (!adminLogin) {
-      console.log(_contents);
       if (!_contents) return exchangeKey.emptyContents;
       // 비밀번호가 빈칸일 경우
       if (!password) return exchangeKey.emptyPassword;

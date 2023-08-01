@@ -81,7 +81,6 @@ export const getResult = (
       result.push(data);
     }
   );
-  console.log(1);
 
   return result;
 };

@@ -12,7 +12,7 @@ let infiniteRequestDocument: number | ReturnType<typeof setInterval>;
 export default function _IndexForm(
   props: IndexIPropsTypes & IndexPagePropsTypes
 ) {
-  const { indexList, changeLoading, loading } = props;
+  const { indexList, changeLoading, isLoading } = props;
 
   // 현재 선택되어 있는 목차
   const [current, setCurrent] = useState(0);
@@ -34,7 +34,6 @@ export default function _IndexForm(
     clearTimeout(deboucing);
 
     deboucing = window.setTimeout(() => {
-      console.log(1);
       if (indexList.length) {
         indexList.some((info, idx) => {
           const documents = document.getElementById(info.id);
@@ -57,7 +56,7 @@ export default function _IndexForm(
 
   // 해당 목차로 이동하기
   const moveIndex = (id: string) => {
-    if (loading) return;
+    if (isLoading) return;
     // 해당 목차 위치로 스크롤 이동
     moveDocument(id);
     clearInterval(infiniteRequestDocument);
@@ -87,7 +86,7 @@ export default function _IndexForm(
       {...props}
       current={current}
       moveIndex={moveIndex}
-      loading={loading}
+      isLoading={isLoading}
     />
   );
 }

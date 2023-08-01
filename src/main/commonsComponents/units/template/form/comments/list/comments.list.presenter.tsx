@@ -11,7 +11,7 @@ import {
 } from "./comments.list.styles";
 import { MutableRefObject } from "react";
 
-import { InfoTypes, CommentsAllInfoTypes } from "../comments.types";
+import { CommentsAllInfoTypes } from "../comments.types";
 import { categoryInitList } from "../write/comments.write.types";
 
 import { _PText, _Button } from "mcm-js-commons";
@@ -26,8 +26,7 @@ export default function CommentsListUIPage({
   changeInfo,
   listRef,
   fetchCommentsList,
-}: // changePage,
-{
+}: {
   commentsInfo: CommentsAllInfoTypes;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   listRef: MutableRefObject<HTMLUListElement>;
@@ -41,18 +40,19 @@ export default function CommentsListUIPage({
     >
       <CategoryWrapper>
         <CategoryContents>
-          <CategoryItems render={commentsInfo.countList.all !== undefined}>
-            {Object.entries(commentsInfo.countList).map((el, key) => {
-              const [name] = el;
+          <CategoryItems
+            render={commentsInfo.countFilterList.all !== undefined}
+          >
+            {Object.entries(commentsInfo.countFilterList).map((el, key) => {
+              const name = el[0] || "all";
 
               // 현재 선택되어 있는 카테고리인지?
               const isSelected = commentsInfo.selectCategory === name;
-
               const info = { ...commentsInfo, ["selectCategory"]: name };
 
               // 해당 카테고리의 개수
               let categoryLen: string | number =
-                commentsInfo.countList[name || "all"];
+                commentsInfo.countFilterList[name].count;
               if (categoryLen > 999) categoryLen = `999+`;
 
               // 선택 불가능한 카테고리인지? (개수가 0개일 때)
@@ -79,7 +79,7 @@ export default function CommentsListUIPage({
           <Shadow />
         </CategoryContents>
 
-        {commentsInfo.countList.all !== undefined && (
+        {commentsInfo.countFilterList.all.count !== undefined && (
           <CommentsFilterPage
             commentsInfo={commentsInfo}
             changeInfo={changeInfo}
@@ -105,15 +105,6 @@ export default function CommentsListUIPage({
               fetchCommentsList={fetchCommentsList}
             />
           ))}
-          {/* <PaginationWrapper>
-            <_PaginationForm
-              allData={commentsInfo.filter.allData}
-              currentPage={commentsInfo.filter.page}
-              limit={commentsInfo.filter.limit}
-              changePageEvent={changePage}
-              startPage={commentsInfo.filter.startPage}
-            />
-          </PaginationWrapper> */}
         </CommentListItems>
       )}
     </CommentsListWrapper>

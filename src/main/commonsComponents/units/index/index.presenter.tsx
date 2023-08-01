@@ -28,20 +28,23 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
     toggleIndex,
     isMinimum,
     show,
-    loading,
+    isLoading,
   } = props;
 
   return (
     <Items className="mcm-index-items">
-      {loading && (
+      {(isLoading && (
         <Loading>
           <_PText>페이지 로딩중</_PText>
         </Loading>
-      )}
+      )) || <></>}
 
       {show ? (
         <>
-          <OptionWrapper className="mcm-index-option-wrapper" loading={loading}>
+          <OptionWrapper
+            className="mcm-index-option-wrapper"
+            isLoading={isLoading}
+          >
             {indexOptionalDataList.map((info, idx) => (
               <Tooltip
                 key={`index-option-list-${info.target}-${idx}`}
@@ -51,11 +54,13 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
                     ? info.tooltipText[Number(props[info.target])]
                     : info.tooltipText
                 }
-                isDisable={loading}
+                isDisable={isLoading}
               >
                 {info.isClose ? (
                   <_CloseButton
-                    onClickEvent={() => !loading && toggleIndex(false)}
+                    onClickEvent={() =>
+                      (!isLoading && toggleIndex(false)) || undefined
+                    }
                     className="mcm-index-close-button"
                   />
                 ) : (
@@ -65,7 +70,7 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
                     }-button ${props[info.target] ? "on" : "off"}`}
                     onClickEvent={() =>
                       (info.clickEvent &&
-                        !loading &&
+                        !isLoading &&
                         props[info.clickEvent]()) ||
                       undefined
                     }
@@ -84,11 +89,12 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
                 <IndexList
                   key={getUuid()}
                   isSelected={current === idx}
-                  loading={loading}
+                  isLoading={isLoading}
                 >
                   <_Button
                     onClickEvent={() =>
-                      current !== idx && !loading && moveIndex(list.id)
+                      (current !== idx && !isLoading && moveIndex(list.id)) ||
+                      undefined
                     }
                     className="index-button"
                   >

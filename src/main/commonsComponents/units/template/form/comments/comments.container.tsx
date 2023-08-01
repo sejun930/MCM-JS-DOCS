@@ -25,6 +25,7 @@ import {
   moveDocument,
 } from "src/main/commonsComponents/functional";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import countApis from "src/commons/libraries/apis/comments/count/count.apis";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
@@ -65,7 +66,8 @@ export default function CommentsPage() {
     notLimit?: boolean; // 전체 데이터로 가져오기
     startPage?: number; // 시작용 페이지
   }) => {
-    const { selectCategory } = info;
+    const { selectCategory, filter } = info;
+    const { list, limit, page } = filter;
 
     // 선택되어 있는 카테고리가 있다면 해당 카테고리 조회
     if (selectCategory !== "all" && selectCategory) {
@@ -75,14 +77,14 @@ export default function CommentsPage() {
     switch (selectCategory) {
       case "bug":
         // 카테고리가 버그일 경우
-        if (info.filter.list["bug-complete"])
+        if (list["bug-complete"])
           // 해결 완료만 보기
           doc = doc.where("bugStatus", "==", 2);
         break;
 
       case "question":
         // 카테고리가 문의일 경우
-        if (info.filter.list["question-complete"])
+        if (list["question-complete"])
           // 답변 완료만 보기
           doc = doc.where("answer", "!=", "").orderBy("answer");
         break;
@@ -93,8 +95,8 @@ export default function CommentsPage() {
       const numArr = [];
 
       // 선택한 점수들만 모아보기
-      for (const num in info.filter.list) {
-        if (info.filter.list[num]) {
+      for (const num in list) {
+        if (list[num]) {
           const _rating = num.split("-");
 
           if (_rating[0] === selectCategory && Number(_rating[1]))
@@ -111,10 +113,10 @@ export default function CommentsPage() {
     doc = doc.where("deletedAt", "==", null);
 
     // 과거순 및 최신순으로 조회하기
-    doc = doc.orderBy("createdAt", info.filter.list.oddest ? "asc" : "desc");
+    doc = doc.orderBy("createdAt", list.oddest ? "asc" : "desc");
 
     // 페이지 별로 데이터 limit 개씩 노출
-    if (!notLimit) doc = doc.limit(info.filter.limit * info.filter.page);
+    if (!notLimit) doc = doc.limit(limit * page);
 
     return doc;
   };
@@ -132,7 +134,7 @@ export default function CommentsPage() {
       const _info = deepCopy(info || commentsInfo);
 
       for (const filter in _info.filter.list) {
-        if (!_info.countFilterList[filter]) {
+        if (!_info.filter.list[filter]) {
           _info.filter.list[filter] = false;
         }
       }
@@ -152,12 +154,14 @@ export default function CommentsPage() {
         _commentInfo.commentsList = getResult(result);
 
         // 카테고리 개수 저장하기
-        const getCountList = await saveCategoryCount(_commentInfo);
-        _commentInfo.countList = getCountList._list;
+        const getCountList = await countApis({ module }).asyncAllCountList(
+          _commentInfo
+        );
+        _commentInfo.countFilterList = getCountList;
 
         // 전체 데이터 수 저장하기
         _commentInfo.filter.allData =
-          getCountList._list[_commentInfo.selectCategory];
+          _commentInfo.countFilterList[_commentInfo.selectCategory].count;
 
         // 버그 카테고리이면서 필터 중 "완료된 것만 보기"가 적용되어 있을 경우
         if (
@@ -185,21 +189,19 @@ export default function CommentsPage() {
 
             const allSize = (await bugDoc.get()).size;
             _commentInfo.filter.allData = allSize;
-            _commentInfo.countList[_commentInfo.selectCategory] = allSize;
+            _commentInfo.countFilterList[_commentInfo.selectCategory].count =
+              allSize;
 
             // 필터가 제외된 전체 데이터 가져오기
-            _commentInfo.countList["all"] =
-              _commentInfo.countList.review +
-              _commentInfo.countList.question +
+            _commentInfo.countFilterList.all.count =
+              _commentInfo.countFilterList.review.count +
+              _commentInfo.countFilterList.question.count +
               allSize;
           }
         }
 
-        // 카테고리 필터 개수 저장하기
-        _commentInfo.countFilterList = getCountList.filterCountList;
-
         // 시작 페이지 저장
-        if (startPage) _commentInfo.filter.startPage = startPage;
+        if (startPage) _commentInfo.filter.startPage = startPage || 1;
 
         // 유저 아이피 조회
         const userIp: string = await getUserIp();
@@ -228,20 +230,16 @@ export default function CommentsPage() {
 
   // 카테고리 개수 저장하기
   const saveCategoryCount = async (info: CommentsAllInfoTypes) => {
-    const _list: { [key: string]: number } = {
-      all: 0,
-      bug: 0,
-      question: 0,
-      review: 0,
-    };
-    let filterCountList: { [key: string]: number } = {};
+    return;
+
+    const filterCountList = deepCopy(info.countFilterList);
 
     if (module) {
       try {
         const doc = getDoc("comments", module, "count");
 
-        const result = await apis(doc).read();
-        if (result.empty) {
+        const categoryList = await apis(doc).read();
+        if (categoryList.empty) {
           // 비어있을 경우 새로 생성하기
           Promise.all(
             initCountList.map(async (el) => {
@@ -249,64 +247,63 @@ export default function CommentsPage() {
             })
           );
         } else {
-          result.forEach((data) => {
+          categoryList.forEach((data) => {
             const _data = data.data();
 
+            // 각각의 카테고리 정보 가져오기
+            filterCountList[_data.category] = {
+              ...filterCountList[_data.category],
+              ..._data,
+            };
+            filterCountList[_data.category].id = data.id;
+
             // count와 카테고리만 제외한 나머지 필터 키값만 가져오기
-            const { count, category, ...countFilterList } = _data;
-            filterCountList = { ...filterCountList, ...countFilterList };
+            const { category } = _data;
+            // 현재 선택되어 있는 필터 정보 가져오기
+            const { list } = info.filter;
 
-            // 모든 개수 카운트하기
-            _list[category] = _data.count;
-
-            if (
-              category === "question" &&
-              info.filter.list["question-complete"]
-            ) {
+            if (category === "question" && list["question-complete"]) {
               // 카테고리가 문의이면서 완료된 항목만 검색할 경우
-              _list.question = _data["question-complete"];
+              filterCountList[category].count = _data["question-complete"];
             } else if (category === "review" || category === "bug") {
               // 카테고리가 리뷰 또는 버그일 경우
 
-              if (category === "bug" && info.filter.list["bug-complete"]) {
+              if (category === "bug" && list["bug-complete"]) {
                 // 카테고리가 버그이면서 완료된 항목 검색시
-                _list[category] = _data["bug-complete"];
+                filterCountList[category].count = _data["bug-complete"];
               }
 
               // 점수별로 필터가 있는지 검증
               const isFilter = Array.from(
                 new Array(5),
                 (_, idx) => 1 + idx
-              ).some((num) => info.filter.list[`${category}-${num}`]);
+              ).some((num) => list[`${category}-${num}`]);
 
               if (isFilter) {
-                _list[category] = 0;
+                // 필터 검증을 위해 전체 개수 초기화
+                filterCountList[category].count = 0;
 
                 // 필터가 하나라도 있는 경우
                 Array.from(new Array(5), (_, idx) => 1 + idx).forEach((num) => {
                   if (info.filter.list[`${category}-${num}`]) {
-                    _list[category] += _data[`${category}-${num}`];
+                    filterCountList[category].count +=
+                      _data[`${category}-${num}`];
                   }
                 });
               }
             }
           });
-
           // 전체 개수 구하기
-          let allCount = 0;
-          for (const key in _list) {
-            allCount += _list[key];
+          filterCountList.all.count = 0;
+          for (const category in filterCountList) {
+            filterCountList.all.count += filterCountList[category].count;
           }
-          _list.all = allCount;
         }
       } catch (err) {
         console.log(err);
       }
     }
-    // 과거순 정렬은 무조건 선택 가능
-    filterCountList.oddest = 1;
-
-    return { _list, filterCountList };
+    return filterCountList;
   };
 
   // 데이터 정보 변경하기

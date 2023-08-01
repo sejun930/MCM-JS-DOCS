@@ -16,10 +16,15 @@ let waiting = false; // 선택에 대한 딜레이 지정
 export default function CommentsFilterPage({
   commentsInfo,
   changeInfo,
+  isAdmin,
 }: {
   commentsInfo: CommentsAllInfoTypes;
   changeInfo: (info: CommentsAllInfoTypes) => void;
+  isAdmin?: boolean;
 }) {
+  const { selectCategory, commentsList, countFilterList, filter } =
+    commentsInfo;
+
   // 필터창 오픈 여부
   const [open, setOpen] = useState(false);
   // 필터 리스트
@@ -31,14 +36,11 @@ export default function CommentsFilterPage({
     // 카테고리가 변경될 경우 필터 변경하기
     let _filterList = [...filterInitList];
 
-    if (commentsInfo.commentsList.length) {
-      if (categoryFilterList[commentsInfo.selectCategory]) {
+    if (commentsList.length) {
+      if (categoryFilterList[selectCategory]) {
         // 해당 카테고리에서만 사용 가능한 필터가 존재할 경우
         // 기존의 필터리스트에 추가
-        _filterList = [
-          ..._filterList,
-          ...categoryFilterList[commentsInfo.selectCategory],
-        ];
+        _filterList = [..._filterList, ...categoryFilterList[selectCategory]];
       }
 
       // 노출될 수 있는 필터 리스트
@@ -51,10 +53,15 @@ export default function CommentsFilterPage({
       );
 
       // 현재 노출될 필터가 아니라면 모두 비활성화
-      for (const list in commentsInfo.filter.list) {
+      for (const list in filter.list) {
         if (!ableFilterList[list] || ableFilterList[list] === undefined) {
-          commentsInfo.filter.list[list] = false;
+          filter.list[list] = false;
         }
+      }
+
+      // 관리자가 아니라면, 관리자 권한이 없는 필터는 제거
+      if (!isAdmin) {
+        _filterList = _filterList.filter((el) => !el.isShowAdmin);
       }
 
       setFilterList(_filterList);
@@ -64,7 +71,7 @@ export default function CommentsFilterPage({
         setOpen(false);
       }, 100);
     }
-  }, [commentsInfo.selectCategory]);
+  }, [selectCategory]);
 
   // 필터 현재 이미지 렌더
   const getFilterImage = (): string => {
@@ -74,7 +81,7 @@ export default function CommentsFilterPage({
     let icon = open ? "click" : "off";
 
     // 필터가 설정되어 있는지 체크
-    const filterList = commentsInfo.filter.list;
+    const filterList = filter.list;
     for (const list in filterList) {
       if (filterList[list]) {
         icon = "on";
@@ -87,7 +94,7 @@ export default function CommentsFilterPage({
 
   // 필터창 오픈 및 닫기
   const toggleFilter = (bool?: boolean) => {
-    if (commentsInfo.commentsList.length)
+    if (commentsList.length)
       setOpen(bool !== undefined ? bool : (prev) => !prev);
   };
 
@@ -96,12 +103,13 @@ export default function CommentsFilterPage({
     if (isEmpty || waiting) return;
     waiting = true;
 
-    commentsInfo.filter.list[info.target] =
-      commentsInfo.filter.list[info.target] !== undefined
-        ? !commentsInfo.filter.list[info.target]
+    const _commentsInfo = { ...commentsInfo };
+    _commentsInfo.filter.list[info.target] =
+      _commentsInfo.filter.list[info.target] !== undefined
+        ? !_commentsInfo.filter.list[info.target]
         : true;
 
-    changeInfo(commentsInfo);
+    changeInfo(_commentsInfo);
     window.setTimeout(() => {
       waiting = false;
     }, 0);
@@ -112,8 +120,8 @@ export default function CommentsFilterPage({
     let able = false;
 
     // 필터가 하나라도 적용되어 있는지 체크
-    for (const list in commentsInfo.filter.list) {
-      if (commentsInfo.filter.list[list]) {
+    for (const list in filter.list) {
+      if (filter.list[list]) {
         able = true;
         break;
       }
@@ -137,7 +145,7 @@ export default function CommentsFilterPage({
         <FilterButton
           onClickEvent={() => toggleFilter()}
           className="filter-button"
-          disable={!commentsInfo.commentsList.length}
+          disable={!commentsList.length}
         >
           <_Image src={getFilterImage()} className="filter-image" />
         </FilterButton>
@@ -147,9 +155,12 @@ export default function CommentsFilterPage({
           className="filter-select"
         >
           {filterList.map((el) => {
-            const isSelected = commentsInfo.filter.list[el.target] || false;
+            const isSelected = filter.list[el.target] || false;
+            // @ts-ignore
+            const count = countFilterList[selectCategory][el.target];
+
             // 필터의 개수가 0개인지 검증
-            const isEmpty = !commentsInfo.countFilterList[el.target];
+            let isEmpty = count === 0;
 
             return (
               <FilterList
@@ -159,9 +170,7 @@ export default function CommentsFilterPage({
                 isEmpty={isEmpty}
               >
                 {(isSelected && "✔") || ""} {el.name}{" "}
-                {el.target !== "oddest" &&
-                  !el.isHide &&
-                  `(${commentsInfo.countFilterList[el.target]})`}
+                {count && !el.isHide && `(${count})`}
               </FilterList>
             );
           })}

@@ -8,7 +8,7 @@ interface StyleTypes {
   fix?: boolean;
   isMinimum?: boolean;
   show?: boolean;
-  loading?: boolean;
+  isLoading?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -31,11 +31,6 @@ export const Wrapper = styled.div`
     props.fix && {
       opacity: 1,
     }}
-
-  /* ${(props) =>
-    props.loading && {
-      filter: "blur(3px)",
-    }} */
 
   ${(props) =>
     !props.show && {
@@ -103,7 +98,7 @@ export const IndexList = styled.li`
       }}
 
     ${(props) =>
-      props.loading && {
+      props.isLoading && {
         cursor: "default",
       }}
   }
@@ -122,7 +117,7 @@ export const OptionWrapper = styled.div`
   background-color: white;
 
   ${(props: StyleTypes) =>
-    props.loading && {
+    props.isLoading && {
       filter: "blur(2px)",
     }}
 
@@ -131,7 +126,7 @@ export const OptionWrapper = styled.div`
     height: 15px;
 
     ${(props) =>
-      props.loading && {
+      props.isLoading && {
         cursor: "default",
       }}
   }

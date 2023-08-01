@@ -104,7 +104,7 @@ export default function AdminCommentsUIPage({
               changeInfo={changeInfo}
               render={render}
             />
-            <CommentsFilterPage commentsInfo={info} />
+            {/* <CommentsFilterPage commentsInfo={info} /> */}
           </CategoryFilterWrapper>
 
           <AdminCommentsListPage

@@ -12,7 +12,7 @@ export interface IndexPagePropsTypes {
   fix: boolean;
   isMinimum: boolean;
   show: boolean;
-  loading: boolean;
+  isLoading: boolean;
   changeLoading: (bool: boolean) => void;
 }
 
