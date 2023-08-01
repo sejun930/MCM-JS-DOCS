@@ -25,7 +25,6 @@ export default function AdminCommentsDetailUIPage({
   isAlreadyDeleted,
   removeComments,
   changeLoading,
-  updateFilterCount,
   fetchComments,
 }: {
   info: InfoTypes;
@@ -33,7 +32,6 @@ export default function AdminCommentsDetailUIPage({
   isAlreadyDeleted: boolean;
   removeComments: (isBlock: boolean) => void;
   changeLoading: (bool: boolean) => void;
-  updateFilterCount: (info: InfoTypes) => Promise<boolean>;
   fetchComments: () => void;
 }) {
   return (
@@ -75,7 +73,6 @@ export default function AdminCommentsDetailUIPage({
         info={info}
         changeLoading={changeLoading}
         commentsInfo={commentsInfo}
-        updateFilterCount={updateFilterCount}
         fetchComments={fetchComments}
         isAlreadyDeleted={isAlreadyDeleted}
       />

@@ -15,7 +15,7 @@ import { _SpanText } from "mcm-js-commons";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { CommentsAllInfoTypes, InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
-import { getBugAutoAnswer } from "src/main/commonsComponents/functional";
+import { changeServerText } from "src/main/commonsComponents/functional";
 
 import blockApis from "src/commons/libraries/apis/block/block.apis";
 import ModalResultForm from "../../../../../modal/modal.result";
@@ -53,8 +53,6 @@ export default function ContentsSelectFunctionalPage({
   const [bugStatus, setBugStatus] = useState<number>(info.bugStatus || 0);
   // 중복 클릭 방지
   const [waiting, setWaiting] = useState(false);
-
-  const [detailInfo, setDetailInfo] = useState<InfoTypes>(info);
 
   const confirmRef = useRef() as MutableRefObject<HTMLButtonElement>;
   const contentsRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
@@ -183,7 +181,6 @@ export default function ContentsSelectFunctionalPage({
     const typeName = ContentsSelectTypeName[type][0];
     let failMsg = ""; // 실패 메세지
 
-    console.log(checkAble());
     // 버튼이 비활성화일 경우
     if (checkAble()) {
       openModal({
@@ -234,33 +231,22 @@ export default function ContentsSelectFunctionalPage({
       } else if (typeName === "수정" || typeName === "답변") {
         const changeInput = {
           ...info,
-          ["contents"]: _contents.split("\n").join("<br />"), // 댓글 내용 수정
+          ["contents"]: changeServerText(_contents), // 댓글 내용 수정
           rating,
           bugLevel,
-        };
+        } as WriteInfoTypes;
         // 새로운 답변이 등록될 경우
         if (typeName === "답변") {
           if (answer) {
-            changeInput.answer = answer.split("\n").join("<br />");
-          } else {
-            if (info.category === "bug")
-              // 이슈에서는 답장 미작성시 매크로 답변으로 자동 등록
-              changeInput.answer = getBugAutoAnswer(bugStatus);
+            changeInput.answer = answer;
           }
           changeInput.bugStatus = bugStatus;
-
-          if (info.category === "bug") {
-            if (!bugStatus) {
-              // 답변을 등록했으나, "이슈 확인전" 상태라면 "이슈 확인중"으로 자동 변환
-              changeInput.bugStatus = 1;
-            }
-          }
         }
 
         const { msg } = await commentApi.modifyComments({
           password,
           originInput: info as WriteInfoTypes,
-          changeInput: changeInput as WriteInfoTypes,
+          changeInput,
           updateCategory: true,
         });
 
@@ -299,7 +285,7 @@ export default function ContentsSelectFunctionalPage({
   return (
     <ContentsSelectFunctionalUIPage
       type={type}
-      info={detailInfo}
+      info={info}
       changeData={changeData}
       passwordRef={passwordRef}
       contentsRef={contentsRef}

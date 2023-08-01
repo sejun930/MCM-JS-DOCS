@@ -63,6 +63,7 @@ export interface BlockInfoTypes {
   createdAt?: DateTypes;
   ip?: string;
   module?: string;
+  isBlock: boolean;
 }
 
 export interface CommentsAllInfoTypes {
@@ -97,9 +98,9 @@ export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
 export const initCommentsInfo: CommentsAllInfoTypes = {
   commentsList: [], // 댓글 리스트
   selectCategory: "all", // 선택된 카테고리
-  countList: {}, // 카테고리 개수 리스트
+  countList: { all: 0, bug: 0, question: 0, review: 0 }, // 카테고리 개수 리스트
   countFilterList: {}, // 카테고리 필터 개수
   filter: { allData: 0, limit: 10, page: 1, startPage: 0, list: {} }, // 필터 정보
-  blockInfo: {},
+  blockInfo: { isBlock: false },
   userIp: "",
 };

@@ -1,26 +1,19 @@
-import {
-  InputWrapper,
-  InputItems,
-  LoginAlertWrapper,
-  LoginForm,
-  Message,
-  SubmitButton,
-  ShowPw,
-} from "./login.styles";
-
-import { Modal, Tooltip } from "mcm-js";
-import { _Title, _Input } from "mcm-js-commons";
-import { FormEvent, MutableRefObject, useRef, useState } from "react";
+import { Message } from "./admin.login.styles";
+import { useState, useRef, MutableRefObject, FormEvent } from "react";
 import { useRecoilState } from "recoil";
 import { ipState } from "src/commons/store";
 
+import { Modal } from "mcm-js";
+
+import { adminLoginInfoData } from "./admin.login.data";
 import {
   getHashText,
-  getDateForm,
   getUserIp,
+  getDateForm,
 } from "src/main/commonsComponents/functional";
-import { adminLoginInfoData } from "./login.data";
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
+
+import AdminLoginUIPage from "./admin.login.presenter";
 
 let debouncing: number | ReturnType<typeof setTimeout>;
 let loading = false; // 중복 클릭 방지
@@ -168,47 +161,14 @@ export default function AdminLoginPage({
   };
 
   return (
-    <LoginAlertWrapper>
-      <_Title className="admin-login-title">
-        <p>비로그인 상태입니다.</p>
-        <p>
-          관리자로 <b>로그인</b>해주세요.
-        </p>
-      </_Title>
-      <LoginForm onSubmit={login}>
-        <InputWrapper>
-          <InputItems>
-            {/* 아이디 입력창 */}
-            <_Input
-              onChangeEvent={(text) => changeInfo(text, "id")}
-              placeHolder="관리자 아이디를 입력해주세요."
-              maxLength={30}
-              inputRef={idRef}
-            />
-          </InputItems>
-
-          <InputItems>
-            {/* 비밀번호 입력창 */}
-            <_Input
-              onChangeEvent={(text) => changeInfo(text, "password")}
-              inputClassName="password-input"
-              inputType={showPw ? "text" : "password"}
-              placeHolder="관리자 비밀번호를 입력해주세요."
-              maxLength={30}
-              inputRef={pwRef}
-            />
-            <ShowPw buttonType="button" onClickEvent={toggleShowPw}>
-              <Tooltip tooltipText={`비밀번호 ${showPw ? "가리기" : "보이기"}`}>
-                {showPw ? "🙈" : "🙉"}
-              </Tooltip>
-            </ShowPw>
-          </InputItems>
-        </InputWrapper>
-        {/* 로그인 버튼 */}
-        <SubmitButton onClickEvent={login} isSubmit={checkInfo()}>
-          로그인
-        </SubmitButton>
-      </LoginForm>
-    </LoginAlertWrapper>
+    <AdminLoginUIPage
+      login={login}
+      changeInfo={changeInfo}
+      idRef={idRef}
+      pwRef={pwRef}
+      showPw={showPw}
+      toggleShowPw={toggleShowPw}
+      checkInfo={checkInfo}
+    />
   );
 }

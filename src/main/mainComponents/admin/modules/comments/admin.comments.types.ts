@@ -36,7 +36,7 @@ export const adminCommentsInit: AdminCommentsInitType = {
     list: {},
     startPage: 0,
   }, // 현재 필터 정보
-  blockInfo: {},
+  blockInfo: { isBlock: false },
   userIp: "",
 };
 

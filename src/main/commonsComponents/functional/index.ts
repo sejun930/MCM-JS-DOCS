@@ -203,6 +203,16 @@ const checkSamePassword = async (
   return hashPassword === (await getHashText(inputPassword));
 };
 
+// 서버 저장용 Text로 변경 (클라이언트로부터 받아온 텍스트를 DB에 저장할 때 사용)
+const changeServerText = (text: string): string => {
+  return text.split("\n").join("<br />");
+};
+
+// 클라이언트 렌더용 Text로 변경 (DB에서 가져온 데이터를 화면에 뿌려줄 때 사용)
+const changeClientText = (text: string): string => {
+  return text.split("<br />").join("\n");
+};
+
 export {
   removeTag,
   getDateForm,
@@ -215,4 +225,6 @@ export {
   getRandomNumber,
   deepCopy,
   checkSamePassword,
+  changeServerText,
+  changeClientText,
 };
