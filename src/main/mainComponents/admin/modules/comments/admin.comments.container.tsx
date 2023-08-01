@@ -4,6 +4,7 @@ import { useState, useEffect, ChangeEvent } from "react";
 import {
   CollectionReferenceDocumentData,
   getDoc,
+  getResult,
 } from "src/commons/libraries/firebase";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
@@ -64,7 +65,7 @@ export default function AdminCommentsPage() {
     isInfinite?: boolean
   ) => {
     // 관리자 권한 검증
-    checkAccessToken(true);
+    if (!checkAccessToken(true)) return;
 
     // isInfinite: 무한 스크롤로 데이터를 조회할 경우
     if (isLoading) return;
@@ -126,23 +127,22 @@ export default function AdminCommentsPage() {
 
         try {
           // 댓글 개수 조회
-          const countDoc = (
-            await getDoc("comments", _info.selectModule, "count").get()
-          ).docs;
-          if (countDoc && countDoc.length) {
+          const filterCountResult = getResult(
+            await apis(getDoc("comments", _info.selectModule, "count")).read()
+          );
+
+          if (filterCountResult.length) {
             const countList: { [key: string]: number } = { all: 0 };
-            const filterCountList: {
+            let filterCountList: {
               [key: string]: { [key: string]: number };
             } = {};
 
-            countDoc.forEach((el) => {
-              const data = el.data();
+            filterCountResult.forEach((el) => {
+              countList[el.category] = el.count;
+              countList.all += el.count;
 
-              countList[data.category] = data.count;
-              countList.all += data.count;
-
-              const { category, count, ...filterCount } = data;
-              filterCountList[data.category] = filterCount;
+              const { category, count, ...filterCount } = el;
+              filterCountList = { ...filterCountList, ...filterCount };
             });
             // 카테고리 별 전체 개수 저장
             _info.countList = countList;
@@ -177,7 +177,7 @@ export default function AdminCommentsPage() {
 
   // 현재 관리자 로그인 체크 및 로딩 체크
   const checkLoading = () => {
-    checkAccessToken(true);
+    if (!checkAccessToken(true)) return false;
     if (isLoading) {
       alert("동기화 작업중입니다. 잠시만 기다려주세요.");
       return false;

@@ -190,7 +190,7 @@ export default function ContentsSelectFunctionalPage({
       if (adminLogin) {
         if (type === "block" || type === "question") {
           // 차단 및 답변일 경우, 현재 로그인이 유지되어 있는 상태인지 검증
-          checkAccessToken(true);
+          if (!checkAccessToken(true)) return false;
         }
       }
 
