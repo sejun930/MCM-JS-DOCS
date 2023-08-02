@@ -35,6 +35,7 @@ export const initCountList: Array<{ [key: string]: number | string }> = [
   {
     category: "bug",
     count: 0,
+    deleted: 0,
     "bug-complete": 0,
     "bug-1": 0,
     "bug-2": 0,
@@ -42,10 +43,11 @@ export const initCountList: Array<{ [key: string]: number | string }> = [
     "bug-4": 0,
     "bug-5": 0,
   },
-  { category: "question", count: 0, "question-complete": 0 },
+  { category: "question", count: 0, deleted: 0, "question-complete": 0 },
   {
     category: "review",
     count: 0,
+    deleted: 0,
     "review-1": 0,
     "review-2": 0,
     "review-3": 0,
@@ -65,15 +67,30 @@ export interface BlockInfoTypes {
   module?: string;
   isBlock: boolean;
 }
-interface CountFilterCommonsType {
+export interface CountFilterCommonsType {
   count: number;
   category: string;
   id: string;
+  deleted: number; // 삭제된 댓글 수
 }
+
+export type CountFilterTypes = {
+  // 카테고리별 전체 개수 및 필터별 개수
+  all: CountFilterCommonsType | { [key: string]: number };
+  bug: CountFilterCommonsType | { [key: string]: number };
+  question: CountFilterCommonsType | { [key: string]: number };
+  review: CountFilterCommonsType | { [key: string]: number };
+} & {
+  [key: string]:
+    | { [key: string]: number & string }
+    | CountFilterCommonsType
+    | (number & string);
+};
 
 export interface CommentsAllInfoTypes {
   commentsList: Array<InfoTypes>;
   selectCategory: CategoryTypes | string;
+  selectModule: string;
   filter:
     | {
         // search: string; // 검색어
@@ -94,19 +111,7 @@ export interface CommentsAllInfoTypes {
       };
   blockInfo: BlockInfoTypes; // 차단된 유저라면 해당 사유 및 아이피 저장
   userIp: string; // 유저 아이피 저장
-  countFilterList:
-    | {
-        // 카테고리별 전체 개수 및 필터별 개수
-        all: CountFilterCommonsType | { [key: string]: number };
-        bug: CountFilterCommonsType | { [key: string]: number };
-        question: CountFilterCommonsType | { [key: string]: number };
-        review: CountFilterCommonsType | { [key: string]: number };
-      } & {
-        [key: string]:
-          | { [key: string]: number }
-          | CountFilterCommonsType
-          | (number & string);
-      };
+  countFilterList: CountFilterTypes;
 }
 
 export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
@@ -115,6 +120,7 @@ export type CommentsPartialPropsType = Partial<CommentsAllInfoTypes>;
 export const initCommentsInfo: CommentsAllInfoTypes = {
   commentsList: [], // 댓글 리스트
   selectCategory: "all", // 선택된 카테고리
+  selectModule: "", // 선택된 모듈
   filter: {
     allData: 0,
     limit: 10,
@@ -126,9 +132,9 @@ export const initCommentsInfo: CommentsAllInfoTypes = {
   blockInfo: { isBlock: false },
   userIp: "",
   countFilterList: {
-    all: { count: 0, category: "all", id: "" },
-    bug: { count: 0, category: "bug", id: "" },
-    question: { count: 0, category: "question", id: "" },
-    review: { count: 0, category: "review", id: "" },
+    all: { count: 0, deleted: 0, category: "all", id: "" },
+    bug: { count: 0, deleted: 0, category: "bug", id: "" },
+    question: { count: 0, deleted: 0, category: "question", id: "" },
+    review: { count: 0, deleted: 0, category: "review", id: "" },
   },
 };

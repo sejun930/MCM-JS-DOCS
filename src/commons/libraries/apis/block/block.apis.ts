@@ -1,8 +1,6 @@
-import { getDoc } from "../../firebase";
+import { getDoc, getServerTime } from "../../firebase";
 import { AddBlockInputType, BlockInputTypes } from "./block.types";
 import { BlockInfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
-
-import { getServerTime } from "../../firebase";
 
 // 차단 관련 apis
 const blockApis = () => {

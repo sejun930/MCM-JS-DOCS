@@ -193,8 +193,9 @@ export default function ContentsSelectFunctionalPage({
         }
       }
 
+      const { ip, contents, category, id } = info;
       const commentApi = await commentsApis({
-        input: info as WriteInfoTypes,
+        ip,
         module,
         isAdmin: adminLogin || false,
       });
@@ -203,6 +204,7 @@ export default function ContentsSelectFunctionalPage({
       if (typeName === "삭제" || typeName === "차단") {
         // 기존에 있던 데이터에 업데이트
         const { msg } = await commentApi.removeComments({
+          input: info as WriteInfoTypes,
           password,
           updateCategory: true,
         });
@@ -210,7 +212,6 @@ export default function ContentsSelectFunctionalPage({
         // 해당 유저 차단
         if (typeName === "차단") {
           try {
-            const { ip, contents, category, id } = info;
             await blockApis().block({
               ip,
               contents,

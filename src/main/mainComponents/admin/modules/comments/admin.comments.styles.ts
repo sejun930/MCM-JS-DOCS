@@ -46,7 +46,7 @@ export const LoadingWrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -96,4 +96,14 @@ export const CategoryFilterWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  width: 100%;
+`;
+
+export const CommentsOptionWrapper = styled.div`
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  z-index: 100;
+  border-bottom: double 4px black;
+  padding-bottom: 30px;
 `;

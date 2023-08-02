@@ -1,18 +1,18 @@
 import styled from "@emotion/styled";
-import { _Title, _SpanText, _Button, _PTextWithHtml } from "mcm-js-commons";
+import { _Title } from "mcm-js-commons";
 
-import { AdminCommentsInitType } from "../admin.comments.types";
+import { FetchCommentsTypes } from "../admin.comments.types";
 import AdminCommentsDetailPage from "./detail/admin.comments.detail.container";
+import { CommentsAllInfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
 export default function AdminCommentsListPage({
   info,
   changeLoading,
   fetchComments,
 }: {
-  info: AdminCommentsInitType;
+  info: CommentsAllInfoTypes;
   changeLoading: (bool: boolean) => void;
-  fetchComments: (info?: AdminCommentsInitType) => void;
-}) {
+} & FetchCommentsTypes) {
   const { commentsList, selectModule, selectCategory } = info;
   const isEmpty = commentsList.length === 0;
 
@@ -47,8 +47,7 @@ export interface StyleTypes {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
-  border-top: double 4px black;
+  /* border-top: double 4px black; */
   /* border-bottom: solid 3px black; */
 
   ${(props: StyleTypes) =>

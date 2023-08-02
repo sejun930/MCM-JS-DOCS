@@ -8,7 +8,7 @@ import {
   WriteButton,
 } from "./comments.write.styles";
 
-import { _Input, _PText, _PTextWithHtml, _SpanText } from "mcm-js-commons";
+import { _Input } from "mcm-js-commons";
 import { IPropsTypes } from "./comments.write.types";
 
 import StarsForm from "./stars";

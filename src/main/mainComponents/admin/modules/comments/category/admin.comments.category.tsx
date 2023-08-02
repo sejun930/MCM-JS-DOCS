@@ -2,25 +2,35 @@ import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
 
 import { categoryListArray } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
-import { AdminCommentsInitType } from "../admin.comments.types";
+import { CommentsAllInfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
+import { FetchCommentsTypes } from "../admin.comments.types";
 
 const categoryList = [...categoryListArray];
 export default function AdminCommentsCategoryPage({
   info,
-  changeInfo,
-}: // render,
-{
-  info: AdminCommentsInitType;
-  changeInfo: (info: AdminCommentsInitType) => void;
-  render: boolean;
-}) {
+  fetchComments,
+  changeLoading,
+}: {
+  info: CommentsAllInfoTypes;
+  changeLoading: (bool: boolean) => void;
+} & FetchCommentsTypes) {
+  const { countFilterList, selectCategory, selectModule } = info;
+
   // 카테고리 변경하기
   const changeCategory = (category: string) => {
     const _info = { ...info, ["selectCategory"]: category };
     _info.filter.page = 1;
     _info.filter.startPage = 0;
 
-    changeInfo(_info);
+    const filterList: { [key: string]: boolean } = {};
+    // 과거순 보기 유지
+    if (_info.filter.list.oddest) filterList.oddest = true;
+    // 삭제된 댓글 보기 유지
+    if (_info.filter.list.deleted) filterList.deleted = true;
+    _info.filter.list = filterList;
+
+    changeLoading(true);
+    fetchComments({ info: _info, moveTop: true });
   };
 
   return (
@@ -29,10 +39,10 @@ export default function AdminCommentsCategoryPage({
         {categoryList &&
           categoryList.map((category, idx) => {
             const data = Object.entries(category)[0];
-            const isSelected = info.selectCategory === data[0];
+            const isSelected = selectCategory === data[0];
 
             // 해당 카테고리의 전체 데이터 수
-            let categoryLen = info[data[0]] || 0;
+            let categoryLen = countFilterList[data[0]].count || 0;
             if (categoryLen > 999) categoryLen = 999;
 
             return (
@@ -41,7 +51,7 @@ export default function AdminCommentsCategoryPage({
                   (!isSelected && categoryLen && changeCategory(data[0])) ||
                   undefined
                 }
-                key={`admin-comments-${info.selectModule}-category-${data[0]}-${data[1]}-${idx}`}
+                key={`admin-comments-${selectModule}-category-${data[0]}-${data[1]}-${idx}`}
                 isSelected={isSelected}
                 isEmpty={categoryLen === 0}
               >
@@ -62,7 +72,6 @@ interface StyleTypes {
 export const CategoryWrapper = styled.div`
   display: flex;
   height: 20px;
-  width: 100%;
 `;
 
 export const CategoryListContents = styled.div`

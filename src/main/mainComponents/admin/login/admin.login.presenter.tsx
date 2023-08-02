@@ -60,7 +60,7 @@ export default function AdminLoginUIPage({
             />
             <ShowPw buttonType="button" onClickEvent={toggleShowPw}>
               <Tooltip tooltipText={`비밀번호 ${showPw ? "가리기" : "보이기"}`}>
-                {showPw ? "🙈" : "🙉"}
+                {!showPw ? "🙈" : "🙉"}
               </Tooltip>
             </ShowPw>
           </InputItems>

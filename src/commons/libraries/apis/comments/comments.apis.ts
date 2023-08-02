@@ -2,43 +2,42 @@ import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/c
 import {
   CollectionReferenceDocumentData,
   QueryDocumentData,
+  QuerySnapshotDocumentData,
   getDoc,
+  getServerTime,
 } from "../../firebase";
 
 import blockApis from "../block/block.apis";
 import countApis from "./count/count.apis";
 
-import { getServerTime } from "../../firebase";
 import {
   changeServerText,
   checkSamePassword,
   getBugAutoAnswer,
+  getUserIp,
 } from "src/main/commonsComponents/functional";
+import apis from "../commons.apis";
+
+type ReturnCommentsResultType = { success: boolean; msg: string };
 
 // 댓글 관련 apis
 const commentsApis = async ({
-  input,
+  ip,
   docs,
   module,
   isAdmin,
 }: {
-  input: WriteInfoTypes;
-  docs?: {
-    commentDoc: CollectionReferenceDocumentData;
-    countDoc: CollectionReferenceDocumentData;
-  };
-  module: string;
+  ip?: string; // 유저 아이피
+  module: string; // 현재 선택된 모듈
+  docs?: CollectionReferenceDocumentData;
   isAdmin?: boolean; // 관리자 권한 여부
 }) => {
   // 댓글 리스트 docs
-  const commentDoc =
-    (docs && docs.commentDoc) || getDoc("comments", module, "comment");
-  // 댓글 개수 리스트 docs
-  const countDoc =
-    (docs && docs.countDoc) || getDoc("comments", module, "count");
+  const commentDoc = docs || getDoc("comments", module, "comment");
 
+  const _ip = ip || (await getUserIp());
   // 차단된 유저인지 체크
-  const checkBlockUser = await blockApis().checkBlock(input.ip);
+  const checkBlockUser = await blockApis().checkBlock(_ip);
 
   // 결과 리턴하기
   const result: ReturnCommentsResultType = {
@@ -47,10 +46,19 @@ const commentsApis = async ({
   };
 
   return {
+    // 전체 데이터 가져오기
+    getComments: async (): Promise<QuerySnapshotDocumentData> => {
+      return await apis(commentDoc).read();
+    },
+
     // 댓글 추가하기
-    addComments: async (
-      updateCategory?: boolean // 카테고리 업데이트 여부
-    ): Promise<ReturnCommentsResultType> => {
+    addComments: async ({
+      input,
+      updateCategory,
+    }: {
+      input: WriteInfoTypes;
+      updateCategory?: boolean; // 카테고리 업데이트 여부
+    }): Promise<ReturnCommentsResultType> => {
       if (checkBlockUser.isBlock) {
         // 차단된 유저라면 게시물 작성 금지
         result.msg = "차단된 유저입니다.";
@@ -88,11 +96,14 @@ const commentsApis = async ({
 
       return result;
     },
+
     // 댓글 삭제하기
     removeComments: async ({
+      input,
       password,
       updateCategory,
     }: {
+      input: WriteInfoTypes;
       password: string;
       updateCategory?: boolean; // 카테고리 업데이트 여부
     }): Promise<ReturnCommentsResultType> => {
@@ -137,6 +148,8 @@ const commentsApis = async ({
 
       return result;
     },
+
+    // 댓글 수정하기 (+ 답변 등록하기)
     modifyComments: async ({
       password,
       originInput,
@@ -218,9 +231,95 @@ const commentsApis = async ({
 
       return result;
     },
+
+    // 필터 정보 적용된 댓글 리스트 가져오기
+    getQueryResult: ({
+      category,
+      filterList,
+      notLimit,
+    }: {
+      category: string;
+      filterList: {
+        list: { [key: string]: string | number | boolean };
+        limit: number;
+        page: number;
+        startPage: number;
+      };
+      notLimit?: boolean; // 데이터 개수 제한 없이 전체 데이터 조회
+    }) => {
+      let _commentDoc = commentDoc as QueryDocumentData;
+
+      const { list, limit, page, startPage } = filterList;
+
+      // 선택되어 있는 카테고리가 있다면 해당 카테고리 조회
+      if (category !== "all" && category) {
+        _commentDoc = _commentDoc.where("category", "==", category);
+      }
+
+      switch (category) {
+        case "bug":
+          // 카테고리가 버그일 경우
+          if (list["bug-complete"])
+            // 해결 완료만 보기
+            _commentDoc = _commentDoc.where("bugStatus", "==", 2);
+          break;
+
+        case "question":
+          // 카테고리가 문의일 경우
+          if (list["question-complete"])
+            // 답변 완료만 보기
+            _commentDoc = _commentDoc
+              .where("answer", "!=", "")
+              .orderBy("answer");
+          break;
+      }
+
+      // 카테고리가 버그 및 리뷰일 경우
+      if (category === "bug" || category === "review") {
+        const numArr = [];
+
+        // 선택한 점수들만 모아보기
+        for (const num in list) {
+          if (list[num]) {
+            const _rating = num.split("-");
+
+            if (_rating[0] === category && Number(_rating[1]))
+              numArr.push(Number(_rating[1]));
+          }
+        }
+
+        const column = category === "review" ? "rating" : "bugLevel";
+        // 해당 점수로 필터하기
+        if (numArr.length)
+          _commentDoc = _commentDoc.where(column, "in", numArr);
+      }
+
+      // 삭제되지 않은 댓글만 조회
+      if (!list.deleted)
+        _commentDoc = _commentDoc.where("deletedAt", "==", null);
+
+      // 과거순 및 최신순으로 조회하기
+      _commentDoc = _commentDoc.orderBy(
+        "createdAt",
+        list.oddest ? "asc" : "desc"
+      );
+
+      // 페이지 별로 데이터 limit 개씩 노출
+      let _page = 1;
+      if (!notLimit) {
+        if (!startPage) {
+          // 페이지네이션이 설정되지 않았을 경우 (= 시작 페이지가 없는 경우)
+          _page = page;
+        } else {
+          // 페이지네이션이 설정되어 있는 경우 (= 시작 페이지가 있는 경우)
+          _page = page - startPage + 1;
+        }
+        _commentDoc = _commentDoc.limit(limit * _page);
+      }
+
+      return _commentDoc;
+    },
   };
 };
 
 export default commentsApis;
-
-type ReturnCommentsResultType = { success: boolean; msg: string };

@@ -2,7 +2,6 @@ import { FormEvent, MutableRefObject } from "react";
 
 import { FieldValue } from "src/commons/libraries/firebase";
 import { BlockInfoTypes, CommentsInfoTypes } from "../comments.types";
-import { IsBlockTypes } from "src/commons/store/store.types";
 
 // 작성용 type
 export type WriteInfoTypes = {

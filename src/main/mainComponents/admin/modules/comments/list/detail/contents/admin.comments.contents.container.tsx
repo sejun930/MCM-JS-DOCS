@@ -2,12 +2,11 @@ import { OptionList, OptionBtn } from "./admin.comments.contents.styles";
 import { MouseEvent, MutableRefObject, useRef } from "react";
 import AdminCommentsContentsUIPage from "./admin.comments.contents.presenter";
 
-import { _Input, _SpanText, _Button } from "mcm-js-commons";
 import {
   CommentsAllInfoTypes,
   InfoTypes,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
-import { AdminCommentsInitType } from "../../../admin.comments.types";
+import { FetchCommentsTypes } from "../../../admin.comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
@@ -25,10 +24,9 @@ export default function AdminCommentsContentsPage({
 }: {
   info: InfoTypes;
   changeLoading: (bool: boolean) => void;
-  commentsInfo: CommentsAllInfoTypes & AdminCommentsInitType;
-  fetchComments: (info?: AdminCommentsInitType) => void;
+  commentsInfo: CommentsAllInfoTypes;
   isAlreadyDeleted: boolean;
-}) {
+} & FetchCommentsTypes) {
   let answer = "";
   let bugStatus = info.bugStatus || 0;
   // 기존의 답변 저장
@@ -70,7 +68,7 @@ export default function AdminCommentsContentsPage({
       const updateResult = await (
         await commentsApis({
           module: commentsInfo.selectModule,
-          input: _info,
+          ip: info.ip,
           isAdmin: true,
         })
       ).modifyComments({
@@ -87,7 +85,7 @@ export default function AdminCommentsContentsPage({
           textRef.current.focus();
       } else {
         // 업데이트에 성공한 경우
-        fetchComments(commentsInfo);
+        fetchComments({ info: commentsInfo });
         alert("답변이 업데이트 되었습니다.");
       }
     } catch (err) {

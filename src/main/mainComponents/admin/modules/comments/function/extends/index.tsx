@@ -13,9 +13,7 @@ import {
   getUserIp,
 } from "src/main/commonsComponents/functional";
 import { randomContents } from "./data";
-import { InitTypes } from "src/main/commonsComponents/units/template/form/comments/list/filter/filter.init";
 import countApis from "src/commons/libraries/apis/comments/count/count.apis";
-import { initCountList } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
 // 테스트용을 위한 임의의 댓글 게시물 생성하기
 export default function ExtendsFunction(props: FunctionPropsTypes) {
@@ -25,7 +23,7 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
   const extendsComments = async () => {
     if (!checkLoading()) return;
 
-    let num = Number(
+    const num = Number(
       window.prompt(
         "몇개의 댓글을 생성하시겠습니까? \n(최대 30개까지 생성 가능)"
       ) || 0
@@ -36,7 +34,7 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
         const ip = await getUserIp();
 
         // 전체 카테고리 초기값 객체
-        let allCountList = await countApis({ module }).getAllCountList();
+        const allCountList = await countApis({ module }).getAllCountList();
 
         const createComments = async (
           i: number,
@@ -69,7 +67,7 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
           }
 
           // 댓글 등록하기
-          (await commentsApis({ module, input })).addComments();
+          (await commentsApis({ module, ip: input.ip })).addComments({ input });
 
           // 해당 카테고리에 맞는 카운트 객체 가져오기
           const currentList = allCountList[input.category];
@@ -105,44 +103,12 @@ export default function ExtendsFunction(props: FunctionPropsTypes) {
             alert(`${num}개의 댓글이 추가되었습니다.`);
 
             changeLoading(false);
-            fetchComments(info);
+            fetchComments({ info });
           })
           .catch((err) => {
             alert("동기화에 실패했습니다.");
             console.log(err);
           });
-
-        //   // 업데이트 된 리스트 저장하기
-        //   allCountList[countAddResult.countList.category] =
-        //     countAddResult.countList;
-        //   })
-        // );
-
-        // if (addCommentsList.length) {
-        //   addCommentsList.forEach(async (el) => {
-        //     console.log(allCountList, el);
-        //     console.log(allCountList[el.category]);
-        //     console.log(
-        //       await countApis({ module }).add({
-        //         input: el,
-        //         countList: allCountList,
-        //       })
-        //     );
-        //   });
-        // }
-
-        // 댓글들 병렬로 등록하기
-        // await Promise.all(promiseAll);
-
-        // 카테고리 카운트 병렬 처리하기
-        // const promiseAllCountList = Object.values(allCountList).map(
-        //   async (el) => {
-        //     const { id, ...countList } = el;
-
-        //     await countApis({ module }).update(id, countList);
-        //   }
-        // );
-        // await Promise.all(promiseAllCountList);
       } catch (err) {
         alert("댓글 추가에 실패했습니다.");
         console.log(err);

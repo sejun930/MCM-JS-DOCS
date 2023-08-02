@@ -19,7 +19,7 @@ import { getUuid } from "src/main/commonsComponents/functional";
 
 import ListContentsInfoPage from "./contents/list.contents.container";
 import CommentsFilterPage from "./filter";
-import _PaginationForm from "../../pagination";
+// import _PaginationForm from "../../pagination";
 
 export default function CommentsListUIPage({
   commentsInfo,
@@ -57,7 +57,6 @@ export default function CommentsListUIPage({
 
               // 선택 불가능한 카테고리인지? (개수가 0개일 때)
               const isDisable = categoryLen === 0;
-
               return (
                 <Category
                   key={`comments-category-list-${name}-${key}`}
@@ -89,10 +88,7 @@ export default function CommentsListUIPage({
 
       {!commentsInfo.commentsList.length ? (
         <EmptyWrapper>
-          <_PText className="empty-list">
-            등록된 댓글이 없습니다. <br />
-            제일 먼저 댓글을 등록해보세요!
-          </_PText>
+          <_PText className="empty-list">조회된 댓글이 없습니다.</_PText>
         </EmptyWrapper>
       ) : (
         <CommentListItems ref={listRef}>
