@@ -17,7 +17,7 @@ import {
   CommentsAllInfoTypes,
   InfoTypes,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
-import { AdminCommentsInitType } from "../../admin.comments.types";
+import { FetchCommentsTypes } from "../../admin.comments.types";
 
 export default function AdminCommentsDetailUIPage({
   info,
@@ -28,12 +28,11 @@ export default function AdminCommentsDetailUIPage({
   fetchComments,
 }: {
   info: InfoTypes;
-  commentsInfo: CommentsAllInfoTypes & AdminCommentsInitType;
+  commentsInfo: CommentsAllInfoTypes;
   isAlreadyDeleted: boolean;
   removeComments: (isBlock: boolean) => void;
   changeLoading: (bool: boolean) => void;
-  fetchComments: () => void;
-}) {
+} & FetchCommentsTypes) {
   return (
     <ListDetailWrapper>
       <ListHeaderWrapper>

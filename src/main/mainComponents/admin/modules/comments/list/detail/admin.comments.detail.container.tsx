@@ -1,17 +1,10 @@
 import AdminCommentsDetailUIPage from "./admin.comments.detail.presenter";
-import {
-  _SpanText,
-  _Button,
-  _PTextWithHtml,
-  _SpanTextWithHtml,
-  _Input,
-} from "mcm-js-commons";
 
 import {
   CommentsAllInfoTypes,
   InfoTypes,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
-import { AdminCommentsInitType } from "../../admin.comments.types";
+import { FetchCommentsTypes } from "../../admin.comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
 import blockApis from "src/commons/libraries/apis/block/block.apis";
@@ -25,10 +18,9 @@ export default function AdminCommentsDetailPage({
   fetchComments,
 }: {
   info: InfoTypes;
-  commentsInfo: CommentsAllInfoTypes & AdminCommentsInitType;
+  commentsInfo: CommentsAllInfoTypes;
   changeLoading: (bool: boolean) => void;
-  fetchComments: (info?: AdminCommentsInitType) => void;
-}) {
+} & FetchCommentsTypes) {
   // 이미 삭제된 댓글인지 체크
   const isAlreadyDeleted = info.deletedAt !== null;
 
@@ -44,6 +36,7 @@ export default function AdminCommentsDetailPage({
       msg = "해당 유저를 차단하시겠습니까? \n댓글은 자동으로 삭제됩니다.";
 
     if (window.confirm(msg)) {
+      changeLoading(true);
       const _info: WriteInfoTypes = { ...(info as WriteInfoTypes) };
       let ableBlock = isBlock; // 차단 가능 여부
 
@@ -52,10 +45,11 @@ export default function AdminCommentsDetailPage({
         const removeResult = await (
           await commentsApis({
             module: commentsInfo.selectModule,
-            input: _info,
+            ip: _info.ip,
             isAdmin: true,
           })
         ).removeComments({
+          input: _info,
           password: "",
           updateCategory: true,
         });
@@ -89,12 +83,13 @@ export default function AdminCommentsDetailPage({
           }
         }
 
-        alert(
-          isBlock && ableBlock
-            ? "차단이 완료되었습니다."
-            : "댓글 삭제가 완료되었습니다."
-        );
-        fetchComments(commentsInfo);
+        fetchComments({
+          info: commentsInfo,
+          alertMsg:
+            isBlock && ableBlock
+              ? "차단이 완료되었습니다."
+              : "댓글 삭제가 완료되었습니다.",
+        });
       } catch (err) {
         console.log(err);
         alert(`${isBlock ? "유저 차단" : "댓글 삭제"}에 실패했습니다.`);

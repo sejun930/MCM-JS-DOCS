@@ -221,8 +221,11 @@ export default function CommentsWritePage({
       if (input.category !== "review") input.rating = 0;
 
       // 댓글 추가하기
-      const addDocs = await commentsApis({ module, input });
-      const addResult = await addDocs.addComments(true);
+      const addDocs = await commentsApis({ module, ip: input.ip });
+      const addResult = await addDocs.addComments({
+        input,
+        updateCategory: true,
+      });
 
       const _info = { ...commentsInfo };
 

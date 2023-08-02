@@ -8,6 +8,7 @@ import {
   PaginationWrapper,
   PaginationItems,
   CategoryFilterWrapper,
+  CommentsOptionWrapper,
 } from "./admin.comments.styles";
 import { _Title, _Button, _Image } from "mcm-js-commons";
 
@@ -31,14 +32,13 @@ export default function AdminCommentsUIPage({
   info,
   isLoading,
   changeSelectModule,
-  render,
   changeLoading,
   fetchComments,
-  changeInfo,
   toggleSettings,
   oepnSettings,
   checkLoading,
   changePage,
+  changeFilterComments,
 }: AdminCommentsPropsType) {
   // 관리자 기능 props 객체
   const functionProps: FunctionPropsTypes = {
@@ -62,50 +62,55 @@ export default function AdminCommentsUIPage({
           </LoadingWrapper>
         )) || <></>}
         <Items isLoading={isLoading || false}>
-          <ModuleSelectWrapper>
-            <ModuleSelector
-              onChange={changeSelectModule}
-              defaultValue={info.selectModule}
-            >
-              {navList &&
-                navList.length &&
-                navList.map((module, idx) => (
-                  <option
-                    key={`admin-module-${module.name}-${idx}`}
-                    disabled={module.name === info.selectModule}
-                  >
-                    {module.name}
-                  </option>
-                ))}
-            </ModuleSelector>
-            <AdminFunctionalWrapper>
-              <_Button onClickEvent={toggleSettings(true)}>
-                <_Image
-                  src={`/images/commons/icons/settings${
-                    (oepnSettings && "-on") || ""
-                  }.png`}
-                  className="settings-icon"
-                />
-              </_Button>
-              <_SelectForm
-                show={oepnSettings}
-                closeEvent={toggleSettings(false)}
-                className="admin-function-select"
+          <CommentsOptionWrapper>
+            <ModuleSelectWrapper>
+              <ModuleSelector
+                onChange={changeSelectModule}
+                defaultValue={info.selectModule}
               >
-                <ExtendsFunction {...functionProps} />
-                <SyncComments {...functionProps} />
-              </_SelectForm>
-            </AdminFunctionalWrapper>
-          </ModuleSelectWrapper>
-
-          <CategoryFilterWrapper>
-            <AdminCommentsCategoryPage
-              info={info}
-              changeInfo={changeInfo}
-              render={render}
-            />
-            {/* <CommentsFilterPage commentsInfo={info} /> */}
-          </CategoryFilterWrapper>
+                {navList &&
+                  navList.length &&
+                  navList.map((module, idx) => (
+                    <option
+                      key={`admin-module-${module.name}-${idx}`}
+                      disabled={module.name === info.selectModule}
+                    >
+                      {module.name}
+                    </option>
+                  ))}
+              </ModuleSelector>
+              <AdminFunctionalWrapper>
+                <_Button onClickEvent={toggleSettings(true)}>
+                  <_Image
+                    src={`/images/commons/icons/settings${
+                      (oepnSettings && "-on") || ""
+                    }.png`}
+                    className="settings-icon"
+                  />
+                </_Button>
+                <_SelectForm
+                  show={oepnSettings}
+                  closeEvent={toggleSettings(false)}
+                  className="admin-function-select"
+                >
+                  <ExtendsFunction {...functionProps} />
+                  <SyncComments {...functionProps} />
+                </_SelectForm>
+              </AdminFunctionalWrapper>
+            </ModuleSelectWrapper>
+            <CategoryFilterWrapper>
+              <AdminCommentsCategoryPage
+                info={info}
+                changeLoading={changeLoading}
+                fetchComments={fetchComments}
+              />
+              <CommentsFilterPage
+                commentsInfo={info}
+                changeInfo={changeFilterComments}
+                isAdmin
+              />
+            </CategoryFilterWrapper>
+          </CommentsOptionWrapper>
 
           <AdminCommentsListPage
             info={info}

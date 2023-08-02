@@ -1,19 +1,22 @@
 import {
   CollectionReferenceDocumentData,
   QueryDocumentData,
-  QueryDocumentSnapshotDocumentData,
   getDoc,
 } from "src/commons/libraries/firebase";
 import { deepCopy } from "src/main/commonsComponents/functional";
 import {
   CommentsAllInfoTypes,
+  CountFilterTypes,
   initCountList,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
+export type CountListType = { [key: string]: string | number };
+export type ReturnResultType = { countList: CountListType; docId: string };
+
 // 카운트 관련 apis
 const countApis = ({ module }: { module: string }) => {
-  let countDoc: QueryDocumentData = getDoc("comments", module, "count");
+  const countDoc: QueryDocumentData = getDoc("comments", module, "count");
 
   // update를 제외한 결과 객체
   const result: ReturnResultType = {
@@ -66,8 +69,11 @@ const countApis = ({ module }: { module: string }) => {
       );
       let _countList = getCountDoc.countList;
 
-      // 전체 카테고리 개수 1개 제거
-      _countList = { ..._countList, ["count"]: _countList.count - 1 };
+      _countList = {
+        ..._countList,
+        ["count"]: _countList.count - 1, // 전체 카테고리 개수 1개 제거
+        ["deleted"]: _countList.deleted + 1, // 삭제 카테고리 개수 1개 추가
+      };
       // docId 가져오기
       result.docId = getCountDoc.docId;
 
@@ -108,7 +114,7 @@ const countApis = ({ module }: { module: string }) => {
       const getCountDoc = await countApis({ module }).getCountDoc(
         originInput.category
       );
-      let _countList = getCountDoc.countList;
+      const _countList = getCountDoc.countList;
       result.docId = getCountDoc.docId;
 
       const { category } = originInput;
@@ -193,7 +199,9 @@ const countApis = ({ module }: { module: string }) => {
     },
 
     // 카테고리 개수 동기화 시키기 (+ 필터 적용하기)
-    asyncAllCountList: async (info: CommentsAllInfoTypes) => {
+    asyncAllCountList: async (
+      info: CommentsAllInfoTypes
+    ): Promise<CountFilterTypes> => {
       const filterCountList = deepCopy(info.countFilterList);
 
       if (module) {
@@ -261,6 +269,12 @@ const countApis = ({ module }: { module: string }) => {
                   );
                 }
               }
+
+              // 삭제된 댓글 포함하기
+              if (list.deleted) {
+                filterCountList[category].count +=
+                  filterCountList[category].deleted;
+              }
             });
             // 전체 개수 구하기
             filterCountList.all.count = 0;
@@ -272,12 +286,9 @@ const countApis = ({ module }: { module: string }) => {
           console.log(err);
         }
       }
-      return filterCountList;
+      return filterCountList as CountFilterTypes;
     },
   };
 };
 
 export default countApis;
-
-export type CountListType = { [key: string]: string | number };
-export type ReturnResultType = { countList: CountListType; docId: string };

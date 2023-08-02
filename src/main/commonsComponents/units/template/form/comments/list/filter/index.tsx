@@ -32,11 +32,18 @@ export default function CommentsFilterPage({
     ...filterInitList,
   ]);
 
+  // 필터 비활성화 여부
+  let isDisable = !commentsList.length; // 조회된 데이터가 하나도 없는 경우
+  if (Object.values(commentsInfo.filter.list).some((el) => el)) {
+    // 필터가 현재 하나라도 적용되어 있는 경우
+    isDisable = false;
+  }
+
   useEffect(() => {
     // 카테고리가 변경될 경우 필터 변경하기
     let _filterList = [...filterInitList];
 
-    if (commentsList.length) {
+    if (!isDisable) {
       if (categoryFilterList[selectCategory]) {
         // 해당 카테고리에서만 사용 가능한 필터가 존재할 경우
         // 기존의 필터리스트에 추가
@@ -94,8 +101,7 @@ export default function CommentsFilterPage({
 
   // 필터창 오픈 및 닫기
   const toggleFilter = (bool?: boolean) => {
-    if (commentsList.length)
-      setOpen(bool !== undefined ? bool : (prev) => !prev);
+    if (!isDisable) setOpen(bool !== undefined ? bool : (prev) => !prev);
   };
 
   // 필터 정보 변경하기
@@ -145,7 +151,7 @@ export default function CommentsFilterPage({
         <FilterButton
           onClickEvent={() => toggleFilter()}
           className="filter-button"
-          disable={!commentsList.length}
+          disable={isDisable}
         >
           <_Image src={getFilterImage()} className="filter-image" />
         </FilterButton>
@@ -157,10 +163,11 @@ export default function CommentsFilterPage({
           {filterList.map((el) => {
             const isSelected = filter.list[el.target] || false;
             // @ts-ignore
-            const count = countFilterList[selectCategory][el.target];
+            const count = countFilterList[selectCategory][el.target] || "";
 
             // 필터의 개수가 0개인지 검증
-            let isEmpty = count === 0;
+            const isEmpty =
+              count === 0 || (count === "" && !el.searchFilterList);
 
             return (
               <FilterList

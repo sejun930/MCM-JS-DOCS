@@ -1,28 +1,35 @@
 import { ChangeEvent } from "react";
 import { CommentsAllInfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
-export type AdminCommentsInitType = CommentsAllInfoTypes & {
-  selectModule: string;
+export type FetchCommentsTypes = {
+  fetchComments: ({
+    info,
+    isInfinite,
+    alertMsg,
+    moveTop,
+  }: {
+    info?: CommentsAllInfoTypes;
+    isInfinite?: boolean;
+    alertMsg?: string;
+    moveTop?: boolean;
+  }) => Promise<void>;
 };
 
-export interface AdminCommentsPropsType {
-  info: AdminCommentsInitType;
+export type AdminCommentsPropsType = {
+  info: CommentsAllInfoTypes;
   isLoading: boolean;
   changeSelectModule: (e: ChangeEvent<HTMLSelectElement>) => void;
-  render: boolean;
   changeLoading: (bool: boolean) => void;
-  fetchComments: (info?: AdminCommentsInitType) => void;
-  changeInfo: (info: AdminCommentsInitType, forcing?: boolean) => void;
   toggleSettings: (bool: boolean) => () => void;
   oepnSettings: boolean;
   checkLoading: () => boolean;
   changePage: (page: number, isInfinite?: boolean) => void;
-}
+  changeFilterComments: (info: CommentsAllInfoTypes) => void;
+} & FetchCommentsTypes;
 
-export interface FunctionPropsTypes {
+export type FunctionPropsTypes = {
   module: string;
   changeLoading: (bool: boolean) => void;
-  info: AdminCommentsInitType;
-  fetchComments: (info?: AdminCommentsInitType) => void;
+  info: CommentsAllInfoTypes;
   checkLoading: () => boolean;
-}
+} & FetchCommentsTypes;

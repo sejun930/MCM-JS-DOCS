@@ -3,13 +3,11 @@ import { Label, LabelWrapper, UserIP } from "./label.styles";
 import { _Button } from "mcm-js-commons";
 import React, { MouseEvent } from "react";
 
-// import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import { CommentsAllInfoTypes, InfoTypes } from "../../comments.types";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 import { categoryInitList } from "../../write/comments.write.types";
 import StarsForm from "../../write/stars";
-import { AdminCommentsInitType } from "src/main/mainComponents/admin/modules/comments/admin.comments.types";
 
 // label 렌더용 컴포넌트
 export default function CommentsLabel({

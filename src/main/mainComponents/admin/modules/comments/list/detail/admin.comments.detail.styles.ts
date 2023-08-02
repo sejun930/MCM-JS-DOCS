@@ -47,5 +47,6 @@ export const RemoveButton = styled(_Button)`
     props.alreadyDeleted && {
       cursor: "default",
       fontWeight: 700,
+      color: "#aa5656",
     }}
 `;

@@ -11,7 +11,7 @@ import {
   BugStatusButton,
 } from "./contents.select.functional.styles";
 
-import { _Title, _Input, _Button, _SpanText } from "mcm-js-commons";
+import { _Title, _Input } from "mcm-js-commons";
 import { InfoTypes } from "../../../../comments.types";
 import { Tooltip } from "mcm-js";
 

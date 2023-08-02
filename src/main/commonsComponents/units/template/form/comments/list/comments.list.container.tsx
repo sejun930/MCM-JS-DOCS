@@ -1,5 +1,5 @@
 import { deepCopy } from "src/main/commonsComponents/functional";
-import { InfoTypes, CommentsAllInfoTypes } from "../comments.types";
+import { CommentsAllInfoTypes } from "../comments.types";
 import CommentsListUIPage from "./comments.list.presenter";
 
 import { MutableRefObject, useEffect, useRef } from "react";
