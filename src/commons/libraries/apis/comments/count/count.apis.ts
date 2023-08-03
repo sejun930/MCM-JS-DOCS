@@ -267,6 +267,10 @@ const countApis = ({ module }: { module: string }) => {
                   filterCountList[category].count =
                     categoryInfo["question-complete"];
 
+                  // 삭제된 개수를 "삭제된 완료된 댓글" 수로 변경하기
+                  filterCountList.question.deleted =
+                    categoryInfo["question-complete-deleted"];
+
                   if (deleted)
                     // 삭제된 댓글도 포함이라면 삭제된 완료된 댓글도 포함하기
                     filterCountList[category].count +=
@@ -277,6 +281,7 @@ const countApis = ({ module }: { module: string }) => {
 
                 // 이슈 및 리뷰는 모든 필터 리스트로 개수 종합
                 let allCount = categoryInfo.count;
+
                 //  삭제 보기일 땐 삭제된 개수도 포함하기
                 if (deleted) allCount += categoryInfo.deleted;
 
@@ -300,31 +305,53 @@ const countApis = ({ module }: { module: string }) => {
                 if (hasFilter) {
                   // 필터가 있다면 0으로 초기화
                   allCount = 0;
+                  filterCountList[category].deleted = 0;
+                  filterCountList.bug["bug-complete"] = 0;
+                }
 
-                  Array.from(new Array(5), (_, idx) => 1 + idx).forEach(
-                    (num) => {
-                      if (list[`${category}-${num}`]) {
-                        if (category === "bug" && list["bug-complete"]) {
-                          // 카테고리가 버그이고, "해결 완료만 보기" 필터가 적용되어 있을 경우
-                          // 해결 완료된 해당 점수의 개수만 더한다.
-                          allCount += categoryInfo[`bug-${num}-complete`];
+                Array.from(new Array(5), (_, idx) => 1 + idx).forEach((num) => {
+                  // 해결 완료된 것만 보기 = 이슈 필터의 개수에서 해결 완료된 갯수로 저장
+                  if (category === "bug" && list["bug-complete"]) {
+                    // 각각의 필터 개수는 해결 완료된 갯수로 저장한다.
+                    filterCountList[category][`bug-${num}`] =
+                      filterCountList[category][`bug-${num}-complete`];
+                  }
 
-                          if (deleted)
-                            // 만약 삭제까지 포함된다면, 해결 완료된 댓글 중 삭제된 개수까지 더한다.
-                            allCount +=
-                              categoryInfo[`bug-${num}-complete-deleted`];
-                        } else {
-                          // 선택한 필터의 개수만큼 전체 개수에 더하기
-                          allCount += categoryInfo[`${category}-${num}`];
+                  if (list[`${category}-${num}`]) {
+                    if (category === "bug" && list["bug-complete"]) {
+                      // 카테고리가 버그이고, "해결 완료만 보기" 필터가 적용되어 있을 경우
+                      // 해결 완료된 해당 점수의 개수만 더한다.
+                      allCount += categoryInfo[`bug-${num}-complete`];
 
-                          if (deleted)
-                            allCount +=
-                              categoryInfo[`${category}-${num}-deleted`];
-                        }
+                      // 선택된 버그 카테고리 개수에서 해결 완료된 개수 종합하기
+                      filterCountList.bug["bug-complete"] +=
+                        categoryInfo[`bug-${num}-complete`];
+
+                      if (deleted)
+                        // 만약 삭제까지 포함된다면, 해결 완료된 댓글 중 삭제된 개수까지 더한다.
+                        allCount += categoryInfo[`bug-${num}-complete-deleted`];
+                    } else {
+                      // 선택한 필터의 개수만큼 전체 개수에 더하기
+                      allCount += categoryInfo[`${category}-${num}`];
+                      filterCountList[category].deleted +=
+                        categoryInfo[`${category}-${num}-deleted`];
+
+                      // 이슈 카테고리의 "해결 완료만 보기" 개수 종합하기
+                      filterCountList.bug["bug-complete"] +=
+                        categoryInfo[`bug-${num}-complete`];
+
+                      if (deleted) {
+                        allCount += categoryInfo[`${category}-${num}-deleted`];
                       }
                     }
-                  );
-                }
+                  }
+
+                  if (deleted) {
+                    // 삭제된 내역만 보기 선택시, 각각의 필터 개수 동기화하기
+                    filterCountList[category][`${category}-${num}`] +=
+                      filterCountList[category][`${category}-${num}-deleted`];
+                  }
+                });
                 filterCountList[category].count = allCount;
               }
             });

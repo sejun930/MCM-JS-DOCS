@@ -117,6 +117,7 @@ export default function CommentsFilterPage({
     waiting = true;
 
     const _commentsInfo = { ...commentsInfo };
+    // 해당 필터 적용하기
     _commentsInfo.filter.list[info.target] =
       _commentsInfo.filter.list[info.target] !== undefined
         ? !_commentsInfo.filter.list[info.target]
@@ -173,8 +174,11 @@ export default function CommentsFilterPage({
             const count = countFilterList[selectCategory][el.target] || "";
 
             // 필터의 개수가 0개인지 검증
-            let isEmpty = count === 0 || (count === "" && !el.searchFilterList);
-            if (isAdmin && filter.list.deleted) {
+            let isEmpty = count === 0 || count === "";
+            if (el.target === "oddest") isEmpty = false;
+
+            // 갯수가 0이지만 이미 선택되어 있는 경우
+            if (isEmpty && isSelected) {
               isEmpty = false;
             }
 
