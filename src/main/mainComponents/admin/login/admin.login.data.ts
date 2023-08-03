@@ -1,5 +1,5 @@
 // 각각의 요일에 해당하는 아이디 값과 비밀번호 값 저장
-export const adminLoginInfoData = () => [
+export const adminLoginInfoData = [
   {
     id: process.env.NEXT_PUBLIC_ADMIN_ID_D0,
     password: process.env.NEXT_PUBLIC_ADMIN_PW_P0,

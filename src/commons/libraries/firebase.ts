@@ -17,6 +17,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_ID,
   measurementId: "G-B6KWZ1B1D8",
 };
+console.log(firebaseConfig);
 
 // Initialize Firebase
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
