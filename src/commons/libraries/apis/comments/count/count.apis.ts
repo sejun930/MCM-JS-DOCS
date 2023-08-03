@@ -7,6 +7,7 @@ import { deepCopy } from "src/main/commonsComponents/functional";
 import {
   CommentsAllInfoTypes,
   CountFilterTypes,
+  initCommentsInfo,
   initCountList,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
@@ -80,21 +81,36 @@ const countApis = ({ module }: { module: string }) => {
       const { category } = input;
       // 버그 또는 리뷰 별 접근할 컬럼 이름
       const target = category === "bug" ? "bugLevel" : "rating";
+      const num = input[target]; // 해당 이슈 레벨 및 평점
 
       if (category === "question") {
         // 카테고리가 문의일 경우
         if (input.answer && input.answerCreatedAt) {
           // 답장이 등록되어 있는 경우, "답장 완료(question-complete)" 1개 제거
           _countList["question-complete"]--;
+          // 삭제된 답장 완료 1개 추가
+          _countList["question-complete-deleted"]++;
         }
       } else {
         // 카테고리가 버그 또는 리뷰일 경우
         // 해당 점수(버그 레벨 및 평점) 1개 삭제
-        _countList[`${category}-${input[target]}`]--;
+        _countList[`${category}-${num}`]--;
+        // 삭제된 평점 개수 1개 추가
+        _countList[`${category}-${num}-deleted`]++;
 
-        if (category === "bug" && input.bugStatus === 2) {
-          // 이슈일 때, "해결 완료(bug-complete)"라면 해당 필터도 1개 제거
-          _countList["bug-complete"]--;
+        if (category === "bug") {
+          // 카테고리가 이슈일 때
+          if (input.bugStatus === 2) {
+            // "해결 완료(bug-complete)" 필터 1개 제거
+            _countList["bug-complete"]--;
+            // "해결 완료(bug-complete)" 삭제 필터 1개 추가
+            _countList["bug-complete-deleted"]++;
+
+            // 해당 레벨의 해결 완료 1개 제거
+            _countList[`bug-${num}-complete`]--;
+            // 해당 레벨의 해결 완료 삭제 1개 증가
+            _countList[`bug-${num}-complete-deleted`]++;
+          }
         }
       }
       result.countList = _countList;
@@ -138,6 +154,8 @@ const countApis = ({ module }: { module: string }) => {
           // 답변이 완료될 경우
           if (originInput.bugStatus !== 2 && changeInput.bugStatus === 2) {
             _countList["bug-complete"]++;
+            // 해당 이슈 레벨의 완료 개수 1개 증가
+            _countList[`bug-${originInput.bugLevel}-complete`]++;
           }
         }
       }
@@ -234,52 +252,90 @@ const countApis = ({ module }: { module: string }) => {
               // count와 카테고리만 제외한 나머지 필터 키값만 가져오기
               // 현재 선택되어 있는 필터 정보 가져오기
               const { list } = info.filter;
+              const { deleted } = list;
 
-              if (category === "question" && list["question-complete"]) {
-                // 카테고리가 문의이면서 완료된 항목만 검색할 경우
-                filterCountList[category].count =
-                  categoryInfo["question-complete"];
+              // 삭제된 댓글도 포함하기
+              if (deleted) {
+                filterCountList[category].count +=
+                  filterCountList[category].deleted;
+              }
+
+              if (category === "question") {
+                // 카테고리가 문의일 경우
+                if (list["question-complete"]) {
+                  // 완료된 댓글만 볼 경우
+                  filterCountList[category].count =
+                    categoryInfo["question-complete"];
+
+                  if (deleted)
+                    // 삭제된 댓글도 포함이라면 삭제된 완료된 댓글도 포함하기
+                    filterCountList[category].count +=
+                      categoryInfo["question-complete-deleted"];
+                }
               } else if (category === "review" || category === "bug") {
                 // 카테고리가 리뷰 또는 버그일 경우
 
+                // 이슈 및 리뷰는 모든 필터 리스트로 개수 종합
+                let allCount = categoryInfo.count;
+                //  삭제 보기일 땐 삭제된 개수도 포함하기
+                if (deleted) allCount += categoryInfo.deleted;
+
                 if (category === "bug" && list["bug-complete"]) {
-                  // 카테고리가 버그이면서 완료된 항목 검색시
-                  filterCountList[category].count =
-                    categoryInfo["bug-complete"];
+                  // 완료된 이슈만 보기 개수 가져오기
+                  allCount = categoryInfo["bug-complete"];
+                  // 삭제된 완료된 이슈 더하기
+                  if (deleted) allCount += categoryInfo["bug-complete-deleted"];
                 }
 
-                // 점수별로 필터가 있는지 검증
-                const isFilter = Array.from(
-                  new Array(5),
-                  (_, idx) => 1 + idx
-                ).some((num) => list[`${category}-${num}`]);
+                // 필터 (과거순, 삭제 포함)을 제외한 필터가 하나라도 있는 경우 체크
+                const hasFilter = Object.entries(list).some((el) => {
+                  const [name, bool] = el;
+                  const [target, num] = name.split("-");
 
-                if (isFilter) {
-                  // 필터 검증을 위해 전체 개수 초기화
-                  filterCountList[category].count = 0;
+                  return (
+                    target === category && !Number.isNaN(Number(num)) && bool
+                  );
+                });
 
-                  // 필터가 하나라도 있는 경우
+                if (hasFilter) {
+                  // 필터가 있다면 0으로 초기화
+                  allCount = 0;
+
                   Array.from(new Array(5), (_, idx) => 1 + idx).forEach(
                     (num) => {
-                      if (info.filter.list[`${category}-${num}`]) {
-                        filterCountList[category].count +=
-                          categoryInfo[`${category}-${num}`];
+                      if (list[`${category}-${num}`]) {
+                        if (category === "bug" && list["bug-complete"]) {
+                          // 카테고리가 버그이고, "해결 완료만 보기" 필터가 적용되어 있을 경우
+                          // 해결 완료된 해당 점수의 개수만 더한다.
+                          allCount += categoryInfo[`bug-${num}-complete`];
+
+                          if (deleted)
+                            // 만약 삭제까지 포함된다면, 해결 완료된 댓글 중 삭제된 개수까지 더한다.
+                            allCount +=
+                              categoryInfo[`bug-${num}-complete-deleted`];
+                        } else {
+                          // 선택한 필터의 개수만큼 전체 개수에 더하기
+                          allCount += categoryInfo[`${category}-${num}`];
+
+                          if (deleted)
+                            allCount +=
+                              categoryInfo[`${category}-${num}-deleted`];
+                        }
                       }
                     }
                   );
                 }
-              }
-
-              // 삭제된 댓글 포함하기
-              if (list.deleted) {
-                filterCountList[category].count +=
-                  filterCountList[category].deleted;
+                filterCountList[category].count = allCount;
               }
             });
-            // 전체 개수 구하기
-            filterCountList.all.count = 0;
+            // 전체 개수, 삭제된 개수 구하기
+            filterCountList.all = deepCopy(
+              initCommentsInfo.countFilterList.all
+            );
+
             for (const category in filterCountList) {
               filterCountList.all.count += filterCountList[category].count;
+              filterCountList.all.deleted += filterCountList[category].deleted;
             }
           }
         } catch (err) {
