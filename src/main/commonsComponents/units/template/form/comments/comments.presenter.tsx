@@ -118,7 +118,7 @@ const TitleWrapper = styled.div`
 
     h2 {
       font-size: 20px;
-      padding: 40px 0px;
+      padding: 60px 0px;
     }
   }
 `;
@@ -160,5 +160,12 @@ export const LoadingContents = styled.div`
     top: 50%;
     text-align: center;
     cursor: wait;
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    .loading-title {
+      font-size: 9vw;
+      white-space: pre;
+    }
   }
 `;

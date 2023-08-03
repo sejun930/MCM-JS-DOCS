@@ -16,6 +16,7 @@ export const CommentsListWrapper = styled.div`
 
   @media ${breakPoints.mobileLarge} {
     margin-top: 20px;
+    padding-bottom: 0px;
   }
 `;
 
