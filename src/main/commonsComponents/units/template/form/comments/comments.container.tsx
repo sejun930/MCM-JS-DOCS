@@ -25,6 +25,7 @@ import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
 export default function CommentsPage() {
+  console.log("  ");
   // 댓글 전체 정보 (댓글 리스트, 카테고리 등등)
   const [commentsInfo, setCommentsInfo] = useState<CommentsAllInfoTypes>(
     deepCopy(initCommentsInfo)
