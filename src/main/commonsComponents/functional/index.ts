@@ -213,6 +213,57 @@ const changeClientText = (text: string): string => {
   return text.split("<br />").join("\n");
 };
 
+// 관리자 로그인 체크
+const adminLoginCheck = async (id: string, pw: string): Promise<boolean> => {
+  // 아이디 및 비밀번호 일치 확인
+  const hashId = await getHashText(id); // 아이디 해쉬화
+  const hashpw = await getHashText(pw); // 비밀번화 해쉬화
+
+  // 현재 요일 구하기
+  const date = new Date().getDate();
+
+  console.log(date, process.env.NEXT_PUBLIC_ADMIN_ID_D0);
+
+  switch (date) {
+    case 0:
+      return (
+        hashId === process.env.NEXT_PUBLIC_ADMIN_ID_D0 &&
+        hashpw === process.env.NEXT_PUBLIC_ADMIN_PW_P0
+      );
+    case 1:
+      return (
+        hashId === process.env.NEXT_PUBLIC_ADMIN_ID_D1 &&
+        hashpw === process.env.NEXT_PUBLIC_ADMIN_PW_P1
+      );
+    case 2:
+      return (
+        hashId === process.env.NEXT_PUBLIC_ADMIN_ID_D2 &&
+        hashpw === process.env.NEXT_PUBLIC_ADMIN_PW_P2
+      );
+    case 3:
+      return (
+        hashId === process.env.NEXT_PUBLIC_ADMIN_ID_D3 &&
+        hashpw === process.env.NEXT_PUBLIC_ADMIN_PW_P3
+      );
+    case 4:
+      return (
+        hashId === process.env.NEXT_PUBLIC_ADMIN_ID_D4 &&
+        hashpw === process.env.NEXT_PUBLIC_ADMIN_PW_P4
+      );
+    case 5:
+      return (
+        hashId === process.env.NEXT_PUBLIC_ADMIN_ID_D5 &&
+        hashpw === process.env.NEXT_PUBLIC_ADMIN_PW_P5
+      );
+    case 6:
+      return (
+        hashId === process.env.NEXT_PUBLIC_ADMIN_ID_D6 &&
+        hashpw === process.env.NEXT_PUBLIC_ADMIN_PW_P6
+      );
+  }
+  return false;
+};
+
 export {
   removeTag,
   getDateForm,
@@ -227,4 +278,5 @@ export {
   checkSamePassword,
   changeServerText,
   changeClientText,
+  adminLoginCheck,
 };

@@ -5,11 +5,11 @@ import { ipState } from "src/commons/store";
 
 import { Modal } from "mcm-js";
 
-import { adminLoginInfoData } from "./admin.login.data";
 import {
   getHashText,
   getUserIp,
   getDateForm,
+  adminLoginCheck,
 } from "src/main/commonsComponents/functional";
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
 
@@ -88,23 +88,14 @@ export default function AdminLoginPage({
       }
     } else {
       // 아이디 및 비밀번호 일치 확인
-      const hashId = await getHashText(info.id); // 아이디 해쉬화
-      const hashpw = await getHashText(info.password); // 비밀번화 해쉬화
+      // const hashId = await getHashText(info.id); // 아이디 해쉬화
+      // const hashpw = await getHashText(info.password); // 비밀번화 해쉬화
 
       const now = new Date();
       // 현재 요일값 가져오기
-      const currentWeek = now.getDay();
-      // 어드민 로그인 정보 가져오기
-      const adminInfo = adminLoginInfoData()[currentWeek];
+      // const currentWeek = now.getDay();
 
-      console.log(
-        adminInfo,
-        hashId,
-        hashpw,
-        process.env.NEXT_PUBLIC_ADMIN_ID_D0
-      );
-
-      if (hashId !== adminInfo.id || hashpw !== adminInfo.password) {
+      if (!(await adminLoginCheck(info.id, info.password))) {
         // 아이디 & 비밀번호가 불일치 할 경우
         msg = "아이디 & 비밀번호 오류";
       } else {
