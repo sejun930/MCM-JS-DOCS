@@ -20,16 +20,14 @@ export const filterInitList: Array<InitTypes> = [
 // 카테고리별 추가 필터 리스트
 export const categoryFilterList: { [key: string]: Array<InitTypes> } = {
   bug: [
-    [{ name: "해결 완료만 보기", target: "bug-complete", isHide: true }],
+    [{ name: "해결 완료만 보기", target: "bug-complete" }],
     Array.from(new Array(5), (_, i) => 1 + i)
       .reverse()
       .map((el) => {
         return { name: `중요도 ${el}점 보기`, target: `bug-${el}` };
       }),
   ].flat(),
-  question: [
-    { name: "답변 완료만 보기", target: "question-complete", isHide: true },
-  ],
+  question: [{ name: "답변 완료만 보기", target: "question-complete" }],
   review: Array.from(new Array(5), (_, i) => 1 + i)
     .reverse()
     .map((el) => {
