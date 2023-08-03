@@ -23,10 +23,16 @@ export default function AdminCommentsCategoryPage({
     _info.filter.startPage = 0;
 
     const filterList: { [key: string]: boolean } = {};
-    // 과거순 보기 유지
-    if (_info.filter.list.oddest) filterList.oddest = true;
-    // 삭제된 댓글 보기 유지
-    if (_info.filter.list.deleted) filterList.deleted = true;
+    if (_info.countFilterList[_info.selectCategory].count) {
+      // 과거순 보기 유지
+      if (_info.filter.list.oddest) filterList.oddest = true;
+      // 삭제된 댓글 보기 유지
+      if (_info.filter.list.deleted) {
+        // 삭제된 댓글이 존재하는 경우에만 유지
+        if (info.countFilterList[_info.selectCategory].deleted)
+          filterList.deleted = true;
+      }
+    }
     _info.filter.list = filterList;
 
     changeLoading(true);

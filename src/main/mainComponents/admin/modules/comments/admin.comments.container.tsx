@@ -196,6 +196,9 @@ export default function AdminCommentsPage() {
   // 필터 변경용 함수
   const changeFilterComments = (info: CommentsAllInfoTypes) => {
     setIsLoading(true);
+    info.filter.page = 1;
+    info.filter.startPage = 0;
+
     fetchComments({ info, moveTop: true });
   };
 

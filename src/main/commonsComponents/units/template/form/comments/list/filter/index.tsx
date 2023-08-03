@@ -38,6 +38,13 @@ export default function CommentsFilterPage({
     // 필터가 현재 하나라도 적용되어 있는 경우
     isDisable = false;
   }
+  if (
+    // 관리자이면서 삭제된 댓글이 하나라도 있는 경우
+    (isAdmin &&
+      commentsInfo.countFilterList[commentsInfo.selectCategory].deleted) ||
+    commentsInfo.filter.list.deleted
+  )
+    isDisable = false;
 
   useEffect(() => {
     // 카테고리가 변경될 경우 필터 변경하기
@@ -166,8 +173,10 @@ export default function CommentsFilterPage({
             const count = countFilterList[selectCategory][el.target] || "";
 
             // 필터의 개수가 0개인지 검증
-            const isEmpty =
-              count === 0 || (count === "" && !el.searchFilterList);
+            let isEmpty = count === 0 || (count === "" && !el.searchFilterList);
+            if (isAdmin && filter.list.deleted) {
+              isEmpty = false;
+            }
 
             return (
               <FilterList

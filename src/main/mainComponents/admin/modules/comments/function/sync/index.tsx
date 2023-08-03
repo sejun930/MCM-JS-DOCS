@@ -10,6 +10,7 @@ import {
   initCountList,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import apis from "src/commons/libraries/apis/commons.apis";
 
 // 댓글 정보와 개수 최신화 업데이트
 export default function SyncCommentsFunction(props: FunctionPropsTypes) {
@@ -26,11 +27,9 @@ export default function SyncCommentsFunction(props: FunctionPropsTypes) {
       try {
         changeLoading(true);
 
-        // 전체 데이터 가져오기 (삭제된 게시물 제외)
+        // 전체 데이터 가져오기
         const commentsList = getResult(
-          await getDoc("comments", module, "comment")
-            .where("deletedAt", "==", null)
-            .get()
+          await apis(getDoc("comments", module, "comment")).read()
         );
 
         // 현재 모듈의 카운트 리스트 가져오기
@@ -41,32 +40,73 @@ export default function SyncCommentsFunction(props: FunctionPropsTypes) {
           countList[category] = { ...el, id: countList[category].id };
         });
 
-        // 전체 개수 담기
-        countList.all.count = commentsList.length;
-
         // 카테고리 개수 종합하기
         commentsList.forEach((el: InfoTypes) => {
-          const { category, answer, answerCreatedAt, bugStatus } = el;
+          const {
+            category,
+            answer,
+            answerCreatedAt,
+            bugStatus,
+            deletedAt,
+            rating,
+            bugLevel,
+          } = el;
 
-          // 해당 카테고리의 개수 1개 더하기
-          countList[category].count++;
+          // 삭제된 댓글이라면 삭제 1개 증가
+          if (!deletedAt) {
+            // 전체 개수 1개 증가
+            countList.all.count++;
+            // 해당 카테고리의 개수 1개 더하기
+            countList[category].count++;
+          } else {
+            // 삭제되었다면 삭제 개수 1개 증가
+            countList[category].deleted++;
+            countList.all.deleted++;
+          }
 
           if (category === "question") {
             if (answer && answerCreatedAt) {
               // 카테고리가 문의이면서, 답변이 등록되어 있는 경우
-              countList.question["question-complete"]++;
+
+              // 삭제되었다면, 삭제 개수 1개 증가
+              if (deletedAt) countList.question["question-complete-deleted"]++;
+              // 삭제되지 않은 경우에만 완료 개수 1개 증가
+              else countList.question["question-complete"]++;
             }
-          } else {
-            // 카테고리가 이슈 또는 리뷰일 경우
-            const target = category === "bug" ? "bugLevel" : "rating";
-            const num = el[target];
+          } else if (category === "review") {
+            // 카테고리가 리뷰일 경우
 
-            // 해당 점수의 카테고리 개수 1개 증가
-            countList[category][`${category}-${num}`]++;
+            if (!deletedAt) {
+              // 삭제되지 않은 해당 점수의 카테고리 개수 1개 증가
+              countList[category][`${category}-${rating}`]++;
+            } else {
+              // 삭제된 해당 평점의 삭제 개수 1개 증가
+              countList[category][`${category}-${rating}-deleted`]++;
+            }
+          } else if (category === "bug") {
+            // 카테고리가 이슈일 경우
 
-            if (category === "bug" && bugStatus === 2) {
-              // 버그 카테고리이면서, 해결이 완료된 경우
-              countList.bug["bug-complete"]++;
+            if (!deletedAt) {
+              // 삭제되지 않은 해당 버그 레벨의 카테고리 개수 1개 증가
+              countList[category][`${category}-${bugLevel}`]++;
+            } else {
+              // 삭제된 해당 버그 레벨의 삭제 개수 1개 증가
+              countList[category][`${category}-${bugLevel}-deleted`]++;
+            }
+
+            if (bugStatus === 2) {
+              if (!deletedAt) {
+                // 해결 완료된 이슈일 경우, 해결 완료 1개 증가
+                countList[category][`${category}-${bugLevel}-complete`]++;
+                countList[category]["bug-complete"]++;
+              } else {
+                countList[category]["bug-complete-deleted"]++;
+
+                // 삭제된 해결 완료 개수 1개 증가
+                countList[category][
+                  `${category}-${bugLevel}-complete-deleted`
+                ]++;
+              }
             }
           }
         });
