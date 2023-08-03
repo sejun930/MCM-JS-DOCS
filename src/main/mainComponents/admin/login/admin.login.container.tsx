@@ -95,7 +95,7 @@ export default function AdminLoginPage({
       // 현재 요일값 가져오기
       const currentWeek = now.getDay();
       // 어드민 로그인 정보 가져오기
-      const adminInfo = adminLoginInfoData[currentWeek];
+      const adminInfo = adminLoginInfoData()[currentWeek];
 
       console.log(
         adminInfo,
