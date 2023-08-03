@@ -267,6 +267,10 @@ const countApis = ({ module }: { module: string }) => {
                   filterCountList[category].count =
                     categoryInfo["question-complete"];
 
+                  // 삭제된 개수를 "삭제된 완료된 댓글" 수로 변경하기
+                  filterCountList.question.deleted =
+                    categoryInfo["question-complete-deleted"];
+
                   if (deleted)
                     // 삭제된 댓글도 포함이라면 삭제된 완료된 댓글도 포함하기
                     filterCountList[category].count +=
@@ -317,9 +321,13 @@ const countApis = ({ module }: { module: string }) => {
                           // 선택한 필터의 개수만큼 전체 개수에 더하기
                           allCount += categoryInfo[`${category}-${num}`];
 
-                          if (deleted)
+                          if (deleted) {
                             allCount +=
                               categoryInfo[`${category}-${num}-deleted`];
+
+                            // 각각의 필터 점수에도 삭제된 내역의 수만큼 더하기
+                            console.log(categoryInfo);
+                          }
                         }
                       }
                     }
