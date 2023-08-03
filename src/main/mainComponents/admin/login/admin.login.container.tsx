@@ -97,6 +97,8 @@ export default function AdminLoginPage({
       // 어드민 로그인 정보 가져오기
       const adminInfo = adminLoginInfoData[currentWeek];
 
+      console.log(process.env.NODE_ENV);
+
       if (hashId !== adminInfo.id || hashpw !== adminInfo.password) {
         // 아이디 & 비밀번호가 불일치 할 경우
         msg = "아이디 & 비밀번호 오류";
