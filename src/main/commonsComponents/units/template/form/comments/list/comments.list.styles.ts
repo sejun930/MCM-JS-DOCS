@@ -7,6 +7,7 @@ interface StyleTypes {
   selected?: boolean;
   isDisable?: boolean;
 }
+//
 
 export const CommentsListWrapper = styled.div`
   display: flex;
