@@ -78,6 +78,7 @@ export default function ListContentsInfoUIPage({
             commentsInfo={commentsInfo}
             changeInfo={changeInfo}
             adminLogin={adminLogin}
+            hideStar={info.category === "bug"}
           />
         </LabelWrapper>
         <ContentsWrapper>
@@ -87,7 +88,8 @@ export default function ListContentsInfoUIPage({
                 isView
                 isBugMode
                 rating={info.bugLevel || 0}
-                category=""
+                category="bug"
+                tooltipPosition="bottom"
               />
             </legend>
             <ContentsInfo hasQuestion={info.category === "question"}>

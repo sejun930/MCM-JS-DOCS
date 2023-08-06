@@ -17,6 +17,7 @@ export default function CommentsLabel({
   showCategoryName,
   modifyRatingEvent,
   adminLogin,
+  hideStar,
 }: {
   info: InfoTypes;
   commentsInfo?: CommentsAllInfoTypes;
@@ -24,6 +25,7 @@ export default function CommentsLabel({
   showCategoryName?: boolean; // 카테고리 출력 여부
   modifyRatingEvent?: (value: number) => void; // 평점 수정 이벤트 (평점 수정 가능)
   adminLogin: boolean | null;
+  hideStar?: boolean; // 이슈 및 리뷰 카테고리에서 평점 부분 숨기기 여부
 }) {
   const renderLabel = () => {
     const nodeList = [];
@@ -46,7 +48,7 @@ export default function CommentsLabel({
       );
     }
 
-    if (info.category === "review" || info.category === "bug") {
+    if (!hideStar && (info.category === "review" || info.category === "bug")) {
       // 리뷰일 경우 평점 추가
       nodeList.push(
         <StarsForm

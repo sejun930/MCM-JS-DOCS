@@ -13,12 +13,14 @@ export default function StarsForm({
   changeEvent,
   isView,
   isBugMode,
+  tooltipPosition,
 }: {
   rating?: number; // 평점 정보, 있다면 defaultValue로 노출
   category: string;
   changeEvent?: (rating: number) => void;
   isView?: boolean;
   isBugMode?: boolean; // 버그 카테고리 모드용
+  tooltipPosition?: "top" | "bottom"; // tootlip 메시지 방향 지정
 }) {
   // 별점 선택시 영역 계산 state
   const [selectRating, setSelectRating] = useState(0);
@@ -46,7 +48,7 @@ export default function StarsForm({
   const renderEmoji = () => {
     let str = "⭐";
     if (isBugMode) str = "🔥";
-    if (isView && !isBugMode) str = "🌟";
+    // if (isView && !isBugMode) str = "🌟";
 
     return str;
   };
@@ -77,6 +79,7 @@ export default function StarsForm({
             tooltipText={tooltipMessage}
             isDisable={!tooltipMessage}
             useShowAnimation
+            position={tooltipPosition || "top"}
           >
             <Star
               type="button"
