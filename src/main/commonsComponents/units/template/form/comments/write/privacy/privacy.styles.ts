@@ -14,7 +14,7 @@ export const AgreeUserPrivacyWrapper = styled.div`
     font-size: 14px;
     cursor: pointer;
     color: #666666;
-    width: 194px;
+    white-space: pre;
   }
 
   .checked {
@@ -30,7 +30,7 @@ export const AgreeUserPrivacyWrapper = styled.div`
     width: 100%;
 
     #privacy-label {
-      font-size: 14px;
+      font-size: 12px;
       width: 100%;
     }
 

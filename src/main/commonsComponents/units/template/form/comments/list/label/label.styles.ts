@@ -37,6 +37,7 @@ export const Label = styled.p`
   background-color: #c88ea7;
   color: #ffffff;
   margin: 0px;
+  white-space: pre;
 
   &.bug-label-0,
   &.question-label-0 {
