@@ -1,7 +1,7 @@
 import { useState, useRef, MutableRefObject, useEffect } from "react";
 
 import ExampleFixedUIPage from "./fixed.presenter";
-import { ExampleCodeListTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
+import { ExampleCodeListTypes } from "../index.types";
 
 let eventStart: boolean = false; // 스크롤 이벤트 시작여부
 let itemsHeight: number = 0; // tap items 태그의 높이값 설정

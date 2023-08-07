@@ -5,9 +5,7 @@ import { getCommonsHighlight } from "src/commons/highlight";
 
 import { removeTag } from "src/main/commonsComponents/functional";
 
-export interface ExampleCodeListTypes {
-  [key: string]: string[];
-}
+import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
 
 // 해당 모듈을 실행하기 위한 공통적인 준비물
 export const modalCommonsData: Array<ExampleCommonsTypes> = [

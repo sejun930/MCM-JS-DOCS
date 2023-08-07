@@ -68,7 +68,7 @@ export default function MyModal() {
   return (
     <Template>
       <ModulesInfoWrapper>
-        <_MainTitleTemplate id="main-title-form" />
+        <_MainTitleTemplate />
         <ModulesInfoWrapper ref={endPointRef}>
           {(render && (
             <>

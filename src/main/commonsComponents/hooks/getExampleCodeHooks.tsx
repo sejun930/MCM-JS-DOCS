@@ -14,10 +14,13 @@ export default function getExampleCodeComponnet() {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
 
-  const getCommonsInfo: ExampleCommonsTypes[] =
+  const getCommonsInfo: Array<ExampleCommonsTypes> | ExampleCommonsTypes =
     exampleCommonsList[module || "Modal"];
+
   const commonsInfo: ExampleCommonsTypes =
-    getCommonsInfo && getCommonsInfo[vers || 0];
+    getCommonsInfo && Array.isArray(getCommonsInfo)
+      ? getCommonsInfo[vers || 0]
+      : getCommonsInfo;
 
   // 해당 모듈의 이름으로 호출하는 코드 출력
   const getExampleCode = ({

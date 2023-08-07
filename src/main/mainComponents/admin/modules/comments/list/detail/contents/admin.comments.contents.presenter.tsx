@@ -4,7 +4,6 @@ import {
   ContentsItems,
   ContentsWrapper,
   OptionWrapper,
-  ListOptionalModifiedWrapper,
 } from "./admin.comments.contents.styles";
 
 import { MutableRefObject } from "react";
@@ -57,10 +56,15 @@ export default function AdminCommentsContentsUIPage({
           readOnly={isAlreadyDeleted}
         />
       </ContentsItems>
-      <OptionWrapper>
-        <ListOptionalModifiedWrapper>
-          {info.modifyAt && (
-            <Tooltip tooltipText="댓글 수정일" useShowAnimation>
+
+      {((info.modifyAt || info.answerCreatedAt) && (
+        <OptionWrapper>
+          <Tooltip
+            tooltipText="댓글 수정일"
+            useShowAnimation
+            className="modify-date-wrapper"
+          >
+            {info.modifyAt && (
               <_PText className="answer-date">
                 수정일 |{" "}
                 {getDateForm({
@@ -68,22 +72,27 @@ export default function AdminCommentsContentsUIPage({
                   getDate: true,
                 })}
               </_PText>
-            </Tooltip>
-          )}
-          {renderOptionList()}
-        </ListOptionalModifiedWrapper>
-        {info.answerCreatedAt && (
-          <Tooltip tooltipText="답변 작성일" useShowAnimation>
-            <_SpanText className="answer-date">
-              답변일 |{" "}
-              {getDateForm({
-                firebaseTimer: info.answerCreatedAt,
-                getDate: true,
-              })}
-            </_SpanText>
+            )}
           </Tooltip>
-        )}
-      </OptionWrapper>
+          <Tooltip
+            tooltipText="답변 작성일"
+            useShowAnimation
+            className="answer"
+          >
+            {info.answerCreatedAt && (
+              <_SpanText className="answer-date">
+                답변일 |{" "}
+                {getDateForm({
+                  firebaseTimer: info.answerCreatedAt,
+                  getDate: true,
+                })}
+              </_SpanText>
+            )}
+          </Tooltip>
+        </OptionWrapper>
+      )) || <></>}
+
+      {renderOptionList()}
     </ContentsWrapper>
   );
 }

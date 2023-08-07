@@ -248,6 +248,7 @@ export default function ContentsSelectFunctionalPage({
           originInput: info as WriteInfoTypes,
           changeInput,
           updateCategory: true,
+          isUpdate: typeName === "수정" || false,
         });
 
         // 실패 메세지 저장
