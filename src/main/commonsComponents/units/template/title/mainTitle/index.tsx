@@ -6,7 +6,7 @@ import { moduleState, versState } from "src/commons/store";
 
 import { moduleRemarksList } from "./data";
 import { moduleIndexList } from "src/commons/data/index/index.commons.data";
-import { _PTextWithHtml, _Title } from "mcm-js-commons";
+import { _PTextWithHtml, _Title, _Image } from "mcm-js-commons";
 
 import IndexRenderPage from "../../../index/index.render";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
@@ -35,8 +35,9 @@ export default function _MainTitleTemplate({ id }: { id?: string }) {
           className="main-title-remarks"
           dangerouslySetInnerHTML={moduleRemarksList[module]}
         />
-      </Items>
 
+        <ExampleImage src={`/images/modules/example/${module}-example.gif`} />
+      </Items>
       {(list.length && <IndexRenderPage indexList={list} />) || <></>}
     </Wrapper>
   );
@@ -75,5 +76,18 @@ export const Items = styled.div`
       font-size: 14px;
       line-height: 22px;
     }
+  }
+`;
+
+export const ExampleImage = styled(_Image)`
+  margin-top: 30px;
+  max-width: 400px;
+
+  @media ${breakPoints.mobileLarge} {
+    border: solid 2px black;
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    max-width: 100%;
   }
 `;
