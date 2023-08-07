@@ -22,8 +22,6 @@ import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import countApis from "src/commons/libraries/apis/comments/count/count.apis";
 import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 
-import { getHashText } from "src/main/commonsComponents/functional";
-
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
 export default function CommentsPage() {

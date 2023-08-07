@@ -11,7 +11,7 @@ import ExampleFixedPage from "./fixed/fixed.container";
 
 import { Wrapper } from "../form.commons.styles";
 import { howUseTextList } from "./data";
-import { ExampleCodeListTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
+import { ExampleCodeListTypes } from "./index.types";
 
 // 사용 방법에 대한 폼
 export default function _HowUseForm({
@@ -21,7 +21,7 @@ export default function _HowUseForm({
 }: {
   codeInfo: ExampleCodeListTypes;
   exmapleContents: React.ReactNode | string;
-  endPointRef: HTMLDivElement;
+  endPointRef?: HTMLDivElement;
 }) {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
@@ -40,13 +40,13 @@ export default function _HowUseForm({
         }
       />
       <CopyWrapper>
-        {codeInfo.title.length && (
+        {(codeInfo.title.length && endPointRef && (
           <ExampleFixedPage
             codeInfo={codeInfo}
             endPointRef={endPointRef}
             vers={vers}
           />
-        )}
+        )) || <></>}
 
         {codeInfo.basic[vers] !== undefined && (
           <_Copy

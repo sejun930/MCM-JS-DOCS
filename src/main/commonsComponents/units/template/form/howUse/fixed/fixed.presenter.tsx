@@ -2,7 +2,7 @@ import { FixedTap, TapItems, TapWrapper } from "./fixed.styles";
 import { MutableRefObject } from "react";
 
 import TapListPage from "./tapList";
-import { ExampleCodeListTypes } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
+import { ExampleCodeListTypes } from "../index.types";
 
 export default function ExampleFixedUIPage({
   fixed,

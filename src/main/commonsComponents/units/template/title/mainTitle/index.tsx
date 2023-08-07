@@ -11,7 +11,7 @@ import { _PTextWithHtml, _Title, _Image } from "mcm-js-commons";
 import IndexRenderPage from "../../../index/index.render";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-export default function _MainTitleTemplate({ id }: { id?: string }) {
+export default function _MainTitleTemplate() {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
 
@@ -27,7 +27,7 @@ export default function _MainTitleTemplate({ id }: { id?: string }) {
   }, [module, vers]);
 
   return (
-    <Wrapper className="main-title-wrapper" id={id}>
+    <Wrapper className="main-title-wrapper" id="main-title-form">
       <Items>
         <_Title className="main-title">📖 {module}</_Title>
         <_PTextWithHtml
