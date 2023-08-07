@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import { breakPoints } from "mcm-js-commons/dist/responsive";
+
 interface StyleTypes {
   isLoading?: boolean;
 }
@@ -106,4 +108,9 @@ export const CommentsOptionWrapper = styled.div`
   z-index: 100;
   border-bottom: double 4px black;
   padding-bottom: 30px;
+
+  @media ${breakPoints.mobileLarge} {
+    padding-bottom: 10px;
+    top: -16px;
+  }
 `;

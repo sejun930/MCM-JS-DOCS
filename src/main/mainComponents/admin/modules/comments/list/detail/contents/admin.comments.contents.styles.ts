@@ -1,10 +1,15 @@
 import styled from "@emotion/styled";
 import { _Button, _PTextWithHtml } from "mcm-js-commons";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+
+  .mcm-input-submit-button-wrapper {
+    display: flex;
+  }
 `;
 
 export const ContentsItems = styled.div`
@@ -59,17 +64,49 @@ export const Contents = styled(_PTextWithHtml)`
 export const OptionWrapper = styled.div`
   display: flex;
   margin-top: 16px;
-  justify-content: space-between;
+
+  .mcm-tooltip-wrapper {
+    width: 50%;
+
+    .mcm-tooltip-layout {
+      justify-content: flex-end;
+    }
+  }
+
+  .modify-date-wrapper {
+    .mcm-tooltip-layout {
+      justify-content: flex-start;
+    }
+  }
 
   .answer-date {
     font-size: 12px;
     color: gray;
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    flex-direction: column;
+    gap: 6px 0px;
+
+    .mcm-tooltip-wrapper {
+      width: 100%;
+
+      .mcm-tooltip-layout {
+        justify-content: flex-start;
+      }
+    }
   }
 `;
 
 export const OptionList = styled.div`
   display: flex;
   gap: 0px 10px;
+  margin-top: 16px;
+
+  @media ${breakPoints.mobileSmall} {
+    max-width: 75%;
+    overflow-x: auto;
+  }
 `;
 
 export const OptionBtn = styled(_Button)`
@@ -90,6 +127,12 @@ export const OptionBtn = styled(_Button)`
     background-color: gray;
     color: #dddddd;
     cursor: not-allowed;
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    min-width: 100px;
+    white-space: pre;
+    padding: 6px 0px;
   }
 `;
 

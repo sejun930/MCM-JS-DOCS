@@ -47,8 +47,6 @@ export interface StyleTypes {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* border-top: double 4px black; */
-  /* border-bottom: solid 3px black; */
 
   ${(props: StyleTypes) =>
     props.isEmpty && {
@@ -60,7 +58,6 @@ export const ListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-  /* gap: 30px 0px; */
 
   .empty-title {
     display: flex;

@@ -4,6 +4,7 @@ import { _Button } from "mcm-js-commons";
 import { categoryListArray } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 import { CommentsAllInfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { FetchCommentsTypes } from "../admin.comments.types";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 const categoryList = [...categoryListArray];
 export default function AdminCommentsCategoryPage({
@@ -78,11 +79,17 @@ interface StyleTypes {
 export const CategoryWrapper = styled.div`
   display: flex;
   height: 20px;
+
+  @media ${breakPoints.mobileLarge} {
+    max-width: 80%;
+    overflow-x: auto;
+  }
 `;
 
 export const CategoryListContents = styled.div`
   display: flex;
   gap: 0px 32px;
+  white-space: pre;
 `;
 
 export const CategoryBtn = styled(_Button)`

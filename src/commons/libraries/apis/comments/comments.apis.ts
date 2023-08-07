@@ -155,11 +155,13 @@ const commentsApis = async ({
       originInput,
       changeInput,
       updateCategory,
+      isUpdate,
     }: {
       password: string;
       originInput: WriteInfoTypes; // 수정전 원본 데이터
       changeInput: WriteInfoTypes; // 수정할 데이터
       updateCategory?: boolean;
+      isUpdate?: boolean; // 유저가 수정한 경우를 체크
     }): Promise<ReturnCommentsResultType> => {
       // 관리자이거나 비밀번호 체크하기 (관리자일 경우 비밀번호 체크를 하지 않음)
       const samePw =
@@ -167,7 +169,7 @@ const commentsApis = async ({
 
       if (samePw) {
         try {
-          changeInput.modifyAt = getServerTime(); // 수정일 기입
+          if (isUpdate) changeInput.modifyAt = getServerTime(); // 유저가 직접 수정한 경우 수정일 기입
 
           // 답변 등록용
           if (originInput.answer !== changeInput.answer) {

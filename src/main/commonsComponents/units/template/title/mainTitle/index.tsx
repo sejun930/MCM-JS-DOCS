@@ -11,7 +11,6 @@ import { _PTextWithHtml, _Title, _Image } from "mcm-js-commons";
 import IndexRenderPage from "../../../index/index.render";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-// let deboucing: ReturnType<typeof setTimeout> | number;
 export default function _MainTitleTemplate({ id }: { id?: string }) {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
@@ -35,7 +34,6 @@ export default function _MainTitleTemplate({ id }: { id?: string }) {
           className="main-title-remarks"
           dangerouslySetInnerHTML={moduleRemarksList[module]}
         />
-
         <ExampleImage src={`/images/modules/example/${module}-example.gif`} />
       </Items>
       {(list.length && <IndexRenderPage indexList={list} />) || <></>}
