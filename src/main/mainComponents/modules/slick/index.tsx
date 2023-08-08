@@ -1,32 +1,26 @@
 import { Modal } from "mcm-js";
+import { useState } from "react";
 
 export default function ModalExamplePage() {
+  // 모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다
+  const [isOpen, setIsOpen] = useState(false);
+
+  // 모달을 실행하는 함수입니다.
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  // 모달을 종료하는 함수입니다.
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <button
-      onClick={() =>
-        Modal.open({
-          children: (
-            <div>
-              <span> 상위 모달 </span>
-              <Modal
-                show={true}
-                onCloseModal={() => Modal.close({ id: "parents-modal" })}
-                modalSize={{ width: "400px", height: "400px" }}
-                mobileModalSize={{ width: "50%", height: "50%" }}
-                showBGAnimation={true}
-                showModalOpenAnimation={true}
-              >
-                <span> 하위 모달을 종료하면 상위 모달도 함께 종료됩니다. </span>
-              </Modal>
-            </div>
-          ),
-          id: "parents-modal",
-          showBGAnimation: true,
-          showModalOpenAnimation: true,
-        })
-      }
-    >
-      모달 실행하기
-    </button>
+    <div>
+      <button onClick={openModal}> 모달 실행하기 </button>
+      <Modal show={isOpen} onCloseModal={closeModal}>
+        <span> 기본 모달 페이지입니다. </span>
+      </Modal>
+    </div>
   );
 }

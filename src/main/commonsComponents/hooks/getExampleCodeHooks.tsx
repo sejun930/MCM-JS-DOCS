@@ -7,6 +7,7 @@ import {
   exampleCommonsReturnList,
 } from "src/commons/data/example/example.commons.data";
 import React from "react";
+import { getCommonsHighlight } from "src/commons/highlight";
 
 // 공백 2칸을 주고 싶다면 /&tap2&/ 를 추가
 
@@ -14,10 +15,13 @@ export default function getExampleCodeComponnet() {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
 
-  const getCommonsInfo: Array<ExampleCommonsTypes> | ExampleCommonsTypes =
-    exampleCommonsList[module || "Modal"];
+  const getCommonsInfo:
+    | Array<ExampleCommonsTypes>
+    | ExampleCommonsTypes
+    | null =
+    (exampleCommonsList && exampleCommonsList[module || "Modal"]) || null;
 
-  const commonsInfo: ExampleCommonsTypes =
+  const commonsInfo: ExampleCommonsTypes | null =
     getCommonsInfo && Array.isArray(getCommonsInfo)
       ? getCommonsInfo[vers || 0]
       : getCommonsInfo;
@@ -42,11 +46,10 @@ export default function getExampleCodeComponnet() {
     str += `<span class='skyblue'>${module}</span>`;
     str += `<span class='yellow'> } </span>`;
     str += `<span class='purple'>from</span>`;
-    str += `<span class='lightOrange'> "mcm-js"</span>`;
-    str += `<span class='lightGray'>;</span>`;
+    str += ` ${getCommonsHighlight.string("mcm-js", true)}`;
 
     // 추가 import 렌더하기
-    if (commonsInfo?.import) {
+    if (commonsInfo && commonsInfo?.import) {
       str += getImportCode(commonsInfo.import);
     }
 
@@ -56,11 +59,11 @@ export default function getExampleCodeComponnet() {
     str += "<span class='yellow'>() {</span>";
 
     // 공통으로 사용되는 코드 렌더
-    if (commonsInfo?.code) {
+    if (commonsInfo && commonsInfo?.code) {
       str += `${commonsInfo.code}`;
     }
 
-    const getReturnStr = getReturn(
+    const getReturnStr = getCommonsHighlight.return(
       getCommonsReturn({
         code,
         children,
@@ -93,15 +96,6 @@ export default function getExampleCodeComponnet() {
     return str;
   };
 
-  // return 붙여서 렌더하기
-  const getReturn = (code: string) => {
-    const str = `  <span class='purple'>return</span> <span class='deepPurple'>(</span>
-    ${(code && code) || ""}
-  <span class='deepPurple'>)</span><span class='lightGray'>;</span>`;
-
-    return str;
-  };
-
   // return 안에서 모듈 각각의 공통 태그들 추가하기
   const getCommonsReturn = ({
     code,
@@ -125,13 +119,17 @@ export default function getExampleCodeComponnet() {
       _children = `<span class='lightGray'>${children}</span>`;
     }
 
-    if (returnInfo) return returnInfo(code, _children)[idx || 0];
+    // 적용된 최종 결과 코드
+    const resultCode = returnInfo(code, _children);
+    if (resultCode) {
+      // 배열, 문자열 분기화
+      return typeof resultCode === "string" ? resultCode : resultCode[idx || 0];
+    }
     return code;
   };
 
   return {
     getExampleCode,
-    getReturn,
     getCommonsReturn,
   };
 }

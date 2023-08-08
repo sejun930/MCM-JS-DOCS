@@ -20,6 +20,7 @@ import _Copy from "src/main/commonsComponents/units/copy";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
+import { getCommonsHighlight } from "src/commons/highlight";
 
 export default function FunctionalDetailInfoListPage({
   module,
@@ -31,8 +32,7 @@ export default function FunctionalDetailInfoListPage({
   propsRef?: MutableRefObject<HTMLDivElement>;
 }) {
   const { componentRender } = CommonsHooksComponents();
-  const { getReturn, getCommonsReturn, getExampleCode } =
-    getExampleCodeComponnet();
+  const { getCommonsReturn, getExampleCode } = getExampleCodeComponnet();
 
   // props 페이지 위치로 이동
   const movePropsPage = () => {
@@ -91,7 +91,7 @@ export default function FunctionalDetailInfoListPage({
                     idx: -1,
                     children: "",
                   })}
-                  showText={getReturn(
+                  showText={getCommonsHighlight.return(
                     getCommonsReturn({
                       code: "",
                       idx: -1,

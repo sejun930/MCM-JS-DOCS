@@ -9,6 +9,7 @@ import _Copy from "src/main/commonsComponents/units/copy";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 
 import { Tooltip } from "mcm-js";
+import { getCommonsHighlight } from "src/commons/highlight";
 
 // 예시용에 추가적으로 붙는 옵션 폼 페이지 (ex : 코드보기 등등)
 export default function _ExampleOptionalFormPage({
@@ -33,8 +34,7 @@ export default function _ExampleOptionalFormPage({
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   const [vers] = useRecoilState(versState);
-  const { getExampleCode, getReturn, getCommonsReturn } =
-    getExampleCodeComponnet();
+  const { getExampleCode, getCommonsReturn } = getExampleCodeComponnet();
 
   useEffect(() => {
     if (_wrapperRef?.current) {
@@ -79,7 +79,7 @@ export default function _ExampleOptionalFormPage({
             changeContent,
           })}
           type="Code"
-          showText={getReturn(
+          showText={getCommonsHighlight.return(
             getCommonsReturn({
               code,
               children: content,

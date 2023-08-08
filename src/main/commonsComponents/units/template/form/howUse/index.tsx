@@ -40,7 +40,7 @@ export default function _HowUseForm({
         }
       />
       <CopyWrapper>
-        {(codeInfo.title.length && endPointRef && (
+        {(codeInfo.title && Array.isArray(codeInfo.title) && endPointRef && (
           <ExampleFixedPage
             codeInfo={codeInfo}
             endPointRef={endPointRef}
@@ -48,7 +48,7 @@ export default function _HowUseForm({
           />
         )) || <></>}
 
-        {codeInfo.basic[vers] !== undefined && (
+        {codeInfo.basic && codeInfo.basic[vers] !== undefined && (
           <_Copy
             text={getExampleCode({
               code: codeInfo.basic[vers],
