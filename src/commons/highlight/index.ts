@@ -131,11 +131,20 @@ export const getCommonsHighlight = {
         ""
       }<span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
   },
-
-  // 태그
-  // tag: ({ tagName, children }: { tagName: string; children?: string }) =>
-  //   `<span><</span><span class='darkBlue'>${tagName}</span><span>></span> ${
-  //     children || ""
-  //   } <span><</span><span>/</span><span class='darkBlue'>${tagName}</span><span>></span>`,
-  // // span 태그
+  // 쌍따옴표로 감싸진 문자열 출력
+  string: (text: string, semicolon?: boolean) =>
+    // semicolon : 세미클론으로 종료 여부
+    `<span class='lightOrange'>"${text}"</span>${
+      (semicolon && getCommonsHighlight.semiColon()) || ""
+    }`,
+  // return 폼
+  return: (code: string) =>
+    `  <span class='purple'>return</span> <span class='deepPurple'>(</span>
+    ${code}
+  <span class='deepPurple'>)</span><span class='lightGray'>;</span>`,
+  // 컴포넌트 props 폼
+  props: (key: string, value: string) =>
+    `<span class='skyblue'>${key}</span>${getCommonsHighlight.text(
+      "="
+    )}${value}`,
 };

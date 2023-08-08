@@ -21,6 +21,8 @@ export default function ExampleFixedUIPage({
   codeInfo: ExampleCodeListTypes;
   itemsHeight: number;
 }) {
+  const tapList = [...Array.from(codeInfo.title)] || [];
+
   return (
     <TapWrapper
       hasMultiple={codeInfo.title.length > 1}
@@ -30,13 +32,13 @@ export default function ExampleFixedUIPage({
       isFixed={fixed}
     >
       <TapItems isFixed={fixed} itemsHeight={itemsHeight}>
-        <TapListPage tapList={codeInfo.title || []} />
+        <TapListPage tapList={tapList} />
       </TapItems>
 
       <FixedTap ref={_fixedRef}>
         {fixed && (
           <TapListPage
-            tapList={codeInfo.title || []}
+            tapList={tapList}
             changeTempVers={changeTempVers}
             isFixedMode={fixed}
             fixed={fixed}

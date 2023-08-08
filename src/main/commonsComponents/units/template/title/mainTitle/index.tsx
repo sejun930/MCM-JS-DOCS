@@ -34,7 +34,9 @@ export default function _MainTitleTemplate() {
           className="main-title-remarks"
           dangerouslySetInnerHTML={moduleRemarksList[module]}
         />
-        <ExampleImage src={`/images/modules/example/${module}-example.gif`} />
+        {module && (
+          <ExampleImage src={`/images/modules/example/${module}-example.gif`} />
+        )}
       </Items>
       {(list.length && <IndexRenderPage indexList={list} />) || <></>}
     </Wrapper>

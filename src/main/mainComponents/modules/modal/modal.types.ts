@@ -13,12 +13,6 @@ export interface ModalExampleInitTypes {
   mobileDefaultStyles?: { width?: string; height?: string };
 }
 
-export interface TestTypes {
-  name: string;
-  age: number;
-  hobby?: string;
-}
-
 // // 전체의 타입에 물음표를 붙여준다.
 // type test1 = Partial<TestTypes>;
 // // 전체의 타입을 필수 타입으로 변경한다.
