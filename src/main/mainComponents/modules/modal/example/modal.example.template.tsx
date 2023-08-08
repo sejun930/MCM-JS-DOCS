@@ -10,6 +10,7 @@ import {
   ExampleContentsInfoTypes,
 } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 import { ModalExampleCommonsTypes } from "../modal.types";
+import { ModalPropsType } from "mcm-js/dist/commons/types";
 
 export default function MyModalExample(props: ExampleContentsTypes) {
   const { idx, buttonName } = props.info as ExampleContentsInfoTypes;
@@ -18,11 +19,12 @@ export default function MyModalExample(props: ExampleContentsTypes) {
 
   const isError = props?.isError || false;
 
-  const _props = { ...props.addProps };
-  _props.show = isShow[idx ?? 0];
-  _props.onCloseModal = closeModal(idx ?? 0);
+  const _props = { ...props.addProps } as Partial<ModalPropsType>;
+  _props.show = isShow ? isShow[idx ?? 0] : false;
+  _props.onCloseModal = closeModal && closeModal(idx ?? 0);
 
   if (isError) {
+    // 강제 에러 노출을 위해 undefined 삽입
     _props.show = undefined;
     _props.onCloseModal = undefined;
   }

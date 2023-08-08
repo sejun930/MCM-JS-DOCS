@@ -29,7 +29,7 @@ export default function MyModal() {
   const { getAllExampleComponentLength } = CommonsHooksComponents();
 
   const [vers] = useRecoilState(versState);
-  const [isShow, setIsShow] = useState(
+  const [isShow, setIsShow] = useState<Array<boolean>>(
     new Array(getAllExampleComponentLength(modalExampleList(vers))).fill(false)
   );
 
@@ -38,7 +38,7 @@ export default function MyModal() {
   // fixed 종료 시점 설정
   const endPointRef = useRef() as MutableRefObject<HTMLDivElement>;
   // endPointRef가 있을 경우에만 렌더
-  const [render, setRender] = useState(false);
+  const [render, setRender] = useState<boolean>(false);
 
   useEffect(() => {
     if (endPointRef.current) {

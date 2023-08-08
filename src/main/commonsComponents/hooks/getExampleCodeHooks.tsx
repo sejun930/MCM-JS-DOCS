@@ -120,8 +120,8 @@ export default function getExampleCodeComponnet() {
     }
 
     // 적용된 최종 결과 코드
-    const resultCode = returnInfo(code, _children);
-    if (resultCode) {
+    if (returnInfo) {
+      const resultCode = returnInfo(code, _children);
       // 배열, 문자열 분기화
       return typeof resultCode === "string" ? resultCode : resultCode[idx || 0];
     }

@@ -10,7 +10,7 @@ export const tooltipCodeList: ExampleCodeListTypes = {
 export const tooltipReturnCommonsData = () => {
   return `${getCommonsHighlight.tag.component({
     componentName: "Tooltip",
-    props: ` ${tooltipCommonsExampleCode.tooltipText("world")}`,
+    props: ` ${tooltipCommonsExampleCode.tooltipText("World")}`,
     children: `
       ${getCommonsHighlight.tag.span("Hello")}
     `,
