@@ -12,7 +12,7 @@ export default function ModalFunctionalList(): FunctionalListType[] {
       remakrs: "모달을 실행하는 함수입니다.",
       props: { isSameContents: true, list: [] },
       exampleCode: `${getCommonsHighlight.tag.button({
-        children: getCommonsHighlight.text(" 모달 실행하기"),
+        children: getCommonsHighlight.colors(" 모달 실행하기").text,
         clickEvent: {
           hasStartSpace: true,
           code: `
@@ -74,7 +74,7 @@ export default function ModalFunctionalList(): FunctionalListType[] {
         ],
       },
       exampleCode: `${getCommonsHighlight.tag.button({
-        children: getCommonsHighlight.text(" 모달 실행하기"),
+        children: getCommonsHighlight.colors(" 모달 실행하기").text,
         clickEvent: {
           hasStartSpace: true,
           code: `

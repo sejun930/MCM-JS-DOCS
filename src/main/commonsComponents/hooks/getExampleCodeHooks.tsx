@@ -114,14 +114,14 @@ export default function getExampleCodeComponnet() {
       changeContent: changeContent || "",
       funcName,
     })[module];
-    let _children = children;
-    if (typeof children === "string") {
-      _children = `<span class='lightGray'>${children}</span>`;
-    }
+    // let _children = children;
+    // if (typeof children === "string") {
+    //   _children = `<span class='lightGray'>${children}</span>`;
+    // }
 
     // 적용된 최종 결과 코드
     if (returnInfo) {
-      const resultCode = returnInfo(code, _children);
+      const resultCode = returnInfo(code, children);
       // 배열, 문자열 분기화
       return typeof resultCode === "string" ? resultCode : resultCode[idx || 0];
     }

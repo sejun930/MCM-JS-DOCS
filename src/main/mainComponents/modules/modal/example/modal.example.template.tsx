@@ -13,9 +13,11 @@ import { ModalExampleCommonsTypes } from "../modal.types";
 import { ModalPropsType } from "mcm-js/dist/commons/types";
 
 export default function MyModalExample(props: ExampleContentsTypes) {
-  const { idx, buttonName } = props.info as ExampleContentsInfoTypes;
   const { isShow, openModal, closeModal } =
     props.commonsProps as ModalExampleCommonsTypes;
+
+  const idx = (props.info && props.info.idx && props.info?.idx) || 0;
+  const buttonName = props.info?.buttonName || "";
 
   const isError = props?.isError || false;
 

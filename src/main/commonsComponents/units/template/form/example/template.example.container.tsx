@@ -18,7 +18,12 @@ export default function _ExampleForm(props: IProps) {
   useEffect(() => {
     const _allLen = props.exampleList
       .filter((el) => !el.isError && !el.isHide)
-      .reduce((acc, cur) => acc + cur.contents.length, 0);
+      .reduce(
+        (acc, cur) =>
+          acc + ((Array.isArray(cur.contents) && cur.contents.length) || 1),
+        0
+      );
+    console.log(_allLen);
     setAllLen(_allLen);
 
     // 모두 열기 상태에서 전환시에 새로운 내용까지 연 상태로 만들기

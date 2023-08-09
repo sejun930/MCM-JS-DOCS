@@ -15,12 +15,12 @@ export interface ExampleContentsInfoTypes {
 // 각각의 페이지의 예시 컴포넌트에 전달될 props 타입
 export interface ExampleContentsTypes {
   children?: ReactNode;
-  info: ExampleContentsInfoTypes;
+  info?: ExampleContentsInfoTypes;
   addProps?: ModuleAllPropsTypes; // 예시 컴포넌트 실행시 추가적으로 넘길 props 값
   commonsProps?: Partial<ModuleAllExampleCommonsTypes>; // 컴포넌트 실행하기 위해 필요한 Props 값
   changeContent?: string; // 별개의 데이터로 content를 입력하고 싶을 때 사용
-  content: string | JSX.Element; // 모듈 실행시 함께 렌더될 데이터
-  code: null | Array<string> | string; // 렌더되는 코드 정보
+  content: string | ReactNode; // 모듈 실행시 함께 렌더될 데이터
+  code: null | Array<string> | string | (() => string | Array<string>); // 렌더되는 코드 정보
   remakrs: string; // 예시 설명
   isError?: boolean; // 에러 여부
   vers?: number;
@@ -29,7 +29,8 @@ export interface ExampleContentsTypes {
 // 각각의 페이지에서 전달될 props 타입
 export interface ExampleIProps {
   title: string; // 예시 타이틀
-  contents: Array<ExampleContentsTypes>;
+  blockRemarks?: string; // 한 블록 범위의 설명 정보
+  contents: ExampleContentsTypes | Array<ExampleContentsTypes>;
   isFull?: boolean; // 화면을 분할해서 사용하지 않고 block 요소로 전체 사용
   isError?: boolean; // 에러케이스 여부
   isHide?: boolean; // 노출 여부 (true일 경우 숨기기)

@@ -341,7 +341,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
               `
             `
             )}
-          <span class='blue'>)</span>${getCommonsHighlight.text(",")}`,
+          <span class='blue'>)</span>${getCommonsHighlight.colors(",").text}`,
         content: `하위 모달을 종료하면 상위 모달도 함께 종료됩니다.`,
         code: modalCodeList(idx).selectClose,
       },

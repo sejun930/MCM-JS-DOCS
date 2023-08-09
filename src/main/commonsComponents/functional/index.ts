@@ -1,12 +1,9 @@
 // 태그 제거하기
-const removeTag = (str: string) => {
-  return str
-    .split("</span>")
-    .map((el) =>
-      el.replace(el.substring(el.indexOf("<span"), el.indexOf(">") + 1), "")
-    )
+const removeTag = (str: string): string =>
+  str
+    .split("<span")
+    .map((el) => el.substring(el.indexOf(">") + 1).replaceAll("</span>", ""))
     .join("");
-};
 
 // 시간에 대한 차이 구하기
 const getDateForm = ({
@@ -213,6 +210,21 @@ const changeClientText = (text: string): string => {
   return text.split("<br />").join("\n");
 };
 
+// 이미지 미리 불러오기
+const imagePreLoad = (list: Array<string>) => {
+  const script = document.createElement("script");
+
+  if (list && list.length) {
+    list.forEach((url) => {
+      const img = document.createElement("img");
+      img.src = url;
+
+      script.append(img);
+    });
+  }
+  document.body.append(script);
+};
+
 export {
   removeTag,
   getDateForm,
@@ -227,4 +239,5 @@ export {
   checkSamePassword,
   changeServerText,
   changeClientText,
+  imagePreLoad,
 };

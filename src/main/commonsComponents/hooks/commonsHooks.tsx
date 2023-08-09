@@ -43,7 +43,11 @@ export default function CommonsHooksComponents() {
 
   // 예시용 렌더시 몇개의 예시 컴포넌트를 가지고 있는지를 리턴
   const getAllExampleComponentLength = (list: Array<ExampleIProps>): number => {
-    return list.reduce((acc, cur) => acc + cur.contents.length, 0);
+    return list.reduce(
+      (acc, cur) =>
+        acc + ((Array.isArray(cur.contents) && cur.contents.length) || 1),
+      0
+    );
   };
 
   // CamelCase 적용된 문자열을 기존의 하이픈 문법으로 변경하기

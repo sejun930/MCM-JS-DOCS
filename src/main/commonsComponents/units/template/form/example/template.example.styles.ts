@@ -71,6 +71,13 @@ export const ExampleContentsItems = styled.div`
     font-weight: 700;
   }
 
+  .example-block-remarks {
+    margin-top: 12px;
+    font-size: 16px;
+    padding-left: 10px;
+    color: #555555;
+  }
+
   ${(props: StyleTypes) =>
     props.isFull && {
       width: "100%",

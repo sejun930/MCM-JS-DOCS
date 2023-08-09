@@ -4,15 +4,49 @@ import { tooltipCommonsExampleCode } from "./tooltip.example.commons.code";
 
 // Tooltip 각각의 예시 코드를 저장하는 객체
 export const tooltipCodeList: ExampleCodeListTypes = {
-  basic: `${tooltipCommonsExampleCode.tooltipText("aaa")}`,
+  basic: ` ${tooltipCommonsExampleCode.tooltipString("World")}`,
+  basicImg: ` 
+      ${tooltipCommonsExampleCode.tooltipObject(
+        `
+        ${getCommonsHighlight.tag.img(
+          getCommonsHighlight.props(
+            "src",
+            getCommonsHighlight.string("이미지 주소")
+          )
+        )}
+      `
+      )}
+    `,
+  animation: ` ${tooltipCommonsExampleCode.tooltipString("World")} ${
+    tooltipCommonsExampleCode.useAnimation
+  }`,
+  animationImg: ` 
+      ${tooltipCommonsExampleCode.useAnimation}
+      ${tooltipCommonsExampleCode.tooltipObject(
+        `
+        ${getCommonsHighlight.tag.img(
+          getCommonsHighlight.props(
+            "src",
+            getCommonsHighlight.string("이미지 주소")
+          )
+        )}
+      `
+      )}
+    `,
 };
 
-export const tooltipReturnCommonsData = () => {
+export const tooltipReturnCommonsData = ({
+  code,
+  children,
+}: {
+  code: string;
+  children?: React.ReactNode | string;
+}) => {
   return `${getCommonsHighlight.tag.component({
     componentName: "Tooltip",
-    props: ` ${tooltipCommonsExampleCode.tooltipText("World")}`,
+    props: code,
     children: `
-      ${getCommonsHighlight.tag.span("Hello")}
+      ${children}
     `,
   })}`;
 };

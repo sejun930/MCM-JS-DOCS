@@ -1,9 +1,5 @@
 // highlight가 적용된 코드 및 그외 기능 렌더시 사용
 export const getCommonsHighlight = {
-  // 주석 처리
-  comment: (text: string) => `<span class='lightGreen'>// ${text}</span>`,
-  // 텍스트 입력
-  text: (text: string) => `<span class='lightGray'>${text}</span>`,
   // 세미콜론
   semiColon: () => `<span class='lightGray'>;</span>`,
   // 콤마
@@ -26,16 +22,25 @@ export const getCommonsHighlight = {
       tagName,
       children,
       endSpace,
+      closeTag,
     }: {
       tagName: string;
       children?: string;
       endSpace?: string;
+      closeTag?: {
+        // 단독적으로 사용되는 태그
+        props: string;
+      };
     }) =>
-      `<span><</span><span class='darkBlue'>${tagName}</span><span>></span> ${
-        children || ""
-      }${
-        endSpace || ""
-      }<span><</span><span>/</span><span class='darkBlue'>${tagName}</span><span>></span>`,
+      `<span><</span><span class='darkBlue'>${tagName}</span><span>${
+        (closeTag && ` ${closeTag.props} <span>/</span>`) || ""
+      }></span>${
+        (!closeTag &&
+          ` ${children || ""}${
+            endSpace || ""
+          }<span><</span><span>/</span><span class='darkBlue'>${tagName}</span><span>></span>`) ||
+        ""
+      }`,
     // 컴포넌트
     component: ({
       componentName,
@@ -65,7 +70,14 @@ export const getCommonsHighlight = {
     span: (children: string) =>
       getCommonsHighlight.tag.tag({
         tagName: "span",
-        children: getCommonsHighlight.text(children),
+        children: getCommonsHighlight.colors(children).text,
+        endSpace: " ",
+      }),
+    // p 태그
+    p: (children: string) =>
+      getCommonsHighlight.tag.tag({
+        tagName: "p",
+        children: getCommonsHighlight.colors(children).text,
         endSpace: " ",
       }),
     // div 태그
@@ -75,6 +87,15 @@ export const getCommonsHighlight = {
         children,
         endSpace,
       }),
+    // img 태그
+    img: (children: string) =>
+      getCommonsHighlight.tag.tag({
+        tagName: "img",
+        closeTag: {
+          props: children,
+        },
+      }),
+    // `<span><</span><span class='darkBlue'>img</span>  <span>/></span>`,
     // button 태그
     button: ({
       children,
@@ -129,7 +150,7 @@ export const getCommonsHighlight = {
           `
     `) ||
         ""
-      }<span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
+      } <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
   },
   // 쌍따옴표로 감싸진 문자열 출력
   string: (text: string, semicolon?: boolean) =>
@@ -144,7 +165,18 @@ export const getCommonsHighlight = {
   <span class='deepPurple'>)</span><span class='lightGray'>;</span>`,
   // 컴포넌트 props 폼
   props: (key: string, value: string) =>
-    `<span class='skyblue'>${key}</span>${getCommonsHighlight.text(
-      "="
-    )}${value}`,
+    `<span class='skyblue'>${key}</span>${
+      getCommonsHighlight.colors("=").text
+    }${value}`,
+  // 중괄호 폼
+  curly: (children: string) =>
+    `<span class="blue">{</span>${children}<span class="blue">}</span>`,
+  // 각각의 상황에 맞는 컬러 반환
+  colors: (children: string) => {
+    return {
+      bool: `<span class="blue3">${children}</span>`, // boolean 타입
+      comment: `<span class='lightGreen'>// ${children}</span>`, // 주석 처리
+      text: `<span class='lightGray'>${children}</span>`, // 일반 텍스트 입력
+    };
+  },
 };
