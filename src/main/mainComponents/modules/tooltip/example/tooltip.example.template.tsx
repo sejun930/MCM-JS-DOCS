@@ -24,4 +24,8 @@ export default function MyTooltipExample(props: ExampleContentsTypes) {
 
 const _Tooltip = styled(Tooltip)`
   width: fit-content;
+
+  span {
+    font-size: 18px;
+  }
 `;

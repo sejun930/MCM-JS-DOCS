@@ -1,5 +1,11 @@
 import { CodeInfoWrapper, OptionalWrapper, Wrapper } from "./optional.styles";
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, {
+  MutableRefObject,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { useRecoilState } from "recoil";
 import { versState } from "src/commons/store";
@@ -22,7 +28,7 @@ export default function _ExampleOptionalFormPage({
   allHeightList,
 }: {
   code: string;
-  content: string | JSX.Element;
+  content: string | ReactNode;
   isOpen: boolean;
   changeOpenList: (idx: number, list?: Array<boolean>) => void;
   codeIdx: number;

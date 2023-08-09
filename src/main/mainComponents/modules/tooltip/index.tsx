@@ -10,22 +10,31 @@ import {
   tooltipExampleList,
   tooltipExampleInitProps,
 } from "./example/tooltip.example.render.data";
-import { TooltipPropsType } from "mcm-js/dist/commons/types";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+
+import { _PText } from "mcm-js-commons";
+import { getCommonsHighlight } from "src/commons/highlight";
+import { imagePreLoad } from "src/main/commonsComponents/functional";
 
 export default function MyTooltip() {
+  // 필요한 이미지 미리 로드하기
+  useEffect(() => {
+    imagePreLoad(["/images/modules/example/tooltip/dancing.gif"]);
+  }, []);
+
   const commonsProps: { tooltipText: string | ReactNode; children: ReactNode } =
     {
       tooltipText: "World",
-      children: <span>Hello</span>,
+      children: <_PText>Hello</_PText>,
     };
+
   return (
     <Template>
       <ModulesInfoWrapper>
         <_MainTitleTemplate />
         <_HowUseForm
           codeInfo={tooltipCodeList}
-          exmapleContents="툴팁의 기본형입니다."
+          exmapleContents={getCommonsHighlight.tag.p("Hello")}
         />
         <_ExampleForm
           exampleList={tooltipExampleList()}

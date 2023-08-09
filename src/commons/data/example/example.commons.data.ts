@@ -17,7 +17,6 @@ export const exampleCommonsList: {
   [key: string]: Array<ExampleCommonsTypes> | ExampleCommonsTypes | null;
 } = {
   Modal: modalCommonsData,
-  Tooltip: null,
 };
 
 // 예시용 코드에 붙여지는 return 코드들
@@ -35,7 +34,8 @@ export const exampleCommonsReturnList = ({
 } => {
   return {
     Modal: (code: string, children?: React.ReactNode | string) =>
-      modalReturnCommonsData({ code, text: children, changeContent, funcName }),
-    Tooltip: () => tooltipReturnCommonsData(),
+      modalReturnCommonsData({ code, children, changeContent, funcName }),
+    Tooltip: (code: string, children?: React.ReactNode | string) =>
+      tooltipReturnCommonsData({ code, children }),
   };
 };

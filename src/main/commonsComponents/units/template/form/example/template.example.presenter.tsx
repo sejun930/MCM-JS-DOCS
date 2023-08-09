@@ -80,63 +80,77 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                   >
                     {el.isError ? "❗ 모듈 호출시 에러 발생 예시" : el.title}
                   </_Title>
+                  {el.blockRemarks && (
+                    <_PText className="example-block-remarks">
+                      {el.blockRemarks}
+                    </_PText>
+                  )}
                   <ExampleResultList className="example-list-items">
-                    {el.contents &&
-                      el.contents.length &&
-                      el.contents.map(
-                        (component: ExampleContentsTypes, idx2: number) => {
-                          // 렌더할 때 넘겨줄 props 옵션 값 설정
-                          const addProps = {
-                            ...initProps,
-                            ...component.addProps,
-                          };
-                          component.addProps = { ...addProps };
-                          // 에러케이스 처리
-                          component.isError = el?.isError || false;
-                          // vers 저장
-                          component.vers = vers;
+                    {(Array.isArray(el.contents) // 콘텐츠가 여러개인지 검증
+                      ? el.contents
+                      : [el.contents]
+                    ) // 한개라면 배열에 감싸기
+                      .map((component: ExampleContentsTypes, idx2: number) => {
+                        // 렌더할 때 넘겨줄 props 옵션 값 설정
+                        const addProps = {
+                          ...initProps,
+                          ...component.addProps,
+                        };
+                        component.addProps = { ...addProps };
+                        // 에러케이스 처리
+                        component.isError = el?.isError || false;
+                        // vers 저장
+                        component.vers = vers;
 
-                          // 렌더될 대상의 인덱스 값 지정
-                          component.info.idx = _idx;
-                          _idx++;
+                        // 렌더될 대상의 인덱스 값 지정
+                        if (component.info) component.info.idx = _idx;
+                        _idx++;
 
-                          // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
-                          component.commonsProps = { ...commonsProps };
+                        // 해당 컴포넌트를 실행할 수 있는 공통 props 값 지정
+                        component.commonsProps = { ...commonsProps };
 
-                          // 하위 컴포넌트들의 width 값 지정하기
-                          let width: string = "100%";
-                          if (el.isFull) {
-                            width = `${100 / el.contents.length}%`;
-                          }
-
-                          return (
-                            <ExampleListWrapper
-                              key={`${module}_${idx}_${idx2}`}
-                              style={{ width }}
-                              className="example-list"
-                            >
-                              <ExampleListItems>
-                                {renderTemplateList[module] &&
-                                  renderTemplateList[module](component)}
-                                <_PText className="example-remarks">
-                                  {component.remakrs}
-                                </_PText>
-                              </ExampleListItems>
-                              {component.code && (
-                                <_ExampleOptionalFormPage
-                                  code={component.code[vers]}
-                                  content={component.content}
-                                  isOpen={openList[_idx - 1]}
-                                  changeOpenList={changeOpenList}
-                                  codeIdx={_idx - 1}
-                                  changeContent={component.changeContent || ""}
-                                  allHeightList={allHeightList}
-                                />
-                              )}
-                            </ExampleListWrapper>
-                          );
+                        // 하위 컴포넌트들의 width 값 지정하기
+                        let width: string = "100%";
+                        if (el.isFull) {
+                          width = `${
+                            100 /
+                            ((Array.isArray(el.contents) &&
+                              el.contents.length) ||
+                              1)
+                          }%`;
                         }
-                      )}
+
+                        let code = component.code;
+                        if (typeof code === "function") code = code();
+                        if (Array.isArray(code)) code = code[vers];
+
+                        return (
+                          <ExampleListWrapper
+                            key={`${module}_${idx}_${idx2}`}
+                            style={{ width }}
+                            className="example-list"
+                          >
+                            <ExampleListItems>
+                              {renderTemplateList[module] &&
+                                renderTemplateList[module](component)}
+                              <_PText className="example-remarks">
+                                {component.remakrs}
+                              </_PText>
+                            </ExampleListItems>
+                            {component.code && (
+                              <_ExampleOptionalFormPage
+                                code={code ?? ""}
+                                content={component.content}
+                                isOpen={openList[_idx - 1]}
+                                changeOpenList={changeOpenList}
+                                codeIdx={_idx - 1}
+                                changeContent={component.changeContent || ""}
+                                allHeightList={allHeightList}
+                              />
+                            )}
+                          </ExampleListWrapper>
+                        );
+                      })}
                   </ExampleResultList>
                 </ExampleContentsItems>
               )

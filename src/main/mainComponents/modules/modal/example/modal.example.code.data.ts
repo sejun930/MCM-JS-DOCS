@@ -12,15 +12,15 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   // prettier-ignore
   {
     code: `
-  ${getCommonsHighlight.comment("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다")}
+  ${getCommonsHighlight.colors("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다").comment}
   <span class='darkBlue'>const</span> <span class='deepPurple'>[</span><span class='blue'>isOpen</span><span class='lightGray'>,</span> <span class='lightYellow'>setIsOpen</span><span class='deepPurple'>]</span> <span class='lightGray'>=</span> <span class='lightYellow'>useState</span><span class='deepPurple'>(</span><span class='blue'>false</span><span class='deepPurple'>)</span><span class='lightGray'>;</span>
   
-  ${getCommonsHighlight.comment("모달을 실행하는 함수입니다.")}
+  ${getCommonsHighlight.colors("모달을 실행하는 함수입니다.").comment}
   <span class='darkBlue'>const</span> <span class='lightYellow'>openModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
     <span class='lightYellow'>setIsOpen</span><span class='blue'>(true)</span><span class='lightGray'>;</span>
   <span class='deepPurple'>}</span><span class='lightGray'>;</span>
   
-  ${getCommonsHighlight.comment("모달을 종료하는 함수입니다.")}
+  ${getCommonsHighlight.colors("모달을 종료하는 함수입니다.").comment}
   <span class='darkBlue'>const</span> <span class='lightYellow'>closeModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
     <span class='lightYellow'>setIsOpen</span><span class='blue'>(false)</span><span class='lightGray'>;</span>
   <span class='deepPurple'>}</span><span class='lightGray'>;</span>
@@ -37,21 +37,21 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
 // 리턴될 때에 공통적으로 들어가는 코드 데이터
 export const modalReturnCommonsData = ({
   code,
-  text,
+  children,
   changeContent, // content form 사용 여부, true일 경우 사용하지 않음
   funcName, // 사용될 함수명
 }: {
   code: string;
-  text?: React.ReactNode | string;
+  children?: React.ReactNode | string;
   changeContent?: string;
   funcName?: string;
 }): Array<string> => {
-  text = removeTag(typeof text === "string" ? text : "");
+  children = removeTag(typeof children === "string" ? children : "");
 
   return [
     getCommonsHighlight.tag.div(`
       ${getCommonsHighlight.tag.button({
-        children: getCommonsHighlight.text("모달 실행하기 "),
+        children: getCommonsHighlight.colors("모달 실행하기").text,
         clickEvent: {
           // useArrow: true,
           eventName: "openModal",
@@ -62,7 +62,7 @@ export const modalReturnCommonsData = ({
         componentName: "Modal",
         props: ` ${code}`,
         children: getCommonsHighlight.tag.span(
-          typeof text === "string" ? text : ""
+          typeof children === "string" ? children : ""
         ),
         childrenSpace: `
         `,
@@ -71,7 +71,7 @@ export const modalReturnCommonsData = ({
       })}
     `),
     `${getCommonsHighlight.tag.button({
-      children: getCommonsHighlight.text("모달 실행하기"),
+      children: getCommonsHighlight.colors("모달 실행하기").text,
       endSpace: `
       `,
       clickEvent: {
@@ -83,7 +83,7 @@ export const modalReturnCommonsData = ({
           <span class='skyblue'>children:</span> ${
             (!changeContent &&
               `${getCommonsHighlight.tag.span(
-                typeof text === "string" ? text : ""
+                typeof children === "string" ? children : ""
               )}<span class='lightGray'>,</span>`) ||
             changeContent
           }${

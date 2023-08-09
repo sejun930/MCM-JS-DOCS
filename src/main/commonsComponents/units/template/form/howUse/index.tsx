@@ -28,6 +28,9 @@ export default function _HowUseForm({
 
   const { getExampleCode } = getExampleCodeComponnet();
 
+  let code = codeInfo.basic || "";
+  if (Array.isArray(code)) code = codeInfo.basic[vers];
+
   return (
     <Wrapper id="how-use-form">
       <_SubTitleTemplate
@@ -51,7 +54,7 @@ export default function _HowUseForm({
         {codeInfo.basic && codeInfo.basic[vers] !== undefined && (
           <_Copy
             text={getExampleCode({
-              code: codeInfo.basic[vers],
+              code,
               children: exmapleContents,
               idx: vers,
             })}
