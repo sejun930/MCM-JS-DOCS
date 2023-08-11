@@ -88,6 +88,19 @@ export const ExampleContentsItems = styled.div`
 
     h3 {
       font-size: 18px;
+      text-align: center;
+    }
+
+    .example-block-remarks {
+      text-align: center;
+      padding-left: 0px;
+    }
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    h3,
+    .example-block-remarks {
+      text-align: left;
     }
   }
 `;
@@ -118,6 +131,12 @@ export const ExampleListWrapper = styled.div`
     line-height: 20px;
     letter-spacing: -0.01rem;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    .example-remarks {
+      text-align: center;
+    }
+  }
 `;
 
 export const ExampleListItems = styled.div`
@@ -132,6 +151,7 @@ export const ExampleListItems = styled.div`
 
   @media ${breakPoints.mobileLarge} {
     padding: 1rem;
+    align-items: center;
 
     .mcm-error-unit {
       margin: 0;

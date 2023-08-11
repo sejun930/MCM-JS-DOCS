@@ -23,7 +23,6 @@ export default function _ExampleForm(props: IProps) {
           acc + ((Array.isArray(cur.contents) && cur.contents.length) || 1),
         0
       );
-    console.log(_allLen);
     setAllLen(_allLen);
 
     // 모두 열기 상태에서 전환시에 새로운 내용까지 연 상태로 만들기
