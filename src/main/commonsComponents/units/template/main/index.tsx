@@ -32,6 +32,7 @@ export const Wrapper = styled.main`
   flex-direction: column;
   min-width: 85%;
   position: relative;
+  overflow-x: hidden;
 
   ${(props: StyleTypes) =>
     props.isFull && {
@@ -52,6 +53,11 @@ export const Wrapper = styled.main`
     .deepPurple {
       // 진보라색 : state, function
       color: #de6db7;
+    }
+
+    .number {
+      // 숫자
+      color: #c4d7b2;
     }
 
     .lightYellow {

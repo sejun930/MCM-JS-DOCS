@@ -15,6 +15,7 @@ import _Copy from "src/main/commonsComponents/units/copy";
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
 
 import { Tooltip } from "mcm-js";
+import { _Button } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
 
 // 예시용에 추가적으로 붙는 옵션 폼 페이지 (ex : 코드보기 등등)
@@ -65,7 +66,11 @@ export default function _ExampleOptionalFormPage({
   return (
     <Wrapper>
       <Tooltip
-        tooltipText={`코드 ${isOpen ? "닫기" : "열기"}`}
+        tooltipText={
+          <_Button onClickEvent={toggleShowCode}>
+            코드 {isOpen ? "닫기" : "열기"}
+          </_Button>
+        }
         useShowAnimation
       >
         <OptionalWrapper onClick={toggleShowCode}>

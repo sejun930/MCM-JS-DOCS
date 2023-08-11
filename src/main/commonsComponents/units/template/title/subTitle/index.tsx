@@ -3,7 +3,7 @@ import React, { CSSProperties } from "react";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import { subTitleEmoji } from "./data";
-import { _Title, _PText } from "mcm-js-commons";
+import { _Title, _PTextWithHtml } from "mcm-js-commons";
 
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
@@ -42,7 +42,12 @@ export default function _SubTitleTemplate({
         {sideComponent && componentRender(sideComponent)}
       </TitleWrapper>
       <Line className="subTitle-line" />
-      {remakrs && <_PText className="subTitle-remarks">{remakrs}</_PText>}
+      {remakrs && (
+        <_PTextWithHtml
+          className="subTitle-remarks"
+          dangerouslySetInnerHTML={remakrs}
+        />
+      )}
       {children}
     </Wrapper>
   );
@@ -57,11 +62,13 @@ export const Wrapper = styled.div`
     font-size: 16px;
     margin: 6px 0px;
     margin-bottom: 20px;
+    line-height: 24px;
   }
 
   @media ${breakPoints.mobileLarge} {
     .subTitle-remarks {
       font-size: 14px;
+      line-height: 22px;
     }
   }
 `;

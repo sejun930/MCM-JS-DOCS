@@ -36,6 +36,6 @@ export const exampleCommonsReturnList = ({
     Modal: (code: string, children?: React.ReactNode | string) =>
       modalReturnCommonsData({ code, children, changeContent, funcName }),
     Tooltip: (code: string, children?: React.ReactNode | string) =>
-      tooltipReturnCommonsData({ code, children }),
+      tooltipReturnCommonsData({ code, children, changeContent }),
   };
 };

@@ -21,7 +21,7 @@ export default function ExampleFixedUIPage({
   codeInfo: ExampleCodeListTypes;
   itemsHeight: number;
 }) {
-  const tapList = [...Array.from(codeInfo.title)] || [];
+  const tapList = [...Array.from(codeInfo.title())] || [];
 
   return (
     <TapWrapper

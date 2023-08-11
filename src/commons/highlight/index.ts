@@ -158,6 +158,8 @@ export const getCommonsHighlight = {
     `<span class='lightOrange'>"${text}"</span>${
       (semicolon && getCommonsHighlight.semiColon()) || ""
     }`,
+  // 숫자 타입 출력
+  number: (num: number | string) => `<span class="number">${num}</span>`,
   // return 폼
   return: (code: string) =>
     `  <span class='purple'>return</span> <span class='deepPurple'>(</span>
@@ -165,18 +167,24 @@ export const getCommonsHighlight = {
   <span class='deepPurple'>)</span><span class='lightGray'>;</span>`,
   // 컴포넌트 props 폼
   props: (key: string, value: string) =>
-    `<span class='skyblue'>${key}</span>${
+    `${getCommonsHighlight.colors(key).key}${
       getCommonsHighlight.colors("=").text
     }${value}`,
   // 중괄호 폼
-  curly: (children: string) =>
-    `<span class="blue">{</span>${children}<span class="blue">}</span>`,
+  curly: (children: string, className?: string) =>
+    `<span class=${className || "blue"}>{</span>${children}<span class=${
+      className || "blue"
+    }>}</span>`,
+  // 객체 key-value 폼
+  obj: (key: string, value: string) =>
+    `${getCommonsHighlight.colors(key + ":").key} ${value}`,
   // 각각의 상황에 맞는 컬러 반환
   colors: (children: string) => {
     return {
       bool: `<span class="blue3">${children}</span>`, // boolean 타입
       comment: `<span class='lightGreen'>// ${children}</span>`, // 주석 처리
       text: `<span class='lightGray'>${children}</span>`, // 일반 텍스트 입력
+      key: `<span class='skyblue'>${children}</span>`, // 객체의 key 및 props의 key 이름
     };
   },
 };

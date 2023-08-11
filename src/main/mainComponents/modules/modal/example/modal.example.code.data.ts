@@ -103,12 +103,12 @@ export const modalReturnCommonsData = ({
 // Modal 각각의 예시 코드를 저장하는 객체
 export const modalCodeList = (idx: number): ExampleCodeListTypes => {
   return {
-    title: ["With State", "Use in Function"],
-    basic: [
+    title: () => ["With State", "Use in Function"],
+    basic: () => [
       `${modalCommonsExampleCode.show[idx]} ${modalCommonsExampleCode.onCloseModal[idx]}`,
       ``,
     ],
-    animation: [
+    animation: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -120,7 +120,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
       ])}`,
     ],
-    size300: [
+    size300: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -131,7 +131,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         modalCommonsExampleCode.modalSize("300px", "300px")[idx],
       ])}`,
     ],
-    sizePercent: [
+    sizePercent: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -142,7 +142,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         modalCommonsExampleCode.modalSize("30%", "40%")[idx],
       ])}`,
     ],
-    responsive: [
+    responsive: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -152,7 +152,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         modalCommonsExampleCode.mobileModalSize("50%", "50%")[idx],
       ])}`,
     ],
-    modalStyle: [
+    modalStyle: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -160,7 +160,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
       `,
       `${modalCommonsExampleCode.modalStyles[idx]}`,
     ],
-    mobileModalStyles: [
+    mobileModalStyles: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -168,13 +168,13 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
       `,
       `${modalCommonsExampleCode.mobileModalStyles[idx]}`,
     ],
-    hideCloseButton: [
+    hideCloseButton: () => [
       `${modalCommonsExampleCode.show[idx]} ${modalCommonsExampleCode.onCloseModal[idx]} ${modalCommonsExampleCode.hideCloseButton[idx]}`,
       `${getCommonsHighlight.getComma([
         modalCommonsExampleCode.hideCloseButton[idx],
       ])}`,
     ],
-    addCloseMent: [
+    addCloseMent: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -185,7 +185,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         modalCommonsExampleCode.closeMent("오늘 하루 보지 않기")[idx],
       ])}`,
     ],
-    resizeBtn: [
+    resizeBtn: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -196,7 +196,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         modalCommonsExampleCode.closeButtonInfo[idx],
       ])}`,
     ],
-    offAutoClose: [
+    offAutoClose: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -207,7 +207,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         modalCommonsExampleCode.offAutoClose[idx],
       ])}`,
     ],
-    selectClose: [
+    selectClose: () => [
       ``,
       `${getCommonsHighlight.getComma([
         `<span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span>`,
@@ -215,7 +215,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
       ])}`,
     ],
-    onFixWindow: [
+    onFixWindow: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
@@ -225,7 +225,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         modalCommonsExampleCode.onFixWindow[idx],
       ])}`,
     ],
-    autoCloseTimer: [
+    autoCloseTimer: () => [
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}

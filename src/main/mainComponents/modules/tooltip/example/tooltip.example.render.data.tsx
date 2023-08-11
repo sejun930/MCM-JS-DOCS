@@ -42,17 +42,15 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs: "애니메이션을 적용하면 좀더 역동적인 툴팁이 실행됩니다.",
-        content: getCommonsHighlight.tag.p("Hello"),
-        code: tooltipCodeList.animation,
         addProps: {
           ...tooltipExampleInitProps,
           useShowAnimation: true,
         },
+        content: getCommonsHighlight.tag.p("Hello"),
+        code: tooltipCodeList.animation,
       },
       {
         remakrs: "툴팁의 내용과 상관없이 애니메이션을 적용할 수 있습니다.",
-        content: getCommonsHighlight.tag.p("Hello"),
-        code: tooltipCodeList.animationImg,
         addProps: {
           ...tooltipExampleInitProps,
           useShowAnimation: true,
@@ -61,30 +59,133 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
             <img src="https://mcm-js-image.s3.ap-northeast-2.amazonaws.com/dancing.gif" />
           ),
         },
+        content: getCommonsHighlight.tag.p("Hello"),
+        code: tooltipCodeList.animationImg,
+      },
+    ],
+  },
+  {
+    title: "방향 (Position) 설정",
+    blockRemarks: "툴팁이 실행되는 방향을 직접 설정할 수 있습니다.",
+    contents: [
+      {
+        remakrs: "툴팁이 '위'로 실행됩니다. (Default)",
+        content: getCommonsHighlight.tag.p("🕛 (Top)"),
+        code: tooltipCodeList.position("top position", "top"),
+        addProps: {
+          ...tooltipExampleInitProps,
+          useShowAnimation: true,
+          children: <_PText>🕛 (Top)</_PText>,
+          tooltipText: "top position",
+        },
+      },
+      {
+        remakrs: "툴팁이 '오른쪽'으로 실행됩니다.",
+        content: getCommonsHighlight.tag.p("🕒 (Right)"),
+        code: tooltipCodeList.position("right position", "right"),
+        addProps: {
+          ...tooltipExampleInitProps,
+          useShowAnimation: true,
+          children: <_PText>🕒 (Right)</_PText>,
+          tooltipText: "right position",
+          position: "right",
+        },
+      },
+      {
+        remakrs: "툴팁이 '아래'로 실행됩니다.",
+        content: getCommonsHighlight.tag.p("🕕 (Bottom)"),
+        code: tooltipCodeList.position("bottom position", "bottom"),
+        addProps: {
+          ...tooltipExampleInitProps,
+          useShowAnimation: true,
+          children: <_PText>🕕 (Bottom)</_PText>,
+          tooltipText: "bottom position",
+          position: "bottom",
+        },
+      },
+      {
+        remakrs: "툴팁이 '왼쪽'으로 실행됩니다.",
+        content: getCommonsHighlight.tag.p("🕘 (Left)"),
+        code: tooltipCodeList.position("left position", "left"),
+        addProps: {
+          ...tooltipExampleInitProps,
+          useShowAnimation: true,
+          children: <_PText>🕘 (Left)</_PText>,
+          tooltipText: "left position",
+          position: "left",
+        },
+      },
+    ],
+    isFull: true,
+  },
+  {
+    title: "스타일 지정 (웹, 모바일)",
+    isFull: true,
+    contents: [
+      {
+        remakrs:
+          "툴팁을 원하는 스타일로 커스텀 할 수 있습니다. (Web, Mobile 동시 적용)",
+        addProps: {
+          ...tooltipExampleInitProps,
+          children: <_PText>Open New Style Tooltip</_PText>,
+          tooltipText: "New Style Tooltip",
+          tooltipStyles: {
+            backgroundColor: "black",
+            padding: "16px",
+            font: {
+              color: "#9BE8D8",
+              size: "20px",
+              weight: 700,
+            },
+            border: {
+              color: "#9BE8D8",
+              width: "3px",
+              radius: "0px",
+            },
+          },
+        },
+        content: getCommonsHighlight.tag.p("Open New Style Tooltip"),
+        code: tooltipCodeList.styles(),
+      },
+      {
+        remakrs: "모바일(767px 이하)만 적용되는 스타일입니다. (Mobile 적용)",
+        addProps: {
+          ...tooltipExampleInitProps,
+          children: <_PText>Open New Mobile Style Tooltip</_PText>,
+          tooltipText: "New Mobile Style Tooltip",
+          tooltipMobileStyles: {
+            backgroundColor: "white",
+            padding: "20px",
+            font: {
+              color: "#F86F03",
+              size: "20px",
+              weight: 500,
+            },
+            border: {
+              color: "#F86F03",
+              width: "3px",
+              radius: "0px",
+            },
+          },
+        },
+        content: getCommonsHighlight.tag.p("Open New Mobile Style Tooltip"),
+        code: tooltipCodeList.mobileStyles(),
       },
     ],
   },
   // {
-  //   title: "방향 (Position) 설정",
-  //   blockRemarks: "툴팁의 실행되는 방향을 직접 변경할 수 있습니다.",
+  //   title: "비활성화 (Disable) 적용",
   //   contents: [
   //     {
-  //       remakrs: "ㅁㅁㅁㅁ",
-  //       content: "222",
-  //     },
-  //     {
-  //       remakrs: "ㅁㅁㅁㅁ",
-  //       content: "222",
-  //     },
-  //     {
-  //       remakrs: "ㅁㅁㅁㅁ",
-  //       content: "222",
-  //     },
-  //     {
-  //       remakrs: "ㅁㅁㅁㅁ",
-  //       content: "222",
+  //       remakrs: "원하는 시점에 툴팁의 기능을 활성화/비활성화 할 수 있습니다.",
+  //       addProps: {
+  //         ...tooltipExampleInitProps,
+  //         useShowAnimation: true,
+  //       },
+  //       changeContent: `123123`,
+  //       content: getCommonsHighlight.tag.p("Hello"),
+  //       code: tooltipCodeList.disable,
   //     },
   //   ],
-  //   isFull: true,
   // },
 ];
