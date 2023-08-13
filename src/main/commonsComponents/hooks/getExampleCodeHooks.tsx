@@ -12,20 +12,6 @@ import { getCommonsHighlight } from "src/commons/highlight";
 // 공백 2칸을 주고 싶다면 /&tap2&/ 를 추가
 
 export default function getExampleCodeComponnet() {
-  const [module] = useRecoilState(moduleState);
-  const [vers] = useRecoilState(versState);
-
-  const getCommonsInfo:
-    | Array<ExampleCommonsTypes>
-    | ExampleCommonsTypes
-    | null =
-    (exampleCommonsList && exampleCommonsList[module || "Modal"]) || null;
-
-  const commonsInfo: ExampleCommonsTypes | null =
-    getCommonsInfo && Array.isArray(getCommonsInfo)
-      ? getCommonsInfo[vers || 0]
-      : getCommonsInfo;
-
   // 해당 모듈의 이름으로 호출하는 코드 출력
   const getExampleCode = ({
     code,
@@ -33,24 +19,41 @@ export default function getExampleCodeComponnet() {
     idx,
     changeContent,
     funcName,
+    module,
+    vers,
+    returnStr,
+    addImport,
   }: {
     code: string;
     children: React.ReactNode | string;
     idx?: number;
     changeContent?: string;
     funcName?: string;
+    module: string;
+    vers?: number;
+    returnStr?: string;
+    addImport?: { [key: string]: string[] | string };
   }): string => {
-    let str = "";
-    str += `<span class='purple'>import</span>`;
-    str += `<span class='yellow'> { </span>`;
-    str += `<span class='skyblue'>${module}</span>`;
-    str += `<span class='yellow'> } </span>`;
-    str += `<span class='purple'>from</span>`;
-    str += ` ${getCommonsHighlight.string("mcm-js", true)}`;
+    const getCommonsInfo:
+      | Array<ExampleCommonsTypes>
+      | ExampleCommonsTypes
+      | null =
+      (exampleCommonsList && exampleCommonsList[module || "Modal"]) || null;
+
+    const commonsInfo: ExampleCommonsTypes | null =
+      getCommonsInfo && Array.isArray(getCommonsInfo)
+        ? getCommonsInfo[vers || 0]
+        : getCommonsInfo;
+
+    let str = getCommonsHighlight.import([module], "mcm-js");
 
     // 추가 import 렌더하기
     if (commonsInfo && commonsInfo?.import) {
       str += getImportCode(commonsInfo.import);
+    }
+    if (addImport) {
+      str += getImportCode(addImport);
+      // addImport.forEach((el) => (str += getImportCode(el)));
     }
 
     str += "/&tap2&/<span class='purple'>export default</span>";
@@ -63,16 +66,21 @@ export default function getExampleCodeComponnet() {
       str += `${commonsInfo.code}`;
     }
 
-    const getReturnStr = getCommonsHighlight.return(
-      getCommonsReturn({
-        code,
-        children,
-        idx: idx || 0,
-        changeContent,
-        funcName,
-      }) || code
-    );
-    if (getReturnStr) str += `/&tap&/${getReturnStr}`;
+    if (!returnStr) {
+      const getReturnStr = getCommonsHighlight.return(
+        getCommonsReturn({
+          code,
+          children,
+          idx: idx || 0,
+          changeContent,
+          funcName,
+          module,
+        }) || code
+      );
+      if (getReturnStr) str += `/&tap&/${getReturnStr}`;
+    } else
+      str += `
+  ${returnStr}`;
     str += "/&tap&/<span class='yellow'>}</span>";
 
     return str;
@@ -103,12 +111,14 @@ export default function getExampleCodeComponnet() {
     idx,
     changeContent,
     funcName,
+    module,
   }: {
     code: string;
     children: React.ReactNode | string;
     idx: number;
     changeContent?: string;
     funcName?: string;
+    module: string;
   }): string => {
     const returnInfo = exampleCommonsReturnList({
       changeContent: changeContent || "",

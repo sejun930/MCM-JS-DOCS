@@ -8,7 +8,7 @@ import React, {
 } from "react";
 
 import { useRecoilState } from "recoil";
-import { versState } from "src/commons/store";
+import { moduleState, versState } from "src/commons/store";
 
 import _ExampleOptionalCodeIconPage from "./code";
 import _Copy from "src/main/commonsComponents/units/copy";
@@ -27,6 +27,7 @@ export default function _ExampleOptionalFormPage({
   codeIdx,
   changeContent,
   allHeightList,
+  replaceAllCode,
 }: {
   code: string;
   content: string | ReactNode;
@@ -35,11 +36,16 @@ export default function _ExampleOptionalFormPage({
   codeIdx: number;
   changeContent: string;
   allHeightList: { [key: number]: number };
+  replaceAllCode: {
+    code: string;
+    showCode: string;
+  } | null;
 }) {
   // 코드 보기 및 가리기
   const [showCode, setShowCode] = useState(false);
   const _wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 
+  const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
   const { getExampleCode, getCommonsReturn } = getExampleCodeComponnet();
 
@@ -83,21 +89,30 @@ export default function _ExampleOptionalFormPage({
         allHeight={allHeightList[codeIdx]}
       >
         <_Copy
-          text={getExampleCode({
-            code,
-            children: content,
-            idx: vers || 0,
-            changeContent,
-          })}
-          type="Code"
-          showText={getCommonsHighlight.return(
-            getCommonsReturn({
+          text={
+            (replaceAllCode && replaceAllCode.code) ||
+            getExampleCode({
               code,
               children: content,
               idx: vers || 0,
               changeContent,
+              module,
+              vers,
             })
-          )}
+          }
+          type="Code"
+          showText={
+            (replaceAllCode && replaceAllCode.showCode) ||
+            getCommonsHighlight.return(
+              getCommonsReturn({
+                code,
+                children: content,
+                idx: vers || 0,
+                changeContent,
+                module,
+              })
+            )
+          }
           position="Top"
         />
       </CodeInfoWrapper>

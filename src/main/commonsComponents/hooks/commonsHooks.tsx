@@ -45,7 +45,7 @@ export default function CommonsHooksComponents() {
   const getAllExampleComponentLength = (list: Array<ExampleIProps>): number => {
     return list.reduce(
       (acc, cur) =>
-        acc + ((Array.isArray(cur.contents) && cur.contents.length) || 1),
+        acc + ((Array.isArray(cur.contents) && cur.contents.length) || 0),
       0
     );
   };

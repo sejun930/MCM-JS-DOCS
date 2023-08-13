@@ -5,6 +5,17 @@ import { TooltipPropsType } from "mcm-js/dist/commons/types";
 import { _PText } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
 
+import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
+const { getExampleCode } = getExampleCodeComponnet();
+
+import TooltipExampleDisableReplaceTemplate from "./replace/tooltip.example.disable.template";
+import TooltipExampleOnOffReplaceTemplate from "./replace/tooltip.example.onoff.template";
+
+import {
+  disableReplaceCode,
+  onoffReplaceCode,
+} from "./replace/tooltip.example.replace.code";
+
 // Modal default Props값
 export const tooltipExampleInitProps: TooltipPropsType = {
   tooltipText: "",
@@ -173,19 +184,68 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
       },
     ],
   },
-  // {
-  //   title: "비활성화 (Disable) 적용",
-  //   contents: [
-  //     {
-  //       remakrs: "원하는 시점에 툴팁의 기능을 활성화/비활성화 할 수 있습니다.",
-  //       addProps: {
-  //         ...tooltipExampleInitProps,
-  //         useShowAnimation: true,
-  //       },
-  //       changeContent: `123123`,
-  //       content: getCommonsHighlight.tag.p("Hello"),
-  //       code: tooltipCodeList.disable,
-  //     },
-  //   ],
-  // },
+  {
+    title: "비활성화 (Disable) 적용",
+    contents: [
+      {
+        remakrs:
+          "원하는 시점에 툴팁의 기능을 활성화/비활성화 할 수 있습니다. <br /><b>'isDisable'</b> props 값에 true를 전달하면 비활성화가 적용됩니다.",
+        addProps: {
+          ...tooltipExampleInitProps,
+        },
+        replaceChildren: <TooltipExampleDisableReplaceTemplate />,
+        content: getCommonsHighlight.tag.p("Hello"),
+        code: tooltipCodeList.disable,
+        replaceAllCode: {
+          code: tooltipReplaceCode.disable.code,
+          showCode: tooltipReplaceCode.disable.showCode,
+        },
+      },
+    ],
+  },
+  {
+    title: "수동 ON/OFF",
+    contents: [
+      {
+        remakrs:
+          "원하는 시점에 툴팁을 수동으로 오픈하거나 종료할 수 있습니다. <br />state를 사용한다면 <b>'open'</b>과 <b>'onCloseAfterEvent'</b> props를 함께 사용해주세요.",
+        addProps: {
+          ...tooltipExampleInitProps,
+        },
+        replaceChildren: <TooltipExampleOnOffReplaceTemplate />,
+        content: getCommonsHighlight.tag.p("Hello"),
+        code: tooltipCodeList.onoff,
+        replaceAllCode: {
+          code: tooltipReplaceCode.onoff.code,
+          showCode: tooltipReplaceCode.onoff.showCode,
+        },
+      },
+    ],
+  },
 ];
+
+/* //////////////////////////////////////////////////////////////// */
+
+// 통째로 변경될 코드 리스트
+const tooltipReplaceCode = {
+  disable: {
+    code: getExampleCode({
+      module: "Tooltip",
+      returnStr: disableReplaceCode,
+      code: "",
+      children: "",
+      addImport: { react: ["useState"] },
+    }),
+    showCode: `  ` + disableReplaceCode,
+  },
+  onoff: {
+    code: getExampleCode({
+      module: "Tooltip",
+      returnStr: onoffReplaceCode,
+      code: "",
+      children: "",
+      addImport: { react: ["useState"] },
+    }),
+    showCode: `  ` + onoffReplaceCode,
+  },
+};

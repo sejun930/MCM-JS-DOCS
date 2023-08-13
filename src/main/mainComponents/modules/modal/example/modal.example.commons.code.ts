@@ -51,7 +51,7 @@ export const modalCommonsExampleCode = {
     `<span class='skyblue'>children:</span> <span><</span><span class='darkBlue'>span</span><span>></span> <span class='lightGray'>${text}</span> <span><</span><span>/</span><span class='darkBlue'>span</span><span>></span>`,
   ],
   show: [
-    `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='blue3'>isOpen</span><span class='blue'>}</span>`,
+    `<span class='skyblue'>show</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='blue1'>isOpen</span><span class='blue'>}</span>`,
   ],
   onCloseModal: [
     `<span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='blue'>{</span><span class='lightYellow'>closeModal</span><span class='blue'>}</span>`,

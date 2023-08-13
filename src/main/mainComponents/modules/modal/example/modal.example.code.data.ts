@@ -13,16 +13,16 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   {
     code: `
   ${getCommonsHighlight.colors("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다").comment}
-  <span class='darkBlue'>const</span> <span class='deepPurple'>[</span><span class='blue'>isOpen</span><span class='lightGray'>,</span> <span class='lightYellow'>setIsOpen</span><span class='deepPurple'>]</span> <span class='lightGray'>=</span> <span class='lightYellow'>useState</span><span class='deepPurple'>(</span><span class='blue'>false</span><span class='deepPurple'>)</span><span class='lightGray'>;</span>
+  <span class='darkBlue'>const</span> <span class='deepPurple'>[</span><span class='blue1'>isOpen</span><span class='lightGray'>,</span> <span class='lightYellow'>setIsOpen</span><span class='deepPurple'>]</span> <span class='lightGray'>=</span> <span class='lightYellow'>useState</span><span class='deepPurple'>(</span><span class='darkBlue'>false</span><span class='deepPurple'>)</span><span class='lightGray'>;</span>
   
   ${getCommonsHighlight.colors("모달을 실행하는 함수입니다.").comment}
   <span class='darkBlue'>const</span> <span class='lightYellow'>openModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
-    <span class='lightYellow'>setIsOpen</span><span class='blue'>(true)</span><span class='lightGray'>;</span>
+    <span class='lightYellow'>setIsOpen</span><span class='blue'>(</span><span class='darkBlue'>true</span><span class='blue'>)</span><span class='lightGray'>;</span>
   <span class='deepPurple'>}</span><span class='lightGray'>;</span>
   
   ${getCommonsHighlight.colors("모달을 종료하는 함수입니다.").comment}
   <span class='darkBlue'>const</span> <span class='lightYellow'>closeModal</span> <span class='lightGray'>=</span> <span class='deepPurple'>()</span> <span class='blue'>=></span> <span class='deepPurple'>{</span>
-    <span class='lightYellow'>setIsOpen</span><span class='blue'>(false)</span><span class='lightGray'>;</span>
+    <span class='lightYellow'>setIsOpen</span><span class='blue'>(</span><span class='darkBlue'>false</span><span class='blue'>)</span><span class='lightGray'>;</span>
   <span class='deepPurple'>}</span><span class='lightGray'>;</span>
   `,
     import: { react: ["useState"] },

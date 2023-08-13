@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { versState, moduleState } from "src/commons/store";
 
-import { _Button, _Title, _PText } from "mcm-js-commons";
+import { _Button, _Title, _PText, _PTextWithHtml } from "mcm-js-commons";
 import _SubTitleTemplate from "../../title/subTitle";
 import _ExampleOptionalFormPage from "./optional";
 
@@ -133,9 +133,10 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                             <ExampleListItems>
                               {renderTemplateList[module] &&
                                 renderTemplateList[module](component)}
-                              <_PText className="example-remarks">
-                                {component.remakrs}
-                              </_PText>
+                              <_PTextWithHtml
+                                className="example-remarks"
+                                dangerouslySetInnerHTML={component.remakrs}
+                              />
                             </ExampleListItems>
                             {component.code && (
                               <_ExampleOptionalFormPage
@@ -146,6 +147,9 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                                 codeIdx={_idx - 1}
                                 changeContent={component.changeContent || ""}
                                 allHeightList={allHeightList}
+                                replaceAllCode={
+                                  component.replaceAllCode || null
+                                }
                               />
                             )}
                           </ExampleListWrapper>

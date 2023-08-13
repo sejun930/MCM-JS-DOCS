@@ -59,6 +59,10 @@ export const tooltipCodeList: ExampleCodeListTypes = {
     `${tooltipCodeList.basic(
       "New Style Tooltip"
     )} ${tooltipCommonsExampleCode.disable()}`,
+  onoff: () =>
+    `${tooltipCodeList.basic(
+      "New Style Tooltip"
+    )} ${tooltipCommonsExampleCode.onoff()}`,
 };
 
 export const tooltipReturnCommonsData = ({

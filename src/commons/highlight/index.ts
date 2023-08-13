@@ -50,20 +50,24 @@ export const getCommonsHighlight = {
       endSpace,
       childrenSpace,
     }: {
-      componentName: string;
+      componentName: string | null;
       props?: string;
       children?: string;
       isClose?: boolean;
       endSpace?: string; // 닫힘 컴포넌트의 공백 문자열
       childrenSpace?: string; // children 사이의 공백 문자열
     }) =>
-      `<span><</span><span class='green'>${componentName}</span>${props || ""}${
-        (isClose && `<span>/</span>`) || ""
-      }<span>></span>${!isClose ? childrenSpace || "" : ""}${
-        (!isClose && `${children || ""}`) || ""
-      }${!isClose ? endSpace || "" : ""}${
+      `<span><</span><span class='green'>${componentName || ""}</span>${
+        props || ""
+      }${(isClose && `<span>/</span>`) || ""}<span>></span>${
+        !isClose ? childrenSpace || "" : ""
+      }${(!isClose && `${children || ""}`) || ""}${
+        !isClose ? endSpace || "" : ""
+      }${
         (!isClose &&
-          `<span><</span><span>/</span><span class='green'>${componentName}</span><span>></span>`) ||
+          `<span><</span><span>/</span><span class='green'>${
+            componentName || ""
+          }</span><span>></span>`) ||
         ""
       }`,
     // span 태그
@@ -178,13 +182,118 @@ export const getCommonsHighlight = {
   // 객체 key-value 폼
   obj: (key: string, value: string) =>
     `${getCommonsHighlight.colors(key + ":").key} ${value}`,
+  // 배열 폼
+  arr: (arr: Array<string>, isState?: boolean) =>
+    `<span class=${(isState && "deepPurple") || "yellow"}>[</span>${
+      (arr &&
+        arr.reduce(
+          (acc, cur, i) =>
+            `${acc + cur}${
+              (i + 1 !== arr.length && `${getCommonsHighlight.comma()} `) || ""
+            }`,
+          ""
+        )) ||
+      ""
+    }<span class=${(isState && "deepPurple") || "yellow"}>]</span>`,
+  // state 폼
+  state: (stateName: string, stateValue: string) =>
+    `${getCommonsHighlight.colors().const} ${getCommonsHighlight.arr(
+      [
+        getCommonsHighlight.colors(stateName).varName,
+        getCommonsHighlight.function({
+          funcName: `set${stateName[0].toUpperCase() + stateName.substring(1)}`,
+        }),
+        // getCommonsHighlight.colors("setIsAble").function,
+      ],
+      true
+    )} ${getCommonsHighlight.colors("=").text} ${getCommonsHighlight.function({
+      funcName: "useState",
+      setFunc: {
+        children: stateValue,
+      },
+    })}`,
+  // function 폼
+  function: ({
+    funcName,
+    setFunc,
+  }: {
+    funcName?: string;
+    setFunc?: {
+      color?: string;
+      children: string;
+    };
+  }) =>
+    `<span class='function'>${funcName || ""}</span>${
+      (setFunc &&
+        `<span class=${setFunc.color || "deepPurple"}>(</span>${
+          setFunc.children
+        }<span class=${
+          setFunc.color || "deepPurple"
+        }>)</span>${getCommonsHighlight.semiColon()}`) ||
+      ""
+    }`,
+  // 화살표 함수 선언 form
+  makeFunction: ({
+    funcName,
+    children,
+  }: {
+    funcName: string;
+    children: string;
+  }) =>
+    `${getCommonsHighlight.colors().const} ${getCommonsHighlight.function({
+      funcName,
+    })} ${
+      getCommonsHighlight.colors("=").text
+    } ${getCommonsHighlight.arrowFunction({
+      returnValue: "",
+    })} ${getCommonsHighlight.curly(
+      `
+    ${children}
+  `,
+      "deepPurple"
+    )}${getCommonsHighlight.semiColon()}`,
+  // 화살표 함수 폼
+  arrowFunction: ({
+    props,
+    isChildren,
+    returnValue,
+  }: {
+    props?: string;
+    isChildren?: boolean;
+    returnValue: string;
+  }) =>
+    `<span class=${(isChildren && "yellow") || "deepPurple"}>(</span>${
+      props || ""
+    }<span class=${
+      (isChildren && "yellow") || "deepPurple"
+    }>)</span> <span class='darkBlue'>=></span>${returnValue || ""}`,
+  // import 폼
+  import: (importName: Array<string>, from: string) =>
+    `<span class="purple">import</span> ${getCommonsHighlight.curly(
+      ` ${importName.reduce(
+        (acc, cur, i) =>
+          `${acc + getCommonsHighlight.colors(cur).varName2}${
+            (i + 1 !== importName.length &&
+              getCommonsHighlight.comma() + " ") ||
+            ""
+          }`,
+        ""
+      )} `,
+      "yellow"
+    )} <span class="purple">from</span> ${getCommonsHighlight.string(
+      from
+    )}${getCommonsHighlight.semiColon()}`,
   // 각각의 상황에 맞는 컬러 반환
-  colors: (children: string) => {
+  colors: (children?: string) => {
+    children = children || "";
     return {
-      bool: `<span class="blue3">${children}</span>`, // boolean 타입
+      bool: `<span class="darkBlue">${children}</span>`, // boolean 타입
       comment: `<span class='lightGreen'>// ${children}</span>`, // 주석 처리
       text: `<span class='lightGray'>${children}</span>`, // 일반 텍스트 입력
       key: `<span class='skyblue'>${children}</span>`, // 객체의 key 및 props의 key 이름
+      const: `<span class='darkBlue'>const</span>`, // const 선언
+      varName: `<span class='blue1'>${children}</span>`, // 변수의 이름명 (진한색)
+      varName2: `<span class='skyblue'>${children}</span>`, // 변수의 이름명 (약한색)
     };
   },
 };
