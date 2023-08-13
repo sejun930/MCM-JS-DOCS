@@ -24,10 +24,12 @@ import { getCommonsHighlight } from "src/commons/highlight";
 
 export default function FunctionalDetailInfoListPage({
   module,
+  vers,
   list,
   propsRef,
 }: {
   module: string;
+  vers: number;
   list: Array<FunctionalListType>;
   propsRef?: MutableRefObject<HTMLDivElement>;
 }) {
@@ -90,12 +92,15 @@ export default function FunctionalDetailInfoListPage({
                     code: el.exampleCode,
                     idx: -1,
                     children: "",
+                    module,
+                    vers,
                   })}
                   showText={getCommonsHighlight.return(
                     getCommonsReturn({
                       code: "",
                       idx: -1,
                       children: "",
+                      module,
                     }) || el.exampleCode
                   )}
                   type="Code"

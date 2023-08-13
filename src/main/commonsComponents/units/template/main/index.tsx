@@ -45,12 +45,16 @@ export const Wrapper = styled.main`
     font-size: 14px;
     color: #9d9d9d;
 
-    .purple {
+    .purple,
+    .import,
+    .export,
+    .from {
       // 보라색 : import, export, from
       color: #cb86b9;
     }
 
-    .deepPurple {
+    .deepPurple,
+    .state {
       // 진보라색 : state, function
       color: #de6db7;
     }
@@ -60,7 +64,8 @@ export const Wrapper = styled.main`
       color: #c4d7b2;
     }
 
-    .lightYellow {
+    .lightYellow,
+    .function {
       // 연한 노란색 : 함수명
       color: #fffbac;
     }
@@ -76,9 +81,14 @@ export const Wrapper = styled.main`
       color: #5e8fe9;
     }
 
-    .blue {
-      // 파란색 : 변수명, state 이름
+    .blue,
+    .var {
       color: #009eff;
+    }
+
+    .blue1 {
+      // 파란색 : 변수명, state 이름
+      color: #00c0ff;
     }
 
     .blue2 {

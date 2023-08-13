@@ -15,12 +15,18 @@ export interface ExampleContentsInfoTypes {
 // 각각의 페이지의 예시 컴포넌트에 전달될 props 타입
 export interface ExampleContentsTypes {
   children?: ReactNode;
+  replaceChildren?: JSX.Element; // 통째로 변경할 전체 코드
   info?: ExampleContentsInfoTypes;
   addProps?: ModuleAllPropsTypes; // 예시 컴포넌트 실행시 추가적으로 넘길 props 값
   commonsProps?: Partial<ModuleAllExampleCommonsTypes>; // 컴포넌트 실행하기 위해 필요한 Props 값
   changeContent?: string; // 별개의 데이터로 content를 입력하고 싶을 때 사용
   content: string | ReactNode; // 모듈 실행시 함께 렌더될 데이터
   code: null | Array<string> | string | (() => string | Array<string>); // 렌더되는 코드 정보
+  replaceAllCode?: {
+    // 완전히 새로운 코드를 별도로 사용할 때 사용
+    code: string; // 복사될 코드
+    showCode: string; // 별도로 보여지는 코드
+  };
   remakrs: string; // 예시 설명
   isError?: boolean; // 에러 여부
   vers?: number;

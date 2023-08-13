@@ -90,6 +90,11 @@ export const tooltipCommonsExampleCode = {
       "isDisable",
       getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
     )}`,
+  onoff: () =>
+    `${getCommonsHighlight.props(
+      "isOpen",
+      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+    )}`,
 };
 
 // interface Type {

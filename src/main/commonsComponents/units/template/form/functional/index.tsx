@@ -1,7 +1,7 @@
 import { functionalList } from "src/commons/data/functional/functional.commons.data";
 
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { moduleState, versState } from "src/commons/store";
 
 import { Wrapper } from "../form.commons.styles";
 
@@ -16,6 +16,8 @@ export default function _FunctionalForm({
   propsRef?: MutableRefObject<HTMLDivElement>; // props 페이지의 시작 위치
 }) {
   const [module] = useRecoilState(moduleState);
+  const [vers] = useRecoilState(versState);
+
   return (
     (functionalList[module] && functionalList[module].length && (
       <Wrapper id="functional-form">
@@ -26,6 +28,7 @@ export default function _FunctionalForm({
         />
         <FunctionalDetailInfoListPage
           module={module}
+          vers={vers}
           list={functionalList[module]}
           propsRef={propsRef}
         />

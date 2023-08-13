@@ -31,6 +31,8 @@ export default function _HowUseForm({
   let code = codeInfo.basic() || "";
   if (Array.isArray(code)) code = codeInfo.basic()[vers];
 
+  console.log(endPointRef, codeInfo.title);
+
   return (
     <Wrapper id="how-use-form">
       <_SubTitleTemplate
@@ -43,7 +45,7 @@ export default function _HowUseForm({
         }
       />
       <CopyWrapper>
-        {(codeInfo.title && Array.isArray(codeInfo.title) && endPointRef && (
+        {(codeInfo.title && Array.isArray(codeInfo.title()) && endPointRef && (
           <ExampleFixedPage
             codeInfo={codeInfo}
             endPointRef={endPointRef}
@@ -57,6 +59,8 @@ export default function _HowUseForm({
               code,
               children: exmapleContents,
               idx: vers,
+              module,
+              vers,
             })}
             type="Code"
           />
