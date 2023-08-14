@@ -13,14 +13,13 @@ import {
   tooltipExampleList,
   tooltipExampleInitProps,
 } from "./example/tooltip.example.render.data";
-import { MutableRefObject, ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect } from "react";
 
 import { _PText } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
 import { imagePreLoad } from "src/main/commonsComponents/functional";
 
 export default function MyTooltip() {
-  const propsRef = useRef() as MutableRefObject<HTMLDivElement>;
   // 필요한 이미지 미리 로드하기
   useEffect(() => {
     imagePreLoad(["/images/modules/example/tooltip/dancing.gif"]);

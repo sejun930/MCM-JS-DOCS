@@ -5,9 +5,6 @@ import { TooltipPropsType } from "mcm-js/dist/commons/types";
 import { _PText, _SpanText } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
 
-import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
-const { getExampleCode } = getExampleCodeComponnet();
-
 import TooltipExampleDisableReplaceTemplate from "./replace/tooltip.example.disable.template";
 import TooltipExampleOnOffReplaceTemplate from "./replace/tooltip.example.onoff.template";
 
@@ -15,6 +12,9 @@ import {
   disableReplaceCode,
   onoffReplaceCode,
 } from "./replace/tooltip.example.replace.code";
+
+import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
+const { getExampleCode } = getExampleCodeComponnet();
 
 // Modal default Props값
 export const tooltipExampleInitProps: TooltipPropsType = {

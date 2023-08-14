@@ -1,3 +1,5 @@
+import React from "react";
+
 import { getCommonsHighlight } from "src/commons/highlight";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
 import { tooltipCommonsExampleCode } from "./tooltip.example.commons.code";

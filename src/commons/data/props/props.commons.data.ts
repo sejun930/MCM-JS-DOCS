@@ -40,14 +40,15 @@ export const commonsPropsList: Array<PropsModuleListType> = [
 
 // 공통 props가 적용된 props 리스트 가져오기
 const getWithCommnsPropsList = (list: Array<PropsModuleListType>) => {
+  if (!list) return [];
+
   // 마지막 필수 props index
-  const lastRequiredIdx =
-    list.findLastIndex((el) => el.isRequired) || list.length;
+  const lastRequiredIdx = list.findIndex((el) => !el.isRequired);
 
   return [
-    ...list.slice(0, lastRequiredIdx + 1), // 필수 props 인덱스까지 자르기
+    ...list.slice(0, lastRequiredIdx), // 필수 props 인덱스까지 자르기
     ...commonsPropsList, // 공통 props 추가하기
-    ...list.slice(lastRequiredIdx + 1), // 나머지 props 붙이기
+    ...list.slice(lastRequiredIdx), // 나머지 props 붙이기
   ];
 };
 
