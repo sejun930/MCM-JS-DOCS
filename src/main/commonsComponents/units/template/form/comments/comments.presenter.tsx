@@ -154,10 +154,14 @@ export const LoadingContents = styled.div`
   z-index: 10;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 
   .loading-title {
     position: sticky;
-    top: 50%;
+    /* top: 50%; */
+    bottom: 160px;
     text-align: center;
     cursor: wait;
   }
