@@ -63,6 +63,19 @@ export const tooltipCodeList: ExampleCodeListTypes = {
     `${tooltipCodeList.basic(
       "New Style Tooltip"
     )} ${tooltipCommonsExampleCode.onoff()}`,
+  offHover: () =>
+    `
+     ${tooltipCodeList.basic("Already fixed")} 
+      ${tooltipCommonsExampleCode.offHover()}
+      ${tooltipCommonsExampleCode.onoff()}
+    `,
+  hideMobile: () =>
+    `
+     ${tooltipCodeList.basic("모바일에서는 보이지 않습니다.")} 
+      ${tooltipCommonsExampleCode.offHover()}
+      ${tooltipCommonsExampleCode.onoff()}
+      ${tooltipCommonsExampleCode.hideMobile()}
+    `,
 };
 
 export const tooltipReturnCommonsData = ({

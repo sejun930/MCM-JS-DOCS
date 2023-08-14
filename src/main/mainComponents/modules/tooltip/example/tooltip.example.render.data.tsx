@@ -2,7 +2,7 @@ import { ExampleIProps } from "src/main/commonsComponents/units/template/form/ex
 import { tooltipCodeList } from "./tooltip.example.code.data";
 import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
-import { _PText } from "mcm-js-commons";
+import { _PText, _SpanText } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
 
 import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExampleCodeHooks";
@@ -219,6 +219,67 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
           code: tooltipReplaceCode.onoff.code,
           showCode: tooltipReplaceCode.onoff.showCode,
         },
+      },
+    ],
+  },
+  {
+    title: "마우스 (Hover) 이벤트 OFF",
+    contents: [
+      {
+        remakrs:
+          "마우스로 툴팁을 실행하거나 종료시키는 이벤트를 비활성화 합니다. <br /><b>'open'</b> props와 함께 사용하면 툴팁을 강제로 고정시킬 수 있습니다.",
+        addProps: {
+          ...tooltipExampleInitProps,
+          children: <_PText>Fixed tooltip</_PText>,
+          open: true,
+          offHoverEvent: true,
+          tooltipText: (
+            <_SpanText styles={{ fontSize: "12px" }}>Already fixed</_SpanText>
+          ),
+        },
+        content: getCommonsHighlight.tag.span("Hello"),
+        code: tooltipCodeList.offHover,
+      },
+    ],
+  },
+  {
+    title: "모바일 OFF",
+    contents: [
+      {
+        remakrs: "모바일 환경(767px 이하)에서는 툴팁을 가릴 수 있습니다.",
+        addProps: {
+          ...tooltipExampleInitProps,
+          open: true,
+          offHoverEvent: true,
+          hideMobile: true,
+          tooltipText: (
+            <_SpanText styles={{ fontSize: "12px" }}>
+              모바일에서는 보이지 않습니다.
+            </_SpanText>
+          ),
+        },
+        content: getCommonsHighlight.tag.span("Hello"),
+        code: tooltipCodeList.hideMobile,
+      },
+    ],
+  },
+  {
+    title: "",
+    isError: true,
+    contents: [
+      {
+        remakrs:
+          "Tooltip 모듈을 사용하기 위해서는 <b class='error-example'>'children'</b>, <b class='error-example'>'tooltipText'</b> props가 필수로 전달되어야 합니다. 전달되지 않는다면 모듈을 실행할 수 없으므로 해당 에러메세지가 보여진다면 props 값을 다시 확인해주세요. ",
+        addProps: {
+          ...tooltipExampleInitProps,
+          children: undefined,
+          tooltipText: undefined,
+        },
+        info: {
+          buttonName: "Open Off Auto-close Modal",
+        },
+        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+        code: null,
       },
     ],
   },

@@ -192,6 +192,7 @@ export const BugStatusWrapper = styled.div`
 
 export const WriteButton = styled(_Button)`
   font-weight: 700;
+  font-size: 16px;
 
   // 누락된 부분으로 등록이 불가능한 상태
   ${(props: StyleTypes) =>
