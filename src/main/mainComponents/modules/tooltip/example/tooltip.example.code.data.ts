@@ -52,8 +52,8 @@ export const tooltipCodeList: ExampleCodeListTypes = {
      ${tooltipCommonsExampleCode.styles()}
     `,
   mobileStyles: () => `
-    ${tooltipCodeList.basic("New Mobile Style Tooltip")}
-    ${tooltipCommonsExampleCode.styles(true)}
+     ${tooltipCodeList.basic("New Mobile Style Tooltip")}
+     ${tooltipCommonsExampleCode.styles(true)}
    `,
   disable: () =>
     `${tooltipCodeList.basic(

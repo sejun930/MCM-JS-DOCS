@@ -13,7 +13,7 @@ import { propsModuleList } from "src/commons/data/props/props.commons.data";
 export default function _PropsForm({
   propsRef,
 }: {
-  propsRef: MutableRefObject<HTMLDivElement>;
+  propsRef?: MutableRefObject<HTMLDivElement>;
 }) {
   const [module] = useRecoilState(moduleState);
 

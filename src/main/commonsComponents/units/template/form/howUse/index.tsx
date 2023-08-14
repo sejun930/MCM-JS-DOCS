@@ -31,8 +31,6 @@ export default function _HowUseForm({
   let code = codeInfo.basic() || "";
   if (Array.isArray(code)) code = codeInfo.basic()[vers];
 
-  console.log(endPointRef, codeInfo.title);
-
   return (
     <Wrapper id="how-use-form">
       <_SubTitleTemplate

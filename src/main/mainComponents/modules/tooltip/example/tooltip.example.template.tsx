@@ -20,8 +20,6 @@ export default function MyTooltipExample(props: ExampleContentsTypes) {
     _children = undefined;
   }
 
-  console.log(_tooltipText, _children);
-
   const renderComponents = () => {
     // 대체 컴포넌트가 있다면 대체 컴포넌트로 렌더
     if (replaceChildren) {
