@@ -27,7 +27,7 @@ export const CategoryWrapper = styled.div`
   justify-content: space-between;
   border-bottom: double 5px black;
   position: sticky;
-  top: 0;
+  top: 0px;
   width: 100%;
   background-color: white;
   z-index: 3;

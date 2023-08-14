@@ -32,7 +32,7 @@ export const Wrapper = styled.main`
   flex-direction: column;
   min-width: 85%;
   position: relative;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 
   ${(props: StyleTypes) =>
     props.isFull && {
