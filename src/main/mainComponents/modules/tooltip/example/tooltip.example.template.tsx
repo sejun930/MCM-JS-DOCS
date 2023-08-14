@@ -8,12 +8,17 @@ export default function MyTooltipExample(props: ExampleContentsTypes) {
   let _tooltipText = props.commonsProps?.tooltipText;
   let _children = props.commonsProps?.children;
 
-  const { replaceChildren } = props;
+  const { replaceChildren, isError } = props;
   const _addProps = props.addProps as TooltipPropsType;
   const { tooltipText, children, ..._props } = _addProps;
 
   if (tooltipText) _tooltipText = tooltipText;
   if (children) _children = children;
+
+  if (isError) {
+    _tooltipText = undefined;
+    _children = undefined;
+  }
 
   const renderComponents = () => {
     // 대체 컴포넌트가 있다면 대체 컴포넌트로 렌더

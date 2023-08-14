@@ -1,5 +1,5 @@
 // 목차 리스트 기본형
-const initIndexList = (module: string) => [
+export const initIndexList = (module: string) => [
   { title: `📖 ${module}`, id: "main-title-form" },
   { title: "🔍 How To Use", id: "how-use-form" },
   { title: "📝 Example", id: "example-form" },

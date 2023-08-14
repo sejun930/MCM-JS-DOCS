@@ -92,7 +92,17 @@ export const tooltipCommonsExampleCode = {
     )}`,
   onoff: () =>
     `${getCommonsHighlight.props(
-      "isOpen",
+      "open",
+      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+    )}`,
+  offHover: () =>
+    `${getCommonsHighlight.props(
+      "offHoverEvent",
+      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+    )}`,
+  hideMobile: () =>
+    `${getCommonsHighlight.props(
+      "hideMobile",
       getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
     )}`,
 };

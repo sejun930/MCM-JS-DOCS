@@ -49,6 +49,7 @@ export default function AdminCommentsPage() {
 
     const { value } = e.target;
     if (value) {
+      startClickedPage = 1;
       setRender(false);
 
       const _info = deepCopy(initCommentsInfo);
@@ -56,7 +57,7 @@ export default function AdminCommentsPage() {
       _info.selectModule = value;
       _info.selectCategory = "all";
 
-      fetchComments(_info);
+      fetchComments({ info: _info });
     }
   };
 
@@ -106,11 +107,6 @@ export default function AdminCommentsPage() {
       }
     }
 
-    // 가져올 데이터의 제한 수 적용하기
-    // if (isInfinite && page > startClickedPage) {
-    //   _info.filter.limit = limit * (page - startClickedPage);
-    // }
-
     // 필터가 적용된 댓글 리스트 정보 가져오기 (limit 적용)
     let commentsDoc = (
       await commentsApis({ module: selectModule, isAdmin: true })
@@ -133,6 +129,14 @@ export default function AdminCommentsPage() {
         _info.countFilterList = await countApis({
           module: selectModule,
         }).asyncAllCountList(_info);
+
+        setInfo(_info);
+        setRender(true);
+        setIsLoading(false);
+
+        if (alertMsg) alert(alertMsg);
+        if (isLoading) setIsLoading(false);
+        if (moveTop) moveDocument("admin-comments-list-wrapper", -160);
       } catch (err2) {
         console.log(err2);
         alert("카테고리 개수 조회에 실패했습니다.");
@@ -141,14 +145,6 @@ export default function AdminCommentsPage() {
       console.log(err);
       alert("댓글 리스트 조회에 실패했습니다.");
     }
-
-    setInfo(_info);
-    setRender(true);
-    setIsLoading(false);
-
-    if (alertMsg) alert(alertMsg);
-    if (isLoading) setIsLoading(false);
-    if (moveTop) moveDocument("admin-comments-list-wrapper", -160);
   };
 
   const changeLoading = (bool: boolean) => {

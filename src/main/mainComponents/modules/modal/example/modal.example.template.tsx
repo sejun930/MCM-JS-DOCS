@@ -5,10 +5,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 import { Modal } from "mcm-js";
 import { _Button } from "mcm-js-commons";
 
-import {
-  ExampleContentsTypes,
-  ExampleContentsInfoTypes,
-} from "src/main/commonsComponents/units/template/form/example/template.example.types";
+import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 import { ModalExampleCommonsTypes } from "../modal.types";
 import { ModalPropsType } from "mcm-js/dist/commons/types";
 

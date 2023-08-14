@@ -4,6 +4,13 @@ import { ReactNode } from "react";
 import { ModalExampleCommonsTypes } from "src/main/mainComponents/modules/modal/modal.types";
 import { TooltipExampleCommonsTypes } from "src/main/mainComponents/modules/tooltip/tooltip.types";
 
+// 여러 모듈들의 props 타입 종합
+export type ModuleAllPropsTypes = ModalPropsType | TooltipPropsType;
+
+// 여러 모듈들의 example commons 타입 종합
+export type ModuleAllExampleCommonsTypes =
+  | ModalExampleCommonsTypes & TooltipExampleCommonsTypes;
+
 // 예시 컴포넌트의 부가적인 옵션 타입
 export interface ExampleContentsInfoTypes {
   idx?: number; // 실행 인덱스 값 지정
@@ -54,10 +61,3 @@ export interface UIProps {
   isOneOpen: boolean;
   allLen: number;
 }
-
-// 여러 모듈들의 props 타입 종합
-export type ModuleAllPropsTypes = ModalPropsType | TooltipPropsType;
-
-// 여러 모듈들의 example commons 타입 종합
-export type ModuleAllExampleCommonsTypes =
-  | ModalExampleCommonsTypes & TooltipExampleCommonsTypes;

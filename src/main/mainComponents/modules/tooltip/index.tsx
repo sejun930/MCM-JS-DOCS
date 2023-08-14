@@ -4,6 +4,9 @@ import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
+import _PropsForm from "src/main/commonsComponents/units/template/form/props";
+import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
+import _CommentsForm from "src/main/commonsComponents/units/template/form/comments/comments.render";
 
 import { tooltipCodeList } from "./example/tooltip.example.code.data";
 import {
@@ -41,6 +44,9 @@ export default function MyTooltip() {
           initProps={tooltipExampleInitProps}
           commonsProps={commonsProps}
         />
+        <_PropsForm />
+        <_TreeForm />
+        <_CommentsForm />
       </ModulesInfoWrapper>
     </Template>
   );
