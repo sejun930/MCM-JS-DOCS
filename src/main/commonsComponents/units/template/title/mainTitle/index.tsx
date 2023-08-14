@@ -5,7 +5,10 @@ import { useRecoilState } from "recoil";
 import { moduleState, versState } from "src/commons/store";
 
 import { moduleRemarksList } from "./data";
-import { moduleIndexList } from "src/commons/data/index/index.commons.data";
+import {
+  initIndexList,
+  moduleIndexList,
+} from "src/commons/data/index/index.commons.data";
 import { _PTextWithHtml, _Title, _Image } from "mcm-js-commons";
 
 import IndexRenderPage from "../../../index/index.render";
@@ -20,9 +23,11 @@ export default function _MainTitleTemplate() {
   // 리스트 가져오기
   useEffect(() => {
     window.setTimeout(() => {
-      if (moduleIndexList(module, vers)) {
-        setList(moduleIndexList(module, vers)());
-      }
+      let moduleList = initIndexList(module);
+      if (moduleIndexList(module, vers))
+        moduleList = moduleIndexList(module, vers)();
+
+      setList(moduleList);
     }, 100);
   }, [module, vers]);
 
