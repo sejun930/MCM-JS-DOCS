@@ -3,12 +3,11 @@ import { useState, useRef, MutableRefObject, FormEvent } from "react";
 import { useRecoilState } from "recoil";
 import { ipState } from "src/commons/store";
 
-import { Modal } from "mcm-js";
-
 import {
   getHashText,
   getUserIp,
   getDateForm,
+  getLibraries,
 } from "src/main/commonsComponents/functional";
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
 
@@ -17,6 +16,8 @@ import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 
 let debouncing: number | ReturnType<typeof setTimeout>;
 let loading = false; // 중복 클릭 방지
+
+const Modal = getLibraries("Modal");
 export default function AdminLoginPage({
   loginComplete,
 }: {

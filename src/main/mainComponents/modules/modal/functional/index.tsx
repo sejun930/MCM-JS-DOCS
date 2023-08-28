@@ -2,9 +2,10 @@ import { FunctionalListType } from "src/commons/data/functional/functional.commo
 import { getCommonsHighlight } from "src/commons/highlight";
 import { modalCommonsExampleCode } from "../example/modal.example.commons.code";
 
-import { Modal } from "mcm-js";
 import { OpenModalButton } from "../example/modal.example.template";
+import { getLibraries } from "src/main/commonsComponents/functional";
 
+const Modal = getLibraries("Modal");
 export default function ModalFunctionalList(): FunctionalListType[] {
   return [
     {

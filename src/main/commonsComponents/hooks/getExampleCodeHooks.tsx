@@ -42,7 +42,11 @@ export default function getExampleCodeComponnet() {
         ? getCommonsInfo[vers || 0]
         : getCommonsInfo;
 
-    let str = getCommonsHighlight.import([module], "mcm-js");
+    let str = getCommonsHighlight.import(
+      [module],
+      // 개발환경 및 배포환경 분기
+      `mcm-js${(process.env.NODE_ENV === "development" && "-dev") || ""}`
+    );
 
     // 추가 import 렌더하기
     if (commonsInfo && commonsInfo?.import) {

@@ -2,13 +2,13 @@ import React from "react";
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-import { Modal } from "mcm-js";
 import { _Button } from "mcm-js-commons";
-
 import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 import { ModalExampleCommonsTypes } from "../modal.types";
 import { ModalPropsType } from "mcm-js/dist/commons/types";
+import { getLibraries } from "src/main/commonsComponents/functional";
 
+const Modal = getLibraries("Modal");
 export default function MyModalExample(props: ExampleContentsTypes) {
   const { isShow, openModal, closeModal } =
     props.commonsProps as ModalExampleCommonsTypes;

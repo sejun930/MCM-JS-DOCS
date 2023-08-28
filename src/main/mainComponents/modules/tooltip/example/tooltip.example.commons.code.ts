@@ -105,6 +105,11 @@ export const tooltipCommonsExampleCode = {
       "hideMobile",
       getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
     )}`,
+  isFix: () =>
+    `${getCommonsHighlight.props(
+      "isFix",
+      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+    )}`,
 };
 
 // interface Type {

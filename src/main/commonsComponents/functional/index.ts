@@ -1,3 +1,5 @@
+import ModuleTypes from "mcm-js/dist/commons/types";
+
 // 태그 제거하기
 const removeTag = (str: string): string =>
   str
@@ -225,6 +227,13 @@ const imagePreLoad = (list: Array<string>) => {
   document.body.append(script);
 };
 
+// 개발 및 배포 환경의 라이브러리 호출하기
+const getLibraries = (module: string) => {
+  return require(`mcm-js${
+    (process.env.NODE_ENV === "development" && "-dev") || ""
+  }`)[module];
+};
+
 export {
   removeTag,
   getDateForm,
@@ -240,4 +249,5 @@ export {
   changeServerText,
   changeClientText,
   imagePreLoad,
+  getLibraries,
 };

@@ -27,7 +27,8 @@
     "**/*.tsx",
     "**/*.ts",
     "src/main/mainComponents/modules/modal/functional/index.ts",
-    "src/main/mainComponents/modules/modal/example/modal.example.render.data.tsx"
+    "src/main/mainComponents/modules/modal/example/modal.example.render.data.tsx",
+    "src/main/mainComponents/modules/tooltip/example/replace/tooltip.example.disable.templatetsx"
   ],
   "exclude": [
     "node_modules"

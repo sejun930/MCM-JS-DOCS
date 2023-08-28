@@ -8,10 +8,9 @@ import {
 } from "./index.styles";
 
 import { _Button, _CloseButton, _PText } from "mcm-js-commons";
-import { getUuid } from "../../functional";
+import { getLibraries, getUuid } from "../../functional";
 
 import { indexOptionalDataList } from "./index.data";
-import { Tooltip } from "mcm-js";
 
 import {
   IndexIPropsTypes,
@@ -19,6 +18,7 @@ import {
   IndexPagePropsTypes,
 } from "./index.type";
 
+const Tooltip = getLibraries("Tooltip");
 type allTypes = IndexIPropsTypes & IndexUIPropsTypes & IndexPagePropsTypes;
 export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
   const {

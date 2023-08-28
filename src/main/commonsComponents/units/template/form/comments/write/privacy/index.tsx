@@ -2,10 +2,11 @@ import { AgreeUserPrivacyWrapper } from "./privacy.styles";
 import { _Button, _Checkbox } from "mcm-js-commons";
 import { WriteInfoTypes } from "../comments.write.types";
 
-import { Modal } from "mcm-js";
 import PrivacyNoticePage from "./notice";
 import { useEffect } from "react";
+import { getLibraries } from "src/main/commonsComponents/functional";
 
+const Modal = getLibraries("Modal");
 // 개인정보 수집 약관 및 동의 페이지
 export default function PrivacyPage({
   changeInfo,

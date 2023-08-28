@@ -7,10 +7,11 @@ import {
   SubmitButton,
 } from "./admin.login.styles";
 
-import { Tooltip } from "mcm-js";
 import { _Title, _Input } from "mcm-js-commons";
 import { FormEvent, MutableRefObject } from "react";
+import { getLibraries } from "src/main/commonsComponents/functional";
 
+const Tooltip = getLibraries("Tooltip");
 export default function AdminLoginUIPage({
   login,
   changeInfo,

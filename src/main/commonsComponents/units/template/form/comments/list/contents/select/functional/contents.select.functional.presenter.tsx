@@ -13,7 +13,6 @@ import {
 
 import { _Title, _Input } from "mcm-js-commons";
 import { InfoTypes } from "../../../../comments.types";
-import { Tooltip } from "mcm-js";
 
 import CommentsLabel from "../../../label";
 import {
@@ -21,8 +20,12 @@ import {
   ContentsSelectTypeName,
 } from "../../list.data";
 import { AdminBugStatusSelectList } from "./contents.select.functional.data";
-import { changeClientText } from "src/main/commonsComponents/functional";
+import {
+  changeClientText,
+  getLibraries,
+} from "src/main/commonsComponents/functional";
 
+const Tooltip = getLibraries("Tooltip");
 export default function ContentsSelectFunctionalUIPage({
   type,
   info,

@@ -6,10 +6,12 @@ import {
   RemoveButton,
 } from "./admin.comments.detail.styles";
 
-import { Tooltip } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
+import {
+  getDateForm,
+  getLibraries,
+} from "src/main/commonsComponents/functional";
 
-import { getDateForm } from "src/main/commonsComponents/functional";
 import CommentsLabel from "src/main/commonsComponents/units/template/form/comments/list/label";
 import AdminCommentsContentsPage from "./contents/admin.comments.contents.container";
 
@@ -19,6 +21,7 @@ import {
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { FetchCommentsTypes } from "../../admin.comments.types";
 
+const Tooltip = getLibraries("Tooltip");
 export default function AdminCommentsDetailUIPage({
   info,
   commentsInfo,

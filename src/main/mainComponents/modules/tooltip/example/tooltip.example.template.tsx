@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 
-import { Tooltip } from "mcm-js";
+import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
+import { getLibraries } from "src/main/commonsComponents/functional";
 import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
+const Tooltip = getLibraries("Tooltip");
 export default function MyTooltipExample(props: ExampleContentsTypes) {
   let _tooltipText = props.commonsProps?.tooltipText;
   let _children = props.commonsProps?.children;

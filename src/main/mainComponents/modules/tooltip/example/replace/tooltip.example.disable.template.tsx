@@ -1,10 +1,11 @@
-import { Tooltip } from "mcm-js";
 import { useState } from "react";
 
 import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { getLibraries } from "src/main/commonsComponents/functional";
 
+const Tooltip = getLibraries("Tooltip");
 export default function TooltipExampleDisableReplacePage() {
   // 툴팁의 활성화 또는 비활성화의 기준이 되는 state 값입니다.
   const [isDisable, setIsDisable] = useState(false);

@@ -126,7 +126,7 @@ export const ExampleListWrapper = styled.div`
 
   .example-remarks {
     font-size: 14px;
-    margin-top: 16px;
+    margin-top: 20px;
     color: #666666;
     line-height: 20px;
     letter-spacing: -0.01rem;
@@ -135,6 +135,7 @@ export const ExampleListWrapper = styled.div`
   @media ${breakPoints.mobileLarge} {
     .example-remarks {
       text-align: center;
+      margin-top: 24px;
     }
   }
 `;
@@ -150,7 +151,7 @@ export const ExampleListItems = styled.div`
   }
 
   @media ${breakPoints.mobileLarge} {
-    padding: 1rem;
+    padding: 1.6rem 1rem;
     align-items: center;
 
     .mcm-error-unit {

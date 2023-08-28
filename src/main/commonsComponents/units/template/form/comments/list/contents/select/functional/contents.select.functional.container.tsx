@@ -9,13 +9,15 @@ import {
   useState,
 } from "react";
 
-import { Modal } from "mcm-js";
 import { _SpanText } from "mcm-js-commons";
 
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { CommentsAllInfoTypes, InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
-import { changeServerText } from "src/main/commonsComponents/functional";
+import {
+  changeServerText,
+  getLibraries,
+} from "src/main/commonsComponents/functional";
 
 import blockApis from "src/commons/libraries/apis/block/block.apis";
 import ModalResultForm from "../../../../../modal/modal.result";
@@ -35,6 +37,7 @@ let bugLevel = 0; // 버그 중요도 저장
 let disableOpenModal = false; // 모달 중복 실행 방지
 let updating = false; // 업데이트 진행중 여부 (중복 클릭 방지)
 
+const Modal = getLibraries("Modal");
 export default function ContentsSelectFunctionalPage({
   info,
   type,

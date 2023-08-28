@@ -64,11 +64,11 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
         remakrs: "툴팁의 내용과 상관없이 애니메이션을 적용할 수 있습니다.",
         addProps: {
           ...tooltipExampleInitProps,
-          useShowAnimation: true,
           children: <_PText>Dancing</_PText>,
           tooltipText: (
             <img src="https://mcm-js-image.s3.ap-northeast-2.amazonaws.com/dancing.gif" />
           ),
+          useShowAnimation: true,
         },
         content: getCommonsHighlight.tag.p("Hello"),
         code: tooltipCodeList.animationImg,
@@ -185,7 +185,91 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "비활성화 (Disable) 적용",
+    title: "수동 ON/OFF & Hover 이벤트 비활성화",
+    isFull: true,
+    contents: [
+      {
+        remakrs:
+          '원하는 시점에 툴팁을 수동으로 오픈하거나 종료할 수 있습니다. <br />state를 사용한다면 <b>"open"</b>과 <b>"onCloseAfterEvent"</b> props를 함께 사용해주세요.',
+        addProps: {
+          ...tooltipExampleInitProps,
+        },
+        replaceChildren: (
+          <TooltipExampleOnOffReplaceTemplate
+            children={<></>}
+            tooltipText="버튼을 클릭하면 툴팁을 수동으로 실행하거나 종료할 수 있습니다."
+          />
+        ),
+        content: getCommonsHighlight.tag.p("Hello"),
+        code: tooltipCodeList.onoff,
+        replaceAllCode: {
+          code: tooltipReplaceCode({
+            tooltipText:
+              "버튼을 클릭하면 툴팁을 수동으로 실행하거나 종료할 수 있습니다.",
+            children: <></>,
+          }).onoff.code,
+          showCode: tooltipReplaceCode({
+            tooltipText:
+              "버튼을 클릭하면 툴팁을 수동으로 실행하거나 종료할 수 있습니다.",
+            children: <></>,
+          }).onoff.showCode,
+        },
+      },
+      {
+        remakrs:
+          "마우스로 툴팁을 실행하거나 종료시키는 Hover 이벤트를 비활성화 합니다.",
+        addProps: {
+          ...tooltipExampleInitProps,
+          offHoverEvent: true,
+        },
+        replaceChildren: (
+          <TooltipExampleOnOffReplaceTemplate
+            children={<></>}
+            tooltipText="마우스 Hover 이벤트가 비활성화 되었습니다."
+            offHoverEvent
+          />
+        ),
+        content: getCommonsHighlight.tag.span("offHoverEvent"),
+        code: tooltipCodeList.offHover,
+        replaceAllCode: {
+          code: tooltipReplaceCode({
+            tooltipText: "마우스 Hover 이벤트가 비활성화 되었습니다.",
+            children: <></>,
+            offHoverEvent: true,
+          }).onoff.code,
+          showCode: tooltipReplaceCode({
+            tooltipText: "마우스 Hover 이벤트가 비활성화 되었습니다.",
+            children: <></>,
+            offHoverEvent: true,
+          }).onoff.showCode,
+        },
+      },
+    ],
+  },
+  {
+    title: "툴팁 고정 (Fix)",
+    contents: [
+      {
+        remakrs:
+          '실행된 툴팁을 종료하지 않고 고정시킬 수 있습니다. <br /><b>"open"</b> props와 함께 사용하면 고정된 툴팁을 표현할 수 있습니다.',
+        addProps: {
+          ...tooltipExampleInitProps,
+          tooltipText: (
+            <_SpanText styles={{ fontSize: "12px" }}>
+              고정된 툴팁입니다.
+            </_SpanText>
+          ),
+          children: <_PText>Open Fix Tooltip</_PText>,
+          isFix: true,
+          open: true,
+        },
+        content: getCommonsHighlight.tag.span("Open Fix Tooltip"),
+        code: tooltipCodeList.fix,
+      },
+    ],
+  },
+  {
+    title: "툴팁 완전 비활성화 (Disable) 적용",
     contents: [
       {
         remakrs:
@@ -197,48 +281,15 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
         content: getCommonsHighlight.tag.p("Hello"),
         code: tooltipCodeList.disable,
         replaceAllCode: {
-          code: tooltipReplaceCode.disable.code,
-          showCode: tooltipReplaceCode.disable.showCode,
+          code: tooltipReplaceCode({
+            tooltipText: "활성화 상태에서만 툴팁이 실행됩니다.",
+            children: <></>,
+          }).disable.code,
+          showCode: tooltipReplaceCode({
+            tooltipText: "활성화 상태에서만 툴팁이 실행됩니다.",
+            children: <></>,
+          }).disable.showCode,
         },
-      },
-    ],
-  },
-  {
-    title: "수동 ON/OFF",
-    contents: [
-      {
-        remakrs:
-          "원하는 시점에 툴팁을 수동으로 오픈하거나 종료할 수 있습니다. <br />state를 사용한다면 <b>'open'</b>과 <b>'onCloseAfterEvent'</b> props를 함께 사용해주세요.",
-        addProps: {
-          ...tooltipExampleInitProps,
-        },
-        replaceChildren: <TooltipExampleOnOffReplaceTemplate />,
-        content: getCommonsHighlight.tag.p("Hello"),
-        code: tooltipCodeList.onoff,
-        replaceAllCode: {
-          code: tooltipReplaceCode.onoff.code,
-          showCode: tooltipReplaceCode.onoff.showCode,
-        },
-      },
-    ],
-  },
-  {
-    title: "마우스 (Hover) 이벤트 OFF",
-    contents: [
-      {
-        remakrs:
-          "마우스로 툴팁을 실행하거나 종료시키는 이벤트를 비활성화 합니다. <br /><b>'open'</b> props와 함께 사용하면 툴팁을 강제로 고정시킬 수 있습니다.",
-        addProps: {
-          ...tooltipExampleInitProps,
-          children: <_PText>Fixed tooltip</_PText>,
-          open: true,
-          offHoverEvent: true,
-          tooltipText: (
-            <_SpanText styles={{ fontSize: "12px" }}>Already fixed</_SpanText>
-          ),
-        },
-        content: getCommonsHighlight.tag.span("Hello"),
-        code: tooltipCodeList.offHover,
       },
     ],
   },
@@ -288,25 +339,27 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
 /* //////////////////////////////////////////////////////////////// */
 
 // 통째로 변경될 코드 리스트
-const tooltipReplaceCode = {
-  disable: {
-    code: getExampleCode({
-      module: "Tooltip",
-      returnStr: disableReplaceCode,
-      code: "",
-      children: "",
-      addImport: { react: ["useState"] },
-    }),
-    showCode: `  ` + disableReplaceCode,
-  },
-  onoff: {
-    code: getExampleCode({
-      module: "Tooltip",
-      returnStr: onoffReplaceCode,
-      code: "",
-      children: "",
-      addImport: { react: ["useState"] },
-    }),
-    showCode: `  ` + onoffReplaceCode,
-  },
+const tooltipReplaceCode = (props: TooltipPropsType) => {
+  return {
+    disable: {
+      code: getExampleCode({
+        module: "Tooltip",
+        returnStr: disableReplaceCode,
+        code: "",
+        children: "",
+        addImport: { react: ["useState"] },
+      }),
+      showCode: `  ` + disableReplaceCode,
+    },
+    onoff: {
+      code: getExampleCode({
+        module: "Tooltip",
+        returnStr: onoffReplaceCode(props),
+        code: "",
+        children: "",
+        addImport: { react: ["useState"] },
+      }),
+      showCode: `  ` + onoffReplaceCode(props),
+    },
+  };
 };
