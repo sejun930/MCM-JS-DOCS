@@ -1,3 +1,5 @@
+import ModuleTypes from "mcm-js/dist/commons/types";
+
 // 태그 제거하기
 const removeTag = (str: string): string =>
   str
@@ -232,13 +234,6 @@ const getLibraries = (module: string) => {
   }`)[module];
 };
 
-// 개발 및 배포 환경의 타입 호출하기
-const getLibrariesTypes = (module: string) => {
-  return require(`mcm-js${
-    (process.env.NODE_ENV === "development" && "-dev") || ""
-  }/dist/commons/types/index`)[`TooltipPropsType`];
-};
-
 export {
   removeTag,
   getDateForm,
@@ -255,5 +250,4 @@ export {
   changeClientText,
   imagePreLoad,
   getLibraries,
-  getLibrariesTypes,
 };

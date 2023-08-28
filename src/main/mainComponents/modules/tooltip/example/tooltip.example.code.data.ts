@@ -25,7 +25,6 @@ export const tooltipCodeList: ExampleCodeListTypes = {
       tooltipCommonsExampleCode.useAnimation
     }`,
   animationImg: () => ` 
-      ${tooltipCommonsExampleCode.useAnimation}
       ${tooltipCommonsExampleCode.tooltipObject(
         `
         ${getCommonsHighlight.tag.img(
@@ -36,6 +35,7 @@ export const tooltipCodeList: ExampleCodeListTypes = {
         )}
       `
       )}
+      ${tooltipCommonsExampleCode.useAnimation}
     `,
   position: (
     tooltipText: string,
@@ -77,6 +77,12 @@ export const tooltipCodeList: ExampleCodeListTypes = {
       ${tooltipCommonsExampleCode.offHover()}
       ${tooltipCommonsExampleCode.onoff()}
       ${tooltipCommonsExampleCode.hideMobile()}
+    `,
+  fix: () =>
+    `
+     ${tooltipCodeList.basic("고정된 툴팁입니다.")} 
+      ${tooltipCommonsExampleCode.onoff()}
+      ${tooltipCommonsExampleCode.isFix()}
     `,
 };
 

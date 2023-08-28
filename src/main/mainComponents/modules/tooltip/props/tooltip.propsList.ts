@@ -74,7 +74,14 @@ export const tooltipPropsList: Array<PropsModuleListType> = [
     default: false,
     type: "Boolean",
     notice:
-      'true를 전달하면 마우스를 올리거나 나갔을 때에 툴팁이 실행 및 종료되는 이벤트를 비활성화합니다. <br /><b>"open"</b> props와 함께 사용하면 고정되어 있는 툴팁을 나타낼 수 있습니다.',
+      'true를 전달하면 툴팁을 실행하거나 종료하는 Hover 이벤트를 비활성화합니다. <br /><b>"open"</b> props를 함께 사용하여 툴팁을 실행하거나 종료할 수 있습니다.',
+  },
+  {
+    name: "isFix",
+    default: false,
+    type: "Boolean",
+    notice:
+      'true를 전달하면 종료되지 않는 툴팁을 나타낼 수 있습니다. <br /><b>"open"</b> props를 함께 사용하면 고정된 툴팁을 표현할 수 있습니다.',
   },
   {
     name: "hideMobile",

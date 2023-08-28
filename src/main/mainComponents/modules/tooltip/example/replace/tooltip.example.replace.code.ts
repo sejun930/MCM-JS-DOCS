@@ -1,5 +1,6 @@
 import { getCommonsHighlight } from "src/commons/highlight";
 import { tooltipCommonsExampleCode } from "../tooltip.example.commons.code";
+import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
 // "disable" 예시의 전체 코드
 export const disableReplaceCode = `${
@@ -73,7 +74,7 @@ ${getCommonsHighlight.return(
 )}`;
 
 // "onoff" 예시의 전체 코드
-export const onoffReplaceCode = `${
+export const onoffReplaceCode = (props: TooltipPropsType) => `${
   getCommonsHighlight.colors(
     `툴팁을 실행하거나 종료시키는 기준이 되는 state 값입니다.
   // true를 전달하면 실행시킬 수 있고, false를 전달하면 종료됩니다.`
@@ -137,9 +138,7 @@ ${getCommonsHighlight.return(
         componentName: "Tooltip",
         children: `
         ${getCommonsHighlight.tag.p(
-          getCommonsHighlight.colors(
-            "버튼을 클릭하면 툴팁을 수동으로 실행하거나 종료할 수 있습니다."
-          ).text
+          getCommonsHighlight.colors(String(props.tooltipText) || "").text
         )}
       `,
         props: ` 
@@ -166,7 +165,20 @@ ${getCommonsHighlight.return(
           getCommonsHighlight.curly(
             getCommonsHighlight.function({ funcName: "closeAfterEvent" })
           )
-        )}
+        )}${
+          (props.offHoverEvent &&
+            `
+        ${
+          getCommonsHighlight.colors(
+            "툴팁 실행 및 종료 마우스 Hover 이벤트를 비활성화합니다."
+          ).comment
+        }
+        ${getCommonsHighlight.props(
+          "offHoverEvent",
+          getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+        )}`) ||
+          ""
+        }
       `,
       })}
     `

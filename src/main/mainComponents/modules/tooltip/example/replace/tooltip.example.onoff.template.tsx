@@ -4,9 +4,12 @@ import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 import { getLibraries } from "src/main/commonsComponents/functional";
+import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
 const Tooltip = getLibraries("Tooltip");
-export default function TooltipExampleOnOffReplacePage() {
+export default function TooltipExampleOnOffReplacePage(
+  props: TooltipPropsType
+) {
   const [open, setOpen] = useState(false);
 
   const toggleDisable = () => {
@@ -16,6 +19,8 @@ export default function TooltipExampleOnOffReplacePage() {
   const closeDisable = () => {
     setOpen(false);
   };
+
+  const { tooltipText, ..._props } = props;
 
   return (
     <Wrapper>
@@ -28,8 +33,9 @@ export default function TooltipExampleOnOffReplacePage() {
         open={open}
         useShowAnimation
         onCloseAfterEvent={closeDisable}
+        {..._props}
       >
-        <p> 버튼을 클릭하면 툴팁을 수동으로 실행하거나 종료할 수 있습니다. </p>
+        <p> {props.tooltipText} </p>
       </Tooltip>
     </Wrapper>
   );
