@@ -225,6 +225,20 @@ const imagePreLoad = (list: Array<string>) => {
   document.body.append(script);
 };
 
+// 개발 및 배포 환경의 라이브러리 호출하기
+const getLibraries = (module: string) => {
+  return require(`mcm-js${
+    (process.env.NODE_ENV === "development" && "-dev") || ""
+  }`)[module];
+};
+
+// 개발 및 배포 환경의 타입 호출하기
+const getLibrariesTypes = (module: string) => {
+  return require(`mcm-js${
+    (process.env.NODE_ENV === "development" && "-dev") || ""
+  }/dist/commons/types/index`)[`TooltipPropsType`];
+};
+
 export {
   removeTag,
   getDateForm,
@@ -240,4 +254,6 @@ export {
   changeServerText,
   changeClientText,
   imagePreLoad,
+  getLibraries,
+  getLibrariesTypes,
 };

@@ -9,15 +9,14 @@ import { useRecoilState } from "recoil";
 import { adminLoginState, moduleState } from "src/commons/store";
 
 import CommonsHooksComponents from "../../../../../../../hooks/commonsHooks";
-import { getUuid } from "src/main/commonsComponents/functional";
-
+import { getLibraries, getUuid } from "src/main/commonsComponents/functional";
 import { _CloseButton, _Button } from "mcm-js-commons";
 
-import { Modal } from "mcm-js";
 import ContentsOptionalPage from "./functional/contents.select.functional.container";
 import { CommentsAllInfoTypes, InfoTypes } from "../../../comments.types";
 
 let ableClose = true;
+const Modal = getLibraries("Modal");
 export default function SelectListOptional({
   list,
   styles,

@@ -1,10 +1,11 @@
-import { Tooltip } from "mcm-js";
 import { useState } from "react";
 
 import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { getLibraries } from "src/main/commonsComponents/functional";
 
+const Tooltip = getLibraries("Tooltip");
 export default function TooltipExampleOnOffReplacePage() {
   const [open, setOpen] = useState(false);
 

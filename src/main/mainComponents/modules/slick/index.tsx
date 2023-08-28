@@ -1,5 +1,6 @@
-import { Tooltip } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional";
 
+const Tooltip = getLibraries("Tooltip");
 export default function TooltipExamplePage() {
   return (
     <Tooltip

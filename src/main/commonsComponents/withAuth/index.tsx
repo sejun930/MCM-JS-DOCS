@@ -3,12 +3,13 @@ import { useRecoilState } from "recoil";
 import { adminLoginState } from "src/commons/store";
 import Template from "../units/template/main";
 
-import { Modal } from "mcm-js";
 import AdminLoginPage from "src/main/mainComponents/admin/login/admin.login.container";
 import CommonsHooksComponents from "../hooks/commonsHooks";
 
 import { checkAccessToken } from "./check";
+import { getLibraries } from "../functional";
 
+const Modal = getLibraries("Modal");
 // 관리자 로그인 권한 체크하기
 const WithAuthAdmin =
   <P extends {}>(Component: ComponentType<P>) =>
