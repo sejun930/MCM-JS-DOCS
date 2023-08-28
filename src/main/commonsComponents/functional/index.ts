@@ -1,10 +1,13 @@
-import ModuleTypes from "mcm-js/dist/commons/types";
-
 // 태그 제거하기
 const removeTag = (str: string): string =>
   str
     .split("<span")
-    .map((el) => el.substring(el.indexOf(">") + 1).replaceAll("</span>", ""))
+    .map((el) =>
+      el
+        .substring(el.indexOf(">") + 1)
+        .split("</span>")
+        .join("")
+    )
     .join("");
 
 // 시간에 대한 차이 구하기
@@ -78,7 +81,7 @@ const getDateForm = ({
 
 // 줄바꿈 (\n => <br />) 처리하기
 const changeMultipleLine = (str: string) => {
-  return str.replaceAll("\n", "<br />");
+  return str.split("\n").join("<br />");
 };
 
 // 텍스트 해쉬화

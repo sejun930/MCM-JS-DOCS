@@ -9931,19 +9931,6 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
-mcm-js-commons@^0.0.64:
-  version "0.0.64"
-  resolved "https://registry.yarnpkg.com/mcm-js-commons/-/mcm-js-commons-0.0.64.tgz#2e7b39db057a9c9f924b009d8be3b0d5a0d1057d"
-  integrity sha512-fqK2kfrX1gODxbplblKxxLrVKY6qFVaA+tM0t+C1kV9VCy4xxLThgxV9MFhOkr7b7jolMjo0HqE1j3GQGoVCmA==
-  dependencies:
-    "@emotion/react" "^11.10.6"
-    "@emotion/styled" "^11.10.6"
-    dompurify "^3.0.1"
-    next "13.1.6"
-    react "18.2.0"
-    react-dom "18.2.0"
-    uuid "^9.0.0"
-
 mcm-js-commons@^0.0.7-3.1:
   version "0.0.7-3.1"
   resolved "https://registry.yarnpkg.com/mcm-js-commons/-/mcm-js-commons-0.0.7-3.1.tgz#b0376a13e2c14c89a719d9563cb08d5568a4e519"
@@ -9983,14 +9970,14 @@ mcm-js-dev@0.0.28.3:
     react-dom "^18.2.0"
     uuid "^9.0.0"
 
-mcm-js@0.0.6-7.10:
-  version "0.0.6-7.10"
-  resolved "https://registry.yarnpkg.com/mcm-js/-/mcm-js-0.0.6-7.10.tgz#4f1128eca37f7ad83ed573a5134206b859eea560"
-  integrity sha512-/ENkBpKIsXae8SoqXHA6vkPlPwYP2K1bOK6M79H1Y6TZyjZtBXjkmFageJzQsARx95NU8g87W9+LjwGClrotFQ==
+mcm-js@0.0.68:
+  version "0.0.68"
+  resolved "https://registry.yarnpkg.com/mcm-js/-/mcm-js-0.0.68.tgz#a1ed3b3574a51da0b0a942f6c06f191185c7a56f"
+  integrity sha512-cIjCVZQ4r2sM8spz04jqPChCKdGNHoDqA0jW7FBd9uPRpAhSayo72g6pv878MfQIbPeGlcXhgsFDKe2mXWi3cw==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
-    mcm-js-commons "^0.0.64"
+    mcm-js-commons "^0.0.7-3.1"
     next "^13.3.0"
     react "18.2.0"
     react-dom "^18.2.0"
