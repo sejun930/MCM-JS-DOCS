@@ -4,7 +4,7 @@ import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/
 import { getLibraries } from "src/main/commonsComponents/functional";
 import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 export default function MyTooltipExample(props: ExampleContentsTypes) {
   let _tooltipText = props.commonsProps?.tooltipText;
   let _children = props.commonsProps?.children;

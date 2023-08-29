@@ -11,7 +11,7 @@ import { _Title, _Input } from "mcm-js-commons";
 import { FormEvent, MutableRefObject } from "react";
 import { getLibraries } from "src/main/commonsComponents/functional";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 export default function AdminLoginUIPage({
   login,
   changeInfo,

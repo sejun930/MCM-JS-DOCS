@@ -17,7 +17,7 @@ import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 let debouncing: number | ReturnType<typeof setTimeout>;
 let loading = false; // 중복 클릭 방지
 
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
 export default function AdminLoginPage({
   loginComplete,
 }: {

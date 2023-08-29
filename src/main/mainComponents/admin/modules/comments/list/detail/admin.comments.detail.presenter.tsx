@@ -21,7 +21,7 @@ import {
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { FetchCommentsTypes } from "../../admin.comments.types";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 export default function AdminCommentsDetailUIPage({
   info,
   commentsInfo,

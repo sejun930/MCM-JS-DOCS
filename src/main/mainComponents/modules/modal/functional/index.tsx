@@ -5,7 +5,7 @@ import { modalCommonsExampleCode } from "../example/modal.example.commons.code";
 import { OpenModalButton } from "../example/modal.example.template";
 import { getLibraries } from "src/main/commonsComponents/functional";
 
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
 export default function ModalFunctionalList(): FunctionalListType[] {
   return [
     {

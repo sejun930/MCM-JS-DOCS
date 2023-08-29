@@ -9,7 +9,7 @@ import CommonsHooksComponents from "../hooks/commonsHooks";
 import { checkAccessToken } from "./check";
 import { getLibraries } from "../functional";
 
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
 // 관리자 로그인 권한 체크하기
 const WithAuthAdmin =
   <P extends {}>(Component: ComponentType<P>) =>

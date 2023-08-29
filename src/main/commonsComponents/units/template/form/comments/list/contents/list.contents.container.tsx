@@ -15,7 +15,7 @@ import ContentsOptionalPage from "src/main/commonsComponents/units/template/form
 import { ListContentsSelectType } from "./list.data";
 import { getLibraries } from "src/main/commonsComponents/functional";
 
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
 export interface ListContentsIProps {
   info: InfoTypes;
   commentsInfo: CommentsAllInfoTypes;

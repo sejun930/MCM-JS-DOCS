@@ -16,7 +16,7 @@ import ContentsOptionalPage from "./functional/contents.select.functional.contai
 import { CommentsAllInfoTypes, InfoTypes } from "../../../comments.types";
 
 let ableClose = true;
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
 export default function SelectListOptional({
   list,
   styles,

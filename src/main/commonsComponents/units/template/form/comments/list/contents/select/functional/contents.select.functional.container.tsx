@@ -37,7 +37,7 @@ let bugLevel = 0; // 버그 중요도 저장
 let disableOpenModal = false; // 모달 중복 실행 방지
 let updating = false; // 업데이트 진행중 여부 (중복 클릭 방지)
 
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
 export default function ContentsSelectFunctionalPage({
   info,
   type,

@@ -1,3 +1,7 @@
+import { ModalType } from "mcm-js/dist/components/modules/modal/component/modal.types";
+import { SliderType } from "mcm-js/dist/components/modules/slider/components/slider.types";
+import { TooltipType } from "mcm-js/dist/components/modules/tooltip/component/tooltip.types";
+
 // 태그 제거하기
 const removeTag = (str: string): string =>
   str
@@ -231,10 +235,20 @@ const imagePreLoad = (list: Array<string>) => {
 };
 
 // 개발 및 배포 환경의 라이브러리 호출하기
-const getLibraries = (module: string) => {
-  return require(`mcm-js${
+const getLibraries = () => {
+  // 전체 모듈 가져오기
+  const getAllLibraries = require(`mcm-js${
     (process.env.NODE_ENV === "development" && "-dev") || ""
-  }`)[module];
+  }`);
+  delete getAllLibraries["__esModule"];
+
+  type ModuleTypes = {
+    Modal: ModalType;
+    Tooltip: TooltipType;
+    Slider: SliderType;
+  };
+
+  return getAllLibraries as ModuleTypes;
 };
 
 export {

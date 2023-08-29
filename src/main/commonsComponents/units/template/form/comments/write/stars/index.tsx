@@ -3,10 +3,9 @@ import React, { useEffect, useState } from "react";
 
 import { getLibraries, getUuid } from "src/main/commonsComponents/functional";
 import { _SpanText } from "mcm-js-commons";
-
 import { starsTooltipTextList } from "./stars.tooltip.text";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 export default function StarsForm({
   rating,
   category,

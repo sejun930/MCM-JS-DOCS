@@ -15,7 +15,7 @@ import {
 } from "src/main/commonsComponents/functional";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 export default function AdminCommentsContentsUIPage({
   info,
   toggleMoreShow,

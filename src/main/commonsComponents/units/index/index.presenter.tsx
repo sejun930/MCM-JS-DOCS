@@ -18,7 +18,7 @@ import {
   IndexPagePropsTypes,
 } from "./index.type";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 type allTypes = IndexIPropsTypes & IndexUIPropsTypes & IndexPagePropsTypes;
 export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
   const {

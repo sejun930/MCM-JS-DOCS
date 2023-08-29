@@ -18,7 +18,7 @@ import { _Button } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
 import { getLibraries } from "src/main/commonsComponents/functional";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 // 예시용에 추가적으로 붙는 옵션 폼 페이지 (ex : 코드보기 등등)
 export default function _ExampleOptionalFormPage({
   code,

@@ -11,7 +11,7 @@ import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHook
 import LayoutNavPage from "src/main/commonsComponents/layout/nav";
 import { getLibraries } from "src/main/commonsComponents/functional";
 
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
 export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);

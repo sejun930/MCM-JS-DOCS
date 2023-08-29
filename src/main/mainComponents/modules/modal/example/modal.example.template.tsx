@@ -8,7 +8,8 @@ import { ModalExampleCommonsTypes } from "../modal.types";
 import { ModalPropsType } from "mcm-js/dist/commons/types";
 import { getLibraries } from "src/main/commonsComponents/functional";
 
-const Modal = getLibraries("Modal");
+const { Modal } = getLibraries();
+
 export default function MyModalExample(props: ExampleContentsTypes) {
   const { isShow, openModal, closeModal } =
     props.commonsProps as ModalExampleCommonsTypes;

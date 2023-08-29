@@ -25,7 +25,7 @@ import {
   getLibraries,
 } from "src/main/commonsComponents/functional";
 
-const Tooltip = getLibraries("Tooltip");
+const { Tooltip } = getLibraries();
 export default function ContentsSelectFunctionalUIPage({
   type,
   info,
