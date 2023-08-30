@@ -14,20 +14,21 @@ export default function ModulesPage(props: { name: string }) {
   return (
     <>
       <Head>
-        <title>MCM-JS || {name}</title>
+        <title>MCM-JSㅤ||ㅤ{name}</title>
         <meta
-          name="og:description"
+          property="og:description"
           content={
             moduleRemarksList[name].split("<br />").join(" ") ||
             "내 취향대로 모듈을 만들어보세요. || My Custom Modlues"
           }
-        ></meta>
-        <meta
-          name="og:image"
-          content={`https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${name}-example.gif`}
         />
         <meta
-          name="og:url"
+          property="og:image"
+          content={`https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${name}-example.gif`}
+        />
+        <meta property="og:image:type" content="image/gif" />
+        <meta
+          property="og:url"
           content={`https://mcm-js.site/modules/${name.toLowerCase()}`}
         />
       </Head>

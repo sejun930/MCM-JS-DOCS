@@ -72,9 +72,9 @@ export default function NavListPage({
             </li>
           );
         })) || (
-        <li>
+        <EmptyResult>
           <_PText className="empty-search-result">검색 결과 없음</_PText>
-        </li>
+        </EmptyResult>
       )}
     </ListWrapper>
   );
@@ -149,5 +149,13 @@ export const ListWrapper = styled.ul`
       props.isAdmin && {
         padding: "0px",
       }}
+  }
+`;
+
+export const EmptyResult = styled.li`
+  margin-top: 20px;
+
+  @media ${breakPoints.mobileLarge} {
+    margin-top: 0px;
   }
 `;
