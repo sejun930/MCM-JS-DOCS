@@ -16,8 +16,20 @@ function MyApp({ Component, pageProps }: AppProps) {
           property="og:description"
           content="내 취향대로 모듈을 만들어보세요. || My Custom Modlues"
         />
+        <meta property="og:title" content="MCM-JS" />
         <meta name="og:subject" content="" />
         <meta name="og:rating" content="General" />
+        <meta
+          property="og:image"
+          content="/images/commons/logo/MCM_white_logo.png"
+        />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta http-equiv="Content-Script-Type" content="Text/javascript" />
+        <meta http-equiv="Subject" content="React" />
+        <meta http-equiv="Email" content="sejun3278@gmail.com" />
+        <meta http-equiv="Copyright" content="sejun3278@gmail.com" />
       </Head>
       <RecoilRoot>
         <LayoutPage>

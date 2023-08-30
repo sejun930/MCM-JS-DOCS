@@ -19,9 +19,10 @@ export default function ModulesPage(props: { name: string }) {
           property="og:description"
           content={
             moduleRemarksList[name].split("<br />").join(" ").trim() ||
-            "내 취향대로 모듈을 만들어보세요. || My Custom Modlues"
+            "내 취향대로 모듈을 만들어보세요. 2 || My Custom Modlues"
           }
         />
+        <meta property="og:title" content={`MCM-JS::${name}`} />
         <meta
           property="og:image"
           content={`https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${name}-example.gif`}
@@ -31,6 +32,7 @@ export default function ModulesPage(props: { name: string }) {
           property="og:url"
           content={`https://mcm-js.site/modules/${name.toLowerCase()}`}
         />
+        <meta name="Keywords" content={`${name}, nextjs, react, modules`} />
       </Head>
       {!ModuleComponentsList[name] ? <ErrorPage /> : Components}
     </>
