@@ -26,10 +26,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta http-equiv="Content-Script-Type" content="Text/javascript" />
-        <meta http-equiv="Subject" content="React" />
-        <meta http-equiv="Email" content="sejun3278@gmail.com" />
-        <meta http-equiv="Copyright" content="sejun3278@gmail.com" />
+        <meta httpEquiv="Content-Script-Type" content="Text/javascript" />
+        <meta httpEquiv="Subject" content="React" />
+        <meta httpEquiv="Email" content="sejun3278@gmail.com" />
+        <meta httpEquiv="Copyright" content="sejun3278@gmail.com" />
       </Head>
       <RecoilRoot>
         <LayoutPage>
