@@ -5,6 +5,9 @@ import { NavListTypes } from "../nav.data";
 import { _Link, _PText, _SpanTextWithHtml } from "mcm-js-commons";
 import { CSSProperties } from "react";
 
+import { imagePreLoad } from "src/main/commonsComponents/functional";
+import { ModuleComponentsList } from "pages/modules/[module]/module.list";
+
 export default function NavListPage({
   list,
   isSelect,
@@ -16,6 +19,13 @@ export default function NavListPage({
   search?: string;
   isAdmin?: boolean;
 }) {
+  // Example 이미지 미리 호출하기
+  const preLoadExampleImage = (name: string) => () => {
+    imagePreLoad([
+      `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${name}-example.gif`,
+    ]);
+  };
+
   return (
     <ListWrapper
       isSelect={isSelect}
@@ -23,6 +33,7 @@ export default function NavListPage({
         isSelect ? " nav-list-select-wrapper" : ""
       }`}
       isAdmin={isAdmin}
+      hasError={list[0] === undefined}
     >
       {(list.length &&
         list.map((el, key) => {
@@ -46,10 +57,19 @@ export default function NavListPage({
           }
 
           return (
-            <li key={`tap-name-${el?.name}-${key}`}>
-              <_Link href={_href}>
-                <_SpanTextWithHtml dangerouslySetInnerHTML={name || "-"} />
-              </_Link>
+            <li
+              key={`tap-name-${el?.name}-${key}`}
+              onMouseEnter={preLoadExampleImage(el?.name || "")}
+            >
+              {name ? (
+                <_Link href={_href}>
+                  <_SpanTextWithHtml
+                    dangerouslySetInnerHTML={name || "Not Found"}
+                  />
+                </_Link>
+              ) : (
+                <></>
+              )}
             </li>
           );
         })) || (
@@ -64,6 +84,7 @@ export default function NavListPage({
 interface StyleTypes {
   isSelect?: boolean;
   isAdmin?: boolean;
+  hasError?: boolean;
 }
 
 export const ListWrapper = styled.ul`
@@ -83,6 +104,11 @@ export const ListWrapper = styled.ul`
   ${(props) =>
     props.isAdmin && {
       padding: "0px",
+    }}
+
+  ${(props) =>
+    props.hasError && {
+      paddingTop: "0px",
     }}
 
   li {

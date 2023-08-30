@@ -40,7 +40,7 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
           ...tooltipExampleInitProps,
           children: <_PText>Dancing</_PText>,
           tooltipText: (
-            <img src="https://mcm-js-image.s3.ap-northeast-2.amazonaws.com/dancing.gif" />
+            <img src="/images/modules/example/tooltip/dancing.gif" />
           ),
         },
         content: getCommonsHighlight.tag.p("Dancing"),
@@ -66,7 +66,7 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
           ...tooltipExampleInitProps,
           children: <_PText>Dancing</_PText>,
           tooltipText: (
-            <img src="https://mcm-js-image.s3.ap-northeast-2.amazonaws.com/dancing.gif" />
+            <img src="/images/modules/example/tooltip/dancing.gif" />
           ),
           useShowAnimation: true,
         },

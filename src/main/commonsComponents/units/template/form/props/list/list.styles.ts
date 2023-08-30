@@ -77,7 +77,7 @@ export const Tr = styled.tr`
     font-weight: 700;
     border: solid 1px #bbbbbb;
     padding: 15px 10px;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.7px;
     line-height: 24px;
 
     ${(props: StyleTypes) =>
@@ -88,6 +88,7 @@ export const Tr = styled.tr`
 
   .props-name {
     width: 20%;
+    font-size: 16px;
   }
   .props-notice {
     width: 55%;

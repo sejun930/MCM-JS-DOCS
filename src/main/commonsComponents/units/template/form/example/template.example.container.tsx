@@ -7,8 +7,9 @@ import { versState } from "src/commons/store";
 // import { versState } from "src/commons/store";
 import { IProps, UIProps } from "./template.example.types";
 
-let isAllOpen = false;
 export default function _ExampleForm(props: IProps) {
+  let isAllOpen = false;
+
   const [vers] = useRecoilState(versState);
   // 전체 예시용 코드의 개수
   const [allLen, setAllLen] = useState<number>(0);

@@ -228,10 +228,12 @@ const imagePreLoad = (list: Array<string>) => {
       const img = document.createElement("img");
       img.src = url;
 
-      script.append(img);
+      if (img) {
+        script.append(img);
+        document.body.append(script);
+      }
     });
   }
-  document.body.append(script);
 };
 
 // 개발 및 배포 환경의 라이브러리 호출하기
@@ -249,6 +251,14 @@ const getLibraries = () => {
   };
 
   return getAllLibraries as ModuleTypes;
+};
+
+// 문자열을 카멜 케이스 형태로 변환하기
+export const getCamelCase = (str: string) => {
+  return str
+    .split(" ")
+    .map((el) => el[0].toUpperCase() + el.substring(1))
+    .join(" ");
 };
 
 export {
