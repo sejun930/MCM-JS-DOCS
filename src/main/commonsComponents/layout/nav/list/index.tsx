@@ -6,7 +6,6 @@ import { _Link, _PText, _SpanTextWithHtml } from "mcm-js-commons";
 import { CSSProperties } from "react";
 
 import { imagePreLoad } from "src/main/commonsComponents/functional";
-import { ModuleComponentsList } from "pages/modules/[module]/module.list";
 
 export default function NavListPage({
   list,

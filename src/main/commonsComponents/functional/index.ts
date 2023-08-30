@@ -242,7 +242,7 @@ const getLibraries = () => {
   const getAllLibraries = require(`mcm-js${
     (process.env.NODE_ENV === "development" && "-dev") || ""
   }`);
-  delete getAllLibraries["__esModule"];
+  delete getAllLibraries.__esModule;
 
   type ModuleTypes = {
     Modal: ModalType;

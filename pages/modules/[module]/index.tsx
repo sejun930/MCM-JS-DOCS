@@ -1,5 +1,7 @@
+import MyModal from "src/main/mainComponents/modules/modal";
+import MyTooltip from "src/main/mainComponents/modules/tooltip";
+
 import Head from "next/head";
-import { ModuleComponentsList } from "./module.list";
 import ErrorPage from "../../404";
 
 import { getCamelCase } from "src/main/commonsComponents/functional";
@@ -43,4 +45,10 @@ export const getServerSideProps = (url: { query: { module: string } }) => {
       name: getCamelCase(module),
     },
   };
+};
+
+// 모듈 컴포넌트 모음
+export const ModuleComponentsList: { [key: string]: JSX.Element } = {
+  Modal: <MyModal />,
+  Tooltip: <MyTooltip />,
 };
