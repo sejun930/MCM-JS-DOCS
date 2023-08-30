@@ -11,15 +11,14 @@ export default function ModulesPage(props: { name: string }) {
   const { name } = props;
   const Components = ModuleComponentsList[name];
 
-  //
   return (
     <>
       <Head>
-        <title>MCM-JSㅤ||ㅤ{name}</title>
+        <title>MCM-JS::{name}</title>
         <meta
           property="og:description"
           content={
-            moduleRemarksList[name].split("<br />").join(" ") ||
+            moduleRemarksList[name].split("<br />").join(" ").trim() ||
             "내 취향대로 모듈을 만들어보세요. || My Custom Modlues"
           }
         />
