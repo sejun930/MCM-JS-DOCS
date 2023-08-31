@@ -1,5 +1,28 @@
 import { getPropsCodeTemplate } from "src/main/commonsComponents/functional";
 import { getCommonsHighlight } from "src/commons/highlight";
+import { PropsModuleListType } from "./props.commons.data";
+
+// export const getPropsForm = <T>(
+//   props: Omit<PropsModuleListType, "code">
+// ): PropsModuleListType => {
+//   const { name, type, notice, isRequired } = props;
+//   const _default = props.default;
+
+//   return {
+//     name,
+//     type,
+//     default: _default,
+//     notice,
+//     isRequired,
+//   };
+// };
+
+// name: "children",
+// default: '""',
+// type: "String | Node",
+// notice: "툴팁 메세지가 출력되는 Hover 이벤트가 적용될 대상입니다.",
+// isRequired: true,
+// code: propsCommonsCodeList("children").string(""),
 
 // props 예시용 코드 폼
 export const propsCommonsCodeList = (key: string, isObject?: boolean) => {

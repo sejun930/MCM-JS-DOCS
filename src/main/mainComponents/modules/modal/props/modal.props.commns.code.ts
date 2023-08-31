@@ -1,7 +1,3 @@
-import {
-  getPropsCodeTemplate,
-  getObjectTemplate,
-} from "src/main/commonsComponents/functional";
 import { getCommonsHighlight } from "src/commons/highlight";
 
 export const modalPropsCommonsCode = {
