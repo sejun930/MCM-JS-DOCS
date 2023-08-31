@@ -26,7 +26,7 @@ export default function _PropsForm({
         remakrs="Props들을 이용해 원하는 모듈을 조립해보세요."
       />
       <ModulePropsListFormPage
-        list={propsModuleList[module]}
+        list={propsModuleList(vers || 0)[module]}
         vers={vers || 0}
       />
     </Wrapper>

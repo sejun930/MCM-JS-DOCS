@@ -5,7 +5,7 @@ import {
   Tr,
   CopyCode,
 } from "./list.styles";
-import { PropsModuleListType } from "src/commons/data/props/props.commons.data";
+import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
 import { _SpanText, _Button } from "mcm-js-commons";
 import {
   getLibraries,
@@ -22,7 +22,7 @@ export default function ModulePropsListFormPage({
   hideTitle,
   vers,
 }: {
-  list: Array<PropsModuleListType>;
+  list: Array<PropsModuleListResultType>;
   hideTitle?: boolean; // 타이틀 가리기 여부
   vers: number;
 }) {

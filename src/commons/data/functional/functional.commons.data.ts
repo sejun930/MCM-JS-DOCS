@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { PropsModuleListType } from "../props/props.commons.data";
+import { PropsModuleListResultType } from "../props/props.commons.data";
 
 import ModalFunctionalList from "src/main/mainComponents/modules/modal/functional";
 
@@ -8,7 +8,7 @@ export interface FunctionalListType {
   remakrs: string; // 간단 설명
   props: {
     isSameContents?: boolean; // 본문의 props와 동일한지?
-    list: Array<PropsModuleListType>; // props 리스트 정보
+    list: Array<PropsModuleListResultType>; // props 리스트 정보
   };
   exampleCode: string; // 예시용 코드
   info?: Array<string>; // 추가 정보
