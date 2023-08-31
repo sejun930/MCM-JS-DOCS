@@ -1,6 +1,7 @@
 import { ModalType } from "mcm-js/dist/components/modules/modal/component/modal.types";
 import { SliderType } from "mcm-js/dist/components/modules/slider/components/slider.types";
 import { TooltipType } from "mcm-js/dist/components/modules/tooltip/component/tooltip.types";
+import { getCommonsHighlight } from "src/commons/highlight";
 
 // 태그 제거하기
 const removeTag = (str: string): string =>
@@ -13,6 +14,20 @@ const removeTag = (str: string): string =>
         .join("")
     )
     .join("");
+
+// 탭 (공백) 적용하기
+const getTap = (str: string) => {
+  // 2줄 처리하기
+  return str
+    .split("/&tap&/")
+    .join(
+      `
+`
+    )
+    .split("/&tap2&/").join(`
+    
+`);
+};
 
 // 시간에 대한 차이 구하기
 const getDateForm = ({
@@ -261,8 +276,31 @@ export const getCamelCase = (str: string) => {
     .join(" ");
 };
 
+// 문자열 복사하기
+const copyText = (text: string, isCode?: boolean) => {
+  if (isCode) text = removeTag(text);
+  navigator.clipboard.writeText(text);
+};
+
+// 컴포넌트 props 형태를 객체 형태로 변경
+const getObjectTemplate = (code: string) => {
+  return `${code.replace(">=<", ">: <")}${getCommonsHighlight.comma()}`;
+};
+
+// props 예시용 코드 완성하기
+const getPropsCodeTemplate = ({
+  key,
+  value,
+}: {
+  key: string;
+  value: string;
+}) => {
+  return `${getCommonsHighlight.props(key, value)}`;
+};
+
 export {
   removeTag,
+  getTap,
   getDateForm,
   changeMultipleLine,
   getHashText,
@@ -277,4 +315,7 @@ export {
   changeClientText,
   imagePreLoad,
   getLibraries,
+  copyText,
+  getObjectTemplate,
+  getPropsCodeTemplate,
 };

@@ -5,7 +5,7 @@ import { Wrapper } from "../form.commons.styles";
 
 import { MutableRefObject } from "react";
 import { useRecoilState } from "recoil";
-import { moduleState } from "src/commons/store";
+import { moduleState, versState } from "src/commons/store";
 
 import { propsModuleList } from "src/commons/data/props/props.commons.data";
 
@@ -16,6 +16,7 @@ export default function _PropsForm({
   propsRef?: MutableRefObject<HTMLDivElement>;
 }) {
   const [module] = useRecoilState(moduleState);
+  const [vers] = useRecoilState(versState);
 
   return (
     <Wrapper ref={propsRef} id="props-form">
@@ -24,7 +25,10 @@ export default function _PropsForm({
         className="props-subTitle"
         remakrs="Props들을 이용해 원하는 모듈을 조립해보세요."
       />
-      <ModulePropsListFormPage list={propsModuleList[module]} />
+      <ModulePropsListFormPage
+        list={propsModuleList(vers || 0)[module]}
+        vers={vers || 0}
+      />
     </Wrapper>
   );
 }

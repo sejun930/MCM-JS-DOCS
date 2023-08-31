@@ -10,7 +10,7 @@ import { IProps, UIProps } from "./template.example.types";
 export default function _ExampleForm(props: IProps) {
   let isAllOpen = false;
 
-  const [vers] = useRecoilState(versState);
+  const [vers, setVers] = useRecoilState(versState);
   // 전체 예시용 코드의 개수
   const [allLen, setAllLen] = useState<number>(0);
   // 코스 on/off 정보
@@ -34,6 +34,12 @@ export default function _ExampleForm(props: IProps) {
 
     setOpenList(_openList);
   }, [vers]);
+
+  useEffect(() => {
+    return () => {
+      setVers(0);
+    };
+  }, []);
 
   const changeOpenList = (
     idx: number,

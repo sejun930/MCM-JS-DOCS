@@ -75,7 +75,10 @@ export default function FunctionalDetailInfoListPage({
                       를 확인해주세요.
                     </_PText>
                   ) : (
-                    <ModulePropsListFormPage list={el.props.list} />
+                    <ModulePropsListFormPage
+                      list={el.props.list}
+                      vers={vers || 0}
+                    />
                   )}
                 </PropsInfoList>
               </PropsInfoItems>

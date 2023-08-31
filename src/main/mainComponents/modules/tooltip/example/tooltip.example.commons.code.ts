@@ -9,11 +9,13 @@ export const tooltipCommonsExampleCode = {
   tooltipObject: (children: string) =>
     `${getCommonsHighlight.props(
       "tooltipText",
-      getCommonsHighlight.curly(children)
+      getCommonsHighlight.curly({ children })
     )}`,
   useAnimation: getCommonsHighlight.props(
     "useShowAnimation",
-    getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+    getCommonsHighlight.curly({
+      children: getCommonsHighlight.colors("true").bool,
+    })
   ),
   position: (position?: "top" | "bottom" | "left" | "right") =>
     ` ${getCommonsHighlight.props(
@@ -23,9 +25,10 @@ export const tooltipCommonsExampleCode = {
   styles: (mobileVers?: boolean) =>
     ` ${getCommonsHighlight.props(
       mobileVers ? "tooltipMobileStyles" : "tooltipStyles",
-      getCommonsHighlight.curly(
-        `${getCommonsHighlight.curly(
-          `
+      getCommonsHighlight.curly({
+        children: `${getCommonsHighlight.curly({
+          className: "yellow",
+          children: `
         ${getCommonsHighlight.getComma([
           `${getCommonsHighlight.obj(
             `backgroundColor`,
@@ -37,8 +40,9 @@ export const tooltipCommonsExampleCode = {
           )}`,
           `       ${getCommonsHighlight.obj(
             "font",
-            getCommonsHighlight.curly(
-              `
+            getCommonsHighlight.curly({
+              className: "deepPurple",
+              children: `
           ${getCommonsHighlight.getComma([
             `${getCommonsHighlight.obj(
               `color`,
@@ -54,13 +58,13 @@ export const tooltipCommonsExampleCode = {
             )}`,
           ])}
         `,
-              "deepPurple"
-            )
+            })
           )}`,
           `       ${getCommonsHighlight.obj(
             "border",
-            getCommonsHighlight.curly(
-              `
+            getCommonsHighlight.curly({
+              className: "deepPurple",
+              children: `
           ${getCommonsHighlight.getComma([
             `${getCommonsHighlight.obj(
               `color`,
@@ -76,39 +80,47 @@ export const tooltipCommonsExampleCode = {
             )}`,
           ])}
         `,
-              "deepPurple"
-            )
+            })
           )}`,
         ])}
       `,
-          "yellow"
-        )}`
-      )
+        })}`,
+      })
     )}`,
   disable: () =>
     `${getCommonsHighlight.props(
       "isDisable",
-      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+      getCommonsHighlight.curly({
+        children: getCommonsHighlight.colors("true").bool,
+      })
     )}`,
   onoff: () =>
     `${getCommonsHighlight.props(
       "open",
-      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+      getCommonsHighlight.curly({
+        children: getCommonsHighlight.colors("true").bool,
+      })
     )}`,
   offHover: () =>
     `${getCommonsHighlight.props(
       "offHoverEvent",
-      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+      getCommonsHighlight.curly({
+        children: getCommonsHighlight.colors("true").bool,
+      })
     )}`,
   hideMobile: () =>
     `${getCommonsHighlight.props(
       "hideMobile",
-      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+      getCommonsHighlight.curly({
+        children: getCommonsHighlight.colors("true").bool,
+      })
     )}`,
   isFix: () =>
     `${getCommonsHighlight.props(
       "isFix",
-      getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+      getCommonsHighlight.curly({
+        children: getCommonsHighlight.colors("true").bool,
+      })
     )}`,
 };
 
