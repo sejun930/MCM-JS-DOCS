@@ -1,6 +1,9 @@
 import { modalPropsList } from "src/main/mainComponents/modules/modal/props/modal.propsList";
 import { tooltipPropsList } from "src/main/mainComponents/modules/tooltip/props/tooltip.propsList";
 
+import { getCommonsHighlight } from "src/commons/highlight";
+import { getObjectTemplate } from "src/main/commonsComponents/functional";
+
 export interface PropsModuleListType {
   name: string;
   default: any;
@@ -19,6 +22,7 @@ export interface PropsModuleListType {
     | "[Function]";
   notice: string;
   isRequired?: boolean;
+  code: string | Array<string>;
 }
 
 // 공통으로 사용되는 Props
@@ -28,6 +32,12 @@ export const commonsPropsList: Array<PropsModuleListType> = [
     default: '""',
     type: "String",
     notice: "모듈에 id 선택자 값을 지정합니다. id는 wrapper 태그에 적용됩니다.",
+    code: [
+      `${getCommonsHighlight.props("id", getCommonsHighlight.string(""))}`,
+      `${getObjectTemplate(
+        getCommonsHighlight.props("id", getCommonsHighlight.string(""))
+      )}`,
+    ],
   },
   {
     name: "className",
@@ -35,6 +45,15 @@ export const commonsPropsList: Array<PropsModuleListType> = [
     type: "String",
     notice:
       "모듈에 class 선택자 값을 지정합니다. className은 wrapper 태그에 적용됩니다.",
+    code: [
+      `${getCommonsHighlight.props(
+        "className",
+        getCommonsHighlight.string("")
+      )}`,
+      `${getObjectTemplate(
+        getCommonsHighlight.props("className", getCommonsHighlight.string(""))
+      )}`,
+    ],
   },
 ];
 

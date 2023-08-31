@@ -4,7 +4,7 @@ import { _PText } from "mcm-js-commons";
 
 import CommonsHooksComponents from "../../hooks/commonsHooks";
 import { CodeTypes } from "./copy.types";
-import { removeTag } from "../../functional";
+import { getTap, removeTag } from "../../functional";
 import { Pre } from "./code-highlight/codeHighlight.styles";
 
 // 글자 복사 기능 컴포넌트
@@ -34,33 +34,17 @@ export default function _Copy({
   // 복사 확인 여부 (true일 경우 복사 완료)
   const [isCopied, setIsCopied] = useState(false);
 
-  // 탭 (공백) 적용하기
-  const getTap = (str: string) => {
-    // 2줄 처리하기
-    return str
-      .split("/&tap&/")
-      .join(
-        `
-`
-      )
-      .split("/&tap2&/").join(`
-    
-`);
-  };
-
   // 글자 복사하기
   const copy = () => {
     if (isCopied || copyDisable) return;
 
     setIsCopied(true);
-    _ref?.current?.addEventListener("mouseleave", leaveIconMouse);
 
-    if (_ref.current) {
-      if (type === "Code") {
-        text = getTap(removeTag(text));
-      }
-      navigator.clipboard.writeText(text);
-    }
+    if (_ref.current)
+      _ref?.current?.addEventListener("mouseleave", leaveIconMouse);
+
+    if (type === "Code") text = getTap(removeTag(text));
+    navigator.clipboard.writeText(text);
   };
 
   // 마우스 leave 이벤트 작동시, 아이콘 되돌리기
@@ -98,7 +82,11 @@ export default function _Copy({
       </CopyText>
 
       {!copyDisable && (
-        <CopyButton isCode={isCode} textPosition={textPosition}>
+        <CopyButton
+          isCode={isCode}
+          textPosition={textPosition}
+          className="copy-btn"
+        >
           <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
         </CopyButton>
       )}

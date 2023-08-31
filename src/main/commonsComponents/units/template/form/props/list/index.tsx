@@ -3,17 +3,37 @@ import {
   PropsMobileInfoWrapper,
   PropsTable,
   Tr,
+  CopyCode,
 } from "./list.styles";
 import { PropsModuleListType } from "src/commons/data/props/props.commons.data";
-import { _SpanText } from "mcm-js-commons";
+import { _SpanText, _Button } from "mcm-js-commons";
+import {
+  getLibraries,
+  copyText,
+  removeTag,
+  getTap,
+} from "src/main/commonsComponents/functional";
 
+import _Copy from "src/main/commonsComponents/units/copy";
+
+const { Tooltip } = getLibraries();
 export default function ModulePropsListFormPage({
   list,
   hideTitle,
+  vers,
 }: {
   list: Array<PropsModuleListType>;
   hideTitle?: boolean; // 타이틀 가리기 여부
+  vers: number;
 }) {
+  // props 코드 복사하기
+  const copyCode = (code: Array<string> | string) => () => {
+    let result = code;
+    if (Array.isArray(code)) result = code[vers];
+
+    copyText(getTap(removeTag(String(result))));
+  };
+
   return (
     (list && list.length && (
       <PropsListWrapper className="mcm-props-list-wrapper">
@@ -41,7 +61,33 @@ export default function ModulePropsListFormPage({
                 isRequired={el.isRequired || false}
                 isLast={list.length === idx + 1}
               >
-                <td className="props-name">{el.name}</td>
+                <td className="props-name">
+                  <_SpanText>{el.name}</_SpanText>
+                  {el.code && (
+                    <Tooltip
+                      tooltipText={
+                        <_Copy
+                          text={
+                            Array.isArray(el.code) ? el.code[vers] : el.code
+                          }
+                          type="Code"
+                        />
+                      }
+                      className="module-props-copy-button-tooltip"
+                      tooltipStyles={{
+                        backgroundColor: "#333333",
+                        padding: "0px",
+                      }}
+                    >
+                      <CopyCode
+                        onClickEvent={copyCode(el.code)}
+                        className="module-props-copy-button"
+                      >
+                        📝
+                      </CopyCode>
+                    </Tooltip>
+                  )}
+                </td>
                 <td
                   dangerouslySetInnerHTML={{ __html: el.notice }}
                   className="props-notice"

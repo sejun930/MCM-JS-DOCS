@@ -25,7 +25,7 @@ export const disableReplaceCode = `${
       setFunc: {
         color: "blue",
         children: `${getCommonsHighlight.arrowFunction({
-          isChildren: true,
+          className: "yellow",
           props: `<span class='skyblue'>prev</span>`,
           returnValue: ` ${
             getCommonsHighlight.colors("!").text
@@ -63,9 +63,9 @@ ${getCommonsHighlight.return(
         }
         ${getCommonsHighlight.props(
           "isDisable",
-          getCommonsHighlight.curly(
-            getCommonsHighlight.colors("isDisable").varName
-          )
+          getCommonsHighlight.curly({
+            children: getCommonsHighlight.colors("isDisable").varName,
+          })
         )}
       `,
       })}
@@ -97,7 +97,7 @@ export const onoffReplaceCode = (props: TooltipPropsType) => `${
       setFunc: {
         color: "blue",
         children: `${getCommonsHighlight.arrowFunction({
-          isChildren: true,
+          className: "yellow",
           props: `<span class='skyblue'>prev</span>`,
           returnValue: ` ${
             getCommonsHighlight.colors("!").text
@@ -151,9 +151,9 @@ ${getCommonsHighlight.return(
         }
         ${getCommonsHighlight.props(
           "open",
-          getCommonsHighlight.curly(
-            getCommonsHighlight.colors("isOpen").varName
-          )
+          getCommonsHighlight.curly({
+            children: getCommonsHighlight.colors("isOpen").varName,
+          })
         )}
         ${
           getCommonsHighlight.colors(
@@ -162,9 +162,11 @@ ${getCommonsHighlight.return(
         }
         ${getCommonsHighlight.props(
           "onCloseAfterEvent",
-          getCommonsHighlight.curly(
-            getCommonsHighlight.function({ funcName: "closeAfterEvent" })
-          )
+          getCommonsHighlight.curly({
+            children: getCommonsHighlight.function({
+              funcName: "closeAfterEvent",
+            }),
+          })
         )}${
           (props.offHoverEvent &&
             `
@@ -175,7 +177,9 @@ ${getCommonsHighlight.return(
         }
         ${getCommonsHighlight.props(
           "offHoverEvent",
-          getCommonsHighlight.curly(getCommonsHighlight.colors("true").bool)
+          getCommonsHighlight.curly({
+            children: getCommonsHighlight.colors("true").bool,
+          })
         )}`) ||
           ""
         }

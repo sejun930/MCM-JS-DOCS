@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 // import { _PText } from "mcm-js-commons";
@@ -67,6 +68,16 @@ export const PropsTable = styled.table`
 `;
 
 export const Tr = styled.tr`
+  :hover {
+    .module-props-copy-button {
+      display: inline-block;
+    }
+  }
+
+  .copy-btn {
+    display: none;
+  }
+
   ${(props: StyleTypes) =>
     props.isRequired && {
       backgroundColor: "#FFF2CC",
@@ -88,7 +99,9 @@ export const Tr = styled.tr`
 
   .props-name {
     width: 20%;
-    font-size: 16px;
+    span {
+      font-size: 16px;
+    }
   }
   .props-notice {
     width: 55%;
@@ -107,6 +120,12 @@ export const Tr = styled.tr`
     flex-direction: column;
     border-bottom: solid 2px black;
 
+    :hover {
+      .module-props-copy-button {
+        display: none;
+      }
+    }
+
     ${(props) =>
       props.isLast && {
         border: "unset",
@@ -121,8 +140,11 @@ export const Tr = styled.tr`
 
     .props-name {
       border-bottom: dotted 1px black;
-      font-size: 18px;
-      font-weight: 800 !important;
+
+      span {
+        font-size: 18px;
+        font-weight: 800 !important;
+      }
     }
 
     .props-type {
@@ -134,4 +156,9 @@ export const Tr = styled.tr`
       display: none;
     }
   }
+`;
+
+export const CopyCode = styled(_Button)`
+  padding-left: 5px;
+  display: none;
 `;
