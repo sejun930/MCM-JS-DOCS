@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>MCM-JS</title>
-        <meta charSet="utf-8" />
+        {/* <meta charSet="utf-8" />
         <meta property="og:type" content="website"></meta>
         <meta
           property="og:description"
@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:height" content="630" /> */}
         <meta httpEquiv="Content-Script-Type" content="Text/javascript" />
         <meta httpEquiv="Subject" content="React" />
         <meta httpEquiv="Email" content="sejun3278@gmail.com" />
