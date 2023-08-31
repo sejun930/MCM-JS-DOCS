@@ -23,7 +23,7 @@ export const TitleWrapper = styled.div`
   padding: 20px 24px;
 
   .functional-name {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .function-remarks {
@@ -36,13 +36,10 @@ export const TitleWrapper = styled.div`
   @media ${breakPoints.mobileLarge} {
     padding: 20px;
 
-    .functional-name {
-      font-size: 18px;
-    }
-
     .function-remarks {
-      font-size: 12px;
+      /* font-size: 12px; */
       white-space: unset;
+      margin-top: 16px;
     }
   }
 `;
@@ -58,6 +55,7 @@ export const PropsInfoItems = styled.div`
 
   .props-title {
     font-weight: 500;
+    font-size: 18px;
   }
 
   .functional-props-code-wrapper {
@@ -88,6 +86,12 @@ export const PropsInfoList = styled.div`
   .props-list-wrapper {
     margin-top: 10px;
   }
+
+  @media ${breakPoints.mobileLarge} {
+    .same-props {
+      font-size: 12px;
+    }
+  }
 `;
 
 export const InfoListWrapper = styled.ul`
@@ -97,11 +101,15 @@ export const InfoListWrapper = styled.ul`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px 0px;
+  gap: 12px 0px;
+
+  @media ${breakPoints.mobileLarge} {
+    gap: 14px 0px;
+  }
 `;
 
 export const Info = styled.li`
-  font-size: 14px;
+  font-size: 16px;
   list-style: inside;
 
   b {
@@ -110,7 +118,7 @@ export const Info = styled.li`
   }
 
   @media ${breakPoints.mobileLarge} {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 

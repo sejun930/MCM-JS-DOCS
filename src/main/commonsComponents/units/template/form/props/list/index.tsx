@@ -16,7 +16,7 @@ export default function ModulePropsListFormPage({
 }) {
   return (
     (list && list.length && (
-      <PropsListWrapper>
+      <PropsListWrapper className="mcm-props-list-wrapper">
         <PropsMobileInfoWrapper>
           <div className="box-color" />
           <_SpanText>필수 Props</_SpanText>
