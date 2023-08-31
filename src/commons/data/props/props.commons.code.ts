@@ -27,7 +27,7 @@ export const getPropsForm = (
 };
 
 // props 예시용 코드 폼
-export const propsCommonsCodeList = <T>({
+export const propsCommonsCodeList = ({
   key,
   isObject,
   code,
@@ -37,7 +37,7 @@ export const propsCommonsCodeList = <T>({
   code: PropsCodeTypes;
 }): string => {
   const { type, argu } = code;
-  let getKey = (value: string) => getPropsCodeTemplate({ key, value });
+  const getKey = (value: string) => getPropsCodeTemplate({ key, value });
 
   const func: { [key: string]: string | ((props: any) => string) } = {
     // 함수
@@ -90,7 +90,5 @@ export const propsCommonsCodeList = <T>({
   let result = typeof func[type] === "function" ? func[type](argu) : func[type];
   if (isObject) result = getObjectTemplate(result);
 
-  //   console.log(code);
-  //   return "22";
   return result;
 };

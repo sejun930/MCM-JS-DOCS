@@ -2,16 +2,7 @@ import {
   PropsModuleListResultType,
   PropsModuleListType,
 } from "src/commons/data/props/props.commons.data";
-import {
-  propsCommonsCodeList,
-  getPropsForm,
-} from "src/commons/data/props/props.commons.code";
-
-import { getCommonsHighlight } from "src/commons/highlight";
-import {
-  getPropsCodeTemplate,
-  getObjectTemplate,
-} from "src/main/commonsComponents/functional";
+import { getPropsForm } from "src/commons/data/props/props.commons.code";
 import { modalPropsCommonsCode } from "./modal.props.commns.code";
 
 const modalPropsInfo: (vers: number) => Array<PropsModuleListType> = (

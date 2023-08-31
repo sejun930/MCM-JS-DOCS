@@ -6,7 +6,7 @@ import {
   CopyCode,
 } from "./list.styles";
 import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
-import { _SpanText, _Button } from "mcm-js-commons";
+import { _SpanText } from "mcm-js-commons";
 import {
   getLibraries,
   copyText,
