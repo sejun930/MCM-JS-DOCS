@@ -25,11 +25,11 @@ export const modalPropsCommonsCode = {
   closeBtn: [
     {
       key: "buttonSize",
-      value: getCommonsHighlight.number(0),
+      value: getCommonsHighlight.colors(String(0)).number,
     },
     {
       key: "buttonWeight",
-      value: getCommonsHighlight.number(0),
+      value: getCommonsHighlight.colors(String(0)).number,
     },
     {
       key: "buttonColor",

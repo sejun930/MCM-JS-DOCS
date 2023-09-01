@@ -5,6 +5,8 @@ import { modalCommonsExampleCode } from "../example/modal.example.commons.code";
 import { OpenModalButton } from "../example/modal.example.template";
 import { getLibraries } from "src/main/commonsComponents/functional";
 
+import { getPropsForm } from "src/commons/data/props/props.commons.code";
+
 const { Modal } = getLibraries();
 export default function ModalFunctionalList(): FunctionalListType[] {
   return [
@@ -19,9 +21,12 @@ export default function ModalFunctionalList(): FunctionalListType[] {
           code: `
         <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open(</span><span class='deepPurple'>{</span>
           ${getCommonsHighlight.getComma([
-            modalCommonsExampleCode.children("함수로 실행된 모달입니다.")[1],
-            `         ` + modalCommonsExampleCode.showBGAnimation[1],
-            `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
+            modalCommonsExampleCode("object").children(
+              "함수로 실행된 모달입니다."
+            ),
+            `         ` + modalCommonsExampleCode("object").showBGAnimation,
+            `         ` +
+              modalCommonsExampleCode("object").showModalOpenAnimation,
           ])}
         <span class='deepPurple'>}</span><span class='lightYellow'>)</span>
       `,
@@ -40,18 +45,6 @@ export default function ModalFunctionalList(): FunctionalListType[] {
         >
           Modal Open Functional
         </OpenModalButton>
-        // <button
-        //   className="open-module-button"
-        // onClick={() =>
-        //   Modal.open({
-        //     children: <span>함수로 실행된 모달입니다.</span>,
-        //     showBGAnimation: true,
-        //     showModalOpenAnimation: true,
-        //   })
-        // }
-        // >
-        //   Modal Open Functional
-        // </button>
       ),
     },
     {
@@ -60,18 +53,24 @@ export default function ModalFunctionalList(): FunctionalListType[] {
         "최하위의 모달을 종료하는 함수이며, 선택자를 지정해 상위의 모달을 종료시킬 수 있습니다.",
       props: {
         list: [
-          {
+          getPropsForm({
             name: "id",
             notice: "해당 id 선택자로 설정된 모달을 종료합니다.",
             type: "String",
             default: "-",
-          },
-          {
+            code: {
+              type: "string",
+            },
+          }),
+          getPropsForm({
             name: "className",
             notice: "해당 class 선택자로 설정된 모달을 종료합니다.",
             type: "String",
             default: "-",
-          },
+            code: {
+              type: "string",
+            },
+          }),
         ],
       },
       exampleCode: `${getCommonsHighlight.tag.button({
@@ -91,8 +90,9 @@ export default function ModalFunctionalList(): FunctionalListType[] {
               <span class='lightGray'>모달 종료하기</span>
             <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>
           <span class='blue'>)</span>`,
-            `         ` + modalCommonsExampleCode.showBGAnimation[1],
-            `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
+            `         ` + modalCommonsExampleCode("object").showBGAnimation,
+            `         ` +
+              modalCommonsExampleCode("object").showModalOpenAnimation,
             `         <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span>`,
           ])}
         <span class='deepPurple'>}</span><span class='lightYellow'>)</span>

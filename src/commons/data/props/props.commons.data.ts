@@ -1,9 +1,6 @@
 import { modalPropsList } from "src/main/mainComponents/modules/modal/props/modal.propsList";
 import { tooltipPropsList } from "src/main/mainComponents/modules/tooltip/props/tooltip.propsList";
 
-import { getCommonsHighlight } from "src/commons/highlight";
-import { getObjectTemplate } from "src/main/commonsComponents/functional";
-
 import { getPropsForm } from "./props.commons.code";
 
 export type PropsCodeTypes = {

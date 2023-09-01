@@ -1,27 +1,30 @@
 import { getCommonsHighlight } from "src/commons/highlight";
+import { commonsCodeForm } from "src/commons/highlight";
 
 export const tooltipCommonsExampleCode = {
   tooltipString: (text: string, keyName?: string) =>
-    `${getCommonsHighlight.props(
-      keyName || "tooltipText",
-      getCommonsHighlight.string(text)
-    )}`,
+    commonsCodeForm({
+      key: keyName || "tooltipText",
+      value: text,
+      type: "string",
+    }),
   tooltipObject: (children: string) =>
-    `${getCommonsHighlight.props(
-      "tooltipText",
-      getCommonsHighlight.curly({ children })
-    )}`,
-  useAnimation: getCommonsHighlight.props(
-    "useShowAnimation",
-    getCommonsHighlight.curly({
-      children: getCommonsHighlight.colors("true").bool,
-    })
-  ),
+    commonsCodeForm({
+      key: "tooltipText",
+      value: children,
+      type: "node",
+    }),
+  useAnimation: commonsCodeForm({
+    key: "useShowAnimation",
+    value: "true",
+    type: "bool",
+  }),
   position: (position?: "top" | "bottom" | "left" | "right") =>
-    ` ${getCommonsHighlight.props(
-      "position",
-      getCommonsHighlight.string(position || "top")
-    )}`,
+    commonsCodeForm({
+      key: "position",
+      value: position,
+      type: "string",
+    }),
   styles: (mobileVers?: boolean) =>
     ` ${getCommonsHighlight.props(
       mobileVers ? "tooltipMobileStyles" : "tooltipStyles",
@@ -54,7 +57,7 @@ export const tooltipCommonsExampleCode = {
             )}`,
             `         ${getCommonsHighlight.obj(
               `weight`,
-              getCommonsHighlight.number(mobileVers ? 500 : 700)
+              getCommonsHighlight.colors(String(mobileVers ? 500 : 700)).number
             )}`,
           ])}
         `,
@@ -88,49 +91,33 @@ export const tooltipCommonsExampleCode = {
       })
     )}`,
   disable: () =>
-    `${getCommonsHighlight.props(
-      "isDisable",
-      getCommonsHighlight.curly({
-        children: getCommonsHighlight.colors("true").bool,
-      })
-    )}`,
+    commonsCodeForm({
+      key: "isDisable",
+      value: "true",
+      type: "bool",
+    }),
   onoff: () =>
-    `${getCommonsHighlight.props(
-      "open",
-      getCommonsHighlight.curly({
-        children: getCommonsHighlight.colors("true").bool,
-      })
-    )}`,
+    commonsCodeForm({
+      key: "open",
+      value: "true",
+      type: "bool",
+    }),
   offHover: () =>
-    `${getCommonsHighlight.props(
-      "offHoverEvent",
-      getCommonsHighlight.curly({
-        children: getCommonsHighlight.colors("true").bool,
-      })
-    )}`,
+    commonsCodeForm({
+      key: "offHoverEvent",
+      value: "true",
+      type: "bool",
+    }),
   hideMobile: () =>
-    `${getCommonsHighlight.props(
-      "hideMobile",
-      getCommonsHighlight.curly({
-        children: getCommonsHighlight.colors("true").bool,
-      })
-    )}`,
+    commonsCodeForm({
+      key: "hideMobile",
+      value: "true",
+      type: "bool",
+    }),
   isFix: () =>
-    `${getCommonsHighlight.props(
-      "isFix",
-      getCommonsHighlight.curly({
-        children: getCommonsHighlight.colors("true").bool,
-      })
-    )}`,
+    commonsCodeForm({
+      key: "isFix",
+      value: "true",
+      type: "bool",
+    }),
 };
-
-// interface Type {
-//   [key: string]: () => string | number;
-// }
-
-// const testObj: Type = {
-//   test1: () => `1111`,
-//   test2: () => 222,
-// };
-
-// testObj.test1()

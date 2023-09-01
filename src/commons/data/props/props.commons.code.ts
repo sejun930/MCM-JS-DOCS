@@ -1,8 +1,5 @@
-import {
-  getObjectTemplate,
-  getPropsCodeTemplate,
-} from "src/main/commonsComponents/functional";
-import { getCommonsHighlight } from "src/commons/highlight";
+import { changeObjectTemplate } from "src/main/commonsComponents/functional/code";
+import { getCommonsHighlight, commonsCodeForm } from "src/commons/highlight";
 import {
   PropsModuleListType,
   PropsModuleListResultType,
@@ -27,7 +24,7 @@ export const getPropsForm = (
 };
 
 // props 예시용 코드 폼
-export const propsCommonsCodeList = <T>({
+export const propsCommonsCodeList = ({
   key,
   isObject,
   code,
@@ -37,7 +34,11 @@ export const propsCommonsCodeList = <T>({
   code: PropsCodeTypes;
 }): string => {
   const { type, argu } = code;
-  let getKey = (value: string) => getPropsCodeTemplate({ key, value });
+  const getKey = (value: string) =>
+    commonsCodeForm({
+      key,
+      value,
+    });
 
   const func: { [key: string]: string | ((props: any) => string) } = {
     // 함수
@@ -80,7 +81,7 @@ export const propsCommonsCodeList = <T>({
     number: (num?: number): string =>
       getKey(
         getCommonsHighlight.curly({
-          children: getCommonsHighlight.number(num || 0),
+          children: getCommonsHighlight.colors(String(num || 0)).number,
           curlyHide: isObject,
         })
       ),
@@ -88,9 +89,7 @@ export const propsCommonsCodeList = <T>({
 
   // @ts-ignore
   let result = typeof func[type] === "function" ? func[type](argu) : func[type];
-  if (isObject) result = getObjectTemplate(result);
+  if (isObject) result = changeObjectTemplate(result);
 
-  //   console.log(code);
-  //   return "22";
   return result;
 };

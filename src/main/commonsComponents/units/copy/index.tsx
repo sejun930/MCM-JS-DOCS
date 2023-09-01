@@ -4,7 +4,7 @@ import { _PText } from "mcm-js-commons";
 
 import CommonsHooksComponents from "../../hooks/commonsHooks";
 import { CodeTypes } from "./copy.types";
-import { getTap, removeTag } from "../../functional";
+import { getTap, removeTag } from "../../functional/code";
 import { Pre } from "./code-highlight/codeHighlight.styles";
 
 // 글자 복사 기능 컴포넌트
