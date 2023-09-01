@@ -228,14 +228,14 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
       `
         ${modalCommonsExampleCode.show[idx]}
         ${modalCommonsExampleCode.onCloseModal[idx]}
-        ${modalCommonsExampleCode.timer(2000)[idx]}
+        ${modalCommonsExampleCode.autoCloseTimer(2000)[idx]}
         ${modalCommonsExampleCode.showBGAnimation[idx]}
         ${modalCommonsExampleCode.showModalOpenAnimation[idx]}
         ${modalCommonsExampleCode.offAutoClose[idx]}
         ${modalCommonsExampleCode.hideCloseButton[idx]}
       `,
       `${getCommonsHighlight.getComma([
-        modalCommonsExampleCode.timer(2000)[idx],
+        modalCommonsExampleCode.autoCloseTimer(2000)[idx],
         `         ` + modalCommonsExampleCode.showBGAnimation[idx],
         `         ` + modalCommonsExampleCode.showModalOpenAnimation[idx],
         `         ` + modalCommonsExampleCode.offAutoClose[idx],

@@ -163,7 +163,7 @@ const modalPropsInfo: (vers: number) => Array<PropsModuleListType> = (
     },
   },
   {
-    name: "timer",
+    name: "autoCloseTimer",
     default: "0",
     type: "Number",
     notice:

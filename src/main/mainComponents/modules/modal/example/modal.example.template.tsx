@@ -55,7 +55,7 @@ export default function MyModalExample(props: ExampleContentsTypes) {
       {isShow &&
         ((props.vers === 0 && (
           // @ts-ignore
-          <Modal {..._props}>
+          <Modal {..._props} autoCloseTimer={_props.autoCloseTimer || 0}>
             <span>{props.content}</span>
           </Modal>
         )) || <></>)}

@@ -240,7 +240,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         remakrs: "원하는 시간 (1/1000초) 후에 모달을 자동으로 종료시킵니다.",
         addProps: {
           ...modalExampleInitProps,
-          timer: 2000,
+          autoCloseTimer: 2000,
           showBGAnimation: true,
           showModalOpenAnimation: true,
           offAutoClose: true,
