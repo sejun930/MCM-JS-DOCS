@@ -21,9 +21,12 @@ export default function ModalFunctionalList(): FunctionalListType[] {
           code: `
         <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open(</span><span class='deepPurple'>{</span>
           ${getCommonsHighlight.getComma([
-            modalCommonsExampleCode.children("함수로 실행된 모달입니다.")[1],
-            `         ` + modalCommonsExampleCode.showBGAnimation[1],
-            `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
+            modalCommonsExampleCode("object").children(
+              "함수로 실행된 모달입니다."
+            ),
+            `         ` + modalCommonsExampleCode("object").showBGAnimation,
+            `         ` +
+              modalCommonsExampleCode("object").showModalOpenAnimation,
           ])}
         <span class='deepPurple'>}</span><span class='lightYellow'>)</span>
       `,
@@ -87,8 +90,9 @@ export default function ModalFunctionalList(): FunctionalListType[] {
               <span class='lightGray'>모달 종료하기</span>
             <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>
           <span class='blue'>)</span>`,
-            `         ` + modalCommonsExampleCode.showBGAnimation[1],
-            `         ` + modalCommonsExampleCode.showModalOpenAnimation[1],
+            `         ` + modalCommonsExampleCode("object").showBGAnimation,
+            `         ` +
+              modalCommonsExampleCode("object").showModalOpenAnimation,
             `         <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span>`,
           ])}
         <span class='deepPurple'>}</span><span class='lightYellow'>)</span>

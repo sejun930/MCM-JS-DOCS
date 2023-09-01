@@ -7,12 +7,12 @@ import {
 } from "./list.styles";
 import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
 import { _SpanText } from "mcm-js-commons";
+import { getLibraries } from "src/main/commonsComponents/functional";
 import {
-  getLibraries,
-  copyText,
+  copyCode,
   removeTag,
   getTap,
-} from "src/main/commonsComponents/functional";
+} from "src/main/commonsComponents/functional/code";
 
 import _Copy from "src/main/commonsComponents/units/copy";
 
@@ -27,11 +27,11 @@ export default function ModulePropsListFormPage({
   vers: number;
 }) {
   // props 코드 복사하기
-  const copyCode = (code: Array<string> | string) => () => {
+  const copyCodeFn = (code: Array<string> | string) => () => {
     let result = code;
     if (Array.isArray(code)) result = code[vers];
 
-    copyText(getTap(removeTag(String(result))));
+    copyCode(String(result));
   };
 
   return (
@@ -60,6 +60,7 @@ export default function ModulePropsListFormPage({
                 key={`module-props-list-${module}-${el.name}-${idx}`}
                 isRequired={el.isRequired || false}
                 isLast={list.length === idx + 1}
+                id={`module-props-list-${el.name}`}
               >
                 <td className="props-name">
                   <_SpanText>{el.name}</_SpanText>
@@ -80,7 +81,7 @@ export default function ModulePropsListFormPage({
                       }}
                     >
                       <CopyCode
-                        onClickEvent={copyCode(el.code)}
+                        onClickEvent={copyCodeFn(el.code)}
                         className="module-props-copy-button"
                       >
                         📝

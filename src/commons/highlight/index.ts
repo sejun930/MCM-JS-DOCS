@@ -1,3 +1,5 @@
+import { changeObjectTemplate } from "src/main/commonsComponents/functional/code";
+
 // highlight가 적용된 코드 및 그외 기능 렌더시 사용
 export const getCommonsHighlight = {
   // 세미콜론
@@ -5,11 +7,27 @@ export const getCommonsHighlight = {
   // 콤마
   comma: () => `<span class='lightGray'>,</span>`,
   // 콤마 연속 처리
-  getComma: (arr: string[]) => {
+  getComma: (
+    arr: string[],
+    setting?: { removeTap?: boolean; removeLastComma?: boolean }
+  ) => {
+    // removeTap : 줄바꿈 처리 off
+    // removeLastComma : 마지막 컴마 off
+
+    const renderComma = (i: number) => {
+      let result = getCommonsHighlight.comma();
+      if (setting?.removeLastComma) {
+        if (!arr[i + 1]) result = "";
+      }
+      return result;
+    };
+
     const result = arr
       .map(
         (str, i) =>
-          `${str}${getCommonsHighlight.comma()}${(arr[i + 1] && "\n") || ""}`
+          `${str}${renderComma(i)}${
+            (arr[i + 1] && !setting?.removeTap && "\n") || ""
+          }`
       )
       .join(" ");
 
@@ -162,8 +180,6 @@ export const getCommonsHighlight = {
     `<span class='lightOrange'>"${text}"</span>${
       (semicolon && getCommonsHighlight.semiColon()) || ""
     }`,
-  // 숫자 타입 출력
-  number: (num: number | string) => `<span class="number">${num}</span>`,
   // return 폼
   return: (code: string) =>
     `  <span class='purple'>return</span> <span class='deepPurple'>(</span>
@@ -310,6 +326,71 @@ export const getCommonsHighlight = {
       const: `<span class='darkBlue'>const</span>`, // const 선언
       varName: `<span class='blue1'>${children}</span>`, // 변수의 이름명 (진한색)
       varName2: `<span class='skyblue'>${children}</span>`, // 변수의 이름명 (약한색)
+      number: `<span class="number">${children}</span>`, // 숫자
     };
   },
+};
+
+export type CommonsCodeFormType =
+  | "bool"
+  | "string"
+  | "node"
+  | "var"
+  | "function"
+  | "number";
+
+// 공통으로 자주 사용되는 코드 폼
+export const commonsCodeForm = ({
+  form,
+  key,
+  value,
+  type,
+}: {
+  form?: "props" | "object";
+  key: string;
+  value?: string;
+  type?: CommonsCodeFormType;
+}) => {
+  let code = "";
+  const isObject = form === "object";
+
+  // 기본 폼 구성 (props, object 형태 중 선택)
+  const makeForm = (propsValue?: string) => {
+    code = getCommonsHighlight.props(key, propsValue || "");
+    if (isObject) code = changeObjectTemplate(code, true);
+
+    return code;
+  };
+
+  const func: { [key: string]: string } = {
+    // boolean
+    bool: getCommonsHighlight.curly({
+      curlyHide: isObject,
+      children: getCommonsHighlight.colors(value).bool,
+    }),
+    // string
+    string: getCommonsHighlight.string(value || ""),
+    // node
+    node: getCommonsHighlight.curly({
+      curlyHide: isObject,
+      children: value || "",
+    }),
+    // var
+    var: getCommonsHighlight.curly({
+      curlyHide: isObject,
+      children: getCommonsHighlight.colors(value).varName,
+    }),
+    // function
+    function: getCommonsHighlight.curly({
+      curlyHide: isObject,
+      children: getCommonsHighlight.function({ funcName: value }),
+    }),
+    // number
+    number: getCommonsHighlight.curly({
+      curlyHide: isObject,
+      children: getCommonsHighlight.colors(String(value)).number,
+    }),
+  };
+
+  return makeForm((type && func[type]) || value);
 };

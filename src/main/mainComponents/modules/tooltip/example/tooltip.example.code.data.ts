@@ -44,7 +44,7 @@ export const tooltipCodeList: ExampleCodeListTypes = {
     `
      ${tooltipCodeList.basic(tooltipText)}
       ${tooltipCommonsExampleCode.useAnimation}
-     ${tooltipCommonsExampleCode.position(position || "top")} ${
+      ${tooltipCommonsExampleCode.position(position || "top")} ${
       (position === "top" && getCommonsHighlight.colors("생략 가능").comment) ||
       ""
     }

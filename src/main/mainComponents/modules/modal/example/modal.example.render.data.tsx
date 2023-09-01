@@ -200,17 +200,19 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         code: modalCodeList(idx).addCloseMent,
       },
       {
-        remakrs: "닫기 버튼 사이즈를 조절합니다.",
+        remakrs: "닫기 버튼 사이즈, 굵기, 색상을 조절합니다.",
         addProps: {
           ...modalExampleInitProps,
           closeButtonInfo: {
             buttonSize: "35px",
+            buttonWeight: 4,
+            buttonColor: "#FFBB5C",
           },
         },
         info: {
           buttonName: "Open Resize Button Modal",
         },
-        content: `닫기 버튼의 사이즈가 조절됩니다.`,
+        content: `닫기 버튼의 사이즈와 굵기, 색상등의 스타일이 조절됩니다.`,
         code: modalCodeList(idx).resizeBtn,
       },
     ],
@@ -326,10 +328,13 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
                 props: `
                 <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='darkBlue'>true</span><span class='yellow'>}</span>
                 <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='darkBlue'>=></span> <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='purple'>(</span><span class='blue'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span> <span class='blue'>}</span><span class='purple'>)</span><span class='yellow'>}</span>
-                ${modalCommonsExampleCode.modalSize("400px", "400px")[0]}
-                ${modalCommonsExampleCode.mobileModalSize("50%", "50%")[0]}
-                ${modalCommonsExampleCode.showBGAnimation[0]}
-                ${modalCommonsExampleCode.showModalOpenAnimation[0]}
+                ${modalCommonsExampleCode("props").modalSize("400px", "400px")}
+                ${modalCommonsExampleCode("props").mobileModalSize(
+                  "50%",
+                  "50%"
+                )}
+                ${modalCommonsExampleCode("props").showBGAnimation}
+                ${modalCommonsExampleCode("props").showModalOpenAnimation}
               `,
                 children: getCommonsHighlight.tag.span(
                   "하위 모달을 종료하면 상위 모달도 함께 종료됩니다."

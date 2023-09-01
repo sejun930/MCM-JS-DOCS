@@ -21,10 +21,13 @@ export default function ModalExamplePage() {
       <Modal
         show={isOpen}
         onCloseModal={closeModal}
-        onFixWindow={true}
-        timer={0}
+        closeButtonInfo={{
+          buttonSize: "25px",
+          buttonWeight: 4,
+          buttonColor: "#FFBB5C",
+        }}
       >
-        <span> 이 모달이 실행되는 동안에는 스크롤을 제어할 수 없습니다. </span>
+        <span> 닫기 버튼의 사이즈와 굵기, 색상등의 스타일이 조절됩니다. </span>
       </Modal>
     </div>
   );
