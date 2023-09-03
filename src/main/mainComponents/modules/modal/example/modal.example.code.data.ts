@@ -67,9 +67,7 @@ export const modalReturnCommonsData = ({
       ${getCommonsHighlight.tag.button({
         children: getCommonsHighlight.colors("모달 실행하기").text,
         clickEvent: {
-          // useArrow: true,
           eventName: "openModal",
-          // code: "bbb",
         },
       })}
       ${getCommonsHighlight.tag.component({
@@ -122,8 +120,12 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
     title: () => ["With State", "Use in Function"],
     default: () => [`${ExampleCode.show} ${ExampleCode.onCloseModal}`, ``],
     basic: () => [
-      `${getBoldCode({ code: ExampleCode.show })} ${getBoldCode({
+      `${getBoldCode({
+        code: ExampleCode.show,
+        propsName: "show",
+      })} ${getBoldCode({
         code: ExampleCode.onCloseModal,
+        propsName: "onCloseModal",
       })}`,
       ``,
     ],
