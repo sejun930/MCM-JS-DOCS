@@ -1,6 +1,7 @@
 import { getCommonsHighlight } from "src/commons/highlight";
 import { tooltipCommonsExampleCode } from "../tooltip.example.commons.code";
 import { TooltipPropsType } from "mcm-js/dist/commons/types";
+import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
 // "disable" 예시의 전체 코드
 export const disableReplaceCode = `${
@@ -61,12 +62,14 @@ ${getCommonsHighlight.return(
             "isDisable state값이 true라면 툴팁이 실행되지 않습니다."
           ).comment
         }
-        ${getCommonsHighlight.props(
-          "isDisable",
-          getCommonsHighlight.curly({
-            children: getCommonsHighlight.colors("isDisable").varName,
-          })
-        )}
+        ${getBoldCode({
+          code: getCommonsHighlight.props(
+            "isDisable",
+            getCommonsHighlight.curly({
+              children: getCommonsHighlight.colors("isDisable").varName,
+            })
+          ),
+        })}
       `,
       })}
     `
@@ -160,14 +163,17 @@ ${getCommonsHighlight.return(
             "툴팁이 종료되면 isOpen state 값을 false로 변경해주는 함수가 실행됩니다."
           ).comment
         }
-        ${getCommonsHighlight.props(
-          "onCloseAfterEvent",
-          getCommonsHighlight.curly({
-            children: getCommonsHighlight.function({
-              funcName: "closeAfterEvent",
-            }),
-          })
-        )}${
+        ${getBoldCode({
+          code: getCommonsHighlight.props(
+            "onCloseAfterEvent",
+            getCommonsHighlight.curly({
+              children: getCommonsHighlight.function({
+                funcName: "closeAfterEvent",
+              }),
+            })
+          ),
+          hide: props.offHoverEvent,
+        })}${
           (props.offHoverEvent &&
             `
         ${
@@ -175,12 +181,14 @@ ${getCommonsHighlight.return(
             "툴팁 실행 및 종료 마우스 Hover 이벤트를 비활성화합니다."
           ).comment
         }
-        ${getCommonsHighlight.props(
-          "offHoverEvent",
-          getCommonsHighlight.curly({
-            children: getCommonsHighlight.colors("true").bool,
-          })
-        )}`) ||
+        ${getBoldCode({
+          code: getCommonsHighlight.props(
+            "offHoverEvent",
+            getCommonsHighlight.curly({
+              children: getCommonsHighlight.colors("true").bool,
+            })
+          ),
+        })}`) ||
           ""
         }
       `,

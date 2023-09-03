@@ -33,8 +33,6 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
     isOneOpen,
     allLen,
   } = props;
-  // const [ allHeightList, setAllHeightList ] = useState({})
-
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
 
@@ -140,7 +138,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                             </ExampleListItems>
                             {component.code && (
                               <_ExampleOptionalFormPage
-                                code={code ?? ""}
+                                code={code || ""}
                                 content={component.content}
                                 isOpen={openList[_idx - 1]}
                                 changeOpenList={changeOpenList}

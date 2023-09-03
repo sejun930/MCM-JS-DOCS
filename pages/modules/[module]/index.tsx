@@ -36,8 +36,7 @@ export default function ModulesPage(props: { name: string }) {
           />
           <meta name="Keywords" content={`${name}, nextjs, react, modules`} />
         </Head>
-      )) ||
-        null}
+      )) || <></>}
       {!Components ? <ErrorPage /> : Components}
     </>
   );

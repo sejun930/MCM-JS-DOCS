@@ -4,9 +4,11 @@ import { _PText } from "mcm-js-commons";
 
 import CommonsHooksComponents from "../../hooks/commonsHooks";
 import { CodeTypes } from "./copy.types";
-import { getTap, removeTag } from "../../functional/code";
+import { getTap, removeTag, removeBoldTag } from "../../functional/code";
 import { Pre } from "./code-highlight/codeHighlight.styles";
+import { getLibraries } from "../../functional";
 
+const { Tooltip } = getLibraries();
 // 글자 복사 기능 컴포넌트
 export default function _Copy({
   text,
@@ -43,7 +45,7 @@ export default function _Copy({
     if (_ref.current)
       _ref?.current?.addEventListener("mouseleave", leaveIconMouse);
 
-    if (type === "Code") text = getTap(removeTag(text));
+    if (type === "Code") text = getTap(removeTag(removeBoldTag(text)));
     navigator.clipboard.writeText(text);
   };
 
@@ -87,7 +89,15 @@ export default function _Copy({
           textPosition={textPosition}
           className="copy-btn"
         >
-          <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
+          <Tooltip
+            open={isCopied}
+            offHoverEvent={true}
+            tooltipText="Copied"
+            useShowAnimation
+            position="bottom"
+          >
+            <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
+          </Tooltip>
         </CopyButton>
       )}
     </CopyWrapper>

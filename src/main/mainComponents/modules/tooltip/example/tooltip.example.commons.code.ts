@@ -46,20 +46,21 @@ export const tooltipCommonsExampleCode = {
             getCommonsHighlight.curly({
               className: "deepPurple",
               children: `
-          ${getCommonsHighlight.getComma([
-            `${getCommonsHighlight.obj(
-              `color`,
-              getCommonsHighlight.string(mobileVers ? "#F86F03" : "#9BE8D8")
-            )}`,
-            `         ${getCommonsHighlight.obj(
-              `size`,
-              getCommonsHighlight.string("20px")
-            )}`,
-            `         ${getCommonsHighlight.obj(
-              `weight`,
-              getCommonsHighlight.colors(String(mobileVers ? 500 : 700)).number
-            )}`,
-          ])}
+            ${getCommonsHighlight.getComma([
+              `${getCommonsHighlight.obj(
+                `color`,
+                getCommonsHighlight.string(mobileVers ? "#F86F03" : "#9BE8D8")
+              )}`,
+              `           ${getCommonsHighlight.obj(
+                `size`,
+                getCommonsHighlight.string("20px")
+              )}`,
+              `           ${getCommonsHighlight.obj(
+                `weight`,
+                getCommonsHighlight.colors(String(mobileVers ? 500 : 700))
+                  .number
+              )}`,
+            ])}
         `,
             })
           )}`,
@@ -70,14 +71,14 @@ export const tooltipCommonsExampleCode = {
               children: `
           ${getCommonsHighlight.getComma([
             `${getCommonsHighlight.obj(
-              `color`,
+              ` color`,
               getCommonsHighlight.string(mobileVers ? "#F86F03" : "#9BE8D8")
             )}`,
-            `         ${getCommonsHighlight.obj(
+            `           ${getCommonsHighlight.obj(
               `width`,
               getCommonsHighlight.string("3px")
             )}`,
-            `         ${getCommonsHighlight.obj(
+            `           ${getCommonsHighlight.obj(
               `radius`,
               getCommonsHighlight.string("0px")
             )}`,
@@ -86,7 +87,7 @@ export const tooltipCommonsExampleCode = {
             })
           )}`,
         ])}
-      `,
+`,
         })}`,
       })
     )}`,

@@ -139,3 +139,8 @@ table {
 .error-example {
   color: #aa5656;
 }
+
+.form-area {
+  position: absolute;
+  margin-top: -50px;
+}

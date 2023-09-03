@@ -5,6 +5,7 @@ import { getCommonsHighlight } from "src/commons/highlight";
 
 import { removeTag } from "src/main/commonsComponents/functional/code";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
+import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
 // 해당 모듈을 실행하기 위한 공통적인 준비물
 export const modalCommonsData: Array<ExampleCommonsTypes> = [
@@ -119,112 +120,142 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
 
   return {
     title: () => ["With State", "Use in Function"],
-    basic: () => [`${ExampleCode.show} ${ExampleCode.onCloseModal}`, ``],
+    default: () => [`${ExampleCode.show} ${ExampleCode.onCloseModal}`, ``],
+    basic: () => [
+      `${getBoldCode({ code: ExampleCode.show })} ${getBoldCode({
+        code: ExampleCode.onCloseModal,
+      })}`,
+      ``,
+    ],
     animation: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.showBGAnimation}
-        ${ExampleCode.showModalOpenAnimation}
+        ${
+          getCommonsHighlight.colors(
+            "모달을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
+          ).comment
+        }
+        ${getBoldCode({ code: ExampleCode.showBGAnimation })}
+        ${
+          getCommonsHighlight.colors(
+            "모달을 실행 및 종료할 때 모달 애니메이션을 적용합니다."
+          ).comment
+        }
+        ${getBoldCode({ code: ExampleCode.showModalOpenAnimation })}
       `,
       `${getCommonsHighlight.getComma([
-        ExampleCode.showBGAnimation,
-        `         ` + ExampleCode.showModalOpenAnimation,
+        getCommonsHighlight.colors(
+          "모달을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
+        ).comment,
+        `         ` + getBoldCode({ code: ExampleCode.showBGAnimation }),
+        `         ` +
+          getCommonsHighlight.colors(
+            "모달을 실행 및 종료할 때 모달 애니메이션을 적용합니다."
+          ).comment,
+        `         ` + getBoldCode({ code: ExampleCode.showModalOpenAnimation }),
       ])}`,
     ],
     size300: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.modalSize("300px", "300px")}
+        ${getBoldCode({ code: ExampleCode.modalSize("300px", "300px") })}
       `,
       `${getCommonsHighlight.getComma([
         // ExampleCode.onCloseModal,
-        ExampleCode.modalSize("300px", "300px"),
+        getBoldCode({ code: ExampleCode.modalSize("300px", "300px") }),
       ])}`,
     ],
     sizePercent: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.modalSize("30%", "40%")}
+        ${getBoldCode({ code: ExampleCode.modalSize("30%", "40%") })}
       `,
       `${getCommonsHighlight.getComma([
         // ExampleCode.onCloseModal,
-        ExampleCode.modalSize("30%", "40%"),
+        getBoldCode({ code: ExampleCode.modalSize("30%", "40%") }),
       ])}`,
     ],
     responsive: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.mobileModalSize("50%", "50%")}
+        ${getBoldCode({ code: ExampleCode.mobileModalSize("50%", "50%") })}
       `,
       `${getCommonsHighlight.getComma([
-        ExampleCode.mobileModalSize("50%", "50%"),
+        getBoldCode({ code: ExampleCode.mobileModalSize("50%", "50%") }),
       ])}`,
     ],
     modalStyle: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.modalStyles}
+        ${getBoldCode({ code: ExampleCode.modalStyles })}
       `,
-      `${ExampleCode.modalStyles}`,
+      `${getBoldCode({ code: ExampleCode.modalStyles })}`,
     ],
     mobileModalStyles: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.mobileModalStyles}
+        ${getBoldCode({ code: ExampleCode.mobileModalStyles })}
       `,
-      `${ExampleCode.mobileModalStyles}`,
+      `${getBoldCode({ code: ExampleCode.mobileModalStyles })}`,
     ],
     hideCloseButton: () => [
       `
         ${ExampleCode.show} 
         ${ExampleCode.onCloseModal} 
-        ${ExampleCode.hideCloseButton}
+        ${getBoldCode({ code: ExampleCode.hideCloseButton })}
       `,
-      `${getCommonsHighlight.getComma([ExampleCode.hideCloseButton])}`,
+      `${getBoldCode({
+        code: getCommonsHighlight.getComma([ExampleCode.hideCloseButton]),
+      })}`,
     ],
     addCloseMent: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.closeMent("오늘 하루 보지 않기")}
+        ${getBoldCode({ code: ExampleCode.closeMent("오늘 하루 보지 않기") })}
       `,
       `${getCommonsHighlight.getComma([
-        ExampleCode.closeMent("오늘 하루 보지 않기"),
+        getBoldCode({ code: ExampleCode.closeMent("오늘 하루 보지 않기") }),
       ])}`,
     ],
     resizeBtn: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.closeButtonInfo}
+        ${getBoldCode({ code: ExampleCode.closeButtonInfo })}
       `,
       `${getCommonsHighlight.getComma([
         // ExampleCode.onCloseModal,
-        ExampleCode.closeButtonInfo,
+        getBoldCode({ code: ExampleCode.closeButtonInfo }),
       ])}`,
     ],
     offAutoClose: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.offAutoClose}
         ${ExampleCode.closeMent("닫기")}
+        ${getBoldCode({ code: ExampleCode.offAutoClose })}
       `,
-      `${getCommonsHighlight.getComma([ExampleCode.offAutoClose])}`,
+      `${getCommonsHighlight.getComma([
+        ExampleCode.closeMent("닫기"),
+        `         ` + getBoldCode({ code: ExampleCode.offAutoClose }),
+      ])}`,
     ],
     selectClose: () => [
       ``,
       `${getCommonsHighlight.getComma([
-        getCommonsHighlight.obj(
-          "id",
-          getCommonsHighlight.string("parents-modal")
-        ),
+        getBoldCode({
+          code: getCommonsHighlight.obj(
+            "id",
+            getCommonsHighlight.string("parents-modal")
+          ),
+        }),
         `         ` + ExampleCode.showBGAnimation,
         `         ` + ExampleCode.showModalOpenAnimation,
       ])}`,
@@ -233,26 +264,28 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.onFixWindow}
+        ${getBoldCode({ code: ExampleCode.onFixWindow })}
       `,
-      `${getCommonsHighlight.getComma([ExampleCode.onFixWindow])}`,
+      `${getCommonsHighlight.getComma([
+        getBoldCode({ code: ExampleCode.onFixWindow }),
+      ])}`,
     ],
     autoCloseTimer: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${ExampleCode.autoCloseTimer(2000)}
         ${ExampleCode.showBGAnimation}
         ${ExampleCode.showModalOpenAnimation}
-        ${ExampleCode.offAutoClose}
         ${ExampleCode.hideCloseButton}
+        ${ExampleCode.offAutoClose}
+        ${getBoldCode({ code: ExampleCode.autoCloseTimer(2000) })}
       `,
       `${getCommonsHighlight.getComma([
-        ExampleCode.autoCloseTimer(2000),
-        `         ` + ExampleCode.showBGAnimation,
+        ExampleCode.showBGAnimation,
         `         ` + ExampleCode.showModalOpenAnimation,
-        `         ` + ExampleCode.offAutoClose,
         `         ` + ExampleCode.hideCloseButton,
+        `         ` + ExampleCode.offAutoClose,
+        `         ` + getBoldCode({ code: ExampleCode.autoCloseTimer(2000) }),
       ])}`,
     ],
   };
