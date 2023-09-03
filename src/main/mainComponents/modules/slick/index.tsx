@@ -18,16 +18,8 @@ export default function ModalExamplePage() {
   return (
     <div>
       <button onClick={openModal}> 모달 실행하기 </button>
-      <Modal
-        show={isOpen}
-        onCloseModal={closeModal}
-        closeButtonInfo={{
-          buttonSize: "25px",
-          buttonWeight: 4,
-          buttonColor: "#FFBB5C",
-        }}
-      >
-        <span> 닫기 버튼의 사이즈와 굵기, 색상등의 스타일이 조절됩니다. </span>
+      <Modal show={isOpen} onCloseModal={closeModal}>
+        <span> 기본 모달 페이지입니다. </span>
       </Modal>
     </div>
   );
