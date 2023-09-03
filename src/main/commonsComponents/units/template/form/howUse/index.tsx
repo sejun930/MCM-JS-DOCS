@@ -28,8 +28,8 @@ export default function _HowUseForm({
 
   const { getExampleCode } = getExampleCodeComponnet();
 
-  let code = codeInfo.basic() || "";
-  if (Array.isArray(code)) code = codeInfo.basic()[vers];
+  let code = codeInfo.default() || "";
+  if (Array.isArray(code)) code = codeInfo.default()[vers];
 
   return (
     <Wrapper id="how-use-form">
@@ -51,7 +51,7 @@ export default function _HowUseForm({
           />
         )) || <></>}
 
-        {codeInfo.basic && codeInfo.basic()[vers] !== undefined && (
+        {codeInfo.default && codeInfo.default()[vers] !== undefined && (
           <_Copy
             text={getExampleCode({
               code,

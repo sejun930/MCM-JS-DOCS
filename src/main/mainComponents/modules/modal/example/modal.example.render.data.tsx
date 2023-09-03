@@ -5,6 +5,8 @@ import { modalCommonsExampleCode } from "./modal.example.commons.code";
 import { CloseMultipleModal } from "./modal.example.template";
 import { getCommonsHighlight } from "src/commons/highlight";
 
+import { getBoldCode } from "src/main/commonsComponents/functional/code";
+
 // Modal default Props값
 export const modalExampleInitProps: ModalPropsType = {
   showBGAnimation: false, // 배경 애니메이션 여부
@@ -327,14 +329,18 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
                 `,
                 props: `
                 <span class='skyblue'>show</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='darkBlue'>true</span><span class='yellow'>}</span>
-                <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='darkBlue'>=></span> <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='purple'>(</span><span class='blue'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span> <span class='blue'>}</span><span class='purple'>)</span><span class='yellow'>}</span>
+                <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='darkBlue'>=></span> ${getBoldCode(
+                  {
+                    code: `<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='purple'>(</span><span class='blue'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span> <span class='blue'>}</span><span class='purple'>)</span>`,
+                  }
+                )}<span class='yellow'>}</span>
+                ${modalCommonsExampleCode("props").showBGAnimation}
+                ${modalCommonsExampleCode("props").showModalOpenAnimation}
                 ${modalCommonsExampleCode("props").modalSize("400px", "400px")}
                 ${modalCommonsExampleCode("props").mobileModalSize(
                   "50%",
                   "50%"
                 )}
-                ${modalCommonsExampleCode("props").showBGAnimation}
-                ${modalCommonsExampleCode("props").showModalOpenAnimation}
               `,
                 children: getCommonsHighlight.tag.span(
                   "하위 모달을 종료하면 상위 모달도 함께 종료됩니다."

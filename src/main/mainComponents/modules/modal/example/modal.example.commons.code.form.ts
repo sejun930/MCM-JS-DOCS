@@ -125,7 +125,7 @@ export const modalExampleCommonsCodeForm = {
           ${space}`,
           })
         )}
-        ${space}`,
+`,
       ],
       {
         removeLastComma: true,
@@ -154,7 +154,7 @@ export const modalExampleCommonsCodeForm = {
             "buttonColor",
             getCommonsHighlight.string("#FFBB5C")
           )}
-        ${space}`,
+`,
         ],
         {
           removeTap: true,

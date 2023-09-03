@@ -3,86 +3,91 @@ import React from "react";
 import { getCommonsHighlight } from "src/commons/highlight";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
 import { tooltipCommonsExampleCode } from "./tooltip.example.commons.code";
+import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
 // Tooltip 각각의 예시 코드를 저장하는 객체
 export const tooltipCodeList: ExampleCodeListTypes = {
-  basic: (text?: string) =>
+  default: (text?: string) =>
     ` ${tooltipCommonsExampleCode.tooltipString(text || "World")}`,
+  basic: (text?: string) =>
+    ` ${getBoldCode({
+      code: tooltipCommonsExampleCode.tooltipString(text || "World"),
+    })}`,
   basicImg: () => ` 
-      ${tooltipCommonsExampleCode.tooltipObject(
-        `
-        ${getCommonsHighlight.tag.img(
-          getCommonsHighlight.props(
-            "src",
-            getCommonsHighlight.string("이미지 주소")
-          )
-        )}
-      `
-      )}
+      ${getBoldCode({
+        code: tooltipCommonsExampleCode.tooltipObject(
+          `${getCommonsHighlight.tag.img(
+            getCommonsHighlight.props(
+              "src",
+              getCommonsHighlight.string("이미지 주소")
+            )
+          )}`
+        ),
+      })}
     `,
   animation: () =>
-    ` ${tooltipCommonsExampleCode.tooltipString("World")} ${
-      tooltipCommonsExampleCode.useAnimation
-    }`,
+    ` ${tooltipCommonsExampleCode.tooltipString("World")} ${getBoldCode({
+      code: tooltipCommonsExampleCode.useAnimation,
+    })}`,
   animationImg: () => ` 
       ${tooltipCommonsExampleCode.tooltipObject(
-        `
-        ${getCommonsHighlight.tag.img(
+        `${getCommonsHighlight.tag.img(
           getCommonsHighlight.props(
             "src",
             getCommonsHighlight.string("이미지 주소")
           )
-        )}
-      `
+        )}`
       )}
-      ${tooltipCommonsExampleCode.useAnimation}
+      ${getBoldCode({ code: tooltipCommonsExampleCode.useAnimation })}
     `,
   position: (
     tooltipText: string,
     position: "top" | "bottom" | "left" | "right"
   ) =>
     `
-     ${tooltipCodeList.basic(tooltipText)}
+     ${tooltipCodeList.default(tooltipText)}
       ${tooltipCommonsExampleCode.useAnimation}
-      ${tooltipCommonsExampleCode.position(position || "top")} ${
+      ${getBoldCode({
+        code: tooltipCommonsExampleCode.position(position || "top"),
+      })} ${
       (position === "top" && getCommonsHighlight.colors("생략 가능").comment) ||
       ""
     }
     `,
   styles: () => `
-     ${tooltipCodeList.basic("New Style Tooltip")}
-     ${tooltipCommonsExampleCode.styles()}
+     ${tooltipCodeList.default("New Style Tooltip")}
+     ${getBoldCode({ code: tooltipCommonsExampleCode.styles() })}
     `,
   mobileStyles: () => `
-     ${tooltipCodeList.basic("New Mobile Style Tooltip")}
-     ${tooltipCommonsExampleCode.styles(true)}
+     ${tooltipCodeList.default("New Mobile Style Tooltip")}
+     ${getBoldCode({ code: tooltipCommonsExampleCode.styles(true) })}
    `,
   disable: () =>
-    `${tooltipCodeList.basic(
-      "New Style Tooltip"
-    )} ${tooltipCommonsExampleCode.disable()}`,
+    `${tooltipCodeList.default("New Style Tooltip")} ${getBoldCode({
+      code: tooltipCommonsExampleCode.disable(),
+    })}`,
   onoff: () =>
-    `${tooltipCodeList.basic(
+    `${tooltipCodeList.default(
       "New Style Tooltip"
     )} ${tooltipCommonsExampleCode.onoff()}`,
   offHover: () =>
     `
-     ${tooltipCodeList.basic("Already fixed")} 
+     ${tooltipCodeList.default("Already fixed")} 
       ${tooltipCommonsExampleCode.offHover()}
       ${tooltipCommonsExampleCode.onoff()}
     `,
   hideMobile: () =>
     `
-     ${tooltipCodeList.basic("모바일에서는 보이지 않습니다.")} 
+     ${tooltipCodeList.default("모바일에서는 보이지 않습니다.")} 
       ${tooltipCommonsExampleCode.offHover()}
       ${tooltipCommonsExampleCode.onoff()}
-      ${tooltipCommonsExampleCode.hideMobile()}
+      ${getBoldCode({ code: tooltipCommonsExampleCode.hideMobile() })}
     `,
   fix: () =>
     `
-     ${tooltipCodeList.basic("고정된 툴팁입니다.")} 
+     ${tooltipCodeList.default("고정된 툴팁입니다.")} 
       ${tooltipCommonsExampleCode.onoff()}
-      ${tooltipCommonsExampleCode.isFix()}
+      ${getBoldCode({ code: tooltipCommonsExampleCode.isFix() })}
     `,
 };
 

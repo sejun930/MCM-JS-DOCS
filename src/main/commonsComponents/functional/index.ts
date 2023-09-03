@@ -1,9 +1,6 @@
 import { ModalType } from "mcm-js/dist/components/modules/modal/component/modal.types";
 import { SliderType } from "mcm-js/dist/components/modules/slider/components/slider.types";
 import { TooltipType } from "mcm-js/dist/components/modules/tooltip/component/tooltip.types";
-import { getCommonsHighlight } from "src/commons/highlight";
-
-import { removeTag } from "./code";
 
 // 시간에 대한 차이 구하기
 const getDateForm = ({
@@ -155,8 +152,7 @@ const moveDocument = (id: string, bonus?: number | 0) => {
     const { top } = doc.getBoundingClientRect();
 
     // 해당 document의 위치로 이동
-    const destination =
-      top + document.documentElement.scrollTop - 50 + (bonus || 0);
+    const destination = top + document.documentElement.scrollTop + (bonus || 0);
 
     window.scrollTo({
       top: destination,

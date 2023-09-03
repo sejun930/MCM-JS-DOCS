@@ -43,7 +43,6 @@ export default function _MainTitleTemplate() {
           <ExampleImage
             src={`https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${module}-example.gif`}
           />
-          // <ExampleImage src={`/images/modules/example/${module}-example.gif`} />
         )}
       </Items>
       {(list.length && <IndexRenderPage indexList={list} />) || <></>}

@@ -58,7 +58,7 @@ export default function _IndexForm(
   const moveIndex = (id: string) => {
     if (isLoading) return;
     // 해당 목차 위치로 스크롤 이동
-    moveDocument(id);
+    moveDocument(id, -50);
     clearInterval(infiniteRequestDocument);
 
     // 댓글 목차를 선택했을 경우
@@ -66,18 +66,17 @@ export default function _IndexForm(
       const checkDoc = document.getElementsByClassName("comments-list-render");
       if (!checkDoc.length) {
         changeLoading(true);
+
+        // 댓글 목차가 렌더 될때까지 무한하게 스크롤 이동
+        infiniteRequestDocument = setInterval(() => {
+          const doc = document.getElementsByClassName("comments-list-render");
+          if (doc.length) {
+            moveDocument(id, -50);
+            clearInterval(infiniteRequestDocument);
+            changeLoading(false);
+          }
+        }, 1000);
       }
-
-      // 댓글 목차가 렌더 될때까지 무한하게 스크롤 이동
-      infiniteRequestDocument = setInterval(() => {
-        const doc = document.getElementsByClassName("comments-list-render");
-
-        if (doc.length) {
-          moveDocument(id);
-          clearInterval(infiniteRequestDocument);
-          changeLoading(false);
-        }
-      }, 200);
     }
   };
 
