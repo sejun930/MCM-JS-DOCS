@@ -1,6 +1,6 @@
 import { getCommonsHighlight } from "src/commons/highlight";
 import { tooltipCommonsExampleCode } from "../tooltip.example.commons.code";
-import { TooltipPropsType } from "mcm-js/dist/commons/types";
+import { TooltipPropsType } from "mcm-js-dev/dist/commons/types";
 import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
 // "disable" 예시의 전체 코드

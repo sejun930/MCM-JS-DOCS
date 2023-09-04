@@ -1,0 +1,74 @@
+import { getCommonsHighlight } from "src/commons/highlight";
+import { commonsCodeForm } from "src/commons/highlight";
+
+export const sliderCommonsExampleCode = {
+  useAnimation: commonsCodeForm({
+    key: "useAnimation",
+    value: "true",
+    type: "bool",
+  }),
+  pagination: commonsCodeForm({
+    key: "pagination",
+    type: "node",
+    value: getCommonsHighlight.curly({
+      className: "yellow",
+      children: ` ${getCommonsHighlight.obj(
+        "showPageList",
+        getCommonsHighlight.colors("true").bool
+      )} `,
+    }),
+  }),
+  hideArrow: commonsCodeForm({
+    key: "hideArrow",
+    value: "true",
+    type: "bool",
+  }),
+  autoPlay: commonsCodeForm({
+    key: "useAutoPlay",
+    type: "node",
+    value: getCommonsHighlight.curly({
+      className: "yellow",
+      children: ` ${getCommonsHighlight.obj(
+        "delay",
+        getCommonsHighlight.colors("3000").number
+      )} `,
+    }),
+  }),
+  timer: commonsCodeForm({
+    key: "useAutoPlay",
+    type: "node",
+    value: getCommonsHighlight.curly({
+      className: "yellow",
+      children: getCommonsHighlight.getComma(
+        [
+          ` ` +
+            getCommonsHighlight.obj(
+              "delay",
+              getCommonsHighlight.colors("3000").number
+            ),
+          getCommonsHighlight.obj(
+            "showTimer",
+            getCommonsHighlight.colors("true").bool
+          ) + ` `,
+        ],
+        { removeTap: true, removeLastComma: true }
+      ),
+    }),
+  }),
+  useDragMode: commonsCodeForm({
+    key: "useDragMode",
+    type: "node",
+    value: getCommonsHighlight.curly({
+      className: "yellow",
+      children: ` ${getCommonsHighlight.obj(
+        "sideMovePercent",
+        getCommonsHighlight.colors("30").number
+      )} `,
+    }),
+  }),
+  firstPage: commonsCodeForm({
+    key: "firstPage",
+    value: "3",
+    type: "number",
+  }),
+};

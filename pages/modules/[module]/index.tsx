@@ -1,5 +1,6 @@
 import MyModal from "src/main/mainComponents/modules/modal";
 import MyTooltip from "src/main/mainComponents/modules/tooltip";
+import MySlider from "src/main/mainComponents/modules/slider";
 
 import Head from "next/head";
 import ErrorPage from "../../404";
@@ -57,4 +58,5 @@ export const getServerSideProps = (url: { query: { module: string } }) => {
 export const ModuleComponentsList: { [key: string]: JSX.Element } = {
   Modal: <MyModal />,
   Tooltip: <MyTooltip />,
+  Slider: <MySlider />,
 };

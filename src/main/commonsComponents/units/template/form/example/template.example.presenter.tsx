@@ -136,7 +136,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                                 dangerouslySetInnerHTML={component.remakrs}
                               />
                             </ExampleListItems>
-                            {component.code && (
+                            {component.code !== undefined && (
                               <_ExampleOptionalFormPage
                                 code={code || ""}
                                 content={component.content}

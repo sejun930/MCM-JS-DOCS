@@ -147,6 +147,10 @@ table {
 
 .focusing {
   background-color: #aa5656 !important;
-  color: white;
+  color: white !important;
   transition: all 0.35s ease;
+}
+
+.focusing * {
+  color: white !important;
 }

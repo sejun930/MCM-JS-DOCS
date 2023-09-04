@@ -1,5 +1,3 @@
-import { ModulesInfoWrapper } from "../index.styles";
-
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
@@ -33,21 +31,19 @@ export default function MyTooltip() {
 
   return (
     <Template>
-      <ModulesInfoWrapper>
-        <_MainTitleTemplate />
-        <_HowUseForm
-          codeInfo={tooltipCodeList}
-          exmapleContents={getCommonsHighlight.tag.p("Hello")}
-        />
-        <_ExampleForm
-          exampleList={tooltipExampleList()}
-          initProps={tooltipExampleInitProps}
-          commonsProps={commonsProps}
-        />
-        <_PropsForm />
-        <_TreeForm />
-        <_CommentsForm />
-      </ModulesInfoWrapper>
+      <_MainTitleTemplate />
+      <_HowUseForm
+        codeInfo={tooltipCodeList}
+        exmapleContents={getCommonsHighlight.tag.p("Hello")}
+      />
+      <_ExampleForm
+        exampleList={tooltipExampleList()}
+        initProps={tooltipExampleInitProps}
+        commonsProps={commonsProps}
+      />
+      <_PropsForm />
+      <_TreeForm />
+      <_CommentsForm />
     </Template>
   );
 }
