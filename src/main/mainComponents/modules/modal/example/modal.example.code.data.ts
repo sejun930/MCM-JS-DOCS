@@ -138,103 +138,163 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
             "모달을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
           ).comment
         }
-        ${getBoldCode({ code: ExampleCode.showBGAnimation })}
+        ${getBoldCode({
+          code: ExampleCode.showBGAnimation,
+          propsName: "showBGAnimation",
+        })}
         ${
           getCommonsHighlight.colors(
             "모달을 실행 및 종료할 때 모달 애니메이션을 적용합니다."
           ).comment
         }
-        ${getBoldCode({ code: ExampleCode.showModalOpenAnimation })}
+        ${getBoldCode({
+          code: ExampleCode.showModalOpenAnimation,
+          propsName: "showModalOpenAnimation",
+        })}
       `,
       `${getCommonsHighlight.getComma([
         getCommonsHighlight.colors(
           "모달을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
         ).comment,
-        `         ` + getBoldCode({ code: ExampleCode.showBGAnimation }),
+        `         ` +
+          getBoldCode({
+            code: ExampleCode.showBGAnimation,
+            propsName: "showBGAnimation",
+          }),
         `         ` +
           getCommonsHighlight.colors(
             "모달을 실행 및 종료할 때 모달 애니메이션을 적용합니다."
           ).comment,
-        `         ` + getBoldCode({ code: ExampleCode.showModalOpenAnimation }),
+        `         ` +
+          getBoldCode({
+            code: ExampleCode.showModalOpenAnimation,
+            propsName: "showModalOpenAnimation",
+          }),
       ])}`,
     ],
     size300: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.modalSize("300px", "300px") })}
+        ${getBoldCode({
+          code: ExampleCode.modalSize("300px", "300px"),
+          propsName: "modalStyles",
+        })}
       `,
       `${getCommonsHighlight.getComma([
         // ExampleCode.onCloseModal,
-        getBoldCode({ code: ExampleCode.modalSize("300px", "300px") }),
+        getBoldCode({
+          code: ExampleCode.modalSize("300px", "300px"),
+          propsName: "modalStyles",
+        }),
       ])}`,
     ],
     sizePercent: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.modalSize("30%", "40%") })}
+        ${getBoldCode({
+          code: ExampleCode.modalSize("30%", "40%"),
+          propsName: "modalStyles",
+        })}
       `,
       `${getCommonsHighlight.getComma([
         // ExampleCode.onCloseModal,
-        getBoldCode({ code: ExampleCode.modalSize("30%", "40%") }),
+        getBoldCode({
+          code: ExampleCode.modalSize("30%", "40%"),
+          propsName: "modalStyles",
+        }),
       ])}`,
     ],
     responsive: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.mobileModalSize("50%", "50%") })}
+        ${getBoldCode({
+          code: ExampleCode.mobileModalSize("50%", "50%"),
+          propsName: "mobileModalSize",
+        })}
       `,
       `${getCommonsHighlight.getComma([
-        getBoldCode({ code: ExampleCode.mobileModalSize("50%", "50%") }),
+        getBoldCode({
+          code: ExampleCode.mobileModalSize("50%", "50%"),
+          propsName: "mobileModalSize",
+        }),
       ])}`,
     ],
     modalStyle: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.modalStyles })}
+        ${getBoldCode({
+          code: ExampleCode.modalStyles,
+          propsName: "modalStyles",
+        })}
       `,
-      `${getBoldCode({ code: ExampleCode.modalStyles })}`,
+      `${getBoldCode({
+        code: ExampleCode.modalStyles,
+        propsName: "modalStyles",
+      })}`,
     ],
     mobileModalStyles: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.mobileModalStyles })}
+        ${getBoldCode({
+          code: ExampleCode.mobileModalStyles,
+          propsName: "mobileModalStyles",
+        })}
       `,
-      `${getBoldCode({ code: ExampleCode.mobileModalStyles })}`,
+      `${getBoldCode({
+        code: ExampleCode.mobileModalStyles,
+        propsName: "mobileModalStyles",
+      })}`,
     ],
     hideCloseButton: () => [
       `
         ${ExampleCode.show} 
         ${ExampleCode.onCloseModal} 
-        ${getBoldCode({ code: ExampleCode.hideCloseButton })}
+        ${getBoldCode({
+          code: ExampleCode.hideCloseButton,
+          propsName: "hideCloseButton",
+        })}
       `,
       `${getBoldCode({
         code: getCommonsHighlight.getComma([ExampleCode.hideCloseButton]),
+        propsName: "hideCloseButton",
       })}`,
     ],
     addCloseMent: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.closeMent("오늘 하루 보지 않기") })}
+        ${getBoldCode({
+          code: ExampleCode.closeMent("오늘 하루 보지 않기"),
+          propsName: "closeMent",
+        })}
       `,
       `${getCommonsHighlight.getComma([
-        getBoldCode({ code: ExampleCode.closeMent("오늘 하루 보지 않기") }),
+        getBoldCode({
+          code: ExampleCode.closeMent("오늘 하루 보지 않기"),
+          propsName: "closeMent",
+        }),
       ])}`,
     ],
     resizeBtn: () => [
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.closeButtonInfo })}
+        ${getBoldCode({
+          code: ExampleCode.closeButtonInfo,
+          propsName: "closeButtonInfo",
+        })}
       `,
       `${getCommonsHighlight.getComma([
         // ExampleCode.onCloseModal,
-        getBoldCode({ code: ExampleCode.closeButtonInfo }),
+        getBoldCode({
+          code: ExampleCode.closeButtonInfo,
+          propsName: "closeButtonInfo",
+        }),
       ])}`,
     ],
     offAutoClose: () => [
@@ -242,11 +302,18 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
         ${ExampleCode.closeMent("닫기")}
-        ${getBoldCode({ code: ExampleCode.offAutoClose })}
+        ${getBoldCode({
+          code: ExampleCode.offAutoClose,
+          propsName: "offAutoClose",
+        })}
       `,
       `${getCommonsHighlight.getComma([
         ExampleCode.closeMent("닫기"),
-        `         ` + getBoldCode({ code: ExampleCode.offAutoClose }),
+        `         ` +
+          getBoldCode({
+            code: ExampleCode.offAutoClose,
+            propsName: "offAutoClose",
+          }),
       ])}`,
     ],
     selectClose: () => [
@@ -257,6 +324,8 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
             "id",
             getCommonsHighlight.string("parents-modal")
           ),
+          propsName: "modalFunctionalId",
+          id: "module-props-list-functional-id",
         }),
         `         ` + ExampleCode.showBGAnimation,
         `         ` + ExampleCode.showModalOpenAnimation,
@@ -266,10 +335,16 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
       `
         ${ExampleCode.show}
         ${ExampleCode.onCloseModal}
-        ${getBoldCode({ code: ExampleCode.onFixWindow })}
+        ${getBoldCode({
+          code: ExampleCode.onFixWindow,
+          propsName: "onFixWindow",
+        })}
       `,
       `${getCommonsHighlight.getComma([
-        getBoldCode({ code: ExampleCode.onFixWindow }),
+        getBoldCode({
+          code: ExampleCode.onFixWindow,
+          propsName: "onFixWindow",
+        }),
       ])}`,
     ],
     autoCloseTimer: () => [
@@ -280,14 +355,21 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${ExampleCode.showModalOpenAnimation}
         ${ExampleCode.hideCloseButton}
         ${ExampleCode.offAutoClose}
-        ${getBoldCode({ code: ExampleCode.autoCloseTimer(2000) })}
+        ${getBoldCode({
+          code: ExampleCode.autoCloseTimer(2000),
+          propsName: "autoCloseTimer",
+        })}
       `,
       `${getCommonsHighlight.getComma([
         ExampleCode.showBGAnimation,
         `         ` + ExampleCode.showModalOpenAnimation,
         `         ` + ExampleCode.hideCloseButton,
         `         ` + ExampleCode.offAutoClose,
-        `         ` + getBoldCode({ code: ExampleCode.autoCloseTimer(2000) }),
+        `         ` +
+          getBoldCode({
+            code: ExampleCode.autoCloseTimer(2000),
+            propsName: "autoCloseTimer",
+          }),
       ])}`,
     ],
   };

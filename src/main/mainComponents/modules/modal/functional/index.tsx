@@ -13,6 +13,7 @@ export default function ModalFunctionalList(): FunctionalListType[] {
   return [
     {
       name: "open",
+      id: "modal-open-functional-wrapper",
       remakrs: "모달을 실행하는 함수입니다.",
       props: { isSameContents: true, list: [] },
       exampleCode: `${getCommonsHighlight.tag.button({
@@ -22,6 +23,8 @@ export default function ModalFunctionalList(): FunctionalListType[] {
           code: `
         ${getBoldCode({
           code: `<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span>`,
+          id: "modal-open-functional-wrapper",
+          propsName: "modalOpen",
         })}<span class="lightYellow">(</span><span class='deepPurple'>{</span>
           ${getCommonsHighlight.getComma([
             modalCommonsExampleCode("object").children(
@@ -52,6 +55,7 @@ export default function ModalFunctionalList(): FunctionalListType[] {
     },
     {
       name: "close",
+      id: "modal-close-functional-wrapper",
       remakrs:
         "최하위의 모달을 종료하는 함수이며, 선택자를 지정해 상위의 모달을 종료시킬 수 있습니다.",
       props: {
@@ -95,6 +99,8 @@ export default function ModalFunctionalList(): FunctionalListType[] {
                 <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달을 종료합니다."</span><span class='blue'>)</span><span class='lightGray'>;</span>
                 ${getBoldCode({
                   code: `<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>(</span><span class='yellow'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span> <span class='yellow'>}</span><span class='blue'>)</span><span class='lightGray'>;</span>`,
+                  id: "modal-close-functional-wrapper",
+                  propsName: "modalClose",
                 })}
               <span class='deepPurple'>}</span><span class='yellow'>}</span>
             <span>></span>
@@ -107,6 +113,8 @@ export default function ModalFunctionalList(): FunctionalListType[] {
                   "id",
                   getCommonsHighlight.string("modal")
                 ),
+                propsName: "modalFunctionalId",
+                id: "module-props-list-functional-id",
               }),
             `         ` + modalCommonsExampleCode("object").showBGAnimation,
             `         ` +

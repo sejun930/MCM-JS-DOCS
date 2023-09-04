@@ -21,10 +21,12 @@ export default function ModulePropsListFormPage({
   list,
   hideTitle,
   vers,
+  isFunctional,
 }: {
   list: Array<PropsModuleListResultType>;
   hideTitle?: boolean; // 타이틀 가리기 여부
   vers: number;
+  isFunctional?: boolean;
 }) {
   // props 코드 복사하기
   const copyCodeFn = (code: Array<string> | string) => () => {
@@ -60,7 +62,9 @@ export default function ModulePropsListFormPage({
                 key={`module-props-list-${module}-${el.name}-${idx}`}
                 isRequired={el.isRequired || false}
                 isLast={list.length === idx + 1}
-                id={`module-props-list-${el.name}`}
+                id={`module-props-list-${
+                  (isFunctional && "functional-") || ""
+                }${el.name}`}
               >
                 <td className="props-name">
                   <_SpanText>{el.name}</_SpanText>

@@ -12,6 +12,7 @@ export const tooltipCodeList: ExampleCodeListTypes = {
   basic: (text?: string) =>
     ` ${getBoldCode({
       code: tooltipCommonsExampleCode.tooltipString(text || "World"),
+      propsName: "tooltipText",
     })}`,
   basicImg: () => ` 
       ${getBoldCode({
@@ -23,11 +24,13 @@ export const tooltipCodeList: ExampleCodeListTypes = {
             )
           )}`
         ),
+        propsName: "tooltipText",
       })}
     `,
   animation: () =>
     ` ${tooltipCommonsExampleCode.tooltipString("World")} ${getBoldCode({
       code: tooltipCommonsExampleCode.useAnimation,
+      propsName: "useShowAnimation",
     })}`,
   animationImg: () => ` 
       ${tooltipCommonsExampleCode.tooltipObject(
@@ -38,7 +41,10 @@ export const tooltipCodeList: ExampleCodeListTypes = {
           )
         )}`
       )}
-      ${getBoldCode({ code: tooltipCommonsExampleCode.useAnimation })}
+      ${getBoldCode({
+        code: tooltipCommonsExampleCode.useAnimation,
+        propsName: "useShowAnimation",
+      })}
     `,
   position: (
     tooltipText: string,
@@ -49,6 +55,7 @@ export const tooltipCodeList: ExampleCodeListTypes = {
       ${tooltipCommonsExampleCode.useAnimation}
       ${getBoldCode({
         code: tooltipCommonsExampleCode.position(position || "top"),
+        propsName: "position",
       })} ${
       (position === "top" && getCommonsHighlight.colors("생략 가능").comment) ||
       ""
@@ -56,15 +63,22 @@ export const tooltipCodeList: ExampleCodeListTypes = {
     `,
   styles: () => `
      ${tooltipCodeList.default("New Style Tooltip")}
-     ${getBoldCode({ code: tooltipCommonsExampleCode.styles() })}
+     ${getBoldCode({
+       code: tooltipCommonsExampleCode.styles(),
+       propsName: "tooltipStyles",
+     })}
     `,
   mobileStyles: () => `
      ${tooltipCodeList.default("New Mobile Style Tooltip")}
-     ${getBoldCode({ code: tooltipCommonsExampleCode.styles(true) })}
+     ${getBoldCode({
+       code: tooltipCommonsExampleCode.styles(true),
+       propsName: "tooltipMobileStyles",
+     })}
    `,
   disable: () =>
     `${tooltipCodeList.default("New Style Tooltip")} ${getBoldCode({
       code: tooltipCommonsExampleCode.disable(),
+      propsName: "isDisable",
     })}`,
   onoff: () =>
     `${tooltipCodeList.default(
@@ -81,13 +95,19 @@ export const tooltipCodeList: ExampleCodeListTypes = {
      ${tooltipCodeList.default("모바일에서는 보이지 않습니다.")} 
       ${tooltipCommonsExampleCode.offHover()}
       ${tooltipCommonsExampleCode.onoff()}
-      ${getBoldCode({ code: tooltipCommonsExampleCode.hideMobile() })}
+      ${getBoldCode({
+        code: tooltipCommonsExampleCode.hideMobile(),
+        propsName: "hideMobile",
+      })}
     `,
   fix: () =>
     `
      ${tooltipCodeList.default("고정된 툴팁입니다.")} 
       ${tooltipCommonsExampleCode.onoff()}
-      ${getBoldCode({ code: tooltipCommonsExampleCode.isFix() })}
+      ${getBoldCode({
+        code: tooltipCommonsExampleCode.isFix(),
+        propsName: "isFix",
+      })}
     `,
 };
 

@@ -144,3 +144,9 @@ table {
   position: absolute;
   margin-top: -50px;
 }
+
+.focusing {
+  background-color: #aa5656 !important;
+  color: white;
+  transition: all 0.35s ease;
+}

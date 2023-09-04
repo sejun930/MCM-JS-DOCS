@@ -136,7 +136,8 @@ export default function AdminCommentsPage() {
 
         if (alertMsg) alert(alertMsg);
         if (isLoading) setIsLoading(false);
-        if (moveTop) moveDocument("admin-comments-list-wrapper", -160);
+        if (moveTop)
+          moveDocument({ id: "admin-comments-list-wrapper", bonus: -160 });
       } catch (err2) {
         console.log(err2);
         alert("카테고리 개수 조회에 실패했습니다.");
@@ -180,7 +181,7 @@ export default function AdminCommentsPage() {
       startClickedPage = page;
       _info.filter.startPage = page;
 
-      moveDocument("admin-comments-list-wrapper", -100);
+      moveDocument({ id: "admin-comments-list-wrapper", bonus: -100 });
     }
 
     _info.filter.page = page;

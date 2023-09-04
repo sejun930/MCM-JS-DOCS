@@ -52,10 +52,12 @@ const getBoldCode = ({
   code,
   hide,
   propsName,
+  id,
 }: {
   code: string;
   hide?: boolean;
   propsName?: string;
+  id?: string;
 }) => {
   if (typeof window === "undefined") return "";
   if (propsName) {
@@ -68,18 +70,18 @@ const getBoldCode = ({
     if (!window._propsList[propsName])
       setTimeout(() => {
         window._propsList[propsName] = () =>
-          moveDocument(`module-props-list-${propsName}`); // 함수 저장
+          moveDocument({
+            id: id || `module-props-list-${propsName}`,
+            bonus: -60,
+            focus: true,
+          }); // 함수 저장
       }, 0);
     // @ts-ignore
     window._propsVarList[`props_${propsName}`] = propsName; // 변수 저장
   }
 
   if (hide) return code;
-  return propsName &&
-    window._propsList[propsName] &&
-    window._propsVarList[`props_${propsName}`]
-    ? `<button class="bold-code" onclick="window._propsList[window._propsVarList['props_${propsName}']]()" name="bold-code">${code}</button name="bold-code-end">`
-    : "";
+  return `<button class="bold-code" onclick="window._propsList[window._propsVarList['props_${propsName}']]()" name="bold-code">${code}</button name="bold-code-end">`;
 };
 
 // 강조 태그 삭제하기

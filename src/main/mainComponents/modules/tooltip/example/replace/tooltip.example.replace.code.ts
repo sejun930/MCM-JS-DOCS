@@ -69,6 +69,7 @@ ${getCommonsHighlight.return(
               children: getCommonsHighlight.colors("isDisable").varName,
             })
           ),
+          propsName: "isDisable",
         })}
       `,
       })}
@@ -172,6 +173,7 @@ ${getCommonsHighlight.return(
               }),
             })
           ),
+          propsName: "onCloseAfterEvent",
           hide: props.offHoverEvent,
         })}${
           (props.offHoverEvent &&
@@ -188,6 +190,7 @@ ${getCommonsHighlight.return(
               children: getCommonsHighlight.colors("true").bool,
             })
           ),
+          propsName: "offHoverEvent",
         })}`) ||
           ""
         }

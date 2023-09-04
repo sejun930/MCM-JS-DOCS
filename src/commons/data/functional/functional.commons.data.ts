@@ -13,6 +13,7 @@ export interface FunctionalListType {
   exampleCode: string; // 예시용 코드
   info?: Array<string>; // 추가 정보
   setExampleCode?: ReactNode; // 예시 실행 코드
+  id: string; // id 선택자 설정
 }
 
 export const functionalList: { [key: string]: Array<FunctionalListType> } = {
