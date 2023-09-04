@@ -316,4 +316,5 @@ export {
   changeClientText,
   imagePreLoad,
   getLibraries,
+  getCurrentScroll,
 };

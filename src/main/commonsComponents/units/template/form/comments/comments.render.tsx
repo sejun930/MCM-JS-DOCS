@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import CommentsPage from "./comments.container";
 
 import { Wrapper } from "../../../../../mainComponents";
+import { getCurrentScroll } from "../../../../functional";
 
 // 디바운싱 적용
 let debouncing: ReturnType<typeof setTimeout>;
@@ -25,21 +26,14 @@ export default function RenderCommentsPage() {
     clearTimeout(debouncing);
     debouncing = setTimeout(() => {
       // 현재 스크롤 위치 구하기
-      const scrollTop = Math.max(
-        window.pageYOffset,
-        document.documentElement.scrollTop,
-        document.body.scrollTop
-      );
+      const scrollTop = getCurrentScroll();
 
       // window의 크기 구하기
       const windowHeight =
         window.innerHeight || document.documentElement.clientHeight;
 
       // 최하단 위치 구하기
-      const documentHeight = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight
-      );
+      const documentHeight = getCurrentScroll();
 
       if (scrollTop + windowHeight * 2 >= documentHeight) {
         // 스크립트 호출하기
