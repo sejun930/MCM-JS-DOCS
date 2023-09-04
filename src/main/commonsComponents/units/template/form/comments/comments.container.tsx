@@ -151,7 +151,7 @@ export default function CommentsPage() {
         }
 
         if (_commentInfo.filter.page === 1) {
-          moveDocument("comments-list-wrapper");
+          moveDocument({ id: "comments-list-wrapper" });
         }
 
         setCommentsInfo(_commentInfo);

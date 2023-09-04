@@ -43,5 +43,14 @@ export const Wrapper = styled.div`
         margin-top: 10px;
       }
     }
+
+    .bold-code {
+      background-color: #aa5656;
+      padding: 2px 4px;
+
+      span {
+        color: white;
+      }
+    }
   }
 `;

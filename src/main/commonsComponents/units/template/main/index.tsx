@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import MainMobileNavigationTapPage from "./mobileNavigation/main.mobileNavigation";
+import { ModulesInfoWrapper } from "src/main/mainComponents/modules";
 
 // DOC 페이지 메인 템플릿
 export default function Template({
@@ -16,7 +17,7 @@ export default function Template({
     <Wrapper className="main-template-wrapper" isFull={isFull}>
       {/* 모바일 nav */}
       <MainMobileNavigationTapPage />
-      {children}
+      <ModulesInfoWrapper>{children}</ModulesInfoWrapper>
     </Wrapper>
   );
 }

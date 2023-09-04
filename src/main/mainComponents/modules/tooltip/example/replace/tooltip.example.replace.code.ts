@@ -1,6 +1,6 @@
 import { getCommonsHighlight } from "src/commons/highlight";
 import { tooltipCommonsExampleCode } from "../tooltip.example.commons.code";
-import { TooltipPropsType } from "mcm-js/dist/commons/types";
+import { TooltipPropsType } from "mcm-js-dev/dist/commons/types";
 import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
 // "disable" 예시의 전체 코드
@@ -69,6 +69,7 @@ ${getCommonsHighlight.return(
               children: getCommonsHighlight.colors("isDisable").varName,
             })
           ),
+          propsName: "isDisable",
         })}
       `,
       })}
@@ -172,6 +173,7 @@ ${getCommonsHighlight.return(
               }),
             })
           ),
+          propsName: "onCloseAfterEvent",
           hide: props.offHoverEvent,
         })}${
           (props.offHoverEvent &&
@@ -188,6 +190,7 @@ ${getCommonsHighlight.return(
               children: getCommonsHighlight.colors("true").bool,
             })
           ),
+          propsName: "offHoverEvent",
         })}`) ||
           ""
         }

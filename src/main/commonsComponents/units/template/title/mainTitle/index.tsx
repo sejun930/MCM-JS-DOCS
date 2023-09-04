@@ -88,10 +88,16 @@ export const Items = styled.div`
 
 export const ExampleImage = styled(_Image)`
   margin-top: 30px;
-  max-width: 400px;
+  min-width: 400px;
+  max-width: 600px;
+  /* width: 400px; */
+  /* max-width: 400px; */
+  /* height: 400px; */
+  object-fit: fill;
 
   @media ${breakPoints.mobileLarge} {
     border: solid 2px black;
+    max-width: 600px;
   }
 
   @media ${breakPoints.mobileSmall} {

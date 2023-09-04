@@ -144,12 +144,32 @@ const getUserIp = async () => {
   return ip;
 };
 
-// id 값을 이용해 해당 document 위치로 이동하기
-const moveDocument = (id: string, bonus?: number | 0) => {
-  const doc = document.getElementById(id);
+// 현재 스크롤 위치 구하기
+const getCurrentScroll = () => {
+  return Math.floor(
+    Math.max(
+      window.pageYOffset,
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    )
+  );
+};
 
-  if (doc) {
-    const { top } = doc.getBoundingClientRect();
+// id 값을 이용해 해당 document 위치로 이동하기
+const moveDocument = ({
+  id,
+  bonus,
+  focus,
+}: {
+  id: string;
+  bonus?: number;
+  focus?: boolean;
+}) => {
+  // focus : 이동 후 해당 영역 포커스 여부
+  const target = document.getElementById(id);
+
+  if (target) {
+    const { top } = target.getBoundingClientRect();
 
     // 해당 document의 위치로 이동
     const destination = top + document.documentElement.scrollTop + (bonus || 0);
@@ -157,6 +177,42 @@ const moveDocument = (id: string, bonus?: number | 0) => {
     window.scrollTo({
       top: destination,
     });
+
+    if (focus && target?.classList) {
+      // 포커스 제거
+      const removeClassList = () => {
+        const classList = document.getElementsByClassName("focusing");
+        if (classList.length)
+          Array.from(classList).forEach((el) =>
+            el.classList.remove("focusing")
+          );
+      };
+
+      // 스크롤을 이동하면 포커스 제거
+      const checkScroll = () => {
+        // 현재 스크롤 위치
+        const pageY = getCurrentScroll();
+        // 이동한 스크롤 값
+        const distance = Math.abs(startLocation - pageY);
+        // 30px 이상 이동한 경우
+        if (distance >= 60) {
+          // 이동 이벤트 제거
+          document.removeEventListener("scroll", checkScroll);
+          removeClassList();
+        }
+      };
+      document.removeEventListener("scroll", checkScroll);
+      // 이미 선택된 포커스 제거
+      removeClassList();
+
+      // 시작 스크롤 위치 구하기
+      const startLocation = getCurrentScroll();
+
+      window.setTimeout(() => {
+        document.addEventListener("scroll", checkScroll);
+        target.classList.add("focusing");
+      }, 100);
+    }
   }
 };
 
@@ -260,4 +316,5 @@ export {
   changeClientText,
   imagePreLoad,
   getLibraries,
+  getCurrentScroll,
 };

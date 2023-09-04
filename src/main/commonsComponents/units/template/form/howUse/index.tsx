@@ -51,18 +51,19 @@ export default function _HowUseForm({
           />
         )) || <></>}
 
-        {codeInfo.default && codeInfo.default()[vers] !== undefined && (
-          <_Copy
-            text={getExampleCode({
-              code,
-              children: exmapleContents,
-              idx: vers,
-              module,
-              vers,
-            })}
-            type="Code"
-          />
-        )}
+        {codeInfo.default !== undefined &&
+          codeInfo.default()[vers] !== undefined && (
+            <_Copy
+              text={getExampleCode({
+                code,
+                children: exmapleContents,
+                idx: vers,
+                module,
+                vers,
+              })}
+              type="Code"
+            />
+          )}
       </CopyWrapper>
     </Wrapper>
   );

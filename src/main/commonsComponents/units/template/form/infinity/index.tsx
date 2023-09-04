@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { getCurrentScroll } from "src/main/commonsComponents/functional";
 
 let debouncing: ReturnType<typeof setTimeout>; // 디바운싱 적용
 let loading = false; // 데이터 호출중
@@ -18,21 +19,14 @@ export default function _InfinityScroll({
     clearTimeout(debouncing);
 
     // 현재 스크롤 위치 구하기
-    const scrollTop = Math.max(
-      window.pageYOffset,
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
+    const scrollTop = getCurrentScroll();
 
     // window의 크기 구하기
     const windowHeight =
       window.innerHeight || document.documentElement.clientHeight;
 
     // 최하단 위치 구하기
-    const documentHeight = Math.max(
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight
-    );
+    const documentHeight = getCurrentScroll();
 
     if (scrollTop + windowHeight + 100 >= documentHeight) {
       debouncing = setTimeout(() => {

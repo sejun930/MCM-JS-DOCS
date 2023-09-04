@@ -1,11 +1,18 @@
-import { ModalPropsType, TooltipPropsType } from "mcm-js/dist/commons/types";
+import {
+  ModalPropsType,
+  TooltipPropsType,
+  SliderPropsTypes,
+} from "mcm-js-dev/dist/commons/types";
 import { ReactNode } from "react";
 
 import { ModalExampleCommonsTypes } from "src/main/mainComponents/modules/modal/modal.types";
 import { TooltipExampleCommonsTypes } from "src/main/mainComponents/modules/tooltip/tooltip.types";
 
 // 여러 모듈들의 props 타입 종합
-export type ModuleAllPropsTypes = ModalPropsType | TooltipPropsType;
+export type ModuleAllPropsTypes =
+  | ModalPropsType
+  | TooltipPropsType
+  | SliderPropsTypes;
 
 // 여러 모듈들의 example commons 타입 종합
 export type ModuleAllExampleCommonsTypes =

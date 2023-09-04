@@ -332,6 +332,8 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
                 <span class='skyblue'>onCloseModal</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='darkBlue'>=></span> ${getBoldCode(
                   {
                     code: `<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='purple'>(</span><span class='blue'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"parents-modal"</span> <span class='blue'>}</span><span class='purple'>)</span>`,
+                    id: "modal-close-functional-wrapper",
+                    propsName: "modalClose",
                   }
                 )}<span class='yellow'>}</span>
                 ${modalCommonsExampleCode("props").showBGAnimation}

@@ -58,7 +58,7 @@ export default function _IndexForm(
   const moveIndex = (id: string) => {
     if (isLoading) return;
     // 해당 목차 위치로 스크롤 이동
-    moveDocument(id, -50);
+    moveDocument({ id, bonus: -50 });
     clearInterval(infiniteRequestDocument);
 
     // 댓글 목차를 선택했을 경우
@@ -71,7 +71,7 @@ export default function _IndexForm(
         infiniteRequestDocument = setInterval(() => {
           const doc = document.getElementsByClassName("comments-list-render");
           if (doc.length) {
-            moveDocument(id, -50);
+            moveDocument({ id, bonus: -50 });
             clearInterval(infiniteRequestDocument);
             changeLoading(false);
           }

@@ -31,6 +31,7 @@ export default function _FunctionalForm({
           vers={vers}
           list={functionalList[module]}
           propsRef={propsRef}
+          isFunctional={true}
         />
       </Wrapper>
     )) || <></>

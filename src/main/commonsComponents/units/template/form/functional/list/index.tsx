@@ -27,11 +27,13 @@ export default function FunctionalDetailInfoListPage({
   vers,
   list,
   propsRef,
+  isFunctional,
 }: {
   module: string;
   vers: number;
   list: Array<FunctionalListType>;
   propsRef?: MutableRefObject<HTMLDivElement>;
+  isFunctional?: boolean;
 }) {
   const { componentRender } = CommonsHooksComponents();
   const { getCommonsReturn, getExampleCode } = getExampleCodeComponnet();
@@ -50,9 +52,10 @@ export default function FunctionalDetailInfoListPage({
     <FunctionalWrapper>
       {list.map((el) => {
         const key = getUuid();
+
         return (
           <FunctionalInfoWrapper key={key}>
-            <TitleWrapper>
+            <TitleWrapper id={el.id}>
               <_Title titleLevel="h3" className="functional-name">
                 {module}.{el.name}()
               </_Title>
@@ -78,6 +81,7 @@ export default function FunctionalDetailInfoListPage({
                     <ModulePropsListFormPage
                       list={el.props.list}
                       vers={vers || 0}
+                      isFunctional={isFunctional || false}
                     />
                   )}
                 </PropsInfoList>
@@ -89,7 +93,6 @@ export default function FunctionalDetailInfoListPage({
                     {componentRender(el.setExampleCode)}
                   </ExampleCodeBtnWrapper>
                 )}
-
                 <_Copy
                   text={getExampleCode({
                     code: el.exampleCode,
