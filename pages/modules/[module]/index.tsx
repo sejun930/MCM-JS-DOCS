@@ -7,6 +7,7 @@ import { getCamelCase } from "src/main/commonsComponents/functional";
 
 export default function ModulesPage(props: { name: string }) {
   const Components = ModuleComponentsList[props.name];
+
   return <>{!Components ? <ErrorPage /> : Components}</>;
 }
 

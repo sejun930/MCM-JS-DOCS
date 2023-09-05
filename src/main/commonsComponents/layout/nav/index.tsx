@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 import {
   LayoutNavListWrapper,
@@ -11,7 +10,7 @@ import { navList, NavListTypes, adminNavList } from "./nav.data";
 
 import NavListPage from "./list";
 import NavSearchPage from "./search";
-// import { _Link } from "mcm-js-commons";
+import { _Link } from "mcm-js-commons";
 
 export default function LayoutNavPage({
   isMobileTap,
@@ -26,8 +25,6 @@ export default function LayoutNavPage({
   const [search, setSearch] = useState<string>("");
   // 렌더 여부
   const [render, setRender] = useState<boolean>(false);
-
-  const router = useRouter();
 
   useEffect(() => {
     if (!module) setSearch("");
@@ -90,10 +87,9 @@ export default function LayoutNavPage({
         </LayoutNav>
 
         {!isAdmin && (
-          <button onClick={() => router.push("/admin/comments")}>어드민</button>
-          // <_Link href="/admin/comments" className="admin-mode">
-          //   🛠 Admin
-          // </_Link>
+          <_Link href="/admin/comments" className="admin-mode">
+            🛠 Admin
+          </_Link>
         )}
       </LayoutNavListWrapper>
     </LayoutNavWrapper>
