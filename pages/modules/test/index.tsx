@@ -1,3 +1,5 @@
+import MyModal from "src/main/mainComponents/modules/modal";
+
 export default function MyTest() {
-  return <div>테스트</div>;
+  return <MyModal />;
 }
