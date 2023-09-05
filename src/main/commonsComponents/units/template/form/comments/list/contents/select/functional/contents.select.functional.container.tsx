@@ -14,10 +14,8 @@ import { _SpanText } from "mcm-js-commons";
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { CommentsAllInfoTypes, InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
-import {
-  changeServerText,
-  getLibraries,
-} from "src/main/commonsComponents/functional";
+import { changeServerText } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
 import blockApis from "src/commons/libraries/apis/block/block.apis";
 import ModalResultForm from "../../../../../modal/modal.result";

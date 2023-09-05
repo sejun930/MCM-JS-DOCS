@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
-import { getLibraries } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
 const { Tooltip } = getLibraries();

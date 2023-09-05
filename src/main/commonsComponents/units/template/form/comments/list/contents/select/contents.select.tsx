@@ -9,7 +9,8 @@ import { useRecoilState } from "recoil";
 import { adminLoginState, moduleState } from "src/commons/store";
 
 import CommonsHooksComponents from "../../../../../../../hooks/commonsHooks";
-import { getLibraries, getUuid } from "src/main/commonsComponents/functional";
+import { getUuid } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { _CloseButton, _Button } from "mcm-js-commons";
 
 import ContentsOptionalPage from "./functional/contents.select.functional.container";

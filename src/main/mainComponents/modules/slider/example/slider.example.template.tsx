@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { SliderPropsTypes } from "mcm-js-dev/dist/commons/types";
-import { getLibraries } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 
 const { Slider } = getLibraries();

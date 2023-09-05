@@ -4,7 +4,7 @@ import { WriteInfoTypes } from "../comments.write.types";
 
 import PrivacyNoticePage from "./notice";
 import { useEffect } from "react";
-import { getLibraries } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
 const { Modal } = getLibraries();
 // 개인정보 수집 약관 및 동의 페이지

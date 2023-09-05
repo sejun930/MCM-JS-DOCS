@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
-import { getLibraries } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
 const { Tooltip } = getLibraries();

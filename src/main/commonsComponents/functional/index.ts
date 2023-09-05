@@ -1,7 +1,3 @@
-import { ModalType } from "mcm-js/dist/components/modules/modal/component/modal.types";
-import { SliderType } from "mcm-js/dist/components/modules/slider/components/slider.types";
-import { TooltipType } from "mcm-js/dist/components/modules/tooltip/component/tooltip.types";
-
 // 시간에 대한 차이 구하기
 const getDateForm = ({
   firebaseTimer,
@@ -276,23 +272,6 @@ const imagePreLoad = (list: Array<string>) => {
   }
 };
 
-// 개발 및 배포 환경의 라이브러리 호출하기
-const getLibraries = () => {
-  // 전체 모듈 가져오기
-  const getAllLibraries = require(`mcm-js${
-    (process.env.NODE_ENV === "development" && "-dev") || ""
-  }`);
-  delete getAllLibraries.__esModule;
-
-  type ModuleTypes = {
-    Modal: ModalType;
-    Tooltip: TooltipType;
-    Slider: SliderType;
-  };
-
-  return getAllLibraries as ModuleTypes;
-};
-
 // 문자열을 카멜 케이스 형태로 변환하기
 export const getCamelCase = (str: string) => {
   return str
@@ -329,7 +308,6 @@ export {
   changeServerText,
   changeClientText,
   imagePreLoad,
-  getLibraries,
   getCurrentScroll,
   getExampleErrorText,
 };

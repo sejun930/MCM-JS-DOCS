@@ -7,7 +7,7 @@ import {
 } from "./list.styles";
 import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
 import { _SpanText } from "mcm-js-commons";
-import { getLibraries } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { copyCode } from "src/main/commonsComponents/functional/code";
 
 import _Copy from "src/main/commonsComponents/units/copy";
