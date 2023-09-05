@@ -38,7 +38,7 @@ export default function NavListPage({
         list.map((el, key) => {
           const _href = `/${(!isAdmin ? "modules/" : "admin/") || ""}${String(
             el?.href || el?.name
-          )}`;
+          ).toLowerCase()}`;
           let name = el?.remarks || el?.name;
 
           if (search) {

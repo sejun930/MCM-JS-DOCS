@@ -5,6 +5,8 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 import MainMobileNavigationTapPage from "./mobileNavigation/main.mobileNavigation";
 import { ModulesInfoWrapper } from "src/main/mainComponents/modules";
 
+import MainHead from "./head";
+
 // DOC 페이지 메인 템플릿
 export default function Template({
   children,
@@ -14,11 +16,14 @@ export default function Template({
   isFull?: boolean;
 }) {
   return (
-    <Wrapper className="main-template-wrapper" isFull={isFull}>
-      {/* 모바일 nav */}
-      <MainMobileNavigationTapPage />
-      <ModulesInfoWrapper>{children}</ModulesInfoWrapper>
-    </Wrapper>
+    <>
+      <MainHead />
+      <Wrapper className="main-template-wrapper" isFull={isFull}>
+        {/* 모바일 nav */}
+        <MainMobileNavigationTapPage />
+        <ModulesInfoWrapper>{children}</ModulesInfoWrapper>
+      </Wrapper>
+    </>
   );
 }
 
@@ -32,7 +37,6 @@ export const Wrapper = styled.main`
   flex-direction: column;
   min-width: 85%;
   position: relative;
-  /* overflow-x: hidden; */
 
   ${(props: StyleTypes) =>
     props.isFull && {
