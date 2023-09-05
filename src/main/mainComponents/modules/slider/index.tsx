@@ -2,6 +2,7 @@ import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
+import _PropsForm from "src/main/commonsComponents/units/template/form/props";
 
 import React from "react";
 import { sliderExampleList } from "./example/slider.example.render.data";
@@ -34,6 +35,7 @@ export default function MySlider() {
         initProps={initSliderCommonsProps}
         commonsProps={commonsProps}
       />
+      <_PropsForm />
     </Template>
   );
 }

@@ -8,11 +8,7 @@ import {
 import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
 import { _SpanText } from "mcm-js-commons";
 import { getLibraries } from "src/main/commonsComponents/functional";
-import {
-  copyCode,
-  removeTag,
-  getTap,
-} from "src/main/commonsComponents/functional/code";
+import { copyCode } from "src/main/commonsComponents/functional/code";
 
 import _Copy from "src/main/commonsComponents/units/copy";
 

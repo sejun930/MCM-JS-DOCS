@@ -34,7 +34,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
       ${sliderCommonsExampleCode.pagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.autoPlay,
-        propsName: "autoPlay",
+        propsName: "useAutoPlay",
       })}
     `,
   autoPlayWithTimer: () =>
@@ -43,7 +43,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
       ${sliderCommonsExampleCode.pagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.timer,
-        propsName: "autoPlay",
+        propsName: "useAutoPlay",
       })}
     `,
   useDragMode: () =>
