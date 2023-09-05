@@ -1,6 +1,6 @@
 import { changeObjectTemplate } from "src/main/commonsComponents/functional/code";
 
-// highlight가 적용된 코드 및 그외 기능 렌더시 사용
+// highlight가 적용된 코드 및 그외 기능 렌더시 사용 //
 export const getCommonsHighlight = {
   // 세미콜론
   semiColon: () => `<span class='lightGray'>;</span>`,
