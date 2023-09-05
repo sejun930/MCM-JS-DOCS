@@ -5,7 +5,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 import MainMobileNavigationTapPage from "./mobileNavigation/main.mobileNavigation";
 import { ModulesInfoWrapper } from "src/main/mainComponents/modules";
 
-import MainHead from "./head";
+// import MainHead from "./head";
 
 // DOC 페이지 메인 템플릿
 export default function Template({
@@ -17,7 +17,7 @@ export default function Template({
 }) {
   return (
     <>
-      <MainHead />
+      {/* <MainHead /> */}
       <Wrapper className="main-template-wrapper" isFull={isFull}>
         {/* 모바일 nav */}
         <MainMobileNavigationTapPage />

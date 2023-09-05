@@ -9,6 +9,7 @@ export default function MainHead() {
 
   return (
     <Head>
+      <title>MCM-JS{(module && `::${module}`) || ""}</title>
       <meta
         property="og:description"
         content={
