@@ -301,6 +301,20 @@ export const getCamelCase = (str: string) => {
     .join(" ");
 };
 
+// Example 에러케이스 문자열 처리하기
+const getExampleErrorText = (moduleName: string, list: Array<string>) => {
+  return `${moduleName} 모듈을 사용하기 위해서는 ${list
+    .map(
+      (propsName, idx) =>
+        `<b class='error-example'>"${propsName}"</b>${
+          (idx + 1 !== list.length && ",") || ""
+        }`
+    )
+    .join(
+      ""
+    )} props가 필수로 전달되어야 합니다. 전달되지 않는다면 모듈을 실행할 수 없으므로 해당 에러메세지가 보여진다면 props 값을 다시 확인해주세요.`;
+};
+
 export {
   getDateForm,
   changeMultipleLine,
@@ -317,4 +331,5 @@ export {
   imagePreLoad,
   getLibraries,
   getCurrentScroll,
+  getExampleErrorText,
 };

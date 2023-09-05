@@ -2,7 +2,7 @@ import { ExampleIProps } from "../../../../commonsComponents/units/template/form
 import { sliderDefaultChildren } from "./slider.example.code.data";
 import { sliderCodeList } from "./slider.example.code.data";
 
-const initSliderCommonsProps = {
+export const initSliderCommonsProps = {
   children: [],
 };
 
@@ -122,13 +122,32 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "최초로 시작하는 페이지를 설정합니다. <br />나열된 페이지 번호 중 처음 렌더하고 싶은 페이지의 번호를 입력해주세요.",
+          "최초로 시작하는 페이지를 설정합니다. <br />나열된 페이지 번호 중 처음 렌더하고 싶은 페이지의 번호를 입력해주세요. (default : 1)",
         content: sliderDefaultChildren,
         code: sliderCodeList.firstPage(),
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
           firstPage: 3,
+        },
+      },
+    ],
+  },
+  {
+    title: "",
+    isError: {
+      requiredList: ["children"],
+    },
+    // isFull: true,
+    contents: [
+      {
+        remakrs:
+          "최초로 시작하는 페이지를 설정합니다. <br />나열된 페이지 번호 중 처음 렌더하고 싶은 페이지의 번호를 입력해주세요. (default : 1)",
+        content: sliderDefaultChildren,
+        code: null,
+        addProps: {
+          ...initSliderCommonsProps,
+          children: [],
         },
       },
     ],

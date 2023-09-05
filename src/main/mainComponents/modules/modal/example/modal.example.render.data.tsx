@@ -277,12 +277,12 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
   },
   {
     title: "",
-    isError: true,
+    isError: {
+      requiredList: ["show", "onCloseModal"],
+    },
     isHide: [false, true][idx],
     contents: [
       {
-        remakrs:
-          "Modal 모듈을 사용하기 위해서는 <b class='error-example'>'show'</b>, <b class='error-example'>'onCloseModal'</b> props가 필수로 전달되어야 합니다. 전달되지 않는다면 모듈을 실행할 수 없으므로 해당 에러메세지가 보여진다면 props 값을 다시 확인해주세요. ",
         addProps: {
           ...modalExampleInitProps,
           offAutoClose: true,

@@ -20,6 +20,7 @@ import {
   IProps,
   UIProps,
 } from "./template.example.types";
+import { getExampleErrorText } from "src/main/commonsComponents/functional";
 
 // 모든 코드들의 높이값을 저장하는 객체
 const allHeightList = {};
@@ -96,7 +97,15 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                         };
                         component.addProps = { ...addProps };
                         // 에러케이스 처리
-                        component.isError = el?.isError || false;
+                        component.isError =
+                          el?.isError?.requiredList !== undefined || false;
+                        if (el?.isError && el.isError?.requiredList) {
+                          component.remakrs = getExampleErrorText(
+                            module,
+                            el.isError.requiredList
+                          );
+                        }
+
                         // vers 저장
                         component.vers = vers;
 
@@ -136,7 +145,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                                 dangerouslySetInnerHTML={component.remakrs}
                               />
                             </ExampleListItems>
-                            {component.code !== undefined && (
+                            {code !== undefined && code !== null && (
                               <_ExampleOptionalFormPage
                                 code={code || ""}
                                 content={component.content}

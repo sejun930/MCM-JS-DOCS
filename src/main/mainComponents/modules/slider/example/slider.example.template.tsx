@@ -5,12 +5,10 @@ import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/
 const { Slider } = getLibraries();
 export default function MySliderExample(props: ExampleContentsTypes) {
   const { children, ..._props } = props.addProps as SliderPropsTypes;
+  const _children = props.isError ? undefined : props.commonsProps?.children;
 
   return (
-    <Slider {..._props}>
-      <p>Hello</p>
-      <p>World</p>
-      <img src="/images/modules/example/tooltip/dancing.gif" />
-    </Slider>
+    // @ts-ignore
+    <Slider {..._props}>{_children}</Slider>
   );
 }

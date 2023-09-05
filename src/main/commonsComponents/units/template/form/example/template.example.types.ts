@@ -52,7 +52,9 @@ export interface ExampleIProps {
   blockRemarks?: string; // 한 블록 범위의 설명 정보
   contents: ExampleContentsTypes | Array<ExampleContentsTypes>;
   isFull?: boolean; // 화면을 분할해서 사용하지 않고 block 요소로 전체 사용
-  isError?: boolean; // 에러케이스 여부
+  isError?: {
+    requiredList: Array<string>;
+  }; // 에러케이스 여부
   isHide?: boolean; // 노출 여부 (true일 경우 숨기기)
 }
 
