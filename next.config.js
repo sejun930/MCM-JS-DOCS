@@ -6,7 +6,7 @@ module.exports = {
   generateBuildId: () => "mcm-js-deploy",
   // .next의 빌드 폴더와 out/static 폴더 통일
   exportPathMap: () => ({
-    "/": { page: "/" },
+    "/": { page: "/", query: { __nextDefaultLocale: "en" } },
     "/dynamic": { page: "/dynamic" },
     "/404": { page: "/404" },
   }),

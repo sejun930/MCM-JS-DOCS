@@ -9,7 +9,6 @@ export default function MainHead() {
 
   return (
     <Head>
-      <title>MCM-JS{(module && `::${module}`) || ""}</title>
       <meta
         property="og:description"
         content={
@@ -38,7 +37,7 @@ export default function MainHead() {
         content={`nextjs, react, ${
           module &&
           `${module}, ${module.toLowerCase()}, ${module.toUpperCase()}`
-        }${
+        } ${
           (moduleKeywords[module] && moduleKeywords[module].map((el) => el)) ||
           ""
         }`}
