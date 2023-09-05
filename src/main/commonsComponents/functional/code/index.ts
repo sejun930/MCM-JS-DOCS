@@ -1,5 +1,5 @@
 import { getCommonsHighlight } from "src/commons/highlight";
-import { moveDocument } from "..";
+// import { moveDocument } from "..";
 
 // 카카오에 대한 window 객체 타입 정의
 declare const window: typeof globalThis & {
