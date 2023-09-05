@@ -21,9 +21,12 @@ import {
 } from "../../list.data";
 import { AdminBugStatusSelectList } from "./contents.select.functional.data";
 import { changeClientText } from "src/main/commonsComponents/functional";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
-const { Tooltip } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Tooltip } = getLibraries();
+
+import { Tooltip } from "mcm-js";
+
 export default function ContentsSelectFunctionalUIPage({
   type,
   info,

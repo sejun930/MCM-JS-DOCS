@@ -13,9 +13,11 @@ import { adminLoginState, moduleState } from "src/commons/store";
 import { CommentsAllInfoTypes, InfoTypes } from "../../comments.types";
 import ContentsOptionalPage from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.container";
 import { ListContentsSelectType } from "./list.data";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Modal } = getLibraries();
 
-const { Modal } = getLibraries();
+import { Modal } from "mcm-js";
+
 export interface ListContentsIProps {
   info: InfoTypes;
   commentsInfo: CommentsAllInfoTypes;

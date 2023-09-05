@@ -7,9 +7,11 @@ import AdminLoginPage from "src/main/mainComponents/admin/login/admin.login.cont
 import CommonsHooksComponents from "../hooks/commonsHooks";
 
 import { checkAccessToken } from "./check";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Modal } = getLibraries();
 
-const { Modal } = getLibraries();
+import { Modal } from "mcm-js";
+
 // 관리자 로그인 권한 체크하기
 const WithAuthAdmin =
   <P extends {}>(Component: ComponentType<P>) =>

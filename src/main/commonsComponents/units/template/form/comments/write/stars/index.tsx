@@ -2,11 +2,14 @@ import { Star, Wrapper } from "./stars.styles";
 import React, { useEffect, useState } from "react";
 
 import { getUuid } from "src/main/commonsComponents/functional";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { _SpanText } from "mcm-js-commons";
 import { starsTooltipTextList } from "./stars.tooltip.text";
 
-const { Tooltip } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Tooltip } = getLibraries();
+
+import { Tooltip } from "mcm-js";
+
 export default function StarsForm({
   rating,
   category,

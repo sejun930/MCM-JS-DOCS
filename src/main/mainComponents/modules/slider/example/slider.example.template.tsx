@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 
 import { SliderPropsTypes } from "mcm-js-dev/dist/commons/types";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 
-const { Slider } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Slider } = getLibraries();
+
+import { Slider } from "mcm-js";
+
 export default function MySliderExample(props: ExampleContentsTypes) {
   const { children, ..._props } = props.addProps as SliderPropsTypes;
   const _children = props.isError ? undefined : props.commonsProps?.children;

@@ -16,9 +16,12 @@ import getExampleCodeComponnet from "src/main/commonsComponents/hooks/getExample
 
 import { _Button } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
-const { Tooltip } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Tooltip } = getLibraries();
+
+import { Tooltip } from "mcm-js";
+
 // 예시용에 추가적으로 붙는 옵션 폼 페이지 (ex : 코드보기 등등)
 export default function _ExampleOptionalFormPage({
   code,

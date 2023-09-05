@@ -8,7 +8,6 @@ import {
 
 import { _SpanText } from "mcm-js-commons";
 import { getDateForm } from "src/main/commonsComponents/functional";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
 import CommentsLabel from "src/main/commonsComponents/units/template/form/comments/list/label";
 import AdminCommentsContentsPage from "./contents/admin.comments.contents.container";
@@ -19,7 +18,11 @@ import {
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { FetchCommentsTypes } from "../../admin.comments.types";
 
-const { Tooltip } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Tooltip } = getLibraries();
+
+import { Tooltip } from "mcm-js";
+
 export default function AdminCommentsDetailUIPage({
   info,
   commentsInfo,

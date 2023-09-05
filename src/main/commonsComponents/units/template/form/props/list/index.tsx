@@ -7,12 +7,15 @@ import {
 } from "./list.styles";
 import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
 import { _SpanText } from "mcm-js-commons";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { copyCode } from "src/main/commonsComponents/functional/code";
 
 import _Copy from "src/main/commonsComponents/units/copy";
 
-const { Tooltip } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Tooltip } = getLibraries();
+
+import { Tooltip } from "mcm-js";
+
 export default function ModulePropsListFormPage({
   list,
   hideTitle,

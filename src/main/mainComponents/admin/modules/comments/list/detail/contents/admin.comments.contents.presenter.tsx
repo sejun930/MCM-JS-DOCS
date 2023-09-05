@@ -10,10 +10,13 @@ import { MutableRefObject } from "react";
 import { _Input, _SpanText, _PText } from "mcm-js-commons";
 
 import { getDateForm } from "src/main/commonsComponents/functional";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
-const { Tooltip } = getLibraries();
+import { Tooltip } from "mcm-js-dev";
+
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Tooltip } = getLibraries();
+
 export default function AdminCommentsContentsUIPage({
   info,
   toggleMoreShow,

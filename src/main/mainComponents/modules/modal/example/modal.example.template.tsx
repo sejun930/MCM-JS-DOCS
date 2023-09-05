@@ -6,9 +6,10 @@ import { _Button } from "mcm-js-commons";
 import { ExampleContentsTypes } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 import { ModalExampleCommonsTypes } from "../modal.types";
 import { ModalPropsType } from "mcm-js/dist/commons/types";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
-const { Modal } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Modal } = getLibraries();
+import { Modal } from "mcm-js";
 
 export default function MyModalExample(props: ExampleContentsTypes) {
   const { isShow, openModal, closeModal } =

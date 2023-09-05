@@ -6,9 +6,10 @@ import CommonsHooksComponents from "../../hooks/commonsHooks";
 import { CodeTypes } from "./copy.types";
 import { getTap, removeTag, removeBoldTag } from "../../functional/code";
 import { Pre } from "./code-highlight/codeHighlight.styles";
-import { getLibraries } from "../../functional/modules";
+import { Tooltip } from "mcm-js";
+// import { getLibraries } from "../../functional/modules";
 
-const { Tooltip } = getLibraries();
+// const { Tooltip } = getLibraries();
 // 글자 복사 기능 컴포넌트
 export default function _Copy({
   text,

@@ -10,7 +10,7 @@ import { Message } from "./comments.write.styles";
 import CommentsWriteUIPage from "./comments.write.presenter";
 import ModalResultForm from "../../modal/modal.result";
 
-import { Modal } from "mcm-js-dev";
+import { Modal } from "mcm-js";
 import { _SpanTextWithHtml } from "mcm-js-commons";
 
 import {

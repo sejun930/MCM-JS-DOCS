@@ -9,9 +9,11 @@ import { moduleState, adminLoginState } from "src/commons/store";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import LayoutNavPage from "src/main/commonsComponents/layout/nav";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Modal } = getLibraries();
 
-const { Modal } = getLibraries();
+import { Modal } from "mcm-js";
+
 export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);

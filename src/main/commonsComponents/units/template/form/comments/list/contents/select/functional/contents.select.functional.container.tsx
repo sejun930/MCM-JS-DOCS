@@ -15,7 +15,6 @@ import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { CommentsAllInfoTypes, InfoTypes } from "../../../../comments.types";
 import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import { changeServerText } from "src/main/commonsComponents/functional";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
 import blockApis from "src/commons/libraries/apis/block/block.apis";
 import ModalResultForm from "../../../../../modal/modal.result";
@@ -27,6 +26,11 @@ import {
 import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 import { exchangeKey } from "./contents.select.functional.data";
 
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Modal } = getLibraries();
+
+import { Modal } from "mcm-js";
+
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장
 let rating = 0; // 평점 내용 저장
@@ -35,7 +39,6 @@ let bugLevel = 0; // 버그 중요도 저장
 let disableOpenModal = false; // 모달 중복 실행 방지
 let updating = false; // 업데이트 진행중 여부 (중복 클릭 방지)
 
-const { Modal } = getLibraries();
 export default function ContentsSelectFunctionalPage({
   info,
   type,

@@ -3,12 +3,15 @@ import { getCommonsHighlight } from "src/commons/highlight";
 import { modalCommonsExampleCode } from "../example/modal.example.commons.code";
 
 import { OpenModalButton } from "../example/modal.example.template";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
 import { getPropsForm } from "src/commons/data/props/props.commons.code";
 import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
-const { Modal } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Modal } = getLibraries();
+
+import { Modal } from "mcm-js";
+
 export default function ModalFunctionalList(): FunctionalListType[] {
   return [
     {

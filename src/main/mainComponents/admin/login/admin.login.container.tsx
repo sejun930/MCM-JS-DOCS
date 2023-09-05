@@ -8,16 +8,19 @@ import {
   getUserIp,
   getDateForm,
 } from "src/main/commonsComponents/functional";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
 
 import AdminLoginUIPage from "./admin.login.presenter";
 import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 
+import { Modal } from "mcm-js";
+
 let debouncing: number | ReturnType<typeof setTimeout>;
 let loading = false; // 중복 클릭 방지
 
-const { Modal } = getLibraries();
+// import { getLibraries } from "src/main/commonsComponents/functional/modules";
+// const { Modal } = getLibraries();
+
 export default function AdminLoginPage({
   loginComplete,
 }: {
