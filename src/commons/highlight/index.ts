@@ -207,8 +207,19 @@ export const getCommonsHighlight = {
   obj: (key: string, value: string) =>
     `${getCommonsHighlight.colors(key + ":").key} ${value}`,
   // 배열 폼
-  arr: (arr: Array<string>, isState?: boolean) =>
-    `<span class=${(isState && "deepPurple") || "yellow"}>[</span>${
+  array: ({
+    arr,
+    isState,
+    className,
+  }: {
+    arr: Array<string>;
+    isState?: boolean;
+    className?: string;
+  }) => {
+    let _className = (isState && "deepPurple") || "yellow";
+    if (className) _className = className;
+
+    return `<span class=${_className}>[</span>${
       (arr &&
         arr.reduce(
           (acc, cur, i) =>
@@ -218,19 +229,20 @@ export const getCommonsHighlight = {
           ""
         )) ||
       ""
-    }<span class=${(isState && "deepPurple") || "yellow"}>]</span>`,
+    }<span class=${_className}>]</span>`;
+  },
   // state 폼
   state: (stateName: string, stateValue: string) =>
-    `${getCommonsHighlight.colors().const} ${getCommonsHighlight.arr(
-      [
+    `${getCommonsHighlight.colors().const} ${getCommonsHighlight.array({
+      arr: [
         getCommonsHighlight.colors(stateName).varName,
         getCommonsHighlight.function({
           funcName: `set${stateName[0].toUpperCase() + stateName.substring(1)}`,
         }),
         // getCommonsHighlight.colors("setIsAble").function,
       ],
-      true
-    )} ${getCommonsHighlight.colors("=").text} ${getCommonsHighlight.function({
+      isState: true,
+    })} ${getCommonsHighlight.colors("=").text} ${getCommonsHighlight.function({
       funcName: "useState",
       setFunc: {
         children: stateValue,

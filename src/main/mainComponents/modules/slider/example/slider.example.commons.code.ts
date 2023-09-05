@@ -71,4 +71,21 @@ export const sliderCommonsExampleCode = {
     value: "3",
     type: "number",
   }),
+  listMinHeight: commonsCodeForm({
+    key: "listMinHeight",
+    value: getCommonsHighlight.curly({
+      className: "yellow",
+      children: ` ${getCommonsHighlight.getComma(
+        [
+          getCommonsHighlight.obj("web", getCommonsHighlight.string("240px")),
+          getCommonsHighlight.obj(
+            "mobile",
+            getCommonsHighlight.string("200px")
+          ),
+        ],
+        { removeTap: true, removeLastComma: true }
+      )} `,
+    }),
+    type: "node",
+  }),
 };

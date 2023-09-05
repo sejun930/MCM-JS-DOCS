@@ -1,10 +1,11 @@
 import { modalPropsList } from "src/main/mainComponents/modules/modal/props/modal.propsList";
 import { tooltipPropsList } from "src/main/mainComponents/modules/tooltip/props/tooltip.propsList";
+import { sliderPropsList } from "src/main/mainComponents/modules/slider/props/slider.propsList";
 
 import { getPropsForm } from "./props.commons.code";
 
 export type PropsCodeTypes = {
-  type: "function" | "bool" | "string" | "obj" | "number";
+  type: "function" | "bool" | "string" | "obj" | "number" | "array";
   argu?: any;
 };
 
@@ -23,7 +24,8 @@ export interface PropsModuleListType {
     | "[String]"
     | "[Number]"
     | "[Object]"
-    | "[Function]";
+    | "[Function]"
+    | "[Node]";
   notice: string;
   isRequired?: boolean;
   code: PropsCodeTypes;
@@ -86,5 +88,6 @@ export const propsModuleList: (vers?: number) => {
   return {
     Modal: getWithCommnsPropsList(modalPropsList(vers || 0), vers),
     Tooltip: getWithCommnsPropsList(tooltipPropsList),
+    Slider: getWithCommnsPropsList(sliderPropsList),
   };
 };

@@ -1,7 +1,3 @@
-import { ModalType } from "mcm-js/dist/components/modules/modal/component/modal.types";
-import { SliderType } from "mcm-js/dist/components/modules/slider/components/slider.types";
-import { TooltipType } from "mcm-js/dist/components/modules/tooltip/component/tooltip.types";
-
 // 시간에 대한 차이 구하기
 const getDateForm = ({
   firebaseTimer,
@@ -276,29 +272,26 @@ const imagePreLoad = (list: Array<string>) => {
   }
 };
 
-// 개발 및 배포 환경의 라이브러리 호출하기
-const getLibraries = () => {
-  // 전체 모듈 가져오기
-  const getAllLibraries = require(`mcm-js${
-    (process.env.NODE_ENV === "development" && "-dev") || ""
-  }`);
-  delete getAllLibraries.__esModule;
-
-  type ModuleTypes = {
-    Modal: ModalType;
-    Tooltip: TooltipType;
-    Slider: SliderType;
-  };
-
-  return getAllLibraries as ModuleTypes;
-};
-
 // 문자열을 카멜 케이스 형태로 변환하기
 export const getCamelCase = (str: string) => {
   return str
     .split(" ")
     .map((el) => el[0].toUpperCase() + el.substring(1))
     .join(" ");
+};
+
+// Example 에러케이스 문자열 처리하기
+const getExampleErrorText = (moduleName: string, list: Array<string>) => {
+  return `${moduleName} 모듈을 사용하기 위해서는 ${list
+    .map(
+      (propsName, idx) =>
+        `<b class='error-example'>"${propsName}"</b>${
+          (idx + 1 !== list.length && ",") || ""
+        }`
+    )
+    .join(
+      ""
+    )} props가 필수로 전달되어야 합니다. 전달되지 않는다면 모듈을 실행할 수 없으므로 해당 에러메세지가 보여진다면 props 값을 다시 확인해주세요.`;
 };
 
 export {
@@ -315,6 +308,6 @@ export {
   changeServerText,
   changeClientText,
   imagePreLoad,
-  getLibraries,
   getCurrentScroll,
+  getExampleErrorText,
 };

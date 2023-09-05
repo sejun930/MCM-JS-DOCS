@@ -34,7 +34,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
       ${sliderCommonsExampleCode.pagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.autoPlay,
-        propsName: "autoPlay",
+        propsName: "useAutoPlay",
       })}
     `,
   autoPlayWithTimer: () =>
@@ -43,7 +43,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
       ${sliderCommonsExampleCode.pagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.timer,
-        propsName: "autoPlay",
+        propsName: "useAutoPlay",
       })}
     `,
   useDragMode: () =>
@@ -60,6 +60,15 @@ export const sliderCodeList: ExampleCodeListTypes = {
       ${getBoldCode({
         code: sliderCommonsExampleCode.firstPage,
         propsName: "firstPage",
+      })} 
+    `,
+  minHeight: () =>
+    `
+      ${sliderCommonsExampleCode.useAnimation}
+      ${sliderCommonsExampleCode.pagination}
+      ${getBoldCode({
+        code: sliderCommonsExampleCode.listMinHeight,
+        propsName: "listMinHeight",
       })} 
     `,
 };

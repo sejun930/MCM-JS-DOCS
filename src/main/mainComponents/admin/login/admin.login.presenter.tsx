@@ -9,7 +9,7 @@ import {
 
 import { _Title, _Input } from "mcm-js-commons";
 import { FormEvent, MutableRefObject } from "react";
-import { getLibraries } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
 const { Tooltip } = getLibraries();
 export default function AdminLoginUIPage({

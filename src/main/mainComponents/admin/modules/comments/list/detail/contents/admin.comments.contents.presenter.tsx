@@ -9,10 +9,8 @@ import {
 import { MutableRefObject } from "react";
 import { _Input, _SpanText, _PText } from "mcm-js-commons";
 
-import {
-  getDateForm,
-  getLibraries,
-} from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
 const { Tooltip } = getLibraries();

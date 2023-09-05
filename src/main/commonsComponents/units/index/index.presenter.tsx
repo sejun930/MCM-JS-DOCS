@@ -8,7 +8,8 @@ import {
 } from "./index.styles";
 
 import { _Button, _CloseButton, _PText } from "mcm-js-commons";
-import { getLibraries, getUuid } from "../../functional";
+import { getUuid } from "../../functional";
+import { getLibraries } from "../../functional/modules";
 
 import { indexOptionalDataList } from "./index.data";
 

@@ -2,7 +2,7 @@ import { ExampleIProps } from "../../../../commonsComponents/units/template/form
 import { sliderDefaultChildren } from "./slider.example.code.data";
 import { sliderCodeList } from "./slider.example.code.data";
 
-const initSliderCommonsProps = {
+export const initSliderCommonsProps = {
   children: [],
 };
 
@@ -69,7 +69,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "일정 시간마다 자동으로 다음 페이지로 전환합니다.  <br />시간은 1/1000ms로 적용되며, 최소 3초(3000) 이상부터 적용됩니다.",
+          "일정 시간마다 자동으로 다음 페이지로 전환합니다.  <br />시간은 1/1000ms로 적용되며, <b>최소 3초(3000)</b> 이상부터 적용됩니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.autoPlay(),
         addProps: {
@@ -103,7 +103,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "마우스로 드래그하여 페이지를 이전 또는 다음으로 전환할 수 있습니다. <br />전환되는 영역의 기준을 퍼센트로 조정할 수 있습니다. <br />(최소 10% ~ 최대 90%, default : 50%)",
+          "마우스로 드래그하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.useDragMode(),
         addProps: {
@@ -121,14 +121,55 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     // isFull: true,
     contents: [
       {
-        remakrs:
-          "최초로 시작하는 페이지를 설정합니다. <br />나열된 페이지 번호 중 처음 렌더하고 싶은 페이지의 번호를 입력해주세요.",
+        remakrs: "최초로 시작하는 페이지를 설정합니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.firstPage(),
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
           firstPage: 3,
+        },
+      },
+    ],
+  },
+  {
+    title: "최소 높이값 지정",
+    // isFull: true,
+    contents: [
+      {
+        remakrs:
+          "슬라이더 전체의 최소 높이값을 지정할 수 있습니다. <br />web과 mobile을 별도로 지정하여 웹 사이즈와 모바일 사이즈를 각각 조절할 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.minHeight(),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          pagination: {
+            showPageList: true,
+          },
+          listMinHeight: {
+            web: "240px",
+            mobile: "200px",
+          },
+        },
+      },
+    ],
+  },
+  {
+    title: "",
+    isError: {
+      requiredList: ["children"],
+    },
+    // isFull: true,
+    contents: [
+      {
+        remakrs:
+          "최초로 시작하는 페이지를 설정합니다. <br />나열된 페이지 번호 중 처음 렌더하고 싶은 페이지의 번호를 입력해주세요. (default : 1)",
+        content: sliderDefaultChildren,
+        code: null,
+        addProps: {
+          ...initSliderCommonsProps,
+          children: [],
         },
       },
     ],

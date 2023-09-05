@@ -7,8 +7,8 @@ import {
   getHashText,
   getUserIp,
   getDateForm,
-  getLibraries,
 } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
 
 import AdminLoginUIPage from "./admin.login.presenter";

@@ -20,10 +20,8 @@ import {
   ContentsSelectTypeName,
 } from "../../list.data";
 import { AdminBugStatusSelectList } from "./contents.select.functional.data";
-import {
-  changeClientText,
-  getLibraries,
-} from "src/main/commonsComponents/functional";
+import { changeClientText } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
 
 const { Tooltip } = getLibraries();
 export default function ContentsSelectFunctionalUIPage({

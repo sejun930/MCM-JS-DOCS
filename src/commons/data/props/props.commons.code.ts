@@ -85,6 +85,15 @@ export const propsCommonsCodeList = ({
           curlyHide: isObject,
         })
       ),
+    // 배열
+    array: () =>
+      getKey(
+        getCommonsHighlight.curly({
+          children: getCommonsHighlight.array({ arr: [], className: "blue" }),
+          curlyHide: isObject,
+          className: "deepPurple",
+        })
+      ),
   };
 
   // @ts-ignore
