@@ -3,6 +3,7 @@ import { getCommonsHighlight } from "src/commons/highlight";
 import { sliderCommonsExampleCode } from "./slider.example.commons.code";
 
 import { getBoldCode } from "src/main/commonsComponents/functional/code";
+import { ReactNode } from "react";
 
 export const sliderCodeList: ExampleCodeListTypes = {
   default: () => [``],
@@ -79,7 +80,7 @@ export const sliderReturnCommonsData = ({
   changeContent,
 }: {
   code: string;
-  children?: React.ReactNode | string;
+  children?: ReactNode | string;
   changeContent?: string;
 }) => {
   return `${getCommonsHighlight.tag.component({

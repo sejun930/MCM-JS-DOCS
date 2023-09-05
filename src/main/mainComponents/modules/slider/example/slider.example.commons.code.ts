@@ -1,5 +1,4 @@
-import { getCommonsHighlight } from "src/commons/highlight";
-import { commonsCodeForm } from "src/commons/highlight";
+import { getCommonsHighlight, commonsCodeForm } from "src/commons/highlight";
 
 export const sliderCommonsExampleCode = {
   useAnimation: commonsCodeForm({

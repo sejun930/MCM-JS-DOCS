@@ -5,8 +5,6 @@ import {
 } from "src/commons/data/props/props.commons.data";
 import { getCommonsHighlight } from "src/commons/highlight";
 
-const sliderPropsCommonsCode = [];
-
 export const sliderPropsInfo: Array<PropsModuleListType> = [
   {
     name: "children",
