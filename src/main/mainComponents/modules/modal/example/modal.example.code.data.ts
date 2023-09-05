@@ -3,9 +3,11 @@ import { ExampleCommonsTypes } from "src/commons/data/example/example.commons.da
 import { modalCommonsExampleCode } from "./modal.example.commons.code";
 import { getCommonsHighlight } from "src/commons/highlight";
 
-import { removeTag } from "src/main/commonsComponents/functional/code";
+import {
+  removeTag,
+  getBoldCode,
+} from "src/main/commonsComponents/functional/code";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
-import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
 // 해당 모듈을 실행하기 위한 공통적인 준비물
 export const modalCommonsData: Array<ExampleCommonsTypes> = [

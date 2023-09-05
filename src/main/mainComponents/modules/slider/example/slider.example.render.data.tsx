@@ -1,6 +1,8 @@
 import { ExampleIProps } from "../../../../commonsComponents/units/template/form/example/template.example.types";
-import { sliderDefaultChildren } from "./slider.example.code.data";
-import { sliderCodeList } from "./slider.example.code.data";
+import {
+  sliderDefaultChildren,
+  sliderCodeList,
+} from "./slider.example.code.data";
 
 export const initSliderCommonsProps = {
   children: [],
