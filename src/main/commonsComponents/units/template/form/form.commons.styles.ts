@@ -45,11 +45,10 @@ export const Wrapper = styled.div`
     }
 
     .bold-code {
-      background-color: #aa5656;
       padding: 2px 4px;
 
       span {
-        color: white;
+        font-size: 14px;
       }
     }
   }

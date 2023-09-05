@@ -90,9 +90,6 @@ export const ExampleImage = styled(_Image)`
   margin-top: 30px;
   min-width: 400px;
   max-width: 600px;
-  /* width: 400px; */
-  /* max-width: 400px; */
-  /* height: 400px; */
   object-fit: fill;
 
   @media ${breakPoints.mobileLarge} {
@@ -102,5 +99,6 @@ export const ExampleImage = styled(_Image)`
 
   @media ${breakPoints.mobileSmall} {
     max-width: 100%;
+    min-width: auto;
   }
 `;

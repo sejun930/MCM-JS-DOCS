@@ -18,6 +18,7 @@ export default function MySliderExample(props: ExampleContentsTypes) {
 }
 
 const Wrapper = styled.div`
+  width: 100%;
   .mcm-slider-contents {
     min-height: 120px;
   }
