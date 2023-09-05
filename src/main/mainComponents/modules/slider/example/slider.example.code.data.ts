@@ -62,6 +62,15 @@ export const sliderCodeList: ExampleCodeListTypes = {
         propsName: "firstPage",
       })} 
     `,
+  minHeight: () =>
+    `
+      ${sliderCommonsExampleCode.useAnimation}
+      ${sliderCommonsExampleCode.pagination}
+      ${getBoldCode({
+        code: sliderCommonsExampleCode.listMinHeight,
+        propsName: "listMinHeight",
+      })} 
+    `,
 };
 
 export const sliderReturnCommonsData = ({

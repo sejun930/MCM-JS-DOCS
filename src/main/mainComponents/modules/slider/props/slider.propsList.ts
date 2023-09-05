@@ -58,7 +58,7 @@ export const sliderPropsInfo: Array<PropsModuleListType> = [
     default: "{ delay: 3000, showTimer: false }",
     type: "Object",
     notice:
-      "슬라이더의 페이지를 일정시간(1/1000ms) 마다 자동으로 다음 페이지로 전환합니다. <br />delay로 자동으로 전환되는 시간을 조정할 수 있으며, 최소 3000ms(3초)부터 적용됩니다. <br />showTimer을 적용하면 현재 타이머의 진행도를 출력할 수 있습니다.",
+      "슬라이더의 페이지를 일정시간<b>(1/1000ms)</b> 마다 자동으로 다음 페이지로 전환합니다. <br />delay로 자동으로 전환되는 시간을 조정할 수 있으며, 최소 3000ms(3초)부터 적용됩니다. <br />showTimer를 적용하면 현재 타이머의 진행도를 출력할 수 있습니다.",
     code: {
       type: "obj",
       argu: [
@@ -72,7 +72,7 @@ export const sliderPropsInfo: Array<PropsModuleListType> = [
     default: "{ sideMovePercent : 10~90 }",
     type: "Object",
     notice:
-      "슬라이더에 드래그 기능을 사용할 건지에 대한 여부를 결정합니다. <br />sideMovePercent에 정해진 퍼센트에 따라 해당 퍼센트 영역에 도달하면 이전 및 다음 페이지로 전환할 수 있습니다. (sideMovePercent에는 최소 10, 최대 90까지 지정할 수 있습니다.)",
+      "슬라이더에 드래그 기능을 사용할 건지에 대한 여부를 결정합니다. <br />sideMovePercent에 정해진 퍼센트에 따라 해당 퍼센트 영역에 도달하면 이전 및 다음 페이지로 전환할 수 있습니다. (sideMovePercent에는 <b>최소 10, 최대 90</b>까지 지정할 수 있습니다.)",
     code: {
       type: "obj",
       argu: [
@@ -92,6 +92,20 @@ export const sliderPropsInfo: Array<PropsModuleListType> = [
     code: {
       type: "number",
       argu: "1",
+    },
+  },
+  {
+    name: "listMinHeight",
+    default: `{ web : "0px", mobile : "0px" }`,
+    type: "Object",
+    notice:
+      "슬라이더의 web<b>(768px 이상)</b>, mobile<b>(767px 이하)</b> 환경의 최소 높이를 지정할 수 있습니다.",
+    code: {
+      type: "obj",
+      argu: [
+        { key: "web", value: getCommonsHighlight.string("0px") },
+        { key: "mobile", value: getCommonsHighlight.string("0px") },
+      ],
     },
   },
 ];
