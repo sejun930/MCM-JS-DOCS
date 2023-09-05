@@ -76,6 +76,9 @@ export default function NavListPage({
           <_PText className="empty-search-result">검색 결과 없음</_PText>
         </EmptyResult>
       )}
+      <li>
+        <_Link href="/modules/test">test</_Link>
+      </li>
     </ListWrapper>
   );
 }
