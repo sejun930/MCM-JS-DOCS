@@ -5,7 +5,7 @@ import { NavListTypes } from "../nav.data";
 import { _Link, _PText, _SpanTextWithHtml } from "mcm-js-commons";
 import { CSSProperties } from "react";
 
-import { imagePreLoad } from "src/main/commonsComponents/functional";
+// import { imagePreLoad } from "src/main/commonsComponents/functional";
 
 export default function NavListPage({
   list,
@@ -19,11 +19,11 @@ export default function NavListPage({
   isAdmin?: boolean;
 }) {
   // Example 이미지 미리 호출하기
-  const preLoadExampleImage = (name: string) => () => {
-    imagePreLoad([
-      `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${name}-example.gif`,
-    ]);
-  };
+  // const preLoadExampleImage = (name: string) => () => {
+  //   imagePreLoad([
+  //     `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${name}-example.gif`,
+  //   ]);
+  // };
 
   return (
     <ListWrapper
@@ -58,7 +58,7 @@ export default function NavListPage({
           return (
             <li
               key={`tap-name-${el?.name}-${key}`}
-              onMouseEnter={preLoadExampleImage(el?.name || "")}
+              // onMouseEnter={preLoadExampleImage(el?.name || "")}
             >
               {name ? (
                 <_Link href={_href}>
