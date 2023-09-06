@@ -57,7 +57,8 @@ export const sliderCodeList: ExampleCodeListTypes = {
     `,
   firstPage: () =>
     `
-      ${sliderCommonsExampleCode.useAnimation} 
+      ${sliderCommonsExampleCode.useAnimation}
+      ${sliderCommonsExampleCode.pagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.firstPage,
         propsName: "firstPage",

@@ -10,6 +10,7 @@ import { navList, NavListTypes, adminNavList } from "./nav.data";
 
 import NavListPage from "./list";
 import NavSearchPage from "./search";
+import { _Link } from "mcm-js-commons";
 
 export default function LayoutNavPage({
   isMobileTap,
@@ -85,11 +86,11 @@ export default function LayoutNavPage({
           />
         </LayoutNav>
 
-        {/* {!isAdmin && (
+        {!isAdmin && (
           <_Link href="/admin/comments" className="admin-mode">
             🛠 Admin
           </_Link>
-        )} */}
+        )}
       </LayoutNavListWrapper>
     </LayoutNavWrapper>
   );

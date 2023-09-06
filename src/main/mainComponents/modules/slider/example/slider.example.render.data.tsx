@@ -100,12 +100,12 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "마우스 드래그 기능 적용",
+    title: "드래그 기능 적용",
     // isFull: true,
     contents: [
       {
         remakrs:
-          "마우스로 드래그하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
+          "마우스(터치)로 드래그하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.useDragMode(),
         addProps: {
@@ -129,6 +129,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
+          pagination: { showPageList: true },
           firstPage: 3,
         },
       },

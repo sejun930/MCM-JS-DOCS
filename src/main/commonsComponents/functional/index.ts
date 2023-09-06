@@ -257,17 +257,11 @@ const changeClientText = (text: string): string => {
 
 // 이미지 미리 불러오기
 const imagePreLoad = (list: Array<string>) => {
-  const script = document.createElement("script");
-
   if (list && list.length) {
     list.forEach((url) => {
-      const img = document.createElement("img");
+      // 이미 호출된 이미지인지 체크
+      const img = new Image();
       img.src = url;
-
-      if (img) {
-        script.append(img);
-        document.body.append(script);
-      }
     });
   }
 };

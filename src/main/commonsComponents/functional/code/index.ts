@@ -1,5 +1,5 @@
 import { getCommonsHighlight } from "src/commons/highlight";
-// import { moveDocument } from "..";
+import { moveDocument } from "..";
 
 // 카카오에 대한 window 객체 타입 정의
 declare const window: typeof globalThis & {
@@ -60,29 +60,28 @@ const getBoldCode = ({
   id?: string;
 }) => {
   if (typeof window === "undefined") return "";
-  // if (propsName) {
-  //   // 함수를 저장할 객체 초기 생성
-  //   if (!window._propsList) window._propsList = {};
-  //   // 변수명을 저장할 객체 초기 생성
-  //   if (!window._propsVarList) window._propsVarList = {};
+  if (propsName) {
+    // 함수를 저장할 객체 초기 생성
+    if (!window._propsList) window._propsList = {};
+    // 변수명을 저장할 객체 초기 생성
+    if (!window._propsVarList) window._propsVarList = {};
 
-  //   // 해당 PropsName의 이름으로 함수 및 변수명 저장
-  //   if (!window._propsList[propsName])
-  //     setTimeout(() => {
-  //       window._propsList[propsName] = () =>
-  //         moveDocument({
-  //           id: id || `module-props-list-${propsName}`,
-  //           bonus: -60,
-  //           focus: true,
-  //         }); // 함수 저장
-  //     }, 0);
-  //   // @ts-ignore
-  //   window._propsVarList[`props_${propsName}`] = propsName; // 변수 저장
-  // }
+    // 해당 PropsName의 이름으로 함수 및 변수명 저장
+    if (!window._propsList[propsName])
+      setTimeout(() => {
+        window._propsList[propsName] = () =>
+          moveDocument({
+            id: id || `module-props-list-${propsName}`,
+            bonus: -60,
+            focus: true,
+          }); // 함수 저장
+      }, 0);
+    // @ts-ignore
+    window._propsVarList[`props_${propsName}`] = propsName; // 변수 저장
+  }
 
   if (hide) return code;
-  return code;
-  // return `<button class="bold-code" onclick="window._propsList[window._propsVarList['props_${propsName}']]()" name="bold-code">${code}</button name="bold-code-end">`;
+  return `<button class="bold-code" onclick="window._propsList[window._propsVarList['props_${propsName}']]()" name="bold-code">${code}</button name="bold-code-end">`;
 };
 
 // 강조 태그 삭제하기
