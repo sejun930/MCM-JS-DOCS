@@ -5,10 +5,8 @@ import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 import { TooltipPropsType } from "mcm-js/dist/commons/types";
 
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Tooltip } = getLibraries();
-
-import { Tooltip } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Tooltip } = getLibraries();
 
 export default function TooltipExampleOnOffReplacePage(
   props: TooltipPropsType

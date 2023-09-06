@@ -26,10 +26,8 @@ import {
 import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 import { exchangeKey } from "./contents.select.functional.data";
 
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Modal } = getLibraries();
-
-import { Modal } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Modal } = getLibraries();
 
 let password = ""; // 패스워드 저장
 let _contents = ""; // 댓글 내용 저장

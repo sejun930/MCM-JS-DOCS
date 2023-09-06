@@ -11,10 +11,8 @@ import { copyCode } from "src/main/commonsComponents/functional/code";
 
 import _Copy from "src/main/commonsComponents/units/copy";
 
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Tooltip } = getLibraries();
-
-import { Tooltip } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Tooltip } = getLibraries();
 
 export default function ModulePropsListFormPage({
   list,

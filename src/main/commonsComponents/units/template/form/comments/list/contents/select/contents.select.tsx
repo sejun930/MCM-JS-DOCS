@@ -15,12 +15,10 @@ import { _CloseButton, _Button } from "mcm-js-commons";
 import ContentsOptionalPage from "./functional/contents.select.functional.container";
 import { CommentsAllInfoTypes, InfoTypes } from "../../../comments.types";
 
-import { Modal } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Modal } = getLibraries();
 
 let ableClose = true;
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Modal } = getLibraries();
-
 export default function SelectListOptional({
   list,
   styles,

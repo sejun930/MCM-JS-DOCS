@@ -12,10 +12,8 @@ import { _Input, _SpanText, _PText } from "mcm-js-commons";
 import { getDateForm } from "src/main/commonsComponents/functional";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
-import { Tooltip } from "mcm-js-dev";
-
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Tooltip } = getLibraries();
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Tooltip } = getLibraries();
 
 export default function AdminCommentsContentsUIPage({
   info,

@@ -17,10 +17,8 @@ import {
   IndexPagePropsTypes,
 } from "./index.type";
 
-// import { getLibraries } from "../../functional/modules";
-// const { Tooltip } = getLibraries();
-
-import { Tooltip } from "mcm-js";
+import { getLibraries } from "../../functional/modules";
+const { Tooltip } = getLibraries();
 
 type allTypes = IndexIPropsTypes & IndexUIPropsTypes & IndexPagePropsTypes;
 export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {

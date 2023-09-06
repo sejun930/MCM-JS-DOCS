@@ -9,10 +9,8 @@ import {
 } from "./admin.login.styles";
 
 import { _Title, _Input } from "mcm-js-commons";
-import { Tooltip } from "mcm-js";
-
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Tooltip } = getLibraries();
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Tooltip } = getLibraries();
 
 export default function AdminLoginUIPage({
   login,

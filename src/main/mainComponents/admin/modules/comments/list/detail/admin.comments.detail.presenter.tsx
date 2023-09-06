@@ -18,10 +18,8 @@ import {
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 import { FetchCommentsTypes } from "../../admin.comments.types";
 
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Tooltip } = getLibraries();
-
-import { Tooltip } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Tooltip } = getLibraries();
 
 export default function AdminCommentsDetailUIPage({
   info,

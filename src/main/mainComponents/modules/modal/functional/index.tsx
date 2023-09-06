@@ -7,10 +7,8 @@ import { OpenModalButton } from "../example/modal.example.template";
 import { getPropsForm } from "src/commons/data/props/props.commons.code";
 import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Modal } = getLibraries();
-
-import { Modal } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Modal } = getLibraries();
 
 export default function ModalFunctionalList(): FunctionalListType[] {
   return [

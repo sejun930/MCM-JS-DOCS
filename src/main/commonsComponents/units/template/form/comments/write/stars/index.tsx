@@ -5,10 +5,8 @@ import { getUuid } from "src/main/commonsComponents/functional";
 import { _SpanText } from "mcm-js-commons";
 import { starsTooltipTextList } from "./stars.tooltip.text";
 
-// import { getLibraries } from "src/main/commonsComponents/functional/modules";
-// const { Tooltip } = getLibraries();
-
-import { Tooltip } from "mcm-js";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Tooltip } = getLibraries();
 
 export default function StarsForm({
   rating,
