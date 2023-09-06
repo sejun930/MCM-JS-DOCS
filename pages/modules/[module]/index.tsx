@@ -3,10 +3,20 @@ import MyTooltip from "src/main/mainComponents/modules/tooltip";
 import MySlider from "src/main/mainComponents/modules/slider";
 
 import ErrorPage from "../../404";
-import { getCamelCase } from "src/main/commonsComponents/functional";
+import {
+  getCamelCase,
+  imagePreLoad,
+} from "src/main/commonsComponents/functional";
+import { useEffect } from "react";
 
 export default function ModulesPage(props: { name: string }) {
   const Components = ModuleComponentsList[props.name];
+
+  useEffect(() => {
+    imagePreLoad([
+      `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${props.name}-example.gif`,
+    ]);
+  }, []);
 
   return <>{!Components ? <ErrorPage /> : Components}</>;
 }
