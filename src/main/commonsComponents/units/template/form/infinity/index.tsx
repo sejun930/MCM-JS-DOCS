@@ -26,7 +26,10 @@ export default function _InfinityScroll({
       window.innerHeight || document.documentElement.clientHeight;
 
     // 최하단 위치 구하기
-    const documentHeight = getCurrentScroll();
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    );
 
     if (scrollTop + windowHeight + 100 >= documentHeight) {
       debouncing = setTimeout(() => {
