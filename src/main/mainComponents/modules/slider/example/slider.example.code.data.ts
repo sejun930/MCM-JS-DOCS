@@ -47,12 +47,12 @@ export const sliderCodeList: ExampleCodeListTypes = {
         propsName: "useAutoPlay",
       })}
     `,
-  useDragMode: () =>
+  useSwipeMode: () =>
     `
       ${sliderCommonsExampleCode.useAnimation} 
       ${getBoldCode({
-        code: sliderCommonsExampleCode.useDragMode,
-        propsName: "useDragMode",
+        code: sliderCommonsExampleCode.useSwipeMode,
+        propsName: "useSwipeMode",
       })} 
     `,
   firstPage: () =>

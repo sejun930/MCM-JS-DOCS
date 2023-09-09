@@ -66,11 +66,11 @@ export const sliderPropsInfo: Array<PropsModuleListType> = [
     },
   },
   {
-    name: "useDragMode",
+    name: "useSwipeMode",
     default: "{ sideMovePercent : 10~90 }",
     type: "Object",
     notice:
-      "슬라이더에 드래그 기능을 사용할 건지에 대한 여부를 결정합니다. <br />sideMovePercent에 정해진 퍼센트에 따라 해당 퍼센트 영역에 도달하면 이전 및 다음 페이지로 전환할 수 있습니다. (sideMovePercent에는 <b>최소 10, 최대 90</b>까지 지정할 수 있습니다.)",
+      "스와이프 기능을 사용할 수 있습니다. <br />sideMovePercent에 정해진 퍼센트에 따라 해당 퍼센트 영역에 도달하면 이전 및 다음 페이지로 전환됩니다. (sideMovePercent에는 <b>최소 10, 최대 90</b>까지 지정할 수 있습니다.)",
     code: {
       type: "obj",
       argu: [

@@ -54,8 +54,8 @@ export const sliderCommonsExampleCode = {
       ),
     }),
   }),
-  useDragMode: commonsCodeForm({
-    key: "useDragMode",
+  useSwipeMode: commonsCodeForm({
+    key: "useSwipeMode",
     type: "node",
     value: getCommonsHighlight.curly({
       className: "yellow",
