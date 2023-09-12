@@ -56,7 +56,7 @@ export default function _HowUseForm({
             <_Copy
               text={getExampleCode({
                 code,
-                children: exmapleContents,
+                children: exmapleContents || <></>,
                 idx: vers,
                 module,
                 vers,

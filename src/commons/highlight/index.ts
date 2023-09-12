@@ -130,6 +130,7 @@ export const getCommonsHighlight = {
         code?: string; // 직접 입력
         useArrow?: boolean; // 화살표 함수 사용 여부
         hasStartSpace?: boolean; // 태그와 onClick 사이의 공백 여부
+        props?: string; // 실행 이벤트의 props
       };
       endSpace?: string;
     }) =>
@@ -146,13 +147,21 @@ export const getCommonsHighlight = {
               `<span class='yellow'>()</span> <span class='blue2'>=></span> `) ||
             ""
           }${
-            clickEvent.eventName
-              ? `<span class='lightYellow'>${clickEvent.eventName}</span>${
-                  (clickEvent.useArrow && `<span class='yellow'>()</span>`) ||
+            clickEvent.code
+              ? clickEvent.code
+              : `<span class='lightYellow'>${clickEvent.eventName}</span>${
+                  (clickEvent.useArrow &&
+                    `<span class='yellow'>(</span>${
+                      clickEvent?.props || ""
+                    }<span class='yellow'>)</span>`) ||
                   ""
                 }`
-              : clickEvent.code
-          }<span class='blue'>}</span>`) ||
+          }<span class='blue'>${
+            clickEvent?.props
+              ? `
+      `
+              : ``
+          }}</span>`) ||
         ""
       }${
         (clickEvent &&
@@ -172,7 +181,7 @@ export const getCommonsHighlight = {
           `
     `) ||
         ""
-      } <span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
+      }<span><</span><span>/</span><span class='darkBlue'>button</span><span>></span>`,
   },
   // 쌍따옴표로 감싸진 문자열 출력
   string: (text: string, semicolon?: boolean) =>

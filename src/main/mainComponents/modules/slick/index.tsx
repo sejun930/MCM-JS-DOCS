@@ -1,15 +1,17 @@
-import { Slider } from "mcm-js-dev";
+import { Modal } from "mcm-js-dev";
 
-export default function SliderExamplePage() {
+export default function ModalExamplePage() {
   return (
-    <Slider
-      useAnimation={true}
-      pagination={{ showPageList: true }}
-      listMinHeight={{ web: "200px", mobile: "200px" }}
+    <button
+      onClick={() =>
+        Modal.open({
+          children: <span> 함수로 실행된 모달입니다. </span>,
+          showBGAnimation: true,
+          showModalOpenAnimation: true,
+        })
+      }
     >
-      <p> Hello </p>
-      <p> World </p>
-      <img src="이미지 주소" />
-    </Slider>
+      모달 실행하기
+    </button>
   );
 }

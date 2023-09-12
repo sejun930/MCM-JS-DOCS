@@ -5,6 +5,7 @@ import {
 } from "src/main/mainComponents/modules/modal/example/modal.example.code.data";
 import { tooltipReturnCommonsData } from "src/main/mainComponents/modules/tooltip/example/tooltip.example.code.data";
 import { sliderReturnCommonsData } from "src/main/mainComponents/modules/slider/example/slider.example.code.data";
+import { alertReturnCommonsData } from "src/main/mainComponents/modules/alert/example/alert.example.code.data";
 
 export interface ExampleCommonsTypes {
   code: string;
@@ -40,5 +41,7 @@ export const exampleCommonsReturnList = ({
       tooltipReturnCommonsData({ code, children, changeContent }),
     Slider: (code: string, children?: React.ReactNode | string) =>
       sliderReturnCommonsData({ code, children, changeContent }),
+    Alert: (code: string, children?: React.ReactNode | string) =>
+      alertReturnCommonsData({ code, children, changeContent }),
   };
 };

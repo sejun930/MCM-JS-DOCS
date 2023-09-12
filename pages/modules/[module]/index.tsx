@@ -1,6 +1,7 @@
 import MyModal from "src/main/mainComponents/modules/modal";
 import MyTooltip from "src/main/mainComponents/modules/tooltip";
 import MySlider from "src/main/mainComponents/modules/slider";
+import MyAlert from "src/main/mainComponents/modules/alert";
 
 import ErrorPage from "../../404";
 import {
@@ -37,4 +38,5 @@ export const ModuleComponentsList: { [key: string]: JSX.Element } = {
   Modal: <MyModal />,
   Tooltip: <MyTooltip />,
   Slider: <MySlider />,
+  Alert: <MyAlert />,
 };
