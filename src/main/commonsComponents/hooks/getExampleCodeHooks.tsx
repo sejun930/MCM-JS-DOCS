@@ -45,7 +45,7 @@ export default function getExampleCodeComponnet() {
     let str = getCommonsHighlight.import(
       [module],
       // 개발환경 및 배포환경 분기
-      `mcm-js`
+      process.env.NODE_ENV === "development" ? `mcm-js-dev` : `mcm-js`
     );
 
     // 추가 import 렌더하기

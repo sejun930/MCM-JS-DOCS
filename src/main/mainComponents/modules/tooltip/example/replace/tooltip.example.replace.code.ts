@@ -42,7 +42,7 @@ ${getCommonsHighlight.return(
       ${getCommonsHighlight.tag.button({
         children: `
         ${getCommonsHighlight.colors("툴팁 활성화 / 비활성화").text}
-     `,
+      `,
         clickEvent: {
           eventName: "toggleDisable",
         },
@@ -133,7 +133,7 @@ ${getCommonsHighlight.return(
       ${getCommonsHighlight.tag.button({
         children: `
         ${getCommonsHighlight.colors("툴팁 실행 / 종료").text}
-     `,
+      `,
         clickEvent: {
           eventName: "toggleIsOpen",
         },

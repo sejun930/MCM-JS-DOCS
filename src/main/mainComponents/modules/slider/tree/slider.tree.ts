@@ -27,7 +27,7 @@ export const sliderTreeList: Array<TreeModuleListTypes> = [
     tag: "ul",
     class: classList?.list || "mcm-slider-list",
     depth: 2,
-    role: "슬라이더에 렌더될 컴포넌트들을 감싸는 리스트 태그입니다. <br />여러개의 컴포넌트 중 현재 페이지의 컴포넌트만 보여줍니다. <br /><br /><b>firstPage</b>로 전달받은 페이지를 우선적으로 노출시킵니다.<br /><br /><b>useAnimation</b>이 전달되면 애니메이션 효과가 적용되는 태그이며, <br /><b>useDragMode</b>로 드래그 기능이 적용됩니다.<br /><br /><b>listMinHeight</b>로 전달된 min-height style이 직접 적용됩니다.",
+    role: "슬라이더에 렌더될 컴포넌트들을 감싸는 리스트 태그입니다. <br />여러개의 컴포넌트 중 현재 페이지의 컴포넌트만 보여줍니다. <br /><br /><b>firstPage</b>로 전달받은 페이지를 우선적으로 노출시킵니다.<br /><br /><b>useAnimation</b>이 전달되면 애니메이션 효과가 적용되는 태그이며, <br /><b>useSwipeMode</b>로 스와이프 기능이 적용됩니다.<br /><br /><b>listMinHeight</b>로 전달된 min-height style이 직접 적용됩니다.",
   },
   {
     tag: "li",

@@ -8,6 +8,7 @@ export const navList: Array<NavListTypes> = [
   { name: "Modal" },
   { name: "Tooltip" },
   { name: "Slider" },
+  { name: "Alert" },
   // { name: "Half", href: "halfPage" },
   // { name: "b" },
   // { name: "c" },

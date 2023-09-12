@@ -14,7 +14,7 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   // prettier-ignore
   {
     code: `
-  ${getCommonsHighlight.colors("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다").comment}
+  ${getCommonsHighlight.colors("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.").comment}
   ${getCommonsHighlight.state("isOpen", getCommonsHighlight.colors("false").bool)}
   
   ${getCommonsHighlight.colors("모달을 실행하는 함수입니다.").comment}
@@ -45,8 +45,7 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   },
   // prettier-ignore
   {
-    code: `
-    `,
+    code: ``,
   },
 ];
 
@@ -67,7 +66,7 @@ export const modalReturnCommonsData = ({
   return [
     getCommonsHighlight.tag.div(`
       ${getCommonsHighlight.tag.button({
-        children: getCommonsHighlight.colors("모달 실행하기").text,
+        children: getCommonsHighlight.colors("모달 실행하기 ").text,
         clickEvent: {
           eventName: "openModal",
         },
@@ -85,7 +84,7 @@ export const modalReturnCommonsData = ({
       })}
     `),
     `${getCommonsHighlight.tag.button({
-      children: getCommonsHighlight.colors("모달 실행하기").text,
+      children: getCommonsHighlight.colors("모달 실행하기 ").text,
       endSpace: `
       `,
       clickEvent: {

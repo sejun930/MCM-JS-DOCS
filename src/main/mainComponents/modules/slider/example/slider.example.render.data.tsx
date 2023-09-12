@@ -100,18 +100,17 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "드래그 기능 적용",
+    title: "스와이프 기능 적용",
     // isFull: true,
     contents: [
       {
-        remakrs:
-          "마우스(터치)로 드래그하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
+        remakrs: "스와이프하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
         content: sliderDefaultChildren,
-        code: sliderCodeList.useDragMode(),
+        code: sliderCodeList.useSwipeMode(),
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
-          useDragMode: {
+          useSwipeMode: {
             sideMovePercent: 30,
           },
         },
