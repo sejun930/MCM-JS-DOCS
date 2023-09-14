@@ -53,11 +53,13 @@ const getBoldCode = ({
   hide,
   propsName,
   id,
+  width,
 }: {
   code: string;
   hide?: boolean;
   propsName?: string;
   id?: string;
+  width?: string;
 }) => {
   if (typeof window === "undefined") return "";
   if (propsName) {
@@ -81,7 +83,9 @@ const getBoldCode = ({
   }
 
   if (hide) return code;
-  return `<button class="bold-code" onclick="window._propsList[window._propsVarList['props_${propsName}']]()" name="bold-code">${code}</button name="bold-code-end">`;
+  return `<button class="bold-code" style='width:${
+    width || "auto"
+  }' onclick="window._propsList[window._propsVarList['props_${propsName}']]()" name="bold-code">${code}</button name="bold-code-end">`;
 };
 
 // 강조 태그 삭제하기
@@ -97,6 +101,11 @@ const removeBoldTag = (code: string) => {
   return code;
 };
 
+// 위치 조정하기
+const moveLeft = (left: number, children: string) => {
+  return `<span style="position : absolute; left : ${left}px">${children}</span>`;
+};
+
 export {
   removeTag,
   getTap,
@@ -104,4 +113,5 @@ export {
   changeObjectTemplate,
   getBoldCode,
   removeBoldTag,
+  moveLeft,
 };

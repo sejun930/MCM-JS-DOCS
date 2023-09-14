@@ -1,6 +1,7 @@
 import { ModalType } from "mcm-js-dev/dist/components/modules/modal/component/modal.types";
 import { SliderType } from "mcm-js-dev/dist/components/modules/slider/components/slider.types";
 import { TooltipType } from "mcm-js-dev/dist/components/modules/tooltip/component/tooltip.types";
+import { AlertType } from "mcm-js-dev/dist/components/modules/alert/components/alert.types";
 
 import classList from "mcm-js-dev/dist/commons/class";
 
@@ -10,12 +11,13 @@ const getLibraries = () => {
   const getAllLibraries = require(`mcm-js${
     (process.env.NODE_ENV === "development" && "-dev") || ""
   }`);
-  delete getAllLibraries.__esModule;
+  // delete getAllLibraries.__esModule;
 
   type ModuleTypes = {
     Modal: ModalType;
     Tooltip: TooltipType;
     Slider: SliderType;
+    Alert: AlertType;
   };
 
   return getAllLibraries as ModuleTypes;
@@ -26,7 +28,7 @@ const getClassList = () => {
   const getClassList = require(`mcm-js${
     (process.env.NODE_ENV === "development" && "-dev") || ""
   }/dist/commons/class`);
-  delete getClassList.__esModule;
+  // delete getClassList.__esModule;
 
   return getClassList as typeof classList;
 };

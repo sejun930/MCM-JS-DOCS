@@ -127,11 +127,11 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
         },
       },
     ],
-    isFull: true,
+    isFull: { isHalf: false },
   },
   {
     title: "스타일 지정 (웹, 모바일)",
-    isFull: true,
+    isFull: { isHalf: false },
     contents: [
       {
         remakrs:
@@ -186,7 +186,7 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
   },
   {
     title: "수동 ON/OFF & Hover 이벤트 비활성화",
-    isFull: true,
+    isFull: { isHalf: false },
     contents: [
       {
         remakrs:

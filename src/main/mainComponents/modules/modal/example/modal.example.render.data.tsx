@@ -99,7 +99,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
   },
   {
     title: "스타일 적용 (웹, 모바일)",
-    isFull: true,
+    isFull: { isHalf: false },
     contents: [
       {
         remakrs:
@@ -175,7 +175,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
   },
   {
     title: "모달 닫기 관련",
-    isFull: true,
+    isFull: { isHalf: false },
     contents: [
       {
         remakrs: "닫기 버튼을 사용하지 않을 수도 있습니다.",

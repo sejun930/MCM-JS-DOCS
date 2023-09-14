@@ -13,9 +13,9 @@ export const Wrapper = styled.div`
   }
 
   .bold-code {
-    /* background-color: white; */
+    position: relative;
     border: dotted 2px white;
-    padding: 6px 8px;
+    padding: 8px 12px;
     transition: all 0.25s;
     text-align: left;
     line-height: 26px;
@@ -45,7 +45,7 @@ export const Wrapper = styled.div`
     }
 
     .bold-code {
-      padding: 2px 4px;
+      padding: 6px 10px;
 
       span {
         font-size: 14px;

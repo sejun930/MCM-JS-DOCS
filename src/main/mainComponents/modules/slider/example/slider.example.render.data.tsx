@@ -67,7 +67,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
   },
   {
     title: "자동 전환(Autoplay) 및 타이머 적용",
-    isFull: true,
+    isFull: { isHalf: false },
     contents: [
       {
         remakrs:

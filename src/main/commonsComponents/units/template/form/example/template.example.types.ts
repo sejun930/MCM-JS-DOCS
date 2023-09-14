@@ -2,6 +2,7 @@ import {
   ModalPropsType,
   TooltipPropsType,
   SliderPropsTypes,
+  AlertPropsType,
 } from "mcm-js-dev/dist/commons/types";
 import { ReactNode } from "react";
 
@@ -12,7 +13,8 @@ import { TooltipExampleCommonsTypes } from "src/main/mainComponents/modules/tool
 export type ModuleAllPropsTypes =
   | ModalPropsType
   | TooltipPropsType
-  | SliderPropsTypes;
+  | SliderPropsTypes
+  | AlertPropsType;
 
 // 여러 모듈들의 example commons 타입 종합
 export type ModuleAllExampleCommonsTypes =
@@ -43,6 +45,7 @@ export interface ExampleContentsTypes {
   };
   remakrs: string; // 예시 설명
   isError?: boolean; // 에러 여부
+  isFull?: boolean; // 블럭 처리 여부
   vers?: number;
 }
 
@@ -51,7 +54,10 @@ export interface ExampleIProps {
   title: string; // 예시 타이틀
   blockRemarks?: string; // 한 블록 범위의 설명 정보
   contents: ExampleContentsTypes | Array<ExampleContentsTypes>;
-  isFull?: boolean; // 화면을 분할해서 사용하지 않고 block 요소로 전체 사용
+  isFull?: {
+    // 화면을 분할해서 사용하지 않고 block 요소로 전체 사용
+    isHalf?: boolean; // 한 라인에 2개씩의 출력 여부
+  };
   isError?: {
     requiredList: Array<string>;
   }; // 에러케이스 여부

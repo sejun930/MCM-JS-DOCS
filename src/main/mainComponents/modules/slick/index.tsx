@@ -1,17 +1,17 @@
-import { Modal } from "mcm-js-dev";
+import { Alert } from "mcm-js-dev";
 
-export default function ModalExamplePage() {
+export default function AlertExamplePage() {
   return (
     <button
       onClick={() =>
-        Modal.open({
-          children: <span> 함수로 실행된 모달입니다. </span>,
-          showBGAnimation: true,
-          showModalOpenAnimation: true,
+        Alert.openAlert({
+          children: "이 알럿은 무한하게 실행됩니다.",
+          closeDelayTime: "infinite",
+          useCloseMode: true,
         })
       }
     >
-      모달 실행하기
+      Open Infinite Alert
     </button>
   );
 }

@@ -154,3 +154,9 @@ table {
 .focusing * {
   color: white !important;
 }
+
+@media (max-width: 767px) {
+  #mcm-alert-area {
+    top: 50px;
+  }
+}

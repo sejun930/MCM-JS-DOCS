@@ -123,6 +123,8 @@ export const ExampleListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: fit-content;
+  transition: all 0.35s;
 
   .example-remarks {
     font-size: 14px;
@@ -130,6 +132,10 @@ export const ExampleListWrapper = styled.div`
     color: #666666;
     line-height: 20px;
     letter-spacing: -0.01rem;
+  }
+
+  :hover {
+    background-color: antiquewhite;
   }
 
   @media ${breakPoints.mobileLarge} {
