@@ -70,7 +70,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
               !el.isHide && (
                 <ExampleContentsItems
                   key={`${module}_${idx + 1}`}
-                  isFull={el.isFull ?? false}
+                  isFull={el.isFull ? true : false}
                   className={(el.isFull && "example-list-wrapper") || undefined}
                 >
                   <_Title
@@ -80,9 +80,10 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                     {el.isError ? "❗ 모듈 호출시 에러 발생 예시" : el.title}
                   </_Title>
                   {el.blockRemarks && (
-                    <_PText className="example-block-remarks">
-                      {el.blockRemarks}
-                    </_PText>
+                    <_PTextWithHtml
+                      className="example-block-remarks"
+                      dangerouslySetInnerHTML={el.blockRemarks}
+                    />
                   )}
                   <ExampleResultList className="example-list-items">
                     {(Array.isArray(el.contents) // 콘텐츠가 여러개인지 검증
@@ -117,8 +118,8 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                         component.commonsProps = { ...commonsProps };
 
                         // 하위 컴포넌트들의 width 값 지정하기
-                        let width: string = "100%";
-                        if (el.isFull) {
+                        let width: string = el.isFull?.isHalf ? "50%" : "100%";
+                        if (el.isFull && !el.isFull?.isHalf) {
                           width = `${
                             100 /
                             ((Array.isArray(el.contents) &&
@@ -126,6 +127,8 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                               1)
                           }%`;
                         }
+
+                        if (component.isFull) width = "100%";
 
                         let code = component.code;
                         if (typeof code === "function") code = code();

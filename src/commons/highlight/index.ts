@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { changeObjectTemplate } from "src/main/commonsComponents/functional/code";
 
 // highlight가 적용된 코드 및 그외 기능 렌더시 사용
@@ -204,14 +205,22 @@ export const getCommonsHighlight = {
     children,
     className,
     curlyHide,
+    left,
   }: {
     children: string;
     className?: string;
     curlyHide?: boolean; // 중괄호 숨기기
+    left?: string; // 마지막 객체의 위치값 조정
   }) =>
     `${(!curlyHide && `<span class=${className || "blue"}>{</span>`) || ""}${
       children || ""
-    }${(!curlyHide && `<span class=${className || "blue"}>}</span>`) || ""}`,
+    }${
+      (!curlyHide &&
+        `<span class=${className || "blue"}${
+          (left && ` style="position : absolute; left:${left || "0px"}"`) || ""
+        }>}</span>`) ||
+      ""
+    }`,
   // 객체 key-value 폼
   obj: (key: string, value: string) =>
     `${getCommonsHighlight.colors(key + ":").key} ${value}`,
