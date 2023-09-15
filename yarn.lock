@@ -9970,10 +9970,10 @@ mcm-js-commons@^0.0.73:
     react-dom "18.2.0"
     uuid "^9.0.0"
 
-mcm-js-dev@0.0.31.15:
-  version "0.0.3-1.15"
-  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.3-1.15.tgz#df9d391c2995339ff6b9d84d1398874a29ae3cd2"
-  integrity sha512-TK8nNyu5IHJxeZ+dMg9yY44HMHfCYtcQ51/8iH1LllA2RTF96K8OGhn4Sqnmf9L5FZhF5Jk026ekoOj8kVkPjQ==
+mcm-js-dev@0.0.31.16:
+  version "0.0.3-1.16"
+  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.3-1.16.tgz#5bae912846c5ca7cc0fbf4722938a860a3535a1f"
+  integrity sha512-rOJ8Tjw2E6DJtKrSUomT+YMzSS84Q3UWS2ngGqWgD906n5Xa5993hy4N+KvVFn9z6EeEA5vdKn0FZ3XAzhFL3Q==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"

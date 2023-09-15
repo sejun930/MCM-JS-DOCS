@@ -147,7 +147,7 @@ export const alertCommonsExampleCode = {
               getCommonsHighlight.string("#6527BE")
             )}${getCommonsHighlight.comma()} ${
               getCommonsHighlight.colors(
-                "알럿의 아이콘(이모지)의 색상을 설정합니다."
+                "알럿의 아이콘(이모지)의 색상을 설정합니다. (null 입력시 기존 색상 유지)"
               ).comment
             }
             ${getCommonsHighlight.obj(

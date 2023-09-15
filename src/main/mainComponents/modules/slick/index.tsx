@@ -4,14 +4,12 @@ export default function AlertExamplePage() {
   return (
     <button
       onClick={() =>
-        Alert.openAlert({
-          children: "이 알럿은 무한하게 실행됩니다.",
-          closeDelayTime: "infinite",
-          useCloseMode: true,
+        Alert.closeAlert({
+          className: "Test", // 화면 전체의 "Test" ClassName을 가지는 모든 알럿을 종료합니다.
         })
       }
     >
-      Open Infinite Alert
+      Close with "Test" className Alert
     </button>
   );
 }

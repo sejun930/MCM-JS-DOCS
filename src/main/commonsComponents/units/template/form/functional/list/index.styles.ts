@@ -45,7 +45,7 @@ export const TitleWrapper = styled.div`
 `;
 
 export const PropsInfoWrapper = styled.div`
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 export const PropsInfoItems = styled.div`
@@ -84,7 +84,7 @@ export const PropsInfoList = styled.div`
   }
 
   .props-list-wrapper {
-    margin-top: 10px;
+    margin-top: 16px;
   }
 
   @media ${breakPoints.mobileLarge} {
@@ -125,5 +125,5 @@ export const Info = styled.li`
 export const ExampleCodeBtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 20px;
 `;
