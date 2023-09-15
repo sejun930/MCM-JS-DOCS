@@ -8,14 +8,46 @@ import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { _Button } from "mcm-js-commons";
 const { Alert } = getLibraries();
 
-export default function MyAlertExample(props: ExampleContentsTypes) {
-  const _props = { ...props.commonsProps, ...props.addProps } as AlertPropsType;
+export default function MyAlertExample(
+  props: ExampleContentsTypes & {
+    btnText?: string;
+    func?: "openAlert" | "closeAlert" | "clearAlert";
+    funcProps?: any;
+  }
+) {
+  const { func, funcProps, btnText } = props;
+  const _props = {
+    ...props,
+    ...props.commonsProps,
+    ...props.addProps,
+  } as AlertPropsType;
 
-  return (
-    <Button onClickEvent={() => Alert.openAlert({ ..._props })}>
-      {props.children || "Open Alert"}
-    </Button>
-  );
+  // 버튼에 출력될 텍스트
+  const _btnText = btnText || props.children;
+
+  const renderAlertComponents = () => {
+    if (!func || func === "openAlert") {
+      return (
+        <Button onClickEvent={() => Alert.openAlert({ ..._props })}>
+          {_btnText || "Open Alert"}
+        </Button>
+      );
+    } else if (func === "closeAlert") {
+      return (
+        <Button onClickEvent={() => Alert.closeAlert({ ..._props })}>
+          {_btnText || "Close Alert"}
+        </Button>
+      );
+    } else if (func === "clearAlert") {
+      return (
+        <Button onClickEvent={() => Alert.clearAlert()}>
+          {_btnText || "Clear Alert"}
+        </Button>
+      );
+    }
+  };
+
+  return renderAlertComponents();
 }
 
 export const Button = styled(_Button)`

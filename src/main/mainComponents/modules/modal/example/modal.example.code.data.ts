@@ -53,8 +53,8 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
 export const modalReturnCommonsData = ({
   code,
   children,
-  changeContent, // content form 사용 여부, true일 경우 사용하지 않음
-  funcName, // 사용될 함수명
+  changeContent,
+  funcName,
 }: {
   code: string;
   children?: React.ReactNode | string;

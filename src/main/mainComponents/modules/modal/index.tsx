@@ -10,6 +10,7 @@ import {
   modalFunctionalData,
 } from "./example/modal.example.render.data";
 import { modalCodeList } from "./example/modal.example.code.data";
+import { modalFunctionalList } from "./functional";
 
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
@@ -78,13 +79,16 @@ export default function MyModal() {
               initProps={modalExampleInitProps}
               commonsProps={commonsProps}
             />
-            {modalFunctionalData[vers] && (
-              <_FunctionalForm propsRef={propsRef} />
+            {modalFunctionalData[vers] && vers === 1 && (
+              <_FunctionalForm
+                functionalList={modalFunctionalList}
+                propsRef={propsRef}
+              />
             )}
           </>
         )) || <></>}
+        <_PropsForm propsRef={propsRef} />
       </ModulesInfoWrapper>
-      <_PropsForm propsRef={propsRef} />
       <_TreeForm />
       <_CommentsForm />
     </Template>

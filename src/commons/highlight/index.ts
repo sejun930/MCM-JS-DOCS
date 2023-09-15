@@ -270,20 +270,22 @@ export const getCommonsHighlight = {
   function: ({
     funcName,
     setFunc,
+    removeSemiColon,
   }: {
     funcName?: string;
     setFunc?: {
       color?: string;
       children: string;
     };
+    removeSemiColon?: boolean;
   }) =>
     `<span class='function'>${funcName || ""}</span>${
       (setFunc &&
         `<span class=${setFunc.color || "deepPurple"}>(</span>${
           setFunc.children
-        }<span class=${
-          setFunc.color || "deepPurple"
-        }>)</span>${getCommonsHighlight.semiColon()}`) ||
+        }<span class=${setFunc.color || "deepPurple"}>)</span>${
+          (!removeSemiColon && getCommonsHighlight.semiColon()) || ""
+        }`) ||
       ""
     }`,
   // 화살표 함수 선언 form
@@ -357,6 +359,10 @@ export const getCommonsHighlight = {
       varName: `<span class='blue1'>${children}</span>`, // 변수의 이름명 (진한색)
       varName2: `<span class='skyblue'>${children}</span>`, // 변수의 이름명 (약한색)
       number: `<span class="number">${children}</span>`, // 숫자
+      method: (method?: string) =>
+        `<span class="blue3">${children}</span><span class="lightYellow">.${
+          method || ""
+        }</span>`, // 숫자
     };
   },
 };
@@ -375,18 +381,20 @@ export const commonsCodeForm = ({
   key,
   value,
   type,
+  changeCode,
 }: {
   form?: "props" | "object";
   key: string;
   value?: string;
   type?: CommonsCodeFormType;
+  changeCode?: string;
 }) => {
   let code = "";
   const isObject = form === "object";
 
   // 기본 폼 구성 (props, object 형태 중 선택)
   const makeForm = (propsValue?: string) => {
-    code = getCommonsHighlight.props(key, propsValue || "");
+    code = changeCode || getCommonsHighlight.props(key, propsValue || "");
     if (isObject) code = changeObjectTemplate(code, true);
 
     return code;

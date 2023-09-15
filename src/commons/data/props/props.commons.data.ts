@@ -29,6 +29,7 @@ export interface PropsModuleListType {
   notice: string;
   isRequired?: boolean;
   code: PropsCodeTypes;
+  changeCode?: string; // 대체해서 사용될 코드 (있다면 이 코드를 먼저 출력)
   // code: string | Array<string>;
 }
 

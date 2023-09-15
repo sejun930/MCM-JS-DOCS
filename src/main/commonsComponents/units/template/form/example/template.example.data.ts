@@ -9,5 +9,6 @@ export const renderTemplateList: {
   Modal: MyModalExample,
   Tooltip: MyTooltipExample,
   Slider: MySliderExample,
+  // @ts-ignore
   Alert: MyAlertExample,
 };

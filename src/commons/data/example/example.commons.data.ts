@@ -42,6 +42,6 @@ export const exampleCommonsReturnList = ({
     Slider: (code: string, children?: React.ReactNode | string) =>
       sliderReturnCommonsData({ code, children, changeContent }),
     Alert: (code: string, children?: React.ReactNode | string) =>
-      alertReturnCommonsData({ code, children, changeContent }),
+      alertReturnCommonsData({ code, children, changeContent, funcName }),
   };
 };

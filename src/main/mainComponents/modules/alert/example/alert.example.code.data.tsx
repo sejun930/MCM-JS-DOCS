@@ -6,10 +6,10 @@ import { alertCommonsExampleCode } from "./alert.example.commons.code";
 
 export const alertCodeList: ExampleCodeListTypes = {
   default: () =>
-    getCommonsHighlight.getComma([alertCommonsExampleCode.children("hello")]),
+    getCommonsHighlight.getComma([alertCommonsExampleCode.children("Hello")]),
   basic: () =>
     getCommonsHighlight.getComma([
-      getBoldCode({ code: alertCommonsExampleCode.children("hello") }),
+      getBoldCode({ code: alertCommonsExampleCode.children("Hello") }),
     ]),
   delay: () =>
     `${getCommonsHighlight.getComma([
@@ -74,24 +74,28 @@ export const alertReturnCommonsData = ({
   code,
   children,
   changeContent,
+  funcName,
 }: {
   code: string;
   children?: React.ReactNode | string;
   changeContent?: string;
+  funcName?: string;
 }) => {
-  return getCommonsHighlight.tag.button({
-    children: ` ${children}`,
-    clickEvent: {
-      hasStartSpace: true,
-      eventName: `
-        <span class="blue3">Alert</span>.openAlert`,
-      useArrow: true,
-      props: getCommonsHighlight.curly({
-        className: "deepPurple",
-        children: `
-          ${code}
+  return [
+    getCommonsHighlight.tag.button({
+      children: ` ${children}`,
+      clickEvent: {
+        hasStartSpace: true,
+        eventName: `
+        <span class="blue3">Alert</span>.${funcName || "openAlert"}`,
+        useArrow: true,
+        props: getCommonsHighlight.curly({
+          className: "deepPurple",
+          children: `
+          ${changeContent || code}
         `,
-      }),
-    },
-  });
+        }),
+      },
+    }),
+  ];
 };

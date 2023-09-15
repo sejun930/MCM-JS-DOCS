@@ -1,17 +1,27 @@
-import { Alert } from "mcm-js-dev";
+import { Modal } from "mcm-js-dev";
 
-export default function AlertExamplePage() {
+export default function ModalExamplePage() {
   return (
     <button
       onClick={() =>
-        Alert.openAlert({
-          children: "이 알럿은 무한하게 실행됩니다.",
-          closeDelayTime: "infinite",
-          useCloseMode: true,
+        Modal.open({
+          children: (
+            <button
+              onClick={() => {
+                alert("모달을 종료합니다.");
+                Modal.close({ id: "modal" });
+              }}
+            >
+              모달 종료하기
+            </button>
+          ),
+          id: "modal",
+          showBGAnimation: true,
+          showModalOpenAnimation: true,
         })
       }
     >
-      Open Infinite Alert
+      모달 실행하기
     </button>
   );
 }

@@ -13,7 +13,7 @@ import {
 import { MutableRefObject } from "react";
 import { getUuid } from "src/main/commonsComponents/functional";
 
-import { FunctionalListType } from "src/commons/data/functional/functional.commons.data";
+import { FunctionalListType } from "..";
 import { _Title, _PText } from "mcm-js-commons";
 import ModulePropsListFormPage from "../../props/list";
 import _Copy from "src/main/commonsComponents/units/copy";
@@ -62,30 +62,33 @@ export default function FunctionalDetailInfoListPage({
               <_PText className="function-remarks">{el.remakrs}</_PText>
             </TitleWrapper>
             <PropsInfoWrapper>
-              <PropsInfoItems>
-                <_PText className="props-title">- 📤 Props</_PText>
-                <PropsInfoList>
-                  {el.props.isSameContents ? (
-                    <_PText className="same-props">
-                      본문과 동일한 props 입니다.{" "}
-                      <button
-                        className="move-props-list"
-                        type="button"
-                        onClick={movePropsPage}
-                      >
-                        Props List
-                      </button>
-                      를 확인해주세요.
-                    </_PText>
-                  ) : (
-                    <ModulePropsListFormPage
-                      list={el.props.list}
-                      vers={vers || 0}
-                      isFunctional={isFunctional || false}
-                    />
-                  )}
-                </PropsInfoList>
-              </PropsInfoItems>
+              {((el.props.list && el.props.list.length) ||
+                el.props.isSameContents) && (
+                <PropsInfoItems>
+                  <_PText className="props-title">- 📤 Props</_PText>
+                  <PropsInfoList>
+                    {el.props.isSameContents ? (
+                      <_PText className="same-props">
+                        본문과 동일한 props 입니다.{" "}
+                        <button
+                          className="move-props-list"
+                          type="button"
+                          onClick={movePropsPage}
+                        >
+                          Props List
+                        </button>
+                        를 확인해주세요.
+                      </_PText>
+                    ) : (
+                      <ModulePropsListFormPage
+                        list={el.props.list || []}
+                        vers={vers || 0}
+                        isFunctional={isFunctional || false}
+                      />
+                    )}
+                  </PropsInfoList>
+                </PropsInfoItems>
+              )}
               <PropsInfoItems>
                 <_PText className="props-title">- 📝 Example</_PText>
                 {el?.setExampleCode && (
@@ -115,7 +118,7 @@ export default function FunctionalDetailInfoListPage({
               </PropsInfoItems>
               {el.info && el.info.length && (
                 <PropsInfoItems>
-                  <_PText className="props-title">- 💡 사용시 참고사항 </_PText>
+                  <_PText className="props-title">- 💡 사용시 주의사항 </_PText>
                   <InfoListWrapper>
                     {el.info.map((infoStr, key2) => (
                       <Info

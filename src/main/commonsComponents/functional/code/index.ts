@@ -42,7 +42,7 @@ const copyCode = (text: string) => {
 
 // 컴포넌트 props code 형태를 객체 code 형태로 변경
 const changeObjectTemplate = (code: string, hideComma?: boolean) => {
-  return `${code.replace(">=<", ">: <")}${
+  return `${(code && code.replace(">=<", ">: <")) || ""}${
     (!hideComma && getCommonsHighlight.comma()) || ""
   }`;
 };

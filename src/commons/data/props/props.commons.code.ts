@@ -10,8 +10,11 @@ export const getPropsForm = (
   info: PropsModuleListType,
   isObject?: boolean
 ): PropsModuleListResultType => {
-  const { name, type, notice, isRequired, code } = info;
+  const { name, type, notice, isRequired, code, changeCode } = info;
   const _default = info.default;
+
+  let _code: PropsCodeTypes | string = { ...code };
+  if (changeCode) _code = changeCode as string;
 
   return {
     name,
@@ -19,7 +22,11 @@ export const getPropsForm = (
     default: _default,
     notice,
     isRequired,
-    code: propsCommonsCodeList({ key: name, isObject, code: { ...code } }),
+    code: propsCommonsCodeList({
+      key: name,
+      isObject,
+      code: _code,
+    }),
   };
 };
 
@@ -31,9 +38,15 @@ export const propsCommonsCodeList = ({
 }: {
   key: string;
   isObject?: boolean;
-  code: PropsCodeTypes;
+  code: PropsCodeTypes | string;
 }): string => {
-  const { type, argu } = code;
+  let [type, argu] = ["", ""];
+  if (typeof code === "object") {
+    type = code.type;
+    argu = code.argu;
+  }
+
+  // const { type, argu } = code;
   const getKey = (value: string) =>
     commonsCodeForm({
       key,
@@ -96,9 +109,14 @@ export const propsCommonsCodeList = ({
       ),
   };
 
-  // @ts-ignore
-  let result = typeof func[type] === "function" ? func[type](argu) : func[type];
-  if (isObject) result = changeObjectTemplate(result);
+  let result: string = "";
+
+  if (typeof code === "string") result = code;
+  else if (type)
+    // @ts-ignore
+    result = typeof func[type] === "function" ? func[type](argu) : func[type];
+
+  if (isObject) result = changeObjectTemplate(result, typeof code === "string");
 
   return result;
 };
