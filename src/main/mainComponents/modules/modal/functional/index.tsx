@@ -22,7 +22,7 @@ const modalFunctionalList: Array<FunctionalListType> = [
         hasStartSpace: true,
         code: `
         ${getBoldCode({
-          code: `<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open</span>`,
+          code: `${getCommonsHighlight.colors("Modal").method("open")}`,
           id: "modal-open-functional-wrapper",
           propsName: "modalOpen",
         })}<span class="lightYellow">(</span><span class='deepPurple'>{</span>
@@ -65,10 +65,25 @@ const modalFunctionalList: Array<FunctionalListType> = [
             name: "id",
             notice: "해당 id 선택자로 설정된 모달을 종료합니다.",
             type: "String",
-            default: "-",
+            default: '""',
             code: {
               type: "string",
             },
+            changeCode: `${getCommonsHighlight
+              .colors("Modal")
+              .method()}${getCommonsHighlight.function({
+              funcName: "close",
+              setFunc: {
+                color: "blue",
+                children: getCommonsHighlight.curly({
+                  className: "yellow",
+                  children: ` ${getCommonsHighlight.obj(
+                    "id",
+                    getCommonsHighlight.string("")
+                  )} `,
+                }),
+              },
+            })}`,
           },
           true
         ),
@@ -77,10 +92,25 @@ const modalFunctionalList: Array<FunctionalListType> = [
             name: "className",
             notice: "해당 class 선택자로 설정된 모달을 종료합니다.",
             type: "String",
-            default: "-",
+            default: '""',
             code: {
               type: "string",
             },
+            changeCode: `${getCommonsHighlight
+              .colors("Modal")
+              .method()}${getCommonsHighlight.function({
+              funcName: "close",
+              setFunc: {
+                color: "blue",
+                children: getCommonsHighlight.curly({
+                  className: "yellow",
+                  children: ` ${getCommonsHighlight.obj(
+                    "className",
+                    getCommonsHighlight.string("")
+                  )} `,
+                }),
+              },
+            })}`,
           },
           true
         ),
@@ -91,14 +121,14 @@ const modalFunctionalList: Array<FunctionalListType> = [
       clickEvent: {
         hasStartSpace: true,
         code: `
-        <span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>open(</span><span class='deepPurple'>{</span>
+        <span class='blue3'>Modal</span><span class='lightYellow'>.open(</span><span class='deepPurple'>{</span>
         ${getCommonsHighlight.getComma([
           `  <span class='skyblue'>children:</span> <span class='blue'>(</span>
             <span><</span><span class='darkBlue'>button</span>
               <span class='skyblue'>onClick</span><span class='lightGray'>=</span><span class='yellow'>{</span><span class='deepPurple'>()</span> <span class='blue2'>=></span> <span class='deepPurple'>{</span>
                 <span class='lightYellow'>alert</span><span class='blue'>(</span><span class='lightOrange'>"모달을 종료합니다."</span><span class='blue'>)</span><span class='lightGray'>;</span>
                 ${getBoldCode({
-                  code: `<span class='blue3'>Modal</span><span class='lightGray'>.</span><span class='lightYellow'>close</span><span class='blue'>(</span><span class='yellow'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span> <span class='yellow'>}</span><span class='blue'>)</span><span class='lightGray'>;</span>`,
+                  code: `<span class='blue3'>Modal</span><span class='lightYellow'>.close</span><span class='blue'>(</span><span class='yellow'>{</span> <span class='skyblue'>id:</span> <span class='lightOrange'>"modal"</span> <span class='yellow'>}</span><span class='blue'>)</span><span class='lightGray'>;</span>`,
                   id: "modal-close-functional-wrapper",
                   propsName: "modalClose",
                 })}
