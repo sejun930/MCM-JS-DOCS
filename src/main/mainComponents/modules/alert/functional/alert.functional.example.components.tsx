@@ -54,6 +54,12 @@ export const ExampleWrapper = styled.div`
       width: 260px;
     }
   }
+
+  @media ${breakPoints.mobileSmall} {
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 export const ExampleItems = styled.div`
@@ -71,6 +77,12 @@ export const ExampleItems = styled.div`
     align-items: center;
     gap: 0px 10px;
     font-size: 14px;
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    p {
+      white-space: pre;
+    }
   }
 `;
 
