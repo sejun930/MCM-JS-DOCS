@@ -1,11 +1,7 @@
-import { getPropsForm } from "src/commons/data/props/props.commons.code";
-import {
-  PropsModuleListResultType,
-  PropsModuleListType,
-} from "src/commons/data/props/props.commons.data";
 import { getCommonsHighlight } from "src/commons/highlight";
+import { PropsModuleListType } from "src/main/commonsComponents/units/template/form/props/props.types";
 
-export const sliderPropsInfo: Array<PropsModuleListType> = [
+export const sliderPropsList: Array<PropsModuleListType> = [
   {
     name: "children",
     default: "[]",
@@ -107,6 +103,3 @@ export const sliderPropsInfo: Array<PropsModuleListType> = [
     },
   },
 ];
-
-export const sliderPropsList: Array<PropsModuleListResultType> =
-  sliderPropsInfo.map((el) => getPropsForm(el, false));

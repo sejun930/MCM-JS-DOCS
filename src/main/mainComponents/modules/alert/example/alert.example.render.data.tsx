@@ -126,7 +126,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
   {
     title: "컨셉 (concept)",
     blockRemarks:
-      "메세지의 의도에 따라 알럿의 스타일을 변경할 수 있습니다. <br />또한 원하는 스타일로 커스텀이 가능합니다.",
+      "메세지의 의도에 따라 알럿의 스타일을 변경할 수 있습니다. <br />원하는 스타일의 컨셉으로 직접 커스텀 할 수도 있습니다.",
     isFull: { isHalf: true },
     contents: [
       {

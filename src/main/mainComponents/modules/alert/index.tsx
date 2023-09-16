@@ -12,6 +12,7 @@ import {
 } from "./example/alert.example.render.data";
 import { getCommonsHighlight } from "src/commons/highlight";
 import { alertFunctionalList } from "./functional";
+import { alertPropsList } from "./props/alert.propsList";
 
 export default function MyAlert() {
   return (
@@ -27,7 +28,7 @@ export default function MyAlert() {
         commonsProps={initAlertCommonsProps}
       />
       <_FunctionalForm functionalList={alertFunctionalList} />
-      {/* <_PropsForm /> */}
+      <_PropsForm list={alertPropsList} isObject={true} />
     </Template>
   );
 }

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
+import { PropsModuleListResultType } from "../props/props.types";
 // import { FunctionalListType } from "src/commons/data/functional/functional.commons.data";
 
 import { useRecoilState } from "recoil";

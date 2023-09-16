@@ -4,7 +4,7 @@ import {
   PropsModuleListType,
   PropsModuleListResultType,
   PropsCodeTypes,
-} from "./props.commons.data";
+} from "src/main/commonsComponents/units/template/form/props/props.types";
 
 export const getPropsForm = (
   info: PropsModuleListType,
@@ -69,9 +69,9 @@ export const propsCommonsCodeList = ({
     bool: getKey(
       !isObject
         ? getCommonsHighlight.curly({
-            children: getCommonsHighlight.colors("false").bool,
+            children: getCommonsHighlight.colors(argu || "false").bool,
           })
-        : getCommonsHighlight.colors("false").bool
+        : getCommonsHighlight.colors(argu || "false").bool
     ),
     // 문자열
     string: (text?: string) => getKey(getCommonsHighlight.string(text || "")),
@@ -82,11 +82,14 @@ export const propsCommonsCodeList = ({
           children: getCommonsHighlight.curly({
             curlyHide: isObject,
             className: "yellow",
-            children: `
+            children:
+              (list.length &&
+                `
  ${getCommonsHighlight.getComma(
    list.map((el) => ` ${getCommonsHighlight.obj(el.key, el.value)}`)
  )}
-`,
+`) ||
+              "",
           }),
         })
       ),
@@ -107,6 +110,8 @@ export const propsCommonsCodeList = ({
           className: "deepPurple",
         })
       ),
+    // 개별 설정
+    custom: () => getKey(argu || ""),
   };
 
   let result: string = "";

@@ -1,9 +1,5 @@
-import { getPropsForm } from "src/commons/data/props/props.commons.code";
-import {
-  PropsModuleListResultType,
-  PropsModuleListType,
-} from "src/commons/data/props/props.commons.data";
 import { getCommonsHighlight } from "src/commons/highlight";
+import { PropsModuleListType } from "src/main/commonsComponents/units/template/form/props/props.types";
 
 const tooltipStylesCode = [
   { key: "backgroundColor", value: getCommonsHighlight.string("") },
@@ -24,7 +20,7 @@ const tooltipStylesCode = [
   },
 ];
 
-const tooltipPropsInfo: Array<PropsModuleListType> = [
+export const tooltipPropsList: Array<PropsModuleListType> = [
   {
     name: "children",
     default: '""',
@@ -156,6 +152,3 @@ const tooltipPropsInfo: Array<PropsModuleListType> = [
     },
   },
 ];
-
-export const tooltipPropsList: Array<PropsModuleListResultType> =
-  tooltipPropsInfo.map((el) => getPropsForm(el, false));
