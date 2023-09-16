@@ -17,7 +17,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "제일 기본적으로 실행되는 알럿입니다. <br /><b>children</b> props로 출력될 알럿 메세지를 설정합니다.",
+          "제일 기본적으로 실행되는 Alert입니다. <br /><b>children</b> props로 출력될 Alert 메세지를 설정합니다.",
         content: initAlertContents("Open Basic Alert"),
         code: alertCodeList.basic(),
         children: "Open Basic Alert",
@@ -30,7 +30,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "알럿의 종료 시간(1/1000ms)을 조절할 수 있습니다. <br />위 버튼으로 실행된 알럿은 <b>10초(10000ms) 후</b>에 종료됩니다.",
+          "Alert의 종료 시간(1/1000ms)을 조절할 수 있습니다. <br />위 버튼으로 실행된 Alert은 <b>10초(10000ms) 후</b>에 종료됩니다.",
         content: initAlertContents("Alert closing in 10 seconds"),
         code: alertCodeList.delay(),
         children: "Alert closing in 10 seconds",
@@ -44,7 +44,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
   {
     title: "스타일 지정",
     blockRemarks:
-      "알럿의 전체 스타일 및 <b>웹(768px 이상)</b>과 <b>모바일(767px 이하)</b>의 스타일을 분기하여 설정할 수 있습니다.",
+      "Alert의 전체 스타일 및 <b>웹(768px 이상)</b>과 <b>모바일(767px 이하)</b>의 스타일을 분기하여 설정할 수 있습니다.",
     isFull: { isHalf: false },
     contents: [
       {
@@ -96,11 +96,11 @@ export const alertExampleList = (): Array<ExampleIProps> => [
   },
   {
     title: "수동 종료 (+ 스와이프)",
-    blockRemarks: "사용자 임의로 알럿을 종료할 수 있는 기능을 제공합니다.",
+    blockRemarks: "사용자 임의로 Alert을 종료할 수 있는 기능을 제공합니다.",
     isFull: { isHalf: false },
     contents: [
       {
-        remakrs: "실행된 알럿을 클릭하면 종료할 수 있습니다.",
+        remakrs: "실행된 Alert을 클릭하면 종료할 수 있습니다.",
         content: initAlertContents("Alert Close Mode"),
         code: alertCodeList.close(),
         children: "Alert Close Mode",
@@ -111,7 +111,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
         },
       },
       {
-        remakrs: "실행된 알럿을 좌우로 스와이프 하면 종료할 수 있습니다.",
+        remakrs: "실행된 Alert을 좌우로 스와이프 하면 종료할 수 있습니다.",
         content: initAlertContents("Alert Close Swipe Mode"),
         code: alertCodeList.close(true),
         children: "Alert Close Swipe Mode",
@@ -126,7 +126,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
   {
     title: "컨셉 (concept)",
     blockRemarks:
-      "메세지의 의도에 따라 알럿의 스타일을 변경할 수 있습니다. <br />원하는 스타일의 컨셉으로 직접 커스텀 할 수도 있습니다.",
+      "메세지의 의도에 따라 Alert의 스타일을 변경할 수 있습니다. <br />원하는 스타일의 컨셉으로 직접 커스텀 할 수도 있습니다.",
     isFull: { isHalf: true },
     contents: [
       {
@@ -188,7 +188,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
       },
       {
         remakrs:
-          "컨셉을 원하는대로 커스텀 할 수 있습니다. <br />알럿의 색상과 아이콘의 이모지, 색상, 크기를 직접 설정할 수 있습니다.",
+          "컨셉을 원하는대로 커스텀 할 수 있습니다. <br />Alert 테두리 색상과 <b>아이콘의 이모지, 색상, 크기</b> 및 <b>Alert 메세지의 색상, 크기, 굵기</b>를 직접 설정할 수 있습니다.",
         content: initAlertContents("Open Custom Concept Alert"),
         isFull: true,
         code: alertCodeList.custom(),
@@ -204,6 +204,11 @@ export const alertExampleList = (): Array<ExampleIProps> => [
                 color: "#6527BE",
                 size: 12,
               },
+              text: {
+                color: "#6527BE",
+                size: 20,
+                weight: 700,
+              },
             },
           },
         },
@@ -215,28 +220,28 @@ export const alertExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          '<b>"id"</b> props 값을 설정하면 하나의 알럿만 실행이 가능합니다. <br />(해당 알럿이 종료되기 전까지 실행되지 않습니다.)',
+          '<b>"id"</b> props 값을 설정하면 하나의 Alert만 실행이 가능합니다. <br />(해당 Alert이 종료되기 전까지 실행되지 않습니다.)',
         content: initAlertContents("Open Only One Alert"),
         code: alertCodeList.id(),
         children: "Open Only One Alert",
         addProps: {
-          children: "이 알럿은 한개만 오픈됩니다.",
+          children: "이 Alert은 한개만 오픈됩니다.",
           id: "only",
         },
       },
     ],
   },
   {
-    title: "종료되지 않는 알럿",
+    title: "종료되지 않는 Alert",
     contents: [
       {
         remakrs:
-          '<b>"closeDelayTime"</b> props에 <b>"infinite"</b>를 전달하면 수동으로 종료되기 전까지 <br />무한하게 실행되는 알럿을 설정할 수 있습니다.',
+          '<b>"closeDelayTime"</b> props에 <b>"infinite"</b>를 전달하면 수동으로 종료되기 전까지 <br />무한하게 실행되는 Alert을 설정할 수 있습니다.',
         content: initAlertContents("Open Infinite Alert"),
         code: alertCodeList.infinite(),
         children: "Open Infinite Alert",
         addProps: {
-          children: "이 알럿은 무한하게 실행됩니다.",
+          children: "이 Alert은 무한하게 실행됩니다.",
           closeDelayTime: "infinite",
           useCloseMode: true,
         },

@@ -15,9 +15,13 @@ export default function AlertExamplePage() {
                 size: 10,
                 color: "",
               },
+              text: {
+                color: "",
+                size: 16,
+                weight: 300,
+              },
             },
           },
-          useCloseMode: false,
         })
       }
     >

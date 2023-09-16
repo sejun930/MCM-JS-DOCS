@@ -74,20 +74,25 @@ export const alertPropsList: Array<PropsModuleListType> = [
             icons : {
                 src : "",
                 size : 10,
-                color : ""
-            }
+                color : "",
+            },
+            text : {
+                color : "",
+                size : 16,
+                weight : 300
+            },
         }
     }`,
     type: "Object",
     notice:
-      'Alert의 사용 용도에 맞게 컨셉을 지정할 수 있습니다. <br /><b>"type"</b> key 값을 이용해 원하는 컨셉을 지정할 수 있으며, <br /><b>"custom"</b> key 값을 이용해 원하는 컨셉을 커스텀 할 수 있습니다. <br /><span style="color : gray">(custom.color : Alert 테두리 색상, custom.color : Alert 메세지 색상, custom.icon.src : Alert 이모지, custom.icon.size : Alert 이모지 크기, custom.icon.color : Alert 이모지 색상)</span>',
+      'Alert의 사용 용도에 맞게 컨셉을 지정할 수 있습니다. <br /><b>"type"</b> key 값을 이용해 원하는 컨셉을 지정할 수 있으며, <br /><b>"custom"</b> key 값을 이용해 원하는 컨셉을 커스텀 할 수 있습니다. <br />',
     isRequired: false,
     code: {
       type: "obj",
       argu: [
         {
           key: "type",
-          value: getCommonsHighlight.string(""),
+          value: getCommonsHighlight.string("custom"),
         },
         {
           key: "custom",
@@ -112,6 +117,27 @@ export const alertPropsList: Array<PropsModuleListType> = [
           ),
         `     ` +
           getCommonsHighlight.obj("color", getCommonsHighlight.string("")),
+      ])}
+    `,
+      })
+    )}${getCommonsHighlight.comma()}
+    ${getCommonsHighlight.obj(
+      "text",
+      getCommonsHighlight.curly({
+        className: "deepPurple",
+        children: `
+      ${getCommonsHighlight.getComma([
+        getCommonsHighlight.obj("color", getCommonsHighlight.string("")),
+        `     ` +
+          getCommonsHighlight.obj(
+            "size",
+            getCommonsHighlight.colors("16").number
+          ),
+        `     ` +
+          getCommonsHighlight.obj(
+            "weight",
+            getCommonsHighlight.colors("300").number
+          ),
       ])}
     `,
       })

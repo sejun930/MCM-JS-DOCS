@@ -8,12 +8,15 @@ import { moduleRemarksList } from "./data";
 import {
   initIndexList,
   moduleIndexList,
+  getModuleIndexList,
 } from "src/commons/data/index/index.commons.data";
 import { _PTextWithHtml, _Title, _Image } from "mcm-js-commons";
 
 import IndexRenderPage from "../../../index/index.render";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
+// functional 페이지를 사용하는 모듈
+const hasFunctional = ["Modal", "Alert"];
 export default function _MainTitleTemplate() {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
@@ -23,9 +26,9 @@ export default function _MainTitleTemplate() {
   // 리스트 가져오기
   useEffect(() => {
     window.setTimeout(() => {
-      let moduleList = initIndexList(module);
-      if (moduleIndexList(module, vers))
-        moduleList = moduleIndexList(module, vers)();
+      let moduleList = getModuleIndexList({ module, vers });
+      // if (moduleIndexList(module, vers))
+      //   moduleList = moduleIndexList(module, vers)();
 
       setList(moduleList);
     }, 100);
