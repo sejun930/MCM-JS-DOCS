@@ -24,7 +24,7 @@ export const getModuleIndexList = ({
 }) => {
   // module : 모듈명
   // vers : 모듈 버전
-  let list = initIndexList(module);
+  const list = initIndexList(module);
 
   // functional 페이지 추가
   if (hasFunctional[module] !== undefined && hasFunctional[module] === vers) {

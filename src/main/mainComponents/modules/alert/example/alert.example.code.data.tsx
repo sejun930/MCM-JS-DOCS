@@ -1,3 +1,4 @@
+import React from "react";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
 import { getCommonsHighlight } from "src/commons/highlight";
 

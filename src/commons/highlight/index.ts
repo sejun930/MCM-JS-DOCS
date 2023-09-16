@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { changeObjectTemplate } from "src/main/commonsComponents/functional/code";
 
 // highlight가 적용된 코드 및 그외 기능 렌더시 사용
