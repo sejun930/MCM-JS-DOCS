@@ -12,10 +12,9 @@ export default function MyAlertExample(
   props: ExampleContentsTypes & {
     btnText?: string;
     func?: "openAlert" | "closeAlert" | "clearAlert";
-    funcProps?: any;
   }
 ) {
-  const { func, funcProps, btnText } = props;
+  const { func, btnText } = props;
   const _props = {
     ...props,
     ...props.commonsProps,

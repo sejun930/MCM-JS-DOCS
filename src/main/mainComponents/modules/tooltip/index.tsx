@@ -1,3 +1,6 @@
+import { ReactNode, useEffect } from "react";
+import { _PText } from "mcm-js-commons";
+
 import Template from "src/main/commonsComponents/units/template/main";
 import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/mainTitle";
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
@@ -11,9 +14,8 @@ import {
   tooltipExampleList,
   tooltipExampleInitProps,
 } from "./example/tooltip.example.render.data";
-import { ReactNode, useEffect } from "react";
+import { tooltipPropsList } from "./props/tooltip.propsList";
 
-import { _PText } from "mcm-js-commons";
 import { getCommonsHighlight } from "src/commons/highlight";
 import { imagePreLoad } from "src/main/commonsComponents/functional";
 
@@ -41,7 +43,7 @@ export default function MyTooltip() {
         initProps={tooltipExampleInitProps}
         commonsProps={commonsProps}
       />
-      <_PropsForm />
+      <_PropsForm list={tooltipPropsList} />
       <_TreeForm />
       <_CommentsForm />
     </Template>

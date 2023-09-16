@@ -1,3 +1,4 @@
+import React from "react";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
 import { getCommonsHighlight } from "src/commons/highlight";
 
@@ -9,12 +10,19 @@ export const alertCodeList: ExampleCodeListTypes = {
     getCommonsHighlight.getComma([alertCommonsExampleCode.children("Hello")]),
   basic: () =>
     getCommonsHighlight.getComma([
-      getBoldCode({ code: alertCommonsExampleCode.children("Hello") }),
+      getBoldCode({
+        code: alertCommonsExampleCode.children("Hello"),
+        propsName: "children",
+      }),
     ]),
   delay: () =>
     `${getCommonsHighlight.getComma([
       alertCommonsExampleCode.children("10초 후 종료됩니다."),
-      `         ` + getBoldCode({ code: alertCommonsExampleCode.delay(10000) }),
+      `         ` +
+        getBoldCode({
+          code: alertCommonsExampleCode.delay(10000),
+          propsName: "closeDelayTime",
+        }),
     ])}`,
   close: (isSwipe?: boolean) =>
     `${getCommonsHighlight.getComma([
@@ -23,13 +31,17 @@ export const alertCodeList: ExampleCodeListTypes = {
       `         ` +
         getBoldCode({
           code: alertCommonsExampleCode.closeMode(isSwipe || false),
+          propsName: "useCloseMode",
         }),
     ])} `,
   concept: (text: string, concept: string) =>
     `${getCommonsHighlight.getComma([
       alertCommonsExampleCode.children(text),
       `         ` +
-        getBoldCode({ code: alertCommonsExampleCode.concept(concept) }),
+        getBoldCode({
+          code: alertCommonsExampleCode.concept(concept),
+          propsName: "alertConcept",
+        }),
     ])}`,
   styles: () =>
     `${alertCommonsExampleCode.children(
@@ -38,6 +50,7 @@ export const alertCodeList: ExampleCodeListTypes = {
           ${getBoldCode({
             code: alertCommonsExampleCode.styles(),
             width: "260px",
+            propsName: "alertStyles",
           })}`,
   responsiveStyles: (isMobile?: boolean) =>
     `${alertCommonsExampleCode.children(
@@ -46,6 +59,7 @@ export const alertCodeList: ExampleCodeListTypes = {
           ${getBoldCode({
             code: alertCommonsExampleCode.responsiveStyles(isMobile),
             width: isMobile ? "470px" : "460px",
+            propsName: "alertResponsiveStyles",
           })}`,
   custom: () =>
     `${alertCommonsExampleCode.children(
@@ -53,19 +67,23 @@ export const alertCodeList: ExampleCodeListTypes = {
     )}${getCommonsHighlight.comma()}
           ${getBoldCode({
             code: alertCommonsExampleCode.custom(),
-            // width: "460px",
+            propsName: "alertConcept",
           })}`,
   id: () =>
     `${alertCommonsExampleCode.children(
       "이 알럿은 한번만 오픈됩니다."
     )}${getCommonsHighlight.comma()}
-          ${getBoldCode({ code: alertCommonsExampleCode.id() })}`,
+          ${getBoldCode({
+            code: alertCommonsExampleCode.id(),
+            propsName: "id",
+          })}`,
   infinite: () =>
     `${alertCommonsExampleCode.children(
       "이 알럿은 무한하게 실행됩니다."
     )}${getCommonsHighlight.comma()}
           ${getBoldCode({
             code: alertCommonsExampleCode.delay("infinite"),
+            propsName: "closeDelayTime",
           })}${getCommonsHighlight.comma()}
           ${alertCommonsExampleCode.closeMode()}`,
 };

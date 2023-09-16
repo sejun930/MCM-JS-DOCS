@@ -1,11 +1,7 @@
-import {
-  PropsModuleListResultType,
-  PropsModuleListType,
-} from "src/commons/data/props/props.commons.data";
-import { getPropsForm } from "src/commons/data/props/props.commons.code";
+import { PropsModuleListType } from "src/main/commonsComponents/units/template/form/props/props.types";
 import { modalPropsCommonsCode } from "./modal.props.commns.code";
 
-const modalPropsInfo: (vers: number) => Array<PropsModuleListType> = (
+export const modalPropsList: (vers: number) => Array<PropsModuleListType> = (
   vers: number
 ) => [
   {
@@ -183,8 +179,3 @@ const modalPropsInfo: (vers: number) => Array<PropsModuleListType> = (
     },
   },
 ];
-
-export const modalPropsList: (
-  vers: number
-) => Array<PropsModuleListResultType> = (vers: number) =>
-  modalPropsInfo(vers).map((el) => getPropsForm(el, Boolean(vers)));

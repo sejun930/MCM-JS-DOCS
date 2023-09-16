@@ -9,7 +9,7 @@ export const sliderTreeList: Array<TreeModuleListTypes> = [
     tag: "div",
     class: classList?.wrapper || "mcm-slider-wrapper",
     depth: 0,
-    role: "슬라이더 전체를 감싸는 최상위 태그입니다. <br />슬라이더의 전체 크기를 조절할 때 <b>width</b> 또는 <b>height</b> 스타일을 변경해 전체 크기를 조절할 수 있습니다.",
+    role: "슬라이더 전체를 감싸는 최상위 태그입니다. <br />슬라이더의 전체 크기를 조절할 때 <b>width</b> 또는 <b>height</b> 스타일을 변경해 전체 크기를 조절할 수 있습니다. <br /><br /><b>className</b>및 <b>id</b> 선택자가 적용되는 태그입니다.",
   },
   {
     tag: "div",

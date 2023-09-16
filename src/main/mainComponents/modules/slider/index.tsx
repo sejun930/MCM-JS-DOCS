@@ -16,6 +16,7 @@ import {
   sliderCodeList,
   sliderDefaultChildren,
 } from "./example/slider.example.code.data";
+import { sliderPropsList } from "./props/slider.propsList";
 import { getUuid } from "src/main/commonsComponents/functional";
 
 export default function MySlider() {
@@ -23,7 +24,11 @@ export default function MySlider() {
     children: [
       <p key={getUuid()}>Hello</p>,
       <p key={getUuid()}>World</p>,
-      <img key={getUuid()} src="/images/modules/example/tooltip/dancing.gif" />,
+      <img
+        key={getUuid()}
+        src="/images/modules/example/tooltip/dancing.gif"
+        className="slider-image-example"
+      />,
     ].map((el) => <React.Fragment key={getUuid()}>{el}</React.Fragment>),
   };
 
@@ -39,7 +44,7 @@ export default function MySlider() {
         initProps={initSliderCommonsProps}
         commonsProps={commonsProps}
       />
-      <_PropsForm />
+      <_PropsForm list={sliderPropsList} />
       <_TreeForm />
       <_CommentsForm />
     </Template>

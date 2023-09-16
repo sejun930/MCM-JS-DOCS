@@ -5,7 +5,7 @@ import {
   Tr,
   CopyCode,
 } from "./list.styles";
-import { PropsModuleListResultType } from "src/commons/data/props/props.commons.data";
+import { PropsModuleListResultType } from "../props.types";
 import { _SpanText } from "mcm-js-commons";
 import { copyCode } from "src/main/commonsComponents/functional/code";
 

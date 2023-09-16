@@ -1,27 +1,31 @@
-import { Modal } from "mcm-js-dev";
+import { Alert } from "mcm-js-dev";
 
-export default function ModalExamplePage() {
+export default function AlertExamplePage() {
   return (
     <button
       onClick={() =>
-        Modal.open({
-          children: (
-            <button
-              onClick={() => {
-                alert("모달을 종료합니다.");
-                Modal.close({ id: "modal" });
-              }}
-            >
-              모달 종료하기
-            </button>
-          ),
-          id: "modal",
-          showBGAnimation: true,
-          showModalOpenAnimation: true,
+        Alert.openAlert({
+          children: "",
+          alertConcept: {
+            type: "custom",
+            custom: {
+              color: "",
+              icon: {
+                src: "",
+                size: 10,
+                color: "",
+              },
+              text: {
+                color: "",
+                size: 16,
+                weight: 300,
+              },
+            },
+          },
         })
       }
     >
-      모달 실행하기
+      Open Alert
     </button>
   );
 }

@@ -125,7 +125,9 @@ export const alertCommonsExampleCode = {
           "color",
           getCommonsHighlight.string("#6527BE")
         )}${getCommonsHighlight.comma()} ${
-          getCommonsHighlight.colors("알럿의 테두리 색을 지정합니다.").comment
+          getCommonsHighlight.colors(
+            "알럿의 테두리 색과 이모지 색을 지정합니다."
+          ).comment
         }
         ${getCommonsHighlight.obj(
           "icon",
@@ -147,7 +149,7 @@ export const alertCommonsExampleCode = {
               getCommonsHighlight.string("#6527BE")
             )}${getCommonsHighlight.comma()} ${
               getCommonsHighlight.colors(
-                "알럿의 아이콘(이모지)의 색상을 설정합니다. (null 입력시 기존 색상 유지)"
+                '알럿의 아이콘(이모지)의 색상을 설정합니다. ("unset" 문자열 입력시 기존 색상 유지)'
               ).comment
             }
             ${getCommonsHighlight.obj(
@@ -156,6 +158,40 @@ export const alertCommonsExampleCode = {
             )}${getCommonsHighlight.comma()} ${
               getCommonsHighlight.colors(
                 "알럿의 아이콘(이모지)의 크기를 설정합니다. (ex : 12 = 12px)"
+              ).comment
+            }
+        `,
+          })
+        )}
+        ${getCommonsHighlight.obj(
+          "text",
+          getCommonsHighlight.curly({
+            className: "deepPurple",
+            children: ` ${
+              getCommonsHighlight.colors("알럿 메세지를 설정하는 객체입니다.")
+                .comment
+            }
+            ${getCommonsHighlight.obj(
+              "color",
+              getCommonsHighlight.string("#6527BE")
+            )}${getCommonsHighlight.comma()} ${
+              getCommonsHighlight.colors("알럿 메세지의 색상을 지정합니다.")
+                .comment
+            }
+            ${getCommonsHighlight.obj(
+              "size",
+              getCommonsHighlight.colors("20").number
+            )}${getCommonsHighlight.comma()} ${
+              getCommonsHighlight.colors(
+                "알럿 메세지의 크기를 지정합니다. (ex : 12 = 12px)"
+              ).comment
+            }
+            ${getCommonsHighlight.obj(
+              "weight",
+              getCommonsHighlight.colors("700").number
+            )}${getCommonsHighlight.comma()} ${
+              getCommonsHighlight.colors(
+                "알럿 메세지의 굵기도를 지정합니다. (100 단위로 지정해야 합니다.)"
               ).comment
             }
         `,

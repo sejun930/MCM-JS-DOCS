@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { versState, moduleState } from "src/commons/store";
 
-import { _Button, _Title, _PText, _PTextWithHtml } from "mcm-js-commons";
+import { _Button, _Title, _PTextWithHtml } from "mcm-js-commons";
 import _SubTitleTemplate from "../../title/subTitle";
 import _ExampleOptionalFormPage from "./optional";
 
@@ -67,10 +67,10 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
           exampleList?.length &&
           exampleList.map(
             (el, idx: number) =>
-              !el.isHide && (
+              (!el.isHide && (
                 <ExampleContentsItems
                   key={`${module}_${idx + 1}`}
-                  isFull={el.isFull ? true : false}
+                  isFull={el?.isFull !== undefined || false}
                   className={(el.isFull && "example-list-wrapper") || undefined}
                 >
                   <_Title
@@ -167,7 +167,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                       })}
                   </ExampleResultList>
                 </ExampleContentsItems>
-              )
+              )) || <></>
           )}
       </ExampleContentsWrapper>
     </Wrapper>
