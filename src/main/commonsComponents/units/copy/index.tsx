@@ -8,7 +8,7 @@ import { getTap, removeTag, removeBoldTag } from "../../functional/code";
 import { Pre } from "./code-highlight/codeHighlight.styles";
 
 import { getLibraries } from "../../functional/modules";
-const { Tooltip } = getLibraries();
+const { Tooltip, Alert } = getLibraries();
 
 // 글자 복사 기능 컴포넌트
 export default function _Copy({
@@ -41,6 +41,25 @@ export default function _Copy({
   const copy = () => {
     if (isCopied || copyDisable) return;
 
+    Alert.openAlert({
+      id: "copy-alert",
+      children: `코드 복사 완료`,
+      closeDelayTime: 2000,
+      useCloseMode: { useSwipeMode: true },
+      alertConcept: {
+        type: "success",
+        custom: {
+          color: "white",
+          text: {
+            color: "white",
+            weight: 700,
+          },
+        },
+      },
+      alertStyles: {
+        backgroundColor: "#35A29F",
+      },
+    });
     setIsCopied(true);
 
     if (_ref.current)

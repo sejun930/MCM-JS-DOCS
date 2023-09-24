@@ -273,12 +273,13 @@ export const getCommonsHighlight = {
   }: {
     funcName?: string;
     setFunc?: {
+      funcColor?: string;
       color?: string;
       children: string;
     };
     removeSemiColon?: boolean;
   }) =>
-    `<span class='function'>${funcName || ""}</span>${
+    `<span class=${setFunc?.funcColor || "function"}>${funcName || ""}</span>${
       (setFunc &&
         `<span class=${setFunc.color || "deepPurple"}>(</span>${
           setFunc.children
@@ -358,10 +359,19 @@ export const getCommonsHighlight = {
       varName: `<span class='blue1'>${children}</span>`, // 변수의 이름명 (진한색)
       varName2: `<span class='skyblue'>${children}</span>`, // 변수의 이름명 (약한색)
       number: `<span class="number">${children}</span>`, // 숫자
-      method: (method?: string) =>
-        `<span class="blue3">${children}</span><span class="lightYellow">.${
-          method || ""
-        }</span>`, // 숫자
+      method: (props?: {
+        // 메서드 정보
+        funcName?: string;
+        funcColor?: string;
+        children?: string;
+      }) =>
+        `<span class="blue3">${children}</span><span class=${
+          props?.funcColor || "lightYellow"
+        }>.${props?.funcName || ""}</span>${
+          (props?.children &&
+            `<span class="yellow">(</span>${props?.children}<span class="yellow">)</span>`) ||
+          ""
+        }`,
     };
   },
 };

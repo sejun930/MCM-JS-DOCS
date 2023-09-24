@@ -24,7 +24,7 @@ const funcForm = ({
         ${getBoldCode({
           code: `${getCommonsHighlight
             .colors("Alert")
-            .method(`${method}Alert`)}`,
+            .method({ funcName: `${method}Alert` })}`,
           propsName: `${method}AlertFn`,
           id: `alert-${method}-functional-wrapper`,
         })}`,

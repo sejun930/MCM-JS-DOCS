@@ -21,6 +21,7 @@ import {
   UIProps,
 } from "./template.example.types";
 import { getExampleErrorText } from "src/main/commonsComponents/functional";
+import { getUuid } from "src/main/commonsComponents/functional";
 
 // 모든 코드들의 높이값을 저장하는 객체
 const allHeightList = {};
@@ -67,9 +68,9 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
           exampleList?.length &&
           exampleList.map(
             (el, idx: number) =>
-              (!el.isHide && (
+              !el.isHide && (
                 <ExampleContentsItems
-                  key={`${module}_${idx + 1}`}
+                  key={`${module}_${idx + 1}+${vers}`}
                   isFull={el?.isFull !== undefined || false}
                   className={(el.isFull && "example-list-wrapper") || undefined}
                 >
@@ -136,7 +137,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
 
                         return (
                           <ExampleListWrapper
-                            key={`${module}_${idx}_${idx2}`}
+                            key={`${module}_${idx}_${idx2}+${vers}={${_idx}}`}
                             style={{ width }}
                             className="example-list"
                           >
@@ -167,7 +168,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                       })}
                   </ExampleResultList>
                 </ExampleContentsItems>
-              )) || <></>
+              )
           )}
       </ExampleContentsWrapper>
     </Wrapper>

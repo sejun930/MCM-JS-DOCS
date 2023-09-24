@@ -159,13 +159,35 @@ export const alertPropsList: Array<PropsModuleListType> = [
     code: {
       type: "custom",
       argu: `${getCommonsHighlight.colors("false").bool} ${
-        getCommonsHighlight.colors("||").text
+        getCommonsHighlight.colors("??").text
       } ${getCommonsHighlight.curly({
         children: ` ${getCommonsHighlight.obj(
           "useSwipeMode",
           getCommonsHighlight.colors("false").bool
         )} `,
       })}`,
+    },
+  },
+  {
+    name: "onAfterAlertOpen",
+    default: "() => {}",
+    type: "Function",
+    notice: "Alert이 <b>실행</b>될 때 함께 실행될 함수입니다.",
+    isRequired: false,
+    code: {
+      type: "function",
+      // argu: `,
+    },
+  },
+  {
+    name: "onAfterAlertClose",
+    default: "() => {}",
+    type: "Function",
+    notice: "Alert이 <b>종료</b>될 때 함께 실행될 함수입니다.",
+    isRequired: false,
+    code: {
+      type: "function",
+      // argu: `,
     },
   },
 ];

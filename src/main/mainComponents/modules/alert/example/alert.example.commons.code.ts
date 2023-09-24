@@ -212,4 +212,30 @@ export const alertCommonsExampleCode = {
       type: "string",
       form: "object",
     }),
+  afterEvent: (isOpen: boolean) =>
+    commonsCodeForm({
+      key: `onAfterAlert${isOpen ? "Open" : "Close"}`,
+      value: `${getCommonsHighlight.arrowFunction({
+        className: "blue",
+        returnValue: ` ${getCommonsHighlight.curly({
+          className: "blue",
+          children: `
+    ${getCommonsHighlight.colors("Alert").method({
+      funcName: "openAlert",
+      children: `${getCommonsHighlight.curly({
+        className: "deepPurple",
+        children: `
+        ${alertCommonsExampleCode.children(
+          `${isOpen ? "Open" : "Close"} Alert`
+        )}${getCommonsHighlight.comma()}
+        ${alertCommonsExampleCode.concept("success")}
+    `,
+      })}`,
+    })}${getCommonsHighlight.semiColon()}
+`,
+        })}${getCommonsHighlight.comma()}`,
+      })}`,
+      type: "node",
+      form: "object",
+    }),
 };
