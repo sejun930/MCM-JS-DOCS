@@ -43,8 +43,8 @@ export default function _Copy({
 
     Alert.openAlert({
       id: "copy-alert",
-      children: `코드 복사 완료`,
-      closeDelayTime: 2000,
+      children: `${(type === "Code" && `Code`) || ""} Copied!`,
+      closeDelayTime: "infinite",
       useCloseMode: { useSwipeMode: true },
       alertConcept: {
         type: "success",
@@ -77,17 +77,22 @@ export default function _Copy({
     }
   };
 
+  // 마우스가 벗어날 경우 현재 오픈된 alert 제거
+  const closeAlert = () => {
+    Alert.closeAlert({ id: "copy-alert" });
+  };
+
   // 코드를 렌더하고 있는지?
   const isCode = type === "Code";
 
   return (
     <CopyWrapper
-      onMouseDown={(!onlyClickButton && copy) || undefined}
       className={getAllComponentsClassName("copy-wrapper", className)}
       ref={_ref}
       isCopied={isCopied}
       offCopyAnimation={offCopyAnimation}
       isCode={isCode}
+      onMouseLeave={closeAlert}
     >
       <CopyText ref={_textWrapperRef} className="copy-text">
         {/* 코드용과 텍스트용 분할 렌더 */}
@@ -108,16 +113,17 @@ export default function _Copy({
           isCode={isCode}
           textPosition={textPosition}
           className="copy-btn"
+          onMouseDown={(!onlyClickButton && copy) || undefined}
         >
-          <Tooltip
+          {/* <Tooltip
             open={isCopied}
             offHoverEvent={true}
             tooltipText="Copied"
             useShowAnimation
             position="bottom"
-          >
-            <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
-          </Tooltip>
+          > */}
+          <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
+          {/* </Tooltip> */}
         </CopyButton>
       )}
     </CopyWrapper>

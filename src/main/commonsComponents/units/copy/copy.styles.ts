@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { CSSProperties } from "react";
 
 interface StyleTypes {
   isCopied?: boolean;
@@ -44,19 +45,20 @@ export const CopyWrapper = styled.div`
     position: absolute;
     width: 0px;
     height: 0px;
-    transition: all 0.3s;
+    transition: all 0.35s;
+    opacity: 0;
 
     ${(props: StyleTypes) =>
       props.isCopied &&
       !props.offCopyAnimation && {
-        width: "100%",
-        height: "100%",
+        opacity: 1,
+        width: "99.8%",
+        height: "93%",
       }}
-
     ${(props) =>
       props.isCode && {
         display: "none",
-      }}
+      }};
   }
 
   ::before {
@@ -77,26 +79,33 @@ export const CopyWrapper = styled.div`
 `;
 
 export const CopyButton = styled.button`
-  width: 70px;
+  /* width: 70px; */
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0px;
+  right: 24px;
 
-  ${(props: StyleTypes) =>
-    props.textPosition && {
-      alignItems: props.textPosition,
-    }}
+  ${(props: StyleTypes) => {
+    const styles: CSSProperties & { [key: string]: string } = {};
 
-  ${(props) =>
-    props.isCode && {
-      padding: "1rem 0px",
-    }}
+    if (props.textPosition) styles.alignItems = props.textPosition;
+    if (props.isCode) {
+      styles.height = "auto";
+      styles.top = "20px";
+    }
+
+    return styles;
+  }}
+
+  .mcm-tooltip-wrapper {
+    cursor: pointer;
+  }
 
   .mcm-p-unit {
+    font-size: 14px;
     color: ${(props) => (props.isCode ? "white" : "#333333")};
   }
 

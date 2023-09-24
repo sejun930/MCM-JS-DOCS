@@ -228,7 +228,7 @@ export const alertCommonsExampleCode = {
         ${alertCommonsExampleCode.children(
           `${isOpen ? "Open" : "Close"} Alert`
         )}${getCommonsHighlight.comma()}
-        ${alertCommonsExampleCode.concept("success")}
+        ${alertCommonsExampleCode.concept("info")}
     `,
       })}`,
     })}${getCommonsHighlight.semiColon()}

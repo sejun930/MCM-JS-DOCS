@@ -266,7 +266,7 @@ export const alertExampleList = (): Array<ExampleIProps> => [
           onAfterAlertOpen: () => {
             Alert.openAlert({
               children: "Open Alert",
-              alertConcept: { type: "success" },
+              alertConcept: { type: "info" },
             });
           },
         },
@@ -276,6 +276,15 @@ export const alertExampleList = (): Array<ExampleIProps> => [
         content: initAlertContents("Open On After Alert Close"),
         code: alertCodeList.onAfterAlertClose(),
         children: "Open On After Alert Close",
+        addProps: {
+          children: "Hello",
+          onAfterAlertClose: () => {
+            Alert.openAlert({
+              children: "Close Alert",
+              alertConcept: { type: "info" },
+            });
+          },
+        },
       },
     ],
   },
