@@ -21,7 +21,6 @@ import {
   UIProps,
 } from "./template.example.types";
 import { getExampleErrorText } from "src/main/commonsComponents/functional";
-import { getUuid } from "src/main/commonsComponents/functional";
 
 // 모든 코드들의 높이값을 저장하는 객체
 const allHeightList = {};

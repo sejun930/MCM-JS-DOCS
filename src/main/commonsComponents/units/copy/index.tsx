@@ -8,7 +8,7 @@ import { getTap, removeTag, removeBoldTag } from "../../functional/code";
 import { Pre } from "./code-highlight/codeHighlight.styles";
 
 import { getLibraries } from "../../functional/modules";
-const { Tooltip, Alert } = getLibraries();
+const { Alert } = getLibraries();
 
 // 글자 복사 기능 컴포넌트
 export default function _Copy({

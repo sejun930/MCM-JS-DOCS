@@ -10,7 +10,6 @@ import {
   Info,
 } from "./index.styles";
 
-import { MutableRefObject } from "react";
 import { getUuid, moveDocument } from "src/main/commonsComponents/functional";
 
 import { FunctionalListType } from "..";

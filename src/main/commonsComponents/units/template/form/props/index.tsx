@@ -1,4 +1,3 @@
-import { MutableRefObject } from "react";
 import { useRecoilState } from "recoil";
 import { versState } from "src/commons/store";
 import { Wrapper } from "../form.commons.styles";
