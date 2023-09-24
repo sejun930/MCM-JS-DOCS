@@ -156,10 +156,12 @@ const moveDocument = ({
   id,
   bonus,
   focus,
+  isSmooth,
 }: {
   id: string;
   bonus?: number;
   focus?: boolean;
+  isSmooth?: boolean;
 }) => {
   // focus : 이동 후 해당 영역 포커스 여부
   const target = document.getElementById(id);
@@ -172,6 +174,7 @@ const moveDocument = ({
 
     window.scrollTo({
       top: destination,
+      behavior: isSmooth ? "smooth" : "auto",
     });
 
     if (focus && target?.classList) {

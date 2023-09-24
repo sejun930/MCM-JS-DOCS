@@ -59,6 +59,7 @@ export default function LayoutNavPage({
       isAdmin={isAdmin}
     >
       <LayoutNavListWrapper className="nav-list-wrapper">
+        {/* <div> */}
         <LayoutNav isAdmin={isAdmin}>
           <LayoutNavListItems
             className="nav-list-items"

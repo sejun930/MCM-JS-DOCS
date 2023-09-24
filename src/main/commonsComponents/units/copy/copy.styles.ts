@@ -17,7 +17,7 @@ export const CopyWrapper = styled.div`
   width: 100%;
   border-radius: 5px;
   min-height: 60px;
-  cursor: pointer;
+  /* cursor: pointer; */
   position: relative;
   /* overflow: hidden; */
   padding-right: 10px;

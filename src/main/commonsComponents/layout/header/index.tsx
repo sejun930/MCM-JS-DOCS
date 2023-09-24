@@ -49,3 +49,10 @@ const HeaderWrapper = styled.header`
     }
   }
 `;
+
+export const HeaderItems = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* max-width: 1400px; */
+`;

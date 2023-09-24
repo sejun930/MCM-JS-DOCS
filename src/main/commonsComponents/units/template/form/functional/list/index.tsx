@@ -11,7 +11,7 @@ import {
 } from "./index.styles";
 
 import { MutableRefObject } from "react";
-import { getUuid } from "src/main/commonsComponents/functional";
+import { getUuid, moveDocument } from "src/main/commonsComponents/functional";
 
 import { FunctionalListType } from "..";
 import { _Title, _PText } from "mcm-js-commons";
@@ -26,13 +26,11 @@ export default function FunctionalDetailInfoListPage({
   module,
   vers,
   list,
-  propsRef,
   isFunctional,
 }: {
   module: string;
   vers: number;
   list: Array<FunctionalListType>;
-  propsRef?: MutableRefObject<HTMLDivElement>;
   isFunctional?: boolean;
 }) {
   const { componentRender } = CommonsHooksComponents();
@@ -40,12 +38,7 @@ export default function FunctionalDetailInfoListPage({
 
   // props 페이지 위치로 이동
   const movePropsPage = () => {
-    if (propsRef?.current.offsetTop) {
-      window.scrollTo({
-        top: propsRef?.current.offsetTop - 50,
-        behavior: "smooth",
-      });
-    }
+    moveDocument({ id: "props-form", bonus: -50, isSmooth: true });
   };
 
   return (

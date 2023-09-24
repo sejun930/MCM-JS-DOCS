@@ -18,7 +18,6 @@ export const Wrapper = styled.div`
   right: 2rem;
   bottom: 5rem;
   width: 200px;
-
   background-color: white;
   border: double 3px black;
   opacity: 0.3;
@@ -58,6 +57,18 @@ export const Wrapper = styled.div`
     ::before {
       width: 50%;
     }
+  }
+
+  @media (min-width: 2200px) {
+    right: 15%;
+  }
+
+  @media (min-width: 3000px) {
+    right: 25%;
+  }
+
+  @media (min-width: 4400px) {
+    right: 32%;
   }
 
   @media ${breakPoints.mobileLarge} {
