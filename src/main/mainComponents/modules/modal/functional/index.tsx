@@ -22,7 +22,9 @@ const modalFunctionalList: Array<FunctionalListType> = [
         hasStartSpace: true,
         code: `
         ${getBoldCode({
-          code: `${getCommonsHighlight.colors("Modal").method("open")}`,
+          code: `${getCommonsHighlight
+            .colors("Modal")
+            .method({ funcName: "open" })}`,
           id: "modal-open-functional-wrapper",
           propsName: "modalOpen",
         })}<span class="lightYellow">(</span><span class='deepPurple'>{</span>

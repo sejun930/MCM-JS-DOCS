@@ -2,6 +2,8 @@ import { getCommonsHighlight } from "src/commons/highlight";
 import { ExampleIProps } from "src/main/commonsComponents/units/template/form/example/template.example.types";
 
 import { alertCodeList } from "./alert.example.code.data";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Alert } = getLibraries();
 
 // 코드용 텍스트 출력
 const initAlertContents = (text: string) =>
@@ -244,6 +246,44 @@ export const alertExampleList = (): Array<ExampleIProps> => [
           children: "이 Alert은 무한하게 실행됩니다.",
           closeDelayTime: "infinite",
           useCloseMode: true,
+        },
+      },
+    ],
+  },
+  {
+    title: "실행 & 종료 후 함수 실행",
+    isFull: { isHalf: false },
+    blockRemarks:
+      "Alert이 실행 또는 종료된 이후에 함께 실행될 함수를 설정할 수 있습니다.",
+    contents: [
+      {
+        remakrs: "Alert이 <b>실행</b>될 때 함께 실행될 함수를 설정합니다.",
+        content: initAlertContents("Open On After Alert Open"),
+        code: alertCodeList.onAfterAlertOpen(),
+        children: "Open On After Alert Open",
+        addProps: {
+          children: "Hello",
+          onAfterAlertOpen: () => {
+            Alert.openAlert({
+              children: "Open Alert",
+              alertConcept: { type: "info" },
+            });
+          },
+        },
+      },
+      {
+        remakrs: "Alert이 <b>종료</b>될 때 함께 실행될 함수를 설정합니다.",
+        content: initAlertContents("Open On After Alert Close"),
+        code: alertCodeList.onAfterAlertClose(),
+        children: "Open On After Alert Close",
+        addProps: {
+          children: "Hello",
+          onAfterAlertClose: () => {
+            Alert.openAlert({
+              children: "Close Alert",
+              alertConcept: { type: "info" },
+            });
+          },
         },
       },
     ],

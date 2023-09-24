@@ -1,4 +1,3 @@
-import { MutableRefObject } from "react";
 import { useRecoilState } from "recoil";
 import { versState } from "src/commons/store";
 import { Wrapper } from "../form.commons.styles";
@@ -13,11 +12,9 @@ import { getPropsForm } from "src/commons/data/props/props.commons.code";
 export default function _PropsForm({
   list,
   isObject,
-  propsRef,
 }: {
   list: Array<PropsModuleListType>;
   isObject?: boolean;
-  propsRef?: MutableRefObject<HTMLDivElement>;
 }) {
   const [vers] = useRecoilState(versState);
 
@@ -67,7 +64,7 @@ export default function _PropsForm({
   };
 
   return (
-    <Wrapper ref={propsRef} id="props-form">
+    <Wrapper id="props-form">
       <_SubTitleTemplate
         title="Props List"
         className="props-subTitle"

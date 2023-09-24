@@ -1,4 +1,4 @@
-import { ReactNode, MutableRefObject } from "react";
+import { ReactNode } from "react";
 import { useRecoilState } from "recoil";
 
 import { PropsModuleListResultType } from "../props/props.types";
@@ -24,10 +24,8 @@ export interface FunctionalListType {
 // 부가 기능에 대한 폼
 export default function _FunctionalForm({
   functionalList,
-  propsRef,
 }: {
   functionalList: Array<FunctionalListType>;
-  propsRef?: MutableRefObject<HTMLDivElement>; // props 페이지의 시작 위치
 }) {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
@@ -44,7 +42,6 @@ export default function _FunctionalForm({
           module={module}
           vers={vers}
           list={functionalList}
-          propsRef={propsRef}
           isFunctional={true}
         />
       </Wrapper>

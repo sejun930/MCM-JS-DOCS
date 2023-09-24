@@ -32,8 +32,6 @@ export default function MyModal() {
     new Array(getAllExampleComponentLength(modalExampleList(vers))).fill(false)
   );
 
-  // props 페이지의 ref 설정
-  const propsRef = useRef() as MutableRefObject<HTMLDivElement>;
   // fixed 종료 시점 설정
   const endPointRef = useRef() as MutableRefObject<HTMLDivElement>;
   // endPointRef가 있을 경우에만 렌더
@@ -81,18 +79,11 @@ export default function MyModal() {
               commonsProps={commonsProps}
             />
             {modalFunctionalData[vers] && vers === 1 && (
-              <_FunctionalForm
-                functionalList={modalFunctionalList}
-                propsRef={propsRef}
-              />
+              <_FunctionalForm functionalList={modalFunctionalList} />
             )}
           </>
         )) || <></>}
-        <_PropsForm
-          propsRef={propsRef}
-          isObject={vers === 1}
-          list={modalPropsList(vers)}
-        />
+        <_PropsForm isObject={vers === 1} list={modalPropsList(vers)} />
       </ModulesInfoWrapper>
       <_TreeForm />
       <_CommentsForm />

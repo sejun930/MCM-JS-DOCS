@@ -72,11 +72,12 @@ export const LayoutNavListWrapper = styled.article`
     position: fixed;
     bottom: 0px;
     padding: 0.7rem 1rem;
-    min-width: 15%;
-    border-top: dotted 1px gray;
+    /* min-width: 15%; */
+    /* border-top: dotted 1px gray; */
     font-size: 14px;
     word-spacing: 4px;
     letter-spacing: -0.02rem;
+    /* background-color: white; */
   }
 
   @media ${breakPoints.mobileLarge} {
@@ -123,3 +124,5 @@ export const LayoutNav = styled.div`
       top: "16px",
     }}
 `;
+
+export const AdminLinkWrapper = styled.div``;

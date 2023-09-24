@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
 import MyModal from "src/main/mainComponents/modules/modal";
 import MyTooltip from "src/main/mainComponents/modules/tooltip";
 import MySlider from "src/main/mainComponents/modules/slider";
@@ -8,18 +11,30 @@ import {
   getCamelCase,
   imagePreLoad,
 } from "src/main/commonsComponents/functional";
-import { useEffect } from "react";
 
 export default function ModulesPage(props: { name: string }) {
   const Components = ModuleComponentsList[props.name];
+  const [render, setRender] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     imagePreLoad([
       `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${props.name}-example.gif`,
     ]);
-  }, []);
 
-  return <>{!Components ? <ErrorPage /> : Components}</>;
+    window.setTimeout(() => {
+      // 페이지 렌더
+      setRender(true);
+    }, 100);
+
+    return () => {
+      // 페이지 이탈 시
+      setRender(false);
+    };
+  }, [router]);
+
+  return render ? Components || <ErrorPage /> : <></>;
 }
 
 export const getServerSideProps = (url: { query: { module: string } }) => {

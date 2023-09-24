@@ -5,27 +5,14 @@ export default function AlertExamplePage() {
     <button
       onClick={() =>
         Alert.openAlert({
-          children: "",
-          alertConcept: {
-            type: "custom",
-            custom: {
-              color: "",
-              icon: {
-                src: "",
-                size: 10,
-                color: "",
-              },
-              text: {
-                color: "",
-                size: 16,
-                weight: 300,
-              },
-            },
-          },
+          children: "Hello",
+          useCloseMode: false ?? { useSwipeMode: false },
+          onAfterAlertOpen: () => {},
+          onAfterAlertClose: () => {},
         })
       }
     >
-      Open Alert
+      Open On After Alert Open
     </button>
   );
 }

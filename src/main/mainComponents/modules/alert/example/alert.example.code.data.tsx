@@ -71,7 +71,7 @@ export const alertCodeList: ExampleCodeListTypes = {
           })}`,
   id: () =>
     `${alertCommonsExampleCode.children(
-      "이 알럿은 한번만 오픈됩니다."
+      "이 Alert은 한번만 오픈됩니다."
     )}${getCommonsHighlight.comma()}
           ${getBoldCode({
             code: alertCommonsExampleCode.id(),
@@ -79,13 +79,27 @@ export const alertCodeList: ExampleCodeListTypes = {
           })}`,
   infinite: () =>
     `${alertCommonsExampleCode.children(
-      "이 알럿은 무한하게 실행됩니다."
+      "이 Alert은 무한하게 실행됩니다."
     )}${getCommonsHighlight.comma()}
           ${getBoldCode({
             code: alertCommonsExampleCode.delay("infinite"),
             propsName: "closeDelayTime",
           })}${getCommonsHighlight.comma()}
           ${alertCommonsExampleCode.closeMode()}`,
+  onAfterAlertOpen: () => `${alertCommonsExampleCode.children(
+    "Hello"
+  )}${getCommonsHighlight.comma()}
+          ${getBoldCode({
+            code: alertCommonsExampleCode.afterEvent(true),
+            propsName: "onAfterAlertOpen",
+          })}`,
+  onAfterAlertClose: () => `${alertCommonsExampleCode.children(
+    "Hello"
+  )}${getCommonsHighlight.comma()}
+          ${getBoldCode({
+            code: alertCommonsExampleCode.afterEvent(false),
+            propsName: "onAfterAlertClose",
+          })}`,
 };
 
 export const alertReturnCommonsData = ({
