@@ -81,7 +81,7 @@ export const PaginationWrapper = styled.div`
   height: 50px;
   width: 100%;
   background-color: white;
-  z-index: 999;
+  z-index: 10;
   border-top: solid 3px black;
   left: 0;
 `;

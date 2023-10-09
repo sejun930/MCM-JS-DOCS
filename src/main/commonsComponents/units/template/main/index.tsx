@@ -37,6 +37,7 @@ export const Wrapper = styled.main`
   flex-direction: column;
   min-width: 85%;
   position: relative;
+  z-index: 10;
 
   ${(props: StyleTypes) =>
     props.isFull && {

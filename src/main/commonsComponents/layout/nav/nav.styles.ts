@@ -15,6 +15,7 @@ export const LayoutNavWrapper = styled.nav`
   opacity: 0;
   position: relative;
   background-color: white;
+  z-index: 9;
 
   ${(props: StyleTypes) =>
     props.render && {
@@ -25,7 +26,7 @@ export const LayoutNavWrapper = styled.nav`
     props.isAdmin && {
       padding: "1rem",
       borderRightColor: "#525FE1",
-      zIndex: 1000,
+      // zIndex: 1000,
     }}
 
   @media ${breakPoints.mobileLarge} {
