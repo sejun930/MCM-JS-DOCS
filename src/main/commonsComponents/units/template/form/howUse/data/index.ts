@@ -6,4 +6,6 @@ export const howUseTextList: { [key: string]: string } = {
   Slider:
     "나열하고 싶은 여러개의 컴포넌트들을 Slider 컴포넌트로 감싸주면 적용할 수 있습니다. <br />map 메서드를 이용하면 더 편리하게 렌더할 수 있습니다.",
   Alert: "컴포넌트 형태가 아닌 함수 형태로 Alert 메세지를 출력할 수 있습니다.",
+  Popular:
+    "노출하고 싶은 리스트들을 배열에 담아 전달해야 합니다. <br />React의 <b>useState</b> 또는 <b>전역 변수</b>를 통해 컴포넌트가 재렌더 되더라도 데이터가 변경되지 않는 방법을 권장합니다.",
 };

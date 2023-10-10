@@ -249,22 +249,33 @@ export const getCommonsHighlight = {
     }<span class=${_className}>]</span>`;
   },
   // state 폼
-  state: (stateName: string, stateValue: string) =>
-    `${getCommonsHighlight.colors().const} ${getCommonsHighlight.array({
-      arr: [
-        getCommonsHighlight.colors(stateName).varName,
-        getCommonsHighlight.function({
-          funcName: `set${stateName[0].toUpperCase() + stateName.substring(1)}`,
-        }),
-        // getCommonsHighlight.colors("setIsAble").function,
-      ],
+  state: ({
+    stateName,
+    stateValue,
+    hideSetEvent,
+  }: {
+    stateName: string;
+    stateValue: string;
+    hideSetEvent?: boolean; // set 이벤트 가리기
+  }) => {
+    const arr = [
+      getCommonsHighlight.colors(stateName).varName,
+      getCommonsHighlight.function({
+        funcName: `set${stateName[0].toUpperCase() + stateName.substring(1)}`,
+      }),
+    ];
+    if (hideSetEvent) arr.pop();
+
+    return `${getCommonsHighlight.colors().const} ${getCommonsHighlight.array({
+      arr,
       isState: true,
     })} ${getCommonsHighlight.colors("=").text} ${getCommonsHighlight.function({
       funcName: "useState",
       setFunc: {
         children: stateValue,
       },
-    })}`,
+    })}`;
+  },
   // function 폼
   function: ({
     funcName,
