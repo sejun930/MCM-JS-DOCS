@@ -35,7 +35,7 @@ export default function LayoutPage(props: IProps) {
   return (
     <LayoutWrapper className="layout-home-wrapper">
       <LayoutHeadPage isAdmin={isAdmin} />
-      <LayoutContentsWrapper>
+      <LayoutContentsWrapper isAdmin={isAdmin}>
         {navRenderCondition && (
           <LayoutNavPage module={module} isAdmin={isAdmin} />
         )}

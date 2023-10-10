@@ -6,6 +6,10 @@ import {
 import { tooltipReturnCommonsData } from "src/main/mainComponents/modules/tooltip/example/tooltip.example.code.data";
 import { sliderReturnCommonsData } from "src/main/mainComponents/modules/slider/example/slider.example.code.data";
 import { alertReturnCommonsData } from "src/main/mainComponents/modules/alert/example/alert.example.code.data";
+import {
+  popularCommonsData,
+  popularReturnCommonsData,
+} from "src/main/mainComponents/modules/popular/example/popular.example.code.data";
 
 export interface ExampleCommonsTypes {
   code: string;
@@ -19,6 +23,7 @@ export const exampleCommonsList: {
   [key: string]: Array<ExampleCommonsTypes> | ExampleCommonsTypes | null;
 } = {
   Modal: modalCommonsData,
+  Popular: popularCommonsData,
 };
 
 // 예시용 코드에 붙여지는 return 코드들
@@ -43,5 +48,7 @@ export const exampleCommonsReturnList = ({
       sliderReturnCommonsData({ code, children, changeContent }),
     Alert: (code: string, children?: React.ReactNode | string) =>
       alertReturnCommonsData({ code, children, changeContent, funcName }),
+    Popular: (code: string, children?: React.ReactNode | string) =>
+      popularReturnCommonsData({ code, children, changeContent }),
   };
 };

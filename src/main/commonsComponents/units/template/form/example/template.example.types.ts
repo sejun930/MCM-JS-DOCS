@@ -3,6 +3,7 @@ import {
   TooltipPropsType,
   SliderPropsTypes,
   AlertPropsType,
+  PopularPropsTypes,
 } from "mcm-js-dev/dist/commons/types";
 import { ReactNode } from "react";
 
@@ -14,7 +15,8 @@ export type ModuleAllPropsTypes =
   | ModalPropsType
   | TooltipPropsType
   | SliderPropsTypes
-  | AlertPropsType;
+  | AlertPropsType
+  | (PopularPropsTypes & { children?: any });
 
 // 여러 모듈들의 example commons 타입 종합
 export type ModuleAllExampleCommonsTypes =

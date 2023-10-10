@@ -43,7 +43,7 @@ export const alertPropsList: Array<PropsModuleListType> = [
     default: "{ web : {}, mobile : {} }",
     type: "Object",
     notice:
-      "<b>웹(768px 이상)</b>과 <b>모바일(767px 이하)</b>에 적용되는 스타일을 각각 설정할 수 있습니다.",
+      "<b>웹(768px 이상)</b>과 <b>모바일(767px 이하)</b>에 적용되는 스타일을 각각 설정할 수 있습니다. <br /><b>alertStyles</b> props 보다 더 우선적으로 스타일이 적용됩니다.",
     isRequired: false,
     code: {
       type: "obj",

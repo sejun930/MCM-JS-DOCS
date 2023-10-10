@@ -124,6 +124,7 @@ export const ListWrapper = styled.ul`
             backgroundColor: "#aa5656",
             color: "white",
             width: "calc(100% + 50px)",
+            height: "36px",
           };
 
           if (props.isAdmin) {

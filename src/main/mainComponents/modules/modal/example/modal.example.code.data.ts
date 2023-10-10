@@ -15,7 +15,7 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   {
     code: `
   ${getCommonsHighlight.colors("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.").comment}
-  ${getCommonsHighlight.state("isOpen", getCommonsHighlight.colors("false").bool)}
+  ${getCommonsHighlight.state({ stateName : "isOpen", stateValue : getCommonsHighlight.colors("false").bool })}
   
   ${getCommonsHighlight.colors("모달을 실행하는 함수입니다.").comment}
   ${getCommonsHighlight.makeFunction({

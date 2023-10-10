@@ -9,10 +9,10 @@ export const disableReplaceCode = `${
     "툴팁의 활성화 또는 비활성화의 기준이 되는 state 값입니다."
   ).comment
 }
-  ${getCommonsHighlight.state(
-    "isDisable",
-    getCommonsHighlight.colors("false").bool
-  )}
+  ${getCommonsHighlight.state({
+    stateName: "isDisable",
+    stateValue: getCommonsHighlight.colors("false").bool,
+  })}
   
   ${
     getCommonsHighlight.colors(
@@ -84,10 +84,10 @@ export const onoffReplaceCode = (props: TooltipPropsType) => `${
   // true를 전달하면 실행시킬 수 있고, false를 전달하면 종료됩니다.`
   ).comment
 }
-  ${getCommonsHighlight.state(
-    "isOpen",
-    getCommonsHighlight.colors("false").bool
-  )}
+  ${getCommonsHighlight.state({
+    stateName: "isOpen",
+    stateValue: getCommonsHighlight.colors("false").bool,
+  })}
     
   ${
     getCommonsHighlight.colors(

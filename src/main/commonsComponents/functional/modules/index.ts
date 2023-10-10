@@ -2,6 +2,7 @@ import { ModalType } from "mcm-js-dev/dist/components/modules/modal/component/mo
 import { SliderType } from "mcm-js-dev/dist/components/modules/slider/components/slider.types";
 import { TooltipType } from "mcm-js-dev/dist/components/modules/tooltip/component/tooltip.types";
 import { AlertType } from "mcm-js-dev/dist/components/modules/alert/components/alert.types";
+import { PopularType } from "mcm-js-dev/dist/components/modules/popular/components/popular.types";
 
 import classList from "mcm-js-dev/dist/commons/class";
 
@@ -18,6 +19,7 @@ const getLibraries = () => {
     Tooltip: TooltipType;
     Slider: SliderType;
     Alert: AlertType;
+    Popular: PopularType;
   };
 
   return getAllLibraries as ModuleTypes;
