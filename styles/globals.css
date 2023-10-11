@@ -74,6 +74,16 @@ ol {
   list-style: none;
 }
 
+.ul-wrapper {
+  list-style: disc;
+  padding-left: 16px;
+  text-align: left;
+}
+
+.ul-wrapper .bold {
+  color: black !important;
+}
+
 table {
   border-spacing: 0px;
   border-collapse: collapse;

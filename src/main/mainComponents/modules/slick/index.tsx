@@ -11,5 +11,11 @@ export default function PopularExamplePage() {
     <p> [원두커피1kg] 갓 볶은 신선한 원두커피 1kg </p>,
   ]);
 
-  return <Popular list={list} minHeight={{ web: 40, mobile: 50 }} />;
+  return (
+    <Popular
+      list={list}
+      minHeight={{ web: 40, mobile: 50 }}
+      changeListEvent={(idx) => {}}
+    />
+  );
 }

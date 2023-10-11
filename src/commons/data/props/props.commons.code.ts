@@ -62,6 +62,7 @@ export const propsCommonsCodeList = ({
           funcName: null,
           children: null,
           curlyClass: isObject ? "blue" : "deepPurple",
+          props: argu ? getCommonsHighlight.colors(argu).varName2 : "",
         }),
       })
     ),

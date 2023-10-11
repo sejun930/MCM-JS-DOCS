@@ -86,7 +86,10 @@ const hoverEventCodeForm = {
         props: `
         ${popularCommonsExampleCode.list()}
         ${popularCommonsExampleCode.minHeight()}
-        ${getBoldCode({ code: popularCommonsExampleCode.changeListEvent() })}
+        ${getBoldCode({
+          code: popularCommonsExampleCode.changeListEvent(),
+          propsName: "changeListEvent",
+        })}
       `,
       })}
     `)

@@ -189,17 +189,17 @@ export const popularExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "Popular의 웹<b>(768px 이상)</b> 또는 모바일<b>(767px 이하)</b> 환경의 최소 높이값을 설정할 수 있습니다. <br />위의 모듈은 웹 환경에서는 60px, 모바일 환경에서는 50px의 높이값을 가집니다.",
+          "Popular의 웹<b>(768px 이상)</b> 또는 모바일<b>(767px 이하)</b> 환경의 최소 높이값을 설정할 수 있습니다. <br />위의 모듈은 웹 환경에서는 80px, 모바일 환경에서는 60px의 높이값을 가집니다.",
         content: ``,
         code: ``,
         children: "",
         addProps: {
           ...popularInitProps,
-          minHeight: { web: 60, mobile: 50 },
+          minHeight: { web: 80, mobile: 60 },
         },
         changeContent: `
       ${popularCodeList.basic()}
-      ${popularCodeList.minHeight(60, 50)}
+      ${popularCodeList.minHeight(80, 60)}
     `,
       },
     ],

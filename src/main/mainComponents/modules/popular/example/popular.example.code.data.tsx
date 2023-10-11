@@ -13,39 +13,55 @@ export const popularCodeList: ExampleCodeListTypes = {
   minHeight: (web?: number, mobile?: number) =>
     getBoldCode({
       code: popularCommonsExampleCode.minHeight(web, mobile),
+      propsName: "minHeight",
     }),
   delay: (delay: number) =>
-    getBoldCode({ code: popularCommonsExampleCode.delay(String(delay)) }),
-  styles: () => getBoldCode({ code: popularCommonsExampleCode.styles() }),
+    getBoldCode({
+      code: popularCommonsExampleCode.delay(String(delay)),
+      propsName: "delay",
+    }),
+  styles: () =>
+    getBoldCode({
+      code: popularCommonsExampleCode.styles(),
+      propsName: "popularStyles",
+    }),
   responsiveStyles: () =>
-    getBoldCode({ code: popularCommonsExampleCode.responsiveStyles() }),
+    getBoldCode({
+      code: popularCommonsExampleCode.responsiveStyles(),
+      propsName: "popularResponsiveStyles",
+    }),
   hideList: () =>
     getBoldCode({
       code: popularCommonsExampleCode.setList(
         popularCommonsExampleCodeForm.hideList
       ),
+      propsName: "setList",
     }),
   showRating: () =>
     getBoldCode({
       code: popularCommonsExampleCode.setList(
         popularCommonsExampleCodeForm.showRating
       ),
+      propsName: "setList",
     }),
   hoverStyles: () =>
     getBoldCode({
       code: popularCommonsExampleCode.setList(
         popularCommonsExampleCodeForm.hoverStyles
       ),
+      propsName: "setList",
     }),
   listStyles: () =>
     getBoldCode({
       code: popularCommonsExampleCode.setList(
         popularCommonsExampleCodeForm.listStyles
       ),
+      propsName: "setList",
     }),
   useSwipeMode: () =>
     getBoldCode({
       code: popularCommonsExampleCode.useSwipeMode(),
+      propsName: "useSwipeMode",
     }),
 };
 

@@ -69,6 +69,11 @@ export default function CommonsHooksComponents() {
     return pathName.includes("admin") && pathName.split("/")[1] === "admin";
   };
 
+  // ul 리스트로 구성된 li 컴포넌트 가져오기
+  const getUlList = (list: Array<HTMLLIElement>) => {
+    return (list && list.length && <ul className="ul-wrapper"></ul>) || <></>;
+  };
+
   return {
     componentRender,
     getAllComponentsClassName,
@@ -77,5 +82,6 @@ export default function CommonsHooksComponents() {
     getAllExampleComponentLength,
     getOriginTemplate,
     getIsAdminPage,
+    getUlList,
   };
 }
