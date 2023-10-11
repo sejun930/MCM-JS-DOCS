@@ -1,17 +1,52 @@
 import { ExampleCommonsTypes } from "src/commons/data/example/example.commons.data";
 import { getCommonsHighlight } from "src/commons/highlight";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";
-import { popularCommonsExampleCode } from "./popular.example.commons.code";
+import {
+  popularCommonsExampleCode,
+  popularCommonsExampleCodeForm,
+} from "./popular.example.commons.code";
 import { getBoldCode } from "src/main/commonsComponents/functional/code";
 
 export const popularCodeList: ExampleCodeListTypes = {
   default: () => ` `,
   basic: () => popularCommonsExampleCode.list(),
+  minHeight: (web?: number, mobile?: number) =>
+    getBoldCode({
+      code: popularCommonsExampleCode.minHeight(web, mobile),
+    }),
   delay: (delay: number) =>
     getBoldCode({ code: popularCommonsExampleCode.delay(String(delay)) }),
   styles: () => getBoldCode({ code: popularCommonsExampleCode.styles() }),
   responsiveStyles: () =>
     getBoldCode({ code: popularCommonsExampleCode.responsiveStyles() }),
+  hideList: () =>
+    getBoldCode({
+      code: popularCommonsExampleCode.setList(
+        popularCommonsExampleCodeForm.hideList
+      ),
+    }),
+  showRating: () =>
+    getBoldCode({
+      code: popularCommonsExampleCode.setList(
+        popularCommonsExampleCodeForm.showRating
+      ),
+    }),
+  hoverStyles: () =>
+    getBoldCode({
+      code: popularCommonsExampleCode.setList(
+        popularCommonsExampleCodeForm.hoverStyles
+      ),
+    }),
+  listStyles: () =>
+    getBoldCode({
+      code: popularCommonsExampleCode.setList(
+        popularCommonsExampleCodeForm.listStyles
+      ),
+    }),
+  useSwipeMode: () =>
+    getBoldCode({
+      code: popularCommonsExampleCode.useSwipeMode(),
+    }),
 };
 
 export const popularReturnCommonsData = ({
@@ -28,41 +63,28 @@ export const popularReturnCommonsData = ({
   return getCommonsHighlight.tag.component({
     componentName: "Popular",
     isClose: true,
-    props: `
-      ${getCommonsHighlight.props(
-        "list",
-        getCommonsHighlight.curly({
-          children: getCommonsHighlight.colors("list").varName,
-        })
-      )} ${
-      (!hasCode &&
-        getCommonsHighlight.colors("노출할 리스트를 입력합니다. (필수)")
-          .comment) ||
-      ""
-    }
-      ${getCommonsHighlight.props(
-        "minHeight",
-        getCommonsHighlight.curly({
-          children: getCommonsHighlight.curly({
-            children: ` ${getCommonsHighlight.obj(
-              "web",
-              getCommonsHighlight.colors("40").number
-            )} `,
-            className: "yellow",
-          }),
-        })
-      )} ${
-      (!hasCode &&
-        getCommonsHighlight.colors("모듈의 최소 높이값을 지정합니다. (필수)")
-          .comment) ||
-      ""
-    } ${
-      (hasCode &&
-        `
+    props:
+      changeContent ||
+      `
+      ${popularCommonsExampleCode.list()} ${
+        (!hasCode &&
+          getCommonsHighlight.colors("노출할 리스트를 입력합니다. (필수)")
+            .comment) ||
+        ""
+      }
+      ${popularCommonsExampleCode.minHeight()} ${
+        (!hasCode &&
+          getCommonsHighlight.colors("모듈의 최소 높이값을 지정합니다. (필수)")
+            .comment) ||
+        ""
+      } ${
+        (hasCode &&
+          `
       ${code}
     `) ||
-      ""
-    }`,
+        `
+    `
+      }`,
   });
 };
 

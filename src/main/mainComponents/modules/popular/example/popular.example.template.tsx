@@ -5,10 +5,11 @@ import { PopularPropsTypes } from "mcm-js-dev/dist/commons/types";
 
 const { Popular } = getLibraries();
 export default function MyPopularExample(props: ExampleContentsTypes) {
-  //   const [list] = useState(popularInitList || []);
+  const _props = (props.addProps as PopularPropsTypes) || {};
 
-  let _props = (props.addProps as PopularPropsTypes) || {};
-  //   _props.list = list;
+  let _Children = <Popular {..._props} />;
+  // 대체용 컴포넌트가 있는 경우
+  if (props.replaceChildren) _Children = props.replaceChildren;
 
-  return <Popular {..._props} />;
+  return _Children;
 }

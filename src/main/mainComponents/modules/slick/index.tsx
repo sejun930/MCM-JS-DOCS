@@ -11,20 +11,5 @@ export default function PopularExamplePage() {
     <p> [원두커피1kg] 갓 볶은 신선한 원두커피 1kg </p>,
   ]);
 
-  return (
-    <Popular
-      list={list}
-      minHeight={{ web: 40 }}
-      popularResponsiveStyles={{
-        web: {
-          // 웹 (768px 이상) 스타일
-          backgroundColor: "#C8FFE0",
-        },
-        mobile: {
-          // 모바일 (767px 이하) 스타일
-          backgroundColor: "#F9F3CC",
-        },
-      }}
-    />
-  );
+  return <Popular list={list} minHeight={{ web: 40, mobile: 50 }} />;
 }
