@@ -18,7 +18,7 @@ export const alertPropsList: Array<PropsModuleListType> = [
     // @ts-ignore
     type: "Number | String",
     notice:
-      'Alert이 종료되는 시간을 설정합니다. <br /><b>숫자 타입</b>을 전달하면 기입된 숫자로 종료 시간이 설정할 수 있습니다. <b>(1/1000ms)</b><br />문자열 타입으로 <b>"infinite"</b>를 전달하면 자동 종료되지 않는 Alert이 설정됩니다.',
+      'Alert이 <b>종료되는 시간</b>을 설정합니다. <br /><br /><b>숫자 타입</b>을 전달하면 기입된 숫자로 종료 시간이 설정할 수 있습니다. <b>(1초 = 1/1000ms)</b><br />문자열 타입인 "infinite"를 전달하면 <b>종료되지 않는 Alert</b>이 설정됩니다.',
     isRequired: false,
     code: {
       type: "custom",
@@ -43,7 +43,7 @@ export const alertPropsList: Array<PropsModuleListType> = [
     default: "{ web : {}, mobile : {} }",
     type: "Object",
     notice:
-      "<b>웹(768px 이상)</b>과 <b>모바일(767px 이하)</b>에 적용되는 스타일을 각각 설정할 수 있습니다. <br /><b>alertStyles</b> props 보다 더 우선적으로 스타일이 적용됩니다.",
+      "<b>웹(768px 이상)</b>과 <b>모바일(767px 이하)</b>에 스타일을 각각 설정할 수 있습니다. <br /><b>alertStyles</b> props 보다 더 우선적으로 스타일이 적용됩니다.",
     isRequired: false,
     code: {
       type: "obj",
@@ -84,8 +84,21 @@ export const alertPropsList: Array<PropsModuleListType> = [
         }
     }`,
     type: "Object",
-    notice:
-      'Alert의 사용 용도에 맞게 컨셉을 지정할 수 있습니다. <br /><b>"type"</b> key 값을 이용해 원하는 컨셉을 지정할 수 있으며, <br /><b>"custom"</b> key 값을 이용해 원하는 컨셉을 커스텀 할 수 있습니다. <br />',
+    notice: `Alert의 사용 용도에 맞게 컨셉을 지정할 수 있습니다. <br /><br />
+        <ul class="ul-wrapper">
+          <li><b class="bold">type</b> : Alert의 컨셉 타입을 지정합니다. </b> <b class="option"> <br /> ("success", "info", "warning", "error", "custom")</b></li>
+          <li><b class="bold">custom</b> {</li>
+          <li style="margin-left : 16px"><b class="bold">color</b> : Alert의 <b>이모지 및 테두리</b>의 전체의 색상을 설정합니다. </li>
+          <li style="margin-left : 16px"><b class="bold">icon</b> { </li>
+          <li style="margin-left : 32px"><b class="bold">src</b> : 설정된 컨셉의 이모지로 변경합니다.</li>
+          <li style="margin-left : 32px"><b class="bold">size</b> : <b>이모지의 크기</b>를 조절합니다.</li>
+          <li style="margin-left : 32px"><b class="bold">color</b> : <b>이모지의 색상</b>을 변경합니다.</li>
+          <li style="margin-left : 16px"><b class="bold">text</b> { </li>
+          <li style="margin-left : 32px"><b class="bold">color</b> : <b>메세지 색상</b>을 설정합니다.</li>
+          <li style="margin-left : 32px"><b class="bold">size</b> : <b>메세지 크기</b>를 설정합니다.</li>
+          <li style="margin-left : 32px"><b class="bold">weight</b> : <b>메세지 굵기</b>를 설정합니다.</li>
+        </ul>
+      `,
     isRequired: false,
     code: {
       type: "obj",

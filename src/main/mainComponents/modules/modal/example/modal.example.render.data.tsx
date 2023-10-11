@@ -10,7 +10,7 @@ import { getBoldCode } from "src/main/commonsComponents/functional/code";
 // Modal default Props값
 export const modalExampleInitProps: ModalPropsType = {
   showBGAnimation: false, // 배경 애니메이션 여부
-  showModalOpenAnimation: false, // 모달 오픈 애니메이션 여부
+  showModalOpenAnimation: false, // Modal 오픈 애니메이션 여부
   show: false,
   onCloseModal: () => {},
 };
@@ -21,11 +21,11 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     title: "기본 (Basic)",
     contents: [
       {
-        remakrs: "제일 기본적으로 실행되는 모달입니다.",
+        remakrs: "제일 기본적으로 실행되는 Modal 입니다.",
         info: {
           buttonName: "Open Basic Modal",
         },
-        content: `기본 모달 페이지입니다.`,
+        content: `기본 Modal 페이지입니다.`,
         code: modalCodeList(idx).basic,
       },
     ],
@@ -34,7 +34,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     title: "애니메이션 (Animation) 적용",
     contents: [
       {
-        remakrs: "애니메이션이 적용되어 좀더 활동적인 모달을 제공합니다.",
+        remakrs: "애니메이션이 적용되어 좀더 활동적인 Modal을 제공합니다.",
         addProps: {
           ...modalExampleInitProps,
           showBGAnimation: true,
@@ -43,7 +43,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Animation Modal",
         },
-        content: `애니메이션이 적용된 모달입니다.`,
+        content: `애니메이션이 적용된 Modal 입니다.`,
         code: modalCodeList(idx).animation,
       },
     ],
@@ -53,7 +53,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     // isFull: true,
     contents: [
       {
-        remakrs: "width 300px, height : 300px 크기의 모달을 만들 수 있습니다.",
+        remakrs: "width 300px, height : 300px 크기의 Modal을 만들 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
           modalSize: { width: "300px", height: "300px" },
@@ -61,11 +61,11 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open width 300px, height 300px Modal",
         },
-        content: `크기가 300px로 설정된 모달입니다.`,
+        content: `크기가 300px로 설정된 Modal 입니다.`,
         code: modalCodeList(idx).size300,
       },
       {
-        remakrs: "width 30%, height : 40% 크기의 모달을 만들 수 있습니다.",
+        remakrs: "width 30%, height : 40% 크기의 Modal을 만들 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
           modalSize: { width: "30%", height: "40%" },
@@ -73,7 +73,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open width 30%, height 40% Modal",
         },
-        content: `%로 크기 설정된 모달입니다.`,
+        content: `%로 크기 설정된 Modal 입니다.`,
         code: modalCodeList(idx).sizePercent,
       },
     ],
@@ -174,7 +174,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "모달 닫기 관련",
+    title: "Modal 닫기 관련",
     isFull: { isHalf: false },
     contents: [
       {
@@ -186,7 +186,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Hide Close Button Modal",
         },
-        content: `닫기 버튼이 사라진 모달입니다.`,
+        content: `닫기 버튼이 사라진 Modal 입니다.`,
         code: modalCodeList(idx).hideCloseButton,
       },
       {
@@ -223,7 +223,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     title: "자동 종료 (auto-close) 방지",
     contents: [
       {
-        remakrs: "외부 영역을 선택해도 모달이 종료되지 않습니다.",
+        remakrs: "외부 영역을 선택해도 Modal이 종료되지 않습니다.",
         addProps: {
           ...modalExampleInitProps,
           offAutoClose: true,
@@ -232,7 +232,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Off Auto-close Modal",
         },
-        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+        content: `닫기 버튼을 클릭해야만 실행되어 있는 Modal을 닫을 수 있습니다.`,
         code: modalCodeList(idx).offAutoClose,
       },
     ],
@@ -241,7 +241,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     title: "자동 종료 예약",
     contents: [
       {
-        remakrs: "원하는 시간 (1/1000초) 후에 모달을 자동으로 종료시킵니다.",
+        remakrs: "원하는 시간 (1/1000초) 후에 Modal을 자동으로 종료시킵니다.",
         addProps: {
           ...modalExampleInitProps,
           autoCloseTimer: 2000,
@@ -253,7 +253,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Auto Close Timer Modal",
         },
-        content: `2초 후에 모달이 자동으로 종료됩니다.`,
+        content: `2초 후에 Modal이 자동으로 종료됩니다.`,
         code: modalCodeList(idx).autoCloseTimer,
       },
     ],
@@ -262,7 +262,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
     title: "스크롤 방지",
     contents: [
       {
-        remakrs: "모달이 실행되면 스크롤 이동을 방지합니다.",
+        remakrs: "Modal이 실행되면 스크롤 이동을 방지합니다.",
         addProps: {
           ...modalExampleInitProps,
           onFixWindow: true,
@@ -270,7 +270,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Fix Window",
         },
-        content: `이 모달이 실행되는 동안에는 스크롤을 제어할 수 없습니다.`,
+        content: `이 Modal이 실행되는 동안에는 스크롤을 제어할 수 없습니다.`,
         code: modalCodeList(idx).onFixWindow,
       },
     ],
@@ -295,18 +295,18 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Off Auto-close Modal",
         },
-        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+        content: `닫기 버튼을 클릭해야만 실행되어 있는 Modal을 닫을 수 있습니다.`,
         code: null,
       },
     ],
   },
   {
-    title: "모달 선택 종료",
+    title: "Modal 선택 종료",
     isHide: [true, false][idx],
     contents: [
       {
         remakrs:
-          "여러개의 모달 중 id 또는 class 선택자가 지정된 모달을 선택해서 종료할 수 있습니다.",
+          "여러개의 Modal 중 id 또는 class 선택자가 지정된 Modal을 선택해서 종료할 수 있습니다.",
         addProps: {
           ...modalExampleInitProps,
           id: "parents-modal",
@@ -322,7 +322,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
         changeContent: `<span class='blue'>(</span>
             ${getCommonsHighlight.tag.div(
               `
-              ${getCommonsHighlight.tag.span("상위 모달")}
+              ${getCommonsHighlight.tag.span("상위 Modal")}
               ${getCommonsHighlight.tag.component({
                 componentName: "Modal",
                 childrenSpace: `
@@ -345,7 +345,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
                 )}
               `,
                 children: getCommonsHighlight.tag.span(
-                  "하위 모달을 종료하면 상위 모달도 함께 종료됩니다."
+                  "하위 Modal을 종료하면 상위 Modal도 함께 종료됩니다."
                 ),
                 endSpace: `
               `,
@@ -355,7 +355,7 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
             `
             )}
           <span class='blue'>)</span>${getCommonsHighlight.colors(",").text}`,
-        content: `하위 모달을 종료하면 상위 모달도 함께 종료됩니다.`,
+        content: `하위 Modal을 종료하면 상위 Modal도 함께 종료됩니다.`,
         code: modalCodeList(idx).selectClose,
       },
     ],

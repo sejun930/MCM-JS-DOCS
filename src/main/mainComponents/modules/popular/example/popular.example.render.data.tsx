@@ -222,7 +222,7 @@ export const popularExampleList = (): Array<ExampleIProps> => [
         info: {
           buttonName: "Open Off Auto-close Modal",
         },
-        content: `닫기 버튼을 클릭해야만 모달창을 닫을 수 있습니다.`,
+        content: `닫기 버튼을 클릭해야만 Modal을 닫을 수 있습니다.`,
         code: null,
       },
     ],

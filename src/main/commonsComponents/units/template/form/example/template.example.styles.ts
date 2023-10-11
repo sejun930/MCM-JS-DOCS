@@ -130,7 +130,7 @@ export const ExampleListWrapper = styled.div`
     font-size: 14px;
     margin-top: 20px;
     color: #666666;
-    line-height: 20px;
+    line-height: 24px;
     letter-spacing: -0.01rem;
   }
 

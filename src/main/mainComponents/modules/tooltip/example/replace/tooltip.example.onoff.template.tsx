@@ -26,11 +26,11 @@ export default function TooltipExampleOnOffReplacePage(
   return (
     <Wrapper>
       <ToggleBtn onClickEvent={toggleDisable}>
-        툴팁 {open ? "종료" : "실행"}
+        Tooltip {open ? "종료" : "실행"}
       </ToggleBtn>
       <Tooltip
-        tooltipText="툴팁이 실행되었습니다."
-        // isDisable state값이 true라면 툴팁이 실행되지 않습니다.
+        tooltipText="Tooltip이 실행되었습니다."
+        // isDisable state값이 true라면 Tooltip이 실행되지 않습니다.
         open={open}
         useShowAnimation
         onCloseAfterEvent={closeDisable}

@@ -13,7 +13,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     title: "기본 (Basic)",
     contents: [
       {
-        remakrs: "제일 기본적으로 실행되는 슬라이더입니다.",
+        remakrs: "제일 기본적으로 실행되는 Slider 입니다.",
         content: sliderDefaultChildren,
         code: ``,
       },
@@ -140,7 +140,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "슬라이더 전체의 최소 높이값을 지정할 수 있습니다. <br />web과 mobile을 별도로 지정하여 웹 사이즈와 모바일 사이즈를 각각 조절할 수 있습니다.",
+          "Slider 전체의 최소 높이값을 지정할 수 있습니다. <br />web과 mobile을 별도로 지정하여 웹 사이즈와 모바일 사이즈를 각각 조절할 수 있습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.minHeight(),
         addProps: {
@@ -166,7 +166,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "최초로 시작하는 페이지를 설정합니다. <br />나열된 페이지 번호 중 처음 렌더하고 싶은 페이지의 번호를 입력해주세요. (default : 1)",
+          "최초로 시작하는 페이지를 설정합니다. <br />나열된 페이지 번호 중 처음 렌더하고 싶은 페이지의 번호를 입력해주세요. <b>(default : 1)</b>",
         content: sliderDefaultChildren,
         code: null,
         addProps: {
