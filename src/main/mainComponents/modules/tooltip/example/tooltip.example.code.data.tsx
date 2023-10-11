@@ -102,7 +102,7 @@ export const tooltipCodeList: ExampleCodeListTypes = {
     `,
   fix: () =>
     `
-     ${tooltipCodeList.default("고정된 툴팁입니다.")} 
+     ${tooltipCodeList.default("고정된 Tooltip 입니다.")} 
       ${tooltipCommonsExampleCode.onoff()}
       ${getBoldCode({
         code: tooltipCommonsExampleCode.isFix(),

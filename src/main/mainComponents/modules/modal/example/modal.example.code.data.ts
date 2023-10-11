@@ -14,10 +14,10 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
   // prettier-ignore
   {
     code: `
-  ${getCommonsHighlight.colors("모달을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.").comment}
+  ${getCommonsHighlight.colors("Modal을 실행하거나 종료 시킬 수 있는 state 값을 설정합니다.").comment}
   ${getCommonsHighlight.state({ stateName : "isOpen", stateValue : getCommonsHighlight.colors("false").bool })}
   
-  ${getCommonsHighlight.colors("모달을 실행하는 함수입니다.").comment}
+  ${getCommonsHighlight.colors("Modal을 실행하는 함수입니다.").comment}
   ${getCommonsHighlight.makeFunction({
     funcName : "openModal",
     children : getCommonsHighlight.function({
@@ -29,7 +29,7 @@ export const modalCommonsData: Array<ExampleCommonsTypes> = [
     })
   })}
   
-  ${getCommonsHighlight.colors("모달을 종료하는 함수입니다.").comment}
+  ${getCommonsHighlight.colors("Modal을 종료하는 함수입니다.").comment}
   ${getCommonsHighlight.makeFunction({
     funcName : "closeModal",
     children : getCommonsHighlight.function({
@@ -66,7 +66,7 @@ export const modalReturnCommonsData = ({
   return [
     getCommonsHighlight.tag.div(`
       ${getCommonsHighlight.tag.button({
-        children: getCommonsHighlight.colors("모달 실행하기 ").text,
+        children: getCommonsHighlight.colors("Modal 실행하기 ").text,
         clickEvent: {
           eventName: "openModal",
         },
@@ -84,7 +84,7 @@ export const modalReturnCommonsData = ({
       })}
     `),
     `${getCommonsHighlight.tag.button({
-      children: getCommonsHighlight.colors("모달 실행하기 ").text,
+      children: getCommonsHighlight.colors("Modal 실행하기 ").text,
       endSpace: `
       `,
       clickEvent: {
@@ -136,7 +136,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         ${ExampleCode.onCloseModal}
         ${
           getCommonsHighlight.colors(
-            "모달을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
+            "Modal을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
           ).comment
         }
         ${getBoldCode({
@@ -145,7 +145,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
         })}
         ${
           getCommonsHighlight.colors(
-            "모달을 실행 및 종료할 때 모달 애니메이션을 적용합니다."
+            "Modal을 실행 및 종료할 때 Modal 애니메이션을 적용합니다."
           ).comment
         }
         ${getBoldCode({
@@ -155,7 +155,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
       `,
       `${getCommonsHighlight.getComma([
         getCommonsHighlight.colors(
-          "모달을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
+          "Modal을 실행 및 종료할 때 배경 애니메이션을 적용합니다."
         ).comment,
         `         ` +
           getBoldCode({
@@ -164,7 +164,7 @@ export const modalCodeList = (idx: number): ExampleCodeListTypes => {
           }),
         `         ` +
           getCommonsHighlight.colors(
-            "모달을 실행 및 종료할 때 모달 애니메이션을 적용합니다."
+            "Modal을 실행 및 종료할 때 Modal 애니메이션을 적용합니다."
           ).comment,
         `         ` +
           getBoldCode({

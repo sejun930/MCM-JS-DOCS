@@ -8,7 +8,7 @@ import { getLibraries } from "src/main/commonsComponents/functional/modules";
 const { Tooltip } = getLibraries();
 
 export default function TooltipExampleDisableReplacePage() {
-  // 툴팁의 활성화 또는 비활성화의 기준이 되는 state 값입니다.
+  // Tooltip의 활성화 또는 비활성화의 기준이 되는 state 값입니다.
   const [isDisable, setIsDisable] = useState(false);
 
   // isDisable state 값을 true 또는 false로 변경합니다.
@@ -19,14 +19,14 @@ export default function TooltipExampleDisableReplacePage() {
   return (
     <Wrapper>
       <ToggleBtn onClickEvent={toggleDisable} isTooltipDisable={isDisable}>
-        툴팁 {isDisable ? "활성화" : "비활성화"} 실행
+        Tooltip {isDisable ? "활성화" : "비활성화"} 실행
       </ToggleBtn>
       <Tooltip
         tooltipText="활성화 상태입니다."
-        // isDisable state값이 true라면 툴팁이 실행되지 않습니다.
+        // isDisable state값이 true라면 Tooltip이 실행되지 않습니다.
         isDisable={isDisable}
       >
-        <p> 활성화 상태에서만 툴팁이 실행됩니다. </p>
+        <p> 활성화 상태에서만 Tooltip이 실행됩니다. </p>
       </Tooltip>
     </Wrapper>
   );

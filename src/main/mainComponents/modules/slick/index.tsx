@@ -14,17 +14,8 @@ export default function PopularExamplePage() {
   return (
     <Popular
       list={list}
-      minHeight={{ web: 40 }}
-      popularResponsiveStyles={{
-        web: {
-          // 웹 (768px 이상) 스타일
-          backgroundColor: "#C8FFE0",
-        },
-        mobile: {
-          // 모바일 (767px 이하) 스타일
-          backgroundColor: "#F9F3CC",
-        },
-      }}
+      minHeight={{ web: 40, mobile: 50 }}
+      changeListEvent={(idx) => {}}
     />
   );
 }

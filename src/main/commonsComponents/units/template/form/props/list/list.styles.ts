@@ -105,6 +105,11 @@ export const Tr = styled.tr`
   }
   .props-notice {
     width: 55%;
+
+    b {
+      font-weight: 700;
+      color: #aa5656;
+    }
   }
   .props-type {
     width: 15%;

@@ -304,10 +304,12 @@ export const getCommonsHighlight = {
     funcName,
     children,
     curlyClass,
+    props,
   }: {
     funcName: string | null;
     children: string | null;
     curlyClass?: string;
+    props?: string;
   }) =>
     `${
       (funcName &&
@@ -318,6 +320,7 @@ export const getCommonsHighlight = {
     }${getCommonsHighlight.arrowFunction({
       returnValue: "",
       className: curlyClass || "deepPurple",
+      props,
     })} ${getCommonsHighlight.curly({
       className: curlyClass || "deepPurple",
       children:
@@ -358,6 +361,7 @@ export const getCommonsHighlight = {
     })} <span class="purple">from</span> ${getCommonsHighlight.string(
       from
     )}${getCommonsHighlight.semiColon()}`,
+  //
   // 각각의 상황에 맞는 컬러 반환
   colors: (children?: string) => {
     children = children || "";

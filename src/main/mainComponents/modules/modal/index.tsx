@@ -70,7 +70,7 @@ export default function MyModal() {
           <>
             <_HowUseForm
               codeInfo={modalCodeList(vers)}
-              exmapleContents="기본 모달 페이지입니다."
+              exmapleContents="기본 Modal 페이지입니다."
               endPointRef={endPointRef.current}
             />
             <_ExampleForm
