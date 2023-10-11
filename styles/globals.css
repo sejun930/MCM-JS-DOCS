@@ -83,10 +83,6 @@ ol {
   text-align: left;
 }
 
-.ul-wrapper li {
-  /* width: ; */
-}
-
 .ul-wrapper .bold {
   color: black !important;
 }
@@ -135,10 +131,6 @@ table {
 @media (max-width: 767px) {
   .web-hide {
     display: block;
-  }
-
-  .ul-wrapper {
-    /* align-items: center; */
   }
 }
 
