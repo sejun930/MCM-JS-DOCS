@@ -3,13 +3,12 @@ import _MainTitleTemplate from "src/main/commonsComponents/units/template/title/
 import _HowUseForm from "src/main/commonsComponents/units/template/form/howUse";
 import _ExampleForm from "src/main/commonsComponents/units/template/form/example/template.example.container";
 import _PropsForm from "src/main/commonsComponents/units/template/form/props";
-// import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
-// import _CommentsForm from "src/main/commonsComponents/units/template/form/comments/comments.render";
+import _TreeForm from "src/main/commonsComponents/units/template/form/tree";
+import _CommentsForm from "src/main/commonsComponents/units/template/form/comments/comments.render";
 
 import { popularCodeList } from "./example/popular.example.code.data";
 import { popularExampleList } from "./example/popular.example.render.data";
 import { getCommonsHighlight } from "src/commons/highlight";
-// import { alertFunctionalList } from "./functional";
 import { popularPropsList } from "./props/popular.propsList";
 
 export const popularInitList = [
@@ -38,11 +37,8 @@ export default function MyPopular() {
         commonsProps={{}}
       />
       <_PropsForm list={popularPropsList} />
-
-      {/*
-
       <_TreeForm />
-      <_CommentsForm /> */}
+      <_CommentsForm />
     </Template>
   );
 }

@@ -23,7 +23,6 @@ export default function _MainTitleTemplate() {
       setList(getModuleIndexList({ module, vers }));
     }, 50);
   }, [module, vers]);
-  console.log(module);
 
   return (
     <Wrapper className="main-title-wrapper" id="main-title-form">
