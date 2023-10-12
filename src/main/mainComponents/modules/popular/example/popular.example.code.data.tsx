@@ -1,3 +1,5 @@
+import React from "react";
+
 import { ExampleCommonsTypes } from "src/commons/data/example/example.commons.data";
 import { getCommonsHighlight } from "src/commons/highlight";
 import { ExampleCodeListTypes } from "src/main/commonsComponents/units/template/form/howUse/index.types";

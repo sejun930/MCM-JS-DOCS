@@ -2,6 +2,7 @@ import { modalTreeList } from "src/main/mainComponents/modules/modal/tree/modal.
 import { tooltipTreeList } from "src/main/mainComponents/modules/tooltip/tree/tooltip.tree";
 import { sliderTreeList } from "src/main/mainComponents/modules/slider/tree/slider.tree";
 import { alertTreeList } from "src/main/mainComponents/modules/alert/tree/alert.tree";
+import { popularTreeList } from "src/main/mainComponents/modules/popular/tree/popular.tree";
 
 export interface TreeModuleListTypes {
   tag: string; // 태그 타입
@@ -15,4 +16,5 @@ export const treeModuleList: { [key: string]: Array<TreeModuleListTypes> } = {
   Tooltip: tooltipTreeList,
   Slider: sliderTreeList,
   Alert: alertTreeList,
+  Popular: popularTreeList,
 };
