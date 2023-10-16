@@ -409,7 +409,7 @@ export const commonsCodeForm = ({
 }: {
   form?: "props" | "object";
   key: string;
-  value?: string | { [key: string]: string };
+  value?: string;
   type?: CommonsCodeFormType;
   changeCode?: string;
 }) => {

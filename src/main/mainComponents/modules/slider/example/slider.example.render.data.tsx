@@ -4,8 +4,9 @@ import {
   sliderCodeList,
 } from "./slider.example.code.data";
 
-import SliderExampleChangeEventPage from "./replace/slider.example.changeEvent";
-import { SliderExampleChangeEventCode } from "./replace/slider.example.changeEvent";
+import SliderExampleChangeEventPage, {
+  SliderExampleChangeEventCode,
+} from "./replace/slider.example.changeEvent";
 
 export const initSliderCommonsProps = {
   children: [],
