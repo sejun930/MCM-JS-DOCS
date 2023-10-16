@@ -4,6 +4,9 @@ import {
   sliderCodeList,
 } from "./slider.example.code.data";
 
+import SliderExampleChangeEventPage from "./replace/slider.example.changeEvent";
+import { SliderExampleChangeEventCode } from "./replace/slider.example.changeEvent";
+
 export const initSliderCommonsProps = {
   children: [],
 };
@@ -50,17 +53,76 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "전환 버튼 비활성화",
+    title: "스와이프 기능 적용",
+    // isFull: true,
     contents: [
       {
-        remakrs: "이전 또는 다음으로 이동하는 전환 버튼을 숨깁니다.",
+        remakrs: "스와이프하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
         content: sliderDefaultChildren,
-        code: sliderCodeList.hideArrow(),
+        code: sliderCodeList.useSwipeMode(),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          useSwipeMode: {
+            sideMovePercent: 30,
+          },
+        },
+      },
+    ],
+  },
+  {
+    title: "전환 버튼 설정",
+    isFull: { isHalf: false },
+    blockRemarks:
+      "이전 및 다음으로 이동하는 버튼을 숨기거나 변경할 수 있습니다.",
+    contents: [
+      {
+        remakrs: "버튼을 사용하지 않도록 숨길 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.setArrow("hide"),
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
           pagination: { showPageList: true },
-          hideArrow: true,
+          useSwipeMode: {
+            sideMovePercent: 50,
+          },
+          setArrow: {
+            hide: true,
+          },
+        },
+      },
+      {
+        remakrs: "Slider에 <b>마우스를 올릴 때</b> 버튼을 노출시킵니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.setArrow("showHover"),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          pagination: { showPageList: true },
+          useSwipeMode: {
+            sideMovePercent: 50,
+          },
+          setArrow: {
+            showHover: true,
+          },
+        },
+      },
+      {
+        remakrs:
+          "버튼을 원하는 <b>문자열 또는 컴포넌트</b>로 변경할 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.setArrow("contents"),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          pagination: { showPageList: true },
+          useSwipeMode: {
+            sideMovePercent: 50,
+          },
+          setArrow: {
+            contents: "⬅",
+          },
         },
       },
     ],
@@ -100,24 +162,6 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "스와이프 기능 적용",
-    // isFull: true,
-    contents: [
-      {
-        remakrs: "스와이프하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
-        content: sliderDefaultChildren,
-        code: sliderCodeList.useSwipeMode(),
-        addProps: {
-          ...initSliderCommonsProps,
-          useAnimation: true,
-          useSwipeMode: {
-            sideMovePercent: 30,
-          },
-        },
-      },
-    ],
-  },
-  {
     title: "시작 페이지 지정",
     // isFull: true,
     contents: [
@@ -140,7 +184,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "Slider 전체의 최소 높이값을 지정할 수 있습니다. <br />web과 mobile을 별도로 지정하여 웹 사이즈와 모바일 사이즈를 각각 조절할 수 있습니다.",
+          "Slider 전체의 <b>최소 높이값</b>을 지정할 수 있습니다. <br />web과 mobile을 별도로 지정하여 <b>웹 사이즈와 모바일 사이즈</b>를 각각 조절할 수 있습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.minHeight(),
         addProps: {
@@ -150,9 +194,25 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
             showPageList: true,
           },
           listMinHeight: {
-            web: "240px",
-            mobile: "200px",
+            web: "200px",
+            mobile: "160px",
           },
+        },
+      },
+    ],
+  },
+  {
+    title: "페이지 전환 시 이벤트 발생",
+    contents: [
+      {
+        remakrs:
+          "Slider 페이지의 <b>변경이 감지</b>되면 <b>자동으로 실행</b>되는 이벤트를 설정할 수 있습니다. <br />설정된 함수의 props에 인덱스 값이 기본으로 전달됩니다.",
+        content: sliderDefaultChildren,
+        code: "",
+        replaceChildren: <SliderExampleChangeEventPage />,
+        replaceAllCode: {
+          code: SliderExampleChangeEventCode.code,
+          showCode: SliderExampleChangeEventCode.showCode,
         },
       },
     ],

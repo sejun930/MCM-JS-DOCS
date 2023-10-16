@@ -19,19 +19,21 @@ import {
 import { sliderPropsList } from "./props/slider.propsList";
 import { getUuid } from "src/main/commonsComponents/functional";
 
-export default function MySlider() {
-  const commonsProps = {
-    children: [
-      <p key={getUuid()}>Hello</p>,
-      <p key={getUuid()}>World</p>,
-      <img
-        key={getUuid()}
-        src="/images/modules/example/tooltip/dancing.gif"
-        className="slider-image-example"
-      />,
-    ].map((el) => <React.Fragment key={getUuid()}>{el}</React.Fragment>),
-  };
+export const sliderCommonsProps = {
+  children: [
+    <p key={getUuid()}>Hello World</p>,
+    <p key={getUuid()} style={{ fontSize: "30px" }}>
+      😃🧑😀
+    </p>,
+    <img
+      key={getUuid()}
+      src="/images/modules/example/tooltip/dancing.gif"
+      className="slider-image-example"
+    />,
+  ].map((el) => <React.Fragment key={getUuid()}>{el}</React.Fragment>),
+};
 
+export default function MySlider() {
   return (
     <Template>
       <_MainTitleTemplate />
@@ -42,7 +44,7 @@ export default function MySlider() {
       <_ExampleForm
         exampleList={sliderExampleList()}
         initProps={initSliderCommonsProps}
-        commonsProps={commonsProps}
+        commonsProps={sliderCommonsProps}
       />
       <_PropsForm list={sliderPropsList} />
       <_TreeForm />

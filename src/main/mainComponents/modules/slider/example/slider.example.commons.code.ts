@@ -17,11 +17,6 @@ export const sliderCommonsExampleCode = {
       )} `,
     }),
   }),
-  hideArrow: commonsCodeForm({
-    key: "hideArrow",
-    value: "true",
-    type: "bool",
-  }),
   autoPlay: commonsCodeForm({
     key: "useAutoPlay",
     type: "node",
@@ -33,6 +28,31 @@ export const sliderCommonsExampleCode = {
       )} `,
     }),
   }),
+  setArrow: (value: "hide" | "showHover" | "contents") => {
+    const code: { [key: string]: string } = {
+      hide: getCommonsHighlight.obj(
+        "hide",
+        getCommonsHighlight.colors("true").bool
+      ),
+      showHover: getCommonsHighlight.obj(
+        "showHover",
+        getCommonsHighlight.colors("true").bool
+      ),
+      contents: getCommonsHighlight.obj(
+        "contents",
+        getCommonsHighlight.string("⬅")
+      ),
+    };
+
+    return commonsCodeForm({
+      key: "setArrow",
+      type: "node",
+      value: `${getCommonsHighlight.curly({
+        className: "yellow",
+        children: ` ${code[value]} `,
+      })}`,
+    });
+  },
   timer: commonsCodeForm({
     key: "useAutoPlay",
     type: "node",
@@ -54,17 +74,18 @@ export const sliderCommonsExampleCode = {
       ),
     }),
   }),
-  useSwipeMode: commonsCodeForm({
-    key: "useSwipeMode",
-    type: "node",
-    value: getCommonsHighlight.curly({
-      className: "yellow",
-      children: ` ${getCommonsHighlight.obj(
-        "sideMovePercent",
-        getCommonsHighlight.colors("30").number
-      )} `,
+  useSwipeMode: (num?: string) =>
+    commonsCodeForm({
+      key: "useSwipeMode",
+      type: "node",
+      value: getCommonsHighlight.curly({
+        className: "yellow",
+        children: ` ${getCommonsHighlight.obj(
+          "sideMovePercent",
+          getCommonsHighlight.colors(num || "30").number
+        )} `,
+      }),
     }),
-  }),
   firstPage: commonsCodeForm({
     key: "firstPage",
     value: "3",
@@ -76,14 +97,21 @@ export const sliderCommonsExampleCode = {
       className: "yellow",
       children: ` ${getCommonsHighlight.getComma(
         [
-          getCommonsHighlight.obj("web", getCommonsHighlight.string("240px")),
+          getCommonsHighlight.obj("web", getCommonsHighlight.string("200px")),
           getCommonsHighlight.obj(
             "mobile",
-            getCommonsHighlight.string("200px")
+            getCommonsHighlight.string("160px")
           ),
         ],
         { removeTap: true, removeLastComma: true }
       )} `,
+    }),
+    type: "node",
+  }),
+  changePageEvent: commonsCodeForm({
+    key: "changePageEvent",
+    value: getCommonsHighlight.function({
+      funcName: "changeEvent",
     }),
     type: "node",
   }),

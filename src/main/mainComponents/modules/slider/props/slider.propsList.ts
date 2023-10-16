@@ -25,12 +25,13 @@ export const sliderPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "pagination",
-    default: "{ showPageList : false }",
+    default: "{ showPageList : false, hideMobile : false }",
     type: "Object",
     notice: `나열되어 있는 컴포넌트의 개수만큼 <b>페이지의 개수</b>를 리스트 형태로 출력합니다. <br />출력된 리스트내의 페이지를 클릭해서 페이지를 전환할 수 있습니다.
       <br /><br />
       <ul class="ul-wrapper">
         <li><b class="bold">showPageList</b> : 페이지의 개수 노출 여부를 결정합니다. true를 전달하면 페이지 리스트가 노출됩니다.</li>
+        <li><b class="bold">hideMobile</b> : true를 전달하면 모바일 환경<b>(767px 이하)</b>에서는 페이지를 숨깁니다.</li>
       </ul>
       `,
     code: {
@@ -40,16 +41,33 @@ export const sliderPropsList: Array<PropsModuleListType> = [
           key: "showPageList",
           value: getCommonsHighlight.colors("false").bool,
         },
+        {
+          key: "hideMobile",
+          value: getCommonsHighlight.colors("false").bool,
+        },
       ],
     },
   },
   {
-    name: "hideArrow",
-    default: "false",
-    type: "Boolean",
-    notice: "true를 전달하면 페이지 다음/이전 버튼을 숨길 수 있습니다.",
+    name: "setArrow",
+    default: `{ hide : false, showHover : false, hideMobile : false, contents : "◀" }`,
+    type: "Object",
+    notice: `좌, 우로 이동할 수 있는 버튼에 대한 여러 기능을 제어할 수 있습니다 <br /><br />
+        <ul class="ul-wrapper">
+          <li><b class="bold">hide</b> : true를 전달하면 좌, 우 버튼을 사용하지 않고 숨깁니다.</li>
+          <li><b class="bold">showHover</b> : true를 전달하면 Slider에 <b>마우스를 올릴 때</b>만 버튼을 노출합니다.</li>
+          <li><b class="bold">hideMobile</b> : true를 전달하면 모바일 환경<b>(767px 이하)</b>에서는 버튼을 숨깁니다.</li>
+          <li><b class="bold">contents</b> : 문자열 또는 컴포넌트를 전달하면 버튼의 모양을 변경할 수 있습니다. <br />오른쪽 버튼(다음으로 이동)은 자동으로 <b>좌우 전환</b>된 형태로 노출됩니다.</li>
+        </ul>
+      `,
     code: {
-      type: "bool",
+      type: "obj",
+      argu: [
+        { key: "hide", value: getCommonsHighlight.colors("false").bool },
+        { key: "showHover", value: getCommonsHighlight.colors("false").bool },
+        { key: "hideMobile", value: getCommonsHighlight.colors("false").bool },
+        { key: "contents", value: getCommonsHighlight.string("") },
+      ],
     },
   },
   {
@@ -112,6 +130,17 @@ export const sliderPropsList: Array<PropsModuleListType> = [
         { key: "web", value: getCommonsHighlight.string("0px") },
         { key: "mobile", value: getCommonsHighlight.string("0px") },
       ],
+    },
+  },
+  {
+    name: "changePageEvent",
+    default: `(idx) => {}`,
+    type: "Function",
+    notice:
+      "Slider의 페이지가 변경이 되면 실행될 이벤트를 설정합니다. <br />설정된 이벤트에는 선택되어 있는 <b>리스트의 인덱스 값을 반환</b>하는 props가 제공됩니다.",
+    code: {
+      type: "function",
+      argu: ["idx"],
     },
   },
 ];
