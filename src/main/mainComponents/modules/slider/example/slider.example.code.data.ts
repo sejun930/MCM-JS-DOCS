@@ -20,13 +20,14 @@ export const sliderCodeList: ExampleCodeListTypes = {
         propsName: "pagination",
       })}
     `,
-  hideArrow: () =>
+  setArrow: (value: "hide" | "showHover" | "contents") =>
     ` 
       ${sliderCommonsExampleCode.useAnimation} 
       ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.useSwipeMode("50")}
       ${getBoldCode({
-        code: sliderCommonsExampleCode.hideArrow,
-        propsName: "hideArrow",
+        code: sliderCommonsExampleCode.setArrow(value),
+        propsName: "setArrow",
       })}
     `,
   autoPlay: () =>
@@ -51,7 +52,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
     `
       ${sliderCommonsExampleCode.useAnimation} 
       ${getBoldCode({
-        code: sliderCommonsExampleCode.useSwipeMode,
+        code: sliderCommonsExampleCode.useSwipeMode(),
         propsName: "useSwipeMode",
       })} 
     `,
@@ -73,6 +74,16 @@ export const sliderCodeList: ExampleCodeListTypes = {
         propsName: "listMinHeight",
       })} 
     `,
+  changePageEvent: () =>
+    `
+        ${sliderCommonsExampleCode.useAnimation}
+        ${sliderCommonsExampleCode.pagination}
+        ${sliderCommonsExampleCode.autoPlay}
+        ${getBoldCode({
+          code: sliderCommonsExampleCode.changePageEvent,
+          propsName: "changePageEvent",
+        })} 
+      `,
 };
 
 export const sliderReturnCommonsData = ({
@@ -97,7 +108,7 @@ export const sliderReturnCommonsData = ({
 export const sliderDefaultChildren = `${getCommonsHighlight.tag.p(
   getCommonsHighlight.colors("Hello").text
 )}
-      ${getCommonsHighlight.tag.p(getCommonsHighlight.colors("World").text)}
+      ${getCommonsHighlight.tag.p(getCommonsHighlight.colors("😃🧑😀").text)}
       ${getCommonsHighlight.tag.img(
         getCommonsHighlight.props(
           "src",

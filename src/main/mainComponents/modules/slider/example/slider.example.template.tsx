@@ -13,7 +13,7 @@ export default function MySliderExample(props: ExampleContentsTypes) {
   return (
     <Wrapper>
       {/* @ts-ignore */}
-      <Slider {..._props}>{_children}</Slider>
+      {props?.replaceChildren || <Slider {..._props}>{_children}</Slider>}
     </Wrapper>
   );
 }

@@ -179,7 +179,7 @@ export const modalPropsList: (vers: number) => Array<PropsModuleListType> = (
     default: "false",
     type: "Boolean",
     notice:
-      "Modal이 실행될 때 화면 <b>스크롤 이동을 방지</b>할 수 있습니다. <br /> 설정된 Modal이 실행만 되어 있다면 전체 Modal에도 동일하게 적용됩니다.",
+      "Modal이 실행될 때 화면 <b>스크롤 이동을 방지</b>할 수 있습니다. <br /> 설정된 Modal이 모두 <b>종료되기 전까지</b> 스크롤이 고정됩니다.",
     code: {
       type: "bool",
     },
