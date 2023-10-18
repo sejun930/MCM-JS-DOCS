@@ -111,7 +111,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
       },
       {
         remakrs:
-          "버튼을 원하는 <b>문자열 또는 컴포넌트</b>로 변경할 수 있습니다.",
+          "다음 및 이전 버튼을 원하는 <b>문자열 또는 컴포넌트</b>로 변경할 수 있습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.setArrow("contents"),
         addProps: {
@@ -122,7 +122,10 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
             sideMovePercent: 50,
           },
           setArrow: {
-            contents: "⬅",
+            contents: {
+              left: "🔙",
+              right: "🔜",
+            },
           },
         },
       },
@@ -214,6 +217,32 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
         replaceAllCode: {
           code: SliderExampleChangeEventCode.code,
           showCode: SliderExampleChangeEventCode.showCode,
+        },
+      },
+    ],
+  },
+  {
+    title: "다음 및 이전 페이지 이동 방지",
+    contents: [
+      {
+        remakrs:
+          "Slider의 페이지가 <b>첫번째 또는 마지막 페이</b>지일 경우 <b>이전 또는 다음 페이지 이동을 방지</b>할 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.stopInfinite(),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          pagination: {
+            showPageList: true,
+          },
+          useAutoPlay: {
+            delay: 3000,
+            showTimer: true,
+          },
+          useSwipeMode: {
+            sideMovePercent: 50,
+          },
+          stopInfinite: true,
         },
       },
     ],
