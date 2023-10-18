@@ -38,10 +38,30 @@ export const sliderCommonsExampleCode = {
         "showHover",
         getCommonsHighlight.colors("true").bool
       ),
-      contents: getCommonsHighlight.obj(
+      contents: `
+      ${getCommonsHighlight.obj(
         "contents",
-        getCommonsHighlight.string("⬅")
-      ),
+        getCommonsHighlight.curly({
+          className: "deepPurple",
+          children: `
+            ${getCommonsHighlight.obj(
+              "left",
+              getCommonsHighlight.string("🔙")
+            )}${getCommonsHighlight.comma()}${
+            getCommonsHighlight.colors("이전으로 이동하는 버튼을 대체합니다.")
+              .comment
+          }
+            ${getCommonsHighlight.obj(
+              "right",
+              getCommonsHighlight.string("🔜")
+            )}${
+            getCommonsHighlight.colors("다음으로 이동하는 버튼을 대체합니다.")
+              .comment
+          }
+        `,
+        })
+      )}
+`,
     };
 
     return commonsCodeForm({
@@ -114,5 +134,10 @@ export const sliderCommonsExampleCode = {
       funcName: "changeEvent",
     }),
     type: "node",
+  }),
+  stopInfinite: commonsCodeForm({
+    key: "stopInfinite",
+    value: "true",
+    type: "bool",
   }),
 };

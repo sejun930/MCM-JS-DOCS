@@ -50,14 +50,14 @@ export const sliderPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "setArrow",
-    default: `{ hide : false, showHover : false, hideMobile : false, contents : "◀" }`,
+    default: `{ hide : false, showHover : false, hideMobile : false, contents : { left : "◀", right : "▶" } }`,
     type: "Object",
     notice: `좌, 우로 이동할 수 있는 버튼에 대한 여러 기능을 제어할 수 있습니다 <br /><br />
         <ul class="ul-wrapper">
           <li><b class="bold">hide</b> : true를 전달하면 좌, 우 버튼을 사용하지 않고 숨깁니다.</li>
           <li><b class="bold">showHover</b> : true를 전달하면 Slider에 <b>마우스를 올릴 때</b>만 버튼을 노출합니다.</li>
           <li><b class="bold">hideMobile</b> : true를 전달하면 모바일 환경<b>(767px 이하)</b>에서는 버튼을 숨깁니다.</li>
-          <li><b class="bold">contents</b> : 문자열 또는 컴포넌트를 전달하면 버튼의 모양을 변경할 수 있습니다. <br />오른쪽 버튼(다음으로 이동)은 자동으로 <b>좌우 전환</b>된 형태로 노출됩니다.</li>
+          <li><b class="bold">contents</b> : 문자열 또는 컴포넌트를 전달하면 이전 및 다음 버튼의 모양을 변경할 수 있습니다. <br /><b>left</b>는 이전 버튼, <b>right</b>는 다음 버튼을 제어합니다.</li>
         </ul>
       `,
     code: {
@@ -66,7 +66,19 @@ export const sliderPropsList: Array<PropsModuleListType> = [
         { key: "hide", value: getCommonsHighlight.colors("false").bool },
         { key: "showHover", value: getCommonsHighlight.colors("false").bool },
         { key: "hideMobile", value: getCommonsHighlight.colors("false").bool },
-        { key: "contents", value: getCommonsHighlight.string("") },
+        {
+          key: "contents",
+          value: getCommonsHighlight.curly({
+            className: "deepPurple",
+            children: `
+    ${getCommonsHighlight.obj(
+      "left",
+      getCommonsHighlight.string("◀")
+    )}${getCommonsHighlight.comma()}
+    ${getCommonsHighlight.obj("right", getCommonsHighlight.string("▶"))}
+  `,
+          }),
+        },
       ],
     },
   },
@@ -141,6 +153,17 @@ export const sliderPropsList: Array<PropsModuleListType> = [
     code: {
       type: "function",
       argu: ["idx"],
+    },
+  },
+  {
+    name: "stopInfinite",
+    default: `false`,
+    type: "Boolean",
+    notice:
+      "Slider 페이지가 <b>처음 및 마지막 페이지</b>일 경우 이전/다음 페이지 이동을 <b>비활성화</b> 합니다. <br />스와이프 및 자동/수동 전환 기능에 모두 적용됩니다.",
+    code: {
+      type: "bool",
+      argu: "false",
     },
   },
 ];

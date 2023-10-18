@@ -84,6 +84,17 @@ export const sliderCodeList: ExampleCodeListTypes = {
           propsName: "changePageEvent",
         })} 
       `,
+  stopInfinite: () =>
+    `
+      ${sliderCommonsExampleCode.useAnimation}
+      ${sliderCommonsExampleCode.useSwipeMode("50")}
+      ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.timer}
+      ${getBoldCode({
+        code: sliderCommonsExampleCode.stopInfinite,
+        propsName: "stopInfinite",
+      })} 
+    `,
 };
 
 export const sliderReturnCommonsData = ({
@@ -106,7 +117,7 @@ export const sliderReturnCommonsData = ({
 
 // 공통으로 사용될 children 데이터
 export const sliderDefaultChildren = `${getCommonsHighlight.tag.p(
-  getCommonsHighlight.colors("Hello").text
+  getCommonsHighlight.colors("Hello World").text
 )}
       ${getCommonsHighlight.tag.p(getCommonsHighlight.colors("😃🧑😀").text)}
       ${getCommonsHighlight.tag.img(
