@@ -63,14 +63,7 @@ export const OptionalWrapper = styled.div`
     height: auto;
 
     .mcm-title-unit {
-      margin-bottom: 20px;
-    }
-
-    .optional-input {
-      /* .mcm-textArea-unit {
-        height: 180px;
-        font-size: 12px;
-      } */
+      margin-bottom: 16px;
     }
   }
 `;
@@ -114,12 +107,11 @@ export const Message = styled.div`
 `;
 
 export const CommentsInfoWrapper = styled.div`
-  margin: 24px 0px;
-  margin-bottom: 10px;
+  margin: 16px 0px;
+  /* margin-bottom: 10px; */
 
   @media ${breakPoints.mobileLarge} {
-    margin: 0px;
-    margin-bottom: 10px;
+    margin-top: 0px;
   }
 `;
 
@@ -183,15 +175,18 @@ export const CategoryInfo = styled.div`
     }
   }
 
+  @media ${breakPoints.mobileLarge} {
+    .label-wrapper {
+      justify-content: center;
+      height: 34px;
+      overflow-y: auto;
+    }
+  }
+
   @media ${breakPoints.mobileSmall} {
     .label-wrapper {
       flex-wrap: wrap;
       gap: 6px 12px;
-    }
-
-    p {
-      font-size: 10px;
-      padding: 6px;
     }
   }
 `;

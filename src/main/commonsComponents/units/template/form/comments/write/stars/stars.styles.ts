@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { CSSProperties } from "react";
 
 interface StylesTypes {
   isView?: boolean;
   rating?: number;
+  selectRating?: number; // 현재 선택된 점수
   isHoverArea?: boolean;
   isSelect?: boolean;
   isBugMode?: boolean;
   isAlready?: boolean;
+  isModifyMode?: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -18,11 +22,16 @@ export const Wrapper = styled.div`
   position: relative;
   gap: 0px 10px;
 
-  ${(props: StylesTypes) =>
-    props.isView && {
-      width: "auto",
-      gap: "0px 6px",
-    }}
+  ${(props: StylesTypes) => {
+    let styles: CSSProperties & { [key: string]: string } = {};
+
+    if (props.isView) styles = { width: "auto", gap: "0px 6px" };
+    if (!props.isBugMode && !props.isModifyMode) {
+      styles.gap = "0px";
+    }
+
+    return styles;
+  }}
 
   .select-star {
     text-shadow: 0 0 0 rgba(170, 86, 86) !important; /* 새 이모지 색상 부여 */
@@ -43,10 +52,15 @@ export const Wrapper = styled.div`
       height: 100%;
     }
   }
+
+  @media ${breakPoints.mobileLarge} {
+    gap: 0px 10px;
+  }
 `;
 
 export const Star = styled.button`
   width: 20px;
+  height: 20px;
   font-size: 20px; /* 이모지 크기 */
   color: transparent; /* 기존 이모지 컬러 제거 */
   text-shadow: 0 0 0 #999999; /* 새 이모지 색상 부여 */
@@ -76,46 +90,32 @@ export const Star = styled.button`
     ${(props) =>
     props.isAlready && {
       cursor: "default",
-    }}
-  
-    :after {
-    content: "⭐";
-    position: absolute;
-    color: transparent;
-    text-shadow: 0 0 0 #aa5656;
-    font-size: 22px;
-    transform: scale(var(--rating));
-    display: ${(props) => (props.isView ? "flex" : "none")};
-
-    ${(props) => {
-      let styles = {
-        left: "0px",
-        top: "-0.5px",
-      };
-
-      if (props.rating === 1) styles = { left: "-0.5px", top: "-1px" };
-      if (props.rating === 2) styles = { left: "-0.8px", top: "-1.3px" };
-      if (props.rating === 3) styles = { left: "0px", top: "-1px" };
-      if (props.rating === 4) styles = { left: "-0.1px", top: "-1px" };
-
-      return styles;
-    }}
-    ${(props) =>
-      props.isBugMode && {
-        display: "none",
-      }}
-  }
-
+    }} 
+    
   // 이슈 색상별로 출력하기
   ${(props) => {
-    const styles = { textShadow: "" };
+    const { selectRating, rating, isView } = props;
+    let styles: CSSProperties & { [key: string]: string } = {};
 
-    if (props.isBugMode && props.isView) {
-      if (props.rating === 1) styles.textShadow = "0 0 0 #0079FF";
-      if (props.rating === 2) styles.textShadow = "0 0 0 #00DFA2";
-      if (props.rating === 3) styles.textShadow = "0 0 0 #CBB279";
-      if (props.rating === 4) styles.textShadow = "0 0 0 #E57C23";
-      if (props.rating === 5) styles.textShadow = "0 0 0 #B70404";
+    if (props.isBugMode) {
+      // 이슈 색상 정하기
+      const colors = ["0079FF", "00DFA2", "CBB279", "E57C23", "B70404"];
+
+      if (props.isView && selectRating)
+        styles.textShadow = `0 0 0 #${colors[selectRating - 1]}`;
+    } else {
+      // 리뷰 이미지 가져오기
+      styles = {
+        backgroundImage: `url("/images/commons/icons/star/star_${rating}.gif")`,
+        backgroundSize: "cover",
+        width: `${isView ? 36 : 30}px`,
+        height: `${isView ? 36 : 30}px`,
+      };
+
+      // 선택 모드일 경우
+      if (!isView) {
+        styles.opacity = selectRating === rating ? "1" : "0.5";
+      }
     }
 
     return styles;

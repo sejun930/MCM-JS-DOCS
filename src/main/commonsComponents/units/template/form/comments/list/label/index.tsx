@@ -18,6 +18,7 @@ export default function CommentsLabel({
   modifyRatingEvent,
   adminLogin,
   hideStar,
+  isModifyMode,
 }: {
   info: InfoTypes;
   commentsInfo?: CommentsAllInfoTypes;
@@ -26,6 +27,7 @@ export default function CommentsLabel({
   modifyRatingEvent?: (value: number) => void; // 평점 수정 이벤트 (평점 수정 가능)
   adminLogin: boolean | null;
   hideStar?: boolean; // 이슈 및 리뷰 카테고리에서 평점 부분 숨기기 여부
+  isModifyMode?: boolean; // 모달을 이용한 수정모드 여부
 }) {
   const renderLabel = () => {
     const nodeList = [];
@@ -57,6 +59,7 @@ export default function CommentsLabel({
           rating={info.category === "review" ? info.rating : info.bugLevel}
           changeEvent={modifyRatingEvent}
           isBugMode={info.category === "bug"}
+          isModifyMode={isModifyMode}
         />
       );
     }

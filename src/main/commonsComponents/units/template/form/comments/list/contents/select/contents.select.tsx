@@ -84,7 +84,7 @@ export default function SelectListOptional({
     }, 250);
   };
 
-  // 댓글 삭제하기
+  // 댓글 수정 & 삭제하기
   const deleteComments = (type: "delete" | "modify") => () => {
     ableClose = false;
 

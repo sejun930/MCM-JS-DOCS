@@ -42,8 +42,18 @@ export default function PrivacyPage({
       onFixWindow: true,
       closeMent: "닫기",
       mobileModalSize: {
-        width: "95%",
-        height: "450px",
+        width: "90%",
+        height: "460px",
+      },
+      modalStyles: {
+        contents: {
+          padding: "1rem 2rem",
+        },
+      },
+      mobileModalStyles: {
+        contents: {
+          padding: "1rem",
+        },
       },
     });
   };
