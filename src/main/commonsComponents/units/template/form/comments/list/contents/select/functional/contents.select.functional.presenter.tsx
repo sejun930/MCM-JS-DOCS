@@ -79,10 +79,10 @@ export default function ContentsSelectFunctionalUIPage({
                       )
                   : undefined
               }
+              isModifyMode={true}
             />
           </CategoryInfo>
         </CommentsInfoWrapper>
-
         <CommentsInfoItems isAnswerType={showAnswer !== "" || isAnswerType}>
           <_Input
             isTextArea
@@ -144,7 +144,6 @@ export default function ContentsSelectFunctionalUIPage({
             })}
           </BugStatusWrapper>
         )}
-
         <ConfirmButtonWrapper>
           <ConfirmButton onClickEvent={confirm} buttonRef={confirmRef}>
             {ContentsSelectTypeName[type][1]}

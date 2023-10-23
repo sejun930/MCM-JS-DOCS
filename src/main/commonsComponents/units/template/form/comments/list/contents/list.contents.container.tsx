@@ -99,7 +99,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       id: "comments-functional-modal",
       name,
       modalSize: { width: "460px", height: "480px" },
-      mobileModalSize: { width: "90%" },
+      mobileModalSize: { width: "90%", height: "500px" },
       closeMent: "닫기",
       showBGAnimation: true,
       showModalOpenAnimation: true,

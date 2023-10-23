@@ -13,7 +13,7 @@ export default function PrivacyNoticePage({
     <Wrapper className="privacy-notice-wrapper">
       <TitleWrapper>
         <_Title className="privacy-notice-title">
-          개인정보 (IP) <div className="web-hide" /> 수집 약관
+          개인정보 (IP) 수집 약관
         </_Title>
       </TitleWrapper>
       <NoticeContentsWrapper>
@@ -69,13 +69,14 @@ export const Wrapper = styled.article`
     background-color: #30a2ff;
     border-radius: 0px 0px 10px 10px;
     color: white;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 700;
   }
 
   @media ${breakPoints.mobileLarge} {
     height: 100%;
     justify-content: space-between;
+    padding-top: 20px;
 
     .privacy-agree-button {
       position: relative;
@@ -96,7 +97,7 @@ export const TitleWrapper = styled.div`
     display: flex;
     width: 100%;
     justify-content: center;
-    font-size: 28px;
+    font-size: 26px;
     font-family: sans-serif;
     word-spacing: -0.1rem;
   }
@@ -105,12 +106,11 @@ export const TitleWrapper = styled.div`
     padding: 0;
 
     .privacy-notice-title {
-      flex-direction: column;
       align-items: center;
       font-size: 20px;
       font-weight: 900;
       line-height: 26px;
-      margin-top: 20px;
+      /* margin-top: 20px; */
     }
   }
 `;
@@ -119,8 +119,9 @@ export const NoticeContentsWrapper = styled.div`
   display: flex;
   background-color: #eeeeee;
   border-radius: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 1rem;
+  height: 300px;
 
   @media ${breakPoints.mobileLarge} {
     padding: 0.5rem;
@@ -131,9 +132,9 @@ export const NoticeContentsWrapper = styled.div`
 export const NoticeContents = styled.ul`
   display: flex;
   flex-direction: column;
-  height: 260px;
   overflow: auto;
   gap: 24px 0px;
+  height: 100%;
 
   li {
     font-family: monospace;

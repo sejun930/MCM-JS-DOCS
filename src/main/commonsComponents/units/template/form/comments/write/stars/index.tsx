@@ -15,6 +15,7 @@ export default function StarsForm({
   isView,
   isBugMode,
   tooltipPosition,
+  isModifyMode,
 }: {
   rating?: number; // 평점 정보, 있다면 defaultValue로 노출
   category: string;
@@ -22,6 +23,7 @@ export default function StarsForm({
   isView?: boolean;
   isBugMode?: boolean; // 버그 카테고리 모드용
   tooltipPosition?: "top" | "bottom"; // tootlip 메시지 방향 지정
+  isModifyMode?: boolean; // 수정 모드 여부
 }) {
   // 별점 선택시 영역 계산 state
   const [selectRating, setSelectRating] = useState(0);
@@ -46,20 +48,16 @@ export default function StarsForm({
     if (changeEvent) changeEvent(idx);
   };
 
-  const renderEmoji = () => {
-    let str = "⭐";
-    if (isBugMode) str = "🔥";
-    // if (isView && !isBugMode) str = "🌟";
-
-    return str;
-  };
-
   return (
-    <Wrapper isView={isView} className="stars-wrapper">
+    <Wrapper
+      isView={isView}
+      className="stars-wrapper"
+      isBugMode={isBugMode}
+      isModifyMode={isModifyMode}
+    >
       {Array.from(new Array(isView ? 1 : 5), () => 1).map((_, idx) => {
         const star = idx + 1;
-        // 호버된 영역 표시
-        // const isHoverArea = hoverRating >= star;
+
         // 선택된 영역 표시
         const isSelect = selectRating >= star;
         // 이미 선택된 영역인지
@@ -74,6 +72,10 @@ export default function StarsForm({
             tooltipMessage = starsTooltipTextList[category][rating - 1];
         }
 
+        // 현재 선택되어 있는 이슈 및 평점
+        let currentRating = rating;
+        if (!isView) currentRating = star;
+
         return (
           <Tooltip
             key={getUuid()}
@@ -81,19 +83,20 @@ export default function StarsForm({
             isDisable={!tooltipMessage}
             useShowAnimation
             position={tooltipPosition || "top"}
+            hideMobile={true}
           >
             <Star
               type="button"
-              // isHoverArea={isHoverArea}
               onClick={selectStar(star)}
               isSelect={isSelect}
               isView={isView}
-              rating={selectRating}
+              rating={currentRating}
+              selectRating={selectRating}
               className={`star star-${idx}`}
               isBugMode={isBugMode}
               isAlready={isAlready}
             >
-              {renderEmoji()}
+              {(isBugMode && "🔥") || null}
             </Star>
           </Tooltip>
         );
