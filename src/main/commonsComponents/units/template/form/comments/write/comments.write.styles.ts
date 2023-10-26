@@ -119,12 +119,12 @@ export const OptionItems = styled.div`
     if (props.isRating) {
       styles.transition = "all 0.3s";
       styles.minHeight = "0px";
-      styles.maxHeight = "0px";
+      // styles.maxHeight = "0px";
     }
 
     if (props.show) {
       styles.minHeight = "40px";
-      styles.maxHeight = "40px";
+      // styles.maxHeight = "40px";
     }
 
     return styles;

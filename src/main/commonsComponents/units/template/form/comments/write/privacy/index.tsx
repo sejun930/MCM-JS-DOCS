@@ -1,4 +1,7 @@
-import { AgreeUserPrivacyWrapper } from "./privacy.styles";
+import {
+  AgreeUserPrivacyWrapper,
+  AgreeUserPrivacyItems,
+} from "./privacy.styles";
 import { _Button, _Checkbox } from "mcm-js-commons";
 import { WriteInfoTypes } from "../comments.write.types";
 
@@ -60,25 +63,30 @@ export default function PrivacyPage({
 
   return (
     <AgreeUserPrivacyWrapper>
-      <_Checkbox
-        inputId="privacy-checkbox"
-        onChangeEvent={() => changeInfo(!info.agreeProvacy)("agreeProvacy")}
-        isChecked={info.agreeProvacy}
-      />
-      <label
-        id="privacy-label"
-        htmlFor="privacy-checkbox"
-        className={(info.agreeProvacy && "checked") || undefined}
-      >
-        개인정보 (IP) 수집에 동의합니다.
-      </label>
-      <_Button
-        onClickEvent={openPrivacyNotice}
-        buttonType="button"
-        className="privacy-notice"
-      >
-        [약관 보기]
-      </_Button>
+      <AgreeUserPrivacyItems>
+        <_Checkbox
+          inputId="privacy-checkbox"
+          onChangeEvent={() => changeInfo(!info.agreeProvacy)("agreeProvacy")}
+          isChecked={info.agreeProvacy}
+        />
+        <label
+          id="privacy-label"
+          htmlFor="privacy-checkbox"
+          className={(info.agreeProvacy && "checked") || undefined}
+        >
+          개인정보 (IP) 수집에 동의합니다.
+        </label>
+      </AgreeUserPrivacyItems>
+
+      <AgreeUserPrivacyItems className="privacy-notice-wrapper">
+        <_Button
+          onClickEvent={openPrivacyNotice}
+          buttonType="button"
+          className="privacy-notice"
+        >
+          [약관 보기]
+        </_Button>
+      </AgreeUserPrivacyItems>
     </AgreeUserPrivacyWrapper>
   );
 }

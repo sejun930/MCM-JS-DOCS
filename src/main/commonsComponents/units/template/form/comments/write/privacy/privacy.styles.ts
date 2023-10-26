@@ -8,7 +8,17 @@ interface StyleTypes {
 export const AgreeUserPrivacyWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 0px 8px;
+  gap: 0px 12px;
+
+  @media ${breakPoints.mobileLarge} {
+    width: 100%;
+  }
+`;
+
+export const AgreeUserPrivacyItems = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0px 6px;
 
   #privacy-label {
     font-size: 14px;
@@ -29,9 +39,12 @@ export const AgreeUserPrivacyWrapper = styled.div`
   @media ${breakPoints.mobileLarge} {
     width: 100%;
 
+    &.privacy-notice-wrapper {
+      justify-content: flex-end;
+    }
+
     #privacy-label {
       font-size: 12px;
-      width: 100%;
     }
 
     .privacy-notice {
