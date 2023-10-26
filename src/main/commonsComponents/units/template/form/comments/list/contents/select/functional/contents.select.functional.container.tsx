@@ -37,6 +37,8 @@ let bugLevel = 0; // 버그 중요도 저장
 let disableOpenModal = false; // 모달 중복 실행 방지
 let updating = false; // 업데이트 진행중 여부 (중복 클릭 방지)
 
+let answer = ""; // 답변 내용 저장
+
 export default function ContentsSelectFunctionalPage({
   info,
   type,
@@ -50,7 +52,6 @@ export default function ContentsSelectFunctionalPage({
   module: string;
   fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }) {
-  let answer = info.answer || ""; // 답변 내용 저장
   // 이슈 단계도 (0 : 확인 전, 1 : 확인 및 처리 중, 2 : 수정 완료)
   const [bugStatus, setBugStatus] = useState<number>(info.bugStatus || 0);
   // 중복 클릭 방지
@@ -72,6 +73,7 @@ export default function ContentsSelectFunctionalPage({
     rating = info.rating;
     bugLevel = info.bugLevel;
     updating = false;
+    answer = info?.answer || "";
   }, []);
 
   // 수정 및 삭제 가능 여부 반환
@@ -241,6 +243,7 @@ export default function ContentsSelectFunctionalPage({
         if (typeName === "답변") {
           if (answer) {
             changeInput.answer = answer;
+            answer = "";
           }
           changeInput.bugStatus = bugStatus;
         }

@@ -1,4 +1,4 @@
-import { Star, Wrapper } from "./stars.styles";
+import { Star, Wrapper, Items, Notice } from "./stars.styles";
 import React, { useEffect, useState } from "react";
 
 import { getUuid } from "src/main/commonsComponents/functional";
@@ -27,8 +27,6 @@ export default function StarsForm({
 }) {
   // 별점 선택시 영역 계산 state
   const [selectRating, setSelectRating] = useState(0);
-  // 마우스 호버시 영역 계산 state
-  // const [hoverRating, setHoverRating] = useState(0);
 
   useEffect(() => {
     setSelectRating(rating || 0);
@@ -48,60 +46,75 @@ export default function StarsForm({
     if (changeEvent) changeEvent(idx);
   };
 
+  // 모바일용 리뷰 및 이슈 추가 설명문
+  const getRatingNotice = () => {
+    let notice = `${isBugMode ? "이슈 중요도를" : "리뷰 평점을"} 선택해주세요.`;
+
+    if (selectRating) {
+      // 선택된 이슈 및 평점이 있을 경우
+      notice = `(${selectRating}) ${
+        starsTooltipTextList[category][selectRating - 1]
+      }`;
+    }
+    return notice;
+  };
+
   return (
     <Wrapper
-      isView={isView}
       className="stars-wrapper"
-      isBugMode={isBugMode}
+      isView={isView}
       isModifyMode={isModifyMode}
     >
-      {Array.from(new Array(isView ? 1 : 5), () => 1).map((_, idx) => {
-        const star = idx + 1;
+      <Items isView={isView} isBugMode={isBugMode} isModifyMode={isModifyMode}>
+        {Array.from(new Array(isView ? 1 : 5), () => 1).map((_, idx) => {
+          const star = idx + 1;
 
-        // 선택된 영역 표시
-        const isSelect = selectRating >= star;
-        // 이미 선택된 영역인지
-        const isAlready = selectRating === idx + 1;
+          // 선택된 영역 표시
+          const isSelect = selectRating >= star;
+          // 이미 선택된 영역인지
+          const isAlready = selectRating === idx + 1;
 
-        // Tooltip 메세지
-        let tooltipMessage = "";
-        if (starsTooltipTextList[category]) {
-          tooltipMessage = starsTooltipTextList[category][idx];
+          // Tooltip 메세지
+          let tooltipMessage = "";
+          if (starsTooltipTextList[category]) {
+            tooltipMessage = starsTooltipTextList[category][idx];
 
-          if (isView && rating)
-            tooltipMessage = starsTooltipTextList[category][rating - 1];
-        }
+            if (isView && rating)
+              tooltipMessage = starsTooltipTextList[category][rating - 1];
+          }
 
-        // 현재 선택되어 있는 이슈 및 평점
-        let currentRating = rating;
-        if (!isView) currentRating = star;
+          // 현재 선택되어 있는 이슈 및 평점
+          let currentRating = rating;
+          if (!isView) currentRating = star;
 
-        return (
-          <Tooltip
-            key={getUuid()}
-            tooltipText={tooltipMessage}
-            isDisable={!tooltipMessage}
-            useShowAnimation
-            position={tooltipPosition || "top"}
-            hideMobile={true}
-          >
-            <Star
-              type="button"
-              onClick={selectStar(star)}
-              isSelect={isSelect}
-              isView={isView}
-              rating={currentRating}
-              selectRating={selectRating}
-              className={`star star-${idx}`}
-              isBugMode={isBugMode}
-              isAlready={isAlready}
+          return (
+            <Tooltip
+              key={getUuid()}
+              tooltipText={tooltipMessage}
+              isDisable={!tooltipMessage}
+              useShowAnimation
+              position={tooltipPosition || "top"}
+              hideMobile={true}
             >
-              {(isBugMode && "🔥") || null}
-            </Star>
-          </Tooltip>
-        );
-      })}
-      {isView && <_SpanText className="rating-number">({rating})</_SpanText>}
+              <Star
+                type="button"
+                onClick={selectStar(star)}
+                isSelect={isSelect}
+                isView={isView}
+                rating={currentRating}
+                selectRating={selectRating}
+                className={`star star-${idx}`}
+                isBugMode={isBugMode}
+                isAlready={isAlready}
+              >
+                {(isBugMode && "🔥") || null}
+              </Star>
+            </Tooltip>
+          );
+        })}
+        {isView && <_SpanText className="rating-number">({rating})</_SpanText>}
+      </Items>
+      {!isView && !isModifyMode && <Notice>- {getRatingNotice()}</Notice>}
     </Wrapper>
   );
 }

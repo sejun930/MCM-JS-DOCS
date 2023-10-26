@@ -178,7 +178,7 @@ export const CategoryInfo = styled.div`
   @media ${breakPoints.mobileLarge} {
     .label-wrapper {
       justify-content: center;
-      height: 34px;
+      /* height: 38px; */
       overflow-y: auto;
     }
   }

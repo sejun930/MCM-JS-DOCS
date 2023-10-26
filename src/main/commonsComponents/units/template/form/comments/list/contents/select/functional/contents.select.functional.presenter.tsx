@@ -131,6 +131,7 @@ export default function ContentsSelectFunctionalUIPage({
                   }
                   position="right"
                   useShowAnimation
+                  hideMobile={true}
                 >
                   <BugStatusButton
                     onClickEvent={() => changeBugStatus(listInfo.status)}

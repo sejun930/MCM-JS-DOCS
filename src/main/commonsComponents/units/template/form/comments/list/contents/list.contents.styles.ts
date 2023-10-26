@@ -264,9 +264,15 @@ export const ContentsInfo = styled.div`
     flex-direction: column;
     align-items: baseline;
     gap: 10px 0px;
+    border-radius: 10px 0px 0px 10px;
+
+    &.answer {
+      border-radius: 10px 0px 0px 10px;
+    }
 
     span {
       font-size: 14px;
+      line-height: 22px;
     }
 
     .comments {

@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 import { CSSProperties } from "react";
 
+import { _PText } from "mcm-js-commons";
+
 interface StylesTypes {
   isView?: boolean;
   rating?: number;
@@ -17,6 +19,22 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+
+  @media ${breakPoints.mobileLarge} {
+    ${(props: StylesTypes) =>
+      !props.isView &&
+      !props.isModifyMode && {
+        padding: "10px 0px",
+        height: "70px",
+      }}
+  }
+`;
+
+export const Items = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -26,7 +44,7 @@ export const Wrapper = styled.div`
     let styles: CSSProperties & { [key: string]: string } = {};
 
     if (props.isView) styles = { width: "auto", gap: "0px 6px" };
-    if (!props.isBugMode && !props.isModifyMode) {
+    if (!props.isBugMode && !props.isModifyMode && !props.isView) {
       styles.gap = "0px";
     }
 
@@ -54,13 +72,25 @@ export const Wrapper = styled.div`
   }
 
   @media ${breakPoints.mobileLarge} {
-    gap: 0px 10px;
+    gap: 0px 6px;
+  }
+`;
+
+export const Notice = styled(_PText)`
+  display: none;
+  font-size: 12px;
+  color: #666666;
+  padding-top: 6px;
+
+  @media ${breakPoints.mobileLarge} {
+    display: flex;
+    justify-content: center;
   }
 `;
 
 export const Star = styled.button`
   width: 20px;
-  height: 20px;
+  height: auto;
   font-size: 20px; /* 이모지 크기 */
   color: transparent; /* 기존 이모지 컬러 제거 */
   text-shadow: 0 0 0 #999999; /* 새 이모지 색상 부여 */
@@ -82,9 +112,10 @@ export const Star = styled.button`
       fontSize: "22px",
       position: "relative",
       display: "flex",
-      "--rating": `${0.2 * (props.rating || 1)}`,
+      // "--rating": `${0.2 * (props.rating || 1)}`,
       opacity: 0.8,
       cursor: "default",
+      alignItems: "center",
     }}
 
     ${(props) =>
