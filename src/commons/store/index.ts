@@ -1,6 +1,8 @@
 import { atom } from "recoil";
 import { getUuid } from "src/main/commonsComponents/functional";
 
+import { initSettingInfo } from "./store.types";
+
 // 현재 페이지의 모듈 이름 저장
 export const moduleState = atom({
   key: `moduleState_${getUuid()}`,
@@ -23,4 +25,16 @@ export const ipState = atom({
 export const adminLoginState = atom({
   key: `adminLoginState_${getUuid()}`,
   default: false,
+});
+
+// 셋팅창 오픈 여부
+export const isOpenSettingState = atom({
+  key: `isOpenSetting_${getUuid()}`,
+  default: false,
+});
+
+// 셋팅 정보 저장
+export const settingInfoState = atom({
+  key: `settingInfo_${getUuid()}`,
+  default: initSettingInfo,
 });

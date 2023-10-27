@@ -5,7 +5,11 @@ import {
 } from "./main.mobileNavigation.styles";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { moduleState, adminLoginState } from "src/commons/store";
+import {
+  moduleState,
+  adminLoginState,
+  isOpenSettingState,
+} from "src/commons/store";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 import LayoutNavPage from "src/main/commonsComponents/layout/nav";
@@ -17,6 +21,7 @@ export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);
   const [adminLogin] = useRecoilState(adminLoginState);
+  const [_, setIsOpenSetting] = useRecoilState(isOpenSettingState);
 
   const { getRouter, getIsAdminPage } = CommonsHooksComponents();
   const router = getRouter();
@@ -36,11 +41,23 @@ export default function MainMobileNavigationTapPage() {
 
     setOpenNav(bool);
 
+    // 모바일 환경에서 설정창 열기 = 모듈 모달창 닫기
+    const openMobileSettings = () => {
+      Modal.close({ id: "mobile-nav-modal" });
+      setIsOpenSetting(true);
+      setOpenNav(false);
+    };
+
     if (bool) {
       // 모달 오픈
       Modal.open({
         children: (
-          <LayoutNavPage isMobileTap={true} module={module} isAdmin={isAdmin} />
+          <LayoutNavPage
+            isMobileTap={true}
+            module={module}
+            isAdmin={isAdmin}
+            openIsOpenSettings={openMobileSettings}
+          />
         ),
         id: "mobile-nav-modal",
         showBGAnimation: true,

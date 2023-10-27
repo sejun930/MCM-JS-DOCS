@@ -1,25 +1,26 @@
-import { useEffect, useState } from "react";
-
 import {
   LayoutNavListWrapper,
   LayoutNavWrapper,
   LayoutNavListItems,
   LayoutNav,
+  Setting,
 } from "./nav.styles";
 import { navList, NavListTypes, adminNavList } from "./nav.data";
 
+import { useEffect, useState } from "react";
 import NavListPage from "./list";
 import NavSearchPage from "./search";
-import { _Link } from "mcm-js-commons";
 
 export default function LayoutNavPage({
   isMobileTap,
   module,
   isAdmin,
+  openIsOpenSettings,
 }: {
   isMobileTap?: boolean;
   module: string;
   isAdmin?: boolean;
+  openIsOpenSettings: () => void;
 }) {
   // 모듈 검색어
   const [search, setSearch] = useState<string>("");
@@ -32,6 +33,7 @@ export default function LayoutNavPage({
     setRender(true);
   }, [module]);
 
+  // 검색어 변경하기
   const onChangeSearch = (text: string) => {
     setSearch(text);
   };
@@ -59,7 +61,6 @@ export default function LayoutNavPage({
       isAdmin={isAdmin}
     >
       <LayoutNavListWrapper className="nav-list-wrapper">
-        {/* <div> */}
         <LayoutNav isAdmin={isAdmin}>
           <LayoutNavListItems
             className="nav-list-items"
@@ -88,9 +89,9 @@ export default function LayoutNavPage({
         </LayoutNav>
 
         {!isAdmin && (
-          <_Link href="/admin/comments" className="admin-mode">
-            🛠 Admin
-          </_Link>
+          <Setting onClickEvent={openIsOpenSettings} className="setting">
+            🛠 Setting
+          </Setting>
         )}
       </LayoutNavListWrapper>
     </LayoutNavWrapper>
