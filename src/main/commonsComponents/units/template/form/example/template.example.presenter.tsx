@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { versState, moduleState } from "src/commons/store";
+import { versState, moduleState, settingInfoState } from "src/commons/store";
 
 import { _Button, _Title, _PTextWithHtml } from "mcm-js-commons";
 import _SubTitleTemplate from "../../title/subTitle";
@@ -21,6 +21,7 @@ import {
   UIProps,
 } from "./template.example.types";
 import { getExampleErrorText } from "src/main/commonsComponents/functional";
+import { useEffect } from "react";
 
 // 모든 코드들의 높이값을 저장하는 객체
 const allHeightList = {};
@@ -34,10 +35,28 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
     isOneOpen,
     allLen,
   } = props;
+  // 현재 선택된 모듈명
   const [module] = useRecoilState(moduleState);
+  // 모듈의 버전
   const [vers] = useRecoilState(versState);
+  // 셋팅 정보
+  const [settingInfo] = useRecoilState(settingInfoState);
 
   let _idx = 0;
+
+  // 모든 코드 열기/닫기 여부 저장
+  let _isOneOpen = isOneOpen;
+
+  useEffect(() => {
+    // 열기가 고정되어 있는 경우
+    if (settingInfo.openFix)
+      // 모든 코드 초기 오픈
+      changeOpenList(
+        -1,
+        Array.from(new Array(allLen), () => true),
+        true
+      );
+  }, [settingInfo.openFix]);
 
   return (
     <Wrapper id="example-form">
@@ -52,12 +71,12 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
               onClickEvent={() =>
                 changeOpenList(
                   -1,
-                  Array.from(new Array(allLen), () => !isOneOpen),
+                  Array.from(new Array(allLen), () => !_isOneOpen),
                   true
                 )
               }
             >
-              모든 코드 {isOneOpen ? "닫기" : "열기"}
+              모든 코드 {_isOneOpen ? "닫기" : "열기"}
             </_Button>
           }
         />

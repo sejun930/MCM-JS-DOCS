@@ -1,39 +1,56 @@
-import { useEffect, useState } from "react";
-
 import {
   LayoutNavListWrapper,
   LayoutNavWrapper,
   LayoutNavListItems,
   LayoutNav,
+  Setting,
 } from "./nav.styles";
 import { navList, NavListTypes, adminNavList } from "./nav.data";
 
+import { useEffect, useState } from "react";
 import NavListPage from "./list";
 import NavSearchPage from "./search";
-import { _Link } from "mcm-js-commons";
+
+import { initNavInfoData, InitNavInfoDataTypes } from "./nav.data";
 
 export default function LayoutNavPage({
   isMobileTap,
   module,
   isAdmin,
+  openIsOpenSettings,
+  _favorite,
 }: {
   isMobileTap?: boolean;
   module: string;
   isAdmin?: boolean;
+  openIsOpenSettings: () => void;
+  _favorite: string[];
 }) {
-  // 모듈 검색어
-  const [search, setSearch] = useState<string>("");
-  // 렌더 여부
-  const [render, setRender] = useState<boolean>(false);
+  // 검색어, 렌더 여부, 즐겨찾기 리스트 정보 종합
+  const [info, setInfo] = useState<InitNavInfoDataTypes>(initNavInfoData);
+  const { search, render, favorite } = info;
 
+  // 최초 리스트 저장
   useEffect(() => {
-    if (!module) setSearch("");
+    let _info = { ...info };
 
-    setRender(true);
-  }, [module]);
+    if (!module) _info.search = "";
+    _info.render = true;
 
+    if (_favorite) {
+      _info.favorite = [..._favorite];
+      setInfo(_info);
+    }
+  }, [_favorite, module]);
+
+  // 검색어 변경하기
   const onChangeSearch = (text: string) => {
-    setSearch(text);
+    setInfo({ ...info, ["search"]: text });
+  };
+
+  // 즐겨찾기 리스트 변경하기
+  const onChangeFavorite = (list: string[]) => {
+    setInfo({ ...info, ["favorite"]: list });
   };
 
   // 선택한 탭의 정보
@@ -42,14 +59,37 @@ export default function LayoutNavPage({
   )[0];
 
   // 선택한 탭을 제외한 나머지 탭들의 정보
-  let allTapInfo: Array<NavListTypes> = (
+  let extraTaps: Array<NavListTypes> = (
     isAdmin ? adminNavList : navList
   ).filter((el: NavListTypes) => el.name !== module);
-  if (search)
+
+  // 노출될 전체 리스트
+  let allTapInfo = [...extraTaps];
+  // 즐겨찾기용 및 그 외의 리스트
+  const filterResult: { favorite: NavListTypes[]; extra: NavListTypes[] } = {
+    favorite: [],
+    extra: [],
+  };
+
+  // 즐겨찾기가 되어 있는 모듈을 우선 노출
+  if (favorite && favorite.length) {
+    filterResult.favorite = [
+      ...extraTaps.filter((el) => favorite.some((cu) => cu === el.name)),
+    ];
+    filterResult.extra = [
+      ...extraTaps.filter((el) => favorite.every((cu) => cu !== el.name)),
+    ];
+
+    // 즐겨찾기 - 나머지 리스트 순서대로 나열
+    allTapInfo = [...filterResult.favorite, ...filterResult.extra];
+  }
+
+  if (search) {
     // 검색어가 있을 경우
     allTapInfo = allTapInfo.filter((el: NavListTypes) =>
       el.name.toLowerCase().includes(search.toLowerCase())
     );
+  }
 
   return (
     <LayoutNavWrapper
@@ -59,7 +99,6 @@ export default function LayoutNavPage({
       isAdmin={isAdmin}
     >
       <LayoutNavListWrapper className="nav-list-wrapper">
-        {/* <div> */}
         <LayoutNav isAdmin={isAdmin}>
           <LayoutNavListItems
             className="nav-list-items"
@@ -73,24 +112,29 @@ export default function LayoutNavPage({
               // 선택된 탭의 정보 렌더하기
               <NavListPage
                 list={[selectTapInfo]}
-                isSelect={true}
+                isSelected={true}
                 isAdmin={isAdmin}
+                favorite={favorite || []}
+                changeFavorite={onChangeFavorite}
               />
             )}
           </LayoutNavListItems>
           {/* 선택된 탭을 제외한 나머지 탭 렌더하기 */}
           <NavListPage
             list={allTapInfo}
-            isSelect={false}
+            isSelected={false}
             search={search}
             isAdmin={isAdmin}
+            favorite={favorite || []}
+            changeFavorite={onChangeFavorite}
+            favoriteFilter={filterResult.favorite || []}
           />
         </LayoutNav>
 
         {!isAdmin && (
-          <_Link href="/admin/comments" className="admin-mode">
-            🛠 Admin
-          </_Link>
+          <Setting onClickEvent={openIsOpenSettings} className="setting">
+            🛠 Setting
+          </Setting>
         )}
       </LayoutNavListWrapper>
     </LayoutNavWrapper>

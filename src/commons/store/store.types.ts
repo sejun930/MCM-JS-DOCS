@@ -17,3 +17,12 @@ export const isBlockInit: IsBlockTypes = {
   category: "",
   module: "",
 };
+
+export type InitSettingInfoType = {
+  [key: string]: boolean;
+};
+
+// setting info 초기 설정값
+export const initSettingInfo: InitSettingInfoType = {
+  openFix: false, // 모든 코드 열기
+};

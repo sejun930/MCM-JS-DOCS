@@ -1,22 +1,34 @@
-import styled from "@emotion/styled";
-import { breakPoints } from "mcm-js-commons/dist/responsive";
-
+import {
+  EmptyResult,
+  Favorite,
+  Link,
+  List,
+  ListWrapper,
+} from "./nav.list.styles";
 import { NavListTypes } from "../nav.data";
-import { _Link, _PText, _SpanTextWithHtml } from "mcm-js-commons";
-import { CSSProperties } from "react";
+import { _PText, _SpanTextWithHtml } from "mcm-js-commons";
 
 import { imagePreLoad } from "src/main/commonsComponents/functional";
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+import { removeTag } from "src/main/commonsComponents/functional/code";
 
+const { Alert } = getLibraries();
 export default function NavListPage({
   list,
-  isSelect,
+  isSelected,
   search,
   isAdmin,
+  favorite,
+  changeFavorite,
+  favoriteFilter,
 }: {
   list: Array<NavListTypes>;
-  isSelect: boolean;
+  isSelected: boolean;
   search?: string;
   isAdmin?: boolean;
+  favorite: string[];
+  changeFavorite: (list: string[]) => void;
+  favoriteFilter?: NavListTypes[];
 }) {
   // Example 이미지 미리 호출하기
   const preLoadExampleImage = (name: string) => () => {
@@ -25,11 +37,49 @@ export default function NavListPage({
     ]);
   };
 
+  // 즐겨찾기 추가 및 삭제
+  const toggleFavorite = (name: string) => () => {
+    const _favorite: string[] = [...favorite];
+
+    let msg = ""; // 성공 메세지
+    let idx = _favorite.indexOf(name);
+
+    if (idx === -1) {
+      // 모듈이 없을 경우 추가
+      _favorite.push(name);
+      msg = `즐겨찾기에 등록되었습니다.`;
+    } else {
+      // 모듈이 있을 경우 삭제
+      _favorite.splice(idx, 1);
+      msg = `즐겨찾기에서 삭제되었습니다.`;
+    }
+
+    Alert.openAlert({
+      children: `${name} 모듈이 ${msg}`,
+      alertConcept: {
+        type: idx === -1 ? "success" : "info",
+      },
+      useCloseMode: {
+        useSwipeMode: true,
+      },
+    });
+
+    changeFavorite(_favorite);
+    window.localStorage.setItem("mcm-favorite", JSON.stringify(_favorite));
+  };
+
+  // 검색어가 있지만 해당되는 모듈이 없고 즐겨찾기는 있는 경우
+  let isEmpty = search && !list.length;
+  if (search && !list.length && favoriteFilter?.length) {
+    list = [...favoriteFilter];
+    isEmpty = true;
+  }
+
   return (
     <ListWrapper
-      isSelect={isSelect}
+      isSelected={isSelected}
       className={`nav-list-wrapper${
-        isSelect ? " nav-list-select-wrapper" : ""
+        isSelected ? " nav-list-select-wrapper" : ""
       }`}
       isAdmin={isAdmin}
       hasError={list[0] === undefined}
@@ -55,23 +105,38 @@ export default function NavListPage({
             }
           }
 
+          // 해당 모듈이 즐겨찾기가 되어 있는지 체크
+          const isCheckedFavorite = favorite.includes(removeTag(name));
+
           return (
-            <li
+            <List
               key={`tap-name-${el?.name}-${key}`}
               onMouseEnter={preLoadExampleImage(el?.name || "")}
+              isSelected={isSelected}
             >
-              {name ? (
-                <_Link href={_href}>
+              {(name && (
+                <Link
+                  href={_href}
+                  className="module-tap"
+                  isSelected={isSelected}
+                >
                   <_SpanTextWithHtml
                     dangerouslySetInnerHTML={name || "Not Found"}
                   />
-                </_Link>
-              ) : (
-                <></>
-              )}
-            </li>
+                </Link>
+              )) || <></>}
+              <Favorite
+                onClickEvent={toggleFavorite(removeTag(name))}
+                className="module-favorite-btn"
+                isCheckedFavorite={isCheckedFavorite || false}
+              >
+                ⭐
+              </Favorite>
+            </List>
           );
-        })) || (
+        })) || <></>}
+
+      {isEmpty && (
         <EmptyResult>
           <_PText className="empty-search-result">검색 결과 없음</_PText>
         </EmptyResult>
@@ -79,84 +144,3 @@ export default function NavListPage({
     </ListWrapper>
   );
 }
-
-interface StyleTypes {
-  isSelect?: boolean;
-  isAdmin?: boolean;
-  hasError?: boolean;
-}
-
-export const ListWrapper = styled.ul`
-  padding: 20px 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 20px 0px;
-  position: sticky;
-  top: 125px;
-
-  ${(props: StyleTypes) =>
-    props.isSelect && {
-      padding: "0px",
-      paddingTop: "1rem",
-    }}
-
-  ${(props) =>
-    props.isAdmin && {
-      padding: "0px",
-    }}
-
-  ${(props) =>
-    props.hasError && {
-      paddingTop: "0px",
-    }}
-
-  li {
-    .mcm-link-unit {
-      display: block;
-
-      ${(props) => {
-        let styles: CSSProperties & { [key: string]: string } = {};
-
-        if (props.isSelect) {
-          styles = {
-            padding: "0.5rem",
-            borderRadius: "10px",
-            backgroundColor: "#aa5656",
-            color: "white",
-            width: "calc(100% + 50px)",
-            height: "36px",
-          };
-
-          if (props.isAdmin) {
-            styles.backgroundColor = "#525FE1";
-          }
-        }
-
-        return styles;
-      }}
-    }
-  }
-
-  .empty-search-result {
-    padding: 0px;
-    font-size: 14px;
-    color: #777777;
-  }
-
-  @media ${breakPoints.mobileLarge} {
-    padding: 1rem 0px;
-
-    ${(props) =>
-      props.isAdmin && {
-        padding: "0px",
-      }}
-  }
-`;
-
-export const EmptyResult = styled.li`
-  margin-top: 20px;
-
-  @media ${breakPoints.mobileLarge} {
-    margin-top: 0px;
-  }
-`;
