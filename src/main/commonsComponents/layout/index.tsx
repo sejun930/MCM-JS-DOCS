@@ -9,6 +9,7 @@ import {
   adminLoginState,
   isOpenSettingState,
   settingInfoState,
+  favoriteState,
 } from "src/commons/store";
 
 import LayoutHeadPage from "./header";
@@ -30,6 +31,9 @@ export default function LayoutPage(props: IProps) {
   const [isOpenSetting, setIsOpenSetting] = useRecoilState(isOpenSettingState);
   // 셋팅 정보 종합
   const [settingInfo, setSettingInfo] = useRecoilState(settingInfoState);
+  // 즐겨찾기 정보
+  const [favorite, setFavorite] = useRecoilState(favoriteState);
+
   const router = getRouter();
 
   useEffect(() => {
@@ -40,16 +44,30 @@ export default function LayoutPage(props: IProps) {
   //  저장되어 있는 셋팅 정보 가져오기
   useEffect(() => {
     let _info: string | { [key: string]: boolean } | null =
-      localStorage.getItem("setting-info") || { ...settingInfo };
+      localStorage.getItem("mcm-setting") || { ...settingInfo };
 
     // 이전에 저장되어 있던 설정이 있는 경우
     if (_info !== null) {
-      // 문자열 타입은 객체 타입으로 전환
+      // 문자열 타입을 객체 타입으로 전환
       if (typeof _info === "string") _info = JSON.parse(_info);
-      // 변경된 객체는 recoil에 저장
+      // 변경된 객체를 recoil에 저장
       if (_info !== null && typeof _info === "object") setSettingInfo(_info);
     }
   }, [isOpenSetting]);
+
+  // 즐겨찾기 정보 최초 가져오기
+  useEffect(() => {
+    let _favorite = localStorage.getItem("mcm-favorite") || [];
+
+    // 저장된 즐겨찾기가 있는 경우
+    if (_favorite !== null) {
+      // 문자열 타입을 배열 타입으로 전환
+      if (typeof _favorite === "string") _favorite = JSON.parse(_favorite);
+      // 변경된 배열을 recoil에 저장
+      if (_favorite !== null && typeof _favorite === "object")
+        setFavorite(_favorite);
+    }
+  }, []);
 
   // 현재가 관리자 페이지인지?
   const isAdmin = getIsAdminPage();
@@ -72,6 +90,7 @@ export default function LayoutPage(props: IProps) {
               module={module}
               isAdmin={isAdmin}
               openIsOpenSettings={toggleIsOpenSetting(true)}
+              _favorite={favorite}
             />
           )}
           {props.children}

@@ -22,7 +22,7 @@ export default function SettingPage(props: {
     setSettingInfo({ ..._info });
 
     // localStorage 저장
-    window.localStorage.setItem("setting-info", JSON.stringify(_info));
+    window.localStorage.setItem("mcm-setting", JSON.stringify(_info));
   };
 
   return (

@@ -9,6 +9,7 @@ import {
   moduleState,
   adminLoginState,
   isOpenSettingState,
+  favoriteState,
 } from "src/commons/store";
 
 import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
@@ -22,6 +23,7 @@ export default function MainMobileNavigationTapPage() {
   const [module] = useRecoilState(moduleState);
   const [adminLogin] = useRecoilState(adminLoginState);
   const [_, setIsOpenSetting] = useRecoilState(isOpenSettingState);
+  const [favorite] = useRecoilState(favoriteState);
 
   const { getRouter, getIsAdminPage } = CommonsHooksComponents();
   const router = getRouter();
@@ -57,6 +59,7 @@ export default function MainMobileNavigationTapPage() {
             module={module}
             isAdmin={isAdmin}
             openIsOpenSettings={openMobileSettings}
+            _favorite={favorite}
           />
         ),
         id: "mobile-nav-modal",

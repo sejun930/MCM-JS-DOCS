@@ -35,7 +35,7 @@ export const Wrapper = styled.main`
   padding: 3rem 4rem;
   display: flex;
   flex-direction: column;
-  min-width: 85%;
+  /* width: 85%; */
   position: relative;
   z-index: 10;
 

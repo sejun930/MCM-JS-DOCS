@@ -38,3 +38,9 @@ export const settingInfoState = atom({
   key: `settingInfo_${getUuid()}`,
   default: initSettingInfo,
 });
+
+// 모듈 즐겨찾기 저장
+export const favoriteState = atom({
+  key: `favorite_${getUuid()}`,
+  default: [] as string[],
+});

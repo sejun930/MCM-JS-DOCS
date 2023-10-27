@@ -10,13 +10,6 @@ export const navList: Array<NavListTypes> = [
   { name: "Slider" },
   { name: "Alert" },
   { name: "Popular" },
-  // { name: "Half", href: "halfPage" },
-  // { name: "b" },
-  // { name: "c" },
-  // { name: "z" },
-  // { name: "c" },
-  // { name: "d" },
-  // { name: "e" }, //
 ];
 
 // 관리자용 navigation
@@ -24,3 +17,16 @@ export const adminNavList: Array<NavListTypes> = [
   { name: "Comments", remarks: "댓글 관리" }, // 댓글
   { name: "Block", remarks: "아이피 관리" }, // 아이피 차단
 ];
+
+export interface InitNavInfoDataTypes {
+  search: string;
+  render: boolean;
+  favorite: string[];
+}
+
+// 리스트 관련 데이터
+export const initNavInfoData: InitNavInfoDataTypes = {
+  search: "",
+  render: false,
+  favorite: [],
+};

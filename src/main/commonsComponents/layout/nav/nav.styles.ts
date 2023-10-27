@@ -10,6 +10,7 @@ interface StyleTypes {
 
 export const LayoutNavWrapper = styled.nav`
   min-width: 15%;
+  max-width: 15%;
   height: auto;
   border-right: solid 3px #aa5656;
   display: flex;
@@ -31,9 +32,11 @@ export const LayoutNavWrapper = styled.nav`
     }}
 
   @media ${breakPoints.mobileLarge} {
-    max-width: auto;
     display: none;
     height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
 
     ${(props) =>
       props.isMobileTap && {
