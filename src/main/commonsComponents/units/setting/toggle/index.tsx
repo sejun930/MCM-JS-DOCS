@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 
 export default function Toggle({ isOn }: { isOn?: boolean }) {
-  console.log(isOn);
-
   return (
     <Wrapper className="mcm-toggle-wrapper">
       <Items className={`mcm-toggle-off ${(!isOn && "toggle-on") || ""}`}>

@@ -74,7 +74,6 @@ export default function NavListPage({
     list = [...favoriteFilter];
     isEmpty = true;
   }
-  console.log(isEmpty);
 
   return (
     <ListWrapper
