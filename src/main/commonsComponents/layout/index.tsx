@@ -65,7 +65,7 @@ export default function LayoutPage(props: IProps) {
       if (typeof _favorite === "string") _favorite = JSON.parse(_favorite);
       // 변경된 배열을 recoil에 저장
       if (_favorite !== null && typeof _favorite === "object")
-        setFavorite(_favorite);
+        changeFavoriteList(_favorite);
     }
   }, []);
 
@@ -75,6 +75,11 @@ export default function LayoutPage(props: IProps) {
   // 설정창 토글 함수
   const toggleIsOpenSetting = (bool: boolean) => () => {
     setIsOpenSetting(bool);
+  };
+
+  // 즐겨찾기 리스트 변경하기
+  const changeFavoriteList = (list: string[]) => {
+    setFavorite(list);
   };
 
   let navRenderCondition = !isAdmin;
@@ -91,6 +96,7 @@ export default function LayoutPage(props: IProps) {
               isAdmin={isAdmin}
               openIsOpenSettings={toggleIsOpenSetting(true)}
               _favorite={favorite}
+              onFavoriteChangeEvent={changeFavoriteList}
             />
           )}
           {props.children}

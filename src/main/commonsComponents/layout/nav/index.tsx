@@ -19,12 +19,14 @@ export default function LayoutNavPage({
   isAdmin,
   openIsOpenSettings,
   _favorite,
+  onFavoriteChangeEvent,
 }: {
   isMobileTap?: boolean;
   module: string;
   isAdmin?: boolean;
   openIsOpenSettings: () => void;
   _favorite: string[];
+  onFavoriteChangeEvent: (list: string[]) => void;
 }) {
   // 검색어, 렌더 여부, 즐겨찾기 리스트 정보 종합
   const [info, setInfo] = useState<InitNavInfoDataTypes>(initNavInfoData);
@@ -51,6 +53,7 @@ export default function LayoutNavPage({
   // 즐겨찾기 리스트 변경하기
   const onChangeFavorite = (list: string[]) => {
     setInfo({ ...info, ["favorite"]: list });
+    onFavoriteChangeEvent(list);
   };
 
   // 선택한 탭의 정보
