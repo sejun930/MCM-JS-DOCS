@@ -8,6 +8,7 @@ export const Wrapper = styled.section`
 
   .mcm-tooltip-wrapper {
     width: 100%;
+    height: 26px;
     display: flex;
 
     .mcm-tooltip-items {
