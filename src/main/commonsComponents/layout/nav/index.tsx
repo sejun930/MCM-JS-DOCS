@@ -5,13 +5,17 @@ import {
   LayoutNav,
   Setting,
 } from "./nav.styles";
-import { navList, NavListTypes, adminNavList } from "./nav.data";
+import {
+  navList,
+  NavListTypes,
+  adminNavList,
+  initNavInfoData,
+  InitNavInfoDataTypes,
+} from "./nav.data";
 
 import { useEffect, useState } from "react";
 import NavListPage from "./list";
 import NavSearchPage from "./search";
-
-import { initNavInfoData, InitNavInfoDataTypes } from "./nav.data";
 
 export default function LayoutNavPage({
   isMobileTap,
@@ -19,12 +23,14 @@ export default function LayoutNavPage({
   isAdmin,
   openIsOpenSettings,
   _favorite,
+  onFavoriteChangeEvent,
 }: {
   isMobileTap?: boolean;
   module: string;
   isAdmin?: boolean;
   openIsOpenSettings: () => void;
   _favorite: string[];
+  onFavoriteChangeEvent: (list: string[]) => void;
 }) {
   // 검색어, 렌더 여부, 즐겨찾기 리스트 정보 종합
   const [info, setInfo] = useState<InitNavInfoDataTypes>(initNavInfoData);
@@ -32,9 +38,8 @@ export default function LayoutNavPage({
 
   // 최초 리스트 저장
   useEffect(() => {
-    let _info = { ...info };
+    const _info = { ...info };
 
-    if (!module) _info.search = "";
     _info.render = true;
 
     if (_favorite) {
@@ -51,6 +56,7 @@ export default function LayoutNavPage({
   // 즐겨찾기 리스트 변경하기
   const onChangeFavorite = (list: string[]) => {
     setInfo({ ...info, ["favorite"]: list });
+    onFavoriteChangeEvent(list);
   };
 
   // 선택한 탭의 정보
@@ -59,7 +65,7 @@ export default function LayoutNavPage({
   )[0];
 
   // 선택한 탭을 제외한 나머지 탭들의 정보
-  let extraTaps: Array<NavListTypes> = (
+  const extraTaps: Array<NavListTypes> = (
     isAdmin ? adminNavList : navList
   ).filter((el: NavListTypes) => el.name !== module);
 

@@ -1,10 +1,8 @@
 import { getLibraries } from "src/main/commonsComponents/functional/modules";
-import { Setting } from "../../layout/nav/nav.styles";
 
 import SettingInfoPage from "./setting.info";
 import { useRecoilState } from "recoil";
 import { settingInfoState } from "src/commons/store";
-import { useEffect } from "react";
 
 const { Modal } = getLibraries();
 
@@ -39,8 +37,9 @@ export default function SettingPage(props: {
       }}
       mobileModalStyles={{
         items: {
-          minWidth: "320px",
-          width: "40%",
+          minWidth: "300px",
+          maxWidth: "360px",
+          width: "80%",
           minHeight: "400px",
           height: "50%",
         },

@@ -75,6 +75,8 @@ export const LayoutNavListWrapper = styled.article`
   @media ${breakPoints.mobileLarge} {
     gap: 16px 0px;
     justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 `;
 

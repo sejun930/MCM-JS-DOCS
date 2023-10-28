@@ -42,7 +42,7 @@ export default function NavListPage({
     const _favorite: string[] = [...favorite];
 
     let msg = ""; // 성공 메세지
-    let idx = _favorite.indexOf(name);
+    const idx = _favorite.indexOf(name);
 
     if (idx === -1) {
       // 모듈이 없을 경우 추가

@@ -40,4 +40,8 @@ export const NavSearchFieldset = styled.fieldset`
   legend {
     display: none;
   }
+
+  .mcm-input-unit-items {
+    height: 36px;
+  }
 `;

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
 
 import { _Link, _Button, _SpanText } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";

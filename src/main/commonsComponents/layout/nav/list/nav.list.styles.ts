@@ -110,10 +110,11 @@ export const List = styled.li`
     // 모바일에서는 아이콘 무조건 노출
     .module-favorite-btn {
       opacity: 1;
+      right: 10px;
 
       ${(props) =>
         props.isSelected && {
-          right: "50px",
+          right: "60px",
         }}
     }
   }

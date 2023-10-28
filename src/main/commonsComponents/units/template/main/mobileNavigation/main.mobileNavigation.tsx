@@ -22,8 +22,8 @@ export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);
   const [adminLogin] = useRecoilState(adminLoginState);
-  const [_, setIsOpenSetting] = useRecoilState(isOpenSettingState);
-  const [favorite] = useRecoilState(favoriteState);
+  const [, setIsOpenSetting] = useRecoilState(isOpenSettingState);
+  const [favorite, setFavorite] = useRecoilState(favoriteState);
 
   const { getRouter, getIsAdminPage } = CommonsHooksComponents();
   const router = getRouter();
@@ -50,6 +50,11 @@ export default function MainMobileNavigationTapPage() {
       setOpenNav(false);
     };
 
+    // 즐겨찾기 리스트 변경하기
+    const changeFavoriteList = (list: string[]) => {
+      setFavorite(list);
+    };
+
     if (bool) {
       // 모달 오픈
       Modal.open({
@@ -60,6 +65,7 @@ export default function MainMobileNavigationTapPage() {
             isAdmin={isAdmin}
             openIsOpenSettings={openMobileSettings}
             _favorite={favorite}
+            onFavoriteChangeEvent={changeFavoriteList}
           />
         ),
         id: "mobile-nav-modal",
