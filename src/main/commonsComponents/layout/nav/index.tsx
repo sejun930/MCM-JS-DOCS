@@ -36,7 +36,6 @@ export default function LayoutNavPage({
   useEffect(() => {
     let _info = { ...info };
 
-    if (!module) _info.search = "";
     _info.render = true;
 
     if (_favorite) {
