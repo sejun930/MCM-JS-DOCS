@@ -5,13 +5,17 @@ import {
   LayoutNav,
   Setting,
 } from "./nav.styles";
-import { navList, NavListTypes, adminNavList } from "./nav.data";
+import {
+  navList,
+  NavListTypes,
+  adminNavList,
+  initNavInfoData,
+  InitNavInfoDataTypes,
+} from "./nav.data";
 
 import { useEffect, useState } from "react";
 import NavListPage from "./list";
 import NavSearchPage from "./search";
-
-import { initNavInfoData, InitNavInfoDataTypes } from "./nav.data";
 
 export default function LayoutNavPage({
   isMobileTap,
@@ -34,7 +38,7 @@ export default function LayoutNavPage({
 
   // 최초 리스트 저장
   useEffect(() => {
-    let _info = { ...info };
+    const _info = { ...info };
 
     _info.render = true;
 
@@ -61,7 +65,7 @@ export default function LayoutNavPage({
   )[0];
 
   // 선택한 탭을 제외한 나머지 탭들의 정보
-  let extraTaps: Array<NavListTypes> = (
+  const extraTaps: Array<NavListTypes> = (
     isAdmin ? adminNavList : navList
   ).filter((el: NavListTypes) => el.name !== module);
 

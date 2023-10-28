@@ -45,7 +45,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
   let _idx = 0;
 
   // 모든 코드 열기/닫기 여부 저장
-  let _isOneOpen = isOneOpen;
+  const _isOneOpen = isOneOpen;
 
   useEffect(() => {
     // 열기가 고정되어 있는 경우

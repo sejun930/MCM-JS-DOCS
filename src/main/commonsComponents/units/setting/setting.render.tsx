@@ -1,10 +1,8 @@
 import { getLibraries } from "src/main/commonsComponents/functional/modules";
-import { Setting } from "../../layout/nav/nav.styles";
 
 import SettingInfoPage from "./setting.info";
 import { useRecoilState } from "recoil";
 import { settingInfoState } from "src/commons/store";
-import { useEffect } from "react";
 
 const { Modal } = getLibraries();
 

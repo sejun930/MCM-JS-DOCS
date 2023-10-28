@@ -22,7 +22,7 @@ export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);
   const [adminLogin] = useRecoilState(adminLoginState);
-  const [_, setIsOpenSetting] = useRecoilState(isOpenSettingState);
+  const [, setIsOpenSetting] = useRecoilState(isOpenSettingState);
   const [favorite, setFavorite] = useRecoilState(favoriteState);
 
   const { getRouter, getIsAdminPage } = CommonsHooksComponents();

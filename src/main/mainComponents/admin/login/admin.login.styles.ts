@@ -132,6 +132,11 @@ export const ShowPw = styled(_Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   font-size: 20px;
   min-width: 30px;
+
+  .mcm-tooltip-children {
+    align-items: center;
+  }
 `;
