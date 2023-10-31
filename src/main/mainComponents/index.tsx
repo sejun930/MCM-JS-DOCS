@@ -10,40 +10,42 @@ import _Copy from "../commonsComponents/units/copy";
 export default function MainHomePage() {
   return (
     <Template>
-      <ProjectInfoWrapper>
-        <_Title>
-          <span className="mcm-name-title">MCM</span>{" "}
-          <span>(My Custom Modules)</span>
-        </_Title>
-        <ProjectInfo>
-          <_PText>
-            <span>"쉽게 커스텀할 수 있는 모듈을 만들어보면 어떨까?"</span>{" "}
-            <span>하는 생각에서 시작된 프로젝트입니다.</span>
-          </_PText>
-          <_PText>
-            <span>실력이 부족한 개발자가 혼자 만든 기능들이다 보니</span>{" "}
-            <span>이슈 발생 확률이 상당할 수도 있습니다. 😅</span>
-          </_PText>
-          <_PText>
-            <span>이용중에 발생되는 이슈나 개선점들을</span>{" "}
-            <span>가감없이 말씀해주시면 감사하겠습니다! 🙇</span>
-          </_PText>
-        </ProjectInfo>
-      </ProjectInfoWrapper>
+      <Wrapper id="project-remarks-wrapper">
+        <ProjectInfoWrapper>
+          <_Title>
+            <span className="mcm-name-title">MCM</span>{" "}
+            <span>(My Custom Modules)</span>
+          </_Title>
+          <ProjectInfo>
+            <_PText>
+              <span>"쉽게 커스텀할 수 있는 모듈을 만들어보면 어떨까?"</span>{" "}
+              <span>하는 생각에서 시작된 프로젝트입니다.</span>
+            </_PText>
+            <_PText>
+              <span>실력이 부족한 개발자가 혼자 만든 기능들이다 보니</span>{" "}
+              <span>이슈 발생 확률이 상당할 수도 있습니다. 😅</span>
+            </_PText>
+            <_PText>
+              <span>이용중에 발생되는 이슈나 개선점들을</span>{" "}
+              <span>가감없이 말씀해주시면 감사하겠습니다! 🙇</span>
+            </_PText>
+          </ProjectInfo>
+        </ProjectInfoWrapper>
 
-      <ProjectDetailInfoWrapper>
-        <_SubTitleTemplate title="Install" className="npm-install" />
-        <InstallWrapper>
-          <InstallItems>
-            <_Title titleLevel="h3">npm</_Title>
-            <_Copy text="npm install mcm-js" />
-          </InstallItems>
-          <InstallItems>
-            <_Title titleLevel="h3">yarn</_Title>
-            <_Copy text="yarn add mcm-js" />
-          </InstallItems>
-        </InstallWrapper>
-      </ProjectDetailInfoWrapper>
+        <ProjectDetailInfoWrapper>
+          <_SubTitleTemplate title="Install" className="npm-install" />
+          <InstallWrapper>
+            <InstallItems>
+              <_Title titleLevel="h3">npm</_Title>
+              <_Copy text="npm install mcm-js" />
+            </InstallItems>
+            <InstallItems>
+              <_Title titleLevel="h3">yarn</_Title>
+              <_Copy text="yarn add mcm-js" />
+            </InstallItems>
+          </InstallWrapper>
+        </ProjectDetailInfoWrapper>
+      </Wrapper>
     </Template>
   );
 }
@@ -51,27 +53,31 @@ export default function MainHomePage() {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 240px 0px;
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 60px 0px;
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    gap: 180px 0px;
+    padding: 80px 0px 40px 0px;
+  }
 `;
 
 export const ProjectInfoWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 12px 0px;
+  gap: 16px 0px;
 
   @media ${breakPoints.mobileLarge} {
-    gap: 16px 0px;
-    padding-top: 40px;
-
     .mcm-title-unit {
       font-size: 30px;
     }
   }
 
-  /*   @media ${breakPoints.mobileSmall} {
- */
   @media ${breakPoints.mobileSmall} {
     gap: 30px 0px;
-    padding-top: 60px;
 
     .mcm-title-unit {
       display: flex;
@@ -113,16 +119,10 @@ export const ProjectInfo = styled.div`
 `;
 
 export const ProjectDetailInfoWrapper = styled.section`
-  padding-top: 120px;
-
   @media ${breakPoints.mobileLarge} {
     h2 {
       font-size: 22px;
     }
-  }
-
-  @media ${breakPoints.mobileSmall} {
-    padding-top: 140px;
   }
 `;
 
