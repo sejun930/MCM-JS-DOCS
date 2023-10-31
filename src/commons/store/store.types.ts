@@ -25,4 +25,5 @@ export type InitSettingInfoType = {
 // setting info 초기 설정값
 export const initSettingInfo: InitSettingInfoType = {
   openFix: false, // 모든 코드 열기
+  darkMode: false, // 다크 모드
 };

@@ -77,7 +77,7 @@ export const List = styled.li`
       width: "calc(100% + 50px)",
       padding: "0.5rem",
       paddingLeft: "1rem",
-      backgroundColor: "#aa5656",
+      backgroundColor: "#aa5656 !important",
       color: "white",
       borderRadius: "10px",
       height: "36px",

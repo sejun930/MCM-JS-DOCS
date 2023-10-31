@@ -11,14 +11,20 @@ import MainHead from "./head";
 export default function Template({
   children,
   isFull,
+  className,
 }: {
   children: React.ReactNode;
   isFull?: boolean;
+  className?: string;
 }) {
   return (
     <>
       <MainHead />
-      <Wrapper className="main-template-wrapper" isFull={isFull}>
+      <Wrapper
+        id="main-template-wrapper"
+        isFull={isFull}
+        className="project-remarks-template"
+      >
         {/* 모바일 nav */}
         <MainMobileNavigationTapPage />
         <ModulesInfoWrapper>{children}</ModulesInfoWrapper>
@@ -35,9 +41,10 @@ export const Wrapper = styled.main`
   padding: 3rem 4rem;
   display: flex;
   flex-direction: column;
-  /* width: 85%; */
   position: relative;
   z-index: 10;
+  width: 100%;
+  height: 100%;
 
   ${(props: StyleTypes) =>
     props.isFull && {
@@ -160,6 +167,10 @@ export const Wrapper = styled.main`
           overflow-x: hidden;
         }
       }
+    }
+
+    &.project-remarks-template {
+      border-top: double 6px black;
     }
   }
 `;

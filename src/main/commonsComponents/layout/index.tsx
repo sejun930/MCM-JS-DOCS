@@ -1,5 +1,6 @@
 import { ReactNode, useEffect } from "react";
-import { LayoutWrapper, LayoutContentsWrapper } from "./styles";
+import { LayoutWrapper } from "./styles";
+import { LayoutContentsWrapperWithDarkMode } from "src/commons/styles/darkMode.styles";
 
 import CommonsHooksComponents from "../hooks/commonsHooks";
 // import CommonsHooksComponents from "mcm-js-commons/dist/hooks";
@@ -55,8 +56,8 @@ export default function LayoutPage(props: IProps) {
     }
   }, [isOpenSetting]);
 
-  // 즐겨찾기 정보 최초 가져오기
   useEffect(() => {
+    // 즐겨찾기 정보 최초 가져오기
     let _favorite = localStorage.getItem("mcm-favorite") || [];
 
     // 저장된 즐겨찾기가 있는 경우
@@ -89,7 +90,11 @@ export default function LayoutPage(props: IProps) {
     <>
       <LayoutWrapper className="layout-home-wrapper">
         <LayoutHeadPage isAdmin={isAdmin} />
-        <LayoutContentsWrapper isAdmin={isAdmin}>
+        <LayoutContentsWrapperWithDarkMode
+          isAdmin={isAdmin}
+          id="layout-contents-wrapper"
+          className={(settingInfo.darkMode && "darkMode") || ""}
+        >
           {navRenderCondition && (
             <LayoutNavPage
               module={module}
@@ -100,7 +105,7 @@ export default function LayoutPage(props: IProps) {
             />
           )}
           {props.children}
-        </LayoutContentsWrapper>
+        </LayoutContentsWrapperWithDarkMode>
       </LayoutWrapper>
       {isOpenSetting && (
         <SettingPage

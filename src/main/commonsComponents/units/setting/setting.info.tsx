@@ -29,6 +29,16 @@ export default function SettingInfoPage(props: {
             <Toggle isOn={settingInfo?.openFix || false} />
           </Button>
         </List>
+        <List>
+          <Button
+            onClickEvent={() =>
+              changeSettingsInfo("darkMode", !settingInfo?.darkMode || false)
+            }
+          >
+            <_SpanText>다크 모드</_SpanText>
+            <Toggle isOn={settingInfo?.darkMode || false} />
+          </Button>
+        </List>
       </ListWrapper>
     </Wrapper>
   );

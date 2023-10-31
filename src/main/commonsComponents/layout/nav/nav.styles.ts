@@ -17,7 +17,7 @@ export const LayoutNavWrapper = styled.nav`
   opacity: 0;
   position: relative;
   background-color: white;
-  z-index: 9;
+  z-index: 11;
 
   ${(props: StyleTypes) =>
     props.render && {

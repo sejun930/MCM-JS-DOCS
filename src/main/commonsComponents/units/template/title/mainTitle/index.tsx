@@ -34,6 +34,7 @@ export default function _MainTitleTemplate() {
         />
         {module && (
           <ExampleImage
+            className="main-title-example-image"
             src={`https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${module}-example.gif`}
           />
         )}
@@ -67,7 +68,7 @@ export const Items = styled.div`
   }
 
   @media ${breakPoints.mobileLarge} {
-    padding-top: 40px;
+    padding-top: 60px;
     gap: 16px 0px;
     align-items: center;
 
@@ -84,9 +85,9 @@ export const ExampleImage = styled(_Image)`
   min-width: 400px;
   max-width: 600px;
   object-fit: fill;
+  border: solid 2px gray;
 
   @media ${breakPoints.mobileLarge} {
-    border: solid 2px black;
     max-width: 600px;
   }
 
