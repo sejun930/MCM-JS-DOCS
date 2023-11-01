@@ -7,6 +7,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 interface StyleTypes {
   isRequired?: boolean;
   isLast?: boolean;
+  hideRequired?: boolean;
 }
 
 export const PropsListWrapper = styled.div`
@@ -20,6 +21,11 @@ export const PropsMobileInfoWrapper = styled.div`
   display: none;
   gap: 0px 10px;
   align-items: center;
+
+  ${(props: StyleTypes) =>
+    props.hideRequired && {
+      display: "none",
+    }}
 
   .box-color {
     width: 20px;
@@ -39,10 +45,16 @@ export const PropsMobileInfoWrapper = styled.div`
 
 export const PropsTable = styled.table`
   width: 100%;
-  border: dotted 2px #bbbbbb;
+  /* border: dotted 2px #bbbbbb; */
 
   caption {
     display: none;
+  }
+
+  .props-list-header-wrapper {
+    td {
+      text-align: center;
+    }
   }
 
   thead {

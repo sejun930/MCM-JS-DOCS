@@ -19,11 +19,13 @@ export default function ModulePropsListFormPage({
   hideTitle,
   vers,
   isFunctional,
+  hideRequired,
 }: {
   list: Array<PropsModuleListResultType>;
   hideTitle?: boolean; // 타이틀 가리기 여부
   vers: number;
   isFunctional?: boolean;
+  hideRequired?: boolean;
 }) {
   // props 코드 복사하기
   const copyCodeFn = (code: Array<string> | string) => () => {
@@ -36,7 +38,7 @@ export default function ModulePropsListFormPage({
   return (
     (list && list.length && (
       <PropsListWrapper className="mcm-props-list-wrapper">
-        <PropsMobileInfoWrapper>
+        <PropsMobileInfoWrapper hideRequired={hideRequired}>
           <div className="box-color" />
           <_SpanText>필수 Props</_SpanText>
         </PropsMobileInfoWrapper>

@@ -48,6 +48,7 @@ export default function MyModalExample(props: ExampleContentsTypes) {
           onClickEvent={() =>
             props.vers === 0 ? openModal(idx ?? 0)() : Modal.open({ ..._props })
           }
+          className="example-darkMode-button"
         >
           {buttonName ?? "Open Modal"}
         </OpenModalButton>

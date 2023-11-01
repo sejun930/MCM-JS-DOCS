@@ -86,23 +86,29 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
           </OptionWrapper>
           <IndexListWrapper>
             {!isMinimum ? (
-              indexList.map((list, idx) => (
-                <IndexList
-                  key={getUuid()}
-                  isSelected={current === idx}
-                  isLoading={isLoading}
-                >
-                  <_Button
-                    onClickEvent={() =>
-                      (current !== idx && !isLoading && moveIndex(list.id)) ||
-                      undefined
-                    }
-                    className="index-button"
+              indexList.map((list, idx) => {
+                // 현재 선택되었는지 체크
+                const isSelected = current === idx;
+
+                return (
+                  <IndexList
+                    key={getUuid()}
+                    isSelected={isSelected}
+                    isLoading={isLoading}
+                    className={(isSelected && "selected-index") || ""}
                   >
-                    {list.title}
-                  </_Button>
-                </IndexList>
-              ))
+                    <_Button
+                      onClickEvent={() =>
+                        (!isSelected && !isLoading && moveIndex(list.id)) ||
+                        undefined
+                      }
+                      className="index-button"
+                    >
+                      {list.title}
+                    </_Button>
+                  </IndexList>
+                );
+              })
             ) : (
               <IndexList isSelected={true}>
                 <_Button onClickEvent={() => {}} className="index-button">

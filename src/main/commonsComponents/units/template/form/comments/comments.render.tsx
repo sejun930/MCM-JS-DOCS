@@ -45,7 +45,7 @@ export default function RenderCommentsPage() {
     }, 30);
   };
 
-  // 1. 댓글에 필요한 스크립트 우선 호출
+  // 1. 댓글에 필요한 스크립트` 우선 호출
   return (
     <Wrapper id="comments-form">
       {(render && <CommentsPage />) || <></>}

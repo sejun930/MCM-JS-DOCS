@@ -32,7 +32,7 @@ export default function MainHomePage() {
           </ProjectInfo>
         </ProjectInfoWrapper>
 
-        <ProjectDetailInfoWrapper>
+        <ProjectDetailInfoWrapper className="mcm-install-info-wrapper">
           <_SubTitleTemplate title="Install" className="npm-install" />
           <InstallWrapper>
             <InstallItems>
@@ -53,14 +53,12 @@ export default function MainHomePage() {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 240px 0px;
 
   @media ${breakPoints.mobileLarge} {
     padding: 60px 0px;
   }
 
   @media ${breakPoints.mobileSmall} {
-    gap: 180px 0px;
     padding: 80px 0px 40px 0px;
   }
 `;
@@ -119,6 +117,9 @@ export const ProjectInfo = styled.div`
 `;
 
 export const ProjectDetailInfoWrapper = styled.section`
+  &.mcm-install-info-wrapper {
+    padding-top: 200px;
+  }
   @media ${breakPoints.mobileLarge} {
     h2 {
       font-size: 22px;

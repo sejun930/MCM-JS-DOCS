@@ -43,6 +43,7 @@ const modalFunctionalList: Array<FunctionalListType> = [
     })}`,
     setExampleCode: (
       <OpenModalButton
+        className="example-darkMode-button"
         onClickEvent={() =>
           Modal.open({
             children: <span>함수로 실행된 Modal 입니다.</span>,
@@ -164,6 +165,7 @@ const modalFunctionalList: Array<FunctionalListType> = [
     ],
     setExampleCode: (
       <OpenModalButton
+        className="example-darkMode-button"
         onClickEvent={() =>
           Modal.open({
             children: (
