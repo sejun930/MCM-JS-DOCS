@@ -159,7 +159,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
                             style={{ width }}
                             className="example-list"
                           >
-                            <ExampleListItems>
+                            <ExampleListItems className="example-components">
                               {renderTemplateList[module] &&
                                 renderTemplateList[module](component)}
                               <_PTextWithHtml

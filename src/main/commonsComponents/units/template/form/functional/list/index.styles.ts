@@ -46,12 +46,12 @@ export const TitleWrapper = styled.div`
 
 export const PropsInfoWrapper = styled.div`
   /* overflow: hidden; */
+  border-left: solid 4px rgba(170, 86, 86, 0.4);
 `;
 
 export const PropsInfoItems = styled.div`
   padding: 24px;
   padding-right: 0px;
-  border-left: solid 4px rgba(170, 86, 86, 0.4);
 
   .props-title {
     font-weight: 500;
@@ -79,7 +79,7 @@ export const PropsInfoList = styled.div`
 
     .move-props-list {
       color: blue;
-      font-weight: 500;
+      font-weight: 700;
     }
   }
 

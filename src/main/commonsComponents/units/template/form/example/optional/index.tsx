@@ -72,7 +72,7 @@ export default function _ExampleOptionalFormPage({
   }, [isOpen]);
 
   return (
-    <Wrapper>
+    <Wrapper className="example-code-toggle">
       <Tooltip
         tooltipText={
           <_Button onClickEvent={toggleShowCode}>

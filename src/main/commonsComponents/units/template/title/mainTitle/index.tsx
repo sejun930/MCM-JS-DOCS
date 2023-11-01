@@ -82,10 +82,10 @@ export const Items = styled.div`
 
 export const ExampleImage = styled(_Image)`
   margin-top: 30px;
-  min-width: 400px;
-  max-width: 600px;
+  width: 500px;
   object-fit: fill;
-  border: solid 2px gray;
+  border: solid 1px gray;
+  border-radius: 10px;
 
   @media ${breakPoints.mobileLarge} {
     max-width: 600px;

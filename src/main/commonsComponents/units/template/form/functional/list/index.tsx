@@ -47,16 +47,16 @@ export default function FunctionalDetailInfoListPage({
 
         return (
           <FunctionalInfoWrapper key={key}>
-            <TitleWrapper id={el.id}>
+            <TitleWrapper id={el.id} className="functional-name-wrappre">
               <_Title titleLevel="h3" className="functional-name">
                 {module}.{el.name}()
               </_Title>
               <_PText className="function-remarks">{el.remakrs}</_PText>
             </TitleWrapper>
-            <PropsInfoWrapper>
+            <PropsInfoWrapper className="functional-props-info-wrapper">
               {((el.props.list && el.props.list.length) ||
                 el.props.isSameContents) && (
-                <PropsInfoItems>
+                <PropsInfoItems className="props-info-items">
                   <_PText className="props-title">- 📤 Props</_PText>
                   <PropsInfoList>
                     {el.props.isSameContents ? (
@@ -109,7 +109,7 @@ export default function FunctionalDetailInfoListPage({
                 />
               </PropsInfoItems>
               {el.info && el.info.length && (
-                <PropsInfoItems>
+                <PropsInfoItems className="props-info-items props-warning-info">
                   <_PText className="props-title">- 💡 사용시 주의사항 </_PText>
                   <InfoListWrapper>
                     {el.info.map((infoStr, key2) => (

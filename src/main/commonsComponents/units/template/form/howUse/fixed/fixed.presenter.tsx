@@ -25,6 +25,7 @@ export default function ExampleFixedUIPage({
 
   return (
     <TapWrapper
+      className="howUse-vers-fixed-wrapper"
       hasMultiple={codeInfo.title().length > 1}
       ref={_wrapperRef}
       allLength={codeInfo.title().length || 0}
