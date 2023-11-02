@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
+interface StyleTypes {
+  isDisable?: boolean;
+}
+
 export const Wrapper = styled.div`
   width: 40%;
   position: relative;
@@ -8,6 +12,13 @@ export const Wrapper = styled.div`
   @media ${breakPoints.mobileLarge} {
     width: 100%;
     min-height: 60px;
+
+    ${(props: StyleTypes) =>
+      props.isDisable && {
+        minHeight: "100px",
+        display: "flex",
+        alignItems: "center",
+      }}
   }
 `;
 

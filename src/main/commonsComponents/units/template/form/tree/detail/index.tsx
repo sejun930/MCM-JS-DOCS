@@ -39,7 +39,10 @@ export default function ModuleTreeDetailPage({
   }
 
   return (
-    <Wrapper className="tree-detail-wrapper">
+    <Wrapper
+      className="tree-detail-wrapper"
+      isDisable={detailInfo === undefined}
+    >
       {!detailInfo ? (
         <EmptySelect className="tree-detail-empty-select">
           <_PText>태그를 클릭해보세요.</_PText>
