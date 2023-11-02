@@ -7,7 +7,6 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 interface StyleTypes {
   isRequired?: boolean;
   isLast?: boolean;
-  hideRequired?: boolean;
 }
 
 export const PropsListWrapper = styled.div`
@@ -17,15 +16,11 @@ export const PropsListWrapper = styled.div`
   width: 100%;
 `;
 
-export const PropsMobileInfoWrapper = styled.div`
-  display: none;
+export const PropsRequiredInfoWrapper = styled.div`
+  display: flex;
   gap: 0px 10px;
   align-items: center;
-
-  ${(props: StyleTypes) =>
-    props.hideRequired && {
-      display: "none",
-    }}
+  margin-bottom: 20px;
 
   .box-color {
     width: 20px;
@@ -45,7 +40,6 @@ export const PropsMobileInfoWrapper = styled.div`
 
 export const PropsTable = styled.table`
   width: 100%;
-  /* border: dotted 2px #bbbbbb; */
 
   caption {
     display: none;
@@ -67,11 +61,13 @@ export const PropsTable = styled.table`
     td {
       font-weight: 400;
       font-size: 14px;
+      line-height: 22px;
     }
   }
 
   @media ${breakPoints.mobileLarge} {
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    border: solid 2px black;
 
     .props-list-header-wrapper {
       display: none;
@@ -90,10 +86,13 @@ export const Tr = styled.tr`
     display: none;
   }
 
-  ${(props: StyleTypes) =>
-    props.isRequired && {
-      backgroundColor: "#FFF2CC",
-    }}
+  &.isRequired-list {
+    background-color: #fff2cc;
+
+    td {
+      font-weight: 700;
+    }
+  }
 
   td {
     font-size: 16px;
@@ -116,7 +115,7 @@ export const Tr = styled.tr`
     }
   }
   .props-notice {
-    width: 55%;
+    width: 60%;
 
     b {
       font-weight: 700;
@@ -124,7 +123,7 @@ export const Tr = styled.tr`
     }
   }
   .props-type {
-    width: 15%;
+    width: 20%;
     text-align: center;
   }
   .props-required {
@@ -166,11 +165,17 @@ export const Tr = styled.tr`
 
     .props-type {
       padding-top: 10px;
+      font-size: 12px;
+      line-height: 20px;
       color: gray;
     }
 
     .props-required {
       display: none;
+    }
+
+    .props-notice {
+      padding-top: 24px;
     }
   }
 `;

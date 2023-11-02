@@ -81,7 +81,7 @@ export default function _ExampleUIPage({ props }: { props: IProps & UIProps }) {
           }
         />
       </ExampleTitleWrapper>
-      <ExampleContentsWrapper>
+      <ExampleContentsWrapper id={`${module}-exmaple-wrapper`}>
         {exampleList &&
           exampleList?.length &&
           exampleList.map(

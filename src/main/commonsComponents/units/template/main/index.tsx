@@ -171,6 +171,14 @@ export const Wrapper = styled.main`
 
     &.project-remarks-template {
       border-top: double 6px black;
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  }
+
+  @media ${breakPoints.mobileSmall} {
+    &.project-remarks-template {
+      padding-top: 80px;
     }
   }
 `;

@@ -1,6 +1,6 @@
 import {
   PropsListWrapper,
-  PropsMobileInfoWrapper,
+  PropsRequiredInfoWrapper,
   PropsTable,
   Tr,
   CopyCode,
@@ -19,13 +19,11 @@ export default function ModulePropsListFormPage({
   hideTitle,
   vers,
   isFunctional,
-  hideRequired,
 }: {
   list: Array<PropsModuleListResultType>;
   hideTitle?: boolean; // 타이틀 가리기 여부
   vers: number;
   isFunctional?: boolean;
-  hideRequired?: boolean;
 }) {
   // props 코드 복사하기
   const copyCodeFn = (code: Array<string> | string) => () => {
@@ -35,13 +33,18 @@ export default function ModulePropsListFormPage({
     copyCode(String(result));
   };
 
+  // 필수 리스트가 하나라도 있는지 검증
+  const haveRequired = list.some((el) => el.isRequired);
+
   return (
     (list && list.length && (
       <PropsListWrapper className="mcm-props-list-wrapper">
-        <PropsMobileInfoWrapper hideRequired={hideRequired}>
-          <div className="box-color" />
-          <_SpanText>필수 Props</_SpanText>
-        </PropsMobileInfoWrapper>
+        {haveRequired && (
+          <PropsRequiredInfoWrapper className="mcm-props-mobile-required-info">
+            <div className="box-color" />
+            <_SpanText>필수 Props</_SpanText>
+          </PropsRequiredInfoWrapper>
+        )}
         <PropsTable border={1} className="props-list-wrapper">
           <caption>Props List</caption>
           {!hideTitle && (
@@ -50,7 +53,7 @@ export default function ModulePropsListFormPage({
                 <td className="props-name">이름</td>
                 <td className="props-notice">설명</td>
                 <td className="props-type">기본값 (Type)</td>
-                <td className="props-required">필수 여부</td>
+                {/* <td className="props-required">필수 여부</td> */}
               </Tr>
             </thead>
           )}
@@ -59,7 +62,7 @@ export default function ModulePropsListFormPage({
             {list.map((el, idx) => (
               <Tr
                 key={`module-props-list-${module}-${el.name}-${idx}`}
-                isRequired={el.isRequired || false}
+                className={`${(el.isRequired && "isRequired-list") || ""}`}
                 isLast={list.length === idx + 1}
                 id={`module-props-list-${
                   (isFunctional && "functional-") || ""
@@ -97,9 +100,9 @@ export default function ModulePropsListFormPage({
                   className="props-notice"
                 />
                 <td className="props-type">{`${el.default} (${el.type})`}</td>
-                <td className="props-required">
+                {/* <td className="props-required">
                   {(el.isRequired && "O") || "X"}
-                </td>
+                </td> */}
               </Tr>
             ))}
           </tbody>

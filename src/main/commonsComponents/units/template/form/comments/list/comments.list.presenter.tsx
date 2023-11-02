@@ -38,7 +38,7 @@ export default function CommentsListUIPage({
       id="comments-list-wrapper"
       className="comments-list-render"
     >
-      <CategoryWrapper>
+      <CategoryWrapper className="comments-list-category-wrapper">
         <CategoryContents>
           <CategoryItems
             render={commentsInfo.countFilterList.all !== undefined}
@@ -59,11 +59,13 @@ export default function CommentsListUIPage({
               const isDisable = categoryLen === 0;
               return (
                 <Category
+                  className="comments-category"
                   key={`comments-category-list-${name}-${key}`}
                   selected={isSelected}
                   isDisable={isDisable}
                 >
                   <_Button
+                    className={(isSelected && "selected-category") || ""}
                     onClickEvent={() =>
                       (!isSelected && !isDisable && changeInfo(info)) ||
                       undefined
@@ -91,7 +93,7 @@ export default function CommentsListUIPage({
           <_PText className="empty-list">조회된 댓글이 없습니다.</_PText>
         </EmptyWrapper>
       ) : (
-        <CommentListItems ref={listRef}>
+        <CommentListItems ref={listRef} className="comments-list-items">
           {commentsInfo.commentsList.map((el) => (
             <ListContentsInfoPage
               key={getUuid()}

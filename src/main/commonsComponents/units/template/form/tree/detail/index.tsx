@@ -46,7 +46,7 @@ export default function ModuleTreeDetailPage({
         </EmptySelect>
       ) : (
         <DetailWrapper className="tree-detail-contents-wrapper">
-          <DetailInfoWrapper>
+          <DetailInfoWrapper className="tree-detail-contents-info-wrapper">
             <DetailTitleInfo className="tree-detail-title-wrapper">
               <DetailTitle className="tree-detail-tag-type">
                 <_SpanText>Tag Type</_SpanText>
@@ -65,7 +65,7 @@ export default function ModuleTreeDetailPage({
                 />
               </DetailTitle>
             </DetailTitleInfo>
-            <DetailRole>
+            <DetailRole className="tree-detail-role-wrapper">
               <_PTextWithHtml
                 className="tree-detail-info-role"
                 dangerouslySetInnerHTML={detailInfo?.role || "-"}

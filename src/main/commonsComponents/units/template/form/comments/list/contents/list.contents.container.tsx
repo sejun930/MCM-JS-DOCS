@@ -40,7 +40,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const [moreShow, setMoreShow] = useState(false);
   // 선택 리스트 실행 여부
   const [showSelect, setShowSelect] = useState(false);
-  // hover 여부
+  // select 여부
   const [hover, setHover] = useState(false);
   // 자동닫기 사용 가능 여부
   // const [ableAutoClose, setAbleAutoClose] = useState(false);

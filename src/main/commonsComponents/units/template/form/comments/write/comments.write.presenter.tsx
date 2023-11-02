@@ -52,8 +52,8 @@ export default function CommentsWriteUIPage({
           <fieldset>
             <legend>댓글 작성</legend>
           </fieldset>
-          <WriteWrapper>
-            <OptionWrapper>
+          <WriteWrapper className="comments-write-wrapper">
+            <OptionWrapper className="comments-write-option-wrapper">
               <SelectCategory
                 onChange={(e) => changeInfo(String(e.target.value))("category")}
                 category={input.category}
@@ -126,7 +126,7 @@ export default function CommentsWriteUIPage({
 ${input.category && defaultPlace}`}
             />
           </WriteWrapper>
-          <SubmitWrapper>
+          <SubmitWrapper className="comments-submit-wrapper">
             {/* 개인정보 수집 동의 */}
             <PrivacyPage
               changeInfo={changeInfo}

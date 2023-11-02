@@ -64,14 +64,14 @@ export const DetailInfoWrapper = styled.article`
 export const DetailTitleInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px 0px;
   align-items: center;
   padding-bottom: 20px;
   border-bottom: solid 2px #666666;
   white-space: pre;
   overflow-x: auto;
-  padding: 12px;
+  padding: 12px 20px;
   padding-right: 0px;
+  justify-content: space-around;
   min-height: 80px;
   height: 90px;
   overflow-y: hidden;
@@ -125,7 +125,6 @@ export const ParentsWrapper = styled.div`
   .tree-detail-button {
     height: 100%;
     width: 100%;
-    /* background-color: gainsboro; */
     border-top: double 2px black;
     border-radius: 0px 0px 10px 0px;
 
@@ -133,6 +132,7 @@ export const ParentsWrapper = styled.div`
       height: 100%;
       display: flex;
       padding: 0.5rem;
+      padding-left: 12px;
       font-size: 14px;
       align-items: center;
       white-space: pre;

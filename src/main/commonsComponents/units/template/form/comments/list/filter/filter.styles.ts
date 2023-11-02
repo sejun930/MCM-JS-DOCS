@@ -26,9 +26,16 @@ export const FilterItems = styled.div`
 export const FilterButton = styled(_Button)`
   display: flex;
   align-items: flex-end;
+  background-image: url("/images/commons/icons/filter-off.png");
+  background-size: cover;
+  width: 20px;
+  height: 20px;
 
-  .filter-image {
-    width: 18px;
+  &.open {
+    background-image: url("/images/commons/icons/filter-click.png");
+  }
+  &.on {
+    background-image: url("/images/commons/icons/filter-on.png");
   }
 
   ${(props: StyleTypes) =>

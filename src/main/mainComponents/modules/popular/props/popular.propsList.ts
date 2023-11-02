@@ -4,7 +4,7 @@ import { PropsModuleListType } from "src/main/commonsComponents/units/template/f
 export const popularPropsList: Array<PropsModuleListType> = [
   {
     name: "list",
-    default: "[]",
+    default: "[ ]",
     type: "[Node]",
     notice:
       "Popular에 적용할 나열되는 컴포넌트들을 나타냅니다. <br />list props에 직접 전달할 경우에는 반드시 <b>배열</b>에 담아야 합니다. <br /><br />list로 전달된 배열은 컴포넌트가 재렌더 되더라도 데이터가 변경되지 않도록 <br /> <b>useState</b> 또는 <b>전역 변수</b>로 관리하는 것을 권장합니다.",
