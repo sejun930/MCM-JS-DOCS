@@ -55,9 +55,11 @@ export default function _PropsForm({
 
     // 마지막 필수 props index
     const lastRequiredIdx = list.findIndex((el) => !el.isRequired);
+    // 필수 props 인덱스까지 자르기
+    const requiredList = list.slice(0, lastRequiredIdx);
 
     return [
-      ...list.slice(0, lastRequiredIdx), // 필수 props 인덱스까지 자르기
+      ...requiredList, // 필수 리스트는 전방 배치
       ...commonsPropsList(vers || 0), // 공통 props 추가하기
       ...list.slice(lastRequiredIdx), // 나머지 props 붙이기
     ];

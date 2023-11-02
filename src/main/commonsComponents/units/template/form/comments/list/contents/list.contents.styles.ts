@@ -23,8 +23,8 @@ export const CommentsList = styled.li`
 
   ${(props: StyleTypes) =>
     props.hover && {
-      backgroundColor: "#9BABB8",
-      color: "white",
+      backgroundColor: "#9BABB8 !important",
+      color: "white !important",
     }}
 
   .createdAt {
@@ -57,8 +57,8 @@ export const CommentsList = styled.li`
 
     ${(props: StyleTypes) =>
       props.hover && {
-        backgroundColor: "#9BABB8",
-        color: "white",
+        backgroundColor: "#9BABB8 !important",
+        color: "white !important",
         paddingLeft: "10px",
       }}
   }

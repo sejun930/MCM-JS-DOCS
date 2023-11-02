@@ -35,7 +35,7 @@ export const WriteWrapper = styled.article`
       .contents-input {
         min-height: 180px;
         max-height: 300px;
-        padding: 15px;
+        padding: 18px;
         padding-top: 20px;
         font-size: 15px;
         font-family: system-ui;

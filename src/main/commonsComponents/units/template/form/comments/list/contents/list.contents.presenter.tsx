@@ -66,6 +66,7 @@ export default function ListContentsInfoUIPage({
 
   return (
     <CommentsList
+      className="comments-list"
       hover={hover}
       onClick={() => toggleShowSelect(true)}
       ref={_wrapperRef}
@@ -92,7 +93,10 @@ export default function ListContentsInfoUIPage({
                 tooltipPosition="bottom"
               />
             </legend>
-            <ContentsInfo hasQuestion={info.category === "question"}>
+            <ContentsInfo
+              hasQuestion={info.category === "question"}
+              className={(info.category === "question" && "qna-contents") || ""}
+            >
               {info.category === "question" && (
                 <QuestionTitle> Q. </QuestionTitle>
               )}
@@ -113,9 +117,9 @@ export default function ListContentsInfoUIPage({
 
           {info.answer && (
             <ContentsInfo
+              className={`qna-contents ${answerClass}`}
               hasQuestion={info.category === "question"}
               isAnswer={true}
-              className={answerClass}
             >
               {info.category === "question" && (
                 <QuestionTitle> A. </QuestionTitle>

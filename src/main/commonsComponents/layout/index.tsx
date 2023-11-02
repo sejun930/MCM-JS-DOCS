@@ -93,7 +93,7 @@ export default function LayoutPage(props: IProps) {
         <LayoutContentsWrapperWithDarkMode
           isAdmin={isAdmin}
           id="layout-contents-wrapper"
-          className={(settingInfo.darkMode && "darkMode") || ""}
+          className={(settingInfo.darkMode && !isAdmin && "darkMode") || ""}
         >
           {navRenderCondition && (
             <LayoutNavPage

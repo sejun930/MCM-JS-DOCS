@@ -68,7 +68,7 @@ export const Items = styled.div`
   }
 
   @media ${breakPoints.mobileLarge} {
-    padding-top: 60px;
+    padding-top: 0px;
     gap: 16px 0px;
     align-items: center;
 

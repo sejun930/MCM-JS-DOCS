@@ -62,8 +62,8 @@ export default function PrivacyPage({
   };
 
   return (
-    <AgreeUserPrivacyWrapper>
-      <AgreeUserPrivacyItems>
+    <AgreeUserPrivacyWrapper className="comments-agree-privacy-wrapper">
+      <AgreeUserPrivacyItems className="comments-agree-privacy-items">
         <_Checkbox
           inputId="privacy-checkbox"
           onChangeEvent={() => changeInfo(!info.agreeProvacy)("agreeProvacy")}

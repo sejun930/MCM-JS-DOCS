@@ -54,13 +54,14 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${breakPoints.mobileLarge} {
-    padding: 60px 0px;
+  /* @media ${breakPoints.mobileLarge} {
+    padding: 0px 0px;
   }
 
   @media ${breakPoints.mobileSmall} {
     padding: 80px 0px 40px 0px;
-  }
+    padding: 0px;
+  } */
 `;
 
 export const ProjectInfoWrapper = styled.section`
@@ -120,7 +121,11 @@ export const ProjectDetailInfoWrapper = styled.section`
   &.mcm-install-info-wrapper {
     padding-top: 200px;
   }
+
   @media ${breakPoints.mobileLarge} {
+    &.mcm-install-info-wrapper {
+      padding-top: 140px;
+    }
     h2 {
       font-size: 22px;
     }

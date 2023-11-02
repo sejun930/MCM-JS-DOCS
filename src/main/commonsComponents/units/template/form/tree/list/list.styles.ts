@@ -9,9 +9,9 @@ export const TreeListWrapper = styled.div`
   overflow: auto;
 
   .tree-list {
+    padding-right: 0px;
     border-radius: 5px 0px 0px 5px;
     cursor: default;
-    border-right: solid 2px black;
 
     .copy-text {
       height: 100%;
@@ -30,6 +30,7 @@ export const TreeListWrapper = styled.div`
 
           .select-tree {
             background-color: white;
+            border-radius: 6px;
           }
 
           code {
@@ -39,6 +40,8 @@ export const TreeListWrapper = styled.div`
             height: 30px;
             --left: 0;
             padding-left: calc((var(--left) * 20px) + 10px);
+            display: flex;
+            align-items: center;
           }
         }
       }
@@ -54,10 +57,18 @@ export const TreeListWrapper = styled.div`
       border-radius: 5px 5px 0px 0px;
       padding-right: 0px;
 
-      .copy-text .copy-code-list .copy-code {
-        .select-tree {
-          display: flex;
-          align-items: center;
+      .copy-text {
+        .copy-code-list {
+          .copy-code {
+            .select-tree {
+              display: flex;
+              align-items: center;
+            }
+
+            code {
+              padding-left: calc((var(--left) * 12px) + 0px);
+            }
+          }
         }
       }
     }

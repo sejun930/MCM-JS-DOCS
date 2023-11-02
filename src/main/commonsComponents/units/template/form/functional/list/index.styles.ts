@@ -9,7 +9,7 @@ export const FunctionalWrapper = styled.div`
   margin-top: 30px;
 
   @media ${breakPoints.mobileLarge} {
-    margin-top: 10px;
+    margin-top: 16px;
   }
 `;
 
@@ -45,8 +45,8 @@ export const TitleWrapper = styled.div`
 `;
 
 export const PropsInfoWrapper = styled.div`
-  /* overflow: hidden; */
   border-left: solid 4px rgba(170, 86, 86, 0.4);
+  padding: 16px 0px;
 `;
 
 export const PropsInfoItems = styled.div`
@@ -71,7 +71,7 @@ export const PropsInfoItems = styled.div`
 export const PropsInfoList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 16px;
 
   .same-props {
     color: gray;
@@ -84,12 +84,17 @@ export const PropsInfoList = styled.div`
   }
 
   .props-list-wrapper {
-    margin-top: 16px;
+    /* margin-top: 16px; */
   }
 
   @media ${breakPoints.mobileLarge} {
     .same-props {
       font-size: 12px;
+    }
+
+    .props-list-wrapper {
+      border: solid 1px black;
+      /* margin-top: 0px; */
     }
   }
 `;
@@ -125,5 +130,5 @@ export const Info = styled.li`
 export const ExampleCodeBtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 16px;
 `;

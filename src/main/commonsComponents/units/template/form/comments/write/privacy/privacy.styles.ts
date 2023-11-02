@@ -19,6 +19,7 @@ export const AgreeUserPrivacyItems = styled.div`
   display: flex;
   align-items: center;
   gap: 0px 6px;
+  width: 210px;
 
   #privacy-label {
     font-size: 14px;

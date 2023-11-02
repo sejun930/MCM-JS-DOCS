@@ -6,7 +6,7 @@ import {
 } from "./filter.styles";
 import { useEffect, useState } from "react";
 
-import { _Image, _CloseButton } from "mcm-js-commons";
+import { _CloseButton } from "mcm-js-commons";
 import { CommentsAllInfoTypes } from "../../comments.types";
 
 import _SelectForm from "../../../select/select.container";
@@ -87,23 +87,22 @@ export default function CommentsFilterPage({
     }
   }, [selectCategory]);
 
-  // 필터 현재 이미지 렌더
-  const getFilterImage = (): string => {
-    const src = "/images/commons/icons/filter-";
+  // 필터의 상황에 따라 클래스네임 부여
+  const getFilterClassName = (): string => {
+    let className = "";
 
-    // 필터 오픈 전 / 후
-    let icon = open ? "click" : "off";
+    if (open) className = "open";
 
     // 필터가 설정되어 있는지 체크
     const filterList = filter.list;
     for (const list in filterList) {
       if (filterList[list]) {
-        icon = "on";
+        className = "on";
         break;
       }
     }
 
-    return src + icon + ".png";
+    return className;
   };
 
   // 필터창 오픈 및 닫기
@@ -149,7 +148,11 @@ export default function CommentsFilterPage({
       changeInfo(_commentsInfo);
     };
 
-    return able ? <_CloseButton onClickEvent={reset} /> : <></>;
+    return able ? (
+      <_CloseButton onClickEvent={reset} className="filter-reset-button" />
+    ) : (
+      <></>
+    );
   };
 
   return (
@@ -158,11 +161,9 @@ export default function CommentsFilterPage({
       <FilterItems>
         <FilterButton
           onClickEvent={() => toggleFilter()}
-          className="filter-button"
+          className={`filter-button ${getFilterClassName()}`}
           disable={isDisable}
-        >
-          <_Image src={getFilterImage()} className="filter-image" />
-        </FilterButton>
+        />
         <_SelectForm
           show={open}
           closeEvent={() => toggleFilter(false)}
