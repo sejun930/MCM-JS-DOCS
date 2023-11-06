@@ -54,14 +54,7 @@ export default function ExampleFixedPage({
           (endPointRef?.offsetTop - scrollTop) +
           endPointRef?.clientHeight;
 
-        if (
-          !eventStart &&
-          el &&
-          // scrollTop + bonusHeight >= startFixedPoint
-          // scrollTop >= top &&
-          el.top <= 10 &&
-          endFixedPoint > scrollTop
-        ) {
+        if (!eventStart && el && el?.top <= 10 && endFixedPoint > scrollTop) {
           // fixed 모드 돌입
           eventStart = true;
           _fixedRef.current.classList.add("fixed-mode");
@@ -73,7 +66,7 @@ export default function ExampleFixedPage({
           }, 100);
           // fixed 모드 종료
         } else if (
-          (eventStart && el.top >= 30) ||
+          (eventStart && el?.top >= 30) ||
           scrollTop > endFixedPoint
           // (scrollTop + bonusHeight <= _wrapperRef.current.offsetTop ||
           //   scrollTop > endFixedPoint)

@@ -58,7 +58,7 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
         }
 
         .select-tap {
-          border: solid 1px ${colorBook.borderColor};
+          border: unset;
           border-bottom: unset;
         }
 
@@ -419,13 +419,13 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
         color: #999999;
       }
 
-      .module-favorite-btn {
-        text-shadow: 0 0 0 rgba(255, 255, 255);
-      }
-
       .setting {
         color: ${colorBook.fontColor};
       }
+    }
+
+    .module-favorite-btn {
+      text-shadow: 0 0 0 rgba(255, 255, 255);
     }
 
     // code 관련

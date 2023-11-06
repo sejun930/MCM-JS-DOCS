@@ -7,7 +7,6 @@ interface StyleTypes {
   isSelected?: boolean;
   isAdmin?: boolean;
   hasError?: boolean;
-  isCheckedFavorite?: boolean;
 }
 
 export const ListWrapper = styled.ul`
@@ -118,20 +117,4 @@ export const List = styled.li`
         }}
     }
   }
-`;
-
-export const Favorite = styled(_Button)`
-  position: absolute;
-  right: 0;
-  opacity: 0;
-  color: transparent;
-  text-shadow: 0 0 0 rgba(120, 120, 120); /* 새 이모지 색상 부여 */
-  font-size: 16px;
-  transition: all 0.25s ease;
-
-  ${(props: StyleTypes) =>
-    props.isCheckedFavorite && {
-      color: "white",
-      opacity: 1,
-    }}
 `;

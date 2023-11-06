@@ -66,7 +66,7 @@ export const TreeListWrapper = styled.div`
             }
 
             code {
-              padding-left: calc((var(--left) * 12px) + 0px);
+              padding-left: calc((var(--left) * 12px) + 6px);
             }
           }
         }

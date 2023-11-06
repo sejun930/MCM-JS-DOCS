@@ -1,21 +1,31 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { moduleState, versState } from "src/commons/store";
+import { favoriteState, moduleState, versState } from "src/commons/store";
 
 import { moduleRemarksList } from "./data";
 import { getModuleIndexList } from "src/commons/data/index/index.commons.data";
 import { _PTextWithHtml, _Title, _Image } from "mcm-js-commons";
 
 import IndexRenderPage from "../../../index/index.render";
-import { breakPoints } from "mcm-js-commons/dist/responsive";
+import FavoritePage from "../../form/favorite";
+
+import { getLibraries } from "src/main/commonsComponents/functional/modules";
+const { Tooltip } = getLibraries();
 
 export default function _MainTitleTemplate() {
   const [module] = useRecoilState(moduleState);
   const [vers] = useRecoilState(versState);
+  const [favorite, setFavorite] = useRecoilState<string[]>(favoriteState);
 
   const [list, setList] = useState<Array<{ id: string; title: string }>>([]);
+
+  // 즐겨찾기 토글
+  const changeFavorite = (list: string[]) => {
+    setFavorite(list);
+  };
 
   // 리스트 가져오기
   useEffect(() => {
@@ -24,10 +34,25 @@ export default function _MainTitleTemplate() {
     }, 50);
   }, [module, vers]);
 
+  // 현재 즐겨찾기 적용 여부
+  const isCheckedFavorite = favorite.some((el) => el === module);
+
   return (
     <Wrapper className="main-title-wrapper" id="main-title-form">
       <Items>
-        <_Title className="main-title">📖 {module}</_Title>
+        <TitleWrapper>
+          <_Title className="main-title">📖 {module}</_Title>
+          <Tooltip
+            tooltipText={`즐겨찾기 ${(isCheckedFavorite && "삭제") || "추가"}`}
+            useShowAnimation
+          >
+            <FavoritePage
+              favorite={favorite}
+              changeFavorite={changeFavorite}
+              module={module}
+            />
+          </Tooltip>
+        </TitleWrapper>
         <_PTextWithHtml
           className="main-title-remarks"
           dangerouslySetInnerHTML={moduleRemarksList[module]}
@@ -57,11 +82,6 @@ export const Items = styled.div`
   gap: 10px 0px;
   width: 100%;
 
-  .main-title {
-    display: flex;
-    align-items: center;
-  }
-
   .main-title-remarks {
     line-height: 28px;
     letter-spacing: -0.02rem;
@@ -77,6 +97,23 @@ export const Items = styled.div`
       font-size: 14px;
       line-height: 22px;
     }
+  }
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0px 16px;
+
+  .module-favorite-btn {
+    position: relative;
+    opacity: 1;
+    font-size: 24px;
+  }
+
+  .main-title {
+    display: flex;
+    align-items: center;
   }
 `;
 
