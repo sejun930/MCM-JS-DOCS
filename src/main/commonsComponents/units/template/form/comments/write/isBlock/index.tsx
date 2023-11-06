@@ -3,7 +3,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 import { BlockInfoTypes } from "../../comments.types";
 
 import { _PText, _SpanText, _PTextWithHtml } from "mcm-js-commons";
-import { getDateForm } from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional/date";
 import { categoryInitList } from "../comments.write.types";
 
 // 차단된 유저에게만 렌더되는 페이지

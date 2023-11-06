@@ -25,7 +25,7 @@ export default function MainHead() {
         property="og:image"
         content={
           module
-            ? `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${module}-example.gif`
+            ? `/images/modules/example/${module}-example.gif`
             : "/images/commons/logo/MCM_white_logo.png"
         }
       />

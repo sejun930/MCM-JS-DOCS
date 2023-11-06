@@ -9,7 +9,7 @@ import {
 import { MutableRefObject } from "react";
 import { _Input, _SpanText, _PText } from "mcm-js-commons";
 
-import { getDateForm } from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional/date";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
 import { getLibraries } from "src/main/commonsComponents/functional/modules";

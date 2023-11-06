@@ -1,71 +1,4 @@
-// 시간에 대한 차이 구하기
-const getDateForm = ({
-  firebaseTimer,
-  date,
-  getDate,
-}: {
-  firebaseTimer?: { seconds: number; nanoseconds: number };
-  date?: Date;
-  getDate?: boolean;
-}): string => {
-  let _date = new Date();
-  // 파이어베이스로 가져온 시간인 경우
-  if (firebaseTimer) {
-    _date = new Date(
-      firebaseTimer.seconds * 1000 + firebaseTimer.nanoseconds / 1000000
-    );
-  } else if (date) {
-    _date = date;
-  }
-
-  let result = "";
-
-  // 현재 시간과 해당 시간의 차이 구하기
-  const distance = Number(new Date()) - Number(_date);
-  if (distance > 0) {
-    // 현재로부터 얼마나 차이가 나는지 저장
-    const info = {
-      hour: Math.floor(distance / (1000 * 60 ** 2)), // 시간
-      minute: Math.floor(distance / (1000 * 60)), // 분
-      seconds: Math.floor(distance / 1000), // 초
-    };
-
-    if (!info.hour) {
-      // 1시간 전이라면 초, 분까지 표시
-
-      if (!info.minute) {
-        // 1분 전이라면
-        result = "방금 전";
-      } else {
-        // 1분 후라면
-        result = String(info.minute) + "분 전";
-      }
-    } else if (info.hour < 24) {
-      // 1시간 후일 경우, // 하루가 지나기 전이라면 시간 표시
-      result = String(info.hour) + "시간 전";
-    }
-  }
-
-  if (!result || getDate) {
-    const dateInfo = {
-      // date에 대한 각각의 정보 저장
-      year: _date.getFullYear(), // 연도
-      month: _date.getMonth() + 1, // 월
-      day: _date.getDate(), // 일
-      hours: _date.getHours(), // 시간
-      minutes: _date.getMinutes(), // 분
-    };
-
-    result = `${String(dateInfo.year)}년 ${String(dateInfo.month).padStart(
-      2,
-      "0"
-    )}월 ${String(dateInfo.day).padStart(2, "0")}일 ${String(
-      dateInfo.hours
-    ).padStart(2, "0")}:${String(dateInfo.minutes).padStart(2, "0")}`;
-  }
-
-  return result;
-};
+import { removeTag } from "./code";
 
 // 줄바꿈 (\n => <br />) 처리하기
 const changeMultipleLine = (str: string) => {
@@ -265,6 +198,12 @@ const imagePreLoad = (list: Array<string>) => {
       // 이미 호출된 이미지인지 체크
       const img = new Image();
       img.src = url;
+
+      img.style.position = "absolute";
+      img.style.opacity = "0";
+
+      document.body.append(img);
+      img.remove();
     });
   }
 };
@@ -291,8 +230,15 @@ const getExampleErrorText = (moduleName: string, list: Array<string>) => {
     )} props가 필수로 전달되어야 합니다. 전달되지 않는다면 모듈을 실행할 수 없으므로 해당 에러메세지가 보여진다면 props 값을 다시 확인해주세요.`;
 };
 
+// 현재 모듈이 즐겨찾기 되어 있는지 체크
+const checkedIsFavorite = (list: string[], module: string) => {
+  // 1차로 적용되어 있는 태그 제거
+  module = removeTag(module);
+  // 즐겨찾기에 포함되어 있는지 체크
+  return list.some((name) => name === module);
+};
+
 export {
-  getDateForm,
   changeMultipleLine,
   getHashText,
   getUuid,
@@ -307,4 +253,5 @@ export {
   imagePreLoad,
   getCurrentScroll,
   getExampleErrorText,
+  checkedIsFavorite,
 };

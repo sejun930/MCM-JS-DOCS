@@ -17,7 +17,8 @@ import {
   _Checkbox,
   _SpanText,
 } from "mcm-js-commons";
-import { getUuid, getDateForm } from "src/main/commonsComponents/functional";
+import { getUuid } from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional/date";
 import { IProps } from "./block.types";
 
 import _SelectForm from "src/main/commonsComponents/units/template/form/select/select.container";

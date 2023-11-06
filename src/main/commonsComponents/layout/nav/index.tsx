@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   LayoutNavListWrapper,
   LayoutNavWrapper,
@@ -12,8 +13,8 @@ import {
   initNavInfoData,
   InitNavInfoDataTypes,
 } from "./nav.data";
+import { checkedIsFavorite } from "../../functional";
 
-import { useEffect, useState } from "react";
 import NavListPage from "./list";
 import NavSearchPage from "./search";
 
@@ -80,7 +81,7 @@ export default function LayoutNavPage({
   // 즐겨찾기가 되어 있는 모듈을 우선 노출
   if (favorite && favorite.length) {
     filterResult.favorite = [
-      ...extraTaps.filter((el) => favorite.some((cu) => cu === el.name)),
+      ...extraTaps.filter((el) => checkedIsFavorite(favorite, el.name)),
     ];
     filterResult.extra = [
       ...extraTaps.filter((el) => favorite.every((cu) => cu !== el.name)),

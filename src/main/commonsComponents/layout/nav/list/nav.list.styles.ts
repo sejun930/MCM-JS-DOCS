@@ -16,6 +16,7 @@ export const ListWrapper = styled.ul`
   gap: 20px 0px;
   position: sticky;
   top: 125px;
+  width: 100%;
 
   ${(props: StyleTypes) => {
     const styles: CSSProperties & { [key: string]: string } = {};
@@ -40,15 +41,6 @@ export const ListWrapper = styled.ul`
         padding: "0px",
       }}
   }
-`;
-
-export const Link = styled(_Link)`
-  width: 100%;
-
-  ${(props: StyleTypes) =>
-    props.isSelected && {
-      width: "calc(100% + 50px)",
-    }}
 `;
 
 export const EmptyResult = styled.li`
@@ -88,6 +80,11 @@ export const List = styled.li`
         right: "25px",
         textShadow: `0 0 0 rgba(255, 255, 255)`,
       }}
+  }
+
+  .icons-form {
+    position: absolute;
+    transform: translate3d(-10px, -6px, 0px);
   }
 
   // 마우스 호버시 즐겨찾기 아이콘 노출

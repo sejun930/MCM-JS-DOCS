@@ -3,11 +3,8 @@ import { useState, useRef, MutableRefObject, FormEvent } from "react";
 import { useRecoilState } from "recoil";
 import { ipState } from "src/commons/store";
 
-import {
-  getHashText,
-  getUserIp,
-  getDateForm,
-} from "src/main/commonsComponents/functional";
+import { getHashText, getUserIp } from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional/date";
 import { getDoc, getServerTime } from "src/commons/libraries/firebase";
 
 import AdminLoginUIPage from "./admin.login.presenter";

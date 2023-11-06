@@ -20,9 +20,7 @@ export default function ModulesPage(props: { name: string }) {
   const router = useRouter();
 
   useEffect(() => {
-    imagePreLoad([
-      `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${props.name}-example.gif`,
-    ]);
+    imagePreLoad([`/images/modules/example/${props.name}-example.gif`]);
 
     window.setTimeout(() => {
       // 페이지 렌더

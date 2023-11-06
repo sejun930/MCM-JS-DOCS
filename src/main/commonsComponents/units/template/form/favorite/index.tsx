@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
+
+import { checkedIsFavorite } from "src/main/commonsComponents/functional";
 import { removeTag } from "src/main/commonsComponents/functional/code";
 
 import { getLibraries } from "src/main/commonsComponents/functional/modules";
@@ -45,14 +47,12 @@ export default function FavoritePage({
     window.localStorage.setItem("mcm-favorite", JSON.stringify(_favorite));
   };
 
-  // 적용된 태그 앞뒤로 제거
-  module = removeTag(module);
   // 현재 즐겨찾기가 적용되어 있는지 체크
-  const isCheckedFavorite = favorite.some((el) => el === module);
+  const isCheckedFavorite = checkedIsFavorite(favorite, module);
 
   return (
     <Favorite
-      onClickEvent={toggleFavorite(module)}
+      onClickEvent={toggleFavorite(removeTag(module))}
       className="module-favorite-btn"
       isCheckedFavorite={isCheckedFavorite || false}
     >

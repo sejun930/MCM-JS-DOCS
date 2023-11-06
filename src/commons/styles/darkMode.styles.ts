@@ -476,6 +476,10 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
       .main-title-example-image {
         border-color: ${colorBook.borderColor};
       }
+
+      .update-info {
+        color: #999999;
+      }
     }
 
     // Tooltip 관련
