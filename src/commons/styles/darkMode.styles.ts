@@ -58,7 +58,7 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
         }
 
         .select-tap {
-          border: solid 1px ${colorBook.borderColor};
+          border: unset;
           border-bottom: unset;
         }
 
@@ -365,6 +365,10 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
                 background-color: ${colorBook.white};
               }
             }
+
+            .category-list-shadow {
+              opacity: 0.2;
+            }
           }
 
           .filter-button {
@@ -415,13 +419,13 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
         color: #999999;
       }
 
-      .module-favorite-btn {
-        text-shadow: 0 0 0 rgba(255, 255, 255);
-      }
-
       .setting {
         color: ${colorBook.fontColor};
       }
+    }
+
+    .module-favorite-btn {
+      text-shadow: 0 0 0 rgba(255, 255, 255);
     }
 
     // code 관련
@@ -471,6 +475,10 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
     #main-title-form {
       .main-title-example-image {
         border-color: ${colorBook.borderColor};
+      }
+
+      .update-info {
+        color: #999999;
       }
     }
 
@@ -525,22 +533,35 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
           opacity: 0.6;
         }
       }
-    }
 
-    // Tree 관련
-    #tree-form {
-      .tree-list-wrapper {
-        .tree-list {
-          border-right: unset;
-          border-bottom: solid 2px ${colorBook.borderColor};
+      // Tree 관련
+      #tree-form {
+        .tree-list-wrapper {
+          .tree-list {
+            border-right: unset;
+            border-bottom: solid 2px ${colorBook.borderColor};
+          }
         }
       }
-    }
 
-    // Comments 관련
-    #comments-form {
-      .write-comments-button {
-        border-color: ${colorBook.borderColor};
+      // Comments 관련
+      #comments-form {
+        .write-comments-button {
+          border-color: ${colorBook.borderColor};
+        }
+
+        .comments-wrapper {
+          #comments-list-wrapper {
+            .comments-list-items {
+              .comments-list {
+                :hover {
+                  background-color: unset;
+                  color: ${colorBook.fontColor};
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

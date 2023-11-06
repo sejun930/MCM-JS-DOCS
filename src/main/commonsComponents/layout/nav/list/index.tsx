@@ -1,18 +1,16 @@
-import {
-  EmptyResult,
-  Favorite,
-  Link,
-  List,
-  ListWrapper,
-} from "./nav.list.styles";
+import { EmptyResult, List, ListWrapper } from "./nav.list.styles";
 import { NavListTypes } from "../nav.data";
-import { _PText, _SpanTextWithHtml } from "mcm-js-commons";
+import { _PText, _Link, _SpanTextWithHtml } from "mcm-js-commons";
 
 import { imagePreLoad } from "src/main/commonsComponents/functional";
-import { getLibraries } from "src/main/commonsComponents/functional/modules";
 import { removeTag } from "src/main/commonsComponents/functional/code";
 
-const { Alert } = getLibraries();
+import FavoritePage from "src/main/commonsComponents/units/template/form/favorite";
+import _IconForm from "src/main/commonsComponents/units/template/form/icon";
+
+import { moduleUpdateList } from "src/main/commonsComponents/units/template/title/mainTitle/data";
+import { getDistanceDate } from "src/main/commonsComponents/functional/date";
+
 export default function NavListPage({
   list,
   isSelected,
@@ -32,40 +30,7 @@ export default function NavListPage({
 }) {
   // Example 이미지 미리 호출하기
   const preLoadExampleImage = (name: string) => () => {
-    imagePreLoad([
-      `https://s3.ap-northeast-2.amazonaws.com/mcm-js.site/images/modules/${name}-example.gif`,
-    ]);
-  };
-
-  // 즐겨찾기 추가 및 삭제
-  const toggleFavorite = (name: string) => () => {
-    const _favorite: string[] = [...favorite];
-
-    let msg = ""; // 성공 메세지
-    const idx = _favorite.indexOf(name);
-
-    if (idx === -1) {
-      // 모듈이 없을 경우 추가
-      _favorite.push(name);
-      msg = `즐겨찾기에 등록되었습니다.`;
-    } else {
-      // 모듈이 있을 경우 삭제
-      _favorite.splice(idx, 1);
-      msg = `즐겨찾기에서 삭제되었습니다.`;
-    }
-
-    Alert.openAlert({
-      children: `${name} 모듈이 ${msg}`,
-      alertConcept: {
-        type: idx === -1 ? "success" : "info",
-      },
-      useCloseMode: {
-        useSwipeMode: true,
-      },
-    });
-
-    changeFavorite(_favorite);
-    window.localStorage.setItem("mcm-favorite", JSON.stringify(_favorite));
+    imagePreLoad([`/images/modules/example/${name}-example.gif`]);
   };
 
   // 검색어가 있지만 해당되는 모듈이 없고 즐겨찾기는 있는 경우
@@ -105,8 +70,7 @@ export default function NavListPage({
             }
           }
 
-          // 해당 모듈이 즐겨찾기가 되어 있는지 체크
-          const isCheckedFavorite = favorite.includes(removeTag(name));
+          console.log(getDistanceDate(moduleUpdateList[el?.name]));
 
           return (
             <List
@@ -115,23 +79,21 @@ export default function NavListPage({
               isSelected={isSelected}
             >
               {(name && (
-                <Link
-                  href={_href}
-                  className="module-tap"
-                  isSelected={isSelected}
-                >
+                <_Link href={_href} className="module-tap">
                   <_SpanTextWithHtml
                     dangerouslySetInnerHTML={name || "Not Found"}
                   />
-                </Link>
+                  {!isSelected &&
+                    getDistanceDate(moduleUpdateList[el?.name]) < 15 && (
+                      <_IconForm type="update" />
+                    )}
+                </_Link>
               )) || <></>}
-              <Favorite
-                onClickEvent={toggleFavorite(removeTag(name))}
-                className="module-favorite-btn"
-                isCheckedFavorite={isCheckedFavorite || false}
-              >
-                ⭐
-              </Favorite>
+              <FavoritePage
+                favorite={favorite}
+                changeFavorite={changeFavorite}
+                module={removeTag(name) || ""}
+              />
             </List>
           );
         })) || <></>}

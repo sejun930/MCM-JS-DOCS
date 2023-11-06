@@ -11,11 +11,9 @@ import MainHead from "./head";
 export default function Template({
   children,
   isFull,
-  className,
 }: {
   children: React.ReactNode;
   isFull?: boolean;
-  className?: string;
 }) {
   return (
     <>
@@ -45,6 +43,7 @@ export const Wrapper = styled.main`
   z-index: 10;
   width: 100%;
   height: 100%;
+  max-width: 85%;
 
   ${(props: StyleTypes) =>
     props.isFull && {
@@ -152,6 +151,7 @@ export const Wrapper = styled.main`
 
   @media ${breakPoints.mobileLarge} {
     min-width: 100%;
+    max-width: 100%;
     padding: 20px;
 
     #mobile-nav-modal {

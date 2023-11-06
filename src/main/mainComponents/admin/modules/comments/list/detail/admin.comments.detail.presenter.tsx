@@ -7,7 +7,7 @@ import {
 } from "./admin.comments.detail.styles";
 
 import { _SpanText } from "mcm-js-commons";
-import { getDateForm } from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional/date";
 
 import CommentsLabel from "src/main/commonsComponents/units/template/form/comments/list/label";
 import AdminCommentsContentsPage from "./contents/admin.comments.contents.container";

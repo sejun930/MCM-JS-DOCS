@@ -15,7 +15,7 @@ import {
   QuestionTitle,
   AnswerInfoWrapper,
 } from "./list.contents.styles";
-import { getDateForm } from "src/main/commonsComponents/functional";
+import { getDateForm } from "src/main/commonsComponents/functional/date";
 import { getListContentsInfo, ListContentsSelectType } from "./list.data";
 
 import { _SpanTextWithHtml, _Button, _PText } from "mcm-js-commons";

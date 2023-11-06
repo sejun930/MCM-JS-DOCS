@@ -77,7 +77,7 @@ export default function CommentsListUIPage({
               );
             })}
           </CategoryItems>
-          <Shadow />
+          <Shadow className="category-list-shadow" />
         </CategoryContents>
 
         {commentsInfo.countFilterList.all.count !== undefined && (
