@@ -1,7 +1,6 @@
 import { CSSProperties } from "react";
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
-import { _Link, _Button } from "mcm-js-commons";
 
 interface StyleTypes {
   isSelected?: boolean;

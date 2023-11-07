@@ -38,17 +38,115 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "페이지네이션 (Pagination)",
+    title: "페이지네이션 (Pagination) & 현재 페이지 (Current-Page)",
+    isFull: { isHalf: false },
+    blockRemarks:
+      "리스트에 관한 페이지네이션 및 현재 페이지 정보를 노출합니다.",
     contents: [
       {
         remakrs:
-          "전체 페이지의 개수를 확인할 수 있고, 클릭하면 해당 페이지로 이동할 수 있습니다.",
+          "페이지네이션 기능을 이용해 다른 페이지로 직접 이동할 수 있습니다.",
         content: sliderDefaultChildren,
-        code: sliderCodeList.pagination(),
+        code: sliderCodeList.usePagination(),
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
-          pagination: { showPageList: true },
+          usePagination: true,
+        },
+      },
+      {
+        remakrs: "현재 페이지에 대한 페이지 정보를 나타낼 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.useCurrentPage(),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          useCurrentPage: true,
+        },
+      },
+    ],
+  },
+  {
+    title: "전환 버튼 설정",
+    isFull: { isHalf: false },
+    blockRemarks:
+      "이전 및 다음으로 이동하는 버튼을 숨기거나 변경할 수 있습니다.",
+    contents: [
+      {
+        remakrs: "버튼을 사용하지 않도록 숨길 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.setArrow("hide"),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          usePagination: true,
+          setArrow: {
+            hide: true,
+          },
+        },
+      },
+      {
+        remakrs: "Slider에 <b>마우스를 올릴 때</b> 버튼을 노출시킵니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.setArrow("showHover"),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          usePagination: true,
+          setArrow: {
+            showHover: true,
+          },
+        },
+      },
+      {
+        remakrs:
+          "다음 및 이전 버튼을 원하는 <b>문자열 또는 컴포넌트</b>로 변경할 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.setArrow("contents"),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          usePagination: true,
+          setArrow: {
+            contents: {
+              left: "🔙",
+              right: "🔜",
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    title: "자동 전환(Autoplay) 및 타이머 적용",
+    isFull: { isHalf: false },
+    contents: [
+      {
+        remakrs:
+          "일정 시간마다 자동으로 다음 페이지로 전환합니다.  <br />시간은 1/1000ms로 적용되며, <b>최소 3초(3000)</b> 이상부터 적용됩니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.autoPlay(),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          usePagination: true,
+          useAutoPlay: {
+            delay: 3000,
+          },
+        },
+      },
+      {
+        remakrs: "타이머를 실행시켜 전환되는 진행도를 확인할 수 있습니다.",
+        content: sliderDefaultChildren,
+        code: sliderCodeList.autoPlayWithTimer(),
+        addProps: {
+          ...initSliderCommonsProps,
+          useAnimation: true,
+          usePagination: true,
+          useAutoPlay: {
+            delay: 3000,
+            showTimer: true,
+          },
         },
       },
     ],
@@ -72,100 +170,6 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     ],
   },
   {
-    title: "전환 버튼 설정",
-    isFull: { isHalf: false },
-    blockRemarks:
-      "이전 및 다음으로 이동하는 버튼을 숨기거나 변경할 수 있습니다.",
-    contents: [
-      {
-        remakrs: "버튼을 사용하지 않도록 숨길 수 있습니다.",
-        content: sliderDefaultChildren,
-        code: sliderCodeList.setArrow("hide"),
-        addProps: {
-          ...initSliderCommonsProps,
-          useAnimation: true,
-          pagination: { showPageList: true },
-          useSwipeMode: {
-            sideMovePercent: 50,
-          },
-          setArrow: {
-            hide: true,
-          },
-        },
-      },
-      {
-        remakrs: "Slider에 <b>마우스를 올릴 때</b> 버튼을 노출시킵니다.",
-        content: sliderDefaultChildren,
-        code: sliderCodeList.setArrow("showHover"),
-        addProps: {
-          ...initSliderCommonsProps,
-          useAnimation: true,
-          pagination: { showPageList: true },
-          useSwipeMode: {
-            sideMovePercent: 50,
-          },
-          setArrow: {
-            showHover: true,
-          },
-        },
-      },
-      {
-        remakrs:
-          "다음 및 이전 버튼을 원하는 <b>문자열 또는 컴포넌트</b>로 변경할 수 있습니다.",
-        content: sliderDefaultChildren,
-        code: sliderCodeList.setArrow("contents"),
-        addProps: {
-          ...initSliderCommonsProps,
-          useAnimation: true,
-          pagination: { showPageList: true },
-          useSwipeMode: {
-            sideMovePercent: 50,
-          },
-          setArrow: {
-            contents: {
-              left: "🔙",
-              right: "🔜",
-            },
-          },
-        },
-      },
-    ],
-  },
-  {
-    title: "자동 전환(Autoplay) 및 타이머 적용",
-    isFull: { isHalf: false },
-    contents: [
-      {
-        remakrs:
-          "일정 시간마다 자동으로 다음 페이지로 전환합니다.  <br />시간은 1/1000ms로 적용되며, <b>최소 3초(3000)</b> 이상부터 적용됩니다.",
-        content: sliderDefaultChildren,
-        code: sliderCodeList.autoPlay(),
-        addProps: {
-          ...initSliderCommonsProps,
-          useAnimation: true,
-          pagination: { showPageList: true },
-          useAutoPlay: {
-            delay: 3000,
-          },
-        },
-      },
-      {
-        remakrs: "타이머를 실행시켜 전환되는 진행도를 확인할 수 있습니다.",
-        content: sliderDefaultChildren,
-        code: sliderCodeList.autoPlayWithTimer(),
-        addProps: {
-          ...initSliderCommonsProps,
-          useAnimation: true,
-          pagination: { showPageList: true },
-          useAutoPlay: {
-            delay: 3000,
-            showTimer: true,
-          },
-        },
-      },
-    ],
-  },
-  {
     title: "시작 페이지 지정",
     // isFull: true,
     contents: [
@@ -176,7 +180,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
-          pagination: { showPageList: true },
+          usePagination: true,
           firstPage: 3,
         },
       },
@@ -194,9 +198,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
-          pagination: {
-            showPageList: true,
-          },
+          usePagination: true,
           listMinHeight: {
             web: "200px",
             mobile: "160px",
@@ -232,9 +234,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
-          pagination: {
-            showPageList: true,
-          },
+          usePagination: true,
           useAutoPlay: {
             delay: 3000,
             showTimer: true,

@@ -1,6 +1,20 @@
 import { getCommonsHighlight } from "src/commons/highlight";
 import { PropsModuleListType } from "src/main/commonsComponents/units/template/form/props/props.types";
 
+const usePaginationAndUseCurrentPage = `${getCommonsHighlight.curly({
+  children: `
+  ${getCommonsHighlight.colors("false").bool} ${
+    getCommonsHighlight.colors("||").text
+  } ${getCommonsHighlight.curly({
+    children: ` ${getCommonsHighlight.obj(
+      "hideMobile",
+      getCommonsHighlight.colors("false").bool
+    )} `,
+    className: "yellow",
+  })}
+`,
+})}`;
+
 export const sliderPropsList: Array<PropsModuleListType> = [
   {
     name: "children",
@@ -24,28 +38,33 @@ export const sliderPropsList: Array<PropsModuleListType> = [
     },
   },
   {
-    name: "pagination",
-    default: "{ showPageList : false, hideMobile : false }",
-    type: "Object",
+    name: "usePagination",
+    default: "false | { hideMobile : false }",
+    type: "Boolean | Object",
     notice: `나열되어 있는 컴포넌트의 개수만큼 <b>페이지의 개수</b>를 리스트 형태로 출력합니다. <br />출력된 리스트내의 페이지를 클릭해서 페이지를 전환할 수 있습니다.
       <br /><br />
       <ul class="ul-wrapper">
-        <li><b class="bold">showPageList</b> : 페이지의 개수 노출 여부를 결정합니다. true를 전달하면 페이지 리스트가 노출됩니다.</li>
         <li><b class="bold">hideMobile</b> : true를 전달하면 모바일 환경<b>(767px 이하)</b>에서는 페이지를 숨깁니다.</li>
       </ul>
       `,
     code: {
-      type: "obj",
-      argu: [
-        {
-          key: "showPageList",
-          value: getCommonsHighlight.colors("false").bool,
-        },
-        {
-          key: "hideMobile",
-          value: getCommonsHighlight.colors("false").bool,
-        },
-      ],
+      type: "custom",
+      argu: usePaginationAndUseCurrentPage,
+    },
+  },
+  {
+    name: "useCurrentPage",
+    default: "false | { hideMobile : false }",
+    type: "Boolean | Object",
+    notice: `현재 페이지의 번호와 전체 페이지의 개수의 정보를 노출합니다.
+      <br /><br />
+      <ul class="ul-wrapper">
+        <li><b class="bold">hideMobile</b> : true를 전달하면 모바일 환경<b>(767px 이하)</b>에서는 페이지를 숨깁니다.</li>
+      </ul>
+      `,
+    code: {
+      type: "custom",
+      argu: usePaginationAndUseCurrentPage,
     },
   },
   {

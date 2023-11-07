@@ -236,16 +236,27 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
         color: black;
 
         b {
-          color: ${colorBook.fontColor};
+          color: ${colorBook.fontColor} !important;
         }
       }
 
-      .props-notice .bold {
-        color: ${colorBook.mainColor} !important;
+      .props-notice {
+        .bold {
+          color: ${colorBook.mainColor} !important;
+        }
       }
 
       .box-color {
         background-color: lightslategrey;
+      }
+
+      .focusing {
+        .bold {
+          color: black !important;
+        }
+        b {
+          color: ${colorBook.fontColor};
+        }
       }
     }
 

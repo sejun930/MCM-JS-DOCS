@@ -14,6 +14,7 @@ export interface PropsModuleListType {
     | "Object"
     | "Node"
     | "String | Node"
+    | "Boolean | Object"
     | "[Boolean]"
     | "[String]"
     | "[Number]"

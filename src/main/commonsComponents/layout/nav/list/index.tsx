@@ -70,8 +70,6 @@ export default function NavListPage({
             }
           }
 
-          console.log(getDistanceDate(moduleUpdateList[el?.name]));
-
           return (
             <List
               key={`tap-name-${el?.name}-${key}`}
