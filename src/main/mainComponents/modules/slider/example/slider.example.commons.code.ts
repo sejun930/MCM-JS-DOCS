@@ -6,16 +6,31 @@ export const sliderCommonsExampleCode = {
     value: "true",
     type: "bool",
   }),
-  pagination: commonsCodeForm({
-    key: "pagination",
+  usePagination: commonsCodeForm({
+    key: "usePagination",
     type: "node",
-    value: getCommonsHighlight.curly({
-      className: "yellow",
+    value: `${getCommonsHighlight.colors("true").bool} ${
+      getCommonsHighlight.colors("||").text
+    } ${getCommonsHighlight.curly({
       children: ` ${getCommonsHighlight.obj(
-        "showPageList",
-        getCommonsHighlight.colors("true").bool
+        "hideMobile",
+        getCommonsHighlight.colors("false").bool
       )} `,
-    }),
+      className: "yellow",
+    })}`,
+  }),
+  useCurrentPage: commonsCodeForm({
+    key: "useCurrentPage",
+    type: "node",
+    value: `${getCommonsHighlight.colors("true").bool} ${
+      getCommonsHighlight.colors("||").text
+    } ${getCommonsHighlight.curly({
+      children: ` ${getCommonsHighlight.obj(
+        "hideMobile",
+        getCommonsHighlight.colors("false").bool
+      )} `,
+      className: "yellow",
+    })}`,
   }),
   autoPlay: commonsCodeForm({
     key: "useAutoPlay",

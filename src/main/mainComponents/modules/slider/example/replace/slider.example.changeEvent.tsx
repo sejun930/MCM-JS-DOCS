@@ -23,9 +23,7 @@ export default function SliderExampleChangeEventPage() {
         children={sliderCommonsProps.children}
         changePageEvent={changePage}
         useAnimation
-        pagination={{
-          showPageList: true,
-        }}
+        usePagination
         useAutoPlay={{
           delay: 3000,
         }}

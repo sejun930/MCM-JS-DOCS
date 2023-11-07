@@ -12,18 +12,27 @@ export const sliderCodeList: ExampleCodeListTypes = {
       code: sliderCommonsExampleCode.useAnimation,
       propsName: "useAnimation",
     })}`,
-  pagination: () =>
+  usePagination: () =>
     ` 
       ${sliderCommonsExampleCode.useAnimation} 
       ${getBoldCode({
-        code: sliderCommonsExampleCode.pagination,
-        propsName: "pagination",
+        code: sliderCommonsExampleCode.usePagination,
+        propsName: "usePagination",
       })}
     `,
+  useCurrentPage: () =>
+    `
+      ${sliderCommonsExampleCode.useAnimation} 
+      ${getBoldCode({
+        code: sliderCommonsExampleCode.useCurrentPage,
+        propsName: "useCurrentPage",
+      })}
+    `,
+
   setArrow: (value: "hide" | "showHover" | "contents") =>
     ` 
       ${sliderCommonsExampleCode.useAnimation} 
-      ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.usePagination}
       ${sliderCommonsExampleCode.useSwipeMode("50")}
       ${getBoldCode({
         code: sliderCommonsExampleCode.setArrow(value),
@@ -33,7 +42,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
   autoPlay: () =>
     `
       ${sliderCommonsExampleCode.useAnimation} 
-      ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.usePagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.autoPlay,
         propsName: "useAutoPlay",
@@ -42,7 +51,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
   autoPlayWithTimer: () =>
     `
       ${sliderCommonsExampleCode.useAnimation} 
-      ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.usePagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.timer,
         propsName: "useAutoPlay",
@@ -59,7 +68,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
   firstPage: () =>
     `
       ${sliderCommonsExampleCode.useAnimation}
-      ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.usePagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.firstPage,
         propsName: "firstPage",
@@ -68,7 +77,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
   minHeight: () =>
     `
       ${sliderCommonsExampleCode.useAnimation}
-      ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.usePagination}
       ${getBoldCode({
         code: sliderCommonsExampleCode.listMinHeight,
         propsName: "listMinHeight",
@@ -77,7 +86,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
   changePageEvent: () =>
     `
         ${sliderCommonsExampleCode.useAnimation}
-        ${sliderCommonsExampleCode.pagination}
+        ${sliderCommonsExampleCode.usePagination}
         ${sliderCommonsExampleCode.autoPlay}
         ${getBoldCode({
           code: sliderCommonsExampleCode.changePageEvent,
@@ -88,7 +97,7 @@ export const sliderCodeList: ExampleCodeListTypes = {
     `
       ${sliderCommonsExampleCode.useAnimation}
       ${sliderCommonsExampleCode.useSwipeMode("50")}
-      ${sliderCommonsExampleCode.pagination}
+      ${sliderCommonsExampleCode.usePagination}
       ${sliderCommonsExampleCode.timer}
       ${getBoldCode({
         code: sliderCommonsExampleCode.stopInfinite,
