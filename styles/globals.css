@@ -111,7 +111,7 @@ table {
 
 /* 드래그 방지 */
 .disable-drag {
-  pointer-events: none;
+  /* pointer-events: none; */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;

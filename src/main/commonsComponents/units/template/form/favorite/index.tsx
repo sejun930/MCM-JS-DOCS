@@ -53,7 +53,7 @@ export default function FavoritePage({
   return (
     <Favorite
       onClickEvent={toggleFavorite(removeTag(module))}
-      className="module-favorite-btn"
+      className="module-favorite-btn disable-drag"
       isCheckedFavorite={isCheckedFavorite || false}
     >
       ⭐

@@ -13,7 +13,7 @@ import { favoriteState, moduleState, versState } from "src/commons/store";
 
 import { moduleRemarksList, moduleUpdateList } from "./data";
 import { getModuleIndexList } from "src/commons/data/index/index.commons.data";
-import { _PTextWithHtml, _Title, _Image } from "mcm-js-commons";
+import { _PTextWithHtml, _Title } from "mcm-js-commons";
 
 import IndexRenderPage from "../../../index/index.render";
 import FavoritePage from "../../form/favorite";
