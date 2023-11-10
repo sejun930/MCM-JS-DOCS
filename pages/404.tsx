@@ -12,6 +12,9 @@ export default function ErrorRenderPage() {
   const { getRouter } = CommonsHooksComponents();
 
   useEffect(() => {
+    const doc = document.getElementById("layout-contents-wrapper");
+    if (doc) doc.style.height = "100%";
+
     clearInterval(timeEvent);
     let timer = 10;
     timeEvent = setInterval(() => {
@@ -41,7 +44,7 @@ export default function ErrorRenderPage() {
 
   return (
     <Template>
-      <ErrorWrapper>
+      <ErrorWrapper className="error-wrapper">
         <_Title className="error-title">😢 Page 404</_Title>
         <ErrorRemakrs>
           <_PText className="error-remarks">

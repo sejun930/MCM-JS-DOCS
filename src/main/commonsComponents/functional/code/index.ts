@@ -11,15 +11,17 @@ declare const window: typeof globalThis & {
 
 // 태그 제거하기
 const removeTag = (str: string): string =>
-  str
-    .split("<span")
-    .map((el) =>
-      el
-        .substring(el.indexOf(">") + 1)
-        .split("</span>")
-        .join("")
-    )
-    .join("");
+  (str &&
+    str
+      .split("<span")
+      .map((el) =>
+        el
+          .substring(el.indexOf(">") + 1)
+          .split("</span>")
+          .join("")
+      )
+      .join("")) ||
+  "";
 
 // 탭 (공백) 적용하기
 const getTap = (str: string) => {

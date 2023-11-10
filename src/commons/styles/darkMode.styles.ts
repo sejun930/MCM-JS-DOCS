@@ -451,6 +451,14 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
       }
     }
 
+    // error 페이지 관련
+    .error-wrapper {
+      .error-title,
+      .error-move-home {
+        color: ${colorBook.white};
+      }
+    }
+
     /* 공통 컴포넌트 관련 */
     // input 관련
     .mcm-input-unit-items {

@@ -33,7 +33,7 @@ export default function ModulesPage(props: { name: string }) {
     };
   }, [router]);
 
-  return render ? Components || <ErrorPage /> : <></>;
+  return (render && (Components || <ErrorPage />)) || <></>;
 }
 
 export const getServerSideProps = (url: { query: { module: string } }) => {
