@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from "react";
-import { LayoutWrapper, LayoutContentsWrapper } from "./styles";
+import { LayoutContentsWrapper } from "./styles";
 import { LayoutWithDarkModeWrapper } from "src/commons/styles/darkMode.styles";
 
 import CommonsHooksComponents from "../hooks/commonsHooks";

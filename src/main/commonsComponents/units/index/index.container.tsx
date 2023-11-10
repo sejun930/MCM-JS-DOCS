@@ -12,7 +12,7 @@ let infiniteRequestDocument: number | ReturnType<typeof setInterval>;
 export default function _IndexForm(
   props: IndexIPropsTypes & IndexPagePropsTypes
 ) {
-  const { indexList, changeLoading, isLoading, vers } = props;
+  const { indexList, changeLoading, isLoading } = props;
   // 현재 선택되어 있는 목차
   const [current, setCurrent] = useState(0);
 
