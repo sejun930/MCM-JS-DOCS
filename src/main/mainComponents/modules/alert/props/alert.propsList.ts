@@ -183,7 +183,7 @@ export const alertPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "onAfterAlertOpen",
-    default: "() => {}",
+    default: "( ) => { }",
     type: "Function",
     notice: "Alert이 <b>실행</b>될 때 함께 실행될 함수입니다.",
     isRequired: false,
@@ -194,7 +194,7 @@ export const alertPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "onAfterAlertClose",
-    default: "() => {}",
+    default: "( ) => { }",
     type: "Function",
     notice: "Alert이 <b>종료</b>될 때 함께 실행될 함수입니다.",
     isRequired: false,

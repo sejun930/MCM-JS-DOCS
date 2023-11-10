@@ -65,12 +65,7 @@ export default function ExampleFixedPage({
             _fixedRef.current.classList.add("widen");
           }, 100);
           // fixed 모드 종료
-        } else if (
-          (eventStart && el?.top >= 30) ||
-          scrollTop > endFixedPoint
-          // (scrollTop + bonusHeight <= _wrapperRef.current.offsetTop ||
-          //   scrollTop > endFixedPoint)
-        ) {
+        } else if ((eventStart && el?.top >= 30) || scrollTop > endFixedPoint) {
           eventStart = false;
 
           if (_fixedRef.current.classList.contains("widen"))
@@ -86,6 +81,7 @@ export default function ExampleFixedPage({
   };
 
   const changeTempVers = (i: number) => {
+    // 버전 변경하기
     setTempVers(i);
   };
 

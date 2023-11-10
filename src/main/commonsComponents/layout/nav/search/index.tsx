@@ -9,12 +9,12 @@ export default function NavSearchPage({
   onChangeSearch: (text: string) => void;
 }) {
   return (
-    <Wrapper className="nav-search-wrapper">
-      <NavSearchFieldset>
+    <Wrapper id="nav-search-wrapper">
+      <NavSearchFieldset id="nav-search-filedset">
         <legend>모듈 검색</legend>
         <_Input
           onChangeEvent={onChangeSearch}
-          className="nav-search-input"
+          id="nav-search-input"
           placeHolder="모듈 입력"
           maxLength={10}
           delay={300}

@@ -34,7 +34,9 @@ export default function ModulePropsListFormPage({
   };
 
   // 필수 리스트가 하나라도 있는지 검증
-  const haveRequired = list.some((el) => el.isRequired);
+  const haveRequired = list.some((el) =>
+    typeof el.isRequired === "object" ? el.isRequired[vers] : el.isRequired
+  );
 
   return (
     (list && list.length && (
@@ -59,52 +61,65 @@ export default function ModulePropsListFormPage({
           )}
 
           <tbody>
-            {list.map((el, idx) => (
-              <Tr
-                key={`module-props-list-${module}-${el.name}-${idx}`}
-                className={`${(el.isRequired && "isRequired-list") || ""}`}
-                isLast={list.length === idx + 1}
-                id={`module-props-list-${
-                  (isFunctional && "functional-") || ""
-                }${el.name}`}
-              >
-                <td className="props-name">
-                  <_SpanText>{el.name}</_SpanText>
-                  {el.code && (
-                    <Tooltip
-                      tooltipText={
-                        <_Copy
-                          text={
-                            Array.isArray(el.code) ? el.code[vers] : el.code
-                          }
-                          type="Code"
-                        />
-                      }
-                      className="module-props-copy-button-tooltip"
-                      tooltipStyles={{
-                        backgroundColor: "#333333",
-                        padding: "0px",
-                      }}
-                    >
-                      <CopyCode
-                        onClickEvent={copyCodeFn(el.code)}
-                        className="module-props-copy-button"
+            {list.map((el, idx) => {
+              // 해당 리스트가 필수 항목인지 체크
+              const isRequired =
+                typeof el.isRequired === "object"
+                  ? el.isRequired[vers]
+                  : el.isRequired;
+
+              return (
+                <Tr
+                  key={`module-props-list-${module}-${el.name}-${idx}`}
+                  className={`${(isRequired && "isRequired-list") || ""}`}
+                  isLast={list.length === idx + 1}
+                  id={`module-props-list-${
+                    (isFunctional && "functional-") || ""
+                  }${el.name}`}
+                >
+                  <td className="props-name">
+                    <_SpanText>{el.name}</_SpanText>
+                    {el.code && (
+                      <Tooltip
+                        tooltipText={
+                          <_Copy
+                            text={
+                              Array.isArray(el.code) ? el.code[vers] : el.code
+                            }
+                            type="Code"
+                          />
+                        }
+                        className="module-props-copy-button-tooltip"
+                        tooltipStyles={{
+                          backgroundColor: "#333333",
+                          padding: "0px",
+                        }}
                       >
-                        📝
-                      </CopyCode>
-                    </Tooltip>
-                  )}
-                </td>
-                <td
-                  dangerouslySetInnerHTML={{ __html: el.notice }}
-                  className="props-notice"
-                />
-                <td className="props-type">{`${el.default} (${el.type})`}</td>
-                {/* <td className="props-required">
+                        <CopyCode
+                          onClickEvent={copyCodeFn(el.code)}
+                          className="module-props-copy-button"
+                        >
+                          📝
+                        </CopyCode>
+                      </Tooltip>
+                    )}
+                  </td>
+                  <td
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        typeof el.notice === "object"
+                          ? el.notice[vers]
+                          : el.notice,
+                    }}
+                    className="props-notice"
+                  />
+                  <td className="props-type">{`${el.default} (${el.type})`}</td>
+                  {/* <td className="props-required">
                   {(el.isRequired && "O") || "X"}
                 </td> */}
-              </Tr>
-            ))}
+                </Tr>
+              );
+            })}
           </tbody>
         </PropsTable>
       </PropsListWrapper>

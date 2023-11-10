@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
-import { useState } from "react";
+import { MutableRefObject, useState } from "react";
 import { useRecoilState } from "recoil";
 import { moduleState } from "src/commons/store";
 
@@ -17,7 +17,11 @@ import ModuleTreeListPage from "./list";
 import ModuleTreeDetailPage from "./detail";
 
 // 폴더 구조 예시용 폼
-export default function _TreeForm() {
+export default function _TreeForm({
+  endPointRef,
+}: {
+  endPointRef?: MutableRefObject<HTMLDivElement>;
+}) {
   // 선택한 데이터
   const [select, setSelect] = useState<number>(0);
   const [module] = useRecoilState(moduleState);
@@ -30,7 +34,7 @@ export default function _TreeForm() {
   };
 
   return (
-    <Wrapper id="tree-form">
+    <Wrapper id="tree-form" ref={endPointRef || undefined}>
       <_SubTitleTemplate
         title="Module Tree"
         className="tree-subTitle"

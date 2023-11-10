@@ -8,8 +8,10 @@ export const modalPropsList: (vers: number) => Array<PropsModuleListType> = (
     name: "children",
     default: '""',
     type: "String | Node",
-    notice:
-      "Modal에 출력되는 문자열 또는 컴포넌트를 출력합니다. <br /><b>Modal.open</b>을 사용하는 경우에는 반드시 children Props를 이용해서 전달해야 합니다.",
+    notice: [
+      "Modal에 출력되는 문자열 또는 컴포넌트를 출력합니다.",
+      "Modal에 출력되는 문자열 또는 컴포넌트를 출력합니다. <br /><b>Modal.open</b>을 사용하는 경우에는 반드시 <b>children</b> Props에 전달해야 합니다.",
+    ],
     isRequired: true,
     code: { type: "string" },
   },
@@ -17,20 +19,24 @@ export const modalPropsList: (vers: number) => Array<PropsModuleListType> = (
     name: "show",
     default: false,
     type: "Boolean",
-    notice: `Modal의 실행 여부를 결정하며, true가 전달되면 Modal이 실행됩니다. <br />
-      <b>Modal.open</b>을 사용하는 경우에는 자동으로 적용됩니다.`,
-    isRequired: true,
+    notice: [
+      `Modal의 실행 여부를 결정하며, true가 전달되면 Modal이 실행됩니다.`,
+      `Modal의 실행 여부를 결정하며, true가 전달되면 Modal이 실행됩니다. <br /><b>Modal.open</b> 사용 시 기본값으로 실행됩니다.`,
+    ],
+    isRequired: [true, false],
     code: {
       type: "bool",
     },
   },
   {
     name: "onCloseModal",
-    default: "() => {}",
+    default: "( ) => { }",
     type: "Function",
-    notice:
-      "Modal을 종료할 때 실행하는 이벤트입니다. <br /> <b>Modal.open</b>을 사용하는 경우에는 자동으로 적용됩니다.",
-    isRequired: true,
+    notice: [
+      "Modal을 종료하기 위해 실행할 이벤트입니다.",
+      "Modal을 종료하기 위해 실행할 이벤트입니다. <br /><b>Modal.open</b> 사용 시 기본값으로 실행됩니다.",
+    ],
+    isRequired: [true, false],
     code: {
       type: "function",
     },
@@ -156,7 +162,7 @@ export const modalPropsList: (vers: number) => Array<PropsModuleListType> = (
   },
   {
     name: "onAfterCloseEvent",
-    default: "() => {}",
+    default: "( ) => { }",
     type: "Function",
     notice:
       "Modal이 종료되는 시점 후<b>(onCloseModal 함수 실행 후) 실행</b>될 이벤트입니다.",

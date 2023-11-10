@@ -14,7 +14,7 @@ export default describe("Layout Header Page", () => {
     expect(container).toMatchSnapshot();
 
     // 전체 태그를 감싸는 상위 부모 태그가 있는지 검증
-    const wrapperEle = container.querySelector(".layout-header-wrapper");
+    const wrapperEle = container.querySelector("#layout-header-wrapper");
     expect(wrapperEle).toBeInTheDocument();
 
     if (wrapperEle) {

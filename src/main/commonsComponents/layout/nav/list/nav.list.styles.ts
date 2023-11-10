@@ -17,15 +17,31 @@ export const ListWrapper = styled.ul`
   top: 125px;
   width: 100%;
 
+  &#nav-list-select {
+    padding: 0px;
+    padding-top: 1rem;
+
+    .nav-list-items {
+      width: calc(100% + 50px);
+      padding: 0.5rem;
+      padding-left: 1rem;
+      background-color: #aa5656;
+      color: white;
+      border-radius: 10px;
+      height: 36px;
+
+      .module-favorite-btn {
+        opacity: 1;
+        right: 25px;
+        text-shadow: 0 0 0 rgba(255, 255, 255);
+      }
+    }
+  }
+
   ${(props: StyleTypes) => {
     const styles: CSSProperties & { [key: string]: string } = {};
-    const { isSelected, isAdmin, hasError } = props;
+    const { isAdmin, hasError } = props;
 
-    if (isSelected) {
-      // 현재 선택된 모듈이라면
-      styles.padding = "0px";
-      styles.paddingTop = "1rem";
-    }
     if (isAdmin) styles.padding = "0px";
     if (hasError) styles.paddingTop = "0px";
 
@@ -39,6 +55,12 @@ export const ListWrapper = styled.ul`
       props.isAdmin && {
         padding: "0px",
       }}
+
+    &#nav-list-select {
+      .module-favorite-btn {
+        right: 60px !important;
+      }
+    }
   }
 `;
 
@@ -61,26 +83,6 @@ export const List = styled.li`
   display: flex;
   align-items: center;
 
-  // 선택된 모듈일 경우
-  ${(props: StyleTypes) =>
-    props.isSelected && {
-      width: "calc(100% + 50px)",
-      padding: "0.5rem",
-      paddingLeft: "1rem",
-      backgroundColor: "#aa5656 !important",
-      color: "white",
-      borderRadius: "10px",
-      height: "36px",
-    }}
-
-  .module-favorite-btn {
-    ${(props) =>
-      props.isSelected && {
-        right: "25px",
-        textShadow: `0 0 0 rgba(255, 255, 255)`,
-      }}
-  }
-
   .icons-form {
     position: absolute;
     transform: translate3d(-10px, -6px, 0px);
@@ -93,24 +95,11 @@ export const List = styled.li`
     }
   }
 
-  .module-favorite-btn {
-    // 선택된 모듈은 즐겨찾기 투명도 해제
-    ${(props) =>
-      props.isSelected && {
-        opacity: "1 !important",
-      }}
-  }
-
   @media ${breakPoints.mobileLarge} {
     // 모바일에서는 아이콘 무조건 노출
     .module-favorite-btn {
       opacity: 1;
       right: 10px;
-
-      ${(props) =>
-        props.isSelected && {
-          right: "60px",
-        }}
     }
   }
 `;

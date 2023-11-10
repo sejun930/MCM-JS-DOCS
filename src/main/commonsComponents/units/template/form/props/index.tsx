@@ -49,12 +49,17 @@ export default function _PropsForm({
   // 공통 props가 적용된 props 리스트 가져오기
   const getWithCommnsPropsList = (
     list: Array<PropsModuleListResultType>,
-    vers?: number
+    vers: number
   ) => {
     if (!list) return [];
 
     // 마지막 필수 props index
-    const lastRequiredIdx = list.findIndex((el) => !el.isRequired);
+    const lastRequiredIdx = list.findIndex((el) => {
+      return typeof el.isRequired === "object"
+        ? !el.isRequired[vers]
+        : !el.isRequired;
+    });
+
     // 필수 props 인덱스까지 자르기
     const requiredList = list.slice(0, lastRequiredIdx);
 

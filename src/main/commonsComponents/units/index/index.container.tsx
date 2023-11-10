@@ -12,8 +12,7 @@ let infiniteRequestDocument: number | ReturnType<typeof setInterval>;
 export default function _IndexForm(
   props: IndexIPropsTypes & IndexPagePropsTypes
 ) {
-  const { indexList, changeLoading, isLoading } = props;
-
+  const { indexList, changeLoading, isLoading, vers } = props;
   // 현재 선택되어 있는 목차
   const [current, setCurrent] = useState(0);
 
@@ -28,6 +27,19 @@ export default function _IndexForm(
       window.removeEventListener("scroll", checkScroll);
     };
   });
+
+  // 버전이 변경될 경우
+  // useEffect(() => {
+  //   if (indexList[current] && indexList[current].id) {
+  //     document.body.classList.add("hide");
+  //     console.log(current, indexList[current]);
+
+  //     window.setTimeout(() => {
+  //       moveIndex(indexList[current].id);
+  //       document.body.classList.remove("hide");
+  //     }, 200);
+  //   }
+  // }, [vers]);
 
   // 스크롤 실시간 체크하기
   const checkScroll = () => {
