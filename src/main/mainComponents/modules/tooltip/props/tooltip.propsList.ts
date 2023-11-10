@@ -110,7 +110,7 @@ export const tooltipPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "onOpenAfterEvent",
-    default: "() => {}",
+    default: "( ) => { }",
     type: "Function",
     notice:
       "Tooltip이 <b>실행된 이후</b>에 <b>실행할 함수</b>를 전달할 수 있습니다.",
@@ -120,7 +120,7 @@ export const tooltipPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "onCloseAfterEvent",
-    default: "() => {}",
+    default: "( ) => { }",
     type: "Function",
     notice:
       'Tooltip이 <b>종료된 이후</b>에 <b>실행할 함수</b>를 전달할 수 있습니다. <br /><b>"open"</b> props를 사용할 때 함께 사용하는 것을 권장합니다.',

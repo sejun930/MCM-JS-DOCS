@@ -2,6 +2,7 @@
 export interface IndexIPropsTypes {
   indexList: Array<{ title: string; id: string; children?: JSX.Element }>;
   offFixed?: boolean; // 고정하지 않음
+  vers: number;
 }
 
 // index.container Props type

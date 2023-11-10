@@ -43,9 +43,7 @@ export default function NavListPage({
   return (
     <ListWrapper
       isSelected={isSelected}
-      className={`nav-list-wrapper${
-        isSelected ? " nav-list-select-wrapper" : ""
-      }`}
+      id={`${(isSelected && "nav-list-select") || ""}`}
       isAdmin={isAdmin}
       hasError={list[0] === undefined}
     >
@@ -72,9 +70,9 @@ export default function NavListPage({
 
           return (
             <List
+              className="nav-list-items"
               key={`tap-name-${el?.name}-${key}`}
               onMouseEnter={preLoadExampleImage(el?.name || "")}
-              isSelected={isSelected}
             >
               {(name && (
                 <_Link href={_href} className="module-tap">

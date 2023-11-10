@@ -65,7 +65,7 @@ export default function MyModal() {
   return (
     <Template>
       <_MainTitleTemplate />
-      <ModulesInfoWrapper ref={endPointRef}>
+      <ModulesInfoWrapper>
         {(render && (
           <>
             <_HowUseForm
@@ -85,7 +85,7 @@ export default function MyModal() {
         )) || <></>}
         <_PropsForm isObject={vers === 1} list={modalPropsList(vers)} />
       </ModulesInfoWrapper>
-      <_TreeForm />
+      <_TreeForm endPointRef={endPointRef} />
       <_CommentsForm />
     </Template>
   );

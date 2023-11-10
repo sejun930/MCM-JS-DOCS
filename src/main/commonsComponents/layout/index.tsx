@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from "react";
-import { LayoutWrapper } from "./styles";
-import { LayoutContentsWrapperWithDarkMode } from "src/commons/styles/darkMode.styles";
+import { LayoutContentsWrapper } from "./styles";
+import { LayoutWithDarkModeWrapper } from "src/commons/styles/darkMode.styles";
 
 import CommonsHooksComponents from "../hooks/commonsHooks";
 // import CommonsHooksComponents from "mcm-js-commons/dist/hooks";
@@ -88,13 +88,12 @@ export default function LayoutPage(props: IProps) {
 
   return (
     <>
-      <LayoutWrapper className="layout-home-wrapper">
+      <LayoutWithDarkModeWrapper
+        className={(settingInfo.darkMode && !isAdmin && "darkMode") || ""}
+        id="layout-home-wrapper"
+      >
         <LayoutHeadPage isAdmin={isAdmin} />
-        <LayoutContentsWrapperWithDarkMode
-          isAdmin={isAdmin}
-          id="layout-contents-wrapper"
-          className={(settingInfo.darkMode && !isAdmin && "darkMode") || ""}
-        >
+        <LayoutContentsWrapper isAdmin={isAdmin} id="layout-contents-wrapper">
           {navRenderCondition && (
             <LayoutNavPage
               module={module}
@@ -105,8 +104,8 @@ export default function LayoutPage(props: IProps) {
             />
           )}
           {props.children}
-        </LayoutContentsWrapperWithDarkMode>
-      </LayoutWrapper>
+        </LayoutContentsWrapper>
+      </LayoutWithDarkModeWrapper>
       {isOpenSetting && (
         <SettingPage
           isOpenSetting={isOpenSetting}

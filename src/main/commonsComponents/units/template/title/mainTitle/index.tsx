@@ -85,7 +85,9 @@ export default function _MainTitleTemplate() {
           />
         )}
       </Items>
-      {(list.length && <IndexRenderPage indexList={list} />) || <></>}
+      {(list.length && (
+        <IndexRenderPage indexList={list} vers={vers || 0} />
+      )) || <></>}
     </Wrapper>
   );
 }

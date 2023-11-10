@@ -5,7 +5,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 export default function LayoutHeadPage({ isAdmin }: { isAdmin?: boolean }) {
   return (
-    <HeaderWrapper className="layout-header-wrapper" isAdmin={isAdmin}>
+    <HeaderWrapper id="layout-header-wrapper" isAdmin={isAdmin}>
       <_Link href="/" className="layout-header-link">
         <_Image
           src="/images/commons/logo/MCM_white_logo.png"

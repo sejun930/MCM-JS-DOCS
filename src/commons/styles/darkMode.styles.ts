@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
-import { LayoutContentsWrapper } from "src/main/commonsComponents/layout/styles";
+import { LayoutWrapper } from "src/main/commonsComponents/layout/styles";
 
 // 다크모드 전용 색상 리스트
 const colorBook = {
@@ -13,14 +13,20 @@ const colorBook = {
 };
 
 // 다크모드 적용
-export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
+export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
   /* 전체 적용 */
   &.darkMode {
+    background-color: ${colorBook.bg};
+
     .nav-list-items,
-    .nav-list-wrapper,
+    #nav-list-wrapper,
     #main-template-wrapper {
       background-color: ${colorBook.bg};
       color: ${colorBook.fontColor};
+    }
+
+    #layout-home-wrapper {
+      background-color: ${colorBook.bg};
     }
 
     // main 관련
@@ -232,11 +238,15 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
       }
 
       .isRequired-list {
-        background-color: lightslategrey;
-        color: black;
+        background-color: dimgray;
+        color: ${colorBook.white};
 
         b {
-          color: ${colorBook.fontColor} !important;
+          color: burlywood;
+        }
+
+        .props-type {
+          color: ${colorBook.white};
         }
       }
 
@@ -247,7 +257,7 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
       }
 
       .box-color {
-        background-color: lightslategrey;
+        background-color: dimgray;
       }
 
       .focusing {
@@ -425,7 +435,7 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
     }
 
     // navigation list 관련
-    .nav-list-wrapper {
+    #nav-list-wrapper {
       .empty-search-result {
         color: #999999;
       }
@@ -448,6 +458,14 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
 
       .mcm-p-unit {
         color: ${colorBook.fontColor};
+      }
+    }
+
+    // error 페이지 관련
+    .error-wrapper {
+      .error-title,
+      .error-move-home {
+        color: ${colorBook.white};
       }
     }
 
@@ -526,7 +544,7 @@ export const LayoutContentsWrapperWithDarkMode = styled(LayoutContentsWrapper)`
 
   // 반응형
   @media ${breakPoints.mobileLarge} {
-    &.darkMode {
+    &#darkMode {
       // Props 관련
       .props-list-wrapper {
         border-color: ${colorBook.borderColor};

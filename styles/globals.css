@@ -157,6 +157,14 @@ table {
   color: white !important;
 }
 
+.hide {
+  opacity: 0 !important;
+}
+
+.animation {
+  transition: all 0.25s !important;
+}
+
 @media (max-width: 767px) {
   #mcm-alert-area {
     top: 50px;

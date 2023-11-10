@@ -100,12 +100,12 @@ export default function LayoutNavPage({
 
   return (
     <LayoutNavWrapper
-      className="nav-wrapper"
+      id="nav-wrapper"
       render={render}
       isMobileTap={isMobileTap}
       isAdmin={isAdmin}
     >
-      <LayoutNavListWrapper className="nav-list-wrapper">
+      <LayoutNavListWrapper id="nav-list-wrapper">
         <LayoutNav isAdmin={isAdmin}>
           <LayoutNavListItems
             className="nav-list-items"

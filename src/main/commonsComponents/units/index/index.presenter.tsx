@@ -39,7 +39,6 @@ export default function _IndexUIForm(props: { [key: string]: any } & allTypes) {
           <_PText>페이지 로딩중</_PText>
         </Loading>
       )) || <></>}
-
       {show ? (
         <>
           <OptionWrapper
