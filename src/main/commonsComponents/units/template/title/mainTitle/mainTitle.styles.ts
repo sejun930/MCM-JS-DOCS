@@ -89,4 +89,8 @@ export const UpdateInfo = styled(_PText)`
     position: absolute;
     transform: translate3d(-4px, -8px, 0px);
   }
+
+  @media ${breakPoints.mobileLarge} {
+    margin-top: 6px;
+  }
 `;

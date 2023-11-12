@@ -128,9 +128,9 @@ export const ExampleListWrapper = styled.div`
 
   .example-remarks {
     font-size: 14px;
-    margin-top: 20px;
+    margin-top: 30px;
     color: #666666;
-    line-height: 24px;
+    line-height: 22px;
     letter-spacing: -0.01rem;
   }
 

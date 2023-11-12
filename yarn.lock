@@ -9944,10 +9944,10 @@ mcm-js-commons@^0.0.75:
     react-dom "18.2.0"
     uuid "^9.0.0"
 
-mcm-js-dev@0.0.40:
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.40.tgz#47261331e312c5fef6212baeb8311ff16aff5111"
-  integrity sha512-mQMpP7xjHejgzx117h5IacCK75iqRc45udRg6Yp+uh8epqB01fYzUEwlkwuPFCsDCLpb7cIrz3n0uFEe5fU2Cg==
+mcm-js-dev@0.0.41.3:
+  version "0.0.4-1.3"
+  resolved "https://registry.yarnpkg.com/mcm-js-dev/-/mcm-js-dev-0.0.4-1.3.tgz#a07dad1e09c2615e6e0705c87bc782498eb25912"
+  integrity sha512-wzMD1W7tgj9R2xNF/zO19j/sA3yJWGRxlk8a2+Tg88eVzETrQ8ci0BANYqhoS41QE1lCclCFQo7tzQy0Bt4wpg==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
@@ -9957,10 +9957,10 @@ mcm-js-dev@0.0.40:
     react-dom "^18.2.0"
     uuid "^9.0.0"
 
-mcm-js@1.0.1-7:
-  version "1.0.1-7"
-  resolved "https://registry.yarnpkg.com/mcm-js/-/mcm-js-1.0.1-7.tgz#5d889a9a00558b5f2d9498abde9905b79a74b19a"
-  integrity sha512-yNsovo1WC4SdE5mnbTpcYh5p3zBXRpJdS8KwiRoccz7ta41OotldIYBEQLpeqikLZphQqPio91SKkPifcwQLDQ==
+mcm-js@1.0.1-8:
+  version "1.0.1-8"
+  resolved "https://registry.yarnpkg.com/mcm-js/-/mcm-js-1.0.1-8.tgz#6ee7b0b558c0e8ca891ace91c0b0d71ad2b967f4"
+  integrity sha512-W/C9hfH0VYbFyDU2HQMBs2TPbZCZQafaHW44VOdunxGkFII2F70zQpwCfstegCSEHmh2ZrzGs0gsryoaiO/jIQ==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"

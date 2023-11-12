@@ -15,8 +15,8 @@ export default function ErrorRenderPage() {
     const doc = document.getElementById("layout-contents-wrapper");
     const _next = document.getElementById("__next");
 
-    if (_next) _next.style.height = "100%";
     if (doc) doc.style.height = "100%";
+    if (_next) _next.style.height = "100%";
 
     clearInterval(timeEvent);
     let timer = 10;
@@ -26,7 +26,7 @@ export default function ErrorRenderPage() {
     return () => {
       clearInterval(timeEvent);
 
-      const _next = document.getElementById("__next");
+      if (doc) doc.style.height = "auto";
       if (_next) _next.style.height = "auto";
     };
   }, []);

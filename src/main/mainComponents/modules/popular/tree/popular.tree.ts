@@ -25,7 +25,13 @@ export const popularTreeList: Array<TreeModuleListTypes> = [
     tag: "li",
     class: classList?.mainList || "mcm-popular-main-list",
     depth: 3,
-    role: "현재 리스트들을 나타내는 태그입니다. <br /><br />리스트 중 자동으로 전환되거나 수동으로 선택이 되면 <br />현재 리스트로 노출됩니다.",
+    role: "현재 리스트들을 담는 태그입니다. <br /><br />리스트 중 자동으로 전환되거나 수동으로 선택이 되면 <br />현재 리스트로 노출됩니다.",
+  },
+  {
+    tag: "p",
+    class: classList?.mainContents || "mcm-popular-main-contents",
+    depth: 4,
+    role: "list props로 전달된 <b>데이터의 타입이 문자열</b>일 경우 <br />자동으로 적용되는 태그입니다. <br /><br />이 태그 안의 문자열은 크기가 일정 범위를 넘을 경우 <br /><b>자동 자름 기능</b>을 제공합니다.",
   },
   {
     tag: "button",

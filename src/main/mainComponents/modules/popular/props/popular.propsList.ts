@@ -5,9 +5,9 @@ export const popularPropsList: Array<PropsModuleListType> = [
   {
     name: "list",
     default: "[ ]",
-    type: "[Node]",
+    type: "[String | Node]",
     notice:
-      "Popular에 적용할 나열되는 컴포넌트들을 나타냅니다. <br />list props에 직접 전달할 경우에는 반드시 <b>배열</b>에 담아야 합니다. <br /><br />list로 전달된 배열은 컴포넌트가 재렌더 되더라도 데이터가 변경되지 않도록 <br /> <b>useState</b> 또는 <b>전역 변수</b>로 관리하는 것을 권장합니다.",
+      "Popular에 적용할 나열되는 컴포넌트들을 나타냅니다. <br />list props에 직접 전달할 경우에는 반드시 <b>배열</b>에 담아야 합니다. <br /><br /><b>문자열 또는 컴포넌트</b> 형태로만 전달할 수 있으며, <br />문자열이 전달되면 <b>p태그</b>가 자동으로 적용됩니다. <br /><br />list로 전달된 배열은 컴포넌트가 재렌더 되더라도 데이터가 변경되지 않도록 <br /> <b>useState</b> 또는 <b>전역 변수</b>로 관리하는 것을 권장합니다.",
     isRequired: true,
     code: {
       type: "array",
