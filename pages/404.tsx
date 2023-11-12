@@ -13,6 +13,9 @@ export default function ErrorRenderPage() {
 
   useEffect(() => {
     const doc = document.getElementById("layout-contents-wrapper");
+    const _next = document.getElementById("__next");
+
+    if (_next) _next.style.height = "100%";
     if (doc) doc.style.height = "100%";
 
     clearInterval(timeEvent);
@@ -22,6 +25,9 @@ export default function ErrorRenderPage() {
     }, 1000);
     return () => {
       clearInterval(timeEvent);
+
+      const _next = document.getElementById("__next");
+      if (_next) _next.style.height = "auto";
     };
   }, []);
 

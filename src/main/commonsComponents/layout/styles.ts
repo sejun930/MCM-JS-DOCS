@@ -6,7 +6,7 @@ interface StyleTypes {
 }
 
 export const LayoutWrapper = styled.div`
-  height: 100%;
+  /* height: -webkit-fill-available; */
 
   @media ${breakPoints.mobileLarge} {
     ._halfDrag_controller_ {
@@ -20,6 +20,7 @@ export const LayoutContentsWrapper = styled.div`
   min-width: 100%;
   max-width: 1600px;
   margin: 0 auto;
+  /* height: auto; */
 
   ._halfDrag_controller_ {
     background-color: #e8e2e2;

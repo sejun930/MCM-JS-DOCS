@@ -17,7 +17,6 @@ import {
   initCommentsInfo,
   CommentsAllInfoTypes,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
-import { navList } from "src/main/commonsComponents/layout/nav/nav.data";
 
 let startClickedPage = 1; // 페이지네이션으로 선택한 페이지
 export default function AdminCommentsPage() {
@@ -37,10 +36,12 @@ export default function AdminCommentsPage() {
   useEffect(() => {
     const _info = deepCopy(initCommentsInfo) as CommentsAllInfoTypes;
     // 모듈 지정하기
-    _info.selectModule = navList[0].name;
+    // _info.selectModule = navList[0].name;
+    _info.selectModule = "";
     _info.filter.limit = 20;
+    setRender(true);
 
-    fetchComments({ info: _info });
+    // fetchComments({ info: _info });
   }, []);
 
   // 모듈 변경하기
@@ -50,14 +51,22 @@ export default function AdminCommentsPage() {
     const { value } = e.target;
     if (value) {
       startClickedPage = 1;
-      setRender(false);
 
-      const _info = deepCopy(initCommentsInfo);
+      const _info: CommentsAllInfoTypes = deepCopy(initCommentsInfo);
 
       _info.selectModule = value;
       _info.selectCategory = "all";
 
-      fetchComments({ info: _info });
+      if (value !== "- 모듈 선택") {
+        setRender(false);
+        fetchComments({ info: _info });
+      } else {
+        // 최상위 탭을 선택한 경우
+        _info.selectModule = "";
+        _info.commentsList = [];
+
+        setInfo({ ..._info });
+      }
     }
   };
 
@@ -82,6 +91,8 @@ export default function AdminCommentsPage() {
     const _info: CommentsAllInfoTypes = {
       ...(info || deepCopy(initCommentsInfo)),
     };
+    // 모듈이 선택되지 않은 경우
+    if (!_info.selectModule) return;
     const { selectModule, selectCategory, filter } = _info;
     // 페이지네이션 시작점 구하기
     let startAt = null;

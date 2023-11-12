@@ -38,6 +38,5 @@ export const Wrapper = styled.div`
   @media ${breakPoints.mobileLarge} {
     text-align: center;
     gap: 80px 0px;
-    margin-top: 60px;
   }
 `;

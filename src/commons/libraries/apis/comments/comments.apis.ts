@@ -1,6 +1,7 @@
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 import {
   CollectionReferenceDocumentData,
+  FieldValue,
   QueryDocumentData,
   QuerySnapshotDocumentData,
   getDoc,
@@ -21,17 +22,14 @@ import apis from "../commons.apis";
 type ReturnCommentsResultType = { success: boolean; msg: string };
 
 // 댓글 관련 apis
-const commentsApis = async ({
-  ip,
-  docs,
-  module,
-  isAdmin,
-}: {
+const commentsApis = async (props: {
   ip?: string; // 유저 아이피
   module: string; // 현재 선택된 모듈
   docs?: CollectionReferenceDocumentData;
   isAdmin?: boolean; // 관리자 권한 여부
 }) => {
+  const { ip, module, docs, isAdmin } = props;
+
   // 댓글 리스트 docs
   const commentDoc = docs || getDoc("comments", module, "comment");
 
@@ -64,7 +62,8 @@ const commentsApis = async ({
         result.msg = "차단된 유저입니다.";
       } else {
         // 작성일이 없다면 새로 생성하기
-        if (!input.createdAt) input.createdAt = getServerTime();
+        const createDate = getServerTime();
+        if (!input.createdAt) input.createdAt = createDate;
 
         try {
           // 댓글 추가
@@ -78,8 +77,16 @@ const commentsApis = async ({
               const { docId, countList } = await countApis({ module }).add({
                 input,
               });
-              // 카테고리 업데이트
 
+              // 알림 전송
+              (await commentsApis({ ...props })).createAlert({
+                type: "create",
+                docId,
+                date: createDate,
+                contents: input.contents,
+              });
+
+              // 카테고리 업데이트
               if (docId) {
                 return await countApis({ module }).update(docId, countList);
               }
@@ -114,7 +121,8 @@ const commentsApis = async ({
       // 입력한 비밀번호가 일치하는 경우에만 삭제 가능
       if (samePw) {
         // 삭제일 기입하기 (수정 모드에서는 작동 X)
-        if (!input.deletedAt) input.deletedAt = getServerTime();
+        const deletedAt = getServerTime();
+        if (!input.deletedAt) input.deletedAt = deletedAt;
 
         try {
           // 댓글 삭제하기
@@ -127,6 +135,13 @@ const commentsApis = async ({
               // 해당 카테고리에서 1개 제거하기
               const { docId, countList } = await countApis({ module }).remove({
                 input,
+              });
+
+              // 알림 전송
+              (await commentsApis({ ...props })).createAlert({
+                type: "delete",
+                docId,
+                date: deletedAt,
               });
 
               if (docId) {
@@ -169,12 +184,13 @@ const commentsApis = async ({
 
       if (samePw) {
         try {
-          if (isUpdate) changeInput.modifyAt = getServerTime(); // 유저가 직접 수정한 경우 수정일 기입
+          const updatedAt = getServerTime();
+          if (isUpdate) changeInput.modifyAt = updatedAt; // 유저가 직접 수정한 경우 수정일 기입
 
           // 답변 등록용
           if (originInput.answer !== changeInput.answer) {
             // 새로운 답변이 등록될 경우, 답변일 변경
-            changeInput.answerCreatedAt = getServerTime();
+            changeInput.answerCreatedAt = updatedAt;
 
             if (changeInput.category === "bug") {
               // 이슈 카테고리일 경우
@@ -212,6 +228,14 @@ const commentsApis = async ({
                     changeInput,
                   }
                 );
+
+                // 알림 전송
+                (await commentsApis({ ...props })).createAlert({
+                  type: "update",
+                  docId,
+                  date: updatedAt,
+                  contents: changeInput.contents,
+                });
 
                 // 카테고리 최종 업데이트
                 if (docId)
@@ -320,6 +344,60 @@ const commentsApis = async ({
       }
 
       return _commentDoc;
+    },
+    // 댓글 등록, 수정, 삭제 알림
+    createAlert: async ({
+      type,
+      docId,
+      date,
+      contents,
+    }: {
+      type: "create" | "update" | "delete";
+      docId: string;
+      date: FieldValue;
+      contents?: string;
+    }) => {
+      const alertDoc = getDoc("admin", "alert", "comments");
+
+      // 추가할 정보 객체
+      let inputs: { [key: string]: any } = {
+        module, // 모듈명
+        createdAt: null, // 생성 일자
+        updatedAt: null, // 수정 일자
+        deletedAt: null, // 삭제 일자
+        type, // 알림 종류
+        ip, // 유저 아이피
+        docId, // 댓글 id
+        checked: false, // 확인 여부
+      };
+
+      // 해당 알림이 이전에 등록된 적이 있는지 체크
+      const hasAlert = await alertDoc.where("docId", "==", docId).get();
+
+      if (contents) inputs.contents = contents;
+
+      // 등록된 데이터 가져오기
+      if (hasAlert.docs && hasAlert.docs[0]) {
+        const data = hasAlert.docs[0].data();
+
+        if (data) {
+          inputs = { ...data, type, ["checked"]: false };
+
+          if (!contents && data.contents) inputs.contents = data.contents;
+        }
+      }
+
+      if (type === "create") inputs.createdAt = date; // 생성일 지정
+      if (type === "update") inputs.updatedAt = date; // 수정일 지정
+      if (type === "delete") inputs.deletedAt = date; // 삭제일 지정
+
+      if (!hasAlert.size) {
+        // 등록된 적이 없다면 새로 등록
+        alertDoc.add({ ...inputs });
+      } else {
+        // 등록된 적이 있다면 수정
+        alertDoc.doc(hasAlert.docs[0].id).update({ ...inputs });
+      }
     },
   };
 };

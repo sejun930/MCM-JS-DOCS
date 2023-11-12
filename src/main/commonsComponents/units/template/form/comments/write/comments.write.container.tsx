@@ -235,7 +235,7 @@ export default function CommentsWritePage({
         _info.selectCategory = input.category;
       }
 
-      window.setTimeout(() => {
+      window.setTimeout(async () => {
         openErrorModal({
           message: addResult.success
             ? `댓글이 등록되었습니다. <br />소중한 의견 감사합니다.` // 등록 성공

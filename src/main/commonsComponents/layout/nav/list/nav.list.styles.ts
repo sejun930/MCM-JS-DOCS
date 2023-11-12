@@ -25,7 +25,7 @@ export const ListWrapper = styled.ul`
       width: calc(100% + 50px);
       padding: 0.5rem;
       padding-left: 1rem;
-      background-color: #aa5656;
+      background-color: ${(props) => (props.isAdmin && "#525FE1") || "#aa5656"};
       color: white;
       border-radius: 10px;
       height: 36px;

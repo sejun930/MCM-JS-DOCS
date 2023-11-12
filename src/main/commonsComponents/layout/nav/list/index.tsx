@@ -30,7 +30,7 @@ export default function NavListPage({
 }) {
   // Example 이미지 미리 호출하기
   const preLoadExampleImage = (name: string) => () => {
-    imagePreLoad([`/images/modules/example/${name}-example.gif`]);
+    if (!isAdmin) imagePreLoad([`/images/modules/example/${name}-example.gif`]);
   };
 
   // 검색어가 있지만 해당되는 모듈이 없고 즐겨찾기는 있는 경우

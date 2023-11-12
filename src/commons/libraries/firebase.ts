@@ -53,7 +53,7 @@ export const getServerTime = () => {
   return firebase.firestore.FieldValue.serverTimestamp();
 };
 
-// doc 가져오기
+// collection-doc-collection 가져오기
 export const getDoc = (
   parentCollection: string,
   parentDoc: string,
@@ -63,6 +63,14 @@ export const getDoc = (
     .collection(parentCollection)
     .doc(parentDoc)
     .collection(childrenCollection);
+};
+
+// collection-doc 가져오기
+export const getDocWithoutCollection = (
+  parentCollection: string,
+  parentDoc: string
+) => {
+  return db.collection(parentCollection).doc(parentDoc);
 };
 
 // 결과 배열에 담기

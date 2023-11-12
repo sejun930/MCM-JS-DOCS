@@ -75,7 +75,10 @@ export default function _ExampleOptionalFormPage({
     <Wrapper className="example-code-toggle">
       <Tooltip
         tooltipText={
-          <_Button onClickEvent={toggleShowCode}>
+          <_Button
+            onClickEvent={toggleShowCode}
+            className="example-code-toggle-btn"
+          >
             코드 {isOpen ? "닫기" : "열기"}
           </_Button>
         }
