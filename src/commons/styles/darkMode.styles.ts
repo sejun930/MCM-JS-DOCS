@@ -14,7 +14,7 @@ const colorBook = {
 
 // 다크모드 적용
 export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
-  /* height: 100%; */
+  height: 100%;
 
   /* 전체 적용 */
   &.darkMode {
@@ -113,14 +113,21 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
               .example-code-icon-button {
                 color: ${colorBook.bg};
               }
+
+              .example-components {
+                color: ${colorBook.bg};
+              }
             }
 
             .example-components {
+              color: ${colorBook.fontColor};
+
               .example-darkMode-button {
                 border-color: ${colorBook.fontColor};
               }
 
               .mcm-error-unit {
+                color: ${colorBook.fontColor};
                 background-color: ${colorBook.bg} !important;
                 border-color: ${colorBook.fontColor} !important;
               }
@@ -131,6 +138,11 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
               .copy-wrapper {
                 border: unset;
                 border-top: solid 1px ${colorBook.borderColor};
+              }
+
+              .example-code-toggle-btn {
+                color: ${colorBook.bg} !important;
+                background-color: unset !important;
               }
             }
 
@@ -152,6 +164,7 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
                 color: ${colorBook.fontColor};
               }
             }
+
             .mcm-slider-page {
               background-color: darkgray;
             }
@@ -166,6 +179,12 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
                   background-color: ${colorBook.bg};
                   color: ${colorBook.fontColor};
                   border-color: ${colorBook.borderColor};
+                }
+              }
+
+              .mcm-popular-opener-btn {
+                :hover {
+                  background-color: unset !important;
                 }
               }
 

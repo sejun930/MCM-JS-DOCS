@@ -119,15 +119,15 @@ export const popularCommonsData: ExampleCommonsTypes = {
     stateValue: getCommonsHighlight.array({
       arr: [
         `
-    ${getCommonsHighlight.tag.p("서해안 골뱅이 500g")}`,
+    ${getCommonsHighlight.string("서해안 골뱅이 500g")}`,
         `
-    ${getCommonsHighlight.tag.p("허니레몬 캔디 450p 1.26kg, 1개")}`,
+    ${getCommonsHighlight.string("허니레몬 캔디 450p 1.26kg, 1개")}`,
         `
-    ${getCommonsHighlight.tag.p("프로틴 더블 리치 초콜릿 맛, 2.268kg")}`,
+    ${getCommonsHighlight.string("프로틴 더블 리치 초콜릿 맛, 2.268kg")}`,
         `
-    ${getCommonsHighlight.tag.p("국내산 논 우렁살 (냉장), 180g, 1개")}`,
+    ${getCommonsHighlight.string("국내산 논 우렁살 (냉장), 180g, 1개")}`,
         `
-    ${getCommonsHighlight.tag.p("[원두커피1kg] 갓 볶은 신선한 원두커피 1kg")}
+    ${getCommonsHighlight.string("[원두커피1kg] 갓 볶은 신선한 원두커피 1kg")}
   `,
       ],
       className: "blue",

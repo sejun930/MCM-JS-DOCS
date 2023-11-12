@@ -20,7 +20,8 @@ export interface PropsModuleListType {
     | "[Number]"
     | "[Object]"
     | "[Function]"
-    | "[Node]"; // 타입 혼합
+    | "[Node]" // 타입 혼합
+    | "[String | Node]";
   notice: string | Array<string>;
   isRequired?: boolean | Array<boolean>;
   code: PropsCodeTypes;

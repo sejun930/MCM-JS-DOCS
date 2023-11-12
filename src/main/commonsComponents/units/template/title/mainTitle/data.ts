@@ -25,10 +25,10 @@ export const moduleUpdateList: ModuleListTypes = {
   Modal: "2023.10.08",
   Tooltip: "2023.08.20",
   // Tooltip: "2023.10.25",
-  Slider: "2023.11.07",
+  Slider: "2023.11.12",
   // Slider: "2023.10.25",
   Alert: "2023.10.11",
   // Alert: "2023.10.25",
-  Popular: "2023.09.18",
+  Popular: "2023.11.12",
   // Popular: "2023.10.25",
 };
