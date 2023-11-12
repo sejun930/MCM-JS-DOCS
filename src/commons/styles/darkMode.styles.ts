@@ -14,6 +14,8 @@ const colorBook = {
 
 // 다크모드 적용
 export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
+  /* height: 100%; */
+
   /* 전체 적용 */
   &.darkMode {
     background-color: ${colorBook.bg};
@@ -104,22 +106,8 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
                 color: ${colorBook.bg};
               }
 
-              /* .example-darkMode-button {
-                color: ${colorBook.bg};
-              } */
-
               .example-components {
                 border-bottom-color: ${colorBook.bg};
-
-                /* .example-darkMode-button {
-                  border-color: ${colorBook.bg};
-
-                  :hover {
-                    background-color: ${colorBook.bg};
-                    border-color: ${colorBook.borderColor};
-                    color: ${colorBook.fontColor};
-                  }
-                } */
               }
 
               .example-code-icon-button {
@@ -544,10 +532,11 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
 
   // 반응형
   @media ${breakPoints.mobileLarge} {
-    &#darkMode {
+    &.darkMode {
       // Props 관련
       .props-list-wrapper {
-        border-color: ${colorBook.borderColor};
+        border-color: ${colorBook.borderColor} !important;
+        border-width: 1px;
 
         tr {
           border-color: ${colorBook.borderColor};
@@ -588,6 +577,17 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
                   color: ${colorBook.fontColor};
                 }
               }
+            }
+          }
+        }
+      }
+
+      #example-form {
+        .example-list-items {
+          .mcm-button-unit {
+            :hover {
+              background-color: unset !important;
+              color: black !important;
             }
           }
         }

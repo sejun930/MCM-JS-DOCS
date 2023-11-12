@@ -1,6 +1,8 @@
 import { AppProps } from "next/app";
-import Head from "next/head";
 import { RecoilRoot } from "recoil";
+
+import Script from "next/script";
+import Head from "next/head";
 
 import "../styles/globals.css";
 import LayoutPage from "src/main/commonsComponents/layout";
@@ -15,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta httpEquiv="Copyright" content="sejun3278@gmail.com" />
 
         {/* 제니퍼 프론트 : 실시간 모니터링 */}
-        <script
+        <Script
           dangerouslySetInnerHTML={{
             __html: `
               (function(j,ennifer) {
@@ -25,14 +27,14 @@ function MyApp({ Component, pageProps }: AppProps) {
               `,
           }}
         />
-        <script
+        <Script
           async
           src="https://d-collect.jennifersoft.com/7868b4da/demian.js"
         />
         {/* //////////////////////// */}
 
         {/* Hotjar : 실시간 모니터링 */}
-        <script
+        <Script
           dangerouslySetInnerHTML={{
             __html: `
             (function(h,o,t,j,a,r){

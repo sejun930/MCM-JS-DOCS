@@ -68,6 +68,7 @@ export default function AdminCommentsUIPage({
                 onChange={changeSelectModule}
                 defaultValue={info.selectModule}
               >
+                <option key={`admin-module-select-default`}>- 모듈 선택</option>
                 {navList &&
                   navList.length &&
                   navList.map((module, idx) => (
@@ -79,37 +80,41 @@ export default function AdminCommentsUIPage({
                     </option>
                   ))}
               </ModuleSelector>
-              <AdminFunctionalWrapper>
-                <_Button onClickEvent={toggleSettings(true)}>
-                  <_Image
-                    src={`/images/commons/icons/settings${
-                      (oepnSettings && "-on") || ""
-                    }.png`}
-                    className="settings-icon"
-                  />
-                </_Button>
-                <_SelectForm
-                  show={oepnSettings}
-                  closeEvent={toggleSettings(false)}
-                  className="admin-function-select"
-                >
-                  <ExtendsFunction {...functionProps} />
-                  <SyncComments {...functionProps} />
-                </_SelectForm>
-              </AdminFunctionalWrapper>
+              {info.selectModule && (
+                <AdminFunctionalWrapper>
+                  <_Button onClickEvent={toggleSettings(true)}>
+                    <_Image
+                      src={`/images/commons/icons/settings${
+                        (oepnSettings && "-on") || ""
+                      }.png`}
+                      className="settings-icon"
+                    />
+                  </_Button>
+                  <_SelectForm
+                    show={oepnSettings}
+                    closeEvent={toggleSettings(false)}
+                    className="admin-function-select"
+                  >
+                    <ExtendsFunction {...functionProps} />
+                    <SyncComments {...functionProps} />
+                  </_SelectForm>
+                </AdminFunctionalWrapper>
+              )}
             </ModuleSelectWrapper>
-            <CategoryFilterWrapper>
-              <AdminCommentsCategoryPage
-                info={info}
-                changeLoading={changeLoading}
-                fetchComments={fetchComments}
-              />
-              <CommentsFilterPage
-                commentsInfo={info}
-                changeInfo={changeFilterComments}
-                isAdmin
-              />
-            </CategoryFilterWrapper>
+            {info.selectModule && (
+              <CategoryFilterWrapper>
+                <AdminCommentsCategoryPage
+                  info={info}
+                  changeLoading={changeLoading}
+                  fetchComments={fetchComments}
+                />
+                <CommentsFilterPage
+                  commentsInfo={info}
+                  changeInfo={changeFilterComments}
+                  isAdmin
+                />
+              </CategoryFilterWrapper>
+            )}
           </CommentsOptionWrapper>
 
           <AdminCommentsListPage

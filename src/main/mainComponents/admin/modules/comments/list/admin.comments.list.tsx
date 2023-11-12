@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { _Title } from "mcm-js-commons";
+import { _Title, _SpanTextWithHtml } from "mcm-js-commons";
 
 import { FetchCommentsTypes } from "../admin.comments.types";
 import AdminCommentsDetailPage from "./detail/admin.comments.detail.container";
@@ -32,7 +32,13 @@ export default function AdminCommentsListPage({
             />
           ))) || (
           <_Title titleLevel="h2" className="empty-title">
-            조회된 데이터가 없습니다. <br /> 필터 및 카테고리를 재설정해보세요.
+            <_SpanTextWithHtml
+              dangerouslySetInnerHTML={
+                !info.selectModule
+                  ? `조회할 모듈 이름을 선택해주세요.`
+                  : `조회된 데이터가 없습니다. <br /> 필터 및 카테고리를 재설정해보세요.`
+              }
+            />
           </_Title>
         )}
       </ListWrapper>

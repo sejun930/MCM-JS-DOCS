@@ -115,7 +115,7 @@ export default function LayoutNavPage({
             {!isAdmin && (
               <NavSearchPage search={search} onChangeSearch={onChangeSearch} />
             )}
-            {module && module !== "404" && (
+            {module && module !== "404" && selectTapInfo && (
               // 선택된 탭의 정보 렌더하기
               <NavListPage
                 list={[selectTapInfo]}
