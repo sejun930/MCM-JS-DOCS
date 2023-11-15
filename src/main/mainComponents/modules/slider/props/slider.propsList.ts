@@ -103,7 +103,7 @@ export const sliderPropsList: Array<PropsModuleListType> = [
   },
   {
     name: "useAutoPlay",
-    default: "{ delay: 3000, showTimer: false }",
+    default: "false | { delay: 3000, showTimer: false }",
     type: "Object",
     notice: `Slider의 <b>자동전환</b> 기능을 제어합니다. <br /><br />
       <ul class="ul-wrapper">
@@ -112,16 +112,29 @@ export const sliderPropsList: Array<PropsModuleListType> = [
       </ul>
     `,
     code: {
-      type: "obj",
-      argu: [
-        { key: "delay", value: getCommonsHighlight.colors("3000").number },
-        { key: "showTimer", value: getCommonsHighlight.colors("false").bool },
-      ],
+      type: "custom",
+      argu: `${getCommonsHighlight.curly({
+        children: `${getCommonsHighlight.colors("false").bool} ${
+          getCommonsHighlight.colors("||").text
+        } ${getCommonsHighlight.curly({
+          children: `
+  ${getCommonsHighlight.obj(
+    "delay",
+    getCommonsHighlight.colors("3000").number
+  )}${getCommonsHighlight.comma()}
+  ${getCommonsHighlight.obj(
+    "showTimer",
+    getCommonsHighlight.colors("false").bool
+  )}
+`,
+          className: "yellow",
+        })}`,
+      })}`,
     },
   },
   {
     name: "useSwipeMode",
-    default: "{ sideMovePercent : 10~90 }",
+    default: "false | { sideMovePercent : 10~90 }",
     type: "Object",
     notice: `스와이프 기능을 사용할 수 있습니다. <br /><br />
       <ul class="ul-wrapper">
@@ -129,13 +142,20 @@ export const sliderPropsList: Array<PropsModuleListType> = [
     </ul>
       `,
     code: {
-      type: "obj",
-      argu: [
-        {
-          key: "sideMovePercent",
-          value: getCommonsHighlight.colors("50").number,
-        },
-      ],
+      type: "custom",
+      argu: `${getCommonsHighlight.curly({
+        children: `${getCommonsHighlight.colors("false").bool} ${
+          getCommonsHighlight.colors("||").text
+        } ${getCommonsHighlight.curly({
+          children: `
+  ${getCommonsHighlight.obj(
+    "sideMovePercent",
+    getCommonsHighlight.colors("50").number
+  )}          
+`,
+          className: "yellow",
+        })}`,
+      })}`,
     },
   },
   {

@@ -35,13 +35,15 @@ export const sliderCommonsExampleCode = {
   autoPlay: commonsCodeForm({
     key: "useAutoPlay",
     type: "node",
-    value: getCommonsHighlight.curly({
+    value: `${getCommonsHighlight.colors("true").bool} ${
+      getCommonsHighlight.colors("||").text
+    } ${getCommonsHighlight.curly({
       className: "yellow",
       children: ` ${getCommonsHighlight.obj(
         "delay",
         getCommonsHighlight.colors("3000").number
       )} `,
-    }),
+    })}`,
   }),
   setArrow: (value: "hide" | "showHover" | "contents") => {
     const code: { [key: string]: string } = {
@@ -113,13 +115,15 @@ export const sliderCommonsExampleCode = {
     commonsCodeForm({
       key: "useSwipeMode",
       type: "node",
-      value: getCommonsHighlight.curly({
+      value: `${getCommonsHighlight.colors("true").bool} ${
+        getCommonsHighlight.colors("||").text
+      } ${getCommonsHighlight.curly({
         className: "yellow",
         children: ` ${getCommonsHighlight.obj(
           "sideMovePercent",
-          getCommonsHighlight.colors(num || "30").number
+          getCommonsHighlight.colors(num || "50").number
         )} `,
-      }),
+      })}`,
     }),
   firstPage: commonsCodeForm({
     key: "firstPage",
