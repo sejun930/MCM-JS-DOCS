@@ -123,7 +123,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     contents: [
       {
         remakrs:
-          "일정 시간마다 자동으로 다음 페이지로 전환합니다.  <br />시간은 1/1000ms로 적용되며, <b>최소 3초(3000)</b> 이상부터 적용됩니다.",
+          "일정 시간마다 자동으로 다음 페이지로 전환합니다.  <br /><b>delay</b>를 설정해 전환 시간<b>(1/1000ms)</b>을 조절할 수 있습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.autoPlay(),
         addProps: {
@@ -136,7 +136,8 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
         },
       },
       {
-        remakrs: "타이머를 실행시켜 전환되는 진행도를 확인할 수 있습니다.",
+        remakrs:
+          "타이머를 실행시켜 전환되는 진행도를 확인할 수 있습니다. <br />타이머 시간은 설정된 <b>delay</b>의 영향을 받습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.autoPlayWithTimer(),
         addProps: {
@@ -156,14 +157,15 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
     // isFull: true,
     contents: [
       {
-        remakrs: "스와이프하여 페이지를 이전 또는 다음으로 전환할 수 있습니다.",
+        remakrs:
+          "스와이프하여 페이지를 이전 또는 다음으로 전환할 수 있습니다. <br /><b>sideMovePercent</b>를 이용해 스와이프 감도를 조절할 수 있습니다.",
         content: sliderDefaultChildren,
         code: sliderCodeList.useSwipeMode(),
         addProps: {
           ...initSliderCommonsProps,
           useAnimation: true,
           useSwipeMode: {
-            sideMovePercent: 30,
+            sideMovePercent: 50,
           },
         },
       },
