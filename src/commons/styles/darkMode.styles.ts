@@ -97,6 +97,13 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
           }
 
           .example-list {
+            .mcm-slider-arrow {
+              :hover {
+                background-color: #aaaaaa !important;
+                color: black !important;
+              }
+            }
+
             .example-remarks {
               color: ${colorBook.fontColor};
             }

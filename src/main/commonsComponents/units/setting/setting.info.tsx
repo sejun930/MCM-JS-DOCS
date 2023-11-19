@@ -17,7 +17,7 @@ export default function SettingInfoPage(props: {
     <Wrapper>
       <ListWrapper>
         <List>
-          <_Link href="/admin/block">관리자 로그인</_Link>
+          <_Link href="/admin/comments">관리자 로그인</_Link>
         </List>
         <List>
           <Button
