@@ -52,7 +52,17 @@ export default function LayoutPage(props: IProps) {
       // 문자열 타입을 객체 타입으로 전환
       if (typeof _info === "string") _info = JSON.parse(_info);
       // 변경된 객체를 recoil에 저장
-      if (_info !== null && typeof _info === "object") setSettingInfo(_info);
+      if (_info !== null) {
+        if (typeof _info === "object") {
+          setSettingInfo(_info);
+
+          // const body = document.body;
+          // if (_info.darkMode)
+          //   // 다크모드가 설정되어 있는 경우
+          //   body.style.backgroundColor = "#222222";
+          // else body.style.backgroundColor = "unset";
+        }
+      }
     }
   }, [isOpenSetting]);
 

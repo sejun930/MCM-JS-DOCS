@@ -20,7 +20,7 @@ export const LayoutContentsWrapper = styled.div`
   min-width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  /* height: auto; */
+  height: 100%;
 
   ._halfDrag_controller_ {
     background-color: #e8e2e2;

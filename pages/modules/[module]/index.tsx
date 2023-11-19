@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import MyModal from "src/main/mainComponents/modules/modal";
@@ -15,25 +15,25 @@ import {
 
 export default function ModulesPage(props: { name: string }) {
   const Components = ModuleComponentsList[props.name];
-  const [render, setRender] = useState(false);
+  // const [render, setRender] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
     imagePreLoad([`/images/modules/example/${props.name}-example.gif`]);
 
-    window.setTimeout(() => {
-      // 페이지 렌더
-      setRender(true);
-    }, 100);
+    // window.setTimeout(() => {
+    //   // 페이지 렌더
+    //   setRender(true);
+    // }, 100);
 
-    return () => {
-      // 페이지 이탈 시
-      setRender(false);
-    };
+    // return () => {
+    //   // 페이지 이탈 시
+    //   setRender(false);
+    // };
   }, [router]);
 
-  return (render && (Components || <ErrorPage />)) || <></>;
+  return Components || <ErrorPage />;
 }
 
 export const getServerSideProps = (url: { query: { module: string } }) => {

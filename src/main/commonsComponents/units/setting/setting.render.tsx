@@ -19,6 +19,13 @@ export default function SettingPage(props: {
     const _info = { ...settingInfo, [key]: value };
     setSettingInfo({ ..._info });
 
+    // if (key === "darkMode") {
+    //   // 다크모드 설정시 배경색 변환
+    //   const body = document.body;
+    //   if (value) body.style.backgroundColor = "#222222";
+    //   else body.style.backgroundColor = "unset";
+    // }
+
     // localStorage 저장
     window.localStorage.setItem("mcm-setting", JSON.stringify(_info));
   };
