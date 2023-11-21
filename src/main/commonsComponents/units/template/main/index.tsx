@@ -4,6 +4,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 import MainMobileNavigationTapPage from "./mobileNavigation/main.mobileNavigation";
 import { ModulesInfoWrapper } from "src/main/mainComponents/modules";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 import MainHead from "./head";
 
@@ -11,17 +12,26 @@ import MainHead from "./head";
 export default function Template({
   children,
   isFull,
+  className,
 }: {
   children: React.ReactNode;
   isFull?: boolean;
+  className?: string;
 }) {
+  const { getAllComponentsClassName } = CommonsHooksComponents();
+  // 클래스 추가로 붙이기
+  const _className = getAllComponentsClassName(
+    "project-remarks-template",
+    className
+  );
+
   return (
     <>
       <MainHead />
       <Wrapper
         id="main-template-wrapper"
         isFull={isFull}
-        className="project-remarks-template"
+        className={_className}
       >
         {/* 모바일 nav */}
         <MainMobileNavigationTapPage />

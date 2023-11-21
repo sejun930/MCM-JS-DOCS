@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin Login Page Admin Login Page - Snapshot 1`] = `
+<div>
+  <div
+    class="css-1sqmh5d"
+    id="admin-login-wrapper"
+  >
+    <h1
+      class="mcm-title-unit"
+      id="admin-login-title"
+    >
+      <p>
+        비로그인 상태입니다.
+      </p>
+      <p>
+        관리자로 
+        <b>
+          로그인
+        </b>
+        해주세요.
+      </p>
+    </h1>
+    <form
+      class="css-evrzgm"
+    >
+      <div
+        class="css-bfo5ge"
+      >
+        <div
+          class="css-j3wzer"
+        >
+          <div
+            class="mcm-input-unit-wrapper css-ey5vfm"
+            id="admin-id-input"
+          >
+            <fieldset
+              class="css-1tsvgnq"
+            >
+              <legend>
+                Input & TextArea
+              </legend>
+            </fieldset>
+            <div
+              class="mcm-input-unit-items css-1bcrtr8"
+            >
+              <input
+                autocomplete="off"
+                class="mcm-input-unit css-1348qyx"
+                maxlength="30"
+                placeholder="관리자 아이디를 입력해주세요."
+                type="text"
+                value=""
+              />
+              <div
+                class="mcm-input-submit-button-wrapper css-cakho0"
+              >
+                <div
+                  class="mcm-input-submit-button-items css-16nhp7q"
+                >
+                  <button
+                    class="mcm-close-button-unit css-12tnlcr"
+                    type="button"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="css-j3wzer"
+        >
+          <div
+            class="mcm-input-unit-wrapper css-ey5vfm"
+            id="admin-pw-input"
+          >
+            <fieldset
+              class="css-1tsvgnq"
+            >
+              <legend>
+                Input & TextArea
+              </legend>
+            </fieldset>
+            <div
+              class="mcm-input-unit-items css-1bcrtr8"
+            >
+              <input
+                autocomplete="off"
+                class="mcm-input-unit password-input css-1348qyx"
+                maxlength="30"
+                placeholder="관리자 비밀번호를 입력해주세요."
+                type="password"
+                value=""
+              />
+              <div
+                class="mcm-input-submit-button-wrapper css-cakho0"
+              >
+                <div
+                  class="mcm-input-submit-button-items css-16nhp7q"
+                >
+                  <button
+                    class="mcm-close-button-unit css-12tnlcr"
+                    type="button"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="mcm-button-unit css-1v4db1v"
+            id="admin-pw-toggle-btn"
+            role="button_click_event"
+            type="button"
+          >
+            <div
+              class="mcm-tooltip-wrapper css-s92xr2"
+            >
+              <div
+                class="mcm-tooltip-items css-rgebl6"
+              >
+                <div
+                  class="mcm-tooltip-children css-uk6arh"
+                >
+                  🙈
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+      <button
+        class="mcm-button-unit css-83cl9t"
+        id="admin-login-btn"
+        role="button_click_event"
+        type="submit"
+      >
+        로그인
+      </button>
+    </form>
+  </div>
+</div>
+`;

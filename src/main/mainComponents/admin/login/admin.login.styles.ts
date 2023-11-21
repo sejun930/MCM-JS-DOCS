@@ -14,7 +14,7 @@ export const LoginAlertWrapper = styled.div`
   justify-content: space-between;
   height: 100%;
 
-  .admin-login-title {
+  #admin-login-title {
     p {
       font-size: 26px;
       line-height: 38px;
@@ -32,7 +32,7 @@ export const LoginAlertWrapper = styled.div`
   @media ${breakPoints.mobileLarge} {
     padding: 1rem 10px;
 
-    .admin-login-title {
+    #admin-login-title {
       p {
         font-size: 20px;
         line-height: 30px;

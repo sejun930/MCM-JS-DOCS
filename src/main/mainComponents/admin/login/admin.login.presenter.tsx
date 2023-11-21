@@ -30,8 +30,8 @@ export default function AdminLoginUIPage({
   checkInfo: () => boolean;
 }) {
   return (
-    <LoginAlertWrapper>
-      <_Title className="admin-login-title">
+    <LoginAlertWrapper id="admin-login-wrapper">
+      <_Title id="admin-login-title">
         <p>비로그인 상태입니다.</p>
         <p>
           관리자로 <b>로그인</b>해주세요.
@@ -46,6 +46,7 @@ export default function AdminLoginUIPage({
               placeHolder="관리자 아이디를 입력해주세요."
               maxLength={30}
               inputRef={idRef}
+              id="admin-id-input"
             />
           </InputItems>
 
@@ -58,8 +59,13 @@ export default function AdminLoginUIPage({
               placeHolder="관리자 비밀번호를 입력해주세요."
               maxLength={30}
               inputRef={pwRef}
+              id="admin-pw-input"
             />
-            <ShowPw buttonType="button" onClickEvent={toggleShowPw}>
+            <ShowPw
+              buttonType="button"
+              onClickEvent={toggleShowPw}
+              id="admin-pw-toggle-btn"
+            >
               <Tooltip tooltipText={`비밀번호 ${showPw ? "가리기" : "보이기"}`}>
                 {!showPw ? "🙈" : "🙉"}
               </Tooltip>
@@ -67,7 +73,11 @@ export default function AdminLoginUIPage({
           </InputItems>
         </InputWrapper>
         {/* 로그인 버튼 */}
-        <SubmitButton onClickEvent={login} isSubmit={checkInfo()}>
+        <SubmitButton
+          onClickEvent={login}
+          isSubmit={checkInfo()}
+          id="admin-login-btn"
+        >
           로그인
         </SubmitButton>
       </LoginForm>

@@ -55,6 +55,7 @@ export default function AdminLoginPage({
 
     // 에러 및 성공 메세지
     let msg: string | JSX.Element = "";
+    let isSuccess = false; // 성공 여부
     // focus 이벤트
     let _focusEvent = () => {};
 
@@ -129,6 +130,7 @@ export default function AdminLoginPage({
               "admin-accessToken",
               JSON.stringify(await getHashText(JSON.stringify(now)))
             );
+            isSuccess = true;
           } catch (err) {
             msg = "관리자 로그인에 실패했습니다.";
             console.log(err);
@@ -145,6 +147,7 @@ export default function AdminLoginPage({
         modalSize: { width: "220px", height: `${loading ? 80 : 60}px` },
         mobileModalSize: { width: "220px", height: "60px" },
         onAfterCloseEvent: _focusEvent,
+        id: `admin-login-${(isSuccess && "success") || "fail"}-modal`,
       });
     }
   };

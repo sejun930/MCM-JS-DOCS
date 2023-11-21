@@ -11,6 +11,7 @@ import { getLibraries } from "src/main/commonsComponents/functional/modules";
 const { Modal } = getLibraries();
 
 // 관리자 로그인 권한 체크하기
+let render = false;
 const WithAuthAdmin =
   <P extends {}>(Component: ComponentType<P>) =>
   (props: P) => {
@@ -20,14 +21,17 @@ const WithAuthAdmin =
     const { getRouter } = CommonsHooksComponents();
 
     useEffect(() => {
-      checkAccessToken().then((result: boolean) => {
-        setAdminLogin(result);
-        setOpenModal(true);
-      });
+      if (!render) {
+        checkAccessToken().then((result: boolean) => {
+          setAdminLogin(result);
+          setOpenModal(true);
+        });
+        render = true;
+      }
     }, [getRouter().pathname]);
 
     return (
-      <Template>
+      <Template className="admin-withAuth-template">
         {openModal && !adminLogin && (
           <Modal
             show={!adminLogin}
