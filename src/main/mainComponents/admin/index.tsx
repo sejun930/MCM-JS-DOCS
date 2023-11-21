@@ -14,16 +14,14 @@ function AdminHomePage() {
   const [module] = useRecoilState(moduleState);
 
   return (
-    <Wrapper>
+    <Wrapper id="admin-home-wrapper">
       <_Title className="admin-module-title">
         {adminNavList.filter((info) => info.name === module)[0]?.remarks || ""}
       </_Title>
-
       {module && AdminModulesList[module]}
     </Wrapper>
   );
 }
-
 export default WithAuthAdmin(AdminHomePage);
 
 export const Wrapper = styled.div`

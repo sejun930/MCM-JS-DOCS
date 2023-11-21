@@ -16,8 +16,8 @@ export const LayoutNavWrapper = styled.nav`
   display: flex;
   opacity: 0;
   position: relative;
-  background-color: white;
-  z-index: 11;
+  /* background-color: white; */
+  z-index: 0;
 
   ${(props: StyleTypes) =>
     props.render && {
@@ -85,7 +85,7 @@ export const LayoutNavListItems = styled.div`
   flex-direction: column;
   padding: 1rem;
   border-bottom: solid 2px #ababab;
-  background-color: white;
+  /* background-color: white; */
 
   ${(props: StyleTypes) =>
     props.isMobileTap && {

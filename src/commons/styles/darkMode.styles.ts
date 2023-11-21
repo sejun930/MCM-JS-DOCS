@@ -21,8 +21,7 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
     background-color: ${colorBook.bg};
 
     .nav-list-items,
-    #nav-list-wrapper,
-    #main-template-wrapper {
+    #nav-list-wrapper {
       background-color: ${colorBook.bg};
       color: ${colorBook.fontColor};
     }
@@ -33,6 +32,7 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
 
     // main 관련
     #main-template-wrapper {
+      color: ${colorBook.fontColor};
       &.project-remarks-template {
         border-top-color: ${colorBook.borderColor};
       }
