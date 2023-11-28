@@ -4,7 +4,7 @@
 # RUN sudo apt install -y nodejs
 # RUN sudo npm install -g yarn
 
-FROM node:16
+FROM node:18.12.1
 
 COPY ./package.json /mcm_js_doc/
 COPY ./yarn.lock /mcm_js_doc/
