@@ -8,7 +8,7 @@ import {
 } from "react";
 
 import { useRecoilState } from "recoil";
-import { adminLoginState, moduleState } from "src/commons/store";
+import { adminLoginInfoState, moduleState } from "src/commons/store";
 
 import { CommentsAllInfoTypes, InfoTypes } from "../../comments.types";
 import ContentsOptionalPage from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.container";
@@ -30,7 +30,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const { info, changeInfo, fetchCommentsList } = props;
   const { contents } = info;
 
-  const [adminLogin] = useRecoilState(adminLoginState);
+  const [adminLoginInfo] = useRecoilState(adminLoginInfoState);
   const [module] = useRecoilState(moduleState);
 
   // 더 보기 기능 (8줄 이상 넘어갈 경우에만 적용)
@@ -80,6 +80,8 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   };
 
   const toggleShowSelect = (bool?: boolean) => {
+    if (adminLoginInfo.isTest) return;
+
     setShowSelect(bool !== undefined ? bool : (prev) => !prev);
     setHover(Boolean(bool));
   };
@@ -91,7 +93,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
         <ContentsOptionalPage
           type={type}
           info={info}
-          adminLogin={adminLogin}
+          adminLoginInfo={adminLoginInfo}
           module={module}
           fetchCommentsList={fetchCommentsList}
         />
@@ -131,7 +133,7 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
       name={Name}
       _wrapperRef={_wrapperRef}
       changeInfo={changeInfo}
-      adminLogin={adminLogin}
+      adminLoginInfo={adminLoginInfo}
     />
   );
 }

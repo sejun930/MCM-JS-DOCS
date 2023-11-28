@@ -2,7 +2,7 @@ import CommentsUIPage from "./comments.presenter";
 
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { moduleState, adminLoginState } from "src/commons/store";
+import { moduleState, adminLoginInfoState } from "src/commons/store";
 
 import apis from "src/commons/libraries/apis/commons.apis";
 import blockApis from "src/commons/libraries/apis/block/block.apis";
@@ -18,7 +18,9 @@ import {
   getUserIp,
   moveDocument,
 } from "src/main/commonsComponents/functional";
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+// import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
+
 import countApis from "src/commons/libraries/apis/comments/count/count.apis";
 import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 
@@ -35,7 +37,7 @@ export default function CommentsPage() {
   const [loading, setLoading] = useState(false);
 
   const [module] = useRecoilState<string>(moduleState);
-  const [adminLogin, setAdminLogin] = useRecoilState<boolean>(adminLoginState);
+  const [adminLoginInfo, setAdminLogin] = useRecoilState(adminLoginInfoState);
 
   useEffect(() => {
     // 최초 댓글 리스트 가져오기
@@ -44,9 +46,11 @@ export default function CommentsPage() {
 
   useEffect(() => {
     // 관리자 로그인 체크하기
-    checkAccessToken().then((result) => {
-      setAdminLogin(result);
-    });
+    adminApis()
+      .check(false)
+      .then((result) => {
+        setAdminLogin(result);
+      });
   }, [commentsInfo]);
 
   // 댓글 리스트 조회
@@ -201,7 +205,7 @@ export default function CommentsPage() {
       commentsInfo={commentsInfo}
       changeInfo={changeInfo}
       moreLoad={moreLoad}
-      adminLogin={adminLogin}
+      isAdminLogged={adminLoginInfo.login || false}
       module={module}
       fetchCommentsList={fetchCommentsList}
       render={render}

@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin Block Page Admin Block Page - Snapshot 1`] = `
+<div>
+  <div
+    class="css-i3mup3"
+    id="admin-block-wrapper"
+  >
+    <div
+      class="css-1yxlknd"
+    >
+      <div
+        class="css-ey9ugy"
+        id="admin-block-loading"
+      >
+        <span
+          class="mcm-span-unit loading-data css-1oteowz"
+        >
+          데이터 로딩 중
+        </span>
+      </div>
+      <div
+        class="css-qwguda"
+        id="admin-block-optional-wrapper"
+      >
+        <p
+          class="mcm-p-unit css-z401r8"
+        >
+          - 총 
+          0
+          명의 차단된 유저가 있습니다.
+        </p>
+        <div
+          class="css-haqrkf"
+        >
+          <div
+            class="css-i6f59y"
+          >
+            <button
+              class="mcm-button-unit css-19ngahp"
+              role="button_click_event"
+              type="submit"
+            >
+              <img
+                class="mcm-image-unit filter-icon css-msby2z"
+                src="/images/commons/icons/filter-off.png"
+              />
+            </button>
+          </div>
+          <button
+            class="mcm-button-unit remove-block-user-btn css-19ngahp"
+            role="button_click_event"
+            type="submit"
+          >
+            선택 차단 해제
+          </button>
+        </div>
+      </div>
+      <table
+        class="css-hcsdpe"
+      >
+        <thead>
+          <tr
+            class="css-173yqul"
+          >
+            <td
+              class="block-select"
+            />
+            <td
+              class="block-ip"
+            >
+              아이피
+            </td>
+            <td
+              class="block-contents"
+            >
+              차단 사유
+            </td>
+            <td
+              class="block-date"
+            >
+              차단일
+            </td>
+            <td
+              class="block-cancel"
+            >
+              차단 해제일
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="empty-filter-tr css-173yqul"
+          >
+            <td
+              class="empty-filter-td css-12u6bzw"
+            >
+              <span
+                class="mcm-span-unit css-1oteowz"
+              >
+                조회된 유저가 없습니다.
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;

@@ -19,7 +19,7 @@ export default function CommentsUIPage({
   commentsInfo,
   changeInfo,
   moreLoad,
-  adminLogin,
+  isAdminLogged,
   module,
   fetchCommentsList,
   render,
@@ -28,7 +28,7 @@ export default function CommentsUIPage({
   commentsInfo: CommentsAllInfoTypes;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   moreLoad: () => void;
-  adminLogin: boolean;
+  isAdminLogged: boolean;
   module: string;
   fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
   render: boolean;
@@ -47,7 +47,7 @@ export default function CommentsUIPage({
         title="Comments"
         className="comments-subTitle"
         remakrs={`해당 모듈에 대한 사용후기 및 개선점 등을 남겨주세요! ${
-          (adminLogin && "[🛠]") || ""
+          (isAdminLogged && "[🛠]") || ""
         }`}
       />
 
@@ -73,7 +73,6 @@ export default function CommentsUIPage({
             <CommentsListPage
               commentsInfo={commentsInfo}
               changeInfo={changeInfo}
-              adminLogin={adminLogin}
               fetchCommentsList={fetchCommentsList}
             />
           </_InfinityScroll>

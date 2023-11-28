@@ -39,6 +39,7 @@ export default function AdminCommentsUIPage({
   checkLoading,
   changePage,
   changeFilterComments,
+  adminLoginInfo,
 }: AdminCommentsPropsType) {
   // 관리자 기능 props 객체
   const functionProps: FunctionPropsTypes = {
@@ -80,7 +81,7 @@ export default function AdminCommentsUIPage({
                     </option>
                   ))}
               </ModuleSelector>
-              {info.selectModule && (
+              {info.selectModule && !adminLoginInfo.isTest && (
                 <AdminFunctionalWrapper>
                   <_Button onClickEvent={toggleSettings(true)}>
                     <_Image
@@ -121,6 +122,7 @@ export default function AdminCommentsUIPage({
             info={info}
             changeLoading={changeLoading}
             fetchComments={fetchComments}
+            adminLoginInfo={adminLoginInfo}
           />
         </Items>
         {(info.commentsList.length && (

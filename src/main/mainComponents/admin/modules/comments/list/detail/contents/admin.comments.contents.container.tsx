@@ -9,11 +9,13 @@ import {
 import { FetchCommentsTypes } from "../../../admin.comments.types";
 import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/comments/write/comments.write.types";
 
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+// import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 import { changeClientText } from "src/main/commonsComponents/functional";
 
 import { AdminBugStatusSelectList } from "src/main/commonsComponents/units/template/form/comments/list/contents/select/functional/contents.select.functional.data";
 import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 
 export default function AdminCommentsContentsPage({
   info,
@@ -21,11 +23,13 @@ export default function AdminCommentsContentsPage({
   commentsInfo,
   fetchComments,
   isAlreadyDeleted,
+  adminLoginInfo,
 }: {
   info: InfoTypes;
   changeLoading: (bool: boolean) => void;
   commentsInfo: CommentsAllInfoTypes;
   isAlreadyDeleted: boolean;
+  adminLoginInfo: AdminLoginTypes;
 } & FetchCommentsTypes) {
   let answer = "";
   let bugStatus = info.bugStatus || 0;
@@ -53,9 +57,11 @@ export default function AdminCommentsContentsPage({
   // 답변 수정하기
   const changeAnswer = async () => {
     // 관리자 로그인 체크
-    if (!checkAccessToken(true)) return;
+    if (!(await adminApis().check(true))) return;
     if (isAlreadyDeleted)
       return alert("삭제된 댓글에는 답변을 등록할 수 없습니다.");
+    if (adminLoginInfo.isTest)
+      return alert("테스트 로그인 상태에서는 조회만 가능합니다.");
 
     const _info: WriteInfoTypes = { ...(info as WriteInfoTypes) };
     _info.answer = answer;
@@ -182,6 +188,7 @@ export default function AdminCommentsContentsPage({
       isAlreadyDeleted={isAlreadyDeleted}
       renderOptionList={renderOptionList}
       answer={answer}
+      adminLoginInfo={adminLoginInfo}
     />
   );
 }

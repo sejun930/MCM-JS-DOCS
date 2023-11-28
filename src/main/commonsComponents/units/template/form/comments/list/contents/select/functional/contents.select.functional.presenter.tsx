@@ -23,6 +23,7 @@ import { AdminBugStatusSelectList } from "./contents.select.functional.data";
 import { changeClientText } from "src/main/commonsComponents/functional";
 
 import { getLibraries } from "src/main/commonsComponents/functional/modules";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 const { Tooltip } = getLibraries();
 
 export default function ContentsSelectFunctionalUIPage({
@@ -33,7 +34,7 @@ export default function ContentsSelectFunctionalUIPage({
   confirmRef,
   changeData,
   confirm,
-  adminLogin,
+  adminLoginInfo,
   changeBugStatus,
   bugStatus,
   answerRef,
@@ -49,7 +50,7 @@ export default function ContentsSelectFunctionalUIPage({
     type: "contents" | "password" | "rating" | "bugLevel" | "answer"
   ) => void;
   confirm: (e?: FormEvent) => void;
-  adminLogin: boolean | null;
+  adminLoginInfo: AdminLoginTypes;
   changeBugStatus: (status: number) => void;
   bugStatus: number;
 }) {
@@ -58,7 +59,7 @@ export default function ContentsSelectFunctionalUIPage({
 
   // 답변창 보이기
   const showAnswer =
-    info.answer || (info.answer && adminLogin) || type === "question";
+    info.answer || (info.answer && adminLoginInfo.login) || type === "question";
 
   return (
     <Form onSubmit={confirm}>
@@ -69,7 +70,7 @@ export default function ContentsSelectFunctionalUIPage({
             <CommentsLabel
               showCategoryName
               info={info}
-              adminLogin={adminLogin}
+              adminLoginInfo={adminLoginInfo}
               modifyRatingEvent={
                 type === "modify"
                   ? (value: number) =>
@@ -101,7 +102,7 @@ export default function ContentsSelectFunctionalUIPage({
               className="optional-answer-input"
               maxLength={500}
               defaultValue={changeClientText(info?.answer || "")}
-              readOnly={!isAnswerType || !adminLogin}
+              readOnly={!isAnswerType || !adminLoginInfo.login}
               inputRef={answerRef}
               placeHolder="답변을 입력해주세요."
               onSubmitEvent={confirm}
@@ -109,42 +110,46 @@ export default function ContentsSelectFunctionalUIPage({
           )}
         </CommentsInfoItems>
 
-        {!adminLogin && (
+        {!adminLoginInfo.login && (
           <_Input
             inputType="password"
             className="optional-password-input"
             onChangeEvent={(text) => changeData(text, "password")}
             maxLength={20}
             inputRef={passwordRef}
-            readOnly={adminLogin || false}
+            readOnly={adminLoginInfo.login || false}
           />
         )}
-        {adminLogin && info.category === "bug" && type === "question" && (
-          <BugStatusWrapper>
-            {AdminBugStatusSelectList.slice(info.bugStatus).map((listInfo) => {
-              return (
-                <Tooltip
-                  key={`bug-status-${listInfo.name}-${status}`}
-                  tooltipText={listInfo.tooltipText || ""}
-                  isDisable={
-                    !listInfo.tooltipText || bugStatus === listInfo.status
-                  }
-                  position="right"
-                  useShowAnimation
-                  hideMobile={true}
-                >
-                  <BugStatusButton
-                    onClickEvent={() => changeBugStatus(listInfo.status)}
-                    buttonType="button"
-                    isSelected={listInfo.status === bugStatus}
-                  >
-                    {listInfo.name}
-                  </BugStatusButton>
-                </Tooltip>
-              );
-            })}
-          </BugStatusWrapper>
-        )}
+        {adminLoginInfo.login &&
+          info.category === "bug" &&
+          type === "question" && (
+            <BugStatusWrapper>
+              {AdminBugStatusSelectList.slice(info.bugStatus).map(
+                (listInfo) => {
+                  return (
+                    <Tooltip
+                      key={`bug-status-${listInfo.name}-${status}`}
+                      tooltipText={listInfo.tooltipText || ""}
+                      isDisable={
+                        !listInfo.tooltipText || bugStatus === listInfo.status
+                      }
+                      position="right"
+                      useShowAnimation
+                      hideMobile={true}
+                    >
+                      <BugStatusButton
+                        onClickEvent={() => changeBugStatus(listInfo.status)}
+                        buttonType="button"
+                        isSelected={listInfo.status === bugStatus}
+                      >
+                        {listInfo.name}
+                      </BugStatusButton>
+                    </Tooltip>
+                  );
+                }
+              )}
+            </BugStatusWrapper>
+          )}
         <ConfirmButtonWrapper>
           <ConfirmButton onClickEvent={confirm} buttonRef={confirmRef}>
             {ContentsSelectTypeName[type][1]}

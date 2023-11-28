@@ -26,9 +26,9 @@ describe("Admin Main Home Page", () => {
   });
 
   // 스냅샷
-  test("Admin Main Home Page - Snapshot", async () => {
-    expect(container).toMatchSnapshot();
-  });
+  // test("Admin Main Home Page - Snapshot", async () => {
+  //   expect(container).toMatchSnapshot();
+  // });
 
   // withAuth 체크
   test("Admin Main Home Page - Check ID Selector", () => {

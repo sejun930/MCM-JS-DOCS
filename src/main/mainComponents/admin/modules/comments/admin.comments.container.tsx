@@ -2,11 +2,15 @@ import AdminCommentsUIPage from "./admin.comments.presenter";
 import { useState, useEffect, ChangeEvent } from "react";
 import { _Title } from "mcm-js-commons";
 
+import { useRecoilState } from "recoil";
+import { adminLoginInfoState } from "src/commons/store";
+
 import {
   CollectionReferenceDocumentData,
   getResult,
 } from "src/commons/libraries/firebase";
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+// import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 
 import apis from "src/commons/libraries/apis/commons.apis";
 import { deepCopy, moveDocument } from "src/main/commonsComponents/functional";
@@ -26,11 +30,14 @@ export default function AdminCommentsPage() {
   const [isLoading, setIsLoading] = useState(false);
   // 관리자 특수기능창 on/off
   const [oepnSettings, setOpenSettings] = useState(false);
-
+  // 관리자 로그인 정보
+  const [adminLoginInfo] = useRecoilState(adminLoginInfoState);
   // 댓글 정보 및 필터 정보 저장
   const [info, setInfo] = useState<CommentsAllInfoTypes>(
     deepCopy(initCommentsInfo)
   );
+
+  console.log(adminLoginInfo);
 
   // 댓글 리스트 가져오기
   useEffect(() => {
@@ -83,7 +90,8 @@ export default function AdminCommentsPage() {
     moveTop?: boolean;
   }) => {
     // 관리자 권한 검증
-    if (!checkAccessToken(true)) return;
+    if (!(await adminApis().check(true))) return;
+    // if (!checkAccessToken(true)) return;
 
     // isInfinite: 무한 스크롤로 데이터를 조회할 경우
     if (isLoading) return;
@@ -164,8 +172,9 @@ export default function AdminCommentsPage() {
   };
 
   // 현재 관리자 로그인 체크 및 로딩 체크
-  const checkLoading = () => {
-    if (!checkAccessToken(true)) return false;
+  const checkLoading = async () => {
+    if (!(await adminApis().check(true))) return false;
+    // if (!checkAccessToken(true)) return false;
     if (isLoading) {
       alert("동기화 작업중입니다. 잠시만 기다려주세요.");
       return false;
@@ -223,6 +232,7 @@ export default function AdminCommentsPage() {
         checkLoading={checkLoading}
         changePage={changePage}
         changeFilterComments={changeFilterComments}
+        adminLoginInfo={adminLoginInfo}
       />
     )) || <_Title>페이지 호출 중...</_Title>
   );

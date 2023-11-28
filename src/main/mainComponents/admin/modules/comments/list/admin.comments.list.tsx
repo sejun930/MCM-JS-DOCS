@@ -4,14 +4,17 @@ import { _Title, _SpanTextWithHtml } from "mcm-js-commons";
 import { FetchCommentsTypes } from "../admin.comments.types";
 import AdminCommentsDetailPage from "./detail/admin.comments.detail.container";
 import { CommentsAllInfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 
 export default function AdminCommentsListPage({
   info,
   changeLoading,
   fetchComments,
+  adminLoginInfo,
 }: {
   info: CommentsAllInfoTypes;
   changeLoading: (bool: boolean) => void;
+  adminLoginInfo: AdminLoginTypes;
 } & FetchCommentsTypes) {
   const { commentsList, selectModule, selectCategory } = info;
   const isEmpty = commentsList.length === 0;
@@ -29,6 +32,7 @@ export default function AdminCommentsListPage({
               commentsInfo={info}
               changeLoading={changeLoading}
               fetchComments={fetchComments}
+              adminLoginInfo={adminLoginInfo}
             />
           ))) || (
           <_Title titleLevel="h2" className="empty-title">

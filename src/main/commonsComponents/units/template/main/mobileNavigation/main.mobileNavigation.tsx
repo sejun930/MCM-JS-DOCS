@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import {
   moduleState,
-  adminLoginState,
+  adminLoginInfoState,
   isOpenSettingState,
   favoriteState,
 } from "src/commons/store";
@@ -21,7 +21,7 @@ const { Modal } = getLibraries();
 export default function MainMobileNavigationTapPage() {
   const [openNav, setOpenNav] = useState(false);
   const [module] = useRecoilState(moduleState);
-  const [adminLogin] = useRecoilState(adminLoginState);
+  const [adminLoginInfo] = useRecoilState(adminLoginInfoState);
   const [, setIsOpenSetting] = useRecoilState(isOpenSettingState);
   const [favorite, setFavorite] = useRecoilState(favoriteState);
 
@@ -39,7 +39,7 @@ export default function MainMobileNavigationTapPage() {
 
   // 모바일 nav 토글
   const toggleNav = (bool: boolean) => {
-    if (isAdmin && !adminLogin) return;
+    if (isAdmin && !adminLoginInfo.login) return;
 
     setOpenNav(bool);
 
@@ -93,7 +93,7 @@ export default function MainMobileNavigationTapPage() {
           onClickEvent={() => toggleNav(!openNav)}
           className="mobile-nav-button"
           isOpen={openNav}
-          hide={isAdmin && !adminLogin}
+          hide={isAdmin && !adminLoginInfo.login}
         />
       </MobileTapWrapper>
     </>
