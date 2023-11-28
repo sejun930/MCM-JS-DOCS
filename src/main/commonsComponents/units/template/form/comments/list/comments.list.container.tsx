@@ -3,7 +3,6 @@ import { CommentsAllInfoTypes } from "../comments.types";
 import CommentsListUIPage from "./comments.list.presenter";
 
 import { MutableRefObject, useEffect, useRef } from "react";
-import { AdminLoginTypes } from "src/commons/store/store.types";
 
 let saveCategory = "all";
 export default function CommentsListPage(props: {
