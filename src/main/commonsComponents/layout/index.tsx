@@ -7,7 +7,7 @@ import CommonsHooksComponents from "../hooks/commonsHooks";
 import { useRecoilState } from "recoil";
 import {
   moduleState,
-  adminLoginState,
+  adminLoginInfoState,
   isOpenSettingState,
   settingInfoState,
   favoriteState,
@@ -27,7 +27,7 @@ export default function LayoutPage(props: IProps) {
   // 현재 접속중인 모듈
   const [module, setModule] = useRecoilState(moduleState);
   // 관리자 로그인 여부
-  const [adminLogin] = useRecoilState(adminLoginState);
+  const [adminLoginInfo] = useRecoilState(adminLoginInfoState);
   // 셋팅창 오픈 여부
   const [isOpenSetting, setIsOpenSetting] = useRecoilState(isOpenSettingState);
   // 셋팅 정보 종합
@@ -94,7 +94,7 @@ export default function LayoutPage(props: IProps) {
   };
 
   let navRenderCondition = !isAdmin;
-  if (isAdmin && adminLogin) navRenderCondition = true;
+  if (isAdmin && adminLoginInfo.login) navRenderCondition = true;
 
   return (
     <>

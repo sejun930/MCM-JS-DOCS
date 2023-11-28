@@ -1,4 +1,4 @@
-import { IsBlockTypes } from "src/commons/store/store.types";
+import { AdminLoginTypes, IsBlockTypes } from "src/commons/store/store.types";
 
 export type BlockInfoType = IsBlockTypes & {
   id: string;
@@ -33,5 +33,6 @@ export interface IProps {
   cancelBlock: () => void;
   changePage: (page: number) => void;
   isLoading: boolean;
+  adminLoginInfo: AdminLoginTypes;
   render: boolean;
 }

@@ -48,6 +48,11 @@ export const OptionalWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${(props: StyleTypes) =>
+    !props.render && {
+      opacity: "0",
+    }}
 `;
 
 export const BlockListItems = styled.table`
@@ -59,14 +64,13 @@ export const BlockListItems = styled.table`
       filter: "blur(5px)",
     }}
 
+  ${(props) =>
+    !props.render && {
+      opacity: "0",
+    }}
+
   .checked {
     background-color: #efefef;
-  }
-
-  .empty-filter-list {
-    padding: 20px;
-    text-align: center;
-    color: gray;
   }
 
   thead {
@@ -134,11 +138,6 @@ export const BlockListItems = styled.table`
   @media ${breakPoints.mobileLarge} {
     thead {
       display: none;
-    }
-
-    .empty-filter-list {
-      padding: 16px;
-      font-size: 30px;
     }
 
     tbody {
@@ -302,4 +301,20 @@ export const LoadingData = styled.div`
   }
 `;
 
-export const Rendering = styled.div``;
+export const EmptyList = styled.td`
+  width: 100%;
+  padding: 20px;
+
+  span {
+    font-size: 30px;
+    font-weight: 700;
+    color: gray;
+  }
+
+  @media ${breakPoints.mobileLarge} {
+    padding: 16px;
+    span {
+      font-size: 24px;
+    }
+  }
+`;

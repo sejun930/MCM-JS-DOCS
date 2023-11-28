@@ -4,9 +4,12 @@ import { getDoc } from "src/commons/libraries/firebase";
 import { getUuid } from "src/main/commonsComponents/functional";
 import { BlockInfoType, FilterType, filterInit } from "./block.types";
 
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+// import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 import AdminBlockUIPage from "./block.presenter";
 import blockApis from "src/commons/libraries/apis/block/block.apis";
+import { useRecoilState } from "recoil";
+import { adminLoginInfoState } from "src/commons/store";
 
 // 필터 리스트
 let filter: FilterType = { ...filterInit };
@@ -20,14 +23,17 @@ export default function AdminBlockPage() {
   const [loading, setLoading] = useState(false);
   // 페이지 렌더하기
   const [render, setRender] = useState(false);
+  // 관리자 로그인 정보
+  const [adminLoginInfo] = useRecoilState(adminLoginInfoState);
 
   // 차단 리스트 가져오기
   const getBlockList = async () => {
-    // return;
-    if (!checkAccessToken(true)) {
+    // if (!checkAccessToken(true)) {
+    if (!(await adminApis().check(true))) {
       alert("인증이 만료되었습니다. 재로그인 해주세요.");
       return false;
     }
+    // }
     setLoading(true);
 
     // 과거순 & 최신순 정렬
@@ -105,10 +111,13 @@ export default function AdminBlockPage() {
   // 차단 해제하기
   const cancelBlock = async () => {
     if (loading) return alert("이벤트가 작동중입니다. 잠시만 기다려주세요.");
-    if (!checkAccessToken(true)) {
+    // if (!checkAccessToken(true)) {
+    if (!(await adminApis().check(true))) {
       alert("인증이 만료되었습니다. 재로그인 해주세요.");
       return false;
     }
+    if (adminLoginInfo.isTest)
+      return alert("테스트 로그인 상태에서는 조회만 가능합니다.");
 
     // 선택된 항목 가져오기
     const checkList = blockList.filter((el: BlockInfoType) => el.checked);
@@ -172,6 +181,7 @@ export default function AdminBlockPage() {
       cancelBlock={cancelBlock}
       changePage={changePage}
       isLoading={loading}
+      adminLoginInfo={adminLoginInfo}
       render={render}
     />
   );

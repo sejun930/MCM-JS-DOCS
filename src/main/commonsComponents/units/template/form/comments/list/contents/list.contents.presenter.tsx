@@ -24,6 +24,7 @@ import { ListContentsIProps } from "./list.contents.container";
 import _SelectForm from "../../../select/select.container";
 import CommentsLabel from "../label";
 import StarsForm from "../../write/stars";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 
 interface ListContentsUIProps {
   isMore: boolean;
@@ -37,7 +38,7 @@ interface ListContentsUIProps {
   hover: boolean;
   name: string;
   _wrapperRef: MutableRefObject<HTMLLIElement>;
-  adminLogin: boolean;
+  adminLoginInfo: AdminLoginTypes;
 }
 
 export default function ListContentsInfoUIPage({
@@ -55,7 +56,7 @@ export default function ListContentsInfoUIPage({
   _wrapperRef,
   commentsInfo,
   changeInfo,
-  adminLogin,
+  adminLoginInfo,
 }: ListContentsIProps & ListContentsUIProps) {
   let answerClass = "answer";
 
@@ -78,7 +79,7 @@ export default function ListContentsInfoUIPage({
             info={info}
             commentsInfo={commentsInfo}
             changeInfo={changeInfo}
-            adminLogin={adminLogin}
+            adminLoginInfo={adminLoginInfo}
             hideStar={info.category === "bug"}
           />
         </LabelWrapper>
@@ -154,25 +155,27 @@ export default function ListContentsInfoUIPage({
               )}
             </DateWrapper>
 
-            <SelectWrapper className="select-wrapper" hover={hover}>
-              <OptionalButton hover={hover}>...</OptionalButton>
-              <_SelectForm
-                show={showSelect}
-                closeEvent={() => toggleShowSelect(false)}
-                autoCloseOffTargetName={name}
-              >
-                {getListContentsInfo(adminLogin, info).map((el) => {
-                  return (
-                    <SelectButton
-                      onClickEvent={deleteComments(el.value, name)}
-                      key={`comments-select-list-${info.id}`}
-                    >
-                      {el.name}
-                    </SelectButton>
-                  );
-                })}
-              </_SelectForm>
-            </SelectWrapper>
+            {!adminLoginInfo.isTest && (
+              <SelectWrapper className="select-wrapper" hover={hover}>
+                <OptionalButton hover={hover}>...</OptionalButton>
+                <_SelectForm
+                  show={showSelect}
+                  closeEvent={() => toggleShowSelect(false)}
+                  autoCloseOffTargetName={name}
+                >
+                  {getListContentsInfo(adminLoginInfo.login, info).map((el) => {
+                    return (
+                      <SelectButton
+                        onClickEvent={deleteComments(el.value, name)}
+                        key={`comments-select-list-${info.id}`}
+                      >
+                        {el.name}
+                      </SelectButton>
+                    );
+                  })}
+                </_SelectForm>
+              </SelectWrapper>
+            )}
           </OptionalWrapper>
         </ContentsWrapper>
       </CommentsInfoWrapper>

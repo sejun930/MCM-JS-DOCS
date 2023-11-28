@@ -13,8 +13,9 @@ import { _SpanText } from "mcm-js-commons";
 
 import { WriteInfoTypes } from "../../../../write/comments.write.types";
 import { CommentsAllInfoTypes, InfoTypes } from "../../../../comments.types";
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+// import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
 import { changeServerText } from "src/main/commonsComponents/functional";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 
 import blockApis from "src/commons/libraries/apis/block/block.apis";
 import ModalResultForm from "../../../../../modal/modal.result";
@@ -27,6 +28,7 @@ import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 import { exchangeKey } from "./contents.select.functional.data";
 
 import { getLibraries } from "src/main/commonsComponents/functional/modules";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 const { Modal } = getLibraries();
 
 let password = ""; // 패스워드 저장
@@ -42,13 +44,13 @@ let answer = ""; // 답변 내용 저장
 export default function ContentsSelectFunctionalPage({
   info,
   type,
-  adminLogin,
+  adminLoginInfo,
   module,
   fetchCommentsList,
 }: {
   info: InfoTypes;
   type: ListContentsSelectType;
-  adminLogin: boolean | null;
+  adminLoginInfo: AdminLoginTypes;
   module: string;
   fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }) {
@@ -64,8 +66,8 @@ export default function ContentsSelectFunctionalPage({
 
   useEffect(() => {
     // 관리자일 경우 비밀번호 자동 저장
-    if (adminLogin) password = info.password;
-  }, [adminLogin]);
+    if (adminLoginInfo.login) password = info.password;
+  }, [adminLoginInfo]);
 
   useEffect(() => {
     // 데이터 최초 저장
@@ -79,7 +81,7 @@ export default function ContentsSelectFunctionalPage({
   // 수정 및 삭제 가능 여부 반환
   const checkAble = () => {
     // 관리자라면 무조건 가능
-    if (!adminLogin) {
+    if (!adminLoginInfo.login) {
       if (!_contents) return exchangeKey.emptyContents;
       // 비밀번호가 빈칸일 경우
       if (!password) return exchangeKey.emptyPassword;
@@ -190,10 +192,11 @@ export default function ContentsSelectFunctionalPage({
         text: checkAble(), // 에러메세지 출력
       });
     } else {
-      if (adminLogin) {
+      if (adminLoginInfo.login) {
         if (type === "block" || type === "question") {
           // 차단 및 답변일 경우, 현재 로그인이 유지되어 있는 상태인지 검증
-          if (!checkAccessToken(true)) return false;
+          // if (!checkAccessToken(true)) return false;
+          if (!(await adminApis().check(true))) return false;
         }
       }
 
@@ -201,7 +204,7 @@ export default function ContentsSelectFunctionalPage({
       const commentApi = await commentsApis({
         ip,
         module,
-        isAdmin: adminLogin || false,
+        isAdmin: adminLoginInfo.login || false,
       });
 
       // 삭제 및 차단일 경우 댓글 1차 삭제
@@ -283,8 +286,10 @@ export default function ContentsSelectFunctionalPage({
   };
 
   // 이슈 처리 선택하기
-  const changeBugStatus = (status: number) => {
-    if (!checkAccessToken()) return;
+  const changeBugStatus = async (status: number) => {
+    // if (!checkAccessToken()) return;
+    if (!(await adminApis().check(false))) return;
+
     setBugStatus(status);
   };
 
@@ -297,7 +302,7 @@ export default function ContentsSelectFunctionalPage({
       contentsRef={contentsRef}
       confirmRef={confirmRef}
       confirm={confirm}
-      adminLogin={adminLogin}
+      adminLoginInfo={adminLoginInfo}
       changeBugStatus={changeBugStatus}
       bugStatus={bugStatus}
       answerRef={answerRef}

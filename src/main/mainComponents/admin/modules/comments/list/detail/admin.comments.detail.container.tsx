@@ -9,17 +9,21 @@ import { WriteInfoTypes } from "src/main/commonsComponents/units/template/form/c
 
 import blockApis from "src/commons/libraries/apis/block/block.apis";
 import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+// import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 
 export default function AdminCommentsDetailPage({
   info,
   commentsInfo,
   changeLoading,
   fetchComments,
+  adminLoginInfo,
 }: {
   info: InfoTypes;
   commentsInfo: CommentsAllInfoTypes;
   changeLoading: (bool: boolean) => void;
+  adminLoginInfo: AdminLoginTypes;
 } & FetchCommentsTypes) {
   // 이미 삭제된 댓글인지 체크
   const isAlreadyDeleted = info.deletedAt !== null;
@@ -27,9 +31,12 @@ export default function AdminCommentsDetailPage({
   // 댓글 삭제하기
   const removeComments = async (isBlock: boolean) => {
     // 관리자 권한 체크
-    if (!checkAccessToken(true)) return;
+    if (!(await adminApis().check(true))) return;
     // 삭제일 경우 이미 삭제된 게시물인지 체크
     if (!isBlock && info.deletedAt) return;
+    // 테스트 모드일 경우 사용 불가
+    if (adminLoginInfo.isTest)
+      return alert("테스트 로그인 상태에서는 조회만 가능합니다.");
 
     let msg = "해당 댓글을 삭제하시겠습니까?";
     if (isBlock)
@@ -105,6 +112,7 @@ export default function AdminCommentsDetailPage({
       removeComments={removeComments}
       changeLoading={changeLoading}
       fetchComments={fetchComments}
+      adminLoginInfo={adminLoginInfo}
     />
   );
 }

@@ -94,4 +94,37 @@ describe("Admin Login Page", () => {
       }
     }
   });
+
+  // 관리자 로그인 성공시
+  // test("Admin Login Page - Success Admin Login", () => {
+  //   const { idInput, pwInput, loginBtn } = tagList;
+
+  //   if (idInput && pwInput) {
+  //     idInput.value = "test";
+  //     pwInput.value = "test1123";
+
+  //     // 아이디 및 비밀번호가 빈 값인지 체크
+  //     expect(idInput).toHaveValue("test");
+  //     expect(pwInput).toHaveValue("test1123");
+
+  //     // 로그인 버튼 존재 여부 검사
+  //     expect(loginBtn).toBeInTheDocument();
+
+  //     // 로그인 버튼 클릭
+  //     if (loginBtn) {
+  //       fireEvent.click(loginBtn);
+
+  //       console.log(idInput.value, pwInput.value);
+
+  //       if (idInput.value === "test" && pwInput.value === "test1123") {
+  //         // 성공 모달이 오픈되어 있는지 체크
+  //         const hasModal = document.body.querySelector(
+  //           "#admin-login-fail-modal"
+  //         );
+  //         // expect(hasModal).toBeInTheDocument();
+  //         // if (hasModal) hasModal.remove();
+  //       }
+  //     }
+  //   }
+  // });
 });

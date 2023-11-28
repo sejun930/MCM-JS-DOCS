@@ -9,7 +9,8 @@ import {
   InfoTypes,
   initCountList,
 } from "src/main/commonsComponents/units/template/form/comments/comments.types";
-import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+// import { checkAccessToken } from "src/main/commonsComponents/withAuth/check";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 import apis from "src/commons/libraries/apis/commons.apis";
 
 // 댓글 정보와 개수 최신화 업데이트
@@ -18,7 +19,7 @@ export default function SyncCommentsFunction(props: FunctionPropsTypes) {
 
   // 개수 최신화하기
   const syncComments = async () => {
-    if (!checkLoading() || !checkAccessToken(true)) return;
+    if (!checkLoading() || !(await adminApis().check(true))) return;
 
     if (window.confirm("댓글 동기화 작업을 실행하시겠습니까?")) {
       const _info = deepCopy(info);

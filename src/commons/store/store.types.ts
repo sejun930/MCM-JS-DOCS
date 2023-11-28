@@ -27,3 +27,13 @@ export const initSettingInfo: InitSettingInfoType = {
   openFix: false, // 모든 코드 열기
   darkMode: false, // 다크 모드
 };
+
+export interface AdminLoginTypes {
+  login: boolean;
+  isTest: boolean;
+}
+
+export const initAdminLoginInfo: AdminLoginTypes = {
+  login: false,
+  isTest: false,
+};

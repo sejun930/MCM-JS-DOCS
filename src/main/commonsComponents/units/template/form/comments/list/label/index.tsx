@@ -8,6 +8,7 @@ import { getUuid } from "src/main/commonsComponents/functional";
 
 import { categoryInitList } from "../../write/comments.write.types";
 import StarsForm from "../../write/stars";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 
 // label 렌더용 컴포넌트
 export default function CommentsLabel({
@@ -16,7 +17,7 @@ export default function CommentsLabel({
   changeInfo,
   showCategoryName,
   modifyRatingEvent,
-  adminLogin,
+  adminLoginInfo,
   hideStar,
   isModifyMode,
 }: {
@@ -25,7 +26,7 @@ export default function CommentsLabel({
   changeInfo?: (info: CommentsAllInfoTypes) => void; // 댓글 정보 수정하기
   showCategoryName?: boolean; // 카테고리 출력 여부
   modifyRatingEvent?: (value: number) => void; // 평점 수정 이벤트 (평점 수정 가능)
-  adminLogin: boolean | null;
+  adminLoginInfo: AdminLoginTypes;
   hideStar?: boolean; // 이슈 및 리뷰 카테고리에서 평점 부분 숨기기 여부
   isModifyMode?: boolean; // 모달을 이용한 수정모드 여부
 }) {
@@ -86,7 +87,7 @@ export default function CommentsLabel({
     }
 
     // 관리자일 경우 아이피 노출
-    if (adminLogin)
+    if (adminLoginInfo.login)
       nodeList.push(<UserIP className="user-ip">({info.ip})</UserIP>);
 
     return nodeList;

@@ -1,13 +1,18 @@
 import { ComponentType, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { adminLoginState } from "src/commons/store";
+import { adminLoginInfoState } from "src/commons/store";
 import Template from "../units/template/main";
 
 import AdminLoginPage from "src/main/mainComponents/admin/login/admin.login.container";
 import CommonsHooksComponents from "../hooks/commonsHooks";
 
-import { checkAccessToken } from "./check";
+import adminApis from "src/commons/libraries/apis/admin/admin.apis";
 import { getLibraries } from "src/main/commonsComponents/functional/modules";
+import {
+  initAdminLoginInfo,
+  AdminLoginTypes,
+} from "src/commons/store/store.types";
+import { deepCopy } from "../functional";
 const { Modal } = getLibraries();
 
 // 관리자 로그인 권한 체크하기
@@ -16,25 +21,42 @@ const WithAuthAdmin =
   <P extends {}>(Component: ComponentType<P>) =>
   (props: P) => {
     const [openModal, setOpenModal] = useState(false);
-    const [adminLogin, setAdminLogin] = useRecoilState(adminLoginState);
+    // 관리자 로그인 여부
+    const [adminLoginInfo, setAdminLoginInfo] =
+      useRecoilState(adminLoginInfoState);
 
     const { getRouter } = CommonsHooksComponents();
 
     useEffect(() => {
       if (!render) {
-        checkAccessToken().then((result: boolean) => {
-          setAdminLogin(result);
-          setOpenModal(true);
-        });
+        adminApis()
+          .check(false)
+          .then((result) => {
+            setAdminLoginInfo(result);
+            setOpenModal(true);
+          });
+        // checkAccessToken().then((result: boolean) => {
+        // setAdminLoginInfo(result);
+        // setOpenModal(true);
+        // });
         render = true;
       }
     }, [getRouter().pathname]);
 
+    // 로그인 완료 시 state 변경하기
+    const completeAdminLogin = (isTest: boolean) => {
+      const loginResult: AdminLoginTypes = deepCopy(initAdminLoginInfo);
+      loginResult.login = true;
+      loginResult.isTest = isTest;
+
+      setAdminLoginInfo(loginResult);
+    };
+
     return (
       <Template className="admin-withAuth-template">
-        {openModal && !adminLogin && (
+        {openModal && !adminLoginInfo.login && (
           <Modal
-            show={!adminLogin}
+            show={!adminLoginInfo.login}
             onCloseModal={() => {
               location.replace("/");
             }}
@@ -53,10 +75,10 @@ const WithAuthAdmin =
             className="admin-login-modal"
             closeMent="홈으로 이동"
           >
-            <AdminLoginPage loginComplete={() => setAdminLogin(true)} />
+            <AdminLoginPage loginComplete={completeAdminLogin} />
           </Modal>
         )}
-        {(adminLogin && <Component {...props} />) || <></>}
+        {(adminLoginInfo.login && <Component {...props} />) || <></>}
       </Template>
     );
   };

@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
+import { CSSProperties } from "react";
 
 interface StyleTypes {
   isSuccess?: boolean;
   isDelete?: boolean;
   isReviewCategory?: boolean;
-  adminLogin?: boolean;
   waiting?: boolean;
   isAnswerType?: boolean;
   isSelected?: boolean;
@@ -202,15 +202,16 @@ export const BugStatusButton = styled(_Button)`
   font-size: 12px;
   color: gray;
 
-  ${(props: StyleTypes) =>
-    props.isSelected && {
-      color: "#19a7ce",
-      fontWeight: "700",
-      cursor: "default",
-    }}
+  ${(props: StyleTypes) => {
+    let styles: CSSProperties & { [key: string]: string } = {};
 
-  ${(props) =>
-    props.disableSelected && {
-      cursor: "not-allowed",
-    }}
+    // 선택된 항목이라면
+    if (props.isSelected)
+      styles = { color: "#19a7ce", fontWeight: "700", cursor: "default" };
+
+    // 선택이 불가능한 경우
+    if (props.disableSelected) styles.cursor = "not-allowed";
+
+    return styles;
+  }}
 `;

@@ -8,7 +8,6 @@ let saveCategory = "all";
 export default function CommentsListPage(props: {
   commentsInfo: CommentsAllInfoTypes;
   changeInfo: (info: CommentsAllInfoTypes) => void;
-  adminLogin: boolean;
   fetchCommentsList: (info?: CommentsAllInfoTypes, startPage?: number) => void;
 }) {
   const { commentsInfo, fetchCommentsList } = props;

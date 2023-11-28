@@ -7,16 +7,10 @@ import {
   Tr,
   Wrapper,
   LoadingData,
+  EmptyList,
 } from "./block.styles";
 
-import {
-  _Title,
-  _PText,
-  _Button,
-  _Image,
-  _Checkbox,
-  _SpanText,
-} from "mcm-js-commons";
+import { _PText, _Button, _Image, _Checkbox, _SpanText } from "mcm-js-commons";
 import { getUuid } from "src/main/commonsComponents/functional";
 import { getDateForm } from "src/main/commonsComponents/functional/date";
 import { IProps } from "./block.types";
@@ -36,18 +30,19 @@ export default function AdminBlockUIPage(props: IProps) {
     cancelBlock,
     changePage,
     isLoading,
+    adminLoginInfo,
     render,
   } = props;
 
-  return render ? (
-    <Wrapper>
+  return (
+    <Wrapper id="admin-block-wrapper">
       <BlockListWrapper>
         {isLoading && (
-          <LoadingData>
+          <LoadingData id="admin-block-loading">
             <_SpanText className="loading-data">데이터 로딩 중</_SpanText>
           </LoadingData>
         )}
-        <OptionalWrapper>
+        <OptionalWrapper id="admin-block-optional-wrapper" render={render}>
           <_PText>- 총 {filter.allData}명의 차단된 유저가 있습니다.</_PText>
 
           <FilterWrapper>
@@ -84,15 +79,17 @@ export default function AdminBlockUIPage(props: IProps) {
               </_SelectForm>
             </FilterItems>
 
-            <_Button
-              onClickEvent={cancelBlock}
-              className="remove-block-user-btn"
-            >
-              선택 차단 해제
-            </_Button>
+            {!adminLoginInfo.isTest && (
+              <_Button
+                onClickEvent={cancelBlock}
+                className="remove-block-user-btn"
+              >
+                선택 차단 해제
+              </_Button>
+            )}
           </FilterWrapper>
         </OptionalWrapper>
-        <BlockListItems isLoading={isLoading || false}>
+        <BlockListItems isLoading={isLoading || false} render={render}>
           <thead>
             <Tr>
               <td className="block-select"></td>
@@ -158,9 +155,11 @@ export default function AdminBlockUIPage(props: IProps) {
                 );
               })
             ) : (
-              <_Title titleLevel="h2" className="empty-filter-list">
-                조회된 유저가 없습니다.
-              </_Title>
+              <Tr className="empty-filter-tr">
+                <EmptyList className="empty-filter-td">
+                  <_SpanText>조회된 유저가 없습니다.</_SpanText>
+                </EmptyList>
+              </Tr>
             )}
           </tbody>
         </BlockListItems>
@@ -177,7 +176,5 @@ export default function AdminBlockUIPage(props: IProps) {
       </BlockListWrapper>
       {/* )} */}
     </Wrapper>
-  ) : (
-    <_Title>리스트 불러오는 중...</_Title>
   );
 }

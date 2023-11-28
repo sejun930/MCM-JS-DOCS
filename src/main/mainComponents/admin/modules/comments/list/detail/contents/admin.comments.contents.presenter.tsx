@@ -13,6 +13,7 @@ import { getDateForm } from "src/main/commonsComponents/functional/date";
 import { InfoTypes } from "src/main/commonsComponents/units/template/form/comments/comments.types";
 
 import { getLibraries } from "src/main/commonsComponents/functional/modules";
+import { AdminLoginTypes } from "src/commons/store/store.types";
 const { Tooltip } = getLibraries();
 
 export default function AdminCommentsContentsUIPage({
@@ -25,6 +26,7 @@ export default function AdminCommentsContentsUIPage({
   isAlreadyDeleted,
   renderOptionList,
   answer,
+  adminLoginInfo,
 }: {
   info: InfoTypes;
   toggleMoreShow: () => void;
@@ -35,6 +37,7 @@ export default function AdminCommentsContentsUIPage({
   isAlreadyDeleted: boolean;
   renderOptionList: () => JSX.Element;
   answer: string;
+  adminLoginInfo: AdminLoginTypes;
 }) {
   return (
     <ContentsWrapper>
@@ -55,7 +58,7 @@ export default function AdminCommentsContentsUIPage({
           placeHolder="답변 입력"
           value={answer}
           inputRef={textRef}
-          readOnly={isAlreadyDeleted}
+          readOnly={isAlreadyDeleted || adminLoginInfo.isTest}
         />
       </ContentsItems>
 
@@ -94,7 +97,7 @@ export default function AdminCommentsContentsUIPage({
         </OptionWrapper>
       )) || <></>}
 
-      {renderOptionList()}
+      {!adminLoginInfo.isTest && renderOptionList()}
     </ContentsWrapper>
   );
 }

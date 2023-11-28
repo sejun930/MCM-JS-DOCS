@@ -19,7 +19,7 @@ let loading = false; // 중복 클릭 방지
 export default function AdminLoginPage({
   loginComplete,
 }: {
-  loginComplete: () => void;
+  loginComplete: (isTest: boolean) => void;
 }) {
   const [ip, setIp] = useRecoilState(ipState);
 
@@ -31,6 +31,7 @@ export default function AdminLoginPage({
     id: "",
     password: "",
   });
+  // console.log(info);
   // 비밀번호 가리기 여부
   const [showPw, setShowPw] = useState(false);
 
@@ -59,6 +60,9 @@ export default function AdminLoginPage({
     // focus 이벤트
     let _focusEvent = () => {};
 
+    // 테스트 로그인 감지
+    const isTestLogin = info.id === "test" && info.password === "test1123";
+
     const focusEvent: { [key: string]: () => void } = {
       id: () => {
         if (idRef?.current) {
@@ -72,7 +76,7 @@ export default function AdminLoginPage({
       },
       success: () => {
         loading = false;
-        loginComplete();
+        loginComplete(isTestLogin);
         Modal.close({ className: "admin-login-modal" });
       },
     };
@@ -90,7 +94,8 @@ export default function AdminLoginPage({
       const now = new Date();
 
       // 로그인 체크하기 (아이디 및 비밀번호 일치 확인)
-      const checkAdminLogin = await adminApis().login(info.id, info.password);
+      const checkAdminLogin =
+        isTestLogin || (await adminApis().login(info.id, info.password));
 
       if (!checkAdminLogin) {
         // 아이디 & 비밀번호가 불일치 할 경우
@@ -110,14 +115,20 @@ export default function AdminLoginPage({
         }
 
         if (_ip) {
+          const accessToken = await getHashText(JSON.stringify(now));
+
           try {
             await getDoc("admin", "login", "log").add({
               loginTime: getServerTime(), // 로그인 시간
               ip: _ip, // 로그인 아이피
+              accessToken,
+              isTest: isTestLogin, // 테스트 로그인 여부
             });
 
             // 로그인 성공
-            msg = `관리자로 로그인 되었습니다.<b>(${getDateForm({
+            msg = `관리자${
+              (isTestLogin && "(테스트)") || ""
+            }로 로그인 되었습니다.<b>(${getDateForm({
               date: now,
               getDate: true,
             })})</b>`;
@@ -128,8 +139,9 @@ export default function AdminLoginPage({
             // accessToken 저장하기
             localStorage.setItem(
               "admin-accessToken",
-              JSON.stringify(await getHashText(JSON.stringify(now)))
+              JSON.stringify(accessToken)
             );
+
             isSuccess = true;
           } catch (err) {
             msg = "관리자 로그인에 실패했습니다.";
@@ -140,12 +152,19 @@ export default function AdminLoginPage({
     }
 
     if (msg) {
+      const width = `${isTestLogin ? 280 : 230}px`;
       Modal.open({
         children: <Message isSuccess={loading} dangerouslySetInnerHTML={msg} />,
         showBGAnimation: true,
         showModalOpenAnimation: true,
-        modalSize: { width: "220px", height: `${loading ? 80 : 60}px` },
-        mobileModalSize: { width: "220px", height: "60px" },
+        modalSize: {
+          width,
+          height: `${loading ? 80 : 60}px`,
+        },
+        mobileModalSize: {
+          width,
+          height: "60px",
+        },
         onAfterCloseEvent: _focusEvent,
         id: `admin-login-${(isSuccess && "success") || "fail"}-modal`,
       });
