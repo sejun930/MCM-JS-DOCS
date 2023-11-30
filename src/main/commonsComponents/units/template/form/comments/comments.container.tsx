@@ -26,6 +26,7 @@ import commentsApis from "src/commons/libraries/apis/comments/comments.apis";
 
 // 데이터 조회중 (중복 실행 방지)
 let wating = false;
+let watingTimer: number;
 export default function CommentsPage() {
   // 댓글 전체 정보 (댓글 리스트, 카테고리 등등)
   const [commentsInfo, setCommentsInfo] = useState<CommentsAllInfoTypes>(
@@ -159,7 +160,11 @@ export default function CommentsPage() {
         }
 
         setCommentsInfo(_commentInfo);
-        wating = false;
+
+        clearTimeout(watingTimer);
+        watingTimer = window.setTimeout(() => {
+          wating = false;
+        }, 100);
       } catch (err) {
         console.log(`댓글을 정상적으로 불러오지 못했습니다. : ${err}`);
       }
@@ -187,6 +192,7 @@ export default function CommentsPage() {
 
   // 다음 데이터 가져오기
   const moreLoad = () => {
+    if (wating) return;
     const _info = { ...commentsInfo };
 
     if (render && !wating) {
