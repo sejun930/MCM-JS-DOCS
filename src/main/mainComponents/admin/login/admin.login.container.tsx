@@ -31,7 +31,6 @@ export default function AdminLoginPage({
     id: "",
     password: "",
   });
-  // console.log(info);
   // 비밀번호 가리기 여부
   const [showPw, setShowPw] = useState(false);
 

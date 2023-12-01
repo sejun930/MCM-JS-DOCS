@@ -52,9 +52,11 @@ export default function ListContentsInfoPage(props: ListContentsIProps) {
   const _wrapperRef = useRef() as MutableRefObject<HTMLLIElement>;
 
   useEffect(() => {
+    // 더보기 여부 결정하기
     let allLen = 0;
     let str = "";
 
+    // 공백 처리하기
     contents.split("<br />").forEach((el, idx) => {
       if (idx && allLen < MAX_LINE) {
         str += "<br />";

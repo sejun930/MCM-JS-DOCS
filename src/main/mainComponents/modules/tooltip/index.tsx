@@ -28,7 +28,7 @@ export default function MyTooltip() {
   const commonsProps: { tooltipText: string | ReactNode; children: ReactNode } =
     {
       tooltipText: "World",
-      children: <_PText>Hello</_PText>,
+      children: <_PText className="tooltip-example-text">Hello</_PText>,
     };
 
   return (

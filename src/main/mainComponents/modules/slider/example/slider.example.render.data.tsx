@@ -69,8 +69,7 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
   {
     title: "전환 버튼 설정",
     isFull: { isHalf: false },
-    blockRemarks:
-      "이전 및 다음으로 이동하는 버튼을 숨기거나 변경할 수 있습니다.",
+    blockRemarks: "이전 및 다음으로 이동하는 버튼에 대한 설정이 가능합니다.",
     contents: [
       {
         remakrs: "버튼을 사용하지 않도록 숨길 수 있습니다.",
@@ -119,6 +118,8 @@ export const sliderExampleList = (): Array<ExampleIProps> => [
   },
   {
     title: "자동 전환(Autoplay) 및 타이머 적용",
+    blockRemarks:
+      "페이지를 자동으로 전환하는 것에 필요하거나 부가적인 기능들을 제공합니다.",
     isFull: { isHalf: false },
     contents: [
       {

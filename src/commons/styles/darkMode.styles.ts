@@ -57,6 +57,12 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
             color: ${colorBook.borderColor};
           }
         }
+
+        .selected-index {
+          button {
+            color: white;
+          }
+        }
       }
 
       // vers fixed 관련
@@ -87,7 +93,7 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
       #example-form {
         .example-list-wrapper {
           .example-block-remarks {
-            color: ${colorBook.gray};
+            color: #aaaaaa;
           }
         }
 
@@ -97,6 +103,8 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
           }
 
           .example-list {
+            border-color: ${colorBook.borderColor};
+
             .mcm-slider-arrow {
               :hover {
                 background-color: #aaaaaa !important;
@@ -109,6 +117,12 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
             }
 
             :hover {
+              border-color: #aaaaaa !important;
+
+              .example-code-toggle {
+                border-color: #777777 !important;
+              }
+
               .example-remarks {
                 color: ${colorBook.bg};
               }
@@ -137,6 +151,14 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
                 color: ${colorBook.fontColor};
                 background-color: ${colorBook.bg} !important;
                 border-color: ${colorBook.fontColor} !important;
+              }
+
+              :hover {
+                .tooltip-example-wrapper {
+                  p {
+                    color: black;
+                  }
+                }
               }
             }
 
@@ -466,9 +488,6 @@ export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
     // code 관련
     .copy-wrapper {
       border: solid 1px white;
-      ${colorBook.bg && {
-        backgroundColor: `${colorBook.bg} !important`,
-      }}
 
       .mcm-p-unit {
         color: ${colorBook.fontColor};

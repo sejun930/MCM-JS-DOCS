@@ -99,6 +99,8 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
   },
   {
     title: "스타일 적용 (웹, 모바일)",
+    blockRemarks:
+      "Modal의 스타일을 웹/모바일 및 태그 영역으로 각각 설정할 수 있습니다.",
     isFull: { isHalf: false },
     contents: [
       {
@@ -175,6 +177,8 @@ export const modalExampleList = (idx: number): Array<ExampleIProps> => [
   },
   {
     title: "Modal 닫기 관련",
+    blockRemarks:
+      "Modal 안에서 사용할 수 있는 닫기 버튼에 대한 설정을 지정할 수 있습니다.",
     isFull: { isHalf: false },
     contents: [
       {

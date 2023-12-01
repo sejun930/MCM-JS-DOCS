@@ -30,7 +30,6 @@ export default function CommentsListUIPage({
   commentsInfo: CommentsAllInfoTypes;
   changeInfo: (info: CommentsAllInfoTypes) => void;
   listRef: MutableRefObject<HTMLUListElement>;
-  changePage: (page: number) => void;
   fetchCommentsList: (info?: CommentsAllInfoTypes) => void;
 }) {
   return (
@@ -41,6 +40,7 @@ export default function CommentsListUIPage({
       <CategoryWrapper className="comments-list-category-wrapper">
         <CategoryContents>
           <CategoryItems
+            className="comments-category-wrapper"
             render={commentsInfo.countFilterList.all !== undefined}
           >
             {Object.entries(commentsInfo.countFilterList).map((el, key) => {

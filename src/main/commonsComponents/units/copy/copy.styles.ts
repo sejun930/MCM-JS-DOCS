@@ -105,7 +105,7 @@ export const CopyButton = styled.button`
   }
 
   .mcm-p-unit {
-    font-size: 14px;
+    font-size: 12px;
     color: ${(props) => (props.isCode ? "white" : "#333333")};
   }
 

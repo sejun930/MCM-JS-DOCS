@@ -131,6 +131,8 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
   },
   {
     title: "스타일 지정 (웹, 모바일)",
+    blockRemarks:
+      "Tooltip의 스타일을 웹/모바일 환경에 맞춰서 설정할 수 있습니다.",
     isFull: { isHalf: false },
     contents: [
       {
@@ -187,6 +189,8 @@ export const tooltipExampleList = (): Array<ExampleIProps> => [
   },
   {
     title: "수동 ON/OFF & Hover 이벤트 비활성화",
+    blockRemarks:
+      "Tooltip을 수동으로 실행/종료 하거나, 실행/종료 이벤트를 비활성화 할 수 있습니다.",
     isFull: { isHalf: false },
     contents: [
       {

@@ -36,11 +36,15 @@ export const ExampleContentsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 40px;
-  gap: 60px 0px;
+  margin-top: 100px;
+  gap: 220px 0px;
+  padding: 0px 20px;
 
   @media ${breakPoints.mobileLarge} {
     flex-direction: column;
+    gap: 140px 0px;
+    margin-top: 80px;
+    padding: 0px;
 
     .example-list-wrapper {
       .example-list-items {
@@ -61,7 +65,8 @@ export const ExampleContentsItems = styled.div`
   width: 48%;
 
   h3 {
-    font-size: 20px;
+    font-size: 22px;
+    text-align: center;
   }
 
   .error-form {
@@ -69,13 +74,19 @@ export const ExampleContentsItems = styled.div`
     align-items: center;
     /* color: #7b2869; */
     font-weight: 700;
+    justify-content: center;
   }
 
   .example-block-remarks {
-    margin-top: 12px;
+    margin-top: 28px;
     font-size: 16px;
     padding-left: 10px;
     color: #555555;
+    text-align: center;
+
+    b {
+      color: #aa5656;
+    }
   }
 
   ${(props: StyleTypes) =>
@@ -87,20 +98,15 @@ export const ExampleContentsItems = styled.div`
     width: 100%;
 
     h3 {
-      font-size: 18px;
+      font-size: 20px;
       text-align: center;
     }
 
     .example-block-remarks {
       text-align: center;
       padding-left: 0px;
-    }
-  }
-
-  @media ${breakPoints.mobileSmall} {
-    h3,
-    .example-block-remarks {
-      text-align: left;
+      margin-top: 16px;
+      font-size: 14px;
     }
   }
 `;
@@ -108,9 +114,11 @@ export const ExampleContentsItems = styled.div`
 export const ExampleResultList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  border-top: solid 2px #888888;
   width: 100%;
-  margin-top: 15px;
-  border-radius: 5px;
+  margin-top: 20px;
+  /* border-radius: 5px; */
+  gap: 16px 0px;
 
   ${(props: StyleTypes) =>
     props.offBoard && {
@@ -128,10 +136,11 @@ export const ExampleListWrapper = styled.div`
 
   .example-remarks {
     font-size: 14px;
-    margin-top: 30px;
+    margin-top: 24px;
     color: #666666;
     line-height: 22px;
     letter-spacing: -0.01rem;
+    text-align: center;
   }
 
   :hover {
@@ -139,8 +148,10 @@ export const ExampleListWrapper = styled.div`
   }
 
   @media ${breakPoints.mobileLarge} {
+    border-bottom: dotted 1px black;
+    padding-bottom: 16px;
+
     .example-remarks {
-      text-align: center;
       margin-top: 24px;
     }
   }
@@ -149,8 +160,8 @@ export const ExampleListWrapper = styled.div`
 export const ExampleListItems = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1.3rem 1rem;
-  border: solid 1px #dddddd;
+  padding: 1.8rem 1rem;
+  align-items: center;
 
   .mcm-error-unit {
     margin-top: 0px;

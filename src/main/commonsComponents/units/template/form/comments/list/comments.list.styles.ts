@@ -66,16 +66,20 @@ export const CategoryItems = styled.ul`
     }};
 
   @media ${breakPoints.mobileLarge} {
-    height: auto;
-    width: 100%;
     gap: 0px 20px;
-  }
-
-  @media ${breakPoints.mobileSmall} {
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
     padding-right: 30px;
+
+    ::-webkit-scrollbar {
+      height: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #888888;
+      border-radius: 100px;
+    }
   }
 `;
 

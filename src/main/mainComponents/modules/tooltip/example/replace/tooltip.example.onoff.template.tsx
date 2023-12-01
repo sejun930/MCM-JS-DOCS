@@ -45,11 +45,12 @@ export default function TooltipExampleOnOffReplacePage(
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
   gap: 10px 0px;
 
   p {
     margin: 0px;
+    margin-top: 6px;
   }
 
   @media ${breakPoints.mobileLarge} {

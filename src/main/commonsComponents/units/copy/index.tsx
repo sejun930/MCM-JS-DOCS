@@ -115,15 +115,7 @@ export default function _Copy({
           className="copy-btn"
           onMouseDown={(!onlyClickButton && copy) || undefined}
         >
-          {/* <Tooltip
-            open={isCopied}
-            offHoverEvent={true}
-            tooltipText="Copied"
-            useShowAnimation
-            position="bottom"
-          > */}
           <_PText>{isCopied ? "Copied!" : "Copy"}</_PText>
-          {/* </Tooltip> */}
         </CopyButton>
       )}
     </CopyWrapper>

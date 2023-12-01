@@ -2,8 +2,6 @@ import styled from "@emotion/styled";
 import { CSSProperties } from "react";
 
 export const Wrapper = styled.section`
-  border: solid 1px #dddddd;
-  border-top: unset;
   width: 100%;
 
   .mcm-tooltip-wrapper {

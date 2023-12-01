@@ -43,16 +43,14 @@ export default function CommentsPage() {
   useEffect(() => {
     // 최초 댓글 리스트 가져오기
     fetchCommentsList(commentsInfo);
-  }, [module]);
 
-  useEffect(() => {
     // 관리자 로그인 체크하기
     adminApis()
       .check(false)
       .then((result) => {
         setAdminLogin(result);
       });
-  }, [commentsInfo]);
+  }, [module]);
 
   // 댓글 리스트 조회
   const fetchCommentsList = async (
@@ -164,7 +162,7 @@ export default function CommentsPage() {
         clearTimeout(watingTimer);
         watingTimer = window.setTimeout(() => {
           wating = false;
-        }, 100);
+        }, 200);
       } catch (err) {
         console.log(`댓글을 정상적으로 불러오지 못했습니다. : ${err}`);
       }

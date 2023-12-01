@@ -4,7 +4,7 @@ import { breakPoints } from "mcm-js-commons/dist/responsive";
 export const ModulesInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 160px 0px;
+  gap: 240px 0px;
 
   @media ${breakPoints.mobileLarge} {
     gap: 120px 0px;

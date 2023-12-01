@@ -30,7 +30,11 @@ export default function MyTooltipExample(props: ExampleContentsTypes) {
     }
 
     return (
-      <_Tooltip tooltipText={_tooltipText} {..._props}>
+      <_Tooltip
+        tooltipText={_tooltipText}
+        {..._props}
+        className="tooltip-example-wrapper"
+      >
         {_children}
       </_Tooltip>
     );
@@ -42,7 +46,8 @@ export default function MyTooltipExample(props: ExampleContentsTypes) {
 const _Tooltip = styled(Tooltip)`
   width: fit-content;
 
-  span {
+  p {
     font-size: 18px;
+    border-bottom: solid 1px gray;
   }
 `;
