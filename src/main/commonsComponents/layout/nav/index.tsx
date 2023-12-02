@@ -4,7 +4,6 @@ import {
   LayoutNavWrapper,
   LayoutNavListItems,
   LayoutNav,
-  Setting,
 } from "./nav.styles";
 import {
   navList,
@@ -113,7 +112,11 @@ export default function LayoutNavPage({
             isAdmin={isAdmin}
           >
             {!isAdmin && (
-              <NavSearchPage search={search} onChangeSearch={onChangeSearch} />
+              <NavSearchPage
+                search={search}
+                onChangeSearch={onChangeSearch}
+                openIsOpenSettings={openIsOpenSettings}
+              />
             )}
             {module && module !== "404" && selectTapInfo && (
               // 선택된 탭의 정보 렌더하기
@@ -137,12 +140,6 @@ export default function LayoutNavPage({
             favoriteFilter={filterResult.favorite || []}
           />
         </LayoutNav>
-
-        {!isAdmin && (
-          <Setting onClickEvent={openIsOpenSettings} className="setting">
-            🛠 Setting
-          </Setting>
-        )}
       </LayoutNavListWrapper>
     </LayoutNavWrapper>
   );

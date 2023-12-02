@@ -17,11 +17,10 @@ export default function LayoutHeadPage({ isAdmin }: { isAdmin?: boolean }) {
 }
 
 const HeaderWrapper = styled.header`
-  background-color: #aa5656;
   display: flex;
+  background-color: #aa5656;
   justify-content: center;
   align-items: center;
-  height: 220px;
 
   ${(props: { isAdmin?: boolean }) =>
     props.isAdmin && {

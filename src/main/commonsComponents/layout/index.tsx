@@ -16,6 +16,7 @@ import {
 import LayoutHeadPage from "./header";
 import LayoutNavPage from "./nav";
 import SettingPage from "../units/setting/setting.render";
+import { toggleDarkMode } from "../functional/settings";
 
 interface IProps {
   children: ReactNode;
@@ -55,12 +56,7 @@ export default function LayoutPage(props: IProps) {
       if (_info !== null) {
         if (typeof _info === "object") {
           setSettingInfo(_info);
-
-          // const body = document.body;
-          // if (_info.darkMode)
-          //   // 다크모드가 설정되어 있는 경우
-          //   body.style.backgroundColor = "#222222";
-          // else body.style.backgroundColor = "unset";
+          toggleDarkMode(_info.darkMode || false);
         }
       }
     }

@@ -14,7 +14,8 @@ const colorBook = {
 
 // 다크모드 적용
 export const LayoutWithDarkModeWrapper = styled(LayoutWrapper)`
-  height: 100%;
+  /* height: 100%; */
+  height: auto;
 
   /* 전체 적용 */
   &.darkMode {

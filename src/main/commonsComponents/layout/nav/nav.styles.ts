@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { _Button } from "mcm-js-commons";
 import { breakPoints } from "mcm-js-commons/dist/responsive";
 
 interface StyleTypes {
@@ -111,21 +110,4 @@ export const LayoutNav = styled.div`
       gap: "1rem 0px",
       top: "16px",
     }}
-`;
-
-export const Setting = styled(_Button)`
-  height: 40px;
-  position: fixed;
-  bottom: 0px;
-  padding: 0.7rem 1rem;
-  font-size: 14px;
-  word-spacing: 4px;
-  letter-spacing: -0.02rem;
-
-  @media ${breakPoints.mobileLarge} {
-    position: relative;
-    padding: 0px;
-    padding-top: 1rem;
-    text-align: left;
-  }
 `;

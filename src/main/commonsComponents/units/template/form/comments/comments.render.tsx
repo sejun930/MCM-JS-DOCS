@@ -26,8 +26,23 @@ export default function RenderCommentsPage() {
     debouncing = setTimeout(() => {
       const propsHeight = document.querySelector("#props-form");
 
+      // 현재 스크롤 위치
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      // 현재 뷰포트의 높이
+      const windowHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+
+      // 문서의 전체 높이
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 현재 스크롤의 위치가 화면 끝에 도달했는지 검증
+      const isFinalScroll = scrollTop + windowHeight >= documentHeight;
+
       if (propsHeight) {
-        if (propsHeight.getBoundingClientRect().bottom < 0) {
+        // Props 페이지를 지났는지 체크
+        if (propsHeight.getBoundingClientRect().bottom < 0 || isFinalScroll) {
           // 댓글 페이지 호출하기
           clearTimeout(debouncing);
           setRender(true);
