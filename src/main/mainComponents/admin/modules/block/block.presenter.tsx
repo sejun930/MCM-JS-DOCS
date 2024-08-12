@@ -45,7 +45,7 @@ export default function AdminBlockUIPage(props: IProps) {
         <OptionalWrapper id="admin-block-optional-wrapper" render={render}>
           <_PText>- 총 {filter.allData}명의 차단된 유저가 있습니다.</_PText>
 
-          <FilterWrapper>
+          <FilterWrapper id="admin-block-filter-wrapper">
             <FilterItems>
               <_Button onClickEvent={() => toggleShowFilter(true)}>
                 <_Image
@@ -89,7 +89,11 @@ export default function AdminBlockUIPage(props: IProps) {
             )}
           </FilterWrapper>
         </OptionalWrapper>
-        <BlockListItems isLoading={isLoading || false} render={render}>
+        <BlockListItems
+          isLoading={isLoading || false}
+          render={render}
+          id="admin-block-list-wrapper"
+        >
           <thead>
             <Tr>
               <td className="block-select"></td>
@@ -170,6 +174,7 @@ export default function AdminBlockUIPage(props: IProps) {
             allData={filter.allData}
             limit={filter.limit}
             changePageEvent={changePage}
+            className="admin-block-pagination"
           />
         )) ||
           undefined}

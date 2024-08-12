@@ -10,7 +10,7 @@ import { _Title } from "mcm-js-commons";
 import WithAuthAdmin from "src/main/commonsComponents/withAuth";
 import { AdminModulesList } from "./module.list";
 
-function AdminHomePage() {
+const AdminHomePage = () => {
   const [module] = useRecoilState(moduleState);
 
   return (
@@ -21,7 +21,7 @@ function AdminHomePage() {
       {module && AdminModulesList[module]}
     </Wrapper>
   );
-}
+};
 export default WithAuthAdmin(AdminHomePage);
 
 export const Wrapper = styled.div`

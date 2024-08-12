@@ -10,10 +10,13 @@ import { _Error } from "mcm-js-commons";
 import { IProps, pageInfoInit } from "./pagination.types";
 
 import { getUuid } from "src/main/commonsComponents/functional";
+import CommonsHooksComponents from "src/main/commonsComponents/hooks/commonsHooks";
 
 // 페이지네이션 form
 const _PagiNationForm = (props: IProps) => {
+  const { getAllComponentsClassName } = CommonsHooksComponents();
   let waiting = false; // 중복 클릭 방지
+
   const {
     allData,
     currentPage,
@@ -22,6 +25,7 @@ const _PagiNationForm = (props: IProps) => {
     limitPage,
     startPage,
     disable,
+    className,
   } = props;
 
   // 페이지 정보
@@ -96,7 +100,14 @@ const _PagiNationForm = (props: IProps) => {
       propsList={props}
       requiredList={["allData", "currentPage", "limit", "changePageEvent"]}
     >
-      <PagiNationWrapper className="mcm-pagination-wrapper" disable={disable}>
+      <PagiNationWrapper
+        className={getAllComponentsClassName(
+          "mcm-pagination-wrapper",
+          className
+        )}
+        role="mcm-pagination"
+        disable={disable}
+      >
         {pageInfoList.prev && (
           <PageJumpWrapper>
             <Page onClickEvent={() => jumpPage("first")} buttonType="button">

@@ -6,6 +6,7 @@ export type IProps = {
   limitPage?: number; // 한 블럭당 보여질 페이지 수
   startPage?: number; // 시작점이 되는 페이지
   disable?: boolean; // 비활성화 여부
+  className?: string; // 클래스 추가 적용
 } & { [key: string]: number | string | boolean | Function };
 
 export interface PageInfoInitType {

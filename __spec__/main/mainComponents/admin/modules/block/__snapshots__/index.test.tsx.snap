@@ -32,6 +32,7 @@ exports[`Admin Block Page Admin Block Page - Snapshot 1`] = `
         </p>
         <div
           class="css-haqrkf"
+          id="admin-block-filter-wrapper"
         >
           <div
             class="css-i6f59y"

@@ -28,68 +28,21 @@ export default function AdminBlockPage() {
 
   // 차단 리스트 가져오기
   const getBlockList = async () => {
-    // if (!checkAccessToken(true)) {
     if (!(await adminApis().check(true))) {
       alert("인증이 만료되었습니다. 재로그인 해주세요.");
       return false;
     }
-    // }
-    setLoading(true);
+    setLoading(true); // 로딩 중
 
-    // 과거순 & 최신순 정렬
-    const createdAt = filter.past ? "asc" : "desc";
-    let _db = getDoc("block", "user", "ip").orderBy("createdAt", createdAt);
+    // 차단된 모든 유저 리스트 가져오기
+    const getBlockResult = await blockApis().get(filter);
+    // 전체 리스트 개수 저장
+    filter.allData = getBlockResult.size;
 
-    // 차단된 유저(차단이 해제되지 않는 유저)만 조회할 경우
-    if (filter.showOnlyBlock) {
-      _db = _db.where("canceledAt", "==", null);
-    }
+    setBlockList(getBlockResult.list);
+    setLoading(false); // 로딩 완료
 
-    // 조회 시작될 데이터 시점
-    let startAt = null;
-    // 전체 데이터 수 가져오기
-    try {
-      const allDataList = await _db.get();
-      filter.allData = allDataList.size;
-
-      if (allDataList.size) {
-        // 데이터 조회 시작 시점
-        startAt = allDataList.docs[(filter.page - 1) * filter.limit];
-      }
-    } catch (err) {
-      console.log("전체 데이터 조회에 실패했습니다. : " + err);
-      alert("전체 데이터 조회에 실패했습니다. : " + err);
-    }
-    _db = _db.startAt(startAt);
-
-    _db
-      .limit(filter.limit) // 페이지별 데이터 개수 지정 (기본 : 10개)
-      .get()
-      .then((result) => {
-        // if (!result.empty) {
-        const dataList: Array<BlockInfoType> = [];
-
-        result.forEach((info) => {
-          const _info = info.data() as BlockInfoType;
-
-          const inputId = getUuid();
-          _info.id = info.id;
-          // checkbox의 inputId 값 추가
-          _info.inputId = inputId;
-          // 체크 여부 검증
-          _info.checked = false;
-
-          dataList.push(_info);
-        });
-        setBlockList(dataList);
-        setLoading(false);
-
-        if (!render) setRender(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("유저 조회 실패 : " + err);
-      });
+    if (!render) setRender(true);
   };
 
   useEffect(() => {
